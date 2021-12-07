@@ -5,6 +5,8 @@
 @section scripts{
     <script src="~/assets/js/code/toast.js"></script>
     <script src="~/assets/js/code/main.js"></script>
+<script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="~/assets/js/code/logingoogle.js"></script>
     <script>
         $(".custom-file-input").on("change", function () {
             var fileName = $(this).val().split("\\").pop();
@@ -93,7 +95,7 @@
                                 <span>Đăng nhập với facebook</span>
                             </a>
 
-                            <button class="btn btn-outline-danger">
+                            <button onclick="login()" class="btn btn-outline-danger">
                                 <i class="fab fa-google"></i>
                                 <span>Đăng nhập với gmail</span>
                             </button>

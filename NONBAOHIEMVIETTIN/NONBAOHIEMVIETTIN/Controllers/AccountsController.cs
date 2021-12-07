@@ -44,7 +44,11 @@ namespace NONBAOHIEMVIETTIN.Controllers
 
             return Redirect(loginUrl.AbsoluteUri);
         }
-       
+        [HttpPost]
+        public void LoginGoogle(accounts acc)
+        {
+            Session["acc"] = acc;            
+        }
         public ActionResult FacebookCallback(string code)
         {
             var fb = new FacebookClient();
