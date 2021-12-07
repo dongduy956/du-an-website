@@ -52,6 +52,10 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
+      <HintPath>..\packages\Facebook.7.0.6\lib\net45\Facebook.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -174,13 +178,28 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\accounts.cs" />
-    <Compile Include="Models\EDO.cs" />
+    <Compile Include="Models\accounts.cs">
+      <DependentUpon>EDO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EDO.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EDO.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EDO.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EDO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EDO.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>EDO.edmx</DependentUpon>
+    </Compile>
     <Compile Include="Models\HoTro.cs" />
-    <Compile Include="Models\Login.cs" />
-    <Compile Include="Models\LoginRegister.cs" />
-    <Compile Include="Models\permission.cs" />
-    <Compile Include="Models\Register.cs" />
+    <Compile Include="Models\role.cs">
+      <DependentUpon>EDO.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -1868,11 +1887,11 @@
     <Content Include="Areas\admin\assets\vendor\jquery\jquery.min.js" />
     <Content Include="Areas\admin\assets\vendor\jquery\jquery.slim.js" />
     <Content Include="Areas\admin\assets\vendor\jquery\jquery.slim.min.js" />
-    <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\css\bundle.css" />
     <Content Include="assets\css\plugin.css" />
     <Content Include="assets\css\responsive.css" />
     <Content Include="assets\css\style.css" />
+    <Content Include="assets\css\toast.css" />
     <Content Include="assets\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\fonts\MyriadPro-Bold.svg" />
     <Content Include="assets\fonts\MyriadPro-Regular.svg" />
@@ -1965,9 +1984,11 @@
     <Content Include="assets\img\slider\slider_3.png" />
     <Content Include="assets\img\slider\slide_1.png" />
     <Content Include="assets\img\slider\slide_4.png" />
+    <Content Include="assets\img\user\Profile.png" />
     <Content Include="assets\img\visha\papyel.png" />
     <Content Include="assets\js\ajax-mail.js" />
-    <Content Include="assets\js\bootstrap.min.js" />
+    <Content Include="assets\js\code\main.js" />
+    <Content Include="assets\js\code\toast.js" />
     <Content Include="assets\js\main.js" />
     <Content Include="assets\js\plugins.js" />
     <Content Include="assets\js\popper.js" />
@@ -1977,6 +1998,16 @@
     <Content Include="Global.asax" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Models\EDO.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EDO.edmx</DependentUpon>
+      <LastGenOutput>EDO.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\EDO.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>EDO.edmx</DependentUpon>
+      <LastGenOutput>EDO.cs</LastGenOutput>
     </Content>
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
@@ -2189,12 +2220,22 @@
     <Content Include="Areas\admin\Views\login\Index.cshtml" />
     <Content Include="Areas\admin\Views\Shared\_Slidebar.cshtml" />
     <Content Include="Areas\admin\Views\Shared\_Topbar.cshtml" />
+    <EntityDeploy Include="Models\EDO.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EDO.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\EDO.edmx.diagram">
+      <DependentUpon>EDO.edmx</DependentUpon>
+    </Content>
     <None Include="Project_Readme.html" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Shared\_Slidebar.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\Accounts\Login.cshtml" />
     <Content Include="Views\Accounts\Edit.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

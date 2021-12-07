@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="nonbaohiemviettinModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="role">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="accounts" Relationship="nonbaohiemviettinModel.fk_accounts_role" FromRole="role" ToRole="accounts" />
+  </EntityType>
+  <EntityContainer Name="nonbaohiemviettinEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="role" EntityType="Self.role" />
+    <EntitySet Name="accounts" EntityType="nonbaohiemviettinModel.accounts" />
+    <AssociationSet Name="fk_accounts_role" Association="nonbaohiemviettinModel.fk_accounts_role">
+      <End Role="role" EntitySet="role" />
+      <End Role="accounts" EntitySet="accounts" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="accounts">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idrole" Type="Int32" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="fullname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="phone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="status" Type="Boolean" />
+    <NavigationProperty Name="role" Relationship="nonbaohiemviettinModel.fk_accounts_role" FromRole="accounts" ToRole="role" />
+  </EntityType>
+  <Association Name="fk_accounts_role">
+    <End Type="nonbaohiemviettinModel.role" Role="role" Multiplicity="0..1" />
+    <End Type="nonbaohiemviettinModel.accounts" Role="accounts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="role">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="accounts">
+        <PropertyRef Name="idrole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

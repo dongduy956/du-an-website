@@ -8,7 +8,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
 {
     public class HomeController : Controller
     {
-        EDO db = new EDO();
+        nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
         public ActionResult Index()
         {           
             return View(db.accounts.ToList());

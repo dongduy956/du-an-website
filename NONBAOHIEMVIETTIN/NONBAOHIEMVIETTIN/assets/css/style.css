@@ -2393,7 +2393,7 @@
 	line-height: 22px;
 	margin-bottom: 38px;
 }
-.account_form form {
+.account_form .form {
 	border: 1px solid #d3ced2;
 	padding: 20px;
 	border-radius: 5px;

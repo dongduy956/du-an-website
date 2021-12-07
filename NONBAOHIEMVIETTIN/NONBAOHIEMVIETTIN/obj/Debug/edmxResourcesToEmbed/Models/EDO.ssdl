@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="nonbaohiemviettinModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="accounts">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idrole" Type="int" />
+    <Property Name="username" Type="varchar" MaxLength="50" />
+    <Property Name="password" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="image" Type="varchar" MaxLength="500" />
+    <Property Name="fullname" Type="nvarchar" MaxLength="100" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="phone" Type="varchar" MaxLength="11" />
+    <Property Name="address" Type="nvarchar" MaxLength="100" />
+    <Property Name="status" Type="bit" />
+  </EntityType>
+  <EntityType Name="role">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="varchar" MaxLength="20" />
+  </EntityType>
+  <Association Name="fk_accounts_role">
+    <End Role="role" Type="Self.role" Multiplicity="0..1" />
+    <End Role="accounts" Type="Self.accounts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="role">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="accounts">
+        <PropertyRef Name="idrole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="nonbaohiemviettinModelStoreContainer">
+    <EntitySet Name="accounts" EntityType="Self.accounts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_accounts_role" Association="Self.fk_accounts_role">
+      <End Role="role" EntitySet="role" />
+      <End Role="accounts" EntitySet="accounts" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
