@@ -1,4 +1,9 @@
-﻿<!doctype html>
+﻿@{
+
+    var acc = Session["account"] as NONBAOHIEMVIETTIN.Models.accounts;
+    var check = Session["social"] as bool?;
+}
+<!doctype html>
 <html class="no-js" lang="zxx">
 <head>
     <meta charset="utf-8">
@@ -15,8 +20,10 @@
     <link rel="stylesheet" href="~/assets/css/bundle.css">
     <link href="~/assets/css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/assets/css/responsive.css">
+    <link href="~/assets/css/toast.css" rel="stylesheet" />
+
     <script src="~/assets/js/vendor/modernizr-2.8.3.min.js"></script>
-    @RenderSection("styles",false)
+    @RenderSection("styles", false)
 </head>
 
 <body>
@@ -31,42 +38,66 @@
                     <!--header top-->
                     <div class="header_top">
                         <div class="row align-items-center">
-                            <div class="col-lg-6 col-md-6">
+                            <div class="col-lg-12 col-md-12">
                                 <div class="switcher">
                                     <ul>
                                         <li class="languages">
                                             <a href="#">
-                                                <img src="~/assets/img/logo/fontlogo.jpg" alt=""> English
-                                                <i class="fa fa-angle-down"></i>
+                                                Giới thiệu
                                             </a>
-                                            <ul class="dropdown_languages">
-                                                <li>
-                                                    <a href="#"><img src="~/assets/img/logo/fontlogo.jpg" alt=""> English</a>
-                                                </li>
-                                                <li>
-                                                    <a href="#"><img src="~/assets/img/logo/fontlogo2.jpg" alt=""> French </a>
-                                                </li>
-                                            </ul>
+
                                         </li>
 
                                         <li class="currency">
-                                            <a href="#"> Currency : $ <i class="fa fa-angle-down"></i></a>
-                                            <ul class="dropdown_currency">
-                                                <li><a href="#"> Dollar (USD)</a></li>
-                                                <li><a href="#"> Euro (EUR)  </a></li>
-                                            </ul>
+                                            <a href="#">
+                                                Liên hệ
+                                            </a>
+
                                         </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-6 col-md-6">
-                                <div class="header_links">
-                                    <ul>
-                                        <li><a href="contact.html" title="Contact">Contact</a></li>
-                                        <li><a href="wishlist.html" title="wishlist">My wishlist</a></li>
-                                        <li><a href="my-account.html" title="My account">My account</a></li>
-                                        <li><a href="cart.html" title="My cart">My cart</a></li>
-                                        <li><a href="~/Home/Login" title="Login">Login</a></li>
+                                        @if (acc != null)
+                                        {
+                                            <li style="margin-left:auto" class="languages">
+                                                <a class="w-100">
+
+                                                    @if (check != null)
+                                                    {
+                                                        <img style="border-radius:50%; width: 24px;margin-right: 2px;" src="@acc.image" alt="">
+                                                    }
+                                                    else
+                                                    {
+                                                        <img style="border-radius:50%;width: 24px;margin-right: 2px;" src="~/assets/img/user/@acc.image" alt="">
+
+                                                    }
+                                                    @acc.fullname
+                                                    <i class="fa fa-angle-down"></i>
+                                                </a>
+
+                                                <ul class="dropdown_languages" style="min-width:150px">
+                                                    @if (check == null)
+                                                    {
+                                                        <li>
+                                                            <a id="btnchangepasswordlink" class="w-100" href="#">
+                                                                <i class="fas fa-key"></i>
+                                                                 Đổi mật khẩu</a>
+                                                        </li>
+                                                    }
+                                                    <li>
+                                                        <a class="w-100" href="#" id="btnlogout">
+                                                            <i class="fas fa-sign-out-alt"></i>
+                                                        Đăng xuất </a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                        }
+                                        else
+                                        {
+                                            <li style="margin-left:auto">
+                                                <a href="~/Accounts/Login">Đăng nhập</a>
+                                            </li>
+                                            <li class="languages">
+                                                <a href="#">Đăng ký</a>
+                                            </li>
+                                        }
                                     </ul>
                                 </div>
                             </div>
@@ -156,9 +187,9 @@
                 <!--header end -->
                 <!--pos home section-->
                 <div class="pos_home_section">
-                    <div class="row pos_home">                       
-                            @RenderSection("slidebar",false)                                           
-                            @RenderBody()                       
+                    <div class="row pos_home">
+                        @RenderSection("slidebar", false)
+                        @RenderBody()
                     </div>
                     <!--pos home section end-->
                 </div>
@@ -251,6 +282,33 @@
             </div>
         </div>
         <!--footer area end-->
+
+        <!-- Modal changepassword -->
+        <div class="modal fade" id="myModal7" role="dialog">
+            <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Đổi mật khẩu</h4>
+                        <button type="button" style="position: unset; width: unset;border: unset;height:unset;" id="btnclosexchangepassword" class="close" data-dismiss="modal" >&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <input id="passoldchange" placeholder="Nhập mật khẩu cũ" autofocus autocomplete="on" class="form-control" type="password" />
+                        <input id="passnewchange" style="margin:6px 0;" placeholder="Nhập mật khẩu mới" autofocus autocomplete="on" class="form-control" type="password" />
+                        <input id="prepasschange" placeholder="Nhập lại mật khẩu" autofocus autocomplete="on" class="form-control" type="password" />
+                    </div>
+                    <div class="modal-footer" style="justify-content: space-between;">
+                        <button type="button" id="btnsubmitchangepassword" class="btn btn-outline-success">
+                            <span class="spinner-grow spinner-grow-sm" style="display:none"></span>
+                            Xác nhận
+                        </button>
+                        <button type="button" id="btnclosechangepassword" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!--Modal changepassword end-->
         <!-- all js here -->
         <script src="~/assets/js/vendor/jquery-1.12.0.min.js"></script>
         <script src="~/assets/js/popper.js"></script>
@@ -258,6 +316,8 @@
         <script src="~/assets/js/ajax-mail.js"></script>
         <script src="~/assets/js/plugins.js"></script>
         <script src="~/assets/js/main.js"></script>
+        <script src="~/assets/js/code/toast.js"></script>
+        <script src="~/assets/js/code/main.js"></script>
         @RenderSection("scripts", false)
 </body>
 

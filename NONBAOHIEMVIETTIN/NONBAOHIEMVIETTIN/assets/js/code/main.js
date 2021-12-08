@@ -7,6 +7,14 @@
         if (e.which == 13)
             search()
     })
+    function disable(dom) {
+        $(dom + ' span').show();
+        $(dom).attr('disabled', 'true');
+    }
+    function enable(dom) {
+        $(dom + ' span').hide();
+        $(dom).removeAttr('disabled');
+    }
     function login() {
         var usernamelogin = $('#usernamelogin').val();
         var passwordlogin = $('#passwordlogin').val();
@@ -18,6 +26,7 @@
                 showToast('Mật khẩu không được để trống.');
             }
             else {
+                disable('#btnlogin');
                 $.ajax({
                     url: "/Accounts/Login",
                     data: JSON.stringify({ "usernamelogin": usernamelogin, "passwordlogin": passwordlogin }),
@@ -25,7 +34,7 @@
                     dataType: "json",
                     type: "POST",
                     success: function (data) {
-                        console.log(data)
+
                         if (data == "-1") {
                             showToast('Tài khoản hoặc mật khẩu không chính xác.');
                         }
@@ -33,8 +42,10 @@
                             showToast('Tài khoản đã bị khoá.Liên hệ admin để giải quyết.');
                         }
                         else {
-                            showToast('Đăng nhập thành công');
+                            location.href = '/';
                         }
+                        enable('#btnlogin');
+
                     },
                     error: function (data) {
 
@@ -141,6 +152,7 @@
                                         if (acc.password != prepassword)
                                             showToast('Mật khẩu không giống nhau.');
                                         else {
+                                            disable('#btnregister');
                                             upLoad();
                                             $.ajax({
                                                 url: "/Accounts/Register",
@@ -160,6 +172,8 @@
                                                                 showToast('Email này đã được sử dụng.');
                                                             else
                                                                 $("#myModal3").modal({ backdrop: "static" });
+                                                    enable('#btnregister');
+
                                                 },
                                                 error: function (data) {
 
@@ -169,8 +183,32 @@
                                         }
 
     }
+    $('#btnlogout').click(function (e) {
+        e.preventDefault();
+        $.ajax({
+            url: '/Accounts/Logout',
+            data: JSON.stringify({}),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: "POST",
+            success: function (data) {
+                console.log(data);
+                if (data == 1)
+                    location.href = '/';
+            },
+            error: function (data) {
+                alert('Lỗi')
+            }
+        })
+    }
+    )
     $('#btnregister').click(register);
+    $('#btnclosexregister').click(function () {
+        enable('#btnregister')
+        clearRegister();
+    })
     $('#btncloseregister').click(function () {
+        enable('#btnregister')
         clearRegister();
     })
     function submit(operation) {
@@ -189,8 +227,14 @@
         //
         if (code == "")
             showToast('Bạn chưa nhập mã xác nhập.');
-        else
+        else {
+            if (operation == 'register')
+                disable('#btnsubmitregister');
+            else {
+                disable('#btnsubmitforgetpass');
+            }
             $.ajax({
+
                 url: url,
                 data: JSON.stringify({ code }),
                         contentType: "application/json; charset=utf-8",
@@ -212,13 +256,18 @@
                                     $("#myModal6").modal({ backdrop: "static" });
                                 }
                             }
+                            if (operation == 'register')
+                                enable('#btnsubmitregister');
+                            else {
+                                enable('#btnsubmitforgetpass');
+                            }
                         },
                 error: function (data) {
 
                     alert(JSON.stringify(data));
                 }
             })
-
+        }
     }
 
     $('#btnsubmitregister').click(function () {
@@ -230,6 +279,8 @@
             submit("register");
     })
     function sendAgain() {
+        disable('#btnsendagainregister');
+        disable('#btnsendagainforgetpass');
         $.ajax({
             url: "/Accounts/SendAgain",
             data: JSON.stringify({}),
@@ -244,6 +295,9 @@
                 else {
                     showToast('Mời bạn check email để lấy mã xác nhận mới.Xin cảm ơn.');
                 }
+                enable('#btnsendagainregister');
+                enable('#btnsendagainforgetpass');
+
             },
             error: function (data) {
 
@@ -264,6 +318,7 @@
             if (!validateEmail(email))
                 showToast('Email không đúng định dạng!');
             else {
+                disable('#btnsubmitforget');
                 $.ajax({
                     url: "/Accounts/ForgetPass",
                     data: JSON.stringify({ email}),
@@ -281,6 +336,8 @@
                                 }
                                 else
                                     showToast('Không tồn tại email này.Bạn hãy kiểm tra lại email.');
+                                enable('#btnsubmitforget');
+
                             },
                     error: function (data) {
 
@@ -328,10 +385,11 @@
             if (prepass != passNew)
                 showToast('Mật khẩu không giống nhau!!');
 
-            else
+            else {
+                disable('#btnsubmitchangepass');
                 $.ajax({
-                    url: "/Accounts/ChangePassword",
-                    data: JSON.stringify({ passNew, prepass}),
+                    url: "/Accounts/ChangePasswordEmail",
+                    data: JSON.stringify({ passNew}),
                             contentType: "application/json; charset=utf-8",
                             dataType: "json",
                             type: "POST",
@@ -342,33 +400,77 @@
                                     showToast('Đổi mật khẩu thành công.');
                                     $('#btnclosechangepass').click();
                                 }
+                                enable('#btnsubmitchangepass');
+
                             },
                     error: function (data) {
 
                         alert(JSON.stringify(data));
                     }
                 })
+            }
     })
     $('#btnsendagainforgetpass').click(sendAgain);
+    $('#btnchangepasswordlink').click(function (e) {
+        e.preventDefault();
+        $("#myModal7").modal({ backdrop: "static" });
 
-    $('#loginfacebook').click(function () {
-        $.ajax({
-            url: "/Accounts/LoginFacebook",
-            data: JSON.stringify({}),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    type: "POST",
-                    success: function (data) {
-                        if (data == "1")
-                            showToast('Đăng nhập facebook thành công!!');
-                        else 
-                            showToast('Đăng nhập facebook thất bại!!');                       
-                    },
-            error: function (data) {
+    })
+    $('#btnsubmitchangepassword').click(function () {
+        var passold = $('#passoldchange').val();
+        var passnew = $('#passnewchange').val();
 
-                alert(JSON.stringify(data));
-            }
-        })
+        var prepass = $('#prepasschange').val();
+        if (passold == "")
+            showToast('Mật khẩu cũ không được rỗng!!');
+        else
+            if (passnew == "")
+                showToast('Mật khẩu mới không được rỗng!!');
+            else
+                if (prepass == "")
+                    showToast('Nhập lại mật khẩu không được rỗng!!');
+                else {
+                    disable('#btnsubmitchangepassword');
+                    $.ajax({
+                        url: "/Accounts/ChangePassword",
+                        data: JSON.stringify({ passold, passnew, prepass}),
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                type: "POST",
+                                success: function (data) {
+                                    if (data == "-1")
+                                        showToast('Mật khẩu cũ không chính xác!!!');
+                                    else if (data == "1") {
+                                        showToast('Đổi mật khẩu thành công!Vui lòng đăng nhập lại!!');
+                                        $('#btnclosechangepassword').click();
+
+                                        location.href = "/Accounts/Login";
+                                        $('#btnlogout').click();
+                                    }
+                                    else
+                                        if (data == "0")
+                                            showToast('Nhập lại mật khẩu không giống nhau!!!');
+                                        else
+                                            showToast('Có lỗi xảy ra!!!!');
+
+                                    enable('#btnsubmitchangepassword');
+
+                                },
+                        error: function (data) {
+
+                            alert(JSON.stringify(data));
+                        }
+                    })
+                }
+    })
+    $('#passoldchange').click(function () {
+        $('#btnsubmitchangepassword').click()
+    })
+    $('#passnewchange').click(function () {
+        $('#btnsubmitchangepassword').click()
+    })
+    $('#prepasschange').click(function () {
+        $('#btnsubmitchangepassword').click()
     })
     $('.addcart').off('click').click(function (e) {
         var ProductId = $(this).data('id');
@@ -536,7 +638,7 @@
                         if (data.status == "1") {
                             alert('Cập nhật thành công');
 
-                            $('#cart-icon span').text(data.count == "0" ? "" : data.count);
+                            $('#cart-icon span').text(data.count == "0" ? "": data.count);
                             if (data.count == "0") {
                                 $('.img-cart').show();
                                 $('#cart').hide();

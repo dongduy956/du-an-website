@@ -45,9 +45,17 @@ namespace NONBAOHIEMVIETTIN.Controllers
             return Redirect(loginUrl.AbsoluteUri);
         }
         [HttpPost]
-        public void LoginGoogle(accounts acc)
+        public void LoginGoogle(string username, string email, string fullname, string image)
         {
-            Session["acc"] = acc;            
+            var acc = new accounts()
+            {
+                username = username,
+                email = email,
+                fullname = fullname,
+                image = image
+            };
+            Session["social"] = true;
+            Session["account"] = acc;
         }
         public ActionResult FacebookCallback(string code)
         {
@@ -66,27 +74,33 @@ namespace NONBAOHIEMVIETTIN.Controllers
             {
                 fb.AccessToken = accessToken;
                 // Get the user's information, like email, first name, middle name etc
-                dynamic me = fb.Get("me?fields=first_name,middle_name,last_name,id,email");
+                dynamic me = fb.Get("me?fields=first_name,middle_name,last_name,id,email,picture");
                 string email = me.email;
                 string userName = me.email;
                 string firstname = me.first_name;
                 string middlename = me.middle_name;
                 string lastname = me.last_name;
-
+                string image = me.picture[0].url;
                 var acc = new accounts();
                 acc.email = email;
                 acc.username = email;
                 acc.status = true;
                 acc.fullname = firstname + " " + middlename + " " + lastname;
+                acc.image = image;
                 Session["account"] = acc;
-                Response.Write(acc.email);
-
+                Session["social"] = true;
             }
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
         public ActionResult Login()
         {
             return View();
+        }
+        [HttpPost]
+        public JsonResult Logout()
+        {
+            Session.Clear();
+            return Json(1);
         }
         [HttpPost]
         public JsonResult UploadImg()
@@ -194,7 +208,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                     return Json(2);
                 if (sendMail(acc.email))
                 {
-                    Session["acc"] = acc;                   
+                    Session["acc"] = acc;
                     return Json(1);
                 }
             }
@@ -237,7 +251,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 return Json(0);
 
             }
-        }       
+        }
         [HttpPost]
         public JsonResult CodeRegister(string code)
         {
@@ -271,23 +285,53 @@ namespace NONBAOHIEMVIETTIN.Controllers
         }
 
         [HttpPost]
-        public JsonResult ChangePassword(string passNew)
+        public JsonResult ChangePasswordEmail(string passNew)
         {
-            var acc=Session["acc"] as accounts;
+            var acc = Session["acc"] as accounts;
             try
-            {               
-                    acc.password = HoTro.Instances.EncodeMD5(passNew);
-                    db.Entry(acc).State = EntityState.Modified;
-                    db.SaveChanges();
-                    Session.Clear();
-                    Session.Abandon();
-                    return Json(1);         
+            {
+                acc.password = HoTro.Instances.EncodeMD5(passNew);
+                db.Entry(acc).State = EntityState.Modified;
+                db.SaveChanges();
+                Session.Clear();
+                Session.Abandon();
+                return Json(1);
             }
             catch (Exception ex)
             {
 
             }
             return Json(-1);
+        }
+
+
+        [HttpPost]
+        public JsonResult ChangePassword(string passold, string passnew, string prepass)
+        {
+            try
+            {
+
+
+                var acc = Session["account"] as accounts;
+                if (!acc.password.Equals(HoTro.Instances.EncodeMD5(passold)))
+                    return Json(-1);
+                else
+                {
+                    if (!passnew.Equals(prepass))
+                        return Json(0);
+                    acc.password = HoTro.Instances.EncodeMD5(passnew);
+                    db.Entry(acc).State = EntityState.Modified;
+                    db.SaveChanges();
+                    Session.Clear();
+                    Session.Abandon();
+                    return Json(1);
+                }
+            }
+            catch (Exception)
+            {
+                return Json(2);
+            }
+
         }
 
         // GET: Accounts/Edit/5

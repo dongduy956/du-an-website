@@ -13,7 +13,7 @@ var user;
 var loggedIn = false;
 
 function login() {
-
+    console.log(3)
     var win = window.open(_url, "windowname1", 'width=800, height=600');
     var pollTimer = window.setInterval(function () {
         try {
@@ -26,7 +26,6 @@ function login() {
                 expiresIn = gup(url, 'expires_in');
 
                 win.close();
-                debugger;
                 validateToken(acToken);
             }
         }
@@ -55,35 +54,48 @@ function validateToken(token) {
             url: VALIDURL + token,
             data: null,
             success: function (responseText) {
-            },
+            }, error: function (data) {
+                alert(JSON.stringify(data));
+            }
         });
 }
-
 function getUserInfo() {
-    var account = new Object();    
+
+
     $.ajax({
+
         url: 'https://www.googleapis.com/oauth2/v1/userinfo?access_token=' + acToken,
         data: null,
         success: function (resp) {
             user = resp;
-            account.fullname = user.lastname+' '+user.name;
-            account.username = user.email;
-            account.email = user.email;
-            account.image = user.picture;           
-        },
+            $.ajax({
 
-    }),
+                url: '/Accounts/LoginGoogle/',
+                type: 'POST',
+                data: {
+                    username: user.email,
+                    email: user.email,
+                    fullname: user.name,
+                    image: user.picture
+                },
+                success: function () {
+                    location.href = "/Home/Index/";
+                }, error: function (data) {
+                    alert(JSON.stringify(data));
+                }
 
-    $.ajax({
-        url: '/Accounts/LoginGoogle',
-        type: 'POST',
-        data: {
-           acc:account
-        },
-        success: function () {
-            window.location.href = "/Home/Index/";
-        },
-    });
+                //dataType: "jsonp"
+
+            });
+
+        }, error: function (data) {
+
+            alert(JSON.stringify(data));
+        }
+
+
+    })
+   
 
 
 }
