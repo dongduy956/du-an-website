@@ -12,19 +12,20 @@ namespace NONBAOHIEMVIETTIN.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class accounts
+    public partial class groupproduct
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public groupproduct()
+        {
+            this.products = new HashSet<products>();
+        }
+    
         public int id { get; set; }
-        public Nullable<int> idrole { get; set; }
-        public string username { get; set; }
-        public string password { get; set; }
-        public string image { get; set; }
-        public string fullname { get; set; }
-        public string email { get; set; }
-        public string phone { get; set; }
-        public string address { get; set; }
+        public string name { get; set; }
+        public string metatitle { get; set; }
         public Nullable<bool> status { get; set; }
     
-        public virtual role role { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<products> products { get; set; }
     }
 }

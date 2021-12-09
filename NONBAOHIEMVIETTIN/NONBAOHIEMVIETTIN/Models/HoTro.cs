@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 
-namespace DuongDongDuy_2001191210_ktralan3.Models
+namespace NONBAOHIEMVIETTIN
 {
     public class HoTro
     {

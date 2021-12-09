@@ -1,4 +1,9 @@
-﻿<div class="col-lg-3 col-md-8 col-12">
+﻿@using NONBAOHIEMVIETTIN.Models
+@{
+    var db = new nonbaohiemviettinEntities();
+
+}
+<div class="col-lg-3 col-md-8 col-12">
     <!--sidebar banner-->
     <div class="sidebar_widget banner mb-35">
         <div class="banner_img mb-35">
@@ -11,95 +16,20 @@
     <!--sidebar banner end-->
     <!--categorie menu start-->
     <div class="sidebar_widget catrgorie mb-35">
-        <h3>Categories</h3>
+        <h3>Danh mục sản phẩm</h3>
         <ul>
-            <li class="has-sub">
-                <a href="#"><i class="fa fa-caret-right"></i> women</a>
-                <ul class="categorie_sub">
-                    <li>
-                        <a href="#"><i class="fa fa-caret-right"></i> Accessories</a>
-                        <ul class="categorie_sub">
-                            <li><a href="#"><i class="fa fa-caret-right"></i> Accessories</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i> Dresses</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i> Tops</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i> HandBags</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><i class="fa fa-caret-right"></i> Dresses</a></li>
-                    <li><a href="#"><i class="fa fa-caret-right"></i> Tops</a></li>
-                    <li><a href="#"><i class="fa fa-caret-right"></i> HandBags</a></li>
-                </ul>
-            </li>
-            <li class="has-sub">
-                <a href="#"><i class="fa fa-caret-right"></i> Men</a>
-                <ul class="categorie_sub">
-                    <li>
-                        <a href="#"><i class="fa fa-caret-right"></i> Accessories</a>
-                        <ul class="categorie_sub">
-                            <li><a href="#"><i class="fa fa-caret-right"></i> Accessories</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i> Dresses</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i> Tops</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i> HandBags</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><i class="fa fa-caret-right"></i> Dresses</a></li>
-                    <li><a href="#"><i class="fa fa-caret-right"></i> Tops</a></li>
-                    <li><a href="#"><i class="fa fa-caret-right"></i> HandBags</a></li>
-                </ul>
-            </li>
-            <li class="has-sub">
-                <a href="#"><i class="fa fa-caret-right"></i> Footwear</a>
-                <ul class="categorie_sub">
-                    <li>
-                        <a href="#"><i class="fa fa-caret-right"></i> Accessories</a>
-                        <ul class="categorie_sub">
-                            <li><a href="#"><i class="fa fa-caret-right"></i> Accessories</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i> Dresses</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i> Tops</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i> HandBags</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><i class="fa fa-caret-right"></i> Dresses</a></li>
-                    <li><a href="#"><i class="fa fa-caret-right"></i> Tops</a></li>
-                    <li><a href="#"><i class="fa fa-caret-right"></i> HandBags</a></li>
-                </ul>
-
-            </li>
-            <li class="has-sub">
-                <a href="#"><i class="fa fa-caret-right"></i> Jewelry</a>
-                <ul class="categorie_sub">
-                    <li>
-                        <a href="#"><i class="fa fa-caret-right"></i> Accessories</a>
-                        <ul class="categorie_sub">
-                            <li><a href="#"><i class="fa fa-caret-right"></i> Accessories</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i> Dresses</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i> Tops</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i> HandBags</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><i class="fa fa-caret-right"></i> Dresses</a></li>
-                    <li><a href="#"><i class="fa fa-caret-right"></i> Tops</a></li>
-                    <li><a href="#"><i class="fa fa-caret-right"></i> HandBags</a></li>
-                </ul>
-            </li>
-            <li class="has-sub">
-                <a href="#"><i class="fa fa-caret-right"></i> Lady</a>
-                <ul class="categorie_sub">
-                    <li>
-                        <a href="#"><i class="fa fa-caret-right"></i> Accessories</a>
-                        <ul class="categorie_sub">
-                            <li><a href="#"><i class="fa fa-caret-right"></i> Accessories</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i> Dresses</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i> Tops</a></li>
-                            <li><a href="#"><i class="fa fa-caret-right"></i> HandBags</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="#"><i class="fa fa-caret-right"></i> Dresses</a></li>
-                    <li><a href="#"><i class="fa fa-caret-right"></i> Tops</a></li>
-                    <li><a href="#"><i class="fa fa-caret-right"></i> HandBags</a></li>
-                </ul>
-            </li>
-
+            @foreach (var itemCategory in db.category)
+            {
+                <li class="has-sub">
+                    <a href="#"><i class="fa fa-caret-right"></i>@itemCategory.name (@db.products.Count(x=>x.idcategory==itemCategory.id))</a>
+                    <ul class="categorie_sub">
+                        @foreach (var itemGroupproduct in db.groupproduct)
+                        {
+                            <li><a href="#"><i class="fa fa-caret-right"></i> @itemGroupproduct.name (@db.products.Count(x=>x.idgroupproduct==itemGroupproduct.id && x.idcategory==itemCategory.id))</a></li>
+                        }
+                    </ul>
+                </li>
+            }
         </ul>
     </div>
     <!--categorie menu end-->

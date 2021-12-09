@@ -11,7 +11,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
         nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
         public ActionResult Index()
         {           
-            return View(db.accounts.ToList());
+            return View(db.products.ToList());
         }
         public ActionResult Error()
         {

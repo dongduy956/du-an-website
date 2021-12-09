@@ -25,5 +25,57 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="category">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.category">
+        <MappingFragment StoreEntitySet="category">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="metatitle" ColumnName="metatitle" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="groupproduct">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.groupproduct">
+        <MappingFragment StoreEntitySet="groupproduct">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="metatitle" ColumnName="metatitle" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="production">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.production">
+        <MappingFragment StoreEntitySet="production">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="metatitle" ColumnName="metatitle" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="products">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.products">
+        <MappingFragment StoreEntitySet="products">
+          <ScalarProperty Name="idgroupproduct" ColumnName="idgroupproduct" />
+          <ScalarProperty Name="idproduction" ColumnName="idproduction" />
+          <ScalarProperty Name="idcategory" ColumnName="idcategory" />
+          <ScalarProperty Name="newproduct" ColumnName="newproduct" />
+          <ScalarProperty Name="fastsell" ColumnName="fastsell" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="createddate" ColumnName="createddate" />
+          <ScalarProperty Name="viewcount" ColumnName="viewcount" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="promationprice" ColumnName="promationprice" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="metatitle" ColumnName="metatitle" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

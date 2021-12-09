@@ -27,5 +27,9 @@ namespace NONBAOHIEMVIETTIN.Models
     
         public virtual DbSet<role> role { get; set; }
         public virtual DbSet<accounts> accounts { get; set; }
+        public virtual DbSet<category> category { get; set; }
+        public virtual DbSet<groupproduct> groupproduct { get; set; }
+        public virtual DbSet<production> production { get; set; }
+        public virtual DbSet<products> products { get; set; }
     }
 }

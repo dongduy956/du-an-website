@@ -8,7 +8,14 @@
         <EntityTypeShape EntityType="nonbaohiemviettinModel.role" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
         <EntityTypeShape EntityType="nonbaohiemviettinModel.accounts" Width="1.5" PointX="3" PointY="0.875" />
         <AssociationConnector Association="nonbaohiemviettinModel.fk_accounts_role" />
-      </Diagram>
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.category" Width="2" PointX="5.375" PointY="5.875" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.groupproduct" Width="2" PointX="5.375" PointY="2.25" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.production" Width="2" PointX="5.375" PointY="9.5" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.products" Width="2" PointX="7.625" PointY="1" />
+        <AssociationConnector Association="nonbaohiemviettinModel.fk_products_category" />
+        <AssociationConnector Association="nonbaohiemviettinModel.fk_products_groupproduct" />
+        <AssociationConnector Association="nonbaohiemviettinModel.fk_products_production" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

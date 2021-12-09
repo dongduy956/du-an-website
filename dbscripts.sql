@@ -23,7 +23,7 @@ create table accounts
 	idrole int default 1,
 	username varchar(50),
 	[password] varchar(100) not null,
-	[image] varchar(500),
+	[image] nvarchar(500),
 	fullname nvarchar(100),
 	email varchar(50),
 	phone varchar(11),
@@ -71,7 +71,9 @@ create table products
 	[description] ntext,
 	viewcount int default 0,
 	createddate datetime default getdate(),
-	[image] varchar(500),
+	[image] nvarchar(500),
+	fastsell bit default 1,
+	newproduct bit default 1,
 	idcategory int,
 	idproduction int,
 	idgroupproduct int,
@@ -114,8 +116,8 @@ insert into production(name,metatitle) values(N'Nón sơn','non-son')
 insert into production(name,metatitle) values(N'ROC','roc')
 insert into production(name,metatitle) values(N'Royal','royal')
 --insert dữ liệu vào bảng sản phẩm	
-insert into products(name,metatitle,price,[description],idcategory,idproduction,idgroupproduct,[image]) values(N'AC01 đen cam','ac01-den-cam',50000,N'mô tả ac01 đen cam',1,1,4,'AC01 đen cam.jpg')
-insert into products(name,metatitle,price,[description],idcategory,idproduction,idgroupproduct,[image]) values(N'AC01 đen đỏ','ac01-den-do',50000,N'mô tả ac01 đen đỏ',1,1,4,'AC01 đen đỏ.jpg')
-insert into products(name,metatitle,price,[description],idcategory,idproduction,idgroupproduct,[image]) values(N'AC01 đen xanh lá','ac01-den-xanh-la',50000,N'mô tả ac01 đen xanh lá',1,1,4,'AC01 đen xanh lá.jpg')
-insert into products(name,metatitle,price,[description],idcategory,idproduction,idgroupproduct,[image]) values(N'AC01 đen xanh','ac01-den-xanh',50000,N'mô tả ac01 đen xanh',1,1,4,'AC01 đen xanh.jpg')
-insert into products(name,metatitle,price,[description],idcategory,idproduction,idgroupproduct,[image]) values(N'Agu 46 đỏ','agu-46-do',50000,N'mô tả agu 46 đỏ',1,2,4,'AC01 đen xanh.jpg')
+insert into products(name,metatitle,price,[description],idcategory,idproduction,idgroupproduct,[image],promationprice) values(N'AC01 đen cam','ac01-den-cam',50000,N'mô tả ac01 đen cam',1,1,4,N'AC01 đen cam.jpg',33333)
+insert into products(name,metatitle,price,[description],idcategory,idproduction,idgroupproduct,[image]) values(N'AC01 đen đỏ','ac01-den-do',50000,N'mô tả ac01 đen đỏ',1,1,4,N'AC01 đen đỏ.jpg')
+insert into products(name,metatitle,price,[description],idcategory,idproduction,idgroupproduct,[image]) values(N'AC01 đen xanh lá','ac01-den-xanh-la',50000,N'mô tả ac01 đen xanh lá',1,1,4,N'AC01 đen xanh lá.jpg')
+insert into products(name,metatitle,price,[description],idcategory,idproduction,idgroupproduct,[image]) values(N'AC01 đen xanh','ac01-den-xanh',50000,N'mô tả ac01 đen xanh',1,1,4,N'AC01 đen xanh.jpg')
+insert into products(name,metatitle,price,[description],idcategory,idproduction,idgroupproduct,[image]) values(N'Agu 46 đỏ','agu-46-do',50000,N'mô tả agu 46 đỏ',1,2,4,N'agu 46 do.jpg')

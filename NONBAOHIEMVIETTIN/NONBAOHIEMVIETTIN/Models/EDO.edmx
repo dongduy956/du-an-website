@@ -13,12 +13,60 @@
           <Property Name="idrole" Type="int" />
           <Property Name="username" Type="varchar" MaxLength="50" />
           <Property Name="password" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="image" Type="varchar" MaxLength="500" />
+          <Property Name="image" Type="nvarchar" MaxLength="500" />
           <Property Name="fullname" Type="nvarchar" MaxLength="100" />
           <Property Name="email" Type="varchar" MaxLength="50" />
           <Property Name="phone" Type="varchar" MaxLength="11" />
           <Property Name="address" Type="nvarchar" MaxLength="100" />
           <Property Name="status" Type="bit" />
+        </EntityType>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+          <Property Name="metatitle" Type="varchar" MaxLength="100" />
+          <Property Name="status" Type="bit" />
+        </EntityType>
+        <EntityType Name="groupproduct">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+          <Property Name="metatitle" Type="varchar" MaxLength="100" />
+          <Property Name="status" Type="bit" />
+        </EntityType>
+        <EntityType Name="production">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+          <Property Name="metatitle" Type="varchar" MaxLength="100" />
+          <Property Name="status" Type="bit" />
+        </EntityType>
+        <EntityType Name="products">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+          <Property Name="metatitle" Type="varchar" MaxLength="100" />
+          <Property Name="status" Type="bit" />
+          <Property Name="price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="promationprice" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="description" Type="ntext" />
+          <Property Name="viewcount" Type="int" />
+          <Property Name="createddate" Type="datetime" />
+          <Property Name="image" Type="nvarchar" MaxLength="500" />
+          <Property Name="fastsell" Type="bit" />
+          <Property Name="newproduct" Type="bit" />
+          <Property Name="idcategory" Type="int" />
+          <Property Name="idproduction" Type="int" />
+          <Property Name="idgroupproduct" Type="int" />
         </EntityType>
         <EntityType Name="role">
           <Key>
@@ -39,12 +87,64 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_products_category">
+          <End Role="category" Type="Self.category" Multiplicity="0..1" />
+          <End Role="products" Type="Self.products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="idcategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_products_groupproduct">
+          <End Role="groupproduct" Type="Self.groupproduct" Multiplicity="0..1" />
+          <End Role="products" Type="Self.products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="groupproduct">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="idgroupproduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_products_production">
+          <End Role="production" Type="Self.production" Multiplicity="0..1" />
+          <End Role="products" Type="Self.products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="production">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="idproduction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="nonbaohiemviettinModelStoreContainer">
           <EntitySet Name="accounts" EntityType="Self.accounts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="groupproduct" EntityType="Self.groupproduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="production" EntityType="Self.production" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="fk_accounts_role" Association="Self.fk_accounts_role">
             <End Role="role" EntitySet="role" />
             <End Role="accounts" EntitySet="accounts" />
+          </AssociationSet>
+          <AssociationSet Name="fk_products_category" Association="Self.fk_products_category">
+            <End Role="category" EntitySet="category" />
+            <End Role="products" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="fk_products_groupproduct" Association="Self.fk_products_groupproduct">
+            <End Role="groupproduct" EntitySet="groupproduct" />
+            <End Role="products" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="fk_products_production" Association="Self.fk_products_production">
+            <End Role="production" EntitySet="production" />
+            <End Role="products" EntitySet="products" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -66,6 +166,22 @@
             <End Role="role" EntitySet="role" />
             <End Role="accounts" EntitySet="accounts" />
           </AssociationSet>
+          <EntitySet Name="category" EntityType="nonbaohiemviettinModel.category" />
+          <EntitySet Name="groupproduct" EntityType="nonbaohiemviettinModel.groupproduct" />
+          <EntitySet Name="production" EntityType="nonbaohiemviettinModel.production" />
+          <EntitySet Name="products" EntityType="nonbaohiemviettinModel.products" />
+          <AssociationSet Name="fk_products_category" Association="nonbaohiemviettinModel.fk_products_category">
+            <End Role="category" EntitySet="category" />
+            <End Role="products" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="fk_products_groupproduct" Association="nonbaohiemviettinModel.fk_products_groupproduct">
+            <End Role="groupproduct" EntitySet="groupproduct" />
+            <End Role="products" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="fk_products_production" Association="nonbaohiemviettinModel.fk_products_production">
+            <End Role="production" EntitySet="production" />
+            <End Role="products" EntitySet="products" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="accounts">
           <Key>
@@ -75,7 +191,7 @@
           <Property Name="idrole" Type="Int32" />
           <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="fullname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="phone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
@@ -92,6 +208,96 @@
             </Principal>
             <Dependent Role="accounts">
               <PropertyRef Name="idrole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="category">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="metatitle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Boolean" />
+          <NavigationProperty Name="products" Relationship="nonbaohiemviettinModel.fk_products_category" FromRole="category" ToRole="products" />
+        </EntityType>
+        <EntityType Name="groupproduct">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="metatitle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Boolean" />
+          <NavigationProperty Name="products" Relationship="nonbaohiemviettinModel.fk_products_groupproduct" FromRole="groupproduct" ToRole="products" />
+        </EntityType>
+        <EntityType Name="production">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="metatitle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Boolean" />
+          <NavigationProperty Name="products" Relationship="nonbaohiemviettinModel.fk_products_production" FromRole="production" ToRole="products" />
+        </EntityType>
+        <EntityType Name="products">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="metatitle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="promationprice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="viewcount" Type="Int32" />
+          <Property Name="createddate" Type="DateTime" Precision="3" />
+          <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="fastsell" Type="Boolean" />
+          <Property Name="newproduct" Type="Boolean" />
+          <Property Name="idcategory" Type="Int32" />
+          <Property Name="idproduction" Type="Int32" />
+          <Property Name="idgroupproduct" Type="Int32" />
+          <NavigationProperty Name="category" Relationship="nonbaohiemviettinModel.fk_products_category" FromRole="products" ToRole="category" />
+          <NavigationProperty Name="groupproduct" Relationship="nonbaohiemviettinModel.fk_products_groupproduct" FromRole="products" ToRole="groupproduct" />
+          <NavigationProperty Name="production" Relationship="nonbaohiemviettinModel.fk_products_production" FromRole="products" ToRole="production" />
+        </EntityType>
+        <Association Name="fk_products_category">
+          <End Type="nonbaohiemviettinModel.category" Role="category" Multiplicity="0..1" />
+          <End Type="nonbaohiemviettinModel.products" Role="products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="idcategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_products_groupproduct">
+          <End Type="nonbaohiemviettinModel.groupproduct" Role="groupproduct" Multiplicity="0..1" />
+          <End Type="nonbaohiemviettinModel.products" Role="products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="groupproduct">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="idgroupproduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_products_production">
+          <End Type="nonbaohiemviettinModel.production" Role="production" Multiplicity="0..1" />
+          <End Type="nonbaohiemviettinModel.products" Role="products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="production">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="idproduction" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -121,6 +327,58 @@
                 <ScalarProperty Name="password" ColumnName="password" />
                 <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="idrole" ColumnName="idrole" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="category">
+            <EntityTypeMapping TypeName="nonbaohiemviettinModel.category">
+              <MappingFragment StoreEntitySet="category">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="metatitle" ColumnName="metatitle" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="groupproduct">
+            <EntityTypeMapping TypeName="nonbaohiemviettinModel.groupproduct">
+              <MappingFragment StoreEntitySet="groupproduct">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="metatitle" ColumnName="metatitle" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="production">
+            <EntityTypeMapping TypeName="nonbaohiemviettinModel.production">
+              <MappingFragment StoreEntitySet="production">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="metatitle" ColumnName="metatitle" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="nonbaohiemviettinModel.products">
+              <MappingFragment StoreEntitySet="products">
+                <ScalarProperty Name="idgroupproduct" ColumnName="idgroupproduct" />
+                <ScalarProperty Name="idproduction" ColumnName="idproduction" />
+                <ScalarProperty Name="idcategory" ColumnName="idcategory" />
+                <ScalarProperty Name="newproduct" ColumnName="newproduct" />
+                <ScalarProperty Name="fastsell" ColumnName="fastsell" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="createddate" ColumnName="createddate" />
+                <ScalarProperty Name="viewcount" ColumnName="viewcount" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="promationprice" ColumnName="promationprice" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="metatitle" ColumnName="metatitle" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

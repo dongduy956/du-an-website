@@ -7,7 +7,6 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using NONBAOHIEMVIETTIN.Models;
-using DuongDongDuy_2001191210_ktralan3.Models;
 using System.IO;
 using System.Net.Mail;
 using System.Configuration;
@@ -138,7 +137,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
             accounts acc = db.accounts.SingleOrDefault(x => x.username.Equals(usernamelogin) && x.password.Equals(passwordlogin));
             if (acc != null)
             {
-                if (acc.status)
+                if (bool.Parse(acc.status.ToString()))
                 {
                     Session["account"] = acc;
                     return Json(1);
