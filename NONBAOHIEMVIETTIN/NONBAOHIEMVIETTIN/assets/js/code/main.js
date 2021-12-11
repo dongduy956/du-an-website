@@ -511,16 +511,16 @@
         var f = $(b).find('.product_title > a');
         return (e.text()) > (f.text()) ? 1 : -1;
     }
-    $('.addcart').off('click').click(function (e) {
+    $('.addwish').off('click').click(function (e) {
+        e.preventDefault();
         var ProductId = $(this).data('id');
-        addCart(ProductId);
+        var Quantity = $(this).data('value');
+        addWish(ProductId, Quantity);
     })
-    function addCart(ProductId) {
-
+    function addWish(ProductId, Quantity) {
         console.log(ProductId)
-        var Quantity = 1;
         $.ajax({
-            url: "/Cart/AddItem",
+            url: "/Wish/AddItem",
             data: JSON.stringify({ ProductId, Quantity }),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -528,15 +528,32 @@
                     success: function (data) {
                         console.log(data)
                         if (data.status == "1") {
-                            $('#cart-icon span').text(data.count);
-                            alert('Đã thêm vào giỏ hàng');
+                            {
+                                showToast('Đã thêm vào yêu thích');
+                                
+                                $('#wish-' + data.id + ' .quantity').text('SL:' + data.quantity);
+                            }
             }
-            else if (data.status == "0") {
-                alert('Thêm thất bại');
+                        else if (data.status == "0") {
+                            var html = `<div class="cart_item" id="wish-${data.id}">
+                <div class="cart_img">
+                    <a href="#"><img src="./assets/img/Nón bảo hiểm/${data.image}" alt=""></a>
+                </div>
+                <div class="cart_info">
+                    <a href="#">${data.name}</a>
+                    <span class="cart_price">${data.price}</span>
+                    <span class="quantity">SL: ${data.quantity}</span>
+                </div>
+                <div class="cart_remove">
+                    <a title="Remove this item" href="#"><i class="fa fa-times-circle"></i></a>
+                </div>
+            </div>`;
+                            showToast('Đã thêm vào yêu thích.');
+                            $('#lst-wish').append(html);
             }
             else {
                 alert('Mời bạn đăng nhập');
-                location.href = "/Account/Login";
+                location.href = "/dang-nhap.html";
             }
                     },
             error: function (data) {

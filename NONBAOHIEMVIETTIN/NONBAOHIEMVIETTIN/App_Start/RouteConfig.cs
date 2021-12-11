@@ -19,6 +19,18 @@ namespace NONBAOHIEMVIETTIN
                namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
            );
             routes.MapRoute(
+            name: "Wish",
+            url: "yeu-thich.html",
+            defaults: new { controller = "Wish", action = "Index", id = UrlParameter.Optional },
+            namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+        );
+            routes.MapRoute(
+              name: "Cart",
+              url: "gio-hang.html",
+              defaults: new { controller = "Cart", action = "Index", id = UrlParameter.Optional },
+              namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+          );
+            routes.MapRoute(
             name: "ProductsDetail",
             url: "chi-tiet/{alias}.html",
             defaults: new { controller = "Products", action = "ProductDetail", id = UrlParameter.Optional },
