@@ -26,7 +26,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="100" />
-          <Property Name="metatitle" Type="varchar" MaxLength="100" />
+          <Property Name="alias" Type="varchar" MaxLength="100" />
           <Property Name="status" Type="bit" />
         </EntityType>
         <EntityType Name="groupproduct">
@@ -35,7 +35,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="100" />
-          <Property Name="metatitle" Type="varchar" MaxLength="100" />
+          <Property Name="alias" Type="varchar" MaxLength="100" />
           <Property Name="status" Type="bit" />
         </EntityType>
         <EntityType Name="production">
@@ -44,7 +44,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="100" />
-          <Property Name="metatitle" Type="varchar" MaxLength="100" />
+          <Property Name="alias" Type="varchar" MaxLength="100" />
           <Property Name="status" Type="bit" />
         </EntityType>
         <EntityType Name="products">
@@ -53,7 +53,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="100" />
-          <Property Name="metatitle" Type="varchar" MaxLength="100" />
+          <Property Name="alias" Type="varchar" MaxLength="100" />
           <Property Name="status" Type="bit" />
           <Property Name="price" Type="decimal" Precision="18" Scale="0" />
           <Property Name="promationprice" Type="decimal" Precision="18" Scale="0" />
@@ -151,25 +151,17 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="nonbaohiemviettinModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityType Name="role">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="accounts" Relationship="nonbaohiemviettinModel.fk_accounts_role" FromRole="role" ToRole="accounts" />
-        </EntityType>
         <EntityContainer Name="nonbaohiemviettinEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="role" EntityType="Self.role" />
           <EntitySet Name="accounts" EntityType="nonbaohiemviettinModel.accounts" />
-          <AssociationSet Name="fk_accounts_role" Association="nonbaohiemviettinModel.fk_accounts_role">
-            <End Role="role" EntitySet="role" />
-            <End Role="accounts" EntitySet="accounts" />
-          </AssociationSet>
           <EntitySet Name="category" EntityType="nonbaohiemviettinModel.category" />
           <EntitySet Name="groupproduct" EntityType="nonbaohiemviettinModel.groupproduct" />
           <EntitySet Name="production" EntityType="nonbaohiemviettinModel.production" />
           <EntitySet Name="products" EntityType="nonbaohiemviettinModel.products" />
+          <EntitySet Name="role" EntityType="nonbaohiemviettinModel.role" />
+          <AssociationSet Name="fk_accounts_role" Association="nonbaohiemviettinModel.fk_accounts_role">
+            <End Role="role" EntitySet="role" />
+            <End Role="accounts" EntitySet="accounts" />
+          </AssociationSet>
           <AssociationSet Name="fk_products_category" Association="nonbaohiemviettinModel.fk_products_category">
             <End Role="category" EntitySet="category" />
             <End Role="products" EntitySet="products" />
@@ -199,25 +191,13 @@
           <Property Name="status" Type="Boolean" />
           <NavigationProperty Name="role" Relationship="nonbaohiemviettinModel.fk_accounts_role" FromRole="accounts" ToRole="role" />
         </EntityType>
-        <Association Name="fk_accounts_role">
-          <End Type="nonbaohiemviettinModel.role" Role="role" Multiplicity="0..1" />
-          <End Type="nonbaohiemviettinModel.accounts" Role="accounts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="role">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="accounts">
-              <PropertyRef Name="idrole" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="category">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="metatitle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="status" Type="Boolean" />
           <NavigationProperty Name="products" Relationship="nonbaohiemviettinModel.fk_products_category" FromRole="category" ToRole="products" />
         </EntityType>
@@ -227,7 +207,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="metatitle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="status" Type="Boolean" />
           <NavigationProperty Name="products" Relationship="nonbaohiemviettinModel.fk_products_groupproduct" FromRole="groupproduct" ToRole="products" />
         </EntityType>
@@ -237,7 +217,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="metatitle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="status" Type="Boolean" />
           <NavigationProperty Name="products" Relationship="nonbaohiemviettinModel.fk_products_production" FromRole="production" ToRole="products" />
         </EntityType>
@@ -247,7 +227,7 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="metatitle" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="status" Type="Boolean" />
           <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="promationprice" Type="Decimal" Precision="18" Scale="0" />
@@ -265,6 +245,26 @@
           <NavigationProperty Name="groupproduct" Relationship="nonbaohiemviettinModel.fk_products_groupproduct" FromRole="products" ToRole="groupproduct" />
           <NavigationProperty Name="production" Relationship="nonbaohiemviettinModel.fk_products_production" FromRole="products" ToRole="production" />
         </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="accounts" Relationship="nonbaohiemviettinModel.fk_accounts_role" FromRole="role" ToRole="accounts" />
+        </EntityType>
+        <Association Name="fk_accounts_role">
+          <End Type="nonbaohiemviettinModel.role" Role="role" Multiplicity="0..1" />
+          <End Type="nonbaohiemviettinModel.accounts" Role="accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="accounts">
+              <PropertyRef Name="idrole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_products_category">
           <End Type="nonbaohiemviettinModel.category" Role="category" Multiplicity="0..1" />
           <End Type="nonbaohiemviettinModel.products" Role="products" Multiplicity="*" />
@@ -301,20 +301,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="nonbaohiemviettinModelStoreContainer" CdmEntityContainer="nonbaohiemviettinEntities">
-          <EntitySetMapping Name="role">
-            <EntityTypeMapping TypeName="nonbaohiemviettinModel.role">
-              <MappingFragment StoreEntitySet="role">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="accounts">
             <EntityTypeMapping TypeName="nonbaohiemviettinModel.accounts">
               <MappingFragment StoreEntitySet="accounts">
@@ -335,7 +327,7 @@
             <EntityTypeMapping TypeName="nonbaohiemviettinModel.category">
               <MappingFragment StoreEntitySet="category">
                 <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="metatitle" ColumnName="metatitle" />
+                <ScalarProperty Name="alias" ColumnName="alias" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
@@ -345,7 +337,7 @@
             <EntityTypeMapping TypeName="nonbaohiemviettinModel.groupproduct">
               <MappingFragment StoreEntitySet="groupproduct">
                 <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="metatitle" ColumnName="metatitle" />
+                <ScalarProperty Name="alias" ColumnName="alias" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
@@ -355,7 +347,7 @@
             <EntityTypeMapping TypeName="nonbaohiemviettinModel.production">
               <MappingFragment StoreEntitySet="production">
                 <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="metatitle" ColumnName="metatitle" />
+                <ScalarProperty Name="alias" ColumnName="alias" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
@@ -377,7 +369,15 @@
                 <ScalarProperty Name="promationprice" ColumnName="promationprice" />
                 <ScalarProperty Name="price" ColumnName="price" />
                 <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="metatitle" ColumnName="metatitle" />
+                <ScalarProperty Name="alias" ColumnName="alias" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="role">
+            <EntityTypeMapping TypeName="nonbaohiemviettinModel.role">
+              <MappingFragment StoreEntitySet="role">
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>

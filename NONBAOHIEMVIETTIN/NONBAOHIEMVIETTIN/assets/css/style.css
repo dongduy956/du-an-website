@@ -1,4 +1,4 @@
-/*-----------------------------------------------------------------------------------
+﻿/*-----------------------------------------------------------------------------------
 
     Template Name: Coron - Fashion eCommerce Bootstrap4 Template
     Description: This is html5 template
@@ -573,7 +573,7 @@
 	border-bottom: 0;
 	padding-bottom: 0;
 }
-.sidebar_widget.catrgorie  > ul > li > a::before {
+.sidebar_widget.catrgorie  > ul > li > a>span {
 	position: absolute;
 	content: "+";
 	top: 50%;
@@ -582,7 +582,7 @@
 	-webkit-transform: translatey(-50%);
 	transform: translatey(-50%);
 }
-.sidebar_widget.catrgorie  > ul > li.has-sub.open > a::after {
+/*.sidebar_widget.catrgorie  > ul > li.has-sub.open > a::after {
 	position: absolute;
 	content: "-";
 	right: 0;
@@ -590,7 +590,7 @@
 	top: 50%;
 	-webkit-transform: translatey(-50%);
 	transform: translatey(-50%);
-}
+}*/
 .sidebar_widget.catrgorie  > ul > li.has-sub.open > a::before{
     display: none;
 } 

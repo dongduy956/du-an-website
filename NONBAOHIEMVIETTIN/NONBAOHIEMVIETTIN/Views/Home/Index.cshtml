@@ -5,234 +5,239 @@
     var i = 1;
     var j = 1;
 }
-@section slidebar{
-    @RenderPage("~/Views/Shared/_Slidebar.cshtml")
-}
 @section styles{
     <style>
-         .banner_title.title_2{
+        .banner_title.title_2 {
             left: -207px;
         }
-       .banner_title p::before{
-           right: -39px;
-       }
+
+        .banner_title p::before {
+            right: -39px;
+        }
     </style>
-    }
-<div class="col-lg-9 col-md-12">
-    <!--banner slider start-->
-    <div class="banner_slider slider_1">
+} <!--pos home section-->
+<div class="pos_home_section">
+    <div class="row pos_home">
+        @RenderPage("~/Views/Shared/_Slidebar.cshtml")
+        <div class="col-lg-9 col-md-12">
+            <!--banner slider start-->
+            <div class="banner_slider slider_1">
 
-        <div class="slider_active owl-carousel">
-            <div class="single_slider" style="background-image: url(../../assets/img/slider/slider_3.png)">
-                <div class="slider_content">
-                    <div class="slider_content_inner">
-                        <h1>Women's Fashion</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
-                        <a href="#">shop now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="single_slider" style="background-image: url(../../assets/img/slider/slider_3.png)">
-                <div class="slider_content">
-                    <div class="slider_content_inner">
-                        <h1>New Collection</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
-                        <a href="#">shop now</a>
-                    </div>
-                </div>
-            </div>
-            <div class="single_slider" style="background-image: url(../../assets/img/slider/slider_3.png)">
-                <div class="slider_content">
-                    <div class="slider_content_inner">
-                        <h1>Best Collection</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
-                        <a href="#">shop now</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!--banner slider start-->
-    <!--new product area start-->
-    @if (Model.Count(item => bool.Parse(item.status.ToString()) && bool.Parse(item.newproduct.ToString())) > 0)
-    {
-        <div class="new_product_area">
-            <div class="block_title">
-                <h3>Sản phẩm mới</h3>
-            </div>
-            <div class="row">
-                <div class="product_active owl-carousel">
-                    @foreach (var item in Model)
-                    {
-                        if (bool.Parse(item.status.ToString()) && bool.Parse(item.newproduct.ToString()))
-                        {
-                            <div class="col-lg-3">
-                                <div class="single_product">
-                                    <div class="product_thumb">
-                                        <a href="single-product.html">
-                                            <img src="~/assets/img/@item.category.name/@item.groupproduct.name/@item.image" alt="">
-                                        </a>
-
-                                        <div class="img_icone">
-                                            <img src="~/assets/img/cart/span-new.png" alt="">
-                                        </div>
-                                        <div class="product_action">
-                                            <a href="#"> <i class="fa fa-shopping-cart"></i> Thêm vào vào giỏ hàng</a>
-                                        </div>
-                                    </div>
-                                    <div class="product_content">
-                                        <span class="product_price">@HoTro.Instances.convertVND(@item.price.ToString())</span>
-                                        <h3 class="product_title"><a href="single-product.html">@item.name</a></h3>
-                                    </div>
-                                    <div class="product_info">
-                                        <ul>
-                                            <li><a href="#" title="Add to Wishlist">Add to Wishlist</a></li>
-                                            <li><a href="#" data-toggle="modal" data-target="#modal_box-@item.id" title="Quick view">View Detail</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                <div class="slider_active owl-carousel">
+                    <div class="single_slider" style="background-image: url(../../assets/img/slider/slide_1.png)">
+                        <div class="slider_content">
+                            <div class="slider_content_inner">
+                                <h1>Women's Fashion</h1>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
+                                <a href="#">shop now</a>
                             </div>
-                        }
-                    }
-
-                </div>
-            </div>
-        </div>
-    }
-    <!--new product area start-->
-    <!--featured product start-->
-    @if (Model.Count(item => bool.Parse(item.status.ToString()) && bool.Parse(item.fastsell.ToString())) > 0)
-    {
-        <div class="featured_product">
-            <div class="block_title">
-                <h3>Sản phẩm bán chạy</h3>
-            </div>
-            <div class="row">
-                <div class="product_active owl-carousel">
-                    @foreach (var item in Model)
-                    {
-                        if (bool.Parse(item.status.ToString()) && bool.Parse(item.fastsell.ToString()))
-                        {
-                            <div class="col-lg-3">
-                                <div class="single_product">
-                                    <div class="product_thumb">
-                                        <a href="single-product.html"><img src="~/assets/img/@item.category.name/@item.groupproduct.name/@item.image" alt=""></a>
-                                        <div class="hot_img">
-                                            <img src="~/assets/img/cart/span-hot.png" alt="">
-                                        </div>
-                                        <div class="product_action">
-                                            <a href="#"> <i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
-                                        </div>
-                                    </div>
-                                    <div class="product_content">
-                                        <span class="product_price">@item.price</span>
-                                        <h3 class="product_title"><a href="single-product.html">@item.name</a></h3>
-                                    </div>
-                                    <div class="product_info">
-                                        <ul>
-                                            <li><a href="#" title="Add to Wishlist">Add to Wishlist</a></li>
-                                            <li><a href="#" data-toggle="modal" data-target="#modal_box-@item.id" title="Quick view">Xem chi tiết</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                    <div class="single_slider" style="background-image: url(../../assets/img/slider/slider_2.png)">
+                        <div class="slider_content">
+                            <div class="slider_content_inner">
+                                <h1>New Collection</h1>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
+                                <a href="#">shop now</a>
                             </div>
-                        }
-                    }
+                        </div>
+                    </div>
+                    <div class="single_slider" style="background-image: url(../../assets/img/slider/slider_3.png)">
+                        <div class="slider_content">
+                            <div class="slider_content_inner">
+                                <h1>Best Collection</h1>
+                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
+                                <a href="#">shop now</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    }
-    <!--featured product end-->
-    <!--sale product area start-->
-    @if (Model.Count(item => bool.Parse(item.status.ToString()) && item.promationprice > 0) > 0)
-    {
-        <div class="new_product_area">
-            <div class="block_title">
-                <h3>Sản phẩm khuyến mãi</h3>
-            </div>
-            <div class="row">
-                <div class="product_active owl-carousel">
-                    @foreach (var item in Model)
-                    {
-                        if (bool.Parse(item.status.ToString()) && item.promationprice > 0)
+            <!--banner slider start-->
+            <!--new product area start-->
+            @if (Model.Count(item => bool.Parse(item.status.ToString()) && bool.Parse(item.newproduct.ToString())) > 0)
+            {
+
+            }<div class="new_product_area">
+                <div class="block_title">
+                    <h3>Sản phẩm mới</h3>
+                </div>
+                <div class="row">
+                    <div class="product_active owl-carousel">
+                        @foreach (var item in Model)
                         {
-                            <div class="col-lg-3">
-                                <div class="single_product banner_area">
-                                    <div class="single_banner">
-                                        <div class="product_thumb ">
-                                            <a href="single-product.html">
-                                                <img src="~/assets/img/@item.category.name/@item.groupproduct.name/@item.image" alt="">
+                            if (bool.Parse(item.status.ToString()) && bool.Parse(item.newproduct.ToString()))
+                            {
+                                <div class="col-lg-3">
+                                    <div class="single_product">
+                                        <div class="product_thumb">
+                                            <a href="~/chi-tiet/@(item.alias).html">
+                                                <img src="~/assets/img/Nón bảo hiểm/@item.image" alt="">
                                             </a>
-                                            <div class="banner_title title_2">
-                                                <p>sale off <span>@Math.Round(double.Parse((item.promationprice / item.price).ToString()), 2) %</span></p>
+
+                                            <div class="img_icone">
+                                                <img src="~/assets/img/cart/span-new.png" alt="">
+                                            </div>
+                                            <div class="product_action">
+                                                <a href="#"> <i class="fa fa-shopping-cart"></i> Thêm vào vào giỏ hàng</a>
                                             </div>
                                         </div>
-                                        <div class="product_action">
-                                            <a href="#"> <i class="fa fa-shopping-cart"></i> Thêm vào vào giỏ hàng</a>
+                                        <div class="product_content">
+                                            <span class="product_price">@HoTro.Instances.convertVND(@item.price.ToString())</span>
+                                            <h3 class="product_title"><a href="~/chi-tiet/@(item.alias).html">@item.name</a></h3>
+                                        </div>
+                                        <div class="product_info">
+                                            <ul>
+                                                <li><a href="#" title="Add to Wishlist">Thêm vào yêu thích</a></li>
+                                                <li><a href="#" data-toggle="modal" data-target="#modal_box-@item.id" title="Quick view">Xem chi tiết</a></li>
+                                            </ul>
                                         </div>
                                     </div>
-                                    <div class="product_content">
-                                        <span class="product_price">@HoTro.Instances.convertVND(@item.price.ToString())</span>
-                                        <h3 class="product_title"><a href="single-product.html">@item.name</a></h3>
-                                    </div>
-                                    <div class="product_info">
-                                        <ul>
-                                            <li><a href="#" title="Add to Wishlist">Add to Wishlist</a></li>
-                                            <li><a href="#" data-toggle="modal" data-target="#modal_box-@item.id" title="Quick view">View Detail</a></li>
-                                        </ul>
-                                    </div>
                                 </div>
-                            </div>
+                            }
                         }
-                    }
 
-                </div>
-            </div>
-        </div>
-    }
-    <!--sale product area start-->   
-    <!--brand logo strat-->
-    <div class="brand_logo mb-60">
-        <div class="block_title">
-            <h3>Brands</h3>
-        </div>
-        <div class="row">
-            <div class="brand_active owl-carousel">
-                <div class="col-lg-2">
-                    <div class="single_brand">
-                        <a href="#"><img src="~/assets/img/brand/brand1.jpg" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="single_brand">
-                        <a href="#"><img src="~/assets/img/brand/brand2.jpg" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="single_brand">
-                        <a href="#"><img src="~/assets/img/brand/brand3.jpg" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="single_brand">
-                        <a href="#"><img src="~/assets/img/brand/brand4.jpg" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="single_brand">
-                        <a href="#"><img src="~/assets/img/brand/brand5.jpg" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-2">
-                    <div class="single_brand">
-                        <a href="#"><img src="~/assets/img/brand/brand6.jpg" alt=""></a>
                     </div>
                 </div>
             </div>
+
+            <!--new product area start-->
+            <!--featured product start-->
+            @if (Model.Count(item => bool.Parse(item.status.ToString()) && bool.Parse(item.fastsell.ToString())) > 0)
+            {
+                <div class="featured_product">
+                    <div class="block_title">
+                        <h3>Sản phẩm bán chạy</h3>
+                    </div>
+                    <div class="row">
+                        <div class="product_active owl-carousel">
+                            @foreach (var item in Model)
+                            {
+                                if (bool.Parse(item.status.ToString()) && bool.Parse(item.fastsell.ToString()))
+                                {
+                                    <div class="col-lg-3">
+                                        <div class="single_product">
+                                            <div class="product_thumb">
+                                                <a href="/chi-tiet/@(item.alias).html"><img src="~/assets/img/Nón bảo hiểm/@item.image" alt=""></a>
+                                                <div class="hot_img">
+                                                    <img src="~/assets/img/cart/span-hot.png" alt="">
+                                                </div>
+                                                <div class="product_action">
+                                                    <a href="#"> <i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
+                                                </div>
+                                            </div>
+                                            <div class="product_content">
+                                                <span class="product_price">@item.price</span>
+                                                <h3 class="product_title"><a href="/chi-tiet/@(item.alias).html">@item.name</a></h3>
+                                            </div>
+                                            <div class="product_info">
+                                                <ul>
+                                                    <li><a href="#" title="Add to Wishlist">Thêm vào yêu thích</a></li>
+                                                    <li><a href="#" data-toggle="modal" data-target="#modal_box-@item.id" title="Quick view">Xem chi tiết</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+            <!--featured product end-->
+            <!--sale product area start-->
+            @if (Model.Count(item => bool.Parse(item.status.ToString()) && item.promationprice > 0) > 0)
+            {
+                <div class="new_product_area">
+                    <div class="block_title">
+                        <h3>Sản phẩm khuyến mãi</h3>
+                    </div>
+                    <div class="row">
+                        <div class="product_active owl-carousel">
+                            @foreach (var item in Model)
+                            {
+                                if (bool.Parse(item.status.ToString()) && item.promationprice > 0)
+                                {
+                                    <div class="col-lg-3">
+                                        <div class="single_product banner_area">
+                                            <div class="single_banner">
+                                                <div class="product_thumb ">
+                                                    <a href="/chi-tiet/@(item.alias).html">
+                                                        <img src="~/assets/img/Nón bảo hiểm/@item.image" alt="">
+                                                    </a>
+                                                    <div class="banner_title title_2">
+                                                        <p>sale off <span>@((1-Math.Round(double.Parse((item.promationprice / item.price).ToString()), 2))*100) %</span></p>
+                                                    </div>
+                                                </div>
+                                                <div class="product_action">
+                                                    <a href="#"> <i class="fa fa-shopping-cart"></i> Thêm vào vào giỏ hàng</a>
+                                                </div>
+                                            </div>
+                                            <div class="product_content">
+                                                <span class="product_price">@HoTro.Instances.convertVND(@item.price.ToString())</span>
+                                                <h3 class="product_title"><a href="/chi-tiet/@(item.alias).html">@item.name</a></h3>
+                                            </div>
+                                            <div class="product_info">
+                                                <ul>
+                                                    <li><a href="#" title="Add to Wishlist">Thêm vào yêu thích</a></li>
+                                                    <li><a href="#" data-toggle="modal" data-target="#modal_box-@item.id" title="Quick view">Xem chi tiết</a></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                }
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            }
+            <!--sale product area start-->
+            <!--brand logo strat-->
+            <div class="brand_logo mb-60">
+                <div class="block_title">
+                    <h3>Brands</h3>
+                </div>
+                <div class="row">
+                    <div class="brand_active owl-carousel">
+                        <div class="col-lg-2">
+                            <div class="single_brand">
+                                <a href="#"><img src="~/assets/img/brand/brand1.jpg" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="single_brand">
+                                <a href="#"><img src="~/assets/img/brand/brand2.jpg" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="single_brand">
+                                <a href="#"><img src="~/assets/img/brand/brand3.jpg" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="single_brand">
+                                <a href="#"><img src="~/assets/img/brand/brand4.jpg" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="single_brand">
+                                <a href="#"><img src="~/assets/img/brand/brand5.jpg" alt=""></a>
+                            </div>
+                        </div>
+                        <div class="col-lg-2">
+                            <div class="single_brand">
+                                <a href="#"><img src="~/assets/img/brand/brand6.jpg" alt=""></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+        <!--brand logo end-->
     </div>
+    <!--pos home section end-->
 </div>
-<!--brand logo end-->
 
 @if (Model.Count(item => bool.Parse(item.status.ToString()) && (bool.Parse(item.newproduct.ToString()) || bool.Parse(item.fastsell.ToString())) || item.promationprice > 0) > 0)
 {
@@ -255,7 +260,7 @@
                                             <div class="tab-content" id="pills-tabContent">
                                                 <div class="tab-pane fade show active" id="tab-@(i++)" role="tabpanel">
                                                     <div class="modal_tab_img">
-                                                        <a href="#"><img src="~/assets/img/@item.category.name/@item.groupproduct.name/@item.image" alt=""></a>
+                                                        <a href="#"><img src="~/assets/img/Nón bảo hiểm/@item.image" alt=""></a>
                                                     </div>
                                                 </div>
                                                 <div class="tab-pane fade" id="tab-@(i++)" role="tabpanel">
@@ -273,7 +278,7 @@
                                                 <ul class="nav product_navactive" role="tablist">
                                                     <li>
                                                         <a class="nav-link active" data-toggle="tab" href="#tab-@(j++)" role="tab" aria-controls="tab1" aria-selected="false">
-                                                            <img src="~/assets/img/@item.category.name/@item.groupproduct.name/@item.image" alt="">
+                                                            <img src="~/assets/img/Nón bảo hiểm/@item.image" alt="">
                                                         </a>
                                                     </li>
                                                     <li>

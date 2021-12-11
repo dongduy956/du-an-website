@@ -21,7 +21,7 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="nvarchar" MaxLength="100" />
-    <Property Name="metatitle" Type="varchar" MaxLength="100" />
+    <Property Name="alias" Type="varchar" MaxLength="100" />
     <Property Name="status" Type="bit" />
   </EntityType>
   <EntityType Name="groupproduct">
@@ -30,7 +30,7 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="nvarchar" MaxLength="100" />
-    <Property Name="metatitle" Type="varchar" MaxLength="100" />
+    <Property Name="alias" Type="varchar" MaxLength="100" />
     <Property Name="status" Type="bit" />
   </EntityType>
   <EntityType Name="production">
@@ -39,7 +39,7 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="nvarchar" MaxLength="100" />
-    <Property Name="metatitle" Type="varchar" MaxLength="100" />
+    <Property Name="alias" Type="varchar" MaxLength="100" />
     <Property Name="status" Type="bit" />
   </EntityType>
   <EntityType Name="products">
@@ -48,7 +48,7 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="nvarchar" MaxLength="100" />
-    <Property Name="metatitle" Type="varchar" MaxLength="100" />
+    <Property Name="alias" Type="varchar" MaxLength="100" />
     <Property Name="status" Type="bit" />
     <Property Name="price" Type="decimal" Precision="18" Scale="0" />
     <Property Name="promationprice" Type="decimal" Precision="18" Scale="0" />

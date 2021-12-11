@@ -16,7 +16,7 @@ namespace NONBAOHIEMVIETTIN.Models
     {
         public int id { get; set; }
         public string name { get; set; }
-        public string metatitle { get; set; }
+        public string alias { get; set; }
         public Nullable<bool> status { get; set; }
         public Nullable<decimal> price { get; set; }
         public Nullable<decimal> promationprice { get; set; }

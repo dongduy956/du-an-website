@@ -1,14 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="nonbaohiemviettinModelStoreContainer" CdmEntityContainer="nonbaohiemviettinEntities">
-    <EntitySetMapping Name="role">
-      <EntityTypeMapping TypeName="nonbaohiemviettinModel.role">
-        <MappingFragment StoreEntitySet="role">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="name" ColumnName="name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="accounts">
       <EntityTypeMapping TypeName="nonbaohiemviettinModel.accounts">
         <MappingFragment StoreEntitySet="accounts">
@@ -29,7 +21,7 @@
       <EntityTypeMapping TypeName="nonbaohiemviettinModel.category">
         <MappingFragment StoreEntitySet="category">
           <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="metatitle" ColumnName="metatitle" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
@@ -39,7 +31,7 @@
       <EntityTypeMapping TypeName="nonbaohiemviettinModel.groupproduct">
         <MappingFragment StoreEntitySet="groupproduct">
           <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="metatitle" ColumnName="metatitle" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
@@ -49,7 +41,7 @@
       <EntityTypeMapping TypeName="nonbaohiemviettinModel.production">
         <MappingFragment StoreEntitySet="production">
           <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="metatitle" ColumnName="metatitle" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
@@ -71,7 +63,15 @@
           <ScalarProperty Name="promationprice" ColumnName="promationprice" />
           <ScalarProperty Name="price" ColumnName="price" />
           <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="metatitle" ColumnName="metatitle" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="role">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.role">
+        <MappingFragment StoreEntitySet="role">
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>

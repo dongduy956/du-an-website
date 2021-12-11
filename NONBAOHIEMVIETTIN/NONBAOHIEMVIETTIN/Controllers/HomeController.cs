@@ -16,10 +16,6 @@ namespace NONBAOHIEMVIETTIN.Controllers
         public ActionResult Error()
         {
             return View();
-        }
-        public ActionResult Login()
-        {
-            return View();
-        }
+        }      
     }
 }

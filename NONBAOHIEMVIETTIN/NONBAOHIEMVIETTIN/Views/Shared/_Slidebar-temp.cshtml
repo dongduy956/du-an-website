@@ -1,0 +1,174 @@
+﻿@using NONBAOHIEMVIETTIN.Models
+@{
+    var db = new nonbaohiemviettinEntities();
+}
+<!--categorie menu start-->
+<div class="sidebar_widget catrgorie mb-35">
+    <h3>Danh mục sản phẩm</h3>
+    <ul>
+        @foreach (var itemCategory in db.category)
+            {
+            <li class="has-sub">
+                <a class="category-item" data-alias="@(itemCategory.alias)">
+                    <i class="fa fa-caret-right"></i>@itemCategory.name (@db.products.Count(x => x.idcategory == itemCategory.id))
+                    <span class="operation">+</span>
+                </a>
+                <ul class="categorie_sub">
+                    @foreach (var itemGroupproduct in db.groupproduct)
+                    {
+                        <li><a href="/@itemCategory.alias/@(itemGroupproduct.alias).html"><i class="fa fa-caret-right"></i> @itemGroupproduct.name (@db.products.Count(x => x.idgroupproduct == itemGroupproduct.id && x.idcategory == itemCategory.id))</a></li>
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
+</div>
+<!--categorie menu end-->
+<!--wishlist block start-->
+<div class="block_title">
+    <h3><a href="#">Yêu thích</a></h3>
+</div>
+<div class="sidebar_widget wishlist mb-35" style="overflow-y:scroll;height:200px;">
+
+    <div class="cart_item">
+        <div class="cart_img">
+            <a href="#"><img src="~/assets/img/cart/cart.jpg" alt=""></a>
+        </div>
+        <div class="cart_info">
+            <a href="#">lorem ipsum dolor</a>
+            <span class="cart_price">$115.00</span>
+            <span class="quantity">Qty: 1</span>
+        </div>
+        <div class="cart_remove">
+            <a title="Remove this item" href="#"><i class="fa fa-times-circle"></i></a>
+        </div>
+    </div>
+    <div class="cart_item">
+        <div class="cart_img">
+            <a href="#"><img src="~/assets/img/cart/cart.jpg" alt=""></a>
+        </div>
+        <div class="cart_info">
+            <a href="#">lorem ipsum dolor</a>
+            <span class="cart_price">$115.00</span>
+            <span class="quantity">Qty: 1</span>
+        </div>
+        <div class="cart_remove">
+            <a title="Remove this item" href="#"><i class="fa fa-times-circle"></i></a>
+        </div>
+    </div>
+    <div class="cart_item">
+        <div class="cart_img">
+            <a href="#"><img src="~/assets/img/cart/cart.jpg" alt=""></a>
+        </div>
+        <div class="cart_info">
+            <a href="#">lorem ipsum dolor</a>
+            <span class="cart_price">$115.00</span>
+            <span class="quantity">Qty: 1</span>
+        </div>
+        <div class="cart_remove">
+            <a title="Remove this item" href="#"><i class="fa fa-times-circle"></i></a>
+        </div>
+    </div>
+    <div class="cart_item">
+        <div class="cart_img">
+            <a href="#"><img src="~/assets/img/cart/cart.jpg" alt=""></a>
+        </div>
+        <div class="cart_info">
+            <a href="#">lorem ipsum dolor</a>
+            <span class="cart_price">$115.00</span>
+            <span class="quantity">Qty: 1</span>
+        </div>
+        <div class="cart_remove">
+            <a title="Remove this item" href="#"><i class="fa fa-times-circle"></i></a>
+        </div>
+    </div><div class="cart_item">
+        <div class="cart_img">
+            <a href="#"><img src="~/assets/img/cart/cart.jpg" alt=""></a>
+        </div>
+        <div class="cart_info">
+            <a href="#">lorem ipsum dolor</a>
+            <span class="cart_price">$115.00</span>
+            <span class="quantity">Qty: 1</span>
+        </div>
+        <div class="cart_remove">
+            <a title="Remove this item" href="#"><i class="fa fa-times-circle"></i></a>
+        </div>
+    </div><div class="cart_item">
+        <div class="cart_img">
+            <a href="#"><img src="~/assets/img/cart/cart.jpg" alt=""></a>
+        </div>
+        <div class="cart_info">
+            <a href="#">lorem ipsum dolor</a>
+            <span class="cart_price">$115.00</span>
+            <span class="quantity">Qty: 1</span>
+        </div>
+        <div class="cart_remove">
+            <a title="Remove this item" href="#"><i class="fa fa-times-circle"></i></a>
+        </div>
+    </div><div class="cart_item">
+        <div class="cart_img">
+            <a href="#"><img src="~/assets/img/cart/cart.jpg" alt=""></a>
+        </div>
+        <div class="cart_info">
+            <a href="#">lorem ipsum dolor</a>
+            <span class="cart_price">$115.00</span>
+            <span class="quantity">Qty: 1</span>
+        </div>
+        <div class="cart_remove">
+            <a title="Remove this item" href="#"><i class="fa fa-times-circle"></i></a>
+        </div>
+    </div><div class="cart_item">
+        <div class="cart_img">
+            <a href="#"><img src="~/assets/img/cart/cart.jpg" alt=""></a>
+        </div>
+        <div class="cart_info">
+            <a href="#">lorem ipsum dolor</a>
+            <span class="cart_price">$115.00</span>
+            <span class="quantity">Qty: 1</span>
+        </div>
+        <div class="cart_remove">
+            <a title="Remove this item" href="#"><i class="fa fa-times-circle"></i></a>
+        </div>
+    </div><div class="cart_item">
+        <div class="cart_img">
+            <a href="#"><img src="~/assets/img/cart/cart.jpg" alt=""></a>
+        </div>
+        <div class="cart_info">
+            <a href="#">lorem ipsum dolor</a>
+            <span class="cart_price">$115.00</span>
+            <span class="quantity">Qty: 1</span>
+        </div>
+        <div class="cart_remove">
+            <a title="Remove this item" href="#"><i class="fa fa-times-circle"></i></a>
+        </div>
+    </div>
+    <div class="cart_item">
+        <div class="cart_img">
+            <a href="#"><img src="~/assets/img/cart/cart2.jpg" alt=""></a>
+        </div>
+        <div class="cart_info">
+            <a href="#">Quisque ornare dui</a>
+            <span class="cart_price">$105.00</span>
+            <span class="quantity">Qty: 1</span>
+        </div>
+        <div class="cart_remove">
+            <a title="Remove this item" href="#"><i class="fa fa-times-circle"></i></a>
+        </div>
+    </div>
+    <div class="block_content">
+        <p>2 products</p>
+        <a href="#">» My wishlists</a>
+    </div>
+</div>
+<!--wishlist block end-->
+<!--popular tags area-->
+<div class="sidebar_widget tags mb-35">
+    <div class="block_title">
+        <h3>Các tag phổ biến</h3>
+    </div>
+    <div class="block_tags">
+        <a href="#">ac</a>
+        <a href="#">royal</a>
+    </div>
+</div>
+<!--popular tags end-->

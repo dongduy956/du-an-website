@@ -472,6 +472,45 @@
     $('#prepasschange').click(function () {
         $('#btnsubmitchangepassword').click()
     })
+    $('.nice-select li').off('click').click(function () {
+        var val = $(this).data('value');
+        if (val == '1')
+            $("#list-item .col-lg-4.col-md-4.col-sm-6").sort(desc_sortName).appendTo('#list-item');
+        else
+            if (val == '0')
+                $("#list-item .col-lg-4.col-md-4.col-sm-6").sort(asc_sortName).appendTo('#list-item');
+            else
+                if (val == '2')
+                    $("#list-item .col-lg-4.col-md-4.col-sm-6").sort(asc_sortPrice).appendTo('#list-item');
+                else if (val == '3')
+                    $("#list-item .col-lg-4.col-md-4.col-sm-6").sort(desc_sortPrice).appendTo('#list-item');
+
+    })
+    // Sắp xếp theo thứ tự giảm dần theo giá
+    function asc_sortPrice(a, b) {
+        var e = $(a).find('.product_price');
+        var f = $(b).find('.product_price');
+        return (e.text()) > (f.text()) ? 1 : -1;
+    }
+    // Sắp xếp theo thứ tự giảm dần theo giá
+    function desc_sortPrice(a, b) {
+        var e = $(a).find('.product_price');
+        var f = $(b).find('.product_price');
+        return (e.text()) < (f.text()) ? 1 : -1;
+    }
+    // Sắp xếp theo thứ tự giảm dần theo tên
+    function desc_sortName(a, b) {
+        var e = $(a).find('.product_title > a');
+        var f = $(b).find('.product_title > a');
+
+        return (e.text()) < (f.text()) ? 1 : -1;
+    }
+    // Sắp xếp theo thứ tự tăng dần theo tên dần theo tên
+    function asc_sortName(a, b) {
+        var e = $(a).find('.product_title > a');
+        var f = $(b).find('.product_title > a');
+        return (e.text()) > (f.text()) ? 1 : -1;
+    }
     $('.addcart').off('click').click(function (e) {
         var ProductId = $(this).data('id');
         addCart(ProductId);
@@ -491,14 +530,14 @@
                         if (data.status == "1") {
                             $('#cart-icon span').text(data.count);
                             alert('Đã thêm vào giỏ hàng');
-                        }
-                        else if (data.status == "0") {
-                            alert('Thêm thất bại');
-                        }
-                        else {
-                            alert('Mời bạn đăng nhập');
-                            location.href = "/Account/Login";
-                        }
+            }
+            else if (data.status == "0") {
+                alert('Thêm thất bại');
+            }
+            else {
+                alert('Mời bạn đăng nhập');
+                location.href = "/Account/Login";
+            }
                     },
             error: function (data) {
 

@@ -14,90 +14,15 @@
         </div>
     </div>
     <!--sidebar banner end-->
-    <!--categorie menu start-->
-    <div class="sidebar_widget catrgorie mb-35">
-        <h3>Danh mục sản phẩm</h3>
-        <ul>
-            @foreach (var itemCategory in db.category)
-            {
-                <li class="has-sub">
-                    <a href="#"><i class="fa fa-caret-right"></i>@itemCategory.name (@db.products.Count(x=>x.idcategory==itemCategory.id))</a>
-                    <ul class="categorie_sub">
-                        @foreach (var itemGroupproduct in db.groupproduct)
-                        {
-                            <li><a href="#"><i class="fa fa-caret-right"></i> @itemGroupproduct.name (@db.products.Count(x=>x.idgroupproduct==itemGroupproduct.id && x.idcategory==itemCategory.id))</a></li>
-                        }
-                    </ul>
-                </li>
-            }
-        </ul>
-    </div>
-    <!--categorie menu end-->
-    <!--wishlist block start-->
-    <div class="sidebar_widget wishlist mb-35">
-        <div class="block_title">
-            <h3><a href="#">Wishlist</a></h3>
-        </div>
-        <div class="cart_item">
-            <div class="cart_img">
-                <a href="#"><img src="~/assets/img/cart/cart.jpg" alt=""></a>
-            </div>
-            <div class="cart_info">
-                <a href="#">lorem ipsum dolor</a>
-                <span class="cart_price">$115.00</span>
-                <span class="quantity">Qty: 1</span>
-            </div>
-            <div class="cart_remove">
-                <a title="Remove this item" href="#"><i class="fa fa-times-circle"></i></a>
-            </div>
-        </div>
-        <div class="cart_item">
-            <div class="cart_img">
-                <a href="#"><img src="~/assets/img/cart/cart2.jpg" alt=""></a>
-            </div>
-            <div class="cart_info">
-                <a href="#">Quisque ornare dui</a>
-                <span class="cart_price">$105.00</span>
-                <span class="quantity">Qty: 1</span>
-            </div>
-            <div class="cart_remove">
-                <a title="Remove this item" href="#"><i class="fa fa-times-circle"></i></a>
-            </div>
-        </div>
-        <div class="block_content">
-            <p>2 products</p>
-            <a href="#">» My wishlists</a>
-        </div>
-    </div>
-    <!--wishlist block end-->
-    <!--popular tags area-->
-    <div class="sidebar_widget tags mb-35">
-        <div class="block_title">
-            <h3>popular tags</h3>
-        </div>
-        <div class="block_tags">
-            <a href="#">ipod</a>
-            <a href="#">sam sung</a>
-            <a href="#">apple</a>
-            <a href="#">iphone 5s</a>
-            <a href="#">superdrive</a>
-            <a href="#">shuffle</a>
-            <a href="#">nano</a>
-            <a href="#">iphone 4s</a>
-            <a href="#">canon</a>
-        </div>
-    </div>
-    <!--popular tags end-->
+   @RenderPage("~/Views/Shared/_Slidebar-temp.cshtml");
     <!--newsletter block start-->
     <div class="sidebar_widget newsletter mb-35">
         <div class="block_title">
-            <h3>newsletter</h3>
+            <h3>Đăng ký nhận tin</h3>
         </div>
-        <form action="#">
-            <p>Sign up for your newsletter</p>
-            <input placeholder="Your email address" type="text">
-            <button type="submit">Subscribe</button>
-        </form>
+        <p>Đăng ký tại đây</p>
+        <input placeholder="Nhập vào email của bạn" type="text">
+        <button type="submit">Gửi</button>
     </div>
     <!--newsletter block end-->
     <!--sidebar banner-->
@@ -108,3 +33,14 @@
     </div>
     <!--sidebar banner end-->
 </div>
+@section scripts{
+    <script>
+        $(function () {
+            $('.category-item').off('click').click(function (event) {
+                event.stopPropagation();
+                var dt = $(this).data('id');
+                location.href ='/'+ dt + '.html';
+            })
+        })
+</script>
+    }
