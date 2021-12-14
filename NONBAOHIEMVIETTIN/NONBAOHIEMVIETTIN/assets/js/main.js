@@ -4,7 +4,7 @@
     /*----------------------------
        stickey menu
     ----------------------------*/
-    $(window).on('scroll', function () {
+    $(window).on('scroll', function () {       
         var scroll = $(window).scrollTop();
         if (scroll < 100) {
             $(".sticky-header").removeClass("sticky");
@@ -168,8 +168,10 @@
 
     /*mini cart slideToggle*/
 
-    $(".shopping_cart").on("click", function () {
+    $(".shopping_cart").on("click", function (e) {
+        e.preventDefault();
         $('.mini_cart').slideToggle('medium');
+        e.stopPropagation();
     });
 
 

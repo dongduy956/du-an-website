@@ -1,7 +1,9 @@
-﻿@{
+﻿@using NONBAOHIEMVIETTIN.Models
+@{
 
-    var acc = Session["account"] as NONBAOHIEMVIETTIN.Models.accounts;
+    var acc = Session["account"] as accounts;
     var check = Session["social"] as bool?;
+    var cart = Session["cartSession"] as List<CartItem>;
 }
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -19,12 +21,14 @@
 
     <link rel="stylesheet" href="~/assets/css/plugin.css">
     <link rel="stylesheet" href="~/assets/css/bundle.css">
-    <link rel="stylesheet" href="~/assets/css/responsive.css">
 
     <link href="~/assets/css/style.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/assets/css/responsive.css">
+
     <link href="~/assets/css/toast.css" rel="stylesheet" />
 
-    <script src="~/assets/js/vendor/modernizr-2.8.3.min.js"></script>   
+    <script src="~/assets/js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="~/assets/js/vendor/jquery-1.12.0.min.js"></script>
     @RenderSection("styles", false)
 </head>
 
@@ -120,49 +124,67 @@
                                         </form>
                                     </div>
                                     <div class="shopping_cart">
-                                        <a href="#">
-                                            <i class="fa fa-shopping-cart"></i> 2Items - $209.44
+                                        <a href="">
+                                            <i class="fa fa-shopping-cart"></i>
+                                            <span>
+                                                @(cart != null ? (cart.Sum(x=>x.Quantity) + "sản phẩm -" + HoTro.Instances.convertVND(cart.Sum(x => x.Quantity * x.Product.price).ToString())) : "0 sản phẩm - 0đ")
+                                            </span>
                                             <i class="fa fa-angle-down"></i>
                                         </a>
 
                                         <!--mini cart-->
-                                        <div class="mini_cart">
-                                            <div class="cart_item">
-                                                <div class="cart_img">
-                                                    <a href="#"><img src="~/assets/img/cart/cart.jpg" alt=""></a>
-                                                </div>
-                                                <div class="cart_info">
-                                                    <a href="#">lorem ipsum dolor</a>
-                                                    <span class="cart_price">$115.00</span>
-                                                    <span class="quantity">Qty: 1</span>
-                                                </div>
-                                                <div class="cart_remove">
-                                                    <a title="Remove this item" href="#"><i class="fa fa-times-circle"></i></a>
-                                                </div>
+                                        <div id="lst-cart" class="mini_cart">
+                                            <div class="img-cart" style="padding:24px;">
+                                                <img src="~/assets/img/cart/no-cart.png" />
                                             </div>
-                                            <div class="cart_item">
-                                                <div class="cart_img">
-                                                    <a href="#"><img src="~/assets/img/cart/cart2.jpg" alt=""></a>
-                                                </div>
-                                                <div class="cart_info">
-                                                    <a href="#">Quisque ornare dui</a>
-                                                    <span class="cart_price">$105.00</span>
-                                                    <span class="quantity">Qty: 1</span>
-                                                </div>
-                                                <div class="cart_remove">
-                                                    <a title="Remove this item" href="#"><i class="fa fa-times-circle"></i></a>
-                                                </div>
+                                            <div id="cart" style="max-height:300px; overflow-y:scroll">
+                                                @if (cart == null||cart.Count==0)
+                                                {
+
+                                                    <script>
+                                                        $(function () {
+                                                            $('.img-cart').show();
+                                                            $('#shipping-group').hide();
+                                                        });
+                                                    </script>
+
+                                                }
+                                                else
+                                                {
+                                                    <script>
+                                                        $(function () {
+                                                            $('.img-cart').hide();
+                                                            $('#shipping-group').show();
+                                                        });
+                                                    </script>
+                                                    foreach (var item in cart)
+                                                    {
+                                                        <div class="cart_item" id="cart-@item.Product.id">
+                                                            <div class="cart_img">
+                                                                <a href="/chi-tiet/@(item.Product.alias).html"><img src="~/assets/img/Nón bảo hiểm/@item.Product.image" alt=""></a>
+                                                            </div>
+                                                            <div class="cart_info">
+                                                                <a href="/chi-tiet/@(item.Product.alias).html">@item.Product.name</a>
+                                                                <span class="cart_price">@HoTro.Instances.convertVND(item.Product.price.ToString())</span>
+                                                                <span class="quantity">Số lượng: @item.Quantity</span>
+                                                            </div>
+                                                            <div class="cart_remove">
+                                                                <a title="Xoá sản phẩm @item.Product.name" data-id="@item.Product.id" class="deletecart" href=""><i class="fa fa-times-circle"></i></a>
+                                                            </div>
+                                                        </div>
+
+                                                    }
+
+                                                }
                                             </div>
-                                            <div class="shipping_price">
-                                                <span> Shipping </span>
-                                                <span>  $7.00  </span>
-                                            </div>
-                                            <div class="total_price">
-                                                <span> total </span>
-                                                <span class="prices">  $227.00  </span>
-                                            </div>
-                                            <div class="cart_button">
-                                                <a href="checkout.html"> Check out</a>
+                                            <div id="shipping-group">
+                                                <div class="total_price">
+                                                    <span> Tổng tiền: </span>
+                                                    <span class="prices">@(cart!=null?HoTro.Instances.convertVND(cart.Sum(x => x.Quantity * x.Product.price).ToString()):"0")</span>
+                                                </div>
+                                                <div class="cart_button">
+                                                    <a id="btncheckout" href="/gio-hang.html"> Check out</a>
+                                                </div>
                                             </div>
                                         </div>
                                         <!--mini cart end-->
@@ -300,7 +322,6 @@
         </div>
         <!--Modal changepassword end-->
         <!-- all js here -->
-        <script src="~/assets/js/vendor/jquery-1.12.0.min.js"></script>
         <script src="~/assets/js/popper.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="~/assets/js/ajax-mail.js"></script>

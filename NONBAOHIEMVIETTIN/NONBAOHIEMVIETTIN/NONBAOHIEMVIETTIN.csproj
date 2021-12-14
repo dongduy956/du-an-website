@@ -1963,6 +1963,8 @@
     <Content Include="assets\img\cart\count.png" />
     <Content Include="assets\img\cart\count2.png" />
     <Content Include="assets\img\cart\count3.png" />
+    <Content Include="assets\img\cart\no-cart.png" />
+    <Content Include="assets\img\cart\noti.jpg" />
     <Content Include="assets\img\cart\span-hot.png" />
     <Content Include="assets\img\cart\span-new.png" />
     <Content Include="assets\img\favicon.png" />

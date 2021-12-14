@@ -79,7 +79,7 @@ function getUserInfo() {
                     image: user.picture
                 },
                 success: function () {
-                    location.href = "/Home/Index/";
+                    location.href = "/";
                 }, error: function (data) {
                     alert(JSON.stringify(data));
                 }

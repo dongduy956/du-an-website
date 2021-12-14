@@ -2247,7 +2247,7 @@
     min-width: 300px;
 }
 .table_desc table thead tr th.product_thumb, .table_desc table thead tr th.product_quantity {
-	min-width: 195px;
+	min-width: 90px;
 }
 .cart_page table thead tr:last-child th,.table_desc table tbody tr td:last-child{
     border-right: 0;
@@ -3775,7 +3775,7 @@
     background: #00bba6;
     color: #fff;
 }
-.modal_add_to_cart form input {
+.modal_add_to_cart .form input {
 	width: 80px;
 	border: 1px solid #ddd;
 	background: none;
@@ -3784,7 +3784,7 @@
 	border-radius: 5px;
 	height: 40px;
 }
-.modal_add_to_cart form button{
+.modal_add_to_cart .form button{
 	background: none;
 	border: 1px solid #444;
 	margin-left: 10px;
@@ -3811,12 +3811,10 @@
 }
 .modal-content button.close {
 	position: relative;
-	left: 94%;
+	left: 96%;
 	width: 30px;
 	height: 30px;
 	display: block;
-	border: 1px solid #555;
-	top: 10px;
 	border-radius: 5px;
 	cursor: pointer;
 	z-index: 9;

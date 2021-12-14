@@ -50,7 +50,9 @@ namespace NONBAOHIEMVIETTIN.Controllers
                                         image = item.Product.image,
                                         name = item.Product.name,
                                         price = HoTro.Instances.convertVND(item.Product.price.ToString()),
-                                        quantity = item.Quantity
+                                        quantity = item.Quantity,
+                                        alias = item.Product.alias,
+                                        sumQuantity=list.Sum(x=>x.Quantity)
                                     });
                                 }
 
@@ -70,7 +72,9 @@ namespace NONBAOHIEMVIETTIN.Controllers
                                 image = item.Product.image,
                                 name = item.Product.name,
                                 price = HoTro.Instances.convertVND(item.Product.price.ToString()),
-                                quantity = item.Quantity
+                                quantity = item.Quantity,
+                                alias = item.Product.alias,
+                                sumQuantity = list.Sum(x => x.Quantity)
                             });
                         }
 
@@ -90,7 +94,9 @@ namespace NONBAOHIEMVIETTIN.Controllers
                             image=item.Product.image,
                             name=item.Product.name,
                             price=HoTro.Instances.convertVND(item.Product.price.ToString()),
-                            quantity=item.Quantity
+                            quantity=item.Quantity,
+                            alias = item.Product.alias,
+                            sumQuantity=Quantity
                         });
                     }
                 }
@@ -98,6 +104,25 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 {
                 }
             return Json(new { status = -2 }, JsonRequestBehavior.AllowGet);
+
+        }
+
+        [HttpPost]
+        public JsonResult DeleteItem(int ProductId)
+        {
+            var cart = Session[wishSession];
+            var p = db.products.Find(ProductId);
+            if (cart != null)
+            {
+                var list = (List<CartItem>)cart;
+                if (list.Exists(x => x.Product.id == ProductId))
+                {
+                    list.RemoveAll(r => r.Product.id == ProductId);
+                    Session[wishSession] = list;
+                    return Json(new { status = 1, sumQuantity = list.Sum(x => x.Quantity) });
+                }
+            }
+            return Json(new { status = 0 });
 
         }
     }

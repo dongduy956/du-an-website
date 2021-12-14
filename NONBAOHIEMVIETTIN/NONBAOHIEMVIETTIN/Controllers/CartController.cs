@@ -38,7 +38,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 {
                     list.RemoveAll(r => r.Product.id == ProductId);
                     Session[cartSession] = list;
-                    return Json(new { status = 1, count = list.Sum(x => x.Quantity), summoney = HoTro.Instances.convertVND(list.Sum(x => x.Quantity * x.Product.price).ToString()) }, JsonRequestBehavior.AllowGet);
+                    return Json(new { status = 1, sumQuantity = list.Sum(x => x.Quantity), sumMoney = HoTro.Instances.convertVND(list.Sum(x => x.Quantity * x.Product.price).ToString()) }, JsonRequestBehavior.AllowGet);
                 }
             }
             return Json(new { status = 0 }, JsonRequestBehavior.AllowGet);
@@ -52,18 +52,33 @@ namespace NONBAOHIEMVIETTIN.Controllers
             else
                 try
                 {
-                    var cart = Session[cartSession];//bien Cart co ten la cartSession
+                    var wish = Session[cartSession];//bien wish co ten la wishSession
                     var p = db.products.Find(ProductId);
                     //tim kiem san pham trong db, Id=1
-                    if (cart != null)
+                    if (wish != null)
                     {//gio da co sp
-                        var list = (List<CartItem>)cart;
+                        var list = (List<CartItem>)wish;
                         if (list.Exists(x => x.Product.id == ProductId))
                         {
                             foreach (var item in list)
                             {
                                 if (item.Product.id == ProductId)
+                                {
                                     item.Quantity += Quantity;
+                                    return Json(new
+                                    {
+                                        status = 1,
+                                        id = item.Product.id,
+                                        image = item.Product.image,
+                                        name = item.Product.name,
+                                        price = HoTro.Instances.convertVND(item.Product.price.ToString()),
+                                        quantity = item.Quantity,
+                                        alias = item.Product.alias,
+                                        sumQuantity = list.Sum(x => x.Quantity),
+                                        sumMoney = HoTro.Instances.convertVND(list.Sum(x => x.Quantity * x.Product.price).ToString())
+                                    });
+                                }
+
                             }
                         }
                         else
@@ -73,6 +88,18 @@ namespace NONBAOHIEMVIETTIN.Controllers
                             item.Quantity = Quantity;
                             list.Add(item);
                             Session[cartSession] = list; //save
+                            return Json(new
+                            {
+                                status = 0,
+                                id = item.Product.id,
+                                image = item.Product.image,
+                                name = item.Product.name,
+                                price = HoTro.Instances.convertVND(item.Product.price.ToString()),
+                                quantity = item.Quantity,
+                                alias = item.Product.alias,
+                                sumQuantity = list.Sum(x => x.Quantity),
+                                sumMoney = HoTro.Instances.convertVND(list.Sum(x => x.Quantity * x.Product.price).ToString())
+                            });
                         }
 
                     }
@@ -84,19 +111,25 @@ namespace NONBAOHIEMVIETTIN.Controllers
                         var list = new List<CartItem>();
                         list.Add(item);
                         Session[cartSession] = list;//save 
+                        return Json(new
+                        {
+                            status = 0,
+                            id = item.Product.id,
+                            image = item.Product.image,
+                            name = item.Product.name,
+                            price = HoTro.Instances.convertVND(item.Product.price.ToString()),
+                            quantity = item.Quantity,
+                            alias = item.Product.alias,
+                            sumQuantity = Quantity,
+                            sumMoney = HoTro.Instances.convertVND(list.Sum(x => x.Quantity * x.Product.price).ToString())
+                        });
                     }
-                    int sl = (Session[cartSession] as List<CartItem>).Sum(x => x.Quantity);
-                    return Json(new
-                    {
-                        status = 1,
-                        count = sl
-
-                    }, JsonRequestBehavior.AllowGet);
                 }
                 catch (Exception ex)
                 {
-                    return Json(new { status = 0 }, JsonRequestBehavior.AllowGet);
                 }
+            return Json(new { status = -2 }, JsonRequestBehavior.AllowGet);
+
         }
         [HttpPost]
         public JsonResult UpdateItem(int ProductId, int Quantity)

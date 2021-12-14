@@ -79,7 +79,7 @@
                                                 <img src="~/assets/img/cart/span-new.png" alt="">
                                             </div>
                                             <div class="product_action">
-                                                <a href="#"> <i class="fa fa-shopping-cart"></i> Thêm vào vào giỏ hàng</a>
+                                                <a href="" data-id="@item.id" data-value="1" title="Thêm vào giỏ hàng" class="addcart"> <i class="fa fa-shopping-cart"></i> Thêm vào vào giỏ hàng</a>
                                             </div>
                                         </div>
                                         <div class="product_content">
@@ -123,7 +123,7 @@
                                                     <img src="~/assets/img/cart/span-hot.png" alt="">
                                                 </div>
                                                 <div class="product_action">
-                                                    <a href="#"> <i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
+                                                    <a href="" data-id="@item.id" data-value="1" title="Thêm vào giỏ hàng" class="addcart"> <i class="fa fa-shopping-cart"></i> Thêm vào vào giỏ hàng</a>
                                                 </div>
                                             </div>
                                             <div class="product_content">
@@ -170,7 +170,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="product_action">
-                                                    <a href="#"> <i class="fa fa-shopping-cart"></i> Thêm vào vào giỏ hàng</a>
+                                                    <a href="" data-id="@item.id" data-value="1" title="Thêm vào giỏ hàng" class="addcart"> <i class="fa fa-shopping-cart"></i> Thêm vào vào giỏ hàng</a>
                                                 </div>
                                             </div>
                                             <div class="product_content">
@@ -179,8 +179,8 @@
                                             </div>
                                             <div class="product_info">
                                                 <ul>
-                                                    <li><a href="#" title="Thêm vào yêu thích" data-id="@item.id" data-value="1" class="addwish">Thêm vào yêu thích</a></li>
-                                                    <li><a href="#" data-toggle="modal" class="mt-1" data-target="#modal_box-@item.id" title="Xem chi tiết">Xem chi tiết</a></li>
+                                                    <li><a href="/" title="Thêm vào yêu thích" data-id="@item.id" data-value="1" class="addwish">Thêm vào yêu thích</a></li>
+                                                    <li><a href="/" data-toggle="modal" class="mt-1" data-target="#modal_box-@item.id" title="Xem chi tiết">Xem chi tiết</a></li>
                                                 </ul>
                                             </div>
                                         </div>
@@ -260,7 +260,7 @@
                                             <div class="tab-content" id="pills-tabContent">
                                                 <div class="tab-pane fade show active" id="tab-@(i++)" role="tabpanel">
                                                     <div class="modal_tab_img">
-                                                        <a href="#"><img src="~/assets/img/Nón bảo hiểm/@item.image" alt=""></a>
+                                                        <a href="/chi-tiet/@(item.alias).html"><img src="~/assets/img/Nón bảo hiểm/@item.image" alt=""></a>
                                                     </div>
                                                 </div>
                                                 <div class="tab-pane fade" id="tab-@(i++)" role="tabpanel">
@@ -311,10 +311,10 @@
                                                 </ul>
                                             </div>
                                             <div class="modal_add_to_cart mb-15">
-                                                <form action="#">
-                                                    <input min="0" max="100" step="2" value="1" type="number">
-                                                    <button type="submit">Thêm vào giỏ hàng</button>
-                                                </form>
+                                                <div class="form">
+                                                    <input min="1" id="txtquantity-@item.id" max="100" step="1" value="1" type="number">
+                                                    <button class="btnaddcart" data-id="@item.id" type="submit">Thêm vào giỏ hàng</button>
+                                                </div>
                                             </div>
                                             <div class="modal_description mb-15">
                                                 <p>@item.description</p>

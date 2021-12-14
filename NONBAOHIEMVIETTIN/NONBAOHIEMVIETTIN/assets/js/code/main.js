@@ -1,5 +1,5 @@
-﻿$(function () {
-
+﻿
+$(function () {
     $('#btnSearch').click(function () {
         search()
     })
@@ -200,8 +200,7 @@
                 alert('Lỗi')
             }
         })
-    }
-    )
+    })
     $('#btnregister').click(register);
     $('#btnclosexregister').click(function () {
         enable('#btnregister')
@@ -517,6 +516,12 @@
         var Quantity = $(this).data('value');
         addWish(ProductId, Quantity);
     })
+    $('#btnaddwish').click(function (e) {
+        e.preventDefault();
+        var ProductId = $(this).data('id');
+        var Quantity = $('#txtquantity-detail').val();
+        addWish(ProductId, Quantity);
+    })
     function addWish(ProductId, Quantity) {
         console.log(ProductId)
         $.ajax({
@@ -528,38 +533,282 @@
                     success: function (data) {
                         console.log(data)
                         if (data.status == "1") {
-                            {
                                 showToast('Đã thêm vào yêu thích');
-                                
-                                $('#wish-' + data.id + ' .quantity').text('SL:' + data.quantity);
-                            }
-            }
+                                $('#wish-' +data.id + ' .quantity').text('SL:' +data.quantity);
+                            $('#lst-wish .block_content p').text(`${data.sumQuantity} sản phẩm.`);
+                        }
                         else if (data.status == "0") {
                             var html = `<div class="cart_item" id="wish-${data.id}">
                 <div class="cart_img">
-                    <a href="#"><img src="./assets/img/Nón bảo hiểm/${data.image}" alt=""></a>
+                    <a href="/chi-tiet/${data.alias}.html"><img src="../../assets/img/Nón bảo hiểm/${data.image}" alt=""></a>
                 </div>
                 <div class="cart_info">
-                    <a href="#">${data.name}</a>
+                    <a href="/chi-tiet/${data.alias}.html">${data.name}</a>
                     <span class="cart_price">${data.price}</span>
                     <span class="quantity">SL: ${data.quantity}</span>
                 </div>
                 <div class="cart_remove">
-                    <a title="Remove this item" href="#"><i class="fa fa-times-circle"></i></a>
+                    <a title="Xoá sản phẩm" data-id="${data.id}" href="" class ="deletewish"><i class ="fa fa-times-circle"></i></a>
                 </div>
             </div>`;
+                            var deletewish = `<script> function deletewish(ProductId,check) {
+            $.ajax({
+                url: "/Wish/DeleteItem",
+                data: JSON.stringify({ ProductId}),
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        type: "POST",
+                        success: function (data) {
+                            if (data.status == "1") {
+                                $('#wish-' +ProductId).hide(500);
+                                $('#lst-wish .block_content p').text(data.sumQuantity+ ' sản phẩm.');
+                                if(check)
+                                showToast('Xoá sản phẩm thành công.');
+                                if(data.sumQuantity==0)
+                        {
+                                    $('#wish').hide();
+                                    $('.img-wish').show();
+                        }
+                        }
+                        else
+                                if(check)
+                                showToast('Lỗi hệ thống khi xoá sản phẩm. Vui lòng thao tác lại sau.');
+
+                        },
+                            error: function (data) {
+
+                    alert(JSON.stringify(data));
+                        }
+
+                        });
+                            };
+                              $('.deletewish').off('click').click(function (e) {
+        e.preventDefault();
+        if (confirm("Bạn chắc chắc xoá sản phẩm này?")) {
+            var ProductId = $(this).data('id');
+            deletewish(ProductId, true)
+                            }
+                            })
+                            </script>`
                             showToast('Đã thêm vào yêu thích.');
-                            $('#lst-wish').append(html);
-            }
-            else {
-                alert('Mời bạn đăng nhập');
-                location.href = "/dang-nhap.html";
-            }
+                            $('#lst-wish').prepend(html);
+                            $('#lst-wish').append(deletewish);
+                            $('#lst-wish .block_content p').text(`${data.sumQuantity} sản phẩm.`);
+                            $('.img-wish').hide();
+                        }
+                        else {
+                            alert('Mời bạn đăng nhập');
+                            location.href = "/dang-nhap.html";
+                        }
                     },
             error: function (data) {
 
                 alert(JSON.stringify(data));
             }
+        });
+    }
+    $('.deletewish').off('click').click(function (e) {
+        e.preventDefault();
+        if (confirm("Bạn chắc chắc xoá sản phẩm này?")) {
+            var ProductId = $(this).data('id');
+            deletewish(ProductId, true)
+        }
+    })
+    function deletewish(ProductId, check) {
+        $.ajax({
+            url: "/Wish/DeleteItem",
+            data: JSON.stringify({ ProductId}),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    type: "POST",
+                    success: function (data) {
+                        if (data.status == "1") {
+                            $('#wish-' +ProductId).hide(500);
+                            $('#lst-wish .block_content p').text(`${data.sumQuantity} sản phẩm.`);
+                            if(check)
+                            showToast('Xoá sản phẩm thành công.');
+                            if (data.sumQuantity == 0) {
+                                $('#wish').hide();
+                                $('.img-wish').show();
+                            }
+                        }
+                        else
+                            if (check)
+                                showToast('Lỗi hệ thống khi xoá sản phẩm. Vui lòng thao tác lại sau.');
+
+                    },
+            error: function (data) {
+
+                alert(JSON.stringify(data));
+            }
+
+        });
+    }
+    $('.addcart').off('click').click(function (e) {
+        e.preventDefault();
+        var ProductId = $(this).data('id');
+        var Quantity = $(this).data('value');
+        addCart(ProductId, Quantity);
+    })
+    $('.btnaddcart').off('click').click(function () {
+        var ProductId = $(this).data('id');
+        var Quantity = $('#txtquantity-' + ProductId).val();
+        if (typeof (Quantity) == 'undefined') {
+            var classes = $(this).parent().attr('class');
+            if (classes == 'form form-production')
+                Quantity = $('#txtquantity-production-' + ProductId).val();
+            else
+                if (classes == 'form form-category')
+                    Quantity = $('#txtquantity-category-' + ProductId).val();
+                else
+                    if (classes == 'form form-group-product')
+                        Quantity = $('#txtquantity-group-' + ProductId).val();
+                    else
+                        Quantity = $('#txtquantity-detail').val();
+        }
+
+        addCart(ProductId, Quantity);
+    })
+
+    function addCart(ProductId, Quantity) {
+        $.ajax({
+            url: "/Cart/AddItem",
+            data: JSON.stringify({ ProductId, Quantity }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    type: "POST",
+                    success: function (data) {
+                        console.log(data)
+                        if (data.status == "1") {
+                                showToast('Đã thêm vào giỏ hàng.');
+                                $('#cart-' +data.id + ' .quantity').text('Số lượng:' +data.quantity);
+                                $('#lst-cart .prices').text(data.sumMoney);
+
+                                if (location.pathname == '/yeu-thich.html')
+                                    deletewish(ProductId, false);
+                               
+
+                            $('.shopping_cart a span').text(`${data.sumQuantity} sản phẩm-${data.sumMoney}`);
+
+                        }
+                        else if (data.status == "0") {
+                            var html = `<div class="cart_item" id="cart-${data.id}">
+                                                            <div class="cart_img">
+                                                                <a href="/chi-tiet/${data.alias}.html"><img src="../../assets/img/Nón bảo hiểm/${data.image}" alt=""></a>
+                                                            </div>
+                                                            <div class="cart_info">
+                                                                <a href="/chi-tiet/${data.alias}.html">${data.name}</a>
+                                                                <span class ="cart_price">${data.price}</span>
+                                                                <span class ="quantity">Số lượng: ${data.quantity}</span>
+                                                            </div>
+                                                        <div class="cart_remove">
+                                                            <a title="Xoá sản phẩm ${data.name}" class ="deletecart" data-id='${data.id}' href=""><i class ="fa fa-times-circle"></i></a>
+                                                        </div></div>`;
+                            var script = `<script>
+                                $('.deletecart').off('click').click(function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (confirm("Bạn chắc chắc xoá sản phẩm này?")) {
+            var ProductId = $(this).data('id');
+            deletecart(ProductId, true)
+                            }
+                            })
+    function deletecart(ProductId, check) {
+        $.ajax({
+                                url: "/Cart/DeleteItem",
+                                data: JSON.stringify({ ProductId}),
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                type: "POST",
+                                success: function (data) {
+                        if (data.status == "1") {
+                            $('#cart-' +ProductId).hide(500);
+                            $('.shopping_cart a span').text(data.sumQuantity +' sản phẩm-'+data.sumMoney);
+                            $('#lst-cart .prices').text(data.sumMoney);
+                            if(check)
+                            showToast('Xoá sản phẩm thành công.');
+                            if (data.sumQuantity == 0) {
+                                $('.img-cart').show();                              
+                                $('#shipping-group').hide();
+
+                            }
+                            }
+                            else
+                            if (check)
+                                showToast('Lỗi hệ thống khi xoá sản phẩm. Vui lòng thao tác lại sau.');
+
+                            },
+                            error: function (data) {
+
+                alert(JSON.stringify(data));
+                            }
+
+                            });
+                            }
+                                </script>`;
+                            showToast('Đã thêm vào giỏ hàng.');
+                            $('#cart').prepend(html);
+                            $('#lst-cart').append(script);
+                            $('#lst-cart .prices').text(data.sumMoney);
+                            $('.img-cart').hide();
+                            $('#shipping-group').show();
+                            $('.shopping_cart a span').text(`${data.sumQuantity} sản phẩm-${data.sumMoney}`);
+
+                            if (location.pathname == '/yeu-thich.html')
+                            deletewish(ProductId, false);
+
+                        }
+                        else {
+                            alert('Mời bạn đăng nhập');
+                            location.href = "/dang-nhap.html";
+                        }
+                    },
+            error: function (data) {
+
+                alert(JSON.stringify(data));
+            }
+        });
+    }
+
+
+    $('.deletecart').off('click').click(function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        if (confirm("Bạn chắc chắc xoá sản phẩm này?")) {
+            var ProductId = $(this).data('id');
+            deletecart(ProductId, true)
+        }
+    })
+    function deletecart(ProductId, check) {
+        $.ajax({
+            url: "/Cart/DeleteItem",
+            data: JSON.stringify({ ProductId}),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    type: "POST",
+                    success: function (data) {
+                        if (data.status == "1") {
+                            $('#cart-' +ProductId).hide(500);
+                            $('.shopping_cart a span').text(`${data.sumQuantity} sản phẩm-${data.sumMoney}`);
+                            $('#lst-cart .prices').text(data.sumMoney);
+                            if(check)
+                            showToast('Xoá sản phẩm thành công.');
+                            if (data.sumQuantity == 0) {
+                                $('.img-cart').show();                              
+                                $('#shipping-group').hide();
+
+                            }
+                        }
+                        else
+                            if (check)
+                                showToast('Lỗi hệ thống khi xoá sản phẩm. Vui lòng thao tác lại sau.');
+
+                    },
+            error: function (data) {
+
+                alert(JSON.stringify(data));
+            }
+
         });
     }
     function formatCurrency(nStr, decSeperate, groupSeperate) {
@@ -573,112 +822,6 @@
         }
         return x1 + x2;
     }
-    function search() {
-        var keyWord = $('#keyWord').val();
-        $.ajax({
-            url: "/Home/Search",
-            data: JSON.stringify({ "keyWord": keyWord }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            type: "POST",
-            success: function (data) {
-                var script = `<script>  function addCart(ProductId) {
-
-                    console.log(ProductId)
-                    var Quantity = 1;
-                    $.ajax({
-                        url: "/Cart/AddItem",
-                        data: JSON.stringify({ ProductId, Quantity }),
-                                contentType: "application/json; charset=utf-8",
-                                dataType: "json",
-                                type: "POST",
-                                success: function (data) {
-                                    console.log(data)
-                                    if (data.status == "1") {
-                                        $('#cart-icon span').text(data.count);
-                                        alert('Đã thêm vào giỏ hàng');
-                                    }
-                                    else if (data.status == "0") {
-                                        alert('Thêm thất bại');
-                                    }
-                                    else {
-                                        alert('Mời bạn đăng nhập');
-                                        location.href = "/Account/Login";
-                                    }
-                                },
-                        error: function (data) {
-
-                            alert(JSON.stringify(data));
-                        }
-                    });
-              }
-                </script>`;
-                $('.lst-products').html("");
-                var html = '';
-                for (var i = 0; i < data.length; i++) {
-                    html += `<div class="item-product col-lg-3 mt-1 mb-1 col-md-4 col-md-6 col-sm-12"><div class="card">
-                <img class="card-img-top text-center" src="../../img/book/${data[i].Image}" alt="Card image" style="width:100%;height:300px;">
-                <div class="card-body card-first">
-                    <h4 class ="card-title">${data[i].Productname}</h4>
-                    <p class ="card-text">${data[i].SKU}</p>
-                    <p class ="card-text text-primary">${formatCurrency(data[i].Price, '.', ',')} đ</p>
-                </div>
-                <button data-id="${data[i].Id}" onclick='addCart(${data[i].Id})' class ="addcart btn btn-primary">Thêm giỏ hàng</button>
-                <div class="card-body card-second">
-                   <h4 class="card-title">Loại sách:${data[i].Name}</h4>
-                    <p class="card-text">${data[i].Description}</p>
-                    <p class="card-text text-primary">${data[i].Stock}</p>
-                </div>
-            </div>
-        </div>`
-
-                }
-                if (keyWord == "")
-                    $('.title-product').text('Products');
-                else
-                    $('.title-product').text(`Tìm thấy ${data.length} sách`);
-
-                $('.lst-products').html(html);
-                $('.main').append(script);
-
-                console.log(data);
-            },
-            error: function (data) {
-                alert(JSON.stringify(data));
-            }
-        })
-    }
-    $('.btn-delete-card').off('click').click(function (e) {
-        if (confirm("Bạn chắc chắc xoá sản phẩm này?")) {
-            var ProductId = $(this).data('id');
-            $.ajax({
-                url: "/Cart/DeleteItem",
-                data: JSON.stringify({ ProductId}),
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        type: "POST",
-                        success: function (data) {
-                            console.log(data)
-                            if (data.status == "1") {
-                                $('#cart-icon span').text(data.count == "0" ? "": data.count);
-                                if (data.count == "0") {
-                                    $('.img-cart').show();
-                                    $('#cart').hide();
-                                }
-                                $('#' + ProductId).hide(500);
-                                $('#summoney').text("Tổng tiền:" + data.summoney);
-                            }
-                            else
-                                alert('Xoá thất bại');
-                        },
-                error: function (data) {
-
-                    alert(JSON.stringify(data));
-                }
-
-            });
-        }
-    })
     $('.btn-update-card').off('click').click(function (e) {
         var ProductId = $(this).data('id');
         var Quantity = $('#quantity-' + ProductId).val();
