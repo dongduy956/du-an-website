@@ -14,6 +14,7 @@
     <Property Name="phone" Type="varchar" MaxLength="11" />
     <Property Name="address" Type="nvarchar" MaxLength="100" />
     <Property Name="status" Type="bit" />
+    <Property Name="issocial" Type="int" />
   </EntityType>
   <EntityType Name="category">
     <Key>
@@ -32,6 +33,32 @@
     <Property Name="name" Type="nvarchar" MaxLength="100" />
     <Property Name="alias" Type="varchar" MaxLength="100" />
     <Property Name="status" Type="bit" />
+  </EntityType>
+  <EntityType Name="order">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idaccount" Type="int" />
+    <Property Name="createdate" Type="date" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="fullname" Type="nvarchar" MaxLength="100" />
+    <Property Name="address" Type="nvarchar" MaxLength="500" />
+    <Property Name="phone" Type="varchar" MaxLength="11" />
+    <Property Name="status" Type="bit" />
+    <Property Name="statuspay" Type="bit" />
+    <Property Name="total" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="orderdetail">
+    <Key>
+      <PropertyRef Name="idproduct" />
+      <PropertyRef Name="idorder" />
+    </Key>
+    <Property Name="idproduct" Type="int" Nullable="false" />
+    <Property Name="idorder" Type="int" Nullable="false" />
+    <Property Name="price" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="quantity" Type="int" />
+    <Property Name="subtotal" Type="decimal" Precision="18" Scale="0" />
   </EntityType>
   <EntityType Name="production">
     <Key>
@@ -82,6 +109,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fk_order_account">
+    <End Role="accounts" Type="Self.accounts" Multiplicity="0..1" />
+    <End Role="order" Type="Self.order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="accounts">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="order">
+        <PropertyRef Name="idaccount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="fk_products_category">
     <End Role="category" Type="Self.category" Multiplicity="0..1" />
     <End Role="products" Type="Self.products" Multiplicity="*" />
@@ -122,12 +161,18 @@
     <EntitySet Name="accounts" EntityType="Self.accounts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="groupproduct" EntityType="Self.groupproduct" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="order" EntityType="Self.order" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="orderdetail" EntityType="Self.orderdetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="production" EntityType="Self.production" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="fk_accounts_role" Association="Self.fk_accounts_role">
       <End Role="role" EntitySet="role" />
       <End Role="accounts" EntitySet="accounts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_order_account" Association="Self.fk_order_account">
+      <End Role="accounts" EntitySet="accounts" />
+      <End Role="order" EntitySet="order" />
     </AssociationSet>
     <AssociationSet Name="fk_products_category" Association="Self.fk_products_category">
       <End Role="category" EntitySet="category" />

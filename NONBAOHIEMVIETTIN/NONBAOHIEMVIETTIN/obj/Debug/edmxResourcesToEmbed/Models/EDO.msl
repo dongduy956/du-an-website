@@ -4,6 +4,7 @@
     <EntitySetMapping Name="accounts">
       <EntityTypeMapping TypeName="nonbaohiemviettinModel.accounts">
         <MappingFragment StoreEntitySet="accounts">
+          <ScalarProperty Name="issocial" ColumnName="issocial" />
           <ScalarProperty Name="status" ColumnName="status" />
           <ScalarProperty Name="address" ColumnName="address" />
           <ScalarProperty Name="phone" ColumnName="phone" />
@@ -34,6 +35,33 @@
           <ScalarProperty Name="alias" ColumnName="alias" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="order">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.order">
+        <MappingFragment StoreEntitySet="order">
+          <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="statuspay" ColumnName="statuspay" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="fullname" ColumnName="fullname" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="createdate" ColumnName="createdate" />
+          <ScalarProperty Name="idaccount" ColumnName="idaccount" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orderdetail">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.orderdetail">
+        <MappingFragment StoreEntitySet="orderdetail">
+          <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="idorder" ColumnName="idorder" />
+          <ScalarProperty Name="idproduct" ColumnName="idproduct" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

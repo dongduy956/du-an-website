@@ -6,6 +6,7 @@
     var i = 1;
     var j = i;
 }
+
 <!--breadcrumbs area start-->
 <div class="breadcrumbs_area">
     <div class="row">
@@ -31,7 +32,7 @@
                     <div class="product_tab sidebar fix">
                         <div class="tab-content produc_tab_c">
                             <div class="tab-pane fade show active" id="p_tab1" role="tabpanel">
-                                <div class="modal_img text-center" >
+                                <div class="modal_img text-center">
                                     <a href="#"><img src="~/assets/img/Nón bảo hiểm/@Model.product.image" alt=""></a>
                                     <div class="view_img">
                                         <a class="large_view" href="~/assets/img/Nón bảo hiểm/@Model.product.image"><i class="fa fa-search-plus"></i></a>
@@ -214,13 +215,13 @@
             <!--Related Products group area start-->
             @if (Model.lstProductGroup.Count > 0)
             {
-                <div class="new_product_area">
-                    <div class="block_title">
-                        <h3>@Model.lstProductGroup.Count sản phẩm cùng nhóm</h3>
-                    </div>
-                    <div class="row">
-                        <div class="product_active owl-carousel">
-                            @foreach (var item in Model.lstProductGroup)
+            <div class="new_product_area">
+                <div class="block_title">
+                    <h3>@Model.lstProductGroup.Count sản phẩm cùng nhóm</h3>
+                </div>
+                <div class="row">
+                    <div class="product_active owl-carousel">
+                        @foreach (var item in Model.lstProductGroup)
                             {
                             <div class="col-lg-3">
                                 <div class="single_product">
@@ -243,22 +244,22 @@
                                 </div>
                             </div>
                             }
-                        </div>
                     </div>
                 </div>
+            </div>
             }
             <!--Related Products group area end-->
             <!--Related Products category area start-->
             @if (Model.lstProductCategory.Count > 0)
             {
-                <div class="new_product_area">
-                    <div class="block_title">
-                        <h3>@Model.lstProductCategory.Count sản phẩm cùng danh mục</h3>
-                    </div>
-                    <div class="row">
-                        <div class="product_active owl-carousel">
-                            @foreach (var item in Model.lstProductCategory)
-                        {
+            <div class="new_product_area">
+                <div class="block_title">
+                    <h3>@Model.lstProductCategory.Count sản phẩm cùng danh mục</h3>
+                </div>
+                <div class="row">
+                    <div class="product_active owl-carousel">
+                        @foreach (var item in Model.lstProductCategory)
+                            {
                             <div class="col-lg-3">
                                 <div class="single_product">
                                     <div class="product_thumb">
@@ -279,23 +280,23 @@
                                     </div>
                                 </div>
                             </div>
-                        }
-                        </div>
+                            }
                     </div>
                 </div>
+            </div>
             }
             <!--Related Products category area end-->
             <!--Related Products production area start-->
             @if (Model.lstProductProduction.Count > 0)
             {
-                <div class="new_product_area">
-                    <div class="block_title">
-                        <h3>@Model.lstProductProduction.Count sản phẩm cùng hãng sản xuất</h3>
-                    </div>
-                    <div class="row">
-                        <div class="product_active owl-carousel">
-                            @foreach (var item in Model.lstProductProduction)
-                        {
+            <div class="new_product_area">
+                <div class="block_title">
+                    <h3>@Model.lstProductProduction.Count sản phẩm cùng hãng sản xuất</h3>
+                </div>
+                <div class="row">
+                    <div class="product_active owl-carousel">
+                        @foreach (var item in Model.lstProductProduction)
+                            {
                             <div class="col-lg-3">
                                 <div class="single_product">
                                     <div class="product_thumb">
@@ -316,10 +317,10 @@
                                     </div>
                                 </div>
                             </div>
-                        }
-                        </div>
+                            }
                     </div>
                 </div>
+            </div>
             }
             <!--Related Products production area end-->
         </div>
@@ -386,7 +387,7 @@
                                         <div class="modal_price mb-10">
                                             <span class="new_price">@HoTro.Instances.convertVND(item.promationprice.ToString())</span>
                                             <span class="old_price">@HoTro.Instances.convertVND(item.price.ToString())</span>
-                                        </div>                                       
+                                        </div>
                                         <div class="modal_size mb-15">
                                             <h2>size</h2>
                                             <ul>
@@ -426,8 +427,7 @@
         </div>
     }
 }
-<!-- modal area group products end --> 
-
+<!-- modal area group products end -->
 <!-- modal area category product start-->
 @if (Model.lstProductCategory.Count > 0)
 {
@@ -524,8 +524,7 @@
         </div>
     }
 }
-<!-- modal area category products end --> 
-
+<!-- modal area category products end -->
 <!-- modal area category product start-->
 @if (Model.lstProductProduction.Count > 0)
 {
@@ -622,4 +621,4 @@
         </div>
     }
 }
-<!-- modal area category products end --> 
+<!-- modal area category products end -->

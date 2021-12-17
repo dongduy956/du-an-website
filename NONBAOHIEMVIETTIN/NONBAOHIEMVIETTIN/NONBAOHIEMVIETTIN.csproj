@@ -176,11 +176,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\admin\adminAreaRegistration.cs" />
     <Compile Include="Areas\admin\Controllers\loginController.cs" />
+    <Compile Include="assets\NganLuongAPI\APICheckoutV3.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -215,6 +217,12 @@
       <DependentUpon>EDO.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HoTro.cs" />
+    <Compile Include="Models\order.cs">
+      <DependentUpon>EDO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\orderdetail.cs">
+      <DependentUpon>EDO.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\productdetail.cs" />
     <Compile Include="Models\production.cs">
       <DependentUpon>EDO.tt</DependentUpon>
@@ -1912,6 +1920,7 @@
     <Content Include="Areas\admin\assets\vendor\jquery\jquery.min.js" />
     <Content Include="Areas\admin\assets\vendor\jquery\jquery.slim.js" />
     <Content Include="Areas\admin\assets\vendor\jquery\jquery.slim.min.js" />
+    <Content Include="assets\css\bank.css" />
     <Content Include="assets\css\bundle.css" />
     <Content Include="assets\css\plugin.css" />
     <Content Include="assets\css\responsive.css" />
@@ -1968,6 +1977,7 @@
     <Content Include="assets\img\cart\span-hot.png" />
     <Content Include="assets\img\cart\span-new.png" />
     <Content Include="assets\img\favicon.png" />
+    <Content Include="assets\img\logo\bank_logo.png" />
     <Content Include="assets\img\logo\fontlogo.jpg" />
     <Content Include="assets\img\logo\fontlogo2.jpg" />
     <Content Include="assets\img\logo\logo.jpg.png" />
@@ -2519,6 +2529,8 @@
     <Content Include="assets\img\user\Profile.png" />
     <Content Include="assets\img\visha\papyel.png" />
     <Content Include="assets\js\ajax-mail.js" />
+    <Content Include="assets\js\code\api.js" />
+    <Content Include="assets\js\code\bank.js" />
     <Content Include="assets\js\code\logingoogle.js" />
     <Content Include="assets\js\code\main.js" />
     <Content Include="assets\js\code\toast.js" />
@@ -2543,7 +2555,9 @@
       <DependentUpon>EDO.edmx</DependentUpon>
       <LastGenOutput>EDO.cs</LastGenOutput>
     </Content>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -2766,6 +2780,7 @@
     <Content Include="assets\img\Nón bảo hiểm\Andes 3SHALY Tem Nham W194 Den Bac.jpg.lnk" />
     <Content Include="assets\img\Nón bảo hiểm\JC 07.jpg - Shortcut.lnk" />
     <Content Include="assets\img\Nón bảo hiểm\JC 08.jpg - Shortcut.lnk" />
+    <Content Include="assets\json\data.json" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Shared\_Slidebar.cshtml" />

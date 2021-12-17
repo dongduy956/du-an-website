@@ -7,14 +7,20 @@ using NONBAOHIEMVIETTIN.Models;
 using System.Configuration;
 using System.Net.Mail;
 using System.Net;
+using System.Web.Script.Serialization;
+using NONBAOHIEMVIETTIN.assets.NganLuongAPI;
 
 namespace NONBAOHIEMVIETTIN.Controllers
 {
     public class CartController : Controller
     {
+        private string merchantId = ConfigurationManager.AppSettings["MerchantId"];
+        private string merchantPassword = ConfigurationManager.AppSettings["MerchantPassword"];
+        private string merchantEmail = ConfigurationManager.AppSettings["MerchantEmail"];
         // GET: Cart
         public const string cartSession = "cartSession";
-        private nonbaohiemviettinEntities  db = new nonbaohiemviettinEntities();
+        private nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
+
         // GET: Cart
         public ActionResult Index()
         {
@@ -156,9 +162,15 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 }
 
                 Session[cartSession] = list;
-                return Json(new { status = 1, count = list.Sum(x => x.Quantity), summoney = HoTro.Instances.convertVND(list.Sum(x => x.Quantity * x.Product.price).ToString()), subtotal = HoTro.Instances.convertVND(subtotal.ToString()) }, JsonRequestBehavior.AllowGet);
+                return Json(new
+                {
+                    status = 1,
+                    sumQuantity = list.Sum(x => x.Quantity),
+                    sumMoney = HoTro.Instances.convertVND(list.Sum(x => x.Quantity * x.Product.price).ToString()),
+                    total = HoTro.Instances.convertVND(subtotal.ToString())
+                });
             }
-            return Json(new { status = 0 }, JsonRequestBehavior.AllowGet);
+            return Json(new { status = 0 });
 
 
         }
@@ -253,15 +265,101 @@ namespace NONBAOHIEMVIETTIN.Controllers
 
         }
         [HttpPost]
-        public JsonResult Pay()
-        {
-            if (sendMail(Session["account"] as accounts))
+        public ActionResult Pay(order order, string PaymentMethod, string BankCode)
+        {       
+                order.createdate = DateTime.Parse(DateTime.Now.ToShortDateString());
+                order.status = false;
+                order.idaccount = (Session["account"] as accounts).id;
+                db.order.Add(order);
+                db.SaveChanges();
+                int idorder = db.order.OrderByDescending(x => x.id).FirstOrDefault().id;
+                var cart = Session[cartSession] as List<CartItem>;
+                foreach (var item in cart)
+                {
+                orderdetail odetail = new orderdetail();
+                    odetail.idorder = idorder;
+                    odetail.idproduct = item.Product.id;
+                    odetail.quantity = item.Quantity;
+                    odetail.price = item.Product.price;
+                    db.orderdetail.Add(odetail);
+                    db.SaveChanges();
+                }            
+            if (PaymentMethod == "CASH")
             {
-                Session[cartSession] = null;
-                return Json(1, JsonRequestBehavior.AllowGet);
+                return Json(new
+                {
+                    status = true
+                });
             }
-            return Json(0, JsonRequestBehavior.AllowGet);
+            else
+            {
+                var currentLink = ConfigurationManager.AppSettings["CurrentLink"];
+                RequestInfo info = new RequestInfo();
+                info.Merchant_id = merchantId;
+                info.Merchant_password = merchantPassword;
+                info.Receiver_email = merchantEmail;
+                info.cur_code = "vnd";
+                info.bank_code = BankCode;
+                info.Order_code = idorder.ToString();
+                info.Total_amount = 100+"";
+                //db.orderdetail.Where(x => x.idorder == idorder).Sum(x => x.subtotal).ToString()
+                info.fee_shipping = "0";
+                info.Discount_amount = "0";
+                info.order_description = "Thanh toán đơn hàng tại nonbaohiemviettin";
+                info.return_url = currentLink + "xac-nhan-don-hang.html";
+                info.cancel_url = currentLink + "huy-don-hang.html";
 
+                info.Buyer_fullname = order.fullname;
+                info.Buyer_email = order.email;
+                info.Buyer_mobile = order.phone;
+
+                APICheckoutV3 objNLChecout = new APICheckoutV3();
+                ResponseInfo result = objNLChecout.GetUrlCheckout(info,PaymentMethod);
+                if (result.Error_code == "00")
+                {
+                    return Json(new
+                    {
+                        status = true,
+                        urlCheckout = result.Checkout_url,
+                        message = result.Description
+                    });
+                }
+                else
+                    return Json(new
+                    {
+                        status = false,
+                        message = result.Description
+                    });
+            }
+
+        }
+        public ActionResult ConfirmOrder()
+        {
+            string token = Request["token"];
+            RequestCheckOrder info = new RequestCheckOrder();
+            info.Merchant_id = merchantId;
+            info.Merchant_password = merchantPassword;
+            info.Token = token;
+            APICheckoutV3 objNLChecout = new APICheckoutV3();
+            ResponseCheckOrder result = objNLChecout.GetTransactionDetail(info);
+            if (result.errorCode == "00")
+            {
+                ////update status order
+                //_orderService.UpdateStatus(int.Parse(result.order_code));
+                //_orderService.Save();
+                //ViewBag.IsSuccess = true;
+                ViewBag.Result = "Thanh toán thành công. Chúng tôi sẽ liên hệ lại sớm nhất.";
+            }
+            else
+            {
+                ViewBag.IsSuccess = true;
+                ViewBag.Result = "Có lỗi xảy ra. Vui lòng liên hệ admin.";
+            }
+            return View();
+        }
+        public ActionResult CancelOrder()
+        {
+            return View();
         }
     }
 }

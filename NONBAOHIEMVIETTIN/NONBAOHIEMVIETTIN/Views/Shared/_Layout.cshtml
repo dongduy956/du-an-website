@@ -1,8 +1,6 @@
 ﻿@using NONBAOHIEMVIETTIN.Models
 @{
-
     var acc = Session["account"] as accounts;
-    var check = Session["social"] as bool?;
     var cart = Session["cartSession"] as List<CartItem>;
 }
 <!doctype html>
@@ -58,13 +56,14 @@
                                             <li style="margin-left:auto" class="languages">
                                                 <a class="w-100">
 
-                                                    @if (check != null)
+                                                    @if (acc.issocial == 0)
                                                     {
-                                                        <img style="border-radius:50%; width: 24px;margin-right: 2px;" src="@acc.image" alt="">
+                                                        <img style="border-radius:50%;width: 24px;margin-right: 2px;" src="~/assets/img/user/@acc.image" alt="">
+
                                                     }
                                                     else
                                                     {
-                                                        <img style="border-radius:50%;width: 24px;margin-right: 2px;" src="~/assets/img/user/@acc.image" alt="">
+                                                        <img style="border-radius:50%; width: 24px;margin-right: 2px;" src="@acc.image" alt="">
 
                                                     }
                                                     @acc.fullname
@@ -72,7 +71,7 @@
                                                 </a>
 
                                                 <ul class="dropdown_languages" style="min-width:150px">
-                                                    @if (check == null)
+                                                    @if (acc.issocial==0)
                                                     {
                                                         <li>
                                                             <a id="btnchangepasswordlink" class="w-100" href="#">
@@ -155,11 +154,12 @@
                                                         $(function () {
                                                             $('.img-cart').hide();
                                                             $('#shipping-group').show();
+                                                           
                                                         });
                                                     </script>
                                                     foreach (var item in cart)
                                                     {
-                                                        <div class="cart_item" id="cart-@item.Product.id">
+                                                        <div class="cart_item cart-@item.Product.id">
                                                             <div class="cart_img">
                                                                 <a href="/chi-tiet/@(item.Product.alias).html"><img src="~/assets/img/Nón bảo hiểm/@item.Product.image" alt=""></a>
                                                             </div>
@@ -174,7 +174,6 @@
                                                         </div>
 
                                                     }
-
                                                 }
                                             </div>
                                             <div id="shipping-group">
@@ -183,7 +182,7 @@
                                                     <span class="prices">@(cart!=null?HoTro.Instances.convertVND(cart.Sum(x => x.Quantity * x.Product.price).ToString()):"0")</span>
                                                 </div>
                                                 <div class="cart_button">
-                                                    <a id="btncheckout" href="/gio-hang.html"> Check out</a>
+                                                    <a id="btncheckout" href="/gio-hang.html"> Giỏ hàng</a>
                                                 </div>
                                             </div>
                                         </div>

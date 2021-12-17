@@ -16,6 +16,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
 {
     public class AccountsController : Controller
     {
+
         private nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
 
         private Uri RedirectUri
@@ -51,10 +52,23 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 username = username,
                 email = email,
                 fullname = fullname,
-                image = image
+                image = image,
+                issocial = 1,
+                password="",
+                idrole=1
             };
-            Session["social"] = true;
-            Session["account"] = acc;
+            bool check = false;
+            var accTemp = db.accounts.SingleOrDefault(x => x.email.Equals(acc.email)&&x.issocial==1);
+            if (accTemp == null)           
+                check = true;
+            if (check)
+            {
+                db.accounts.Add(acc);
+                db.SaveChanges();
+                Session["account"] = db.accounts.SingleOrDefault(x => x.email.Equals(acc.email) && x.issocial == 1);
+            }
+            else
+                Session["account"] = accTemp;
         }
         public ActionResult FacebookCallback(string code)
         {
@@ -86,8 +100,21 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 acc.status = true;
                 acc.fullname = firstname + " " + middlename + " " + lastname;
                 acc.image = image;
-                Session["account"] = acc;
-                Session["social"] = true;
+                acc.issocial = 2;
+                acc.password = "";
+                acc.idrole = 1;
+                bool check = false;
+                var accTemp = db.accounts.SingleOrDefault(x => x.email.Equals(acc.email)&&x.issocial==2);
+                if (accTemp == null)               
+                    check = true;
+                if(check)
+                {
+                    db.accounts.Add(acc);
+                    db.SaveChanges();
+                    Session["account"] = db.accounts.SingleOrDefault(x => x.email.Equals(acc.email) && x.issocial == 2);
+                }
+                else
+                    Session["account"] = accTemp;
             }
             return RedirectToAction("Index", "Home");
         }
@@ -134,7 +161,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
         public JsonResult Login(string usernamelogin, string passwordlogin)
         {
             passwordlogin = HoTro.Instances.EncodeMD5(passwordlogin);
-            accounts acc = db.accounts.SingleOrDefault(x => x.username.Equals(usernamelogin) && x.password.Equals(passwordlogin));
+            accounts acc = db.accounts.SingleOrDefault(x => x.username.Equals(usernamelogin) && x.password.Equals(passwordlogin)&&x.issocial==0);
             if (acc != null)
             {
                 if (bool.Parse(acc.status.ToString()))
@@ -200,10 +227,10 @@ namespace NONBAOHIEMVIETTIN.Controllers
         public JsonResult Register(accounts acc)
         {
             try
-            {
-                if (db.accounts.SingleOrDefault(x => x.username.Equals(acc.username)) != null)
+            {               
+                if (db.accounts.SingleOrDefault(x => x.username.Equals(acc.username)&&x.issocial==0) != null)
                     return Json(0);
-                if (db.accounts.SingleOrDefault(x => x.email.Equals(acc.email)) != null)
+                if (db.accounts.SingleOrDefault(x => x.email.Equals(acc.email)&&x.issocial==0) != null)
                     return Json(2);
                 if (sendMail(acc.email))
                 {
@@ -222,7 +249,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
         {
             try
             {
-                var acc = db.accounts.SingleOrDefault(x => x.email.Equals(email));
+                var acc = db.accounts.SingleOrDefault(x => x.email.Equals(email)&&x.issocial==0);
                 if (acc == null)
                     return Json(0);
                 if (sendMail(email))
@@ -262,6 +289,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 acc.password = HoTro.Instances.EncodeMD5(acc.password);
                 acc.idrole = 1;
                 acc.status = true;
+                acc.issocial = 0;
                 db.accounts.Add(acc);
                 db.SaveChanges();
                 Session.Clear();
@@ -309,8 +337,6 @@ namespace NONBAOHIEMVIETTIN.Controllers
         {
             try
             {
-
-
                 var acc = Session["account"] as accounts;
                 if (!acc.password.Equals(HoTro.Instances.EncodeMD5(passold)))
                     return Json(-1);

@@ -249,7 +249,7 @@
 
 
     /*niceSelect*/
-    $('select').niceSelect();
+    //
 
 
 

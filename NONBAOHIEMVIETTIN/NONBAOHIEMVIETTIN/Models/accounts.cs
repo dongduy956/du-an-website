@@ -14,6 +14,12 @@ namespace NONBAOHIEMVIETTIN.Models
     
     public partial class accounts
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public accounts()
+        {
+            this.order = new HashSet<order>();
+        }
+    
         public int id { get; set; }
         public Nullable<int> idrole { get; set; }
         public string username { get; set; }
@@ -24,7 +30,10 @@ namespace NONBAOHIEMVIETTIN.Models
         public string phone { get; set; }
         public string address { get; set; }
         public Nullable<bool> status { get; set; }
+        public Nullable<int> issocial { get; set; }
     
         public virtual role role { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<order> order { get; set; }
     }
 }

@@ -1,12 +1,5 @@
 ﻿
-$(function () {
-    $('#btnSearch').click(function () {
-        search()
-    })
-    $('#keyWord').keypress(function (e) {
-        if (e.which == 13)
-            search()
-    })
+$(function () {   
     function disable(dom) {
         $(dom + ' span').show();
         $(dom).attr('disabled', 'true');
@@ -686,13 +679,13 @@ $(function () {
 
                                 if (location.pathname == '/yeu-thich.html')
                                     deletewish(ProductId, false);
-                               
+
 
                             $('.shopping_cart a span').text(`${data.sumQuantity} sản phẩm-${data.sumMoney}`);
 
                         }
                         else if (data.status == "0") {
-                            var html = `<div class="cart_item" id="cart-${data.id}">
+                            var html = `<div class="cart_item cart-${data.id}">
                                                             <div class="cart_img">
                                                                 <a href="/chi-tiet/${data.alias}.html"><img src="../../assets/img/Nón bảo hiểm/${data.image}" alt=""></a>
                                                             </div>
@@ -722,14 +715,16 @@ $(function () {
                                 type: "POST",
                                 success: function (data) {
                         if (data.status == "1") {
-                            $('#cart-' +ProductId).hide(500);
+                            $('.cart-' +ProductId).hide(500);
                             $('.shopping_cart a span').text(data.sumQuantity +' sản phẩm-'+data.sumMoney);
                             $('#lst-cart .prices').text(data.sumMoney);
                             if(check)
                             showToast('Xoá sản phẩm thành công.');
                             if (data.sumQuantity == 0) {
-                                $('.img-cart').show();                              
+                                $('.img-cart').show();
                                 $('#shipping-group').hide();
+                                $('.shopping_cart_area').hide();
+
 
                             }
                             }
@@ -755,7 +750,7 @@ $(function () {
                             $('.shopping_cart a span').text(`${data.sumQuantity} sản phẩm-${data.sumMoney}`);
 
                             if (location.pathname == '/yeu-thich.html')
-                            deletewish(ProductId, false);
+                                deletewish(ProductId, false);
 
                         }
                         else {
@@ -769,7 +764,6 @@ $(function () {
             }
         });
     }
-
 
     $('.deletecart').off('click').click(function (e) {
         e.preventDefault();
@@ -788,14 +782,17 @@ $(function () {
                     type: "POST",
                     success: function (data) {
                         if (data.status == "1") {
-                            $('#cart-' +ProductId).hide(500);
+                            $('.cart-' +ProductId).hide(500);
                             $('.shopping_cart a span').text(`${data.sumQuantity} sản phẩm-${data.sumMoney}`);
-                            $('#lst-cart .prices').text(data.sumMoney);
+                            $('#lst-cart .prices,.cart_amount.sum_money').text(data.sumMoney);
+                            $('.cart_amount.sum_quantity').text(data.sumQuantity)
                             if(check)
                             showToast('Xoá sản phẩm thành công.');
                             if (data.sumQuantity == 0) {
-                                $('.img-cart').show();                              
+                                $('.img-cart').show();
                                 $('#shipping-group').hide();
+                                $('.shopping_cart_area').hide();
+
 
                             }
                         }
@@ -822,10 +819,12 @@ $(function () {
         }
         return x1 + x2;
     }
-    $('.btn-update-card').off('click').click(function (e) {
+    $('#btncheckout,#cart .cart_info a,#cart .cart_img a').click(function (e) {
+        e.stopPropagation();
+    })
+    $('.txtquantity-lstcart').change(function () {
         var ProductId = $(this).data('id');
-        var Quantity = $('#quantity-' + ProductId).val();
-        console.log(Quantity);
+        var Quantity = $(this).val();
         $.ajax({
             url: "/Cart/UpdateItem",
             data: JSON.stringify({ ProductId, Quantity}),
@@ -833,23 +832,24 @@ $(function () {
                     dataType: "json",
                     type: "POST",
                     success: function (data) {
-                        console.log(data)
                         if (data.status == "1") {
-                            alert('Cập nhật thành công');
-
-                            $('#cart-icon span').text(data.count == "0" ? "": data.count);
-                            if (data.count == "0") {
+                            if (Quantity <= 0)
+                                $('.cart-' + ProductId).hide(500);
+                           
+                                $('.shopping_cart a span').text(`${data.sumQuantity} sản phẩm-${data.sumMoney}`);
+                                $('#total-' + ProductId).text(data.total);
+                                $('#lst-cart .prices,.cart_amount.sum_money').text(data.sumMoney);
+                                $('.cart-' + ProductId + ' .cart_info .quantity').text('Số lượng:' + Quantity);
+                                $('.cart_amount.sum_quantity').text(data.sumQuantity)
+                            if (data.sumQuantity == 0) {
                                 $('.img-cart').show();
-                                $('#cart').hide();
+                                $('#shipping-group').hide();
+                                $('.shopping_cart_area').hide();
                             }
-                            if (Quantity == "0")
-                                $('#' + ProductId).hide(500);
-                            $('#subtotal-' + ProductId).text(data.subtotal);
-                            $('#summoney').text("Tổng tiền:" + data.summoney);
-
                         }
                         else
-                            alert('Cập nhật thất bại');
+                                showToast('Lỗi hệ thống khi xoá sản phẩm. Vui lòng thao tác lại sau.');
+
                     },
             error: function (data) {
 
@@ -857,31 +857,6 @@ $(function () {
             }
 
         });
-    })
-    $('#btnpay').click(function (e) {
-
-        $.ajax({
-            url: "/Cart/Pay",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            type: "POST",
-            success: function (data) {
-                console.log(data)
-                if (data == "1") {
-                    alert('Thanh toán thành công');
-                    $('.img-cart').show();
-                    $('#cart').hide();
-                    $('#cart-icon span').text("");
-
-                }
-                else
-                    alert('Thành toán thất bại');
-            },
-            error: function (data) {
-
-                alert(JSON.stringify(data));
-            }
-
-        });
-    })
+    })    
+  
 })
