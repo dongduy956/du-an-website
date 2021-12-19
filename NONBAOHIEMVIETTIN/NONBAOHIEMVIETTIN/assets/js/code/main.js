@@ -857,6 +857,20 @@ $(function () {
             }
 
         });
-    })    
-  
+    })
+    function search()
+    {
+        var keyword = $('#txtkeyword').val();
+
+        if (keyword == '')
+            showToast('Mời bạn nhập vào từ khoá.');
+        else {
+            location.href = '/tim-kiem.html?tu-khoa=' + keyword;
+        }
+    }
+    $('#btnsearch').click(search)
+    $('#txtkeyword').keypress(function (e) {
+        if (e.which == 13)
+            search();
+    })
 })

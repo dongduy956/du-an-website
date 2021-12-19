@@ -147,17 +147,17 @@
 .header_middel {
 	padding: 15px 20px;
 }
-.search_bar form {
+.search_bar .form {
   position: relative;
 }
-.search_bar form input {
+.search_bar .form input {
 	width: 275px;
 	height: 38px;
 	background: none;
 	border: 1px solid #ddd;
 	padding: 0 59px 0 15px;
 }
-.search_bar form button {
+.search_bar .form button {
 	position: absolute;
 	right: 0;
 	background: none;
@@ -172,7 +172,7 @@
 	transition: .3s;
 	top: 0;
 }
-.search_bar form button:hover{
+.search_bar .form button:hover{
     background: #00bba6;
     color: #fff;
 }

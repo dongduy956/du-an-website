@@ -128,7 +128,6 @@ D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEM
 D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\PagedList.Mvc.dll
 D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\PagedList.xml
 D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\PagedList.Mvc.xml
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.csprojResolveAssemblyReference.cache
 C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\ApplicationInsights.config
 C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\csc.exe
 C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll

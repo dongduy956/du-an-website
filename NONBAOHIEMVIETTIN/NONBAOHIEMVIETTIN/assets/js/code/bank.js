@@ -46,8 +46,8 @@
                 }
                 else
                     {
-                    showToast('Thanh toán thất bại.');
-                    console.log(data.message);
+                    showToast('Thanh toán thất bại.'+response.message);
+                    
                 }
             },
             error: function (data) {

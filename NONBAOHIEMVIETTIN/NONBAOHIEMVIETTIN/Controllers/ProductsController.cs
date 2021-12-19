@@ -3,6 +3,7 @@ using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -49,5 +50,26 @@ namespace NONBAOHIEMVIETTIN.Controllers
             return View(prd);
         }
 
+        public ActionResult Search(int page=1)
+        {
+            try
+            {
+                string keyword = Request["tu-khoa"].ToString().ToLower();
+                var temp = db.products.Where(x => x.category.name.ToLower().Contains(keyword)
+                || x.production.name.ToLower().Contains(keyword)
+                || x.name.ToLower().Contains(keyword)
+                || x.groupproduct.name.ToLower().Contains(keyword)
+                || x.id.ToString().ToLower().Equals(keyword)).OrderByDescending(x => x.id).ToList();
+                var products = temp.ToPagedList(page, pageSize);
+                ViewBag.alias = "Tìm kiếm: " + keyword;
+                ViewBagNoti(temp, page);
+                return View("Index", products);
+            }
+            catch (Exception ex)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            
+        }
     }
 }

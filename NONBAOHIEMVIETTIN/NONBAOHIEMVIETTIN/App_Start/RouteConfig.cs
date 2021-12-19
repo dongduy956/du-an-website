@@ -31,11 +31,18 @@ namespace NONBAOHIEMVIETTIN
               namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
           );
             routes.MapRoute(
+name: "Search",
+url: "tim-kiem.html",
+defaults: new { controller = "Products", action = "Search", id = UrlParameter.Optional },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+);
+            routes.MapRoute(
             name: "ProductsDetail",
             url: "chi-tiet/{alias}.html",
             defaults: new { controller = "Products", action = "ProductDetail", id = UrlParameter.Optional },
             namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
         );
+
             routes.MapRoute(
            name: "ProductsGroup",
            url: "{alias}/{alia}.html",
@@ -48,7 +55,7 @@ namespace NONBAOHIEMVIETTIN
                defaults: new { controller = "Products", action = "Index", id = UrlParameter.Optional },
                namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
            );
-           
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
