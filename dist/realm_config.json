@@ -1,0 +1,8 @@
+{
+    "app_id": "nhomaohoaecec-schon",
+    "config_version": 20210101,
+    "name": "nhomaohoaecec",
+    "location": "SG",
+    "deployment_model": "LOCAL",
+    "environment": "development"
+}
