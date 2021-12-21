@@ -301,8 +301,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 info.cur_code = "vnd";
                 info.bank_code = BankCode;
                 info.Order_code = idorder.ToString();
-                info.Total_amount = 100+"";
-                //db.orderdetail.Where(x => x.idorder == idorder).Sum(x => x.subtotal).ToString()
+                info.Total_amount = db.orderdetail.Where(x => x.idorder == idorder).Sum(x => x.subtotal).ToString();
                 info.fee_shipping = "0";
                 info.Discount_amount = "0";
                 info.order_description = "Thanh toán đơn hàng tại nonbaohiemviettin";
