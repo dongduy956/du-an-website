@@ -41,6 +41,7 @@
     <EntitySetMapping Name="order">
       <EntityTypeMapping TypeName="nonbaohiemviettinModel.order">
         <MappingFragment StoreEntitySet="order">
+          <ScalarProperty Name="note" ColumnName="note" />
           <ScalarProperty Name="total" ColumnName="total" />
           <ScalarProperty Name="statuspay" ColumnName="statuspay" />
           <ScalarProperty Name="status" ColumnName="status" />

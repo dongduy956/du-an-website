@@ -197,3 +197,4 @@ C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Sys
 C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.csprojResolveAssemblyReference.cache
 C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.dll
 C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.pdb
+D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.csprojResolveAssemblyReference.cache

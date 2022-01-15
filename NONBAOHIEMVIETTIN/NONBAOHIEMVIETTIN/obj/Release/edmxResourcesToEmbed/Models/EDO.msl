@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="nonbaohiemviettinModelStoreContainer" CdmEntityContainer="nonbaohiemviettinEntities">
+    <EntitySetMapping Name="accounts">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.accounts">
+        <MappingFragment StoreEntitySet="accounts">
+          <ScalarProperty Name="issocial" ColumnName="issocial" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="fullname" ColumnName="fullname" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="idrole" ColumnName="idrole" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="category">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.category">
+        <MappingFragment StoreEntitySet="category">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="groupproduct">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.groupproduct">
+        <MappingFragment StoreEntitySet="groupproduct">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="order">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.order">
+        <MappingFragment StoreEntitySet="order">
+          <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="statuspay" ColumnName="statuspay" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="fullname" ColumnName="fullname" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="createdate" ColumnName="createdate" />
+          <ScalarProperty Name="idaccount" ColumnName="idaccount" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="orderdetail">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.orderdetail">
+        <MappingFragment StoreEntitySet="orderdetail">
+          <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="idorder" ColumnName="idorder" />
+          <ScalarProperty Name="idproduct" ColumnName="idproduct" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="production">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.production">
+        <MappingFragment StoreEntitySet="production">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="products">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.products">
+        <MappingFragment StoreEntitySet="products">
+          <ScalarProperty Name="idgroupproduct" ColumnName="idgroupproduct" />
+          <ScalarProperty Name="idproduction" ColumnName="idproduction" />
+          <ScalarProperty Name="idcategory" ColumnName="idcategory" />
+          <ScalarProperty Name="newproduct" ColumnName="newproduct" />
+          <ScalarProperty Name="fastsell" ColumnName="fastsell" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="createddate" ColumnName="createddate" />
+          <ScalarProperty Name="viewcount" ColumnName="viewcount" />
+          <ScalarProperty Name="description" ColumnName="description" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="promationprice" ColumnName="promationprice" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="role">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.role">
+        <MappingFragment StoreEntitySet="role">
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

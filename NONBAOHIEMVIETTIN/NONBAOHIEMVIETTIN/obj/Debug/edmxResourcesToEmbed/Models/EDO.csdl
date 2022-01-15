@@ -83,6 +83,7 @@
     <Property Name="statuspay" Type="Boolean" />
     <Property Name="total" Type="Decimal" Precision="18" Scale="0" />
     <NavigationProperty Name="accounts" Relationship="nonbaohiemviettinModel.fk_order_account" FromRole="order" ToRole="accounts" />
+    <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="orderdetail">
     <Key>

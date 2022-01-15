@@ -2792,6 +2792,7 @@
     <Content Include="Views\Products\ProductDetail.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Wish\Index.cshtml" />
+    <None Include="Properties\PublishProfiles\nonbaohiemviettin.pubxml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

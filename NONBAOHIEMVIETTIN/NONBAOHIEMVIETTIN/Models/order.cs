@@ -24,6 +24,7 @@ namespace NONBAOHIEMVIETTIN.Models
         public Nullable<bool> status { get; set; }
         public Nullable<bool> statuspay { get; set; }
         public Nullable<decimal> total { get; set; }
+        public string note { get; set; }
     
         public virtual accounts accounts { get; set; }
     }

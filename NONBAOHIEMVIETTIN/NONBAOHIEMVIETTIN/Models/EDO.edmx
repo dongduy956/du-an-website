@@ -53,6 +53,7 @@
           <Property Name="status" Type="bit" />
           <Property Name="statuspay" Type="bit" />
           <Property Name="total" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="note" Type="nvarchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="orderdetail">
           <Key>
@@ -279,6 +280,7 @@
           <Property Name="statuspay" Type="Boolean" />
           <Property Name="total" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="accounts" Relationship="nonbaohiemviettinModel.fk_order_account" FromRole="order" ToRole="accounts" />
+          <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="orderdetail">
           <Key>
@@ -439,6 +441,7 @@
           <EntitySetMapping Name="order">
             <EntityTypeMapping TypeName="nonbaohiemviettinModel.order">
               <MappingFragment StoreEntitySet="order">
+                <ScalarProperty Name="note" ColumnName="note" />
                 <ScalarProperty Name="total" ColumnName="total" />
                 <ScalarProperty Name="statuspay" ColumnName="statuspay" />
                 <ScalarProperty Name="status" ColumnName="status" />

@@ -48,6 +48,7 @@
     <Property Name="status" Type="bit" />
     <Property Name="statuspay" Type="bit" />
     <Property Name="total" Type="decimal" Precision="18" Scale="0" />
+    <Property Name="note" Type="nvarchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="orderdetail">
     <Key>

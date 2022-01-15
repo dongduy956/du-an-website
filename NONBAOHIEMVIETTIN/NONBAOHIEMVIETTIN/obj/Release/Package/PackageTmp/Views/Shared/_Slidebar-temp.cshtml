@@ -1,0 +1,98 @@
+﻿@using NONBAOHIEMVIETTIN.Models
+@{
+    var db = new nonbaohiemviettinEntities();
+    var lstwish = Session["wishSession"] as List<CartItem>;
+}
+<!--categorie menu start-->
+<div class="sidebar_widget catrgorie mb-35">
+    <h3>Danh mục sản phẩm</h3>
+    <ul>
+        @foreach (var itemCategory in db.category)
+            {
+            <li class="has-sub">
+                <a class="category-item" data-alias="@(itemCategory.alias)">
+                    <i class="fa fa-caret-right"></i>@itemCategory.name (@db.products.Count(x => x.idcategory == itemCategory.id))
+                    <span class="operation">+</span>
+                </a>
+                <ul class="categorie_sub">
+                    @foreach (var itemGroupproduct in db.groupproduct)
+                    {
+                        <li>
+                            <a href="/@itemCategory.alias/@(itemGroupproduct.alias).html">
+                                <i class="fa fa-caret-right"></i> @itemGroupproduct.name (@db.products.Count(x => x.idgroupproduct == itemGroupproduct.id && x.idcategory == itemCategory.id))
+                            </a>
+                        </li>
+                    }
+                </ul>
+            </li>
+        }
+    </ul>
+</div>
+<!--categorie menu end-->
+<!--wishlist block start-->
+<div class="block_title">
+    <h3><a href="#">Yêu thích</a></h3>
+</div>
+<div class="sidebar_widget wishlist mb-35" id="lst-wish" style="overflow-y:scroll;height:200px;">
+    <div class="img-wish" style="padding:24px;">
+        <img src="~/assets/img/cart/no-cart.png" />
+    </div>
+    @if (lstwish == null || lstwish.Count() == 0)
+    {
+
+        <script>
+            $(function () {
+                $('.img-wish').show();
+            });
+        </script>
+        <div class="block_content" style="display: flex;justify-content: space-between;padding: 0 8px;">
+            <p>0 sản phẩm.</p>
+            <a href="/yeu-thich.html">» Yêu thích của bạn</a>
+        </div>
+    }
+    else
+    {
+        <script>
+            $(function () {
+                $('.img-wish').hide();
+            });
+        </script>
+        foreach (var item in lstwish)
+        {
+            <div class="cart_item" id="wish-@item.Product.id">
+                <div class="cart_img">
+                    <a href="/chi-tiet/@(item.Product.alias).html"><img src="~/assets/img/Nón bảo hiểm/@item.Product.image" alt=""></a>
+                </div>
+                <div class="cart_info">
+                    <a href="/chi-tiet/@(item.Product.alias).html">@item.Product.name</a>
+                    <span class="cart_price">@HoTro.Instances.convertVND(item.Product.price.ToString())</span>
+                    <span class="quantity">SL: @item.Quantity</span>
+                </div>
+                <div class="cart_remove">
+                    <a title="Xoá sản phẩm" data-id="@item.Product.id" href="" class="deletewish"><i class="fa fa-times-circle"></i></a>
+                </div>
+            </div>
+        }
+        <div class="block_content" style="display: flex;justify-content: space-between;padding: 0 8px;">
+            <p>@(lstwish.Sum(x => x.Quantity)) sản phẩm.</p>
+            <a href="/yeu-thich.html">» Yêu thích của bạn</a>
+        </div>
+
+    }
+
+   
+
+
+</div>
+<!--wishlist block end-->
+<!--popular tags area-->
+<div class="sidebar_widget tags mb-35">
+    <div class="block_title">
+        <h3>Các tag phổ biến</h3>
+    </div>
+    <div class="block_tags">
+        <a href="#">ac</a>
+        <a href="#">royal</a>
+    </div>
+</div>
+<!--popular tags end-->

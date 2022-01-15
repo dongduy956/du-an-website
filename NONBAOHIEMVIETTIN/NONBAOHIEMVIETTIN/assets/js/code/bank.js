@@ -17,7 +17,8 @@
         order.fullname = $('#cart-fullname').val();
         order.phone = $('#cart-phone').val();
         order.email = $('#cart-email').val();
-        order.address = $('#cart-town').val() + '' + $('#town').val() + ' ' +$('#district').val()+' '+ $('#province').val();
+        order.address = $('#cart-town').val() + '' + $('#town').val() + ' ' + $('#district').val() + ' ' + $('#province').val();
+        order.note = $("#note").val();
         var PaymentMethod = $('input[name="paymentMethod"]:checked').val();
         var BankCode = $('input[groupname="bankcode"]:checked').prop('id');
         $.ajax({
@@ -40,21 +41,15 @@
                 //    $('#divMessage').show();
                 //    $('#divMessage').text(response.message);
                 //}
-                if (response.status)
-                {
-                    location.href = response.urlCheckout;
-                }
-                else
-                    {
-                    showToast('Thanh toán thất bại.'+response.message);
-                    
-                }
+                if (response.status)                
+                    location.href = response.urlCheckout;                
+                else                    
+                    showToast('Thanh toán thất bại.'+response.message);                                    
             },
             error: function (data) {
                 alert(JSON.stringify(data));
             }
         });
     }
-
     $('#btnbill').click(Pay)
 })
