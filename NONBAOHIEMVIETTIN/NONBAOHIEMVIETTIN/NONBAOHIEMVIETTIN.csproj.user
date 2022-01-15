@@ -13,7 +13,11 @@
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <WebStackScaffolding_DbContextTypeFullName>NONBAOHIEMVIETTIN.Models.EDO</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsViewGenerationSelected>True</WebStackScaffolding_IsViewGenerationSelected>
+<<<<<<< HEAD
     <NameOfLastUsedPublishProfile>nonbaohiemviettin</NameOfLastUsedPublishProfile>
+=======
+    <LastActiveSolutionConfig>Debug|Any CPU</LastActiveSolutionConfig>
+>>>>>>> 3a61c0f71802fbcb90196724908f9b399de1feb4
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>
