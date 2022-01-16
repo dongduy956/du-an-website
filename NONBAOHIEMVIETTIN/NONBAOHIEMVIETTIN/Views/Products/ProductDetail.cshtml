@@ -5,6 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var i = 1;
     var j = i;
+    var avgStar = Model.lstRate.Count != 0 ? Model.lstRate.Sum(x => x.star) / (double)Model.lstRate.Count : 0;
+
 }
 
 <!--breadcrumbs area start-->
@@ -78,11 +80,19 @@
                         <h1>@Model.product.name</h1>
                         <div class="product_ratting mb-10">
                             <ul id="countrate">
-                                <li><a><i class="fa fa-star"></i></a></li>
-                                <li><a><i class="fa fa-star"></i></a></li>
-                                <li><a><i class="fa fa-star"></i></a></li>
-                                <li><a><i class="fa fa-star"></i></a></li>
-                                <li><a><i class="fa fa-star"></i></a></li>
+
+                                   @for (var z = 0; z < 5; z++)
+                                    {
+                                        if (avgStar != 0&&z < Math.Round((decimal)avgStar, 0))
+                                        {
+                                            <li><a class="ratting"><i class="fa fa-star"></i></a></li>
+                                        }
+                                        else
+                                        {
+                                            <li><a><i class="fa fa-star"></i></a></li>
+
+                                        }
+                                    }
                             </ul>
                         </div>
                         <div class="product_desc">
@@ -159,20 +169,23 @@
                                             </div>
                                             <div style="display: flex;align-items: baseline;margin-top: 4px;">
                                                 <ul style="margin-right:10px">
-                                                    @for (var z = 0; z < item.star; z++)
+                                                    @for (var z = 0; z < 5; z++)
                                                     {
-                                                        <li><a class="ratting"><i class="fa fa-star"></i></a></li>
-                                                    }
-                                                    @for (var z = item.star; z < 5; z++)
-                                                    {
-                                                        <li><a><i class="fa fa-star"></i></a></li>
+                                                        if (z < item.star)
+                                                        {
+                                                            <li><a class="ratting"><i class="fa fa-star"></i></a></li>
+                                                        }
+                                                        else
+                                                        {
+                                                            <li><a><i class="fa fa-star"></i></a></li>
+                                                        }
                                                     }
                                                 </ul>
                                                 <p style="margin-bottom:unset">@(DateTime.Parse(item.createdate.ToString()).ToShortDateString())</p>
 
                                             </div>
                                         </div>
-                                            <p>@item.comment</p>
+                                        <p>@item.comment</p>
                                     </div>
                                 }
                             </div>

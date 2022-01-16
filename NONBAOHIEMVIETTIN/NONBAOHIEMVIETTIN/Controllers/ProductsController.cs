@@ -101,7 +101,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
             }
             var countRate = db.rate.Count(x => x.id_product == ratting.id_product);
             var avgStar = db.rate.Where(x => x.id_product == ratting.id_product).Sum(x => x.star) / (double)countRate;
-
+            
             return Json(new
             {
                 status = 1,
@@ -110,7 +110,8 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 avgStar = Math.Round((decimal)avgStar,0),
                 issocial=acc.issocial,
                 image=acc.image,
-                fullname=acc.fullname            
+                fullname=acc.fullname,
+                createDate=DateTime.Now.ToShortDateString()
             });
         }
     }

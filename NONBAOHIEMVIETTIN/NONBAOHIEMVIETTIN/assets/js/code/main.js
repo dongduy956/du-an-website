@@ -954,6 +954,7 @@ $(function () {
             if ($(this).find('a').hasClass('active'))
                 sum++;
         })
+        
         var ratting=new Object();
         ratting.id_product = $(this).data('id');
         ratting.comment = comment;
@@ -969,14 +970,46 @@ $(function () {
                             if(data.status==1)
                             {
                                 $('#comment').val('');
-                                $('#sumrate').val(`Tổng đánh giá (${data.countRate})`);
+                                $('#sumrate').text(`Tổng đánh giá (${data.countRate})`);
                                 $('#countrate li').each(function (index, element) {
-                                    if(index<=data.avgStar)
+                                    if(index<data.avgStar)
                                         $(element).find('a').addClass('ratting')
                                     else
                                         $(element).find('a').removeClass('ratting')
-
                                 })
+                                $('#rate li').each(function (index, element) {
+                                    if (index != 0)                                        
+                                    $(element).find('a').removeClass('ratting active');
+                                })
+                                
+                                var img = '';
+                                if (data.issocial == 0)
+                                    img = `/assets/img/user/${data.image}`;
+                                else
+                                    img = data.image;
+                                var li = '';
+                                for (var i = 0; i <5 ; i++)
+                                    if (i < sum)
+                                    li += `<li><a class="ratting"><i class="fa fa-star"></i></a></li>`;
+                                else
+                                    li += `<li><a><i class="fa fa-star"></i></a></li>`;                                
+                                var html = `<div class="lst-ratting mb-2">
+                                        <div class="product_ratting mb-10">
+                                            <div>
+                                                    <img style="border-radius:50%;width: 24px;margin-right: 2px;" src="${img}" alt="">
+                                                <strong>${data.fullname}</strong>
+                                            </div>
+                                            <div style="display: flex;align-items: baseline;margin-top: 4px;">
+                                                <ul style="margin-right:10px">
+                                                    ${li}
+                                                </ul>
+                                                <p style="margin-bottom:unset">${data.createDate}</p>
+
+                                            </div>
+                                        </div>
+                                            <p>${comment}</p>
+                                    </div>`;
+                                $('#sheet').append(html);
                             }
                     },
             error: function (data) {
