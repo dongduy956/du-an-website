@@ -4,20 +4,23 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6a6319431ee946e7bba95942b003f393" Name="Diagram1">
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.accounts" Width="1.5" PointX="8" PointY="2.75" />
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.category" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.groupproduct" Width="1.5" PointX="0.75" PointY="4.125" />
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.order" Width="1.5" PointX="10.25" PointY="2.875" />
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.orderdetail" Width="1.5" PointX="5.75" PointY="7.5" />
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.production" Width="1.5" PointX="0.75" PointY="7.5" />
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.products" Width="1.5" PointX="3" PointY="2.75" />
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.role" Width="1.5" PointX="5.75" PointY="3.625" />
-        <AssociationConnector Association="nonbaohiemviettinModel.fk_accounts_role" />
-        <AssociationConnector Association="nonbaohiemviettinModel.fk_order_account" />
-        <AssociationConnector Association="nonbaohiemviettinModel.fk_products_category" />
-        <AssociationConnector Association="nonbaohiemviettinModel.fk_products_groupproduct" />
-        <AssociationConnector Association="nonbaohiemviettinModel.fk_products_production" />
+      <Diagram DiagramId="ac93f2f2cda344aa8890638bc033f593" Name="Diagram1">
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.accounts" Width="1.5" PointX="8" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.category" Width="1.5" PointX="0.75" PointY="4.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.groupproduct" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.order" Width="1.5" PointX="10.25" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.orderdetail" Width="1.5" PointX="5.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.production" Width="1.5" PointX="0.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.products" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.role" Width="1.5" PointX="5.75" PointY="3.625" IsExpanded="true" />
+        <AssociationConnector Association="nonbaohiemviettinModel.fk_accounts_role" ManuallyRouted="false" />
+        <AssociationConnector Association="nonbaohiemviettinModel.fk_order_account" ManuallyRouted="false" />
+        <AssociationConnector Association="nonbaohiemviettinModel.fk_products_category" ManuallyRouted="false" />
+        <AssociationConnector Association="nonbaohiemviettinModel.fk_products_groupproduct" ManuallyRouted="false" />
+        <AssociationConnector Association="nonbaohiemviettinModel.fk_products_production" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.rate" Width="1.5" PointX="10.25" PointY="7" />
+        <AssociationConnector Association="nonbaohiemviettinModel.fk_rate_accounts" />
+        <AssociationConnector Association="nonbaohiemviettinModel.fk_rate_products" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

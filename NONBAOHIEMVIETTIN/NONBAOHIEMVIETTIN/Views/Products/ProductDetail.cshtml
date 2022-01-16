@@ -77,13 +77,12 @@
                     <div class="product_d_right">
                         <h1>@Model.product.name</h1>
                         <div class="product_ratting mb-10">
-                            <ul>
-                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                <li><a href="#"> Write a review </a></li>
+                            <ul id="countrate">
+                                <li><a><i class="fa fa-star"></i></a></li>
+                                <li><a><i class="fa fa-star"></i></a></li>
+                                <li><a><i class="fa fa-star"></i></a></li>
+                                <li><a><i class="fa fa-star"></i></a></li>
+                                <li><a><i class="fa fa-star"></i></a></li>
                             </ul>
                         </div>
                         <div class="product_desc">
@@ -94,7 +93,7 @@
                             <span class="old-price">@HoTro.Instances.convertVND(Model.product.price.ToString())</span>
                         </div>
                         <div class="box_quantity mb-20">
-                            <div>
+                            <div style="display: flex;align-items: baseline;">
                                 <label>Số lượng</label>
                                 <input min="1" id="txtquantity-detail" max="100" value="1" type="number">
                             </div>
@@ -126,10 +125,10 @@
                                     <a class="active" data-toggle="tab" href="#info" role="tab" aria-controls="info" aria-selected="false">Thông tin sản phẩm</a>
                                 </li>
                                 <li>
-                                    <a data-toggle="tab" href="#sheet" role="tab" aria-controls="sheet" aria-selected="false">Data sheet</a>
+                                    <a data-toggle="tab" href="#sheet" role="tab" aria-controls="sheet" id="sumrate" aria-selected="false">Tổng đánh giá (@Model.lstRate.Count)</a>
                                 </li>
                                 <li>
-                                    <a data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews</a>
+                                    <a data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Đánh giá</a>
                                 </li>
                             </ul>
                         </div>
@@ -140,71 +139,64 @@
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="sheet" role="tabpanel">
-                                <div class="product_d_table">
-                                    <form action="#">
-                                        <table>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="first_child">Compositions</td>
-                                                    <td>Polyester</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="first_child">Styles</td>
-                                                    <td>Girly</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="first_child">Properties</td>
-                                                    <td>Short Dress</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </form>
-                                </div>
-                                <div class="product_info_content">
-                                    <p>Fashion has been creating well-designed collections since 2010. The brand offers feminine designs delivering stylish separates and statement dresses which have since evolved into a full ready-to-wear collection in which every item is a vital part of a woman's wardrobe. The result? Cool, easy, chic looks with youthful elegance and unmistakable signature style. All the beautiful pieces are made in Italy and manufactured with the greatest attention. Now Fashion extends to a range of accessories including shoes, hats, belts and more!</p>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="reviews" role="tabpanel">
-                                <div class="product_info_content">
-                                    <p>Fashion has been creating well-designed collections since 2010. The brand offers feminine designs delivering stylish separates and statement dresses which have since evolved into a full ready-to-wear collection in which every item is a vital part of a woman's wardrobe. The result? Cool, easy, chic looks with youthful elegance and unmistakable signature style. All the beautiful pieces are made in Italy and manufactured with the greatest attention. Now Fashion extends to a range of accessories including shoes, hats, belts and more!</p>
-                                </div>
-                                <div class="product_info_inner">
-                                    <div class="product_ratting mb-10">
-                                        <ul>
-                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-star"></i></a></li>
-                                        </ul>
-                                        <strong>Posthemes</strong>
-                                        <p>09/07/2018</p>
-                                    </div>
-                                    <div class="product_demo">
-                                        <strong>demo</strong>
-                                        <p>That's OK!</p>
-                                    </div>
-                                </div>
-                                <div class="product_review_form">
-                                    <form action="#">
-                                        <h2>Add a review </h2>
-                                        <p>Your email address will not be published. Required fields are marked </p>
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <label for="review_comment">Your review </label>
-                                                <textarea name="comment" id="review_comment"></textarea>
+                                @foreach (var item in Model.lstRate)
+                                {
+                                    <div class="lst-ratting mb-2">
+                                        <div class="product_ratting mb-10">
+                                            <div>
+                                                @if (item.accounts.issocial == 0)
+                                                {
+                                                    <img style="border-radius:50%;width: 24px;margin-right: 2px;" src="~/assets/img/user/@item.accounts.image" alt="">
+
+                                                }
+                                                else
+                                                {
+                                                    <img style="border-radius:50%; width: 24px;margin-right: 2px;" src="@item.accounts.image" alt="">
+
+                                                }
+                                                <strong>@item.accounts.fullname</strong>
+
                                             </div>
-                                            <div class="col-lg-6 col-md-6">
-                                                <label for="author">Name</label>
-                                                <input id="author" type="text">
-                                            </div>
-                                            <div class="col-lg-6 col-md-6">
-                                                <label for="email">Email </label>
-                                                <input id="email" type="text">
+                                            <div style="display: flex;align-items: baseline;margin-top: 4px;">
+                                                <ul style="margin-right:10px">
+                                                    @for (var z = 0; z < item.star; z++)
+                                                    {
+                                                        <li><a class="ratting"><i class="fa fa-star"></i></a></li>
+                                                    }
+                                                    @for (var z = item.star; z < 5; z++)
+                                                    {
+                                                        <li><a><i class="fa fa-star"></i></a></li>
+                                                    }
+                                                </ul>
+                                                <p style="margin-bottom:unset">@(DateTime.Parse(item.createdate.ToString()).ToShortDateString())</p>
+
                                             </div>
                                         </div>
-                                        <button type="submit">Submit</button>
-                                    </form>
+                                            <p>@item.comment</p>
+                                    </div>
+                                }
+                            </div>
+                            <div class="tab-pane fade" id="reviews" role="tabpanel">
+
+                                <div class="product_review_form">
+                                    <h2>Thêm đánh giá </h2>
+                                    <div class="product_ratting mb-10">
+                                        <ul id="rate">
+                                            <li><a class="ratting active"><i class="fa fa-star"></i></a></li>
+                                            <li><a><i class="fa fa-star"></i></a></li>
+                                            <li><a><i class="fa fa-star"></i></a></li>
+                                            <li><a><i class="fa fa-star"></i></a></li>
+                                            <li><a><i class="fa fa-star"></i></a></li>
+                                            <li> Bạn đánh giá cho sản phẩm <strong>@Model.product.name</strong> bao nhiêu sao nhỉ? </li>
+                                        </ul>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12 col-md-12 col-sm-12">
+                                            <label for="review_comment">Đánh giá của bạn </label>
+                                            <textarea name="comment" id="comment"></textarea>
+                                        </div>
+                                    </div>
+                                    <button data-id="@Model.product.id" type="submit" id="btnrate">Gửi đánh giá</button>
                                 </div>
                             </div>
                         </div>
@@ -215,112 +207,112 @@
             <!--Related Products group area start-->
             @if (Model.lstProductGroup.Count > 0)
             {
-            <div class="new_product_area">
-                <div class="block_title">
-                    <h3>@Model.lstProductGroup.Count sản phẩm cùng nhóm</h3>
-                </div>
-                <div class="row">
-                    <div class="product_active owl-carousel">
-                        @foreach (var item in Model.lstProductGroup)
+                <div class="new_product_area">
+                    <div class="block_title">
+                        <h3>@Model.lstProductGroup.Count sản phẩm cùng nhóm</h3>
+                    </div>
+                    <div class="row">
+                        <div class="product_active owl-carousel">
+                            @foreach (var item in Model.lstProductGroup)
                             {
-                            <div class="col-lg-3">
-                                <div class="single_product">
-                                    <div class="product_thumb">
-                                        <a href="/chi-tiet/@(item.alias).html"><img src="~/assets/img/Nón bảo hiểm/@item.image" alt=""></a>
-                                        <div class="product_action">
-                                            <a href="" data-id="@item.id" data-value="1" title="Thêm vào giỏ hàng" class="addcart"> <i class="fa fa-shopping-cart"></i> Thêm vào vào giỏ hàng</a>
+                                <div class="col-lg-3">
+                                    <div class="single_product">
+                                        <div class="product_thumb">
+                                            <a href="/chi-tiet/@(item.alias).html"><img src="~/assets/img/Nón bảo hiểm/@item.image" alt=""></a>
+                                            <div class="product_action">
+                                                <a href="" data-id="@item.id" data-value="1" title="Thêm vào giỏ hàng" class="addcart"> <i class="fa fa-shopping-cart"></i> Thêm vào vào giỏ hàng</a>
+                                            </div>
+                                        </div>
+                                        <div class="product_content">
+                                            <span class="product_price">@item.price</span>
+                                            <h3 class="product_title"><a href="/chi-tiet/@(item.alias).html">@item.name</a></h3>
+                                        </div>
+                                        <div class="product_info">
+                                            <ul>
+                                                <li><a href="#" title="Thêm vào yêu thích">Thêm vào yêu thích</a></li>
+                                                <li><a href="#" data-toggle="modal" class="mt-1" data-target="#modal_box-group-@item.id" title="Quick view">Xem chi tiết</a></li>
+                                            </ul>
                                         </div>
                                     </div>
-                                    <div class="product_content">
-                                        <span class="product_price">@item.price</span>
-                                        <h3 class="product_title"><a href="/chi-tiet/@(item.alias).html">@item.name</a></h3>
-                                    </div>
-                                    <div class="product_info">
-                                        <ul>
-                                            <li><a href="#" title="Thêm vào yêu thích">Thêm vào yêu thích</a></li>
-                                            <li><a href="#" data-toggle="modal" class="mt-1" data-target="#modal_box-group-@item.id" title="Quick view">Xem chi tiết</a></li>
-                                        </ul>
-                                    </div>
                                 </div>
-                            </div>
                             }
+                        </div>
                     </div>
                 </div>
-            </div>
             }
             <!--Related Products group area end-->
             <!--Related Products category area start-->
             @if (Model.lstProductCategory.Count > 0)
             {
-            <div class="new_product_area">
-                <div class="block_title">
-                    <h3>@Model.lstProductCategory.Count sản phẩm cùng danh mục</h3>
-                </div>
-                <div class="row">
-                    <div class="product_active owl-carousel">
-                        @foreach (var item in Model.lstProductCategory)
+                <div class="new_product_area">
+                    <div class="block_title">
+                        <h3>@Model.lstProductCategory.Count sản phẩm cùng danh mục</h3>
+                    </div>
+                    <div class="row">
+                        <div class="product_active owl-carousel">
+                            @foreach (var item in Model.lstProductCategory)
                             {
-                            <div class="col-lg-3">
-                                <div class="single_product">
-                                    <div class="product_thumb">
-                                        <a href="/chi-tiet/@(item.alias).html"><img src="~/assets/img/Nón bảo hiểm/@item.image" alt=""></a>
-                                        <div class="product_action">
-                                            <a href="" data-id="@item.id" data-value="1" title="Thêm vào giỏ hàng" class="addcart"> <i class="fa fa-shopping-cart"></i> Thêm vào vào giỏ hàng</a>
+                                <div class="col-lg-3">
+                                    <div class="single_product">
+                                        <div class="product_thumb">
+                                            <a href="/chi-tiet/@(item.alias).html"><img src="~/assets/img/Nón bảo hiểm/@item.image" alt=""></a>
+                                            <div class="product_action">
+                                                <a href="" data-id="@item.id" data-value="1" title="Thêm vào giỏ hàng" class="addcart"> <i class="fa fa-shopping-cart"></i> Thêm vào vào giỏ hàng</a>
+                                            </div>
+                                        </div>
+                                        <div class="product_content">
+                                            <span class="product_price">@item.price</span>
+                                            <h3 class="product_title"><a href="/chi-tiet/@(item.alias).html">@item.name</a></h3>
+                                        </div>
+                                        <div class="product_info">
+                                            <ul>
+                                                <li><a href="#" title="Thêm vào yêu thích">Thêm vào yêu thích</a></li>
+                                                <li><a href="#" data-toggle="modal" class="mt-1" data-target="#modal_box-category-@item.id" title="Quick view">Xem chi tiết</a></li>
+                                            </ul>
                                         </div>
                                     </div>
-                                    <div class="product_content">
-                                        <span class="product_price">@item.price</span>
-                                        <h3 class="product_title"><a href="/chi-tiet/@(item.alias).html">@item.name</a></h3>
-                                    </div>
-                                    <div class="product_info">
-                                        <ul>
-                                            <li><a href="#" title="Thêm vào yêu thích">Thêm vào yêu thích</a></li>
-                                            <li><a href="#" data-toggle="modal" class="mt-1" data-target="#modal_box-category-@item.id" title="Quick view">Xem chi tiết</a></li>
-                                        </ul>
-                                    </div>
                                 </div>
-                            </div>
                             }
+                        </div>
                     </div>
                 </div>
-            </div>
             }
             <!--Related Products category area end-->
             <!--Related Products production area start-->
             @if (Model.lstProductProduction.Count > 0)
             {
-            <div class="new_product_area">
-                <div class="block_title">
-                    <h3>@Model.lstProductProduction.Count sản phẩm cùng hãng sản xuất</h3>
-                </div>
-                <div class="row">
-                    <div class="product_active owl-carousel">
-                        @foreach (var item in Model.lstProductProduction)
+                <div class="new_product_area">
+                    <div class="block_title">
+                        <h3>@Model.lstProductProduction.Count sản phẩm cùng hãng sản xuất</h3>
+                    </div>
+                    <div class="row">
+                        <div class="product_active owl-carousel">
+                            @foreach (var item in Model.lstProductProduction)
                             {
-                            <div class="col-lg-3">
-                                <div class="single_product">
-                                    <div class="product_thumb">
-                                        <a href="/chi-tiet/@(item.alias).html"><img src="~/assets/img/Nón bảo hiểm/@item.image" alt=""></a>
-                                        <div class="product_action">
-                                            <a class="addcart" href="" data-id="@item.id" data-value="1"> <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</a>
+                                <div class="col-lg-3">
+                                    <div class="single_product">
+                                        <div class="product_thumb">
+                                            <a href="/chi-tiet/@(item.alias).html"><img src="~/assets/img/Nón bảo hiểm/@item.image" alt=""></a>
+                                            <div class="product_action">
+                                                <a class="addcart" href="" data-id="@item.id" data-value="1"> <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</a>
+                                            </div>
+                                        </div>
+                                        <div class="product_content">
+                                            <span class="product_price">@item.price</span>
+                                            <h3 class="product_title"><a href="/chi-tiet/@(item.alias).html">@item.name</a></h3>
+                                        </div>
+                                        <div class="product_info">
+                                            <ul>
+                                                <li><a href="#" title="Thêm vào yêu thích">Thêm vào yêu thích</a></li>
+                                                <li><a href="#" data-toggle="modal" class="mt-1" data-target="#modal_box-production-@item.id" title="Quick view">Xem chi tiết</a></li>
+                                            </ul>
                                         </div>
                                     </div>
-                                    <div class="product_content">
-                                        <span class="product_price">@item.price</span>
-                                        <h3 class="product_title"><a href="/chi-tiet/@(item.alias).html">@item.name</a></h3>
-                                    </div>
-                                    <div class="product_info">
-                                        <ul>
-                                            <li><a href="#" title="Thêm vào yêu thích">Thêm vào yêu thích</a></li>
-                                            <li><a href="#" data-toggle="modal" class="mt-1" data-target="#modal_box-production-@item.id" title="Quick view">Xem chi tiết</a></li>
-                                        </ul>
-                                    </div>
                                 </div>
-                            </div>
                             }
+                        </div>
                     </div>
                 </div>
-            </div>
             }
             <!--Related Products production area end-->
         </div>

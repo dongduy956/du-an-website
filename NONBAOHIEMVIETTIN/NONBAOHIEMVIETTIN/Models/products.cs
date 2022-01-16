@@ -14,6 +14,12 @@ namespace NONBAOHIEMVIETTIN.Models
     
     public partial class products
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public products()
+        {
+            this.rate = new HashSet<rate>();
+        }
+    
         public int id { get; set; }
         public string name { get; set; }
         public string alias { get; set; }
@@ -34,5 +40,7 @@ namespace NONBAOHIEMVIETTIN.Models
         public virtual category category { get; set; }
         public virtual groupproduct groupproduct { get; set; }
         public virtual production production { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<rate> rate { get; set; }
     }
 }

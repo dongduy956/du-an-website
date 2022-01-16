@@ -46,7 +46,11 @@
         select option{
             font-size:16px;
         }
-
+        .bank-title{
+            display:block;
+            text-align:center;
+            color:unset !important;
+        }
     </style>
 <link href="~/assets/css/bank.css" rel="stylesheet" />
 }
@@ -173,18 +177,20 @@ else
                                 <div class="col-lg-6 col-md-12 mb-30">
                                     <label for="town">Phường/Xã <span>*</span></label>
                                     <select name="town" id="town">
-                                        <option value="2">Chọn phường xã</option>
+                                        <option value="-1">Chọn phường xã</option>
                                     </select>
                                 </div>
                                 <div class="col-lg-12 col-md-12 mb-30">
                                     <label for="cart-town"> Thôn/xóm/số nhà <span>*</span></label>
                                     <input id="cart-town" placeholder="Nhập thôn/xóm/số nhà"  type="text">
                                 </div>
-                                <div class="col-12">
-                                    <label><input type="radio" id="rdoCash" name="paymentMethod" value="CASH" checked="checked" /> Tiền mặt</label>
-                                    <label><input type="radio" id="rdoNL" name="paymentMethod" value="NL" /> TK Ngân Lượng</label>
-                                    <label><input type="radio" id="rdoBank" value="ATM_ONLINE" name="paymentMethod" /> Thẻ Ngân hàng nội địa</label>
-                                    <label><input type="radio" id="rdoVisa" name="paymentMethod" value="VISA" /> VISA</label>
+                                <div class="col-lg-12 col-md-12">
+                                    <div class="row">
+                                        <label class="col-lg-3 col-md-6 col-sm-6 mb-1"><input type="radio" id="rdoCash" name="paymentMethod" value="CASH" checked="checked" /> <span class="bank-title">Tiền mặt</span></label>
+                                        <label class="col-sm-6 col-lg-3 col-md-6 mb-1"><input type="radio" id="rdoNL" name="paymentMethod" value="NL" /> <span class="bank-title">Tải khoản Ngân Lượng</span></label>
+                                        <label class="col-lg-3 col-md-6 col-sm-6 mb-1"><input type="radio" id="rdoBank" value="ATM_ONLINE" name="paymentMethod" /><span class="bank-title"> Thẻ Ngân hàng nội địa</span></label>
+                                        <label class="col-lg-3 col-md-6 col-sm-6 mb-1"><input type="radio" id="rdoVisa" name="paymentMethod" value="VISA" /><span class="bank-title"> VISA</span></label>
+                                    </div>
                                     <div id="bankContent" class="boxContent" style="display:none;">
                                         Danh sách ngân hàng nội địa:
                                         <ul class="cardList clearfix">
@@ -338,10 +344,7 @@ else
                                 </div>
                                 <div class="col-12 mt-10">
                                     <button id="btnbill" type="submit">Xác nhận đơn hàng</button>
-                                </div>
-
-                                <a target="_blank" 
-                                   href="https://sandbox.nganluong.vn:8088/nl35/button_payment.php?receiver=dongduy0612@gmail.com&product_name=1&price=100&return_url=xac-nhan-don-hang.html&comments=khong-co"><img src="https://sandbox.nganluong.vn:8088/nl35/css/newhome/img/button/pay-lg.png" border="0" /></a>
+                                </div>                                
                                     
                             </div>
                         </div>

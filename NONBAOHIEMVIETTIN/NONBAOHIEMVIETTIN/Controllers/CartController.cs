@@ -286,6 +286,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 }            
             if (PaymentMethod == "CASH")
             {
+                Session[cartSession] = null;
                 return Json(new
                 {
                     status = true

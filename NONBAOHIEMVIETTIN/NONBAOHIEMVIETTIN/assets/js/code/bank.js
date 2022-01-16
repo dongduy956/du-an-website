@@ -17,8 +17,8 @@
         order.fullname = $('#cart-fullname').val();
         order.phone = $('#cart-phone').val();
         order.email = $('#cart-email').val();
-        order.address = $('#cart-town').val() + '' + $('#town').val() + ' ' + $('#district').val() + ' ' + $('#province').val();
-        order.note = $("#note").val();
+        order.address = $('#cart-town').val() + '' + $('#town').val() == '-1' ? '' : $('#town').val() + ' ' + $('#district').val() == '-1' ? '' : $('#district').val() + ' ' + $('#province').val() == '-1' ? '' : $('#province').val();
+        order.note = $("#order_note").val();
         var PaymentMethod = $('input[name="paymentMethod"]:checked').val();
         var BankCode = $('input[groupname="bankcode"]:checked').prop('id');
         $.ajax({
@@ -41,10 +41,21 @@
                 //    $('#divMessage').show();
                 //    $('#divMessage').text(response.message);
                 //}
-                if (response.status)                
-                    location.href = response.urlCheckout;                
-                else                    
-                    showToast('Thanh toán thất bại.'+response.message);                                    
+                if (response.status) {
+                    if (PaymentMethod == 'CASH')
+                    {
+                        $('.img-cart').show();
+                        $('#shipping-group').hide();
+                        $('.shopping_cart_area').hide();
+                        $('.shopping_cart a span').text('0 sản phẩm- 0đ');
+                        $('#cart').hide();
+                        showToast('Thanh toán thành công.');
+                    }
+                    else
+                    location.href = response.urlCheckout;
+                }
+                else
+                    showToast('Thanh toán thất bại.' + response.message);
             },
             error: function (data) {
                 alert(JSON.stringify(data));

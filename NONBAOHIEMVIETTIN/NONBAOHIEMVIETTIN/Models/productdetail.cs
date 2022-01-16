@@ -11,5 +11,6 @@ namespace NONBAOHIEMVIETTIN.Models
         public List<products> lstProductCategory { get; set; }
         public List<products> lstProductProduction { get; set; }
         public List<products> lstProductGroup { get; set; }
+        public List<rate> lstRate { get; set; }
     }
 }

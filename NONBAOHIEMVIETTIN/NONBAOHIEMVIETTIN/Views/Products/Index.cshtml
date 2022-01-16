@@ -6,6 +6,7 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var i = 1;
     var j = i;
+    var check = ViewBag.check != null ? ViewBag.check : -1;
 }
 @section styles{
     <style>
@@ -60,16 +61,16 @@
                             <p>@ViewBag.noti</p>
                         </div>
                         <div class="select_option">
-                                <label>Sort By</label>
-                                <select name="orderby" id="short">
-                                    <option value="-1">Chọn kiểu sắp xếp</option>
+                            <label>Sort By</label>
+                            <select name="orderby" id="short">
+                                <option value="-1">Chọn kiểu sắp xếp</option>
 
-                                    <option  value="0">Tên tăng dần</option>
-                                    <option  value="1">Tên giảm dần</option>     
-                                    <option value="2">Giá tăng dần</option>
-                                    <option value="3">Giá giảm dần</option>
-                                                                   
-                                </select>
+                                <option value="0">Tên tăng dần</option>
+                                <option value="1">Tên giảm dần</option>
+                                <option value="2">Giá tăng dần</option>
+                                <option value="3">Giá giảm dần</option>
+
+                            </select>
                         </div>
                     </div>
                     <!--shop toolbar end-->
@@ -173,19 +174,44 @@
                                 </form>
                             </div>*@
                         <div class="page_number">
-                            <span>Trang: </span>
                             <ul>
-                                @Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+                                @if (check == 0)
+                                {
+
+
+                                    @Html.PagedListPager(Model,
+    page => Url.Action("Index", new { page }),
+    new PagedListRenderOptions
+    {
+        MaximumPageNumbersToDisplay = 5
+    });
+                                }
+                                else
+                                            if (check == 1)
+                                {
+                                    @Html.PagedListPager(Model, page => Url.Action("GroupProducts", new { page }));
+                                }
+                                else
+                                if (check == 2)
+                                {                                   
+                                    @Html.PagedListPager(Model, page => Url.Action("Search",new { tukhoa = Request.Url.Query.Substring(Request.Url.Query.IndexOf("?tukhoa="), Request.Url.Query.LastIndexOf('&') == -1 ? Request.Url.Query.Length : Request.Url.Query.LastIndexOf('&')).Replace("?tukhoa=", ""), page }));
+                                    
+                                }
+
+
                             </ul>
+
                         </div>
+
                     </div>
-                <!--pagination style end-->
+
+                    <!--pagination style end-->
                 }
             </div>
         }
 
     </div>
-    <div class="col-lg-3 col-md-8 col-12">
+    <div class="col-lg-3 col-md-12">
         @RenderPage("~/Views/Shared/_Slidebar-temp.cshtml")
     </div>
 </div>

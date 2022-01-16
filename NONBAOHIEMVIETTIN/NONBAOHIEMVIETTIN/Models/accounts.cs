@@ -18,6 +18,7 @@ namespace NONBAOHIEMVIETTIN.Models
         public accounts()
         {
             this.order = new HashSet<order>();
+            this.rate = new HashSet<rate>();
         }
     
         public int id { get; set; }
@@ -35,5 +36,7 @@ namespace NONBAOHIEMVIETTIN.Models
         public virtual role role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order> order { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<rate> rate { get; set; }
     }
 }

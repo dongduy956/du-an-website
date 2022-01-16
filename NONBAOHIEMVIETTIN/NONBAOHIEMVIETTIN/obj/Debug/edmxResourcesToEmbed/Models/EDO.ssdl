@@ -91,6 +91,17 @@
     <Property Name="idproduction" Type="int" />
     <Property Name="idgroupproduct" Type="int" />
   </EntityType>
+  <EntityType Name="rate">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_account" Type="int" />
+    <Property Name="id_product" Type="int" />
+    <Property Name="star" Type="int" />
+    <Property Name="comment" Type="nvarchar" MaxLength="500" />
+    <Property Name="createdate" Type="date" />
+  </EntityType>
   <EntityType Name="role">
     <Key>
       <PropertyRef Name="id" />
@@ -158,6 +169,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fk_rate_accounts">
+    <End Role="accounts" Type="Self.accounts" Multiplicity="0..1" />
+    <End Role="rate" Type="Self.rate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="accounts">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="rate">
+        <PropertyRef Name="id_account" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_rate_products">
+    <End Role="products" Type="Self.products" Multiplicity="0..1" />
+    <End Role="rate" Type="Self.rate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="rate">
+        <PropertyRef Name="id_product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="nonbaohiemviettinModelStoreContainer">
     <EntitySet Name="accounts" EntityType="Self.accounts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
@@ -166,6 +201,7 @@
     <EntitySet Name="orderdetail" EntityType="Self.orderdetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="production" EntityType="Self.production" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rate" EntityType="Self.rate" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="fk_accounts_role" Association="Self.fk_accounts_role">
       <End Role="role" EntitySet="role" />
@@ -186,6 +222,14 @@
     <AssociationSet Name="fk_products_production" Association="Self.fk_products_production">
       <End Role="production" EntitySet="production" />
       <End Role="products" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="fk_rate_accounts" Association="Self.fk_rate_accounts">
+      <End Role="accounts" EntitySet="accounts" />
+      <End Role="rate" EntitySet="rate" />
+    </AssociationSet>
+    <AssociationSet Name="fk_rate_products" Association="Self.fk_rate_products">
+      <End Role="products" EntitySet="products" />
+      <End Role="rate" EntitySet="rate" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

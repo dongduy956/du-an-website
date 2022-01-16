@@ -33,5 +33,6 @@ namespace NONBAOHIEMVIETTIN.Models
         public virtual DbSet<production> production { get; set; }
         public virtual DbSet<products> products { get; set; }
         public virtual DbSet<role> role { get; set; }
+        public virtual DbSet<rate> rate { get; set; }
     }
 }

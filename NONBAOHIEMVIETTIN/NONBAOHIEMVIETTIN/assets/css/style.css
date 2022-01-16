@@ -151,7 +151,7 @@
   position: relative;
 }
 .search_bar .form input {
-	width: 275px;
+	min-width: 275px;
 	height: 38px;
 	background: none;
 	border: 1px solid #ddd;
@@ -1559,12 +1559,7 @@
   display: inline-block;
   padding-right: 3px;
 }
-.product_ratting ul li a {
-	color: #00bba6;
-}
-.product_ratting ul li a:hover{
-    color: #e84c3d;
-}
+
 .product_ratting {
   margin-bottom: 10px;
 }
@@ -1726,9 +1721,7 @@
 	font-weight: 700;
 	color: #333;
 }
-.product_d_right .product_ratting ul li:last-child a,.product_d_right .product_ratting ul li:nth-last-child(2) a  {
-  color: #333;
-}
+
 .product_reference p {
 	font-size: 16px;
 	color: #999;
@@ -3822,4 +3815,12 @@
 .modal-content button span{
     
 }
+
 /*modal css end*/
+
+.ratting{
+    color:#00bba6 !important;
+}
+#rate a {
+    cursor:pointer;
+}

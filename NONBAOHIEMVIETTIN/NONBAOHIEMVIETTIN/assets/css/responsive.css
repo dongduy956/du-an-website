@@ -1146,7 +1146,7 @@
     }
     /*modal css here*/
     .modal-content button.close {
-        left: 83%;
+        left: 91%;
         width: 29px;
         height: 32px;
         top: 4px;
@@ -1216,10 +1216,6 @@
         width: 100%;
         margin: 0;
         margin-bottom: 34px;
-    }
-
-    .login_submit a {
-        display: none;
     }
 
     .modal-dialog.modal-dialog-centered {

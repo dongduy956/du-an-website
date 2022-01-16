@@ -2,8 +2,8 @@
 var VALIDURL = 'https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=';
 var SCOPE = 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email';
 var CLIENTID = '302904279340-gqup44b82jtuobr4ig89568sl5pvcc85.apps.googleusercontent.com';
-var REDIRECT = 'http://localhost:50321/Accounts/Login';
-var LOGOUT = 'http://localhost:50321/Accounts/Login';
+var REDIRECT = 'http://localhost:62429/Accounts/Login';
+var LOGOUT = 'http://localhost:62429/Accounts/Login';
 var TYPE = 'token';
 var _url = OAUTHURL + 'scope=' + SCOPE + '&client_id=' + CLIENTID + '&redirect_uri=' + REDIRECT + '&response_type=' + TYPE;
 var acToken;

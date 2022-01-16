@@ -1,274 +1,94 @@
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.CodeAnalysis.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\System.Reflection.Metadata.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\VBCSCompiler.exe
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\ApplicationInsights.config
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\csc.exe
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.CSharp.Core.targets
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.VisualBasic.Core.targets
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\System.Collections.Immutable.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\vbc.exe
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\VBCSCompiler.exe.config
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\NONBAOHIEMVIETTIN.dll.config
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\NONBAOHIEMVIETTIN.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\NONBAOHIEMVIETTIN.pdb
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Antlr3.Runtime.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.Agent.Intercept.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.DependencyCollector.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.PerfCounterCollector.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.ServerTelemetryChannel.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.Web.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.WindowsServer.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.ApplicationInsights.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Web.Infrastructure.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Newtonsoft.Json.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Net.Http.Formatting.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Helpers.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Http.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Http.WebHost.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Mvc.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Optimization.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Razor.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.Deployment.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.Razor.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\WebGrease.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.DependencyCollector.xml
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.ServerTelemetryChannel.xml
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.Web.xml
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.WindowsServer.xml
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.ApplicationInsights.xml
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Helpers.xml
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Mvc.xml
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Optimization.xml
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Razor.xml
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.xml
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.Deployment.xml
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.Razor.xml
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Antlr3.Runtime.pdb
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Newtonsoft.Json.xml
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Net.Http.Formatting.xml
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Http.xml
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Http.WebHost.xml
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.pdb
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\EntityFramework.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\EntityFramework.SqlServer.dll
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\EntityFramework.xml
-D:\Dự án website nón bảo hiểm\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\EntityFramework.SqlServer.xml
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\ApplicationInsights.config
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\csc.exe
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.CodeAnalysis.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.CSharp.Core.targets
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.VisualBasic.Core.targets
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\System.Collections.Immutable.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\System.Reflection.Metadata.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\vbc.exe
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\VBCSCompiler.exe
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\VBCSCompiler.exe.config
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\NONBAOHIEMVIETTIN.dll.config
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\NONBAOHIEMVIETTIN.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\NONBAOHIEMVIETTIN.pdb
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Antlr3.Runtime.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\EntityFramework.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\EntityFramework.SqlServer.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.Agent.Intercept.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.DependencyCollector.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.PerfCounterCollector.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.ServerTelemetryChannel.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.Web.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.WindowsServer.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.ApplicationInsights.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Web.Infrastructure.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Newtonsoft.Json.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Net.Http.Formatting.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Helpers.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Http.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Http.WebHost.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Mvc.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Optimization.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Razor.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.Deployment.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.Razor.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\WebGrease.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\EntityFramework.xml
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\EntityFramework.SqlServer.xml
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.DependencyCollector.xml
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.ServerTelemetryChannel.xml
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.Web.xml
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.WindowsServer.xml
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.ApplicationInsights.xml
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Helpers.xml
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Mvc.xml
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Optimization.xml
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Razor.xml
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.xml
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.Deployment.xml
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.Razor.xml
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Antlr3.Runtime.pdb
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Newtonsoft.Json.xml
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Net.Http.Formatting.xml
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Http.xml
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Http.WebHost.xml
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.pdb
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Facebook.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Facebook.xml
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\PagedList.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\PagedList.Mvc.dll
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\PagedList.xml
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\PagedList.Mvc.xml
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\ApplicationInsights.config
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\csc.exe
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.CodeAnalysis.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.CSharp.Core.targets
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.VisualBasic.Core.targets
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\System.Collections.Immutable.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\System.Reflection.Metadata.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\vbc.exe
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\VBCSCompiler.exe
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\VBCSCompiler.exe.config
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\NONBAOHIEMVIETTIN.dll.config
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\NONBAOHIEMVIETTIN.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\NONBAOHIEMVIETTIN.pdb
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Antlr3.Runtime.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\EntityFramework.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\EntityFramework.SqlServer.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Facebook.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.Agent.Intercept.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.DependencyCollector.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.PerfCounterCollector.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.ServerTelemetryChannel.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.Web.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.WindowsServer.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.ApplicationInsights.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Newtonsoft.Json.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\PagedList.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\PagedList.Mvc.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Net.Http.Formatting.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Helpers.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Http.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Http.WebHost.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Mvc.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Optimization.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Razor.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.Deployment.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.Razor.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\WebGrease.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\EntityFramework.xml
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\EntityFramework.SqlServer.xml
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Facebook.xml
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.DependencyCollector.xml
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.ServerTelemetryChannel.xml
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.Web.xml
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.WindowsServer.xml
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.ApplicationInsights.xml
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\PagedList.xml
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\PagedList.Mvc.xml
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Helpers.xml
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Mvc.xml
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Optimization.xml
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Razor.xml
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.xml
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.Deployment.xml
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.Razor.xml
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Antlr3.Runtime.pdb
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Newtonsoft.Json.xml
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Net.Http.Formatting.xml
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Http.xml
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Http.WebHost.xml
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.csprojResolveAssemblyReference.cache
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.dll
-C:\Users\Admin\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.pdb
-<<<<<<< HEAD
-D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.csprojResolveAssemblyReference.cache
-=======
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\ApplicationInsights.config
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\csc.exe
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.CodeAnalysis.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.CSharp.Core.targets
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.VisualBasic.Core.targets
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\System.Collections.Immutable.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\System.Reflection.Metadata.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\vbc.exe
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\VBCSCompiler.exe
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\VBCSCompiler.exe.config
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\NONBAOHIEMVIETTIN.dll.config
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\NONBAOHIEMVIETTIN.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\NONBAOHIEMVIETTIN.pdb
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Antlr3.Runtime.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\EntityFramework.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\EntityFramework.SqlServer.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Facebook.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.Agent.Intercept.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.DependencyCollector.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.PerfCounterCollector.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.ServerTelemetryChannel.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.Web.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.WindowsServer.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.ApplicationInsights.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Newtonsoft.Json.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\PagedList.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\PagedList.Mvc.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Net.Http.Formatting.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Helpers.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Http.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Http.WebHost.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Mvc.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Optimization.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Razor.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.Deployment.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.Razor.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\WebGrease.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\EntityFramework.xml
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\EntityFramework.SqlServer.xml
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Facebook.xml
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.DependencyCollector.xml
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.ServerTelemetryChannel.xml
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.Web.xml
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.WindowsServer.xml
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.ApplicationInsights.xml
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\PagedList.xml
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\PagedList.Mvc.xml
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Helpers.xml
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Mvc.xml
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Optimization.xml
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Razor.xml
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.xml
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.Deployment.xml
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.Razor.xml
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Antlr3.Runtime.pdb
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Newtonsoft.Json.xml
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Net.Http.Formatting.xml
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Http.xml
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Http.WebHost.xml
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.csprojAssemblyReference.cache
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.csproj.CoreCompileInputs.cache
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.csproj.CopyComplete
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.dll
-C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.pdb
->>>>>>> 3a61c0f71802fbcb90196724908f9b399de1feb4
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.csprojResolveAssemblyReference.cache
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\ApplicationInsights.config
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\csc.exe
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\System.Collections.Immutable.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\System.Reflection.Metadata.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\vbc.exe
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\VBCSCompiler.exe
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\VBCSCompiler.exe.config
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\NONBAOHIEMVIETTIN.dll.config
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\NONBAOHIEMVIETTIN.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\NONBAOHIEMVIETTIN.pdb
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Antlr3.Runtime.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\EntityFramework.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\EntityFramework.SqlServer.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Facebook.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.Agent.Intercept.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.DependencyCollector.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.PerfCounterCollector.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.ServerTelemetryChannel.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.Web.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.WindowsServer.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.ApplicationInsights.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.Identity.Core.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.Identity.Owin.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Host.SystemWeb.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.Cookies.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.Facebook.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.Google.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.OAuth.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.Twitter.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Web.Infrastructure.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Newtonsoft.Json.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Owin.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\PagedList.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Net.Http.Formatting.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Helpers.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Http.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Http.WebHost.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Mvc.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Optimization.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Razor.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.Deployment.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.Razor.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\WebGrease.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Facebook.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.DependencyCollector.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.ServerTelemetryChannel.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.Web.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.WindowsServer.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.ApplicationInsights.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\PagedList.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Helpers.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Mvc.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Optimization.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Razor.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.Deployment.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.Razor.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Antlr3.Runtime.pdb
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Newtonsoft.Json.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Net.Http.Formatting.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Http.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Http.WebHost.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\EntityFramework.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\EntityFramework.SqlServer.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.Identity.Core.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.Identity.Owin.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Host.SystemWeb.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.Facebook.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.Cookies.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.OAuth.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.Google.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.Twitter.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.pdb
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\PagedList.Mvc.dll
+D:\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\PagedList.Mvc.xml

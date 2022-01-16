@@ -1,5 +1,5 @@
 ﻿
-$(function () {   
+$(function () {
     function disable(dom) {
         $(dom + ' span').show();
         $(dom).attr('disabled', 'true');
@@ -466,16 +466,27 @@ $(function () {
     })
     $('.nice-select li').off('click').click(function () {
         var val = $(this).data('value');
-        if (val == '1')
+        if (val == '1') {
             $("#list-item .col-lg-4.col-md-4.col-sm-6").sort(desc_sortName).appendTo('#list-item');
+            $("#list .product_list_item.mb-35").sort(desc_sortName_1).appendTo('#list');
+
+        }
         else
-            if (val == '0')
+            if (val == '0') {
                 $("#list-item .col-lg-4.col-md-4.col-sm-6").sort(asc_sortName).appendTo('#list-item');
+                $("#list .product_list_item.mb-35").sort(asc_sortName_1).appendTo('#list');
+            }
             else
-                if (val == '2')
+                if (val == '2') {
                     $("#list-item .col-lg-4.col-md-4.col-sm-6").sort(asc_sortPrice).appendTo('#list-item');
-                else if (val == '3')
+                    $("#list .product_list_item.mb-35").sort(asc_sortPrice_1).appendTo('#list');
+
+                }
+                else if (val == '3') {
                     $("#list-item .col-lg-4.col-md-4.col-sm-6").sort(desc_sortPrice).appendTo('#list-item');
+                    $("#list .product_list_item.mb-35").sort(desc_sortPrice_1).appendTo('#list');
+
+                }
 
     })
     // Sắp xếp theo thứ tự giảm dần theo giá
@@ -485,9 +496,22 @@ $(function () {
         return (e.text()) > (f.text()) ? 1 : -1;
     }
     // Sắp xếp theo thứ tự giảm dần theo giá
+    function asc_sortPrice_1(a, b) {
+        var e = $(a).find('.old-price');
+        var f = $(b).find('.old-price');
+        return (e.text()) > (f.text()) ? 1 : -1;
+    }
+    // Sắp xếp theo thứ tự giảm dần theo giá
     function desc_sortPrice(a, b) {
         var e = $(a).find('.product_price');
         var f = $(b).find('.product_price');
+        return (e.text()) < (f.text()) ? 1 : -1;
+    }
+
+    // Sắp xếp theo thứ tự giảm dần theo giá
+    function desc_sortPrice_1(a, b) {
+        var e = $(a).find('.old-price');
+        var f = $(b).find('.old-price');
         return (e.text()) < (f.text()) ? 1 : -1;
     }
     // Sắp xếp theo thứ tự giảm dần theo tên
@@ -497,10 +521,23 @@ $(function () {
 
         return (e.text()) < (f.text()) ? 1 : -1;
     }
+    // Sắp xếp theo thứ tự giảm dần theo tên
+    function desc_sortName_1(a, b) {
+        var e = $(a).find('.list_title > h3 > a');
+        var f = $(b).find('.list_title > h3 > a');
+
+        return (e.text()) < (f.text()) ? 1 : -1;
+    }
     // Sắp xếp theo thứ tự tăng dần theo tên dần theo tên
     function asc_sortName(a, b) {
         var e = $(a).find('.product_title > a');
         var f = $(b).find('.product_title > a');
+        return (e.text()) > (f.text()) ? 1 : -1;
+    }
+    // Sắp xếp theo thứ tự tăng dần theo tên dần theo tên
+    function asc_sortName_1(a, b) {
+        var e = $(a).find('.list_title >h3 > a');
+        var f = $(b).find('.list_title >h3 > a');
         return (e.text()) > (f.text()) ? 1 : -1;
     }
     $('.addwish').off('click').click(function (e) {
@@ -834,13 +871,13 @@ $(function () {
                     success: function (data) {
                         if (data.status == "1") {
                             if (Quantity <= 0)
-                                $('.cart-' + ProductId).hide(500);
-                           
+                                $('.cart-' +ProductId).hide(500);
+
                                 $('.shopping_cart a span').text(`${data.sumQuantity} sản phẩm-${data.sumMoney}`);
-                                $('#total-' + ProductId).text(data.total);
+                                $('#total-' +ProductId).text(data.total);
                                 $('#lst-cart .prices,.cart_amount.sum_money').text(data.sumMoney);
-                                $('.cart-' + ProductId + ' .cart_info .quantity').text('Số lượng:' + Quantity);
-                                $('.cart_amount.sum_quantity').text(data.sumQuantity)
+                                $('.cart-' +ProductId + ' .cart_info .quantity').text('Số lượng:' + Quantity);
+                            $('.cart_amount.sum_quantity').text(data.sumQuantity)
                             if (data.sumQuantity == 0) {
                                 $('.img-cart').show();
                                 $('#shipping-group').hide();
@@ -848,7 +885,7 @@ $(function () {
                             }
                         }
                         else
-                                showToast('Lỗi hệ thống khi xoá sản phẩm. Vui lòng thao tác lại sau.');
+                            showToast('Lỗi hệ thống khi xoá sản phẩm. Vui lòng thao tác lại sau.');
 
                     },
             error: function (data) {
@@ -858,19 +895,95 @@ $(function () {
 
         });
     })
-    function search()
-    {
+    function search() {
         var keyword = $('#txtkeyword').val();
 
         if (keyword == '')
             showToast('Mời bạn nhập vào từ khoá.');
         else {
-            location.href = '/tim-kiem.html?tu-khoa=' + keyword;
+            location.href = '/tim-kiem.html?tukhoa=' + keyword;
         }
     }
     $('#btnsearch').click(search)
     $('#txtkeyword').keypress(function (e) {
         if (e.which == 13)
             search();
+    })
+    $('#rate li').each(function (index, element) {        
+        $(element).find('a').mouseenter(function (e) {
+            $(this).addClass('ratting');
+            for (var i = 0; i <5; i++)
+            {
+                if(i<=index)
+                    $($('#rate li')[i]).find('a').addClass('ratting');
+                else
+                    if (!$($('#rate li')[i]).find('a').hasClass('active'))
+                    $($('#rate li')[i]).find('a').removeClass('ratting');
+            }
+
+            return false;
+        }).mouseleave(function (e) {
+            for (var i = 0; i < 5; i++) {
+                if (!$($('#rate li')[i]).find('a').hasClass('active'))
+                    $($('#rate li')[i]).find('a').removeClass('ratting');
+            }
+        })
+    })
+    $('#rate li').each(function (index, element) {
+        $(element).find('a').mousedown(function (e) {
+            e.preventDefault();
+            for (var i = 0; i < 5; i++) {
+                if (i <= index)
+                    $($('#rate li')[i]).find('a').addClass('active');
+                else                   
+                    $($('#rate li')[i]).find('a').removeClass('active');
+
+            }
+            return false;
+        })
+    })
+    $('#btnrate').click(function () {
+        var comment=$("#comment").val();
+        if(comment=='')
+            {
+            showToast('Bạn chưa viết đánh giá!!');
+            return;
+        }
+        var sum = 0;
+        $('#rate li').each(function (index, elemet) {
+            if ($(this).find('a').hasClass('active'))
+                sum++;
+        })
+        var ratting=new Object();
+        ratting.id_product = $(this).data('id');
+        ratting.comment = comment;
+        ratting.star = sum;
+        $.ajax({
+            url: "/Products/Ratting",
+            data: JSON.stringify({ ratting}),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    type: "POST",
+                    success: function (data) {                       
+                            showToast(data.message);
+                            if(data.status==1)
+                            {
+                                $('#comment').val('');
+                                $('#sumrate').val(`Tổng đánh giá (${data.countRate})`);
+                                $('#countrate li').each(function (index, element) {
+                                    if(index<=data.avgStar)
+                                        $(element).find('a').addClass('ratting')
+                                    else
+                                        $(element).find('a').removeClass('ratting')
+
+                                })
+                            }
+                    },
+            error: function (data) {
+
+                alert(JSON.stringify(data));
+            }
+
+        });
     })
 })
