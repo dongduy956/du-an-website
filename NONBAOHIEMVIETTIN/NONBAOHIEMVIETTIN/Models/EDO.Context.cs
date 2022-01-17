@@ -34,5 +34,8 @@ namespace NONBAOHIEMVIETTIN.Models
         public virtual DbSet<products> products { get; set; }
         public virtual DbSet<role> role { get; set; }
         public virtual DbSet<rate> rate { get; set; }
+        public virtual DbSet<listimage> listimage { get; set; }
+        public virtual DbSet<news> news { get; set; }
+        public virtual DbSet<newstype> newstype { get; set; }
     }
 }

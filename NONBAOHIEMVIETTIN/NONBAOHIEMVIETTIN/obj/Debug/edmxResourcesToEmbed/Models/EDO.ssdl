@@ -34,6 +34,34 @@
     <Property Name="alias" Type="varchar" MaxLength="100" />
     <Property Name="status" Type="bit" />
   </EntityType>
+  <EntityType Name="listimage">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_product" Type="int" />
+    <Property Name="image" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="news">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_newstype" Type="int" />
+    <Property Name="title" Type="nvarchar" MaxLength="100" />
+    <Property Name="alias" Type="varchar" MaxLength="100" />
+    <Property Name="content" Type="ntext" />
+    <Property Name="createdate" Type="date" />
+    <Property Name="image" Type="varchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="newstype">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="alias" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
   <EntityType Name="order">
     <Key>
       <PropertyRef Name="id" />
@@ -121,6 +149,30 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fk_listimage_products">
+    <End Role="products" Type="Self.products" Multiplicity="0..1" />
+    <End Role="listimage" Type="Self.listimage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="listimage">
+        <PropertyRef Name="id_product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_news_newstype">
+    <End Role="newstype" Type="Self.newstype" Multiplicity="0..1" />
+    <End Role="news" Type="Self.news" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="newstype">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="news">
+        <PropertyRef Name="id_newstype" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="fk_order_account">
     <End Role="accounts" Type="Self.accounts" Multiplicity="0..1" />
     <End Role="order" Type="Self.order" Multiplicity="*" />
@@ -197,6 +249,9 @@
     <EntitySet Name="accounts" EntityType="Self.accounts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="groupproduct" EntityType="Self.groupproduct" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="listimage" EntityType="Self.listimage" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="news" EntityType="Self.news" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="newstype" EntityType="Self.newstype" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="order" EntityType="Self.order" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="orderdetail" EntityType="Self.orderdetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="production" EntityType="Self.production" Schema="dbo" store:Type="Tables" />
@@ -206,6 +261,14 @@
     <AssociationSet Name="fk_accounts_role" Association="Self.fk_accounts_role">
       <End Role="role" EntitySet="role" />
       <End Role="accounts" EntitySet="accounts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_listimage_products" Association="Self.fk_listimage_products">
+      <End Role="products" EntitySet="products" />
+      <End Role="listimage" EntitySet="listimage" />
+    </AssociationSet>
+    <AssociationSet Name="fk_news_newstype" Association="Self.fk_news_newstype">
+      <End Role="newstype" EntitySet="newstype" />
+      <End Role="news" EntitySet="news" />
     </AssociationSet>
     <AssociationSet Name="fk_order_account" Association="Self.fk_order_account">
       <End Role="accounts" EntitySet="accounts" />

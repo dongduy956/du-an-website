@@ -118,5 +118,36 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="listimage">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.listimage">
+        <MappingFragment StoreEntitySet="listimage">
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="id_product" ColumnName="id_product" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="news">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.news">
+        <MappingFragment StoreEntitySet="news">
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="createdate" ColumnName="createdate" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="id_newstype" ColumnName="id_newstype" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="newstype">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.newstype">
+        <MappingFragment StoreEntitySet="newstype">
+          <ScalarProperty Name="alias" ColumnName="alias" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

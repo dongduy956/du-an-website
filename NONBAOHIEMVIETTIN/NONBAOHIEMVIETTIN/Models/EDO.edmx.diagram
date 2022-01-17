@@ -21,6 +21,11 @@
         <EntityTypeShape EntityType="nonbaohiemviettinModel.rate" Width="1.5" PointX="10.25" PointY="7" />
         <AssociationConnector Association="nonbaohiemviettinModel.fk_rate_accounts" />
         <AssociationConnector Association="nonbaohiemviettinModel.fk_rate_products" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.listimage" Width="1.5" PointX="5.625" PointY="0.75" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.news" Width="1.5" PointX="3" PointY="11.375" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.newstype" Width="1.5" PointX="0.75" PointY="11.75" />
+        <AssociationConnector Association="nonbaohiemviettinModel.fk_listimage_products" />
+        <AssociationConnector Association="nonbaohiemviettinModel.fk_news_newstype" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

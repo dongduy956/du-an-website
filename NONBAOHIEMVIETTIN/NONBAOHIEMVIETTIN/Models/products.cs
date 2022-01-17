@@ -18,6 +18,7 @@ namespace NONBAOHIEMVIETTIN.Models
         public products()
         {
             this.rate = new HashSet<rate>();
+            this.listimage = new HashSet<listimage>();
         }
     
         public int id { get; set; }
@@ -42,5 +43,7 @@ namespace NONBAOHIEMVIETTIN.Models
         public virtual production production { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<rate> rate { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<listimage> listimage { get; set; }
     }
 }

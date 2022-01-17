@@ -101,6 +101,7 @@
     <NavigationProperty Name="groupproduct" Relationship="Self.fk_products_groupproduct" FromRole="products" ToRole="groupproduct" />
     <NavigationProperty Name="production" Relationship="Self.fk_products_production" FromRole="products" ToRole="production" />
     <NavigationProperty Name="rate" Relationship="nonbaohiemviettinModel.fk_rate_products" FromRole="products" ToRole="rate" />
+    <NavigationProperty Name="listimage" Relationship="nonbaohiemviettinModel.fk_listimage_products" FromRole="products" ToRole="listimage" />
   </EntityType>
   <EntityType Name="role">
     <Key>
@@ -208,6 +209,17 @@
       <End Role="products" EntitySet="products" />
       <End Role="rate" EntitySet="rate" />
     </AssociationSet>
+    <EntitySet Name="listimage" EntityType="nonbaohiemviettinModel.listimage" />
+    <EntitySet Name="news" EntityType="nonbaohiemviettinModel.news" />
+    <EntitySet Name="newstype" EntityType="nonbaohiemviettinModel.newstype" />
+    <AssociationSet Name="fk_listimage_products" Association="nonbaohiemviettinModel.fk_listimage_products">
+      <End Role="products" EntitySet="products" />
+      <End Role="listimage" EntitySet="listimage" />
+    </AssociationSet>
+    <AssociationSet Name="fk_news_newstype" Association="nonbaohiemviettinModel.fk_news_newstype">
+      <End Role="newstype" EntitySet="newstype" />
+      <End Role="news" EntitySet="news" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="rate">
     <Key>
@@ -243,6 +255,61 @@
       </Principal>
       <Dependent Role="rate">
         <PropertyRef Name="id_product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="listimage">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_product" Type="Int32" />
+    <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="products" Relationship="nonbaohiemviettinModel.fk_listimage_products" FromRole="listimage" ToRole="products" />
+  </EntityType>
+  <EntityType Name="news">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="id_newstype" Type="Int32" />
+    <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="createdate" Type="DateTime" Precision="0" />
+    <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="newstype" Relationship="nonbaohiemviettinModel.fk_news_newstype" FromRole="news" ToRole="newstype" />
+  </EntityType>
+  <EntityType Name="newstype">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="alias" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="news" Relationship="nonbaohiemviettinModel.fk_news_newstype" FromRole="newstype" ToRole="news" />
+  </EntityType>
+  <Association Name="fk_listimage_products">
+    <End Type="nonbaohiemviettinModel.products" Role="products" Multiplicity="0..1" />
+    <End Type="nonbaohiemviettinModel.listimage" Role="listimage" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="listimage">
+        <PropertyRef Name="id_product" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_news_newstype">
+    <End Type="nonbaohiemviettinModel.newstype" Role="newstype" Multiplicity="0..1" />
+    <End Type="nonbaohiemviettinModel.news" Role="news" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="newstype">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="news">
+        <PropertyRef Name="id_newstype" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

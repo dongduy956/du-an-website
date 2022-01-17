@@ -37,6 +37,12 @@ defaults: new { controller = "Products", action = "Search", id = UrlParameter.Op
 namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
 );
             routes.MapRoute(
+           name: "NewsDetail",
+           url: "chi-tiet/{alias}.html",
+           defaults: new { controller = "News", action = "NewsDetail", id = UrlParameter.Optional },
+           namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+       );
+            routes.MapRoute(
             name: "ProductsDetail",
             url: "chi-tiet/{alias}.html",
             defaults: new { controller = "Products", action = "ProductDetail", id = UrlParameter.Optional },
@@ -49,6 +55,12 @@ namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
            defaults: new { controller = "Products", action = "GroupProducts", id = UrlParameter.Optional },
            namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
        );
+            routes.MapRoute(
+               name: "NewsIndex",
+               url: "{alias}.html",
+               defaults: new { controller = "News", action = "Index", id = UrlParameter.Optional },
+               namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+           );
             routes.MapRoute(
                name: "ProductsIndex",
                url: "{alias}.html",

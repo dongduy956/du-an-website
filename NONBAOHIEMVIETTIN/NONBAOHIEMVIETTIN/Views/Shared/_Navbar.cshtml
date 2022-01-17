@@ -24,6 +24,16 @@
                 </li>
                 <li>
                     <a href="#">Tin tức</a>
+                    <div class="mega_menu jewelry">
+                        <div class="mega_items jewelry">
+                            <ul>
+                                @foreach (var item in db.newstype)
+                                {
+                                    <li><a href="/@(@item.alias).html">@item.name</a></li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
                 </li>
                 <li>
                     <a href="#">Liên hệ</a>

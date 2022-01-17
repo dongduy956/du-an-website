@@ -3234,7 +3234,7 @@
 	visibility: hidden;
 }
 .blog_pagination {
-	padding: 0 20px;
+	padding: 0 20px 20px 20px;
 	margin-bottom: 35px;
 }
 .blog_pagination .page_number {

@@ -220,11 +220,10 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="assets\NganLuongAPI\APICheckoutV3.cs" />
-    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\WishController.cs" />
     <Compile Include="Global.asax.cs">
@@ -258,7 +257,16 @@
     </Compile>
     <Compile Include="Models\HoTro.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\listimage.cs">
+      <DependentUpon>EDO.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\news.cs">
+      <DependentUpon>EDO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\newstype.cs">
+      <DependentUpon>EDO.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\order.cs">
       <DependentUpon>EDO.tt</DependentUpon>
     </Compile>
@@ -343,6 +351,11 @@
     <Content Include="assets\img\logo\fontlogo.jpg" />
     <Content Include="assets\img\logo\fontlogo2.jpg" />
     <Content Include="assets\img\logo\logo.jpg.png" />
+    <Content Include="assets\img\news\tang-ngay-khau-trang-vai-khang-khuan-khi-mua-mu-bao-hiem-andes-bo-doi-hoan-hao-bao-ve-toi-uu-00.jpg" />
+    <Content Include="assets\img\news\tang-ngay-khau-trang-vai-khang-khuan-khi-mua-mu-bao-hiem-andes-bo-doi-hoan-hao-bao-ve-toi-uu-01-768x768.jpg" />
+    <Content Include="assets\img\news\tang-ngay-khau-trang-vai-khang-khuan-khi-mua-mu-bao-hiem-andes-bo-doi-hoan-hao-bao-ve-toi-uu-02-1024x1024.jpg" />
+    <Content Include="assets\img\news\tang-ngay-khau-trang-vai-khang-khuan-khi-mua-mu-bao-hiem-andes-bo-doi-hoan-hao-bao-ve-toi-uu-03-1024x1024.jpg" />
+    <Content Include="assets\img\news\tang-ngay-khau-trang-vai-khang-khuan-khi-mua-mu-bao-hiem-andes-bo-doi-hoan-hao-bao-ve-toi-uu-04-768x768.jpg" />
     <Content Include="assets\img\Nón bảo hiểm\AC01 đen cam.jpg" />
     <Content Include="assets\img\Nón bảo hiểm\AC01 đen xanh lá.jpg" />
     <Content Include="assets\img\Nón bảo hiểm\AC01 đen xanh.jpg" />
@@ -983,24 +996,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Account\_ExternalLoginsListPartial.cshtml" />
-    <Content Include="Views\Account\ConfirmEmail.cshtml" />
-    <Content Include="Views\Account\ExternalLoginConfirmation.cshtml" />
-    <Content Include="Views\Account\ExternalLoginFailure.cshtml" />
-    <Content Include="Views\Account\ForgotPassword.cshtml" />
-    <Content Include="Views\Account\ForgotPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\Account\ResetPassword.cshtml" />
-    <Content Include="Views\Account\ResetPasswordConfirmation.cshtml" />
-    <Content Include="Views\Account\SendCode.cshtml" />
-    <Content Include="Views\Account\VerifyCode.cshtml" />
-    <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
-    <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
-    <Content Include="Views\Manage\ManageLogins.cshtml" />
-    <Content Include="Views\Manage\SetPassword.cshtml" />
-    <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
@@ -1012,6 +1007,7 @@
     <Content Include="Views\Products\Index.cshtml" />
     <Content Include="Views\Products\ProductDetail.cshtml" />
     <Content Include="Views\Wish\Index.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
