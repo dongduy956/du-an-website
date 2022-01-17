@@ -54,6 +54,16 @@
           <Property Name="alias" Type="varchar" MaxLength="100" />
           <Property Name="status" Type="bit" />
         </EntityType>
+        <EntityType Name="introduce">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="100" />
+          <Property Name="content" Type="ntext" />
+          <Property Name="image" Type="varchar" MaxLength="100" />
+          <Property Name="status" Type="bit" />
+        </EntityType>
         <EntityType Name="listimage">
           <Key>
             <PropertyRef Name="id" />
@@ -312,6 +322,7 @@
           <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="contact" EntityType="Self.contact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="groupproduct" EntityType="Self.groupproduct" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="introduce" EntityType="Self.introduce" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="listimage" EntityType="Self.listimage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="news" EntityType="Self.news" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="newstype" EntityType="Self.newstype" Schema="dbo" store:Type="Tables" />
@@ -432,6 +443,7 @@
           <EntitySet Name="contact" EntityType="nonbaohiemviettinModel.contact" />
           <EntitySet Name="sendcontactinfo" EntityType="nonbaohiemviettinModel.sendcontactinfo" />
           <EntitySet Name="subscribe" EntityType="nonbaohiemviettinModel.subscribe" />
+          <EntitySet Name="introduce" EntityType="nonbaohiemviettinModel.introduce" />
         </EntityContainer>
         <EntityType Name="accounts">
           <Key>
@@ -757,6 +769,16 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="introduce">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="image" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Boolean" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -943,6 +965,17 @@
             <EntityTypeMapping TypeName="nonbaohiemviettinModel.subscribe">
               <MappingFragment StoreEntitySet="subscribe">
                 <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="introduce">
+            <EntityTypeMapping TypeName="nonbaohiemviettinModel.introduce">
+              <MappingFragment StoreEntitySet="introduce">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -49,6 +49,16 @@
     <Property Name="alias" Type="varchar" MaxLength="100" />
     <Property Name="status" Type="bit" />
   </EntityType>
+  <EntityType Name="introduce">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="100" />
+    <Property Name="content" Type="ntext" />
+    <Property Name="image" Type="varchar" MaxLength="100" />
+    <Property Name="status" Type="bit" />
+  </EntityType>
   <EntityType Name="listimage">
     <Key>
       <PropertyRef Name="id" />
@@ -307,6 +317,7 @@
     <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="contact" EntityType="Self.contact" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="groupproduct" EntityType="Self.groupproduct" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="introduce" EntityType="Self.introduce" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="listimage" EntityType="Self.listimage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="news" EntityType="Self.news" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="newstype" EntityType="Self.newstype" Schema="dbo" store:Type="Tables" />

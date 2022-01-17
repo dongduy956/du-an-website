@@ -264,6 +264,9 @@
     </Compile>
     <Compile Include="Models\HoTro.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\introduce.cs">
+      <DependentUpon>EDO.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\listimage.cs">
       <DependentUpon>EDO.tt</DependentUpon>
     </Compile>

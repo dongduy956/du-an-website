@@ -40,5 +40,6 @@ namespace NONBAOHIEMVIETTIN.Models
         public virtual DbSet<contact> contact { get; set; }
         public virtual DbSet<sendcontactinfo> sendcontactinfo { get; set; }
         public virtual DbSet<subscribe> subscribe { get; set; }
+        public virtual DbSet<introduce> introduce { get; set; }
     }
 }

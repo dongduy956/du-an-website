@@ -185,5 +185,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="introduce">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.introduce">
+        <MappingFragment StoreEntitySet="introduce">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

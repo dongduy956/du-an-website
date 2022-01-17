@@ -77,7 +77,7 @@
                 </div>
             </div>
 
-        <!--shop tab product-->
+            <!--shop tab product-->
             <div class="shop_tab_product shop_fullwidth">
                 <div class="tab-content" id="myTabContent">
                     <div class="tab-pane fade show active" id="large" role="tabpanel">
@@ -160,7 +160,7 @@
                 <!--shop tab product end-->
                 @if (ViewBag.last != 1)
                 {
-                <!--pagination style start-->
+                    <!--pagination style start-->
                     <div class="pagination_style shop_page" style="justify-content:flex-end">
                         @*<div class="item_page">
                                 <form action="hhihi">
@@ -199,14 +199,14 @@
                                 else
                                 if (check == 2)
                                 {
-                                    @Html.PagedListPager(Model,
-    page => Url.Action("Search", new { page }),
-    new PagedListRenderOptions
-    {
-        MaximumPageNumbersToDisplay = 5
-    })
+                                    @Html.PagedListPager(Model, page => Url.Action("Search", new { tukhoa = Request.Url.Query.Substring(Request.Url.Query.IndexOf("?tukhoa="), Request.Url.Query.LastIndexOf('&') == -1 ? Request.Url.Query.Length : Request.Url.Query.LastIndexOf('&')).Replace("?tukhoa=", ""), page }),
+                                    new PagedListRenderOptions
+                                    {
+                                        MaximumPageNumbersToDisplay = 5
+                                    });
 
-                                }
+
+                                                        }
 
 
                             </ul>
@@ -228,7 +228,7 @@
 <!--pos home section end-->
 <!-- modal area start -->
 @foreach (var item in Model)
-            {
+{
     <div class="modal fade" id="modal_box-@item.id" tabindex="-1" role="dialog" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">

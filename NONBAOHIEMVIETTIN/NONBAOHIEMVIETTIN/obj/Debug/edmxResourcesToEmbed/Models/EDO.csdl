@@ -60,6 +60,7 @@
     <EntitySet Name="contact" EntityType="nonbaohiemviettinModel.contact" />
     <EntitySet Name="sendcontactinfo" EntityType="nonbaohiemviettinModel.sendcontactinfo" />
     <EntitySet Name="subscribe" EntityType="nonbaohiemviettinModel.subscribe" />
+    <EntitySet Name="introduce" EntityType="nonbaohiemviettinModel.introduce" />
   </EntityContainer>
   <EntityType Name="accounts">
     <Key>
@@ -384,5 +385,15 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="introduce">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="image" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="Boolean" />
   </EntityType>
 </Schema>

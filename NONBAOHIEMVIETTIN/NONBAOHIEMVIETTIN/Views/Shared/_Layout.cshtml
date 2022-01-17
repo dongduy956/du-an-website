@@ -1,7 +1,9 @@
 ﻿@using NONBAOHIEMVIETTIN.Models
 @{
+    var db = new nonbaohiemviettinEntities();
     var acc = Session["account"] as accounts;
     var cart = Session["cartSession"] as List<CartItem>;
+    var aboutus = db.contact.SingleOrDefault(x => x.display == true);
 }
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -70,7 +72,7 @@
                                                     <i class="fa fa-angle-down"></i>
                                                 </a>
 
-                                                <ul class="dropdown_languages" style="min-width:150px">
+                                                <ul class="dropdown_languages" style="right:0;min-width:150px">
                                                     @if (acc.issocial==0)
                                                     {
                                                         <li>
@@ -216,13 +218,13 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-sm-6">
                             <div class="footer_widget">
-                                <h3>About us</h3>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <h3>@aboutus.title</h3>
+                                <p>@aboutus.content</p>
                                 <div class="footer_widget_contect">
-                                    <p><i class="fa fa-map-marker" aria-hidden="true"></i> 19 Interpro Road Madison, AL 35758, USA</p>
+                                    <p><i class="fa fa-map-marker" aria-hidden="true"></i>@aboutus.address </p>
 
-                                    <p><i class="fa fa-mobile" aria-hidden="true"></i> (012) 234 432 3568</p>
-                                    <a href="#"><i class="fa fa-envelope-o" aria-hidden="true"></i> Contact@plazathemes.com </a>
+                                    <p><a href="tel:@aboutus.phone"><i class="fa fa-mobile" aria-hidden="true"></i> @aboutus.phone</a></p>
+                                    <a href="mailto:@aboutus.email"><i class="fa fa-envelope-o" aria-hidden="true"></i>@aboutus.email  </a>
                                 </div>
                             </div>
                         </div>
@@ -271,11 +273,11 @@
                         <div class="col-lg-6 col-md-6">
                             <div class="copyright_area">
                                 <ul>
-                                    <li><a href="#"> about us </a></li>
-                                    <li><a href="#">  Customer Service  </a></li>
-                                    <li><a href="#">  Privacy Policy  </a></li>
+                                    <li><a href="/lien-he.html"> Liên hệ </a></li>
+                                    <li><a href="#">  Dịch vụ khách hàng  </a></li>
+                                    <li><a href="#">  Chính sách bảo mật  </a></li>
                                 </ul>
-                                <p>Copyright &copy; 2018 <a href="#">Pos Coron</a>. All rights reserved. </p>
+                                <p>Copyright &copy; @DateTime.Now.Year <a href="#">Duy</a>. All rights reserved. </p>
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6">

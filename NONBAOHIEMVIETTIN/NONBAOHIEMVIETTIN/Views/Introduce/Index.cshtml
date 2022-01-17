@@ -1,4 +1,4 @@
-﻿
+﻿@model NONBAOHIEMVIETTIN.Models.introduce
 @{
     ViewBag.Title = "Giới thiệu";
 }
@@ -24,16 +24,16 @@
     <div class="row align-items-center">
         <div class="col-lg-6 col-md-6">
             <div class="about_thumb">
-                <img src="assets\img\ship\about1.jpg" alt="">
+                <img src="~/assets/img/ship/@Model.image" alt="">
             </div>
         </div>
         <div class="col-lg-6 col-md-6">
             <div class="about_content">
-                <h1>WE CREATE <br>WORDPRESS THEMES</h1>
-                <p>Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam, est usus legentis in iis qui facit eorum claritatem. </p>
-                <div class="view__work">
+                <h1>@Model.title</h1>
+                <p>@Model.content </p>
+                @*<div class="view__work">
                     <a href="#">view work </a>
-                </div>
+                </div>*@
             </div>
         </div>
     </div>
