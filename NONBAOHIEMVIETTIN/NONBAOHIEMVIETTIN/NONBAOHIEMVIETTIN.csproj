@@ -25,6 +25,7 @@
     <UseGlobalApplicationHostFile />
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
+    <Use64BitIISExpress />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -222,9 +223,12 @@
     <Compile Include="assets\NganLuongAPI\APICheckoutV3.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\ContactController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IntroduceController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Controllers\subscribeController.cs" />
     <Compile Include="Controllers\WishController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -235,6 +239,9 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CartItem.cs" />
     <Compile Include="Models\category.cs">
+      <DependentUpon>EDO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\contact.cs">
       <DependentUpon>EDO.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDO.Context.cs">
@@ -284,6 +291,12 @@
       <DependentUpon>EDO.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\role.cs">
+      <DependentUpon>EDO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sendcontactinfo.cs">
+      <DependentUpon>EDO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\subscribe.cs">
       <DependentUpon>EDO.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -996,7 +1009,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Shared\_Slidebar-temp.cshtml" />
@@ -1008,6 +1020,9 @@
     <Content Include="Views\Products\ProductDetail.cshtml" />
     <Content Include="Views\Wish\Index.cshtml" />
     <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\News\Newsdetail.cshtml" />
+    <Content Include="Views\Contact\Index.cshtml" />
+    <Content Include="Views\Introduce\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

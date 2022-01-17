@@ -30,6 +30,21 @@
           <Property Name="alias" Type="varchar" MaxLength="100" />
           <Property Name="status" Type="bit" />
         </EntityType>
+        <EntityType Name="contact">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="title" Type="nvarchar" MaxLength="100" />
+          <Property Name="content" Type="nvarchar" MaxLength="500" />
+          <Property Name="address" Type="nvarchar" MaxLength="100" />
+          <Property Name="email" Type="varchar" MaxLength="100" />
+          <Property Name="phone" Type="varchar" MaxLength="11" />
+          <Property Name="worktime" Type="varchar" MaxLength="100" />
+          <Property Name="map" Type="varchar" MaxLength="500" />
+          <Property Name="display" Type="bit" />
+          <Property Name="workday" Type="nvarchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="groupproduct">
           <Key>
             <PropertyRef Name="id" />
@@ -142,6 +157,24 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="varchar" MaxLength="20" />
         </EntityType>
+        <EntityType Name="sendcontactinfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+          <Property Name="email" Type="varchar" MaxLength="100" />
+          <Property Name="phone" Type="varchar" MaxLength="11" />
+          <Property Name="subject" Type="nvarchar" MaxLength="100" />
+          <Property Name="message" Type="nvarchar" MaxLength="500" />
+        </EntityType>
+        <EntityType Name="subscribe">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+        </EntityType>
         <Association Name="fk_accounts_role">
           <End Role="role" Type="Self.role" Multiplicity="0..1" />
           <End Role="accounts" Type="Self.accounts" Multiplicity="*" />
@@ -187,6 +220,30 @@
             </Principal>
             <Dependent Role="order">
               <PropertyRef Name="idaccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_orderdetail_order">
+          <End Role="order" Type="Self.order" Multiplicity="1" />
+          <End Role="orderdetail" Type="Self.orderdetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orderdetail">
+              <PropertyRef Name="idorder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_orderdetail_products">
+          <End Role="products" Type="Self.products" Multiplicity="1" />
+          <End Role="orderdetail" Type="Self.orderdetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orderdetail">
+              <PropertyRef Name="idproduct" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -253,6 +310,7 @@
         <EntityContainer Name="nonbaohiemviettinModelStoreContainer">
           <EntitySet Name="accounts" EntityType="Self.accounts" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="contact" EntityType="Self.contact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="groupproduct" EntityType="Self.groupproduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="listimage" EntityType="Self.listimage" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="news" EntityType="Self.news" Schema="dbo" store:Type="Tables" />
@@ -263,6 +321,8 @@
           <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rate" EntityType="Self.rate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sendcontactinfo" EntityType="Self.sendcontactinfo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="subscribe" EntityType="Self.subscribe" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="fk_accounts_role" Association="Self.fk_accounts_role">
             <End Role="role" EntitySet="role" />
             <End Role="accounts" EntitySet="accounts" />
@@ -278,6 +338,14 @@
           <AssociationSet Name="fk_order_account" Association="Self.fk_order_account">
             <End Role="accounts" EntitySet="accounts" />
             <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="fk_orderdetail_order" Association="Self.fk_orderdetail_order">
+            <End Role="order" EntitySet="order" />
+            <End Role="orderdetail" EntitySet="orderdetail" />
+          </AssociationSet>
+          <AssociationSet Name="fk_orderdetail_products" Association="Self.fk_orderdetail_products">
+            <End Role="products" EntitySet="products" />
+            <End Role="orderdetail" EntitySet="orderdetail" />
           </AssociationSet>
           <AssociationSet Name="fk_products_category" Association="Self.fk_products_category">
             <End Role="category" EntitySet="category" />
@@ -304,6 +372,67 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="nonbaohiemviettinModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="nonbaohiemviettinEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="accounts" EntityType="nonbaohiemviettinModel.accounts" />
+          <EntitySet Name="category" EntityType="nonbaohiemviettinModel.category" />
+          <EntitySet Name="groupproduct" EntityType="nonbaohiemviettinModel.groupproduct" />
+          <EntitySet Name="listimage" EntityType="nonbaohiemviettinModel.listimage" />
+          <EntitySet Name="news" EntityType="nonbaohiemviettinModel.news" />
+          <EntitySet Name="newstype" EntityType="nonbaohiemviettinModel.newstype" />
+          <EntitySet Name="order" EntityType="nonbaohiemviettinModel.order" />
+          <EntitySet Name="orderdetail" EntityType="nonbaohiemviettinModel.orderdetail" />
+          <EntitySet Name="production" EntityType="nonbaohiemviettinModel.production" />
+          <EntitySet Name="products" EntityType="nonbaohiemviettinModel.products" />
+          <EntitySet Name="rate" EntityType="nonbaohiemviettinModel.rate" />
+          <EntitySet Name="role" EntityType="nonbaohiemviettinModel.role" />
+          <AssociationSet Name="fk_accounts_role" Association="nonbaohiemviettinModel.fk_accounts_role">
+            <End Role="role" EntitySet="role" />
+            <End Role="accounts" EntitySet="accounts" />
+          </AssociationSet>
+          <AssociationSet Name="fk_order_account" Association="nonbaohiemviettinModel.fk_order_account">
+            <End Role="accounts" EntitySet="accounts" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rate_accounts" Association="nonbaohiemviettinModel.fk_rate_accounts">
+            <End Role="accounts" EntitySet="accounts" />
+            <End Role="rate" EntitySet="rate" />
+          </AssociationSet>
+          <AssociationSet Name="fk_products_category" Association="nonbaohiemviettinModel.fk_products_category">
+            <End Role="category" EntitySet="category" />
+            <End Role="products" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="fk_products_groupproduct" Association="nonbaohiemviettinModel.fk_products_groupproduct">
+            <End Role="groupproduct" EntitySet="groupproduct" />
+            <End Role="products" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="fk_listimage_products" Association="nonbaohiemviettinModel.fk_listimage_products">
+            <End Role="products" EntitySet="products" />
+            <End Role="listimage" EntitySet="listimage" />
+          </AssociationSet>
+          <AssociationSet Name="fk_news_newstype" Association="nonbaohiemviettinModel.fk_news_newstype">
+            <End Role="newstype" EntitySet="newstype" />
+            <End Role="news" EntitySet="news" />
+          </AssociationSet>
+          <AssociationSet Name="fk_products_production" Association="nonbaohiemviettinModel.fk_products_production">
+            <End Role="production" EntitySet="production" />
+            <End Role="products" EntitySet="products" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rate_products" Association="nonbaohiemviettinModel.fk_rate_products">
+            <End Role="products" EntitySet="products" />
+            <End Role="rate" EntitySet="rate" />
+          </AssociationSet>
+          <AssociationSet Name="fk_orderdetail_order" Association="nonbaohiemviettinModel.fk_orderdetail_order">
+            <End Role="order" EntitySet="order" />
+            <End Role="orderdetail" EntitySet="orderdetail" />
+          </AssociationSet>
+          <AssociationSet Name="fk_orderdetail_products" Association="nonbaohiemviettinModel.fk_orderdetail_products">
+            <End Role="products" EntitySet="products" />
+            <End Role="orderdetail" EntitySet="orderdetail" />
+          </AssociationSet>
+          <EntitySet Name="contact" EntityType="nonbaohiemviettinModel.contact" />
+          <EntitySet Name="sendcontactinfo" EntityType="nonbaohiemviettinModel.sendcontactinfo" />
+          <EntitySet Name="subscribe" EntityType="nonbaohiemviettinModel.subscribe" />
+        </EntityContainer>
         <EntityType Name="accounts">
           <Key>
             <PropertyRef Name="id" />
@@ -311,7 +440,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="idrole" Type="Int32" />
           <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="fullname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -319,8 +448,8 @@
           <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="status" Type="Boolean" />
           <Property Name="issocial" Type="Int32" />
-          <NavigationProperty Name="role" Relationship="Self.fk_accounts_role" FromRole="accounts" ToRole="role" />
-          <NavigationProperty Name="order" Relationship="Self.fk_order_account" FromRole="accounts" ToRole="order" />
+          <NavigationProperty Name="role" Relationship="nonbaohiemviettinModel.fk_accounts_role" FromRole="accounts" ToRole="role" />
+          <NavigationProperty Name="order" Relationship="nonbaohiemviettinModel.fk_order_account" FromRole="accounts" ToRole="order" />
           <NavigationProperty Name="rate" Relationship="nonbaohiemviettinModel.fk_rate_accounts" FromRole="accounts" ToRole="rate" />
         </EntityType>
         <EntityType Name="category">
@@ -331,7 +460,7 @@
           <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="status" Type="Boolean" />
-          <NavigationProperty Name="products" Relationship="Self.fk_products_category" FromRole="category" ToRole="products" />
+          <NavigationProperty Name="products" Relationship="nonbaohiemviettinModel.fk_products_category" FromRole="category" ToRole="products" />
         </EntityType>
         <EntityType Name="groupproduct">
           <Key>
@@ -341,227 +470,8 @@
           <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="status" Type="Boolean" />
-          <NavigationProperty Name="products" Relationship="Self.fk_products_groupproduct" FromRole="groupproduct" ToRole="products" />
+          <NavigationProperty Name="products" Relationship="nonbaohiemviettinModel.fk_products_groupproduct" FromRole="groupproduct" ToRole="products" />
         </EntityType>
-        <EntityType Name="order">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idaccount" Type="Int32" />
-          <Property Name="createdate" Type="DateTime" Precision="0" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="fullname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="phone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
-          <Property Name="status" Type="Boolean" />
-          <Property Name="statuspay" Type="Boolean" />
-          <Property Name="total" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="accounts" Relationship="Self.fk_order_account" FromRole="order" ToRole="accounts" />
-        </EntityType>
-        <EntityType Name="orderdetail">
-          <Key>
-            <PropertyRef Name="idproduct" />
-            <PropertyRef Name="idorder" />
-          </Key>
-          <Property Name="idproduct" Type="Int32" Nullable="false" />
-          <Property Name="idorder" Type="Int32" Nullable="false" />
-          <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="quantity" Type="Int32" />
-          <Property Name="subtotal" Type="Decimal" Precision="18" Scale="0" />
-        </EntityType>
-        <EntityType Name="production">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="status" Type="Boolean" />
-          <NavigationProperty Name="products" Relationship="Self.fk_products_production" FromRole="production" ToRole="products" />
-        </EntityType>
-        <EntityType Name="products">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="status" Type="Boolean" />
-          <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="promationprice" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="quantity" Type="Int32" />
-          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="viewcount" Type="Int32" />
-          <Property Name="createddate" Type="DateTime" Precision="3" />
-          <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="fastsell" Type="Boolean" />
-          <Property Name="newproduct" Type="Boolean" />
-          <Property Name="idcategory" Type="Int32" />
-          <Property Name="idproduction" Type="Int32" />
-          <Property Name="idgroupproduct" Type="Int32" />
-          <NavigationProperty Name="category" Relationship="Self.fk_products_category" FromRole="products" ToRole="category" />
-          <NavigationProperty Name="groupproduct" Relationship="Self.fk_products_groupproduct" FromRole="products" ToRole="groupproduct" />
-          <NavigationProperty Name="production" Relationship="Self.fk_products_production" FromRole="products" ToRole="production" />
-          <NavigationProperty Name="rate" Relationship="nonbaohiemviettinModel.fk_rate_products" FromRole="products" ToRole="rate" />
-          <NavigationProperty Name="listimage" Relationship="nonbaohiemviettinModel.fk_listimage_products" FromRole="products" ToRole="listimage" />
-        </EntityType>
-        <EntityType Name="role">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="accounts" Relationship="Self.fk_accounts_role" FromRole="role" ToRole="accounts" />
-        </EntityType>
-        <Association Name="fk_accounts_role">
-          <End Role="role" Type="Self.role" Multiplicity="0..1" />
-          <End Role="accounts" Type="Self.accounts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="role">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="accounts">
-              <PropertyRef Name="idrole" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_order_account">
-          <End Role="accounts" Type="Self.accounts" Multiplicity="0..1" />
-          <End Role="order" Type="Self.order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="accounts">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="order">
-              <PropertyRef Name="idaccount" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_products_category">
-          <End Role="category" Type="Self.category" Multiplicity="0..1" />
-          <End Role="products" Type="Self.products" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="category">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="products">
-              <PropertyRef Name="idcategory" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_products_groupproduct">
-          <End Role="groupproduct" Type="Self.groupproduct" Multiplicity="0..1" />
-          <End Role="products" Type="Self.products" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="groupproduct">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="products">
-              <PropertyRef Name="idgroupproduct" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_products_production">
-          <End Role="production" Type="Self.production" Multiplicity="0..1" />
-          <End Role="products" Type="Self.products" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="production">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="products">
-              <PropertyRef Name="idproduction" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="nonbaohiemviettinEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="accounts" EntityType="Self.accounts" />
-          <EntitySet Name="category" EntityType="Self.category" />
-          <EntitySet Name="groupproduct" EntityType="Self.groupproduct" />
-          <EntitySet Name="order" EntityType="Self.order" />
-          <EntitySet Name="orderdetail" EntityType="Self.orderdetail" />
-          <EntitySet Name="production" EntityType="Self.production" />
-          <EntitySet Name="products" EntityType="Self.products" />
-          <EntitySet Name="role" EntityType="Self.role" />
-          <AssociationSet Name="fk_accounts_role" Association="Self.fk_accounts_role">
-            <End Role="role" EntitySet="role" />
-            <End Role="accounts" EntitySet="accounts" />
-          </AssociationSet>
-          <AssociationSet Name="fk_order_account" Association="Self.fk_order_account">
-            <End Role="accounts" EntitySet="accounts" />
-            <End Role="order" EntitySet="order" />
-          </AssociationSet>
-          <AssociationSet Name="fk_products_category" Association="Self.fk_products_category">
-            <End Role="category" EntitySet="category" />
-            <End Role="products" EntitySet="products" />
-          </AssociationSet>
-          <AssociationSet Name="fk_products_groupproduct" Association="Self.fk_products_groupproduct">
-            <End Role="groupproduct" EntitySet="groupproduct" />
-            <End Role="products" EntitySet="products" />
-          </AssociationSet>
-          <AssociationSet Name="fk_products_production" Association="Self.fk_products_production">
-            <End Role="production" EntitySet="production" />
-            <End Role="products" EntitySet="products" />
-          </AssociationSet>
-          <EntitySet Name="rate" EntityType="nonbaohiemviettinModel.rate" />
-          <AssociationSet Name="fk_rate_accounts" Association="nonbaohiemviettinModel.fk_rate_accounts">
-            <End Role="accounts" EntitySet="accounts" />
-            <End Role="rate" EntitySet="rate" />
-          </AssociationSet>
-          <AssociationSet Name="fk_rate_products" Association="nonbaohiemviettinModel.fk_rate_products">
-            <End Role="products" EntitySet="products" />
-            <End Role="rate" EntitySet="rate" />
-          </AssociationSet>
-          <EntitySet Name="listimage" EntityType="nonbaohiemviettinModel.listimage" />
-          <EntitySet Name="news" EntityType="nonbaohiemviettinModel.news" />
-          <EntitySet Name="newstype" EntityType="nonbaohiemviettinModel.newstype" />
-          <AssociationSet Name="fk_listimage_products" Association="nonbaohiemviettinModel.fk_listimage_products">
-            <End Role="products" EntitySet="products" />
-            <End Role="listimage" EntitySet="listimage" />
-          </AssociationSet>
-          <AssociationSet Name="fk_news_newstype" Association="nonbaohiemviettinModel.fk_news_newstype">
-            <End Role="newstype" EntitySet="newstype" />
-            <End Role="news" EntitySet="news" />
-          </AssociationSet>
-        </EntityContainer>
-        <EntityType Name="rate">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_account" Type="Int32" />
-          <Property Name="id_product" Type="Int32" />
-          <Property Name="star" Type="Int32" />
-          <Property Name="comment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="accounts" Relationship="nonbaohiemviettinModel.fk_rate_accounts" FromRole="rate" ToRole="accounts" />
-          <NavigationProperty Name="products" Relationship="nonbaohiemviettinModel.fk_rate_products" FromRole="rate" ToRole="products" />
-          <Property Name="createdate" Type="DateTime" Precision="0" />
-        </EntityType>
-        <Association Name="fk_rate_accounts">
-          <End Type="nonbaohiemviettinModel.accounts" Role="accounts" Multiplicity="0..1" />
-          <End Type="nonbaohiemviettinModel.rate" Role="rate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="accounts">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="rate">
-              <PropertyRef Name="id_account" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_rate_products">
-          <End Type="nonbaohiemviettinModel.products" Role="products" Multiplicity="0..1" />
-          <End Type="nonbaohiemviettinModel.rate" Role="rate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="products">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="rate">
-              <PropertyRef Name="id_product" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityType Name="listimage">
           <Key>
             <PropertyRef Name="id" />
@@ -593,6 +503,155 @@
           <Property Name="alias" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="news" Relationship="nonbaohiemviettinModel.fk_news_newstype" FromRole="newstype" ToRole="news" />
         </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idaccount" Type="Int32" />
+          <Property Name="createdate" Type="DateTime" Precision="0" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="fullname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="phone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="statuspay" Type="Boolean" />
+          <Property Name="total" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="accounts" Relationship="nonbaohiemviettinModel.fk_order_account" FromRole="order" ToRole="accounts" />
+          <NavigationProperty Name="orderdetail" Relationship="nonbaohiemviettinModel.fk_orderdetail_order" FromRole="order" ToRole="orderdetail" />
+        </EntityType>
+        <EntityType Name="orderdetail">
+          <Key>
+            <PropertyRef Name="idproduct" />
+            <PropertyRef Name="idorder" />
+          </Key>
+          <Property Name="idproduct" Type="Int32" Nullable="false" />
+          <Property Name="idorder" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="subtotal" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="order" Relationship="nonbaohiemviettinModel.fk_orderdetail_order" FromRole="orderdetail" ToRole="order" />
+          <NavigationProperty Name="products" Relationship="nonbaohiemviettinModel.fk_orderdetail_products" FromRole="orderdetail" ToRole="products" />
+        </EntityType>
+        <EntityType Name="production">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Boolean" />
+          <NavigationProperty Name="products" Relationship="nonbaohiemviettinModel.fk_products_production" FromRole="production" ToRole="products" />
+        </EntityType>
+        <EntityType Name="products">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="promationprice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="viewcount" Type="Int32" />
+          <Property Name="createddate" Type="DateTime" Precision="3" />
+          <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="fastsell" Type="Boolean" />
+          <Property Name="newproduct" Type="Boolean" />
+          <Property Name="idcategory" Type="Int32" />
+          <Property Name="idproduction" Type="Int32" />
+          <Property Name="idgroupproduct" Type="Int32" />
+          <NavigationProperty Name="category" Relationship="nonbaohiemviettinModel.fk_products_category" FromRole="products" ToRole="category" />
+          <NavigationProperty Name="groupproduct" Relationship="nonbaohiemviettinModel.fk_products_groupproduct" FromRole="products" ToRole="groupproduct" />
+          <NavigationProperty Name="listimage" Relationship="nonbaohiemviettinModel.fk_listimage_products" FromRole="products" ToRole="listimage" />
+          <NavigationProperty Name="production" Relationship="nonbaohiemviettinModel.fk_products_production" FromRole="products" ToRole="production" />
+          <NavigationProperty Name="rate" Relationship="nonbaohiemviettinModel.fk_rate_products" FromRole="products" ToRole="rate" />
+          <NavigationProperty Name="orderdetail" Relationship="nonbaohiemviettinModel.fk_orderdetail_products" FromRole="products" ToRole="orderdetail" />
+        </EntityType>
+        <EntityType Name="rate">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id_account" Type="Int32" />
+          <Property Name="id_product" Type="Int32" />
+          <Property Name="star" Type="Int32" />
+          <Property Name="comment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="createdate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="accounts" Relationship="nonbaohiemviettinModel.fk_rate_accounts" FromRole="rate" ToRole="accounts" />
+          <NavigationProperty Name="products" Relationship="nonbaohiemviettinModel.fk_rate_products" FromRole="rate" ToRole="products" />
+        </EntityType>
+        <EntityType Name="role">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="accounts" Relationship="nonbaohiemviettinModel.fk_accounts_role" FromRole="role" ToRole="accounts" />
+        </EntityType>
+        <Association Name="fk_accounts_role">
+          <End Type="nonbaohiemviettinModel.role" Role="role" Multiplicity="0..1" />
+          <End Type="nonbaohiemviettinModel.accounts" Role="accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="accounts">
+              <PropertyRef Name="idrole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_order_account">
+          <End Type="nonbaohiemviettinModel.accounts" Role="accounts" Multiplicity="0..1" />
+          <End Type="nonbaohiemviettinModel.order" Role="order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="idaccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rate_accounts">
+          <End Type="nonbaohiemviettinModel.accounts" Role="accounts" Multiplicity="0..1" />
+          <End Type="nonbaohiemviettinModel.rate" Role="rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate">
+              <PropertyRef Name="id_account" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_products_category">
+          <End Type="nonbaohiemviettinModel.category" Role="category" Multiplicity="0..1" />
+          <End Type="nonbaohiemviettinModel.products" Role="products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="category">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="idcategory" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_products_groupproduct">
+          <End Type="nonbaohiemviettinModel.groupproduct" Role="groupproduct" Multiplicity="0..1" />
+          <End Type="nonbaohiemviettinModel.products" Role="products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="groupproduct">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="idgroupproduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_listimage_products">
           <End Type="nonbaohiemviettinModel.products" Role="products" Multiplicity="0..1" />
           <End Type="nonbaohiemviettinModel.listimage" Role="listimage" Multiplicity="*" />
@@ -617,7 +676,88 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="fk_products_production">
+          <End Type="nonbaohiemviettinModel.production" Role="production" Multiplicity="0..1" />
+          <End Type="nonbaohiemviettinModel.products" Role="products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="production">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="products">
+              <PropertyRef Name="idproduction" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rate_products">
+          <End Type="nonbaohiemviettinModel.products" Role="products" Multiplicity="0..1" />
+          <End Type="nonbaohiemviettinModel.rate" Role="rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate">
+              <PropertyRef Name="id_product" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_orderdetail_order">
+          <End Type="nonbaohiemviettinModel.order" Role="order" Multiplicity="1" />
+          <End Type="nonbaohiemviettinModel.orderdetail" Role="orderdetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="order">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orderdetail">
+              <PropertyRef Name="idorder" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_orderdetail_products">
+          <End Type="nonbaohiemviettinModel.products" Role="products" Multiplicity="1" />
+          <End Type="nonbaohiemviettinModel.orderdetail" Role="orderdetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="products">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="orderdetail">
+              <PropertyRef Name="idproduct" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="contact">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="title" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="content" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="worktime" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="map" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="display" Type="Boolean" />
+          <Property Name="workday" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="sendcontactinfo">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="subject" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="subscribe">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -626,116 +766,36 @@
           <EntitySetMapping Name="accounts">
             <EntityTypeMapping TypeName="nonbaohiemviettinModel.accounts">
               <MappingFragment StoreEntitySet="accounts">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="idrole" ColumnName="idrole" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="image" ColumnName="image" />
-                <ScalarProperty Name="fullname" ColumnName="fullname" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="issocial" ColumnName="issocial" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="idrole" ColumnName="idrole" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="category">
             <EntityTypeMapping TypeName="nonbaohiemviettinModel.category">
               <MappingFragment StoreEntitySet="category">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="alias" ColumnName="alias" />
                 <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="alias" ColumnName="alias" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="groupproduct">
             <EntityTypeMapping TypeName="nonbaohiemviettinModel.groupproduct">
               <MappingFragment StoreEntitySet="groupproduct">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="status" ColumnName="status" />
                 <ScalarProperty Name="alias" ColumnName="alias" />
-                <ScalarProperty Name="status" ColumnName="status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="order">
-            <EntityTypeMapping TypeName="nonbaohiemviettinModel.order">
-              <MappingFragment StoreEntitySet="order">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="idaccount" ColumnName="idaccount" />
-                <ScalarProperty Name="createdate" ColumnName="createdate" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="fullname" ColumnName="fullname" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="statuspay" ColumnName="statuspay" />
-                <ScalarProperty Name="total" ColumnName="total" />
-                <ScalarProperty Name="note" ColumnName="note" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="orderdetail">
-            <EntityTypeMapping TypeName="nonbaohiemviettinModel.orderdetail">
-              <MappingFragment StoreEntitySet="orderdetail">
-                <ScalarProperty Name="idproduct" ColumnName="idproduct" />
-                <ScalarProperty Name="idorder" ColumnName="idorder" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="subtotal" ColumnName="subtotal" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="production">
-            <EntityTypeMapping TypeName="nonbaohiemviettinModel.production">
-              <MappingFragment StoreEntitySet="production">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="alias" ColumnName="alias" />
-                <ScalarProperty Name="status" ColumnName="status" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="products">
-            <EntityTypeMapping TypeName="nonbaohiemviettinModel.products">
-              <MappingFragment StoreEntitySet="products">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="alias" ColumnName="alias" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="price" ColumnName="price" />
-                <ScalarProperty Name="promationprice" ColumnName="promationprice" />
-                <ScalarProperty Name="quantity" ColumnName="quantity" />
-                <ScalarProperty Name="description" ColumnName="description" />
-                <ScalarProperty Name="viewcount" ColumnName="viewcount" />
-                <ScalarProperty Name="createddate" ColumnName="createddate" />
-                <ScalarProperty Name="image" ColumnName="image" />
-                <ScalarProperty Name="fastsell" ColumnName="fastsell" />
-                <ScalarProperty Name="newproduct" ColumnName="newproduct" />
-                <ScalarProperty Name="idcategory" ColumnName="idcategory" />
-                <ScalarProperty Name="idproduction" ColumnName="idproduction" />
-                <ScalarProperty Name="idgroupproduct" ColumnName="idgroupproduct" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="role">
-            <EntityTypeMapping TypeName="nonbaohiemviettinModel.role">
-              <MappingFragment StoreEntitySet="role">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="rate">
-            <EntityTypeMapping TypeName="nonbaohiemviettinModel.rate">
-              <MappingFragment StoreEntitySet="rate">
-                <ScalarProperty Name="createdate" ColumnName="createdate" />
-                <ScalarProperty Name="comment" ColumnName="comment" />
-                <ScalarProperty Name="star" ColumnName="star" />
-                <ScalarProperty Name="id_product" ColumnName="id_product" />
-                <ScalarProperty Name="id_account" ColumnName="id_account" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -767,6 +827,122 @@
               <MappingFragment StoreEntitySet="newstype">
                 <ScalarProperty Name="alias" ColumnName="alias" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="order">
+            <EntityTypeMapping TypeName="nonbaohiemviettinModel.order">
+              <MappingFragment StoreEntitySet="order">
+                <ScalarProperty Name="note" ColumnName="note" />
+                <ScalarProperty Name="total" ColumnName="total" />
+                <ScalarProperty Name="statuspay" ColumnName="statuspay" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="createdate" ColumnName="createdate" />
+                <ScalarProperty Name="idaccount" ColumnName="idaccount" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orderdetail">
+            <EntityTypeMapping TypeName="nonbaohiemviettinModel.orderdetail">
+              <MappingFragment StoreEntitySet="orderdetail">
+                <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="idorder" ColumnName="idorder" />
+                <ScalarProperty Name="idproduct" ColumnName="idproduct" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="production">
+            <EntityTypeMapping TypeName="nonbaohiemviettinModel.production">
+              <MappingFragment StoreEntitySet="production">
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="alias" ColumnName="alias" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="nonbaohiemviettinModel.products">
+              <MappingFragment StoreEntitySet="products">
+                <ScalarProperty Name="idgroupproduct" ColumnName="idgroupproduct" />
+                <ScalarProperty Name="idproduction" ColumnName="idproduction" />
+                <ScalarProperty Name="idcategory" ColumnName="idcategory" />
+                <ScalarProperty Name="newproduct" ColumnName="newproduct" />
+                <ScalarProperty Name="fastsell" ColumnName="fastsell" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="createddate" ColumnName="createddate" />
+                <ScalarProperty Name="viewcount" ColumnName="viewcount" />
+                <ScalarProperty Name="description" ColumnName="description" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="promationprice" ColumnName="promationprice" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="alias" ColumnName="alias" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="rate">
+            <EntityTypeMapping TypeName="nonbaohiemviettinModel.rate">
+              <MappingFragment StoreEntitySet="rate">
+                <ScalarProperty Name="createdate" ColumnName="createdate" />
+                <ScalarProperty Name="comment" ColumnName="comment" />
+                <ScalarProperty Name="star" ColumnName="star" />
+                <ScalarProperty Name="id_product" ColumnName="id_product" />
+                <ScalarProperty Name="id_account" ColumnName="id_account" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="role">
+            <EntityTypeMapping TypeName="nonbaohiemviettinModel.role">
+              <MappingFragment StoreEntitySet="role">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="contact">
+            <EntityTypeMapping TypeName="nonbaohiemviettinModel.contact">
+              <MappingFragment StoreEntitySet="contact">
+                <ScalarProperty Name="workday" ColumnName="workday" />
+                <ScalarProperty Name="display" ColumnName="display" />
+                <ScalarProperty Name="map" ColumnName="map" />
+                <ScalarProperty Name="worktime" ColumnName="worktime" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="content" ColumnName="content" />
+                <ScalarProperty Name="title" ColumnName="title" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sendcontactinfo">
+            <EntityTypeMapping TypeName="nonbaohiemviettinModel.sendcontactinfo">
+              <MappingFragment StoreEntitySet="sendcontactinfo">
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="subject" ColumnName="subject" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="subscribe">
+            <EntityTypeMapping TypeName="nonbaohiemviettinModel.subscribe">
+              <MappingFragment StoreEntitySet="subscribe">
+                <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

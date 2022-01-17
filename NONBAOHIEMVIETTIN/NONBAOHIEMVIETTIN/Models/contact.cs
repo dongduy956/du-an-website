@@ -12,15 +12,17 @@ namespace NONBAOHIEMVIETTIN.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class orderdetail
+    public partial class contact
     {
-        public int idproduct { get; set; }
-        public int idorder { get; set; }
-        public Nullable<decimal> price { get; set; }
-        public Nullable<int> quantity { get; set; }
-        public Nullable<decimal> subtotal { get; set; }
-    
-        public virtual order order { get; set; }
-        public virtual products products { get; set; }
+        public int id { get; set; }
+        public string title { get; set; }
+        public string content { get; set; }
+        public string address { get; set; }
+        public string email { get; set; }
+        public string phone { get; set; }
+        public string worktime { get; set; }
+        public string map { get; set; }
+        public Nullable<bool> display { get; set; }
+        public string workday { get; set; }
     }
 }

@@ -17,8 +17,9 @@ namespace NONBAOHIEMVIETTIN.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public products()
         {
-            this.rate = new HashSet<rate>();
             this.listimage = new HashSet<listimage>();
+            this.rate = new HashSet<rate>();
+            this.orderdetail = new HashSet<orderdetail>();
         }
     
         public int id { get; set; }
@@ -40,10 +41,12 @@ namespace NONBAOHIEMVIETTIN.Models
     
         public virtual category category { get; set; }
         public virtual groupproduct groupproduct { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<listimage> listimage { get; set; }
         public virtual production production { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<rate> rate { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<listimage> listimage { get; set; }
+        public virtual ICollection<orderdetail> orderdetail { get; set; }
     }
 }

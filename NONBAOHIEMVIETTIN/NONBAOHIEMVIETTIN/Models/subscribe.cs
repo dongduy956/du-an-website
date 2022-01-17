@@ -12,15 +12,9 @@ namespace NONBAOHIEMVIETTIN.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class orderdetail
+    public partial class subscribe
     {
-        public int idproduct { get; set; }
-        public int idorder { get; set; }
-        public Nullable<decimal> price { get; set; }
-        public Nullable<int> quantity { get; set; }
-        public Nullable<decimal> subtotal { get; set; }
-    
-        public virtual order order { get; set; }
-        public virtual products products { get; set; }
+        public int id { get; set; }
+        public string email { get; set; }
     }
 }

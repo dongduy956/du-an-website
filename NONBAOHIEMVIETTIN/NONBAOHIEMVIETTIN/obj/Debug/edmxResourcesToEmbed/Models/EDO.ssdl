@@ -25,6 +25,21 @@
     <Property Name="alias" Type="varchar" MaxLength="100" />
     <Property Name="status" Type="bit" />
   </EntityType>
+  <EntityType Name="contact">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="title" Type="nvarchar" MaxLength="100" />
+    <Property Name="content" Type="nvarchar" MaxLength="500" />
+    <Property Name="address" Type="nvarchar" MaxLength="100" />
+    <Property Name="email" Type="varchar" MaxLength="100" />
+    <Property Name="phone" Type="varchar" MaxLength="11" />
+    <Property Name="worktime" Type="varchar" MaxLength="100" />
+    <Property Name="map" Type="varchar" MaxLength="500" />
+    <Property Name="display" Type="bit" />
+    <Property Name="workday" Type="nvarchar" MaxLength="100" />
+  </EntityType>
   <EntityType Name="groupproduct">
     <Key>
       <PropertyRef Name="id" />
@@ -137,6 +152,24 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="varchar" MaxLength="20" />
   </EntityType>
+  <EntityType Name="sendcontactinfo">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="100" />
+    <Property Name="email" Type="varchar" MaxLength="100" />
+    <Property Name="phone" Type="varchar" MaxLength="11" />
+    <Property Name="subject" Type="nvarchar" MaxLength="100" />
+    <Property Name="message" Type="nvarchar" MaxLength="500" />
+  </EntityType>
+  <EntityType Name="subscribe">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+  </EntityType>
   <Association Name="fk_accounts_role">
     <End Role="role" Type="Self.role" Multiplicity="0..1" />
     <End Role="accounts" Type="Self.accounts" Multiplicity="*" />
@@ -182,6 +215,30 @@
       </Principal>
       <Dependent Role="order">
         <PropertyRef Name="idaccount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_orderdetail_order">
+    <End Role="order" Type="Self.order" Multiplicity="1" />
+    <End Role="orderdetail" Type="Self.orderdetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="order">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="orderdetail">
+        <PropertyRef Name="idorder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_orderdetail_products">
+    <End Role="products" Type="Self.products" Multiplicity="1" />
+    <End Role="orderdetail" Type="Self.orderdetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="orderdetail">
+        <PropertyRef Name="idproduct" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -248,6 +305,7 @@
   <EntityContainer Name="nonbaohiemviettinModelStoreContainer">
     <EntitySet Name="accounts" EntityType="Self.accounts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="contact" EntityType="Self.contact" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="groupproduct" EntityType="Self.groupproduct" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="listimage" EntityType="Self.listimage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="news" EntityType="Self.news" Schema="dbo" store:Type="Tables" />
@@ -258,6 +316,8 @@
     <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="rate" EntityType="Self.rate" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sendcontactinfo" EntityType="Self.sendcontactinfo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="subscribe" EntityType="Self.subscribe" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="fk_accounts_role" Association="Self.fk_accounts_role">
       <End Role="role" EntitySet="role" />
       <End Role="accounts" EntitySet="accounts" />
@@ -273,6 +333,14 @@
     <AssociationSet Name="fk_order_account" Association="Self.fk_order_account">
       <End Role="accounts" EntitySet="accounts" />
       <End Role="order" EntitySet="order" />
+    </AssociationSet>
+    <AssociationSet Name="fk_orderdetail_order" Association="Self.fk_orderdetail_order">
+      <End Role="order" EntitySet="order" />
+      <End Role="orderdetail" EntitySet="orderdetail" />
+    </AssociationSet>
+    <AssociationSet Name="fk_orderdetail_products" Association="Self.fk_orderdetail_products">
+      <End Role="products" EntitySet="products" />
+      <End Role="orderdetail" EntitySet="orderdetail" />
     </AssociationSet>
     <AssociationSet Name="fk_products_category" Association="Self.fk_products_category">
       <End Role="category" EntitySet="category" />
