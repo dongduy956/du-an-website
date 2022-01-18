@@ -2879,9 +2879,6 @@
 	font-size: 14px;
     text-align: center;
 }
-.coron_table table tbody tr td:last-child a {
-	color: #ea3a3c;
-}
 .dashboard_content h4 {
 	font-size: 20px;
 	text-transform: capitalize;

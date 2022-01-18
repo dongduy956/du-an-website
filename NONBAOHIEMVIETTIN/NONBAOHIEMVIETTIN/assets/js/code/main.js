@@ -150,7 +150,7 @@ $(function () {
                                             $.ajax({
                                                 url: "/Accounts/Register",
                                                 data: JSON.stringify({ acc }),
-                                                contentType: "application/json; charset=utf-8",
+                                                        contentType: "application/json; charset=utf-8",
                                                 dataType: "json",
                                                 type: "POST",
                                                 success: function (data) {
@@ -229,31 +229,31 @@ $(function () {
 
                 url: url,
                 data: JSON.stringify({ code }),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                type: "POST",
-                success: function (data) {
-                    console.log(data)
-                    if (data == "0") {
-                        showToast('Mã xác nhận không chính xác.');
-                    }
-                    else {
-                        if (operation == "register") {
-                            showToast('Đăng ký thành công.');
-                            $('#btncloseregister').click();
-                        }
-                        else {
-                            showToast('Mời bạn check email lấy mã xác nhận.');
-                            $('#btncloseforgetpass').click();
-                            $("#myModal6").modal({ backdrop: "static" });
-                        }
-                    }
-                    if (operation == 'register')
-                        enable('#btnsubmitregister');
-                    else {
-                        enable('#btnsubmitforgetpass');
-                    }
-                },
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        type: "POST",
+                        success: function (data) {
+                            console.log(data)
+                            if (data == "0") {
+                                showToast('Mã xác nhận không chính xác.');
+                            }
+                            else {
+                                if (operation == "register") {
+                                    showToast('Đăng ký thành công.');
+                                    $('#btncloseregister').click();
+                                }
+                                else {
+                                    showToast('Mời bạn check email lấy mã xác nhận.');
+                                    $('#btncloseforgetpass').click();
+                                    $("#myModal6").modal({ backdrop: "static" });
+                                }
+                            }
+                            if (operation == 'register')
+                                enable('#btnsubmitregister');
+                            else {
+                                enable('#btnsubmitforgetpass');
+                            }
+                        },
                 error: function (data) {
 
                     alert(JSON.stringify(data));
@@ -314,23 +314,23 @@ $(function () {
                 $.ajax({
                     url: "/Accounts/ForgetPass",
                     data: JSON.stringify({ email }),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    type: "POST",
-                    success: function (data) {
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            type: "POST",
+                            success: function (data) {
                         console.log(data)
-                        if (data == "-1")
-                            showToast('Lỗi hệ thống không thể gửi mail.');
-                        else if (data == "1") {
-                            showToast('Mời bạn check email để lấy mã xác nhận mới.Xin cảm ơn.');
-                            $('#btncloseforget').click();
-                            $("#myModal5").modal({ backdrop: "static" });
-                        }
-                        else
-                            showToast('Không tồn tại email này.Bạn hãy kiểm tra lại email.');
-                        enable('#btnsubmitforget');
+                                if (data == "-1")
+                                    showToast('Lỗi hệ thống không thể gửi mail.');
+                                else if (data == "1") {
+                                    showToast('Mời bạn check email để lấy mã xác nhận mới.Xin cảm ơn.');
+                                    $('#btncloseforget').click();
+                                    $("#myModal5").modal({ backdrop: "static" });
+                                }
+                                else
+                                    showToast('Không tồn tại email này.Bạn hãy kiểm tra lại email.');
+                                enable('#btnsubmitforget');
 
-                    },
+                            },
                     error: function (data) {
 
                         alert(JSON.stringify(data));
@@ -382,19 +382,19 @@ $(function () {
                 $.ajax({
                     url: "/Accounts/ChangePasswordEmail",
                     data: JSON.stringify({ passNew }),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    type: "POST",
-                    success: function (data) {
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            type: "POST",
+                            success: function (data) {
                         if (data == "-1")
                             showToast('Lỗi hệ thống vui lòng thử lại sau!!');
                         else {
                             showToast('Đổi mật khẩu thành công.');
                             $('#btnclosechangepass').click();
                         }
-                        enable('#btnsubmitchangepass');
+                                enable('#btnsubmitchangepass');
 
-                    },
+                            },
                     error: function (data) {
 
                         alert(JSON.stringify(data));
@@ -426,28 +426,28 @@ $(function () {
                     $.ajax({
                         url: "/Accounts/ChangePassword",
                         data: JSON.stringify({ passold, passnew, prepass }),
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        type: "POST",
-                        success: function (data) {
+                                contentType: "application/json; charset=utf-8",
+                                dataType: "json",
+                                type: "POST",
+                                success: function (data) {
                             if (data == "-1")
                                 showToast('Mật khẩu cũ không chính xác!!!');
-                            else if (data == "1") {
-                                showToast('Đổi mật khẩu thành công!Vui lòng đăng nhập lại!!');
-                                $('#btnclosechangepassword').click();
+                        else if (data == "1") {
+                            showToast('Đổi mật khẩu thành công!Vui lòng đăng nhập lại!!');
+                            $('#btnclosechangepassword').click();
 
-                                location.href = "/Accounts/Login";
-                                $('#btnlogout').click();
-                            }
+                            location.href = "/Accounts/Login";
+                            $('#btnlogout').click();
+                        }
+                        else
+                            if (data == "0")
+                                showToast('Nhập lại mật khẩu không giống nhau!!!');
                             else
-                                if (data == "0")
-                                    showToast('Nhập lại mật khẩu không giống nhau!!!');
-                                else
-                                    showToast('Có lỗi xảy ra!!!!');
+                                showToast('Có lỗi xảy ra!!!!');
 
-                            enable('#btnsubmitchangepassword');
+                                    enable('#btnsubmitchangepassword');
 
-                        },
+                                },
                         error: function (data) {
 
                             alert(JSON.stringify(data));
@@ -557,18 +557,18 @@ $(function () {
         $.ajax({
             url: "/Wish/AddItem",
             data: JSON.stringify({ ProductId, Quantity }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            type: "POST",
-            success: function (data) {
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    type: "POST",
+                    success: function (data) {
                 console.log(data)
                 if (data.status == "1") {
                     showToast('Đã thêm vào yêu thích');
-                    $('#wish-' + data.id + ' .quantity').text('SL:' + data.quantity);
+                    $('#wish-' +data.id + ' .quantity').text('SL:' +data.quantity);
                     $('#lst-wish .block_content p').text(`${data.sumQuantity} sản phẩm.`);
-                }
-                else if (data.status == "0") {
-                    var html = `<div class="cart_item" id="wish-${data.id}">
+            }
+            else if (data.status == "0") {
+                var html = `<div class="cart_item" id="wish-${data.id}">
                 <div class="cart_img">
                     <a href="/chi-tiet/${data.alias}.html"><img src="../../assets/img/Nón bảo hiểm/${data.image}" alt=""></a>
                 </div>
@@ -581,7 +581,7 @@ $(function () {
                     <a title="Xoá sản phẩm" data-id="${data.id}" href="" class ="deletewish"><i class ="fa fa-times-circle"></i></a>
                 </div>
             </div>`;
-                    var deletewish = `<script> function deletewish(ProductId,check) {
+                var deletewish = `<script> function deletewish(ProductId,check) {
             $.ajax({
                 url: "/Wish/DeleteItem",
                 data: JSON.stringify({ ProductId}),
@@ -617,21 +617,21 @@ $(function () {
              var ProductId = $(this).data('id');
 
  alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', function () {
-            deletewish(ProductId, true) }, function () { alertify.error('Cancel') });         
+            deletewish(ProductId, true) }, function () { alertify.error('Cancel') });
                             })
                             </script>`
-                    showToast('Đã thêm vào yêu thích.');
-                    $('#lst-wish').prepend(html);
-                    $('#lst-wish').append(deletewish);
-                    $('#lst-wish .block_content p').text(`${data.sumQuantity} sản phẩm.`);
-                    $('.img-wish').hide();
-                }
-                else {
-                    alertify.alert('Thông báo', 'Mời bạn đăng nhập!', function () {
-                        location.href = "/dang-nhap.html";
-                    });
-                }
-            },
+                showToast('Đã thêm vào yêu thích.');
+                $('#lst-wish').prepend(html);
+                $('#lst-wish').append(deletewish);
+                $('#lst-wish .block_content p').text(`${data.sumQuantity} sản phẩm.`);
+                $('.img-wish').hide();
+            }
+            else {
+                alertify.alert('Thông báo', 'Mời bạn đăng nhập!', function () {
+                    location.href = "/dang-nhap.html";
+                });
+            }
+                    },
             error: function (data) {
 
                 alert(JSON.stringify(data));
@@ -650,12 +650,12 @@ $(function () {
         $.ajax({
             url: "/Wish/DeleteItem",
             data: JSON.stringify({ ProductId }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            type: "POST",
-            success: function (data) {
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    type: "POST",
+                    success: function (data) {
                 if (data.status == "1") {
-                    $('#wish-' + ProductId).hide(500);
+                    $('#wish-' +ProductId).hide(500);
                     $('#lst-wish .block_content p').text(`${data.sumQuantity} sản phẩm.`);
                     if (check)
                         showToast('Xoá sản phẩm thành công.');
@@ -668,7 +668,7 @@ $(function () {
                     if (check)
                         showToast('Lỗi hệ thống khi xoá sản phẩm. Vui lòng thao tác lại sau.');
 
-            },
+                    },
             error: function (data) {
 
                 alert(JSON.stringify(data));
@@ -706,14 +706,14 @@ $(function () {
         $.ajax({
             url: "/Cart/AddItem",
             data: JSON.stringify({ ProductId, Quantity }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            type: "POST",
-            success: function (data) {
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    type: "POST",
+                    success: function (data) {
                 console.log(data)
                 if (data.status == "1") {
                     showToast('Đã thêm vào giỏ hàng.');
-                    $('#cart-' + data.id + ' .quantity').text('Số lượng:' + data.quantity);
+                    $('#cart-' +data.id + ' .quantity').text('Số lượng:' +data.quantity);
                     $('#lst-cart .prices').text(data.sumMoney);
 
                     if (location.pathname == '/yeu-thich.html')
@@ -739,11 +739,11 @@ $(function () {
                     var script = `<script>
                                 $('.deletecart').off('click').click(function (e) {
         e.preventDefault();
-        e.stopPropagation();        
+        e.stopPropagation();
             var ProductId = $(this).data('id');
 
 alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', function () {
-            deletecart(ProductId, true) }, function () { alertify.error('Cancel') });   
+            deletecart(ProductId, true) }, function () { alertify.error('Cancel') });
                             })
     function deletecart(ProductId, check) {
         $.ajax({
@@ -797,7 +797,7 @@ alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', f
                         location.href = "/dang-nhap.html";
                     })
                 }
-            },
+                    },
             error: function (data) {
 
                 alert(JSON.stringify(data));
@@ -817,12 +817,12 @@ alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', f
         $.ajax({
             url: "/Cart/DeleteItem",
             data: JSON.stringify({ ProductId }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            type: "POST",
-            success: function (data) {
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    type: "POST",
+                    success: function (data) {
                 if (data.status == "1") {
-                    $('.cart-' + ProductId).hide(500);
+                    $('.cart-' +ProductId).hide(500);
                     $('.shopping_cart a span').text(`${data.sumQuantity} sản phẩm-${data.sumMoney}`);
                     $('#lst-cart .prices,.cart_amount.sum_money').text(data.sumMoney);
                     $('.cart_amount.sum_quantity').text(data.sumQuantity)
@@ -840,7 +840,7 @@ alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', f
                     if (check)
                         showToast('Lỗi hệ thống khi xoá sản phẩm. Vui lòng thao tác lại sau.');
 
-            },
+                    },
             error: function (data) {
 
                 alert(JSON.stringify(data));
@@ -868,18 +868,18 @@ alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', f
         $.ajax({
             url: "/Cart/UpdateItem",
             data: JSON.stringify({ ProductId, Quantity }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            type: "POST",
-            success: function (data) {
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    type: "POST",
+                    success: function (data) {
                 if (data.status == "1") {
                     if (Quantity <= 0)
-                        $('.cart-' + ProductId).hide(500);
+                        $('.cart-' +ProductId).hide(500);
 
                     $('.shopping_cart a span').text(`${data.sumQuantity} sản phẩm-${data.sumMoney}`);
-                    $('#total-' + ProductId).text(data.total);
+                    $('#total-' +ProductId).text(data.total);
                     $('#lst-cart .prices,.cart_amount.sum_money').text(data.sumMoney);
-                    $('.cart-' + ProductId + ' .cart_info .quantity').text('Số lượng:' + Quantity);
+                    $('.cart-' +ProductId + ' .cart_info .quantity').text('Số lượng:' +Quantity);
                     $('.cart_amount.sum_quantity').text(data.sumQuantity)
                     if (data.sumQuantity == 0) {
                         $('.img-cart').show();
@@ -890,7 +890,7 @@ alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', f
                 else
                     showToast('Lỗi hệ thống khi xoá sản phẩm. Vui lòng thao tác lại sau.');
 
-            },
+                    },
             error: function (data) {
 
                 alert(JSON.stringify(data));
@@ -963,10 +963,10 @@ alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', f
         $.ajax({
             url: "/Products/Ratting",
             data: JSON.stringify({ ratting }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            type: "POST",
-            success: function (data) {
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    type: "POST",
+                    success: function (data) {
                 showToast(data.message);
                 if (data.status == 1) {
                     $('#comment').val('');
@@ -974,9 +974,9 @@ alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', f
                     $('#countrate li').each(function (index, element) {
                         if (index < data.avgStar)
                             $(element).find('a').addClass('ratting')
-                        else
+            else
                             $(element).find('a').removeClass('ratting')
-                    })
+            })
                     $('#rate li').each(function (index, element) {
                         if (index != 0)
                             $(element).find('a').removeClass('ratting active');
@@ -1011,7 +1011,7 @@ alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', f
                                     </div>`;
                     $('#sheet').append(html);
                 }
-            },
+                    },
             error: function (data) {
 
                 alert(JSON.stringify(data));
@@ -1045,10 +1045,10 @@ alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', f
                             $.ajax({
                                 url: "/Contact/sendContactInfo",
                                 data: JSON.stringify({ send }),
-                                contentType: "application/json; charset=utf-8",
-                                dataType: "json",
-                                type: "POST",
-                                success: function (data) {
+                                        contentType: "application/json; charset=utf-8",
+                                        dataType: "json",
+                                        type: "POST",
+                                        success: function (data) {
                                     showToast(data.message);
                                     if (data.status == 1) {
                                         $('#name').val('');
@@ -1056,11 +1056,11 @@ alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', f
                                         $('#subject').val('');
                                         $('#phone').val('');
                                         $('#message').val('');
-                                    }
-                                },
-                                error: function (data) {
-                                    alert(JSON.stringify(data));
                                 }
+                                },
+                                    error: function (data) {
+                                    alert(JSON.stringify(data));
+                                    }
 
                             });
     })
@@ -1078,24 +1078,24 @@ alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', f
                 $.ajax({
                     url: "/subscribe/news",
                     data: JSON.stringify({ sub }),
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    type: "POST",
-                    success: function (data) {
+                            contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            type: "POST",
+                            success: function (data) {
                         showToast(data.message);
                         if (data.status == 1) {
                             $('#emailsub').val('');
-                        }
+                    }
                     },
-                    error: function (data) {
+                        error: function (data) {
                         alert(JSON.stringify(data));
                     }
 
-                });
-    })
+                    });
+                    })
     $('#btninfoacc').click(function () {
         location.href = '/thong-tin-tai-khoan.html';
-    })
+                    })
     function updateAccount() {
         var acc = new Object();
         acc.email = $('#emailupdate').val();
@@ -1128,28 +1128,40 @@ alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', f
                                 $.ajax({
                                     url: "/Accounts/Update",
                                     data: JSON.stringify({ acc }),
-                                    contentType: "application/json; charset=utf-8",
-                                    dataType: "json",
-                                    type: "POST",
-                                    success: function (data) {
+                                            contentType: "application/json; charset=utf-8",
+                                            dataType: "json",
+                                            type: "POST",
+                                            success: function (data) {
                                         showToast(data.message);
                                         if (data.status == 1) {
                                             $('#accountname').text(data.fullname);
-                                            $('#accounthome img').attr('src', '/assets/img/user/' + data.image);
-                                            $('#imgupdate').attr('src', '/assets/img/user/' + data.image);
+                                            $('#accounthome img').attr('src', '/assets/img/user/' +data.image);
+                                            $('#imgupdate').attr('src', '/assets/img/user/' +data.image);
 
 
-                                        }
+                                    }
                                         enable('#btnsaveaccinfo');
 
                                     },
-                                    error: function (data) {
+                                        error: function (data) {
 
                                         alert(JSON.stringify(data));
-                                    }
+                                        }
                                 })
                             }
 
     }
     $('#btnsaveaccinfo').click(updateAccount);
+    $('.view').off('click').click(function () {
+        
+        $(this).toggleClass('active');
+        var id = $(this).data('id');
+        console.log(id);
+        $('.view').each(function (index, element) {
+            if (id != $(element).data('id') && $(element).hasClass('active')) {
+                $('#detail_' + $(element).data('id')).removeClass('show');
+                $(element).removeClass('active');
+            }
+        })
+    })
 })
