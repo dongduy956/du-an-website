@@ -1101,7 +1101,13 @@ alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', f
         acc.email = $('#emailupdate').val();
         acc.phone = $('#phoneupdate').val();
         acc.address = $('#addressupdate').val();
-        var img = $('#imageupdate').val().split("\\").pop();
+        var img = '';
+        var check = true;
+        try {
+            img = $('#imageupdate').val().split("\\").pop();
+        } catch (e) {
+            check = false;
+        }
         acc.image = img == '' ? $('#imgupdate').data('val') : img;
         acc.fullname = $('#fullnameupdate').val();
         if (acc.fullname == "")
@@ -1124,6 +1130,7 @@ alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', f
                                 showToast('Địa chỉ không được rỗng.');
                             else {
                                 disable('#btnsaveaccinfo');
+                                if(check)
                                 upLoad('#imageupdate');
                                 $.ajax({
                                     url: "/Accounts/Update",

@@ -11,6 +11,7 @@ using System.IO;
 using System.Net.Mail;
 using System.Configuration;
 using Facebook;
+using PagedList;
 
 namespace NONBAOHIEMVIETTIN.Controllers
 {
@@ -18,7 +19,16 @@ namespace NONBAOHIEMVIETTIN.Controllers
     {
 
         private nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
-
+        int pageSize = 4;
+        void ViewBagNoti(List<order> temp, int page)
+        {
+            if (temp.Count() > 0)
+            {
+                int last = int.Parse(Math.Ceiling((double)temp.Count() / pageSize).ToString());
+                ViewBag.last = last;
+                ViewBag.noti = "Showing " + page + "-" + last + " of " + temp.Count() + " results";
+            }
+        }
         private Uri RedirectUri
         {
             get
@@ -361,15 +371,16 @@ namespace NONBAOHIEMVIETTIN.Controllers
             }
 
         }        
-        public ActionResult AccountInfo()
+        public ActionResult AccountInfo(int page=1)
         {
+                    
             var acc = Session["account"] as accounts;
             if (acc == null)
-                return Redirect("/");
-            var accinfo = new AccountInfo();
-            accinfo.acc = acc;
-            accinfo.lstOrder = db.order.Where(x => x.idaccount == acc.id).ToList();
-            return View(accinfo);
+                return Redirect("/");            
+            var temp =  db.order.Where(x => x.idaccount == acc.id).ToList();
+           var lstOrder = temp.ToPagedList(page, pageSize);            
+            ViewBagNoti(temp, page);
+            return View(lstOrder);
         }
         [HttpPost]
         public JsonResult update(accounts acc)

@@ -49,13 +49,13 @@
                         $('.shopping_cart_area').hide();
                         $('.shopping_cart a span').text('0 sản phẩm- 0đ');
                         $('#cart').hide();
-                        showToast('Thanh toán thành công.');
+                        showToast('Đặt hàng thành công.');
                     }
                     else
                     location.href = response.urlCheckout;
                 }
                 else
-                    showToast('Thanh toán thất bại.' + response.message);
+                    showToast('Hệ thống bảo trì.Vui lòng đặt hàng bằng phương thức tiền mặt');
             },
             error: function (data) {
                 alert(JSON.stringify(data));

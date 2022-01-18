@@ -233,7 +233,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountInfo.cs" />
     <Compile Include="Models\accounts.cs">
       <DependentUpon>EDO.tt</DependentUpon>
     </Compile>

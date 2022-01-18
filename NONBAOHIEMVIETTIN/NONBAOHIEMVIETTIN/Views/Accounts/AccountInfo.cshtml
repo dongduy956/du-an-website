@@ -1,7 +1,9 @@
 ﻿@using NONBAOHIEMVIETTIN.Models
-@model AccountInfo
+@model PagedList.IPagedList<order>
+@using PagedList.Mvc;
 @{
-    ViewBag.Title = "Thông tin tài khoản - " + Model.acc.username;
+    var acc = Session["account"] as accounts;
+    ViewBag.Title = "Thông tin tài khoản - " +acc.username;
     var db = new nonbaohiemviettinEntities();
 }
 @section styles{
@@ -9,12 +11,13 @@
         #orders th {
             text-align: center;
         }
-        .view.active{
-	color: #ea3a3c;
+
+        .view.active,.page_number .active {
+            color: #ea3a3c;
         }
-        button[disabled]
-        {
-            cursor:not-allowed;
+
+        button[disabled] {
+            cursor: not-allowed;
         }
     </style>
 }
@@ -33,10 +36,10 @@
     <div class="row">
         <div class="col-12">
             <div class="breadcrumb_content">
-                <ul>
+                <ul>                    
                     <li><a href="/">Trang chủ</a></li>
                     <li><i class="fa fa-angle-right"></i></li>
-                    <li>Tài khoản @Model.acc.username</li>
+                    <li>Tài khoản @acc.username</li>
                 </ul>
 
             </div>
@@ -52,53 +55,73 @@
                 <!-- Nav tabs -->
                 <div class="dashboard_tab_button">
                     <ul role="tablist" class="nav flex-column dashboard-list">
-                        <li><a href="#account-details" data-toggle="tab" class="nav-link active">Cập nhật tài khoản</a></li>
 
-                        <li> <a href="#orders" data-toggle="tab" class="nav-link ">Đơn đặt hàng</a></li>
+                        <li> <a href="#orders" data-toggle="tab" class="nav-link active">Đơn đặt hàng</a></li>
+                        <li><a href="#account-details" data-toggle="tab" class="nav-link">Cập nhật tài khoản</a></li>
+
                     </ul>
                 </div>
             </div>
             <div class="col-sm-12 col-md-9 col-lg-9">
                 <!-- Tab panes -->
                 <div class="tab-content dashboard_content">
-                    <div class="tab-pane fade show active" id="account-details">
+                    <div class="tab-pane fade" id="account-details">
                         <div class="login">
                             <div class="login_form_container">
                                 <div class="account_form register">
                                     <h3>Thông tin tài khoản</h3>
                                     <div class="form">
-                                        <p>
-                                            <label for="fullnameupdate">Họ tên</label>
-                                            <input value="@Model.acc.fullname" type="text" id="fullnameupdate" name="fullnameupdate">
-                                        </p>
-                                        <p>
-                                            <label for="emailupdate">Email</label>
-                                            <input type="text" value="@Model.acc.email" id="emailupdate" name="emailupdate">
+                                        @if (acc.issocial == 0)
+                                        {
+                                            <p>
+                                                <label for="fullnameupdate">Họ tên</label>
+                                                <input value="@acc.fullname" type="text" id="fullnameupdate" name="fullnameupdate">
+                                            </p>
+                                            <p>
+                                                <label for="emailupdate">Email</label>
+                                                <input type="text" value="@acc.email" id="emailupdate" name="emailupdate">
 
-                                        </p>
+                                            </p>
+                                        }
+                                        else
+                                        {
+                                            <p>
+                                                <input value="@acc.fullname" type="hidden" id="fullnameupdate" name="fullnameupdate">
+                                            </p>
+                                            <p>
+                                                <input type="hidden" value="@acc.email" id="emailupdate" name="emailupdate">
+
+                                            </p>
+                                        }
                                         <p>
                                             <label for="phoneupdate">Số điện thoại</label>
-                                            <input value="@Model.acc.phone" type="text" id="phoneupdate" name="phoneupdate">
+                                            <input value="@acc.phone" type="text" id="phoneupdate" name="phoneupdate">
 
                                         </p>
                                         <p>
                                             <label for="addressupdate">Địa chỉ</label>
-                                            <input value="@Model.acc.address" type="text" id="addressupdate" name="addressupdate">
+                                            <input value="@acc.address" type="text" id="addressupdate" name="addressupdate">
 
                                         </p>
-
-                                        <p>
-                                            <label for="imageupdate">Ảnh đại diện</label>
-                                            <br />
-                                            <img id="imgupdate" data-val="@Model.acc.image" alt="Lỗi ảnh đại diện" src="~/assets/img/user/@Model.acc.image" />
-                                            <br />
-                                            <span class="custom-file">
-                                                <input type="file" name="file" class="custom-file-input" id="imageupdate">
-                                                <label class="custom-file-label" for="customFile">Chọn file</label>
-                                            </span>
-                                        </p>
+                                        @if (acc.issocial == 0)
+                                        {
+                                            <p>
+                                                <label for="imageupdate">Ảnh đại diện</label>
+                                                <br />
+                                                <img id="imgupdate" data-val="@acc.image" alt="Lỗi ảnh đại diện" src="~/assets/img/user/@acc.image" />
+                                                <br />
+                                                <span class="custom-file">
+                                                    <input type="file" name="file" class="custom-file-input" id="imageupdate">
+                                                    <label class="custom-file-label" for="customFile">Chọn file</label>
+                                                </span>
+                                            </p>
+                                        }
+                                        else
+                                        {
+                                            <input id="imgupdate" data-val="@acc.image" type="hidden" />
+                                        }
                                         <div class="login_submit">
-                                            <button id="btnsaveaccinfo" >
+                                            <button id="btnsaveaccinfo">
                                                 <span class="spinner-grow spinner-grow-sm" style="display:none"></span>
                                                 Lưu
                                             </button>
@@ -108,7 +131,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="tab-pane fade " id="orders">
+                    <div class="tab-pane fade  show active" id="orders">
                         <h3>Đơn đặt hàng</h3>
                         <div class="coron_table table-responsive">
                             <table class="table">
@@ -121,7 +144,7 @@
                                         <th>Hành động</th>
                                     </tr>
                                 </thead>
-                                @foreach(var item in Model.lstOrder)
+                                @foreach (var item in Model)
                                 {
                                     <tr>
                                         <td>@item.id</td>
@@ -137,7 +160,7 @@
 
                                 }
                             </table>
-                            @foreach (var item in Model.lstOrder)
+                            @foreach (var item in Model)
                             {
                                 <div aria-expanded="false" id="detail_@item.id" class="coupon_area collapse">
                                     <h1 class="text-center">Chi tiết đơn hàng @item.id</h1>
@@ -180,13 +203,29 @@
                                 </div>
                                                         }
                         </div>
+                        @if(ViewBag.last!=1)
+                        { 
+                        <div class="pagination_style shop_page" style="justify-content:flex-end">                          
+                            <div class="page_number">
+                                <ul>
+                                    @Html.PagedListPager(Model,
+                    page => Url.Action("AccountInfo", new { page }),
+                    new PagedListRenderOptions
+                    {
+                        MaximumPageNumbersToDisplay = 4
+                    })                                    
 
 
+                                </ul>
 
+                            </div>
+                        </div>
+                        }
                     </div>
 
-                </div>
-            </div>
+                </div>               
+              
+
         </div>
     </div>
 </section>

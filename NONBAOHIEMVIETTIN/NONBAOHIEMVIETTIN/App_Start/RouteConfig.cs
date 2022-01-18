@@ -58,7 +58,7 @@ namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
 );
             routes.MapRoute(
            name: "NewsDetail",
-           url: "chi-tiet/{alias}.html",
+           url: "tin-tuc/chi-tiet/{alias}.html",
            defaults: new { controller = "News", action = "NewsDetail", id = UrlParameter.Optional },
            namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
        );
@@ -68,26 +68,26 @@ namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
             defaults: new { controller = "Products", action = "ProductDetail", id = UrlParameter.Optional },
             namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
         );
-
+            routes.MapRoute(
+         name: "NewsIndex",
+         url: "tin-tuc/{alias}.html",
+         defaults: new { controller = "News", action = "Index", id = UrlParameter.Optional },
+         namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+     );
             routes.MapRoute(
            name: "ProductsGroup",
            url: "{alias}/{alia}.html",
            defaults: new { controller = "Products", action = "GroupProducts", id = UrlParameter.Optional },
            namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
        );
-            routes.MapRoute(
-               name: "NewsIndex",
-               url: "{alias}.html",
-               defaults: new { controller = "News", action = "Index", id = UrlParameter.Optional },
-               namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
-           );
+         
             routes.MapRoute(
                name: "ProductsIndex",
                url: "{alias}.html",
                defaults: new { controller = "Products", action = "Index", id = UrlParameter.Optional },
                namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
            );
-
+         
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
