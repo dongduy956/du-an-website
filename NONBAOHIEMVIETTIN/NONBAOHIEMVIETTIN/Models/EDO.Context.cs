@@ -12,15 +12,14 @@ namespace NONBAOHIEMVIETTIN.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    using System.Data.Entity.Validation;
-    using System.Linq;
-
+    
     public partial class nonbaohiemviettinEntities : DbContext
     {
         public nonbaohiemviettinEntities()
             : base("name=nonbaohiemviettinEntities")
         {
-        }        
+        }
+    
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
