@@ -28,12 +28,39 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="contact">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.contact">
+        <MappingFragment StoreEntitySet="contact">
+          <ScalarProperty Name="workday" ColumnName="workday" />
+          <ScalarProperty Name="display" ColumnName="display" />
+          <ScalarProperty Name="map" ColumnName="map" />
+          <ScalarProperty Name="worktime" ColumnName="worktime" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="title" ColumnName="title" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="groupproduct">
       <EntityTypeMapping TypeName="nonbaohiemviettinModel.groupproduct">
         <MappingFragment StoreEntitySet="groupproduct">
           <ScalarProperty Name="status" ColumnName="status" />
           <ScalarProperty Name="alias" ColumnName="alias" />
           <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="introduce">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.introduce">
+        <MappingFragment StoreEntitySet="introduce">
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="content" ColumnName="content" />
+          <ScalarProperty Name="title" ColumnName="title" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
@@ -149,22 +176,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="contact">
-      <EntityTypeMapping TypeName="nonbaohiemviettinModel.contact">
-        <MappingFragment StoreEntitySet="contact">
-          <ScalarProperty Name="workday" ColumnName="workday" />
-          <ScalarProperty Name="display" ColumnName="display" />
-          <ScalarProperty Name="map" ColumnName="map" />
-          <ScalarProperty Name="worktime" ColumnName="worktime" />
-          <ScalarProperty Name="phone" ColumnName="phone" />
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="address" ColumnName="address" />
-          <ScalarProperty Name="content" ColumnName="content" />
-          <ScalarProperty Name="title" ColumnName="title" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="sendcontactinfo">
       <EntityTypeMapping TypeName="nonbaohiemviettinModel.sendcontactinfo">
         <MappingFragment StoreEntitySet="sendcontactinfo">
@@ -181,17 +192,6 @@
       <EntityTypeMapping TypeName="nonbaohiemviettinModel.subscribe">
         <MappingFragment StoreEntitySet="subscribe">
           <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="id" ColumnName="id" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="introduce">
-      <EntityTypeMapping TypeName="nonbaohiemviettinModel.introduce">
-        <MappingFragment StoreEntitySet="introduce">
-          <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="image" ColumnName="image" />
-          <ScalarProperty Name="content" ColumnName="content" />
-          <ScalarProperty Name="title" ColumnName="title" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>

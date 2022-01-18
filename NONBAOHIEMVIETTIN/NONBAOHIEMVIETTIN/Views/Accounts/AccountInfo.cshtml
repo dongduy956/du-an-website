@@ -1,0 +1,135 @@
+﻿@using NONBAOHIEMVIETTIN.Models
+@model AccountInfo
+@{
+    ViewBag.Title = "Thông tin tài khoản - " + Model.acc.username;
+}
+@section scripts
+{
+    <script>
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}
+<!--breadcrumbs area start-->
+<div class="breadcrumbs_area">
+
+    <div class="row">
+        <div class="col-12">
+            <div class="breadcrumb_content">
+                <ul>
+                    <li><a href="/">Trang chủ</a></li>
+                    <li><i class="fa fa-angle-right"></i></li>
+                    <li>Tài khoản @Model.acc.username</li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs area end-->
+<!-- Start Maincontent  -->
+<section class="main_content_area">
+    <div class="account_dashboard">
+        <div class="row">
+            <div class="col-sm-12 col-md-3 col-lg-3">
+                <!-- Nav tabs -->
+                <div class="dashboard_tab_button">
+                    <ul role="tablist" class="nav flex-column dashboard-list">
+                        <li><a href="#account-details" data-toggle="tab" class="nav-link active">Cập nhật tài khoản</a></li>
+
+                        <li> <a href="#orders" data-toggle="tab" class="nav-link ">Đơn đặt hàng</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+                <!-- Tab panes -->
+                <div class="tab-content dashboard_content">
+                    <div class="tab-pane fade show active" id="account-details">
+                        <div class="login">
+                            <div class="login_form_container">
+                                <div class="account_form register">
+                                    <h3>Thông tin tài khoản</h3>
+                                    <div class="form">
+                                        <p>
+                                            <label for="fullnameupdate">Họ tên</label>
+                                            <input value="@Model.acc.fullname" type="text" id="fullnameupdate" name="fullnameupdate">
+                                        </p>
+                                        <p>
+                                            <label for="emailupdate">Email</label>
+                                            <input type="text" value="@Model.acc.email" id="emailupdate" name="emailupdate">
+
+                                        </p>
+                                        <p>
+                                            <label for="phoneupdate">Số điện thoại</label>
+                                            <input value="@Model.acc.phone" type="text" id="phoneupdate" name="phoneupdate">
+
+                                        </p>
+                                        <p>
+                                            <label for="addressupdate">Địa chỉ</label>
+                                            <input value="@Model.acc.address" type="text" id="addressupdate" name="addressupdate">
+
+                                        </p>
+
+                                        <p>
+                                            <label for="imageupdate">Ảnh đại diện</label>
+                                            <br />
+                                            <img id="imgupdate" data-val="@Model.acc.image" alt="Lỗi ảnh đại diện" src="~/assets/img/user/@Model.acc.image" />
+                                            <br />
+                                            <span class="custom-file">
+                                                <input type="file" name="file" class="custom-file-input" id="imageupdate">
+                                                <label class="custom-file-label" for="customFile">Chọn file</label>
+                                            </span>
+                                        </p>
+                                        <div class="login_submit">
+                                            <button id="btnsaveaccinfo" type="submit">
+                                                <span class="spinner-grow spinner-grow-sm" style="display:none"></span>
+                                                Lưu
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade " id="orders">
+                        <h3>Đơn đặt hàng</h3>
+                        @if()
+                        <div class="coron_table table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Ngày</th>
+                                        <th>Tình trạng</th>
+                                        <th>Tổng</th>
+                                        <th>Hành động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1</td>
+                                        <td>May 10, 2018</td>
+                                        <td><span class="success">Completed</span></td>
+                                        <td>$25.00 for 1 item </td>
+                                        <td><a href="cart.html" class="view">view</a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>May 10, 2018</td>
+                                        <td>Processing</td>
+                                        <td>$17.00 for 1 item </td>
+                                        <td><a href="cart.html" class="view">view</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End Maincontent  -->

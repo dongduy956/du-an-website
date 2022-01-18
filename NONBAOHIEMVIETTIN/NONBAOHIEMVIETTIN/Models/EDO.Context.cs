@@ -12,14 +12,15 @@ namespace NONBAOHIEMVIETTIN.Models
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
-    
+    using System.Data.Entity.Validation;
+    using System.Linq;
+
     public partial class nonbaohiemviettinEntities : DbContext
     {
         public nonbaohiemviettinEntities()
             : base("name=nonbaohiemviettinEntities")
         {
-        }
-    
+        }        
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             throw new UnintentionalCodeFirstException();
@@ -27,7 +28,9 @@ namespace NONBAOHIEMVIETTIN.Models
     
         public virtual DbSet<accounts> accounts { get; set; }
         public virtual DbSet<category> category { get; set; }
+        public virtual DbSet<contact> contact { get; set; }
         public virtual DbSet<groupproduct> groupproduct { get; set; }
+        public virtual DbSet<introduce> introduce { get; set; }
         public virtual DbSet<listimage> listimage { get; set; }
         public virtual DbSet<news> news { get; set; }
         public virtual DbSet<newstype> newstype { get; set; }
@@ -37,9 +40,7 @@ namespace NONBAOHIEMVIETTIN.Models
         public virtual DbSet<products> products { get; set; }
         public virtual DbSet<rate> rate { get; set; }
         public virtual DbSet<role> role { get; set; }
-        public virtual DbSet<contact> contact { get; set; }
         public virtual DbSet<sendcontactinfo> sendcontactinfo { get; set; }
         public virtual DbSet<subscribe> subscribe { get; set; }
-        public virtual DbSet<introduce> introduce { get; set; }
     }
 }

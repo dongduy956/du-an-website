@@ -18,6 +18,13 @@ namespace NONBAOHIEMVIETTIN
                defaults: new { controller = "Accounts", action = "Login", id = UrlParameter.Optional },
                namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
            );
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.MapRoute(
+               name: "AccountInfo",
+               url: "thong-tin-tai-khoan.html",
+               defaults: new { controller = "Accounts", action = "AccountInfo", id = UrlParameter.Optional },
+               namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+           );
             routes.MapRoute(
          name: "Introduce",
          url: "gioi-thieu.html",

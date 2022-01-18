@@ -18,8 +18,8 @@ namespace NONBAOHIEMVIETTIN.Models
         public products()
         {
             this.listimage = new HashSet<listimage>();
-            this.rate = new HashSet<rate>();
             this.orderdetail = new HashSet<orderdetail>();
+            this.rate = new HashSet<rate>();
         }
     
         public int id { get; set; }
@@ -43,10 +43,10 @@ namespace NONBAOHIEMVIETTIN.Models
         public virtual groupproduct groupproduct { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<listimage> listimage { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<orderdetail> orderdetail { get; set; }
         public virtual production production { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<rate> rate { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<orderdetail> orderdetail { get; set; }
     }
 }

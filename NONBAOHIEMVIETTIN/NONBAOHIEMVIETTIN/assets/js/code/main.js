@@ -65,8 +65,8 @@ $(function () {
         var filter = /^((\+[1-9]{1,4}[ \-]*)|(\([0-9]{2,3}\)[ \-]*)|([0-9]{2,4})[ \-]*)*?[0-9]{3,4}?[ \-]*[0-9]{3,4}?$/;
         return filter.test($Phone);
     }
-    function upLoad() {
-        var fileUpload = $("#imageregister").get(0);
+    function upLoad(dom) {
+        var fileUpload = $(dom).get(0);
         var files = fileUpload.files;
 
         // Create  a FormData object
@@ -146,7 +146,7 @@ $(function () {
                                             showToast('Mật khẩu không giống nhau.');
                                         else {
                                             disable('#btnregister');
-                                            upLoad();
+                                            upLoad("#imageregister");
                                             $.ajax({
                                                 url: "/Accounts/Register",
                                                 data: JSON.stringify({ acc }),
@@ -614,10 +614,10 @@ $(function () {
                             };
                               $('.deletewish').off('click').click(function (e) {
         e.preventDefault();
-        if (confirm("Bạn chắc chắc xoá sản phẩm này?")) {
-            var ProductId = $(this).data('id');
-            deletewish(ProductId, true)
-                            }
+             var ProductId = $(this).data('id');
+
+ alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', function () {
+            deletewish(ProductId, true) }, function () { alertify.error('Cancel') });         
                             })
                             </script>`
                     showToast('Đã thêm vào yêu thích.');
@@ -627,8 +627,9 @@ $(function () {
                     $('.img-wish').hide();
                 }
                 else {
-                    alert('Mời bạn đăng nhập');
-                    location.href = "/dang-nhap.html";
+                    alertify.alert('Thông báo', 'Mời bạn đăng nhập!', function () {
+                        location.href = "/dang-nhap.html";
+                    });
                 }
             },
             error: function (data) {
@@ -639,10 +640,11 @@ $(function () {
     }
     $('.deletewish').off('click').click(function (e) {
         e.preventDefault();
-        if (confirm("Bạn chắc chắc xoá sản phẩm này?")) {
-            var ProductId = $(this).data('id');
+        var ProductId = $(this).data('id');
+        alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', function () {
+
             deletewish(ProductId, true)
-        }
+        }, function () { alertify.error('Cancel') });
     })
     function deletewish(ProductId, check) {
         $.ajax({
@@ -737,11 +739,11 @@ $(function () {
                     var script = `<script>
                                 $('.deletecart').off('click').click(function (e) {
         e.preventDefault();
-        e.stopPropagation();
-        if (confirm("Bạn chắc chắc xoá sản phẩm này?")) {
+        e.stopPropagation();        
             var ProductId = $(this).data('id');
-            deletecart(ProductId, true)
-                            }
+
+alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', function () {
+            deletecart(ProductId, true) }, function () { alertify.error('Cancel') });   
                             })
     function deletecart(ProductId, check) {
         $.ajax({
@@ -791,8 +793,9 @@ $(function () {
 
                 }
                 else {
-                    alert('Mời bạn đăng nhập');
-                    location.href = "/dang-nhap.html";
+                    alertify.alert('Thông báo', 'Mời bạn đăng nhập', function () {
+                        location.href = "/dang-nhap.html";
+                    })
                 }
             },
             error: function (data) {
@@ -805,10 +808,10 @@ $(function () {
     $('.deletecart').off('click').click(function (e) {
         e.preventDefault();
         e.stopPropagation();
-        if (confirm("Bạn chắc chắc xoá sản phẩm này?")) {
-            var ProductId = $(this).data('id');
+        var ProductId = $(this).data('id');
+        alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', function () {
             deletecart(ProductId, true)
-        }
+        }, function () { alertify.error('Cancel') });
     })
     function deletecart(ProductId, check) {
         $.ajax({
@@ -1068,22 +1071,85 @@ $(function () {
         if (sub.email == '')
             showToast('Bạn chưa điền email để đăng kí!!');
         else
-        $.ajax({
-            url: "/subscribe/news",
-            data: JSON.stringify({ sub }),
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            type: "POST",
-            success: function (data) {
-                showToast(data.message);
-                if (data.status == 1) {
-                    $('#emailsub').val('');
-                }
-            },
-            error: function (data) {
-                alert(JSON.stringify(data));
-            }
+            if (!validateEmail(sub.email))
+                showToast('Không đúng định dạng email!!');
 
-        });
+            else
+                $.ajax({
+                    url: "/subscribe/news",
+                    data: JSON.stringify({ sub }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    type: "POST",
+                    success: function (data) {
+                        showToast(data.message);
+                        if (data.status == 1) {
+                            $('#emailsub').val('');
+                        }
+                    },
+                    error: function (data) {
+                        alert(JSON.stringify(data));
+                    }
+
+                });
     })
+    $('#btninfoacc').click(function () {
+        location.href = '/thong-tin-tai-khoan.html';
+    })
+    function updateAccount() {
+        var acc = new Object();
+        acc.email = $('#emailupdate').val();
+        acc.phone = $('#phoneupdate').val();
+        acc.address = $('#addressupdate').val();
+        var img = $('#imageupdate').val().split("\\").pop();
+        acc.image = img == '' ? $('#imgupdate').data('val') : img;
+        acc.fullname = $('#fullnameupdate').val();
+        if (acc.fullname == "")
+            showToast('Họ tên không được rỗng.');
+        else
+            if (acc.email == "")
+                showToast('Email không được rỗng.');
+            else
+                if (!validateEmail(acc.email))
+                    showToast('Email không đúng định dạng.');
+                else
+
+                    if (acc.phone == "")
+                        showToast('Số điện thoại không được rỗng.');
+                    else
+                        if (!validatePhone(acc.phone))
+                            showToast('Số điện thoại không đúng định dạng.');
+                        else
+                            if (acc.address == "")
+                                showToast('Địa chỉ không được rỗng.');
+                            else {
+                                disable('#btnsaveaccinfo');
+                                upLoad('#imageupdate');
+                                $.ajax({
+                                    url: "/Accounts/Update",
+                                    data: JSON.stringify({ acc }),
+                                    contentType: "application/json; charset=utf-8",
+                                    dataType: "json",
+                                    type: "POST",
+                                    success: function (data) {
+                                        showToast(data.message);
+                                        if (data.status == 1) {
+                                            $('#accountname').text(data.fullname);
+                                            $('#accounthome img').attr('src', '/assets/img/user/' + data.image);
+                                            $('#imgupdate').attr('src', '/assets/img/user/' + data.image);
+
+
+                                        }
+                                        enable('#btnsaveaccinfo');
+
+                                    },
+                                    error: function (data) {
+
+                                        alert(JSON.stringify(data));
+                                    }
+                                })
+                            }
+
+    }
+    $('#btnsaveaccinfo').click(updateAccount);
 })

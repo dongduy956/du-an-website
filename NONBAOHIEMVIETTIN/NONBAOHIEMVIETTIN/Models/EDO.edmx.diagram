@@ -5,18 +5,22 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="ac93f2f2cda344aa8890638bc033f593" Name="Diagram1">
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.accounts" Width="1.5" PointX="3" PointY="10.25" />
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.category" Width="1.5" PointX="0.75" PointY="4.125" />
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.groupproduct" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.listimage" Width="1.5" PointX="5.25" PointY="7.5" />
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.news" Width="1.5" PointX="10" PointY="2.375" />
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.newstype" Width="1.5" PointX="7.75" PointY="2.875" />
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.order" Width="1.5" PointX="5.25" PointY="10.5" />
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.orderdetail" Width="1.5" PointX="7.75" PointY="6.25" />
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.production" Width="1.5" PointX="0.75" PointY="7.5" />
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.products" Width="1.5" PointX="3" PointY="2.625" />
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.rate" Width="1.5" PointX="5.25" PointY="3.875" />
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.role" Width="1.5" PointX="0.75" PointY="11.25" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.accounts" Width="1.5" PointX="3.75" PointY="10.5" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.category" Width="1.5" PointX="0.75" PointY="4.375" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.contact" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.groupproduct" Width="1.5" PointX="0.75" PointY="1" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.introduce" Width="1.5" PointX="5.75" PointY="0.75" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.listimage" Width="1.5" PointX="5.25" PointY="7.75" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.news" Width="1.5" PointX="11" PointY="8" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.newstype" Width="1.5" PointX="8.75" PointY="8.375" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.order" Width="1.5" PointX="6" PointY="10.625" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.orderdetail" Width="1.5" PointX="8.25" PointY="4.125" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.production" Width="1.5" PointX="0.75" PointY="7.75" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.products" Width="1.5" PointX="3" PointY="2.75" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.rate" Width="1.5" PointX="5.25" PointY="4" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.role" Width="1.5" PointX="1.5" PointY="11.5" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.sendcontactinfo" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.subscribe" Width="1.5" PointX="10.75" PointY="4.75" />
         <AssociationConnector Association="nonbaohiemviettinModel.fk_accounts_role" />
         <AssociationConnector Association="nonbaohiemviettinModel.fk_order_account" />
         <AssociationConnector Association="nonbaohiemviettinModel.fk_rate_accounts" />
@@ -24,14 +28,10 @@
         <AssociationConnector Association="nonbaohiemviettinModel.fk_products_groupproduct" />
         <AssociationConnector Association="nonbaohiemviettinModel.fk_listimage_products" />
         <AssociationConnector Association="nonbaohiemviettinModel.fk_news_newstype" />
-        <AssociationConnector Association="nonbaohiemviettinModel.fk_products_production" />
-        <AssociationConnector Association="nonbaohiemviettinModel.fk_rate_products" />
         <AssociationConnector Association="nonbaohiemviettinModel.fk_orderdetail_order" />
         <AssociationConnector Association="nonbaohiemviettinModel.fk_orderdetail_products" />
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.contact" Width="1.5" PointX="7.375" PointY="9.75" />
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.sendcontactinfo" Width="1.5" PointX="9.375" PointY="9.75" />
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.subscribe" Width="1.5" PointX="10.375" PointY="5.75" />
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.introduce" Width="1.5" PointX="11.375" PointY="8.75" />
+        <AssociationConnector Association="nonbaohiemviettinModel.fk_products_production" />
+        <AssociationConnector Association="nonbaohiemviettinModel.fk_rate_products" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

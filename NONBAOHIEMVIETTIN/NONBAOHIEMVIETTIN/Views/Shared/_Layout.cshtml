@@ -26,9 +26,11 @@
     <link rel="stylesheet" href="~/assets/css/responsive.css">
 
     <link href="~/assets/css/toast.css" rel="stylesheet" />
-
+    <link href="~/Content/alertifyjs/alertify.min.css" rel="stylesheet" />
+    <link href="~/Content/alertifyjs/themes/default.min.css" rel="stylesheet" />
     <script src="~/assets/js/vendor/modernizr-2.8.3.min.js"></script>
     <script src="~/assets/js/vendor/jquery-1.12.0.min.js"></script>
+
     @RenderSection("styles", false)
 </head>
 
@@ -68,13 +70,19 @@
                                                         <img style="border-radius:50%; width: 24px;margin-right: 2px;" src="@acc.image" alt="">
 
                                                     }
-                                                    @acc.fullname
+                                                        <i id="accountname" style="font-style:normal">@acc.fullname</i>
                                                     <i class="fa fa-angle-down"></i>
                                                 </a>
 
                                                 <ul class="dropdown_languages" style="right:0;min-width:150px">
-                                                    @if (acc.issocial==0)
+                                                    @if (acc.issocial == 0)
                                                     {
+                                                        <li>
+                                                            <a id="btninfoacc" class="w-100" href="/thong-tin-tai-khoan.html">
+                                                                <i class="far fa-user"></i>
+                                                               Thông tin tài khoản
+                                                            </a>
+                                                        </li>
                                                         <li>
                                                             <a id="btnchangepasswordlink" class="w-100" href="#">
                                                                 <i class="fas fa-key"></i>
@@ -128,7 +136,7 @@
                                         <a href="">
                                             <i class="fa fa-shopping-cart"></i>
                                             <span>
-                                                @(cart != null ? (cart.Sum(x=>x.Quantity) + "sản phẩm -" + HoTro.Instances.convertVND(cart.Sum(x => x.Quantity * x.Product.price).ToString())) : "0 sản phẩm - 0đ")
+                                                @(cart != null ? (cart.Sum(x => x.Quantity) + "sản phẩm -" + HoTro.Instances.convertVND(cart.Sum(x => x.Quantity * x.Product.price).ToString())) : "0 sản phẩm - 0đ")
                                             </span>
                                             <i class="fa fa-angle-down"></i>
                                         </a>
@@ -139,7 +147,7 @@
                                                 <img src="~/assets/img/cart/no-cart.png" />
                                             </div>
                                             <div id="cart" style="max-height:300px; overflow-y:scroll">
-                                                @if (cart == null||cart.Count==0)
+                                                @if (cart == null || cart.Count == 0)
                                                 {
 
                                                     <script>
@@ -156,7 +164,7 @@
                                                         $(function () {
                                                             $('.img-cart').hide();
                                                             $('#shipping-group').show();
-                                                           
+
                                                         });
                                                     </script>
                                                     foreach (var item in cart)
@@ -181,7 +189,7 @@
                                             <div id="shipping-group">
                                                 <div class="total_price">
                                                     <span> Tổng tiền: </span>
-                                                    <span class="prices">@(cart!=null?HoTro.Instances.convertVND(cart.Sum(x => x.Quantity * x.Product.price).ToString()):"0")</span>
+                                                    <span class="prices">@(cart != null ? HoTro.Instances.convertVND(cart.Sum(x => x.Quantity * x.Product.price).ToString()) : "0")</span>
                                                 </div>
                                                 <div class="cart_button">
                                                     <a id="btncheckout" href="/gio-hang.html"> Giỏ hàng</a>
@@ -327,6 +335,7 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="~/assets/js/ajax-mail.js"></script>
         <script src="~/assets/js/plugins.js"></script>
+        <script src="~/Scripts/alertify.min.js"></script>
         <script src="~/assets/js/main.js"></script>
         <script src="~/assets/js/code/toast.js"></script>
         <script src="~/assets/js/code/main.js"></script>

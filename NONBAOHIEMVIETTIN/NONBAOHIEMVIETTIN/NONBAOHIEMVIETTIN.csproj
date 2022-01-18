@@ -233,6 +233,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\AccountInfo.cs" />
     <Compile Include="Models\accounts.cs">
       <DependentUpon>EDO.tt</DependentUpon>
     </Compile>
@@ -918,13 +919,6 @@
     <Content Include="assets\img\slider\slider_3.png" />
     <Content Include="assets\img\slider\slide_1.png" />
     <Content Include="assets\img\slider\slide_4.png" />
-    <Content Include="assets\img\user\Add.png" />
-    <Content Include="assets\img\user\Back.png" />
-    <Content Include="assets\img\user\brand1.jpg" />
-    <Content Include="assets\img\user\duy.jpg" />
-    <Content Include="assets\img\user\noti.jpg" />
-    <Content Include="assets\img\user\Profile.png" />
-    <Content Include="assets\img\user\web1_N1904P37002H.jpg" />
     <Content Include="assets\img\visha\papyel.png" />
     <Content Include="assets\js\ajax-mail.js" />
     <Content Include="assets\js\code\api.js" />
@@ -937,6 +931,22 @@
     <Content Include="assets\js\popper.js" />
     <Content Include="assets\js\vendor\jquery-1.12.0.min.js" />
     <Content Include="assets\js\vendor\modernizr-2.8.3.min.js" />
+    <Content Include="Content\alertifyjs\alertify.css" />
+    <Content Include="Content\alertifyjs\alertify.min.css" />
+    <Content Include="Content\alertifyjs\alertify.rtl.css" />
+    <Content Include="Content\alertifyjs\alertify.rtl.min.css" />
+    <Content Include="Content\alertifyjs\themes\bootstrap.css" />
+    <Content Include="Content\alertifyjs\themes\bootstrap.min.css" />
+    <Content Include="Content\alertifyjs\themes\bootstrap.rtl.css" />
+    <Content Include="Content\alertifyjs\themes\bootstrap.rtl.min.css" />
+    <Content Include="Content\alertifyjs\themes\default.css" />
+    <Content Include="Content\alertifyjs\themes\default.min.css" />
+    <Content Include="Content\alertifyjs\themes\default.rtl.css" />
+    <Content Include="Content\alertifyjs\themes\default.rtl.min.css" />
+    <Content Include="Content\alertifyjs\themes\semantic.css" />
+    <Content Include="Content\alertifyjs\themes\semantic.min.css" />
+    <Content Include="Content\alertifyjs\themes\semantic.rtl.css" />
+    <Content Include="Content\alertifyjs\themes\semantic.rtl.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\PagedList.css" />
@@ -955,6 +965,8 @@
     </Content>
     <Content Include="Scripts\ai.0.22.9-build00167.js" />
     <Content Include="Scripts\ai.0.22.9-build00167.min.js" />
+    <Content Include="Scripts\alertify.js" />
+    <Content Include="Scripts\alertify.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -1016,7 +1028,6 @@
     <Content Include="Views\Shared\_Navbar.cshtml" />
     <Content Include="Views\Shared\_Slidebar-temp.cshtml" />
     <Content Include="Views\Shared\_Slidebar.cshtml" />
-    <Content Include="Views\Accounts\Edit.cshtml" />
     <Content Include="Views\Accounts\Login.cshtml" />
     <Content Include="Views\Cart\Index.cshtml" />
     <Content Include="Views\Products\Index.cshtml" />
@@ -1026,10 +1037,12 @@
     <Content Include="Views\News\Newsdetail.cshtml" />
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Introduce\Index.cshtml" />
+    <Content Include="Views\Accounts\AccountInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\" />
+    <Folder Include="assets\img\user\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

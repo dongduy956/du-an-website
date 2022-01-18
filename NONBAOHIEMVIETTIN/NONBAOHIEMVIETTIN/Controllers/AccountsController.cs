@@ -120,6 +120,9 @@ namespace NONBAOHIEMVIETTIN.Controllers
         }
         public ActionResult Login()
         {
+            var acc = Session["account"] as accounts;
+            if (acc != null)
+                return Redirect("/");
             return View();
         }
         [HttpPost]
@@ -357,37 +360,49 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 return Json(2);
             }
 
-        }
-
-        // GET: Accounts/Edit/5
-        public ActionResult Edit(int? id)
+        }        
+        public ActionResult AccountInfo()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            accounts accounts = db.accounts.Find(id);
-            if (accounts == null)
-            {
-                return HttpNotFound();
-            }
-            ViewBag.idpermission = new SelectList(db.role, "id", "name", accounts.idrole);
-            return View(accounts);
+            var acc = Session["account"] as accounts;
+            if (acc == null)
+                return Redirect("/");
+            var accinfo = new AccountInfo();
+            accinfo.acc = acc;
+            accinfo.lstOrder = db.order.Where(x => x.idaccount == acc.id).ToList();
+            return View(accinfo);
         }
-
-        // POST: Accounts/Edit/5       
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,idpermission,username,password,image,fullname,email,phone,address")] accounts accounts)
+        public JsonResult update(accounts acc)
         {
-            if (ModelState.IsValid)
+            var accSession = Session["account"] as accounts;
+            acc.id = accSession.id;
+            acc.password = accSession.password;
+            acc.issocial = accSession.issocial;
+            acc.status = accSession.status;
+            acc.idrole = accSession.idrole;
+            acc.username=accSession.username;
+
+            try
             {
-                db.Entry(accounts).State = EntityState.Modified;
+                db.Entry(acc).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
             }
-            ViewBag.idpermission = new SelectList(db.role, "id", "name", accounts.idrole);
-            return View(accounts);
+            catch (Exception)
+            {
+                return Json(new
+                {
+                    status = 0,
+                    message = "Lỗi hệ thống.Cập nhật tài khoản thất bại!!!"
+                });
+            }
+            Session["account"] = acc;
+            return Json(new
+            {
+                status = 1,
+                message = "Cập nhật tài khoản thành công!!!",
+                fullname=acc.fullname,
+                image=acc.image
+            });
         }
         protected override void Dispose(bool disposing)
         {
