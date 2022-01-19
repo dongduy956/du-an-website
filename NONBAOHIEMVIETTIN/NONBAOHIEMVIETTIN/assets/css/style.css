@@ -151,7 +151,6 @@
   position: relative;
 }
 .search_bar .form input {
-	min-width: 275px;
 	height: 38px;
 	background: none;
 	border: 1px solid #ddd;
@@ -1245,6 +1244,17 @@
 	color: #00bba6;
 	text-transform: capitalize;
 	line-height: 15px;
+}
+.breadcrumb_content ul{
+    display:inline-flex;
+}
+.breadcrumb_content ul li:last-child{
+        white-space: pre-wrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    display: -webkit-box;
 }
 .breadcrumb_content ul li a {
 	color: #222;

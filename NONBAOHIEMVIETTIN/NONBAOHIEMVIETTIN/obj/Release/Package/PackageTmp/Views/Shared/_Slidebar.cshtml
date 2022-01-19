@@ -1,0 +1,46 @@
+﻿@using NONBAOHIEMVIETTIN.Models
+@{
+    var db = new nonbaohiemviettinEntities();
+
+}
+<div class="col-lg-3 col-md-8 col-12">
+    <!--sidebar banner-->
+    <div class="sidebar_widget banner mb-35">
+        <div class="banner_img mb-35">
+            <a href="#"><img src="~/assets/img/banner/banner5.jpg" alt=""></a>
+        </div>
+        <div class="banner_img">
+            <a href="#"><img src="~/assets/img/banner/banner6.jpg" alt=""></a>
+        </div>
+    </div>
+    <!--sidebar banner end-->
+   @RenderPage("~/Views/Shared/_Slidebar-temp.cshtml")
+    <!--newsletter block start-->
+    <div class="sidebar_widget newsletter mb-35">
+        <div class="block_title">
+            <h3>Đăng ký nhận tin</h3>
+        </div>
+        <p>Đăng ký tại đây</p>
+        <input id="emailsub" placeholder="Nhập vào email của bạn" type="text">
+        <button type="submit" id="btnsub">Đăng kí</button>
+    </div>
+    <!--newsletter block end-->
+    <!--sidebar banner-->
+    <div class="sidebar_widget bottom ">
+        <div class="banner_img">
+            <a href="#"><img src="~/assets/img/banner/banner9.jpg" alt=""></a>
+        </div>
+    </div>
+    <!--sidebar banner end-->
+</div>
+@section scripts{
+    <script>
+        $(function () {
+            $('.category-item').off('click').click(function (event) {
+                event.stopPropagation();
+                var dt = $(this).data('id');
+                location.href ='/'+ dt + '.html';
+            })
+        })
+</script>
+    }

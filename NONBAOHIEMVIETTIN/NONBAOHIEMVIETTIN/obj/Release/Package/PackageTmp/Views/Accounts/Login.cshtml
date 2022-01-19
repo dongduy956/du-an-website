@@ -1,0 +1,274 @@
+﻿@{
+    ViewBag.Title = "Đăng nhập - Đăng ký";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section scripts{
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+<script src="~/assets/js/code/logingoogle.js"></script>
+    <script>
+        $(".custom-file-input").on("change", function () {
+            var fileName = $(this).val().split("\\").pop();
+            $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+        });
+    </script>
+}
+@section styles{
+    <style>
+        .close {
+            padding: unset !important;
+            margin: unset !important;
+            position: unset !important;
+            width: unset !important;
+            height: unset !important;
+            border: unset !important;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .modal-body input[type=password] {
+            margin: 4px 0;
+        }
+
+        .login-social {
+            display: flex;
+            font-family: 'Myriad Pro';
+            flex-direction: column;
+        }
+
+            .login-social button,.login-social a {
+                text-transform: uppercase;
+                font-size: 1rem;
+            }
+
+        button[disabled] {
+            opacity: 0.85;
+            cursor: not-allowed !important;
+        }
+
+            .login_submit button[disabled]:hover {
+                background-color: #333;
+            }
+    </style>
+}
+<div class="col-lg-12 col-md-12" style="padding:0">
+    <!--breadcrumbs area start-->
+    <div class="breadcrumbs_area">
+        <div class="row">
+            <div class="col-12">
+                <div class="breadcrumb_content">
+                    <ul>
+                        <li><a href="/">Trang chủ</a></li>
+                        <li><i class="fa fa-angle-right"></i></li>
+                        <li>Đăng nhập - Đăng ký</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--breadcrumbs area end-->
+    <!-- customer login start -->
+    <div class="customer_login">
+        <div class="row">
+            <!--login area start-->
+            <div class="col-lg-6 col-md-6">
+                <div class="account_form">
+                    <h2>Đăng nhập</h2>
+                    <div class="form">
+                        <p>
+                            <label for="usernamelogin">Tài khoản <span>*</span></label>
+                            <input type="text" id="usernamelogin" value="" />
+                        </p>
+                        <p>
+                            <label for="passwordlogin">Mật khẩu <span>*</span></label>
+                            <input type="password" id="passwordlogin" value="" />
+                        </p>
+                        <div class="login_submit">
+                            <button id="btnlogin" type="submit">
+                                <span class="spinner-grow spinner-grow-sm" style="display:none"></span>
+                                Đăng nhập
+                            </button>
+                            @*<label for="remember">
+                                    <input id="remember" type="checkbox">
+                                    Nhớ mật khẩu
+                                </label>*@
+                            <a id="btnfogetpass" href="">Quên mật khẩu?</a>
+                        </div>
+                        <br />
+                        <div class="login-social">
+                            <a href="~/Accounts/LoginFacebook" id="" class="btn btn-outline-primary mb-2">
+                                <i class="fab fa-facebook"></i>
+                                <span>Đăng nhập với facebook</span>
+                            </a>
+
+                            <button onclick="login()" class="btn btn-outline-danger">
+                                <span class="spinner-grow spinner-grow-sm" style="display:none"></span>
+
+                                <i class="fab fa-google"></i>
+                                <span>Đăng nhập với google</span>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--login area start-->
+            <!--register area start-->
+            <div class="col-lg-6 col-md-6">
+                <div class="account_form register">
+                    <h2>Đăng ký</h2>
+                    <div class="form">
+                        <p>
+                            <label for="usernameregister">Tài khoản <span>*</span></label>
+                            <input id="usernameregister" type="text">
+                        </p>
+                        <p>
+                            <label for="passwordregister">Mật khẩu <span>*</span></label>
+                            <input id="passwordregister" type="password">
+                        </p>
+                        <p>
+                            <label for="prepasswordregister">Nhập lại mật khẩu <span>*</span></label>
+                            <input id="prepasswordregister" type="password">
+                        </p>
+                        <p>
+                            <label for="emailregister">Email <span>*</span></label>
+                            <input id="emailregister" type="email">
+                        </p>
+                        <p>
+                            <label for="fullnameregister">Họ và tên <span>*</span></label>
+                            <input id="fullnameregister" type="text">
+                        </p>
+                        <p>
+                            <label for="phoneregister">Số điện thoại <span>*</span></label>
+                            <input id="phoneregister" type="text">
+                        </p>
+                        <p>
+                            <label for="addressregister">Địa chỉ <span>*</span></label>
+                            <input id="addressregister" type="text">
+                        </p>
+                        <p>
+                            <label for="imageregister">Ảnh đại diện</label>
+                            <span class="custom-file">
+                                <input type="file" name="file" class="custom-file-input" id="imageregister">
+                                <label class="custom-file-label" for="customFile">Chọn file</label>
+                            </span>
+                        </p>
+                        <div class="login_submit">
+                            <button id="btnregister" type="submit">
+                                <span class="spinner-grow spinner-grow-sm" style="display:none"></span>
+                            Đăng ký</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--register area end-->
+        </div>
+    </div>
+    <!-- customer login end -->
+</div>
+<!-- Modal register -->
+<div class="modal fade" id="myModal3" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Nhập mã xác nhận</h4>
+                <button type="button" id="btnclosexregister" class="close" data-dismiss="modal" style="">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input id="keyword" autofocus autocomplete="on" class="form-control" type="text" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnsubmitregister" class="btn btn-outline-success">
+                    <span class="spinner-grow spinner-grow-sm" style="display:none"></span>
+                Xác nhận</button>
+                <button type="button" id="btnsendagainregister" class="btn btn-outline-primary">
+                    <span class="spinner-grow spinner-grow-sm" style="display:none"></span>
+
+                    Gửi lại mã
+
+                </button>
+                <button type="button" id="btncloseregister" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--Modal register end-->
+<!-- Modal  email -->
+<div class="modal fade" id="myModal4" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Nhập email</h4>
+                <button type="button" id="btnclosexregister" class="close" data-dismiss="modal" style="">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input id="keywordemail" autofocus autocomplete="on" class="form-control" type="text" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnsubmitforget" class="btn btn-outline-success">
+                    <span class="spinner-grow spinner-grow-sm" style="display:none"></span>
+                Xác nhận</button>
+                <button type="button" id="btncloseforget" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--Modal email end-->
+<!-- Modal code forget -->
+<div class="modal fade" id="myModal5" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Nhập mã xác nhận</h4>
+                <button type="button" id="btnclosexforgetpass" class="close" data-dismiss="modal" style="">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input id="keywordforget" autofocus autocomplete="on" class="form-control" type="text" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnsubmitforgetpass" class="btn btn-outline-success">
+                    <span class="spinner-grow spinner-grow-sm" style="display:none"></span>
+
+                Xác nhận</button>
+                <button type="button" id="btnsendagainforgetpass" class="btn btn-outline-primary">
+                    <span class="spinner-grow spinner-grow-sm" style="display:none"></span>
+
+                Gửi lại mã</button>
+                <button type="button" id="btncloseforgetpass" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--Modal code forget end-->
+<!-- Modal changepassword -->
+<div class="modal fade" id="myModal6" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Đổi mật khẩu mới</h4>
+                <button type="button" id="btnclosexchangepass" class="close" data-dismiss="modal" style="">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input id="passnew" placeholder="Nhập mật khẩu mới" autofocus autocomplete="on" class="form-control" type="password" />
+                <input id="prepass" placeholder="Nhập lại mật khẩu" autofocus autocomplete="on" class="form-control" type="password" />
+            </div>
+            <div class="modal-footer">
+                <button type="button" id="btnsubmitchangepass" class="btn btn-outline-success">
+                    <span class="spinner-grow spinner-grow-sm" style="display:none"></span>
+                Xác nhận</button>
+                <button type="button" id="btnclosechangepass" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<!--Modal changepassword end-->

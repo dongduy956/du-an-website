@@ -65,17 +65,16 @@
                 </li>
                 <li>
                     <a href="#">Tin tức</a>
-                    <div class="mega_menu jewelry">
-                        <div class="mega_items jewelry">
+                    <div>
+                        <div>
                             <ul>
-                                @foreach (var item in db.newstype)
-                                {
-                                    <li><a href="/tin-tuc/@(@item.alias).html">@item.name</a></li>
-                                }
+                               @foreach (var item in db.newstype)
+                               {
+                                <li><a href="/tin-tuc/@(@item.alias).html">@item.name</a></li>
+                               }
                             </ul>
                         </div>
-                    </div>
-
+                    </div>                  
                 </li>
                 <li>
                     <a href="/lien-he.html">Liên hệ</a>

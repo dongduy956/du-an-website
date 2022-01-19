@@ -1,0 +1,26 @@
+﻿@using NONBAOHIEMVIETTIN.Models
+@model news
+@{
+    ViewBag.Title = Model.title;
+}
+<!--breadcrumbs area start-->
+<div class="breadcrumbs_area">
+    <div class="row">
+        <div class="col-12">
+            <div class="breadcrumb_content">
+                <ul>
+                    <li><a href="/">Trang chủ</a></li>
+                    <li><i class="fa fa-angle-right"></i></li>
+                    <li>@Model.title</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs area end-->
+
+<div style="padding:10px">
+    <img src="~/assets/img/news/@Model.image" />
+    <h3>@Model.title</h3>
+    @Html.Raw(Model.content)
+</div>

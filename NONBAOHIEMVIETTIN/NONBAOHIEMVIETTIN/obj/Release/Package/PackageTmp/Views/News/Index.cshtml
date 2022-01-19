@@ -1,0 +1,89 @@
+﻿@using NONBAOHIEMVIETTIN.Models
+@model PagedList.IPagedList<news>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = ViewBag.newstype.name;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var i = 1;
+    var j = i;
+} 
+@section styles{
+    <style>
+        .blog_pagination .active{
+            color:red;
+        }
+    </style>
+    }
+<!--breadcrumbs area start-->
+<div class="breadcrumbs_area">
+    <div class="row">
+        <div class="col-12">
+            <div class="breadcrumb_content">
+                <ul>
+                    <li><a href="/">Trang chủ</a></li>
+                    <li><i class="fa fa-angle-right"></i></li>
+                    <li>@ViewBag.newstype.name</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs area end-->
+<!--blog area start-->
+<div class="blog_area">
+   <div class="row">
+       @foreach (var item in Model)
+       {
+        <div class="col-lg-4 col-md-6">
+            <div class="single_blog">
+                <div class="blog_thumb">
+                    <a href="/tin-tuc/chi-tiet/@(item.alias).html"><img src="~/assets/img/news/@item.image" alt=""></a>
+                </div>
+                <div class="blog_content">
+                    <div class="blog_post">
+                        <ul>
+                            <li>
+                                <a href="/tin-tuc/@(ViewBag.newstype.alias).html">@ViewBag.newstype.name</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <h3><a href="/tin-tuc/chi-tiet/@(item.alias).html">@item.title</a></h3>
+                    <div class="post_footer">
+                        <div class="post_meta">
+                            <ul>
+                                <li>@DateTime.Parse(item.createdate.ToString()).ToShortDateString()</li>
+                                <li>3 Comments</li>
+                            </ul>
+                        </div>
+                        <div class="Read_more">
+                            <a href="/tin-tuc/chi-tiet/@(item.alias).html">Chi tiết  <i class="fa fa-angle-double-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+       }
+   </div>
+
+</div>
+<!--blog area end-->
+<!--pagination style start-->
+@if (ViewBag.last != 1)
+{
+<div class="blog_pagination">
+    <div class="row">
+        <div class="col-12">
+            <div class="page_number">
+               @Html.PagedListPager(Model,
+    page => Url.Action("Index", new { page }),
+    new PagedListRenderOptions
+    {
+        MaximumPageNumbersToDisplay = 5
+    })
+            </div>
+        </div>
+    </div>
+</div>
+}
+<!--pagination style end--> 
+

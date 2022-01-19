@@ -1,5 +1,5 @@
 ﻿@using NONBAOHIEMVIETTIN.Models
-@{
+@{  
     var db = new nonbaohiemviettinEntities();
     var acc = Session["account"] as accounts;
     var cart = Session["cartSession"] as List<CartItem>;
@@ -279,7 +279,7 @@
             <div class="footer_bottom">
                 <div class="container">
                     <div class="row align-items-center">
-                        <div class="col-lg-6 col-md-6">
+                        <div class="col-lg-4 col-md-4">
                             <div class="copyright_area">
                                 <ul>
                                     <li><a href="/lien-he.html"> Liên hệ </a></li>
@@ -289,7 +289,15 @@
                                 <p>Copyright &copy; @DateTime.Now.Year <a href="#">Duy</a>. All rights reserved. </p>
                             </div>
                         </div>
-                        <div class="col-lg-6 col-md-6">
+                        <div class="col-lg-4 col-md-4">
+                            <div>
+                                <div class="copyright_area">
+                                    <p>Đang online:<span id="visting">0</span></p>
+                                    <p>Tổng người online:<span id="visited">0</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4">
                             <div class="footer_social text-right">
                                 <ul>
                                     <li><a href="#"><i class="fa fa-facebook"></i></a></li>
@@ -337,9 +345,26 @@
         <script src="~/assets/js/ajax-mail.js"></script>
         <script src="~/assets/js/plugins.js"></script>
         <script src="~/Scripts/alertify.min.js"></script>
+        <script src="@Url.Content("~/Scripts/jquery.signalR-2.4.2.min.js")"></script>
+        <script src="@Url.Content("~/signalr/hubs")"></script>
         <script src="~/assets/js/main.js"></script>
         <script src="~/assets/js/code/toast.js"></script>
         <script src="~/assets/js/code/main.js"></script>
+        <script>
+            $(function () {
+                var counterHub = $.connection.counterHub;
+                $.connection.hub.start().done(function () {
+
+                })
+                counterHub.client.UpdateCount = function (count)
+                {
+                    $('#visting').text(count);                   
+                }               
+                counterHub.client.UpdateTotal = function (count) {
+                    $('#visited').text(count);
+                }
+            })
+        </script>
         @RenderSection("scripts", false)
 </body>
 

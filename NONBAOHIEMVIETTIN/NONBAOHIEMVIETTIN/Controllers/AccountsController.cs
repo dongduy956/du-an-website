@@ -406,7 +406,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                     message = "Lỗi hệ thống.Cập nhật tài khoản thất bại!!!"
                 });
             }
-            Session["account"] = acc;
+            Session["account"] = db.accounts.SingleOrDefault(x=>x.id==acc.id);
             return Json(new
             {
                 status = 1,
