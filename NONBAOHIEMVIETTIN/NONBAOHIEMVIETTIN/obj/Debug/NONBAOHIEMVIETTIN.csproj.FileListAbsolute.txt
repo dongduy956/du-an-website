@@ -287,3 +287,9 @@ D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEM
 D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.dll
 D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.pdb
+C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.SignalR.Core.pdb
+C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
+C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.SignalR.SystemWeb.xml

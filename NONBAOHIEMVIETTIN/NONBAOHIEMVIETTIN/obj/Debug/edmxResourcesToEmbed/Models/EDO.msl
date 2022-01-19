@@ -44,6 +44,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="counonline">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.counonline">
+        <MappingFragment StoreEntitySet="counonline">
+          <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="groupproduct">
       <EntityTypeMapping TypeName="nonbaohiemviettinModel.groupproduct">
         <MappingFragment StoreEntitySet="groupproduct">

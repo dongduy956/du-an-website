@@ -253,6 +253,9 @@
     <Compile Include="Models\contact.cs">
       <DependentUpon>EDO.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\counonline.cs">
+      <DependentUpon>EDO.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\EDO.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -958,7 +961,6 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\PagedList.css" />
-    <Content Include="count.txt" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

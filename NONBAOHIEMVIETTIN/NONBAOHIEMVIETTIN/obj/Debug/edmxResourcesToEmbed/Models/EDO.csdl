@@ -4,6 +4,7 @@
     <EntitySet Name="accounts" EntityType="nonbaohiemviettinModel.accounts" />
     <EntitySet Name="category" EntityType="nonbaohiemviettinModel.category" />
     <EntitySet Name="contact" EntityType="nonbaohiemviettinModel.contact" />
+    <EntitySet Name="counonline" EntityType="nonbaohiemviettinModel.counonline" />
     <EntitySet Name="groupproduct" EntityType="nonbaohiemviettinModel.groupproduct" />
     <EntitySet Name="introduce" EntityType="nonbaohiemviettinModel.introduce" />
     <EntitySet Name="listimage" EntityType="nonbaohiemviettinModel.listimage" />
@@ -105,6 +106,13 @@
     <Property Name="map" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="display" Type="Boolean" />
     <Property Name="workday" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="counonline">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="total" Type="Int64" />
   </EntityType>
   <EntityType Name="groupproduct">
     <Key>
