@@ -293,3 +293,4 @@ C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTI
 C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.SignalR.Core.xml
 C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
 C:\Users\thuha\OneDrive\Desktop\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.csprojResolveAssemblyReference.cache

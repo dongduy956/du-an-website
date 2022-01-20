@@ -17,7 +17,7 @@ namespace NONBAOHIEMVIETTIN.Hubs
         nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
         public override Task OnConnected()
         {
-            var countonline = db.counonline.FirstOrDefault();
+            var countonline = db.countonline.FirstOrDefault();
             var total = countonline.total;
 
             counter += 1;

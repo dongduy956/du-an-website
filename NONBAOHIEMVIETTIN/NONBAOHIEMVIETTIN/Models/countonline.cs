@@ -12,7 +12,7 @@ namespace NONBAOHIEMVIETTIN.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class counonline
+    public partial class countonline
     {
         public int id { get; set; }
         public Nullable<long> total { get; set; }

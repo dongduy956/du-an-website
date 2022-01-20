@@ -40,7 +40,7 @@
     <Property Name="display" Type="bit" />
     <Property Name="workday" Type="nvarchar" MaxLength="100" />
   </EntityType>
-  <EntityType Name="counonline">
+  <EntityType Name="countonline">
     <Key>
       <PropertyRef Name="id" />
     </Key>
@@ -323,7 +323,7 @@
     <EntitySet Name="accounts" EntityType="Self.accounts" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="contact" EntityType="Self.contact" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="counonline" EntityType="Self.counonline" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="countonline" EntityType="Self.countonline" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="groupproduct" EntityType="Self.groupproduct" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="introduce" EntityType="Self.introduce" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="listimage" EntityType="Self.listimage" Schema="dbo" store:Type="Tables" />

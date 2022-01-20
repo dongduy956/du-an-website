@@ -92,3 +92,9 @@ D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEM
 D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Release\NONBAOHIEMVIETTIN.dll
 D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Release\NONBAOHIEMVIETTIN.pdb
 D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Release\NONBAOHIEMVIETTIN.csprojResolveAssemblyReference.cache
+D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.SignalR.Core.dll
+D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.SignalR.Core.pdb
+D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.SignalR.Core.xml
+D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
+D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.SignalR.SystemWeb.xml

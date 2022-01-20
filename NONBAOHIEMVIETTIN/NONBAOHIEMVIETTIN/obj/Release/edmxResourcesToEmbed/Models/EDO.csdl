@@ -1,67 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="nonbaohiemviettinModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityContainer Name="nonbaohiemviettinEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="accounts" EntityType="nonbaohiemviettinModel.accounts" />
-    <EntitySet Name="category" EntityType="nonbaohiemviettinModel.category" />
-    <EntitySet Name="contact" EntityType="nonbaohiemviettinModel.contact" />
-    <EntitySet Name="groupproduct" EntityType="nonbaohiemviettinModel.groupproduct" />
-    <EntitySet Name="introduce" EntityType="nonbaohiemviettinModel.introduce" />
-    <EntitySet Name="listimage" EntityType="nonbaohiemviettinModel.listimage" />
-    <EntitySet Name="news" EntityType="nonbaohiemviettinModel.news" />
-    <EntitySet Name="newstype" EntityType="nonbaohiemviettinModel.newstype" />
-    <EntitySet Name="order" EntityType="nonbaohiemviettinModel.order" />
-    <EntitySet Name="orderdetail" EntityType="nonbaohiemviettinModel.orderdetail" />
-    <EntitySet Name="production" EntityType="nonbaohiemviettinModel.production" />
-    <EntitySet Name="products" EntityType="nonbaohiemviettinModel.products" />
-    <EntitySet Name="rate" EntityType="nonbaohiemviettinModel.rate" />
-    <EntitySet Name="role" EntityType="nonbaohiemviettinModel.role" />
-    <EntitySet Name="sendcontactinfo" EntityType="nonbaohiemviettinModel.sendcontactinfo" />
-    <EntitySet Name="subscribe" EntityType="nonbaohiemviettinModel.subscribe" />
-    <AssociationSet Name="fk_accounts_role" Association="nonbaohiemviettinModel.fk_accounts_role">
-      <End Role="role" EntitySet="role" />
-      <End Role="accounts" EntitySet="accounts" />
-    </AssociationSet>
-    <AssociationSet Name="fk_order_account" Association="nonbaohiemviettinModel.fk_order_account">
-      <End Role="accounts" EntitySet="accounts" />
-      <End Role="order" EntitySet="order" />
-    </AssociationSet>
-    <AssociationSet Name="fk_rate_accounts" Association="nonbaohiemviettinModel.fk_rate_accounts">
-      <End Role="accounts" EntitySet="accounts" />
-      <End Role="rate" EntitySet="rate" />
-    </AssociationSet>
-    <AssociationSet Name="fk_products_category" Association="nonbaohiemviettinModel.fk_products_category">
-      <End Role="category" EntitySet="category" />
-      <End Role="products" EntitySet="products" />
-    </AssociationSet>
-    <AssociationSet Name="fk_products_groupproduct" Association="nonbaohiemviettinModel.fk_products_groupproduct">
-      <End Role="groupproduct" EntitySet="groupproduct" />
-      <End Role="products" EntitySet="products" />
-    </AssociationSet>
-    <AssociationSet Name="fk_listimage_products" Association="nonbaohiemviettinModel.fk_listimage_products">
-      <End Role="products" EntitySet="products" />
-      <End Role="listimage" EntitySet="listimage" />
-    </AssociationSet>
-    <AssociationSet Name="fk_news_newstype" Association="nonbaohiemviettinModel.fk_news_newstype">
-      <End Role="newstype" EntitySet="newstype" />
-      <End Role="news" EntitySet="news" />
-    </AssociationSet>
-    <AssociationSet Name="fk_orderdetail_order" Association="nonbaohiemviettinModel.fk_orderdetail_order">
-      <End Role="order" EntitySet="order" />
-      <End Role="orderdetail" EntitySet="orderdetail" />
-    </AssociationSet>
-    <AssociationSet Name="fk_orderdetail_products" Association="nonbaohiemviettinModel.fk_orderdetail_products">
-      <End Role="products" EntitySet="products" />
-      <End Role="orderdetail" EntitySet="orderdetail" />
-    </AssociationSet>
-    <AssociationSet Name="fk_products_production" Association="nonbaohiemviettinModel.fk_products_production">
-      <End Role="production" EntitySet="production" />
-      <End Role="products" EntitySet="products" />
-    </AssociationSet>
-    <AssociationSet Name="fk_rate_products" Association="nonbaohiemviettinModel.fk_rate_products">
-      <End Role="products" EntitySet="products" />
-      <End Role="rate" EntitySet="rate" />
-    </AssociationSet>
-  </EntityContainer>
   <EntityType Name="accounts">
     <Key>
       <PropertyRef Name="id" />
@@ -69,7 +7,7 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="idrole" Type="Int32" />
     <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="fullname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -77,9 +15,9 @@
     <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="status" Type="Boolean" />
     <Property Name="issocial" Type="Int32" />
-    <NavigationProperty Name="role" Relationship="nonbaohiemviettinModel.fk_accounts_role" FromRole="accounts" ToRole="role" />
-    <NavigationProperty Name="order" Relationship="nonbaohiemviettinModel.fk_order_account" FromRole="accounts" ToRole="order" />
-    <NavigationProperty Name="rate" Relationship="nonbaohiemviettinModel.fk_rate_accounts" FromRole="accounts" ToRole="rate" />
+    <NavigationProperty Name="role" Relationship="Self.fk_accounts_role" FromRole="accounts" ToRole="role" />
+    <NavigationProperty Name="order" Relationship="Self.fk_order_account" FromRole="accounts" ToRole="order" />
+    <NavigationProperty Name="rate" Relationship="Self.fk_rate_accounts" FromRole="accounts" ToRole="rate" />
   </EntityType>
   <EntityType Name="category">
     <Key>
@@ -89,7 +27,7 @@
     <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="status" Type="Boolean" />
-    <NavigationProperty Name="products" Relationship="nonbaohiemviettinModel.fk_products_category" FromRole="category" ToRole="products" />
+    <NavigationProperty Name="products" Relationship="Self.fk_products_category" FromRole="category" ToRole="products" />
   </EntityType>
   <EntityType Name="contact">
     <Key>
@@ -106,6 +44,13 @@
     <Property Name="display" Type="Boolean" />
     <Property Name="workday" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="countonline">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="total" Type="Int64" />
+  </EntityType>
   <EntityType Name="groupproduct">
     <Key>
       <PropertyRef Name="id" />
@@ -114,7 +59,7 @@
     <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="status" Type="Boolean" />
-    <NavigationProperty Name="products" Relationship="nonbaohiemviettinModel.fk_products_groupproduct" FromRole="groupproduct" ToRole="products" />
+    <NavigationProperty Name="products" Relationship="Self.fk_products_groupproduct" FromRole="groupproduct" ToRole="products" />
   </EntityType>
   <EntityType Name="introduce">
     <Key>
@@ -133,7 +78,7 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="id_product" Type="Int32" />
     <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="products" Relationship="nonbaohiemviettinModel.fk_listimage_products" FromRole="listimage" ToRole="products" />
+    <NavigationProperty Name="products" Relationship="Self.fk_listimage_products" FromRole="listimage" ToRole="products" />
   </EntityType>
   <EntityType Name="news">
     <Key>
@@ -146,16 +91,16 @@
     <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="createdate" Type="DateTime" Precision="0" />
     <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="newstype" Relationship="nonbaohiemviettinModel.fk_news_newstype" FromRole="news" ToRole="newstype" />
+    <NavigationProperty Name="newstype" Relationship="Self.fk_news_newstype" FromRole="news" ToRole="newstype" />
   </EntityType>
   <EntityType Name="newstype">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="name" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="alias" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="news" Relationship="nonbaohiemviettinModel.fk_news_newstype" FromRole="newstype" ToRole="news" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="news" Relationship="Self.fk_news_newstype" FromRole="newstype" ToRole="news" />
   </EntityType>
   <EntityType Name="order">
     <Key>
@@ -172,8 +117,8 @@
     <Property Name="statuspay" Type="Boolean" />
     <Property Name="total" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="accounts" Relationship="nonbaohiemviettinModel.fk_order_account" FromRole="order" ToRole="accounts" />
-    <NavigationProperty Name="orderdetail" Relationship="nonbaohiemviettinModel.fk_orderdetail_order" FromRole="order" ToRole="orderdetail" />
+    <NavigationProperty Name="accounts" Relationship="Self.fk_order_account" FromRole="order" ToRole="accounts" />
+    <NavigationProperty Name="orderdetail" Relationship="Self.fk_orderdetail_order" FromRole="order" ToRole="orderdetail" />
   </EntityType>
   <EntityType Name="orderdetail">
     <Key>
@@ -185,8 +130,8 @@
     <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="quantity" Type="Int32" />
     <Property Name="subtotal" Type="Decimal" Precision="18" Scale="0" />
-    <NavigationProperty Name="order" Relationship="nonbaohiemviettinModel.fk_orderdetail_order" FromRole="orderdetail" ToRole="order" />
-    <NavigationProperty Name="products" Relationship="nonbaohiemviettinModel.fk_orderdetail_products" FromRole="orderdetail" ToRole="products" />
+    <NavigationProperty Name="order" Relationship="Self.fk_orderdetail_order" FromRole="orderdetail" ToRole="order" />
+    <NavigationProperty Name="products" Relationship="Self.fk_orderdetail_products" FromRole="orderdetail" ToRole="products" />
   </EntityType>
   <EntityType Name="production">
     <Key>
@@ -196,7 +141,7 @@
     <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="status" Type="Boolean" />
-    <NavigationProperty Name="products" Relationship="nonbaohiemviettinModel.fk_products_production" FromRole="production" ToRole="products" />
+    <NavigationProperty Name="products" Relationship="Self.fk_products_production" FromRole="production" ToRole="products" />
   </EntityType>
   <EntityType Name="products">
     <Key>
@@ -218,12 +163,12 @@
     <Property Name="idcategory" Type="Int32" />
     <Property Name="idproduction" Type="Int32" />
     <Property Name="idgroupproduct" Type="Int32" />
-    <NavigationProperty Name="category" Relationship="nonbaohiemviettinModel.fk_products_category" FromRole="products" ToRole="category" />
-    <NavigationProperty Name="groupproduct" Relationship="nonbaohiemviettinModel.fk_products_groupproduct" FromRole="products" ToRole="groupproduct" />
-    <NavigationProperty Name="listimage" Relationship="nonbaohiemviettinModel.fk_listimage_products" FromRole="products" ToRole="listimage" />
-    <NavigationProperty Name="orderdetail" Relationship="nonbaohiemviettinModel.fk_orderdetail_products" FromRole="products" ToRole="orderdetail" />
-    <NavigationProperty Name="production" Relationship="nonbaohiemviettinModel.fk_products_production" FromRole="products" ToRole="production" />
-    <NavigationProperty Name="rate" Relationship="nonbaohiemviettinModel.fk_rate_products" FromRole="products" ToRole="rate" />
+    <NavigationProperty Name="category" Relationship="Self.fk_products_category" FromRole="products" ToRole="category" />
+    <NavigationProperty Name="groupproduct" Relationship="Self.fk_products_groupproduct" FromRole="products" ToRole="groupproduct" />
+    <NavigationProperty Name="listimage" Relationship="Self.fk_listimage_products" FromRole="products" ToRole="listimage" />
+    <NavigationProperty Name="orderdetail" Relationship="Self.fk_orderdetail_products" FromRole="products" ToRole="orderdetail" />
+    <NavigationProperty Name="production" Relationship="Self.fk_products_production" FromRole="products" ToRole="production" />
+    <NavigationProperty Name="rate" Relationship="Self.fk_rate_products" FromRole="products" ToRole="rate" />
   </EntityType>
   <EntityType Name="rate">
     <Key>
@@ -235,8 +180,8 @@
     <Property Name="star" Type="Int32" />
     <Property Name="comment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="createdate" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="accounts" Relationship="nonbaohiemviettinModel.fk_rate_accounts" FromRole="rate" ToRole="accounts" />
-    <NavigationProperty Name="products" Relationship="nonbaohiemviettinModel.fk_rate_products" FromRole="rate" ToRole="products" />
+    <NavigationProperty Name="accounts" Relationship="Self.fk_rate_accounts" FromRole="rate" ToRole="accounts" />
+    <NavigationProperty Name="products" Relationship="Self.fk_rate_products" FromRole="rate" ToRole="products" />
   </EntityType>
   <EntityType Name="role">
     <Key>
@@ -244,7 +189,7 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="accounts" Relationship="nonbaohiemviettinModel.fk_accounts_role" FromRole="role" ToRole="accounts" />
+    <NavigationProperty Name="accounts" Relationship="Self.fk_accounts_role" FromRole="role" ToRole="accounts" />
   </EntityType>
   <EntityType Name="sendcontactinfo">
     <Key>
@@ -265,8 +210,8 @@
     <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="fk_accounts_role">
-    <End Type="nonbaohiemviettinModel.role" Role="role" Multiplicity="0..1" />
-    <End Type="nonbaohiemviettinModel.accounts" Role="accounts" Multiplicity="*" />
+    <End Role="role" Type="Self.role" Multiplicity="0..1" />
+    <End Role="accounts" Type="Self.accounts" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="role">
         <PropertyRef Name="id" />
@@ -277,8 +222,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="fk_order_account">
-    <End Type="nonbaohiemviettinModel.accounts" Role="accounts" Multiplicity="0..1" />
-    <End Type="nonbaohiemviettinModel.order" Role="order" Multiplicity="*" />
+    <End Role="accounts" Type="Self.accounts" Multiplicity="0..1" />
+    <End Role="order" Type="Self.order" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="accounts">
         <PropertyRef Name="id" />
@@ -289,8 +234,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="fk_rate_accounts">
-    <End Type="nonbaohiemviettinModel.accounts" Role="accounts" Multiplicity="0..1" />
-    <End Type="nonbaohiemviettinModel.rate" Role="rate" Multiplicity="*" />
+    <End Role="accounts" Type="Self.accounts" Multiplicity="0..1" />
+    <End Role="rate" Type="Self.rate" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="accounts">
         <PropertyRef Name="id" />
@@ -301,8 +246,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="fk_products_category">
-    <End Type="nonbaohiemviettinModel.category" Role="category" Multiplicity="0..1" />
-    <End Type="nonbaohiemviettinModel.products" Role="products" Multiplicity="*" />
+    <End Role="category" Type="Self.category" Multiplicity="0..1" />
+    <End Role="products" Type="Self.products" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="category">
         <PropertyRef Name="id" />
@@ -313,8 +258,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="fk_products_groupproduct">
-    <End Type="nonbaohiemviettinModel.groupproduct" Role="groupproduct" Multiplicity="0..1" />
-    <End Type="nonbaohiemviettinModel.products" Role="products" Multiplicity="*" />
+    <End Role="groupproduct" Type="Self.groupproduct" Multiplicity="0..1" />
+    <End Role="products" Type="Self.products" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="groupproduct">
         <PropertyRef Name="id" />
@@ -325,8 +270,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="fk_listimage_products">
-    <End Type="nonbaohiemviettinModel.products" Role="products" Multiplicity="0..1" />
-    <End Type="nonbaohiemviettinModel.listimage" Role="listimage" Multiplicity="*" />
+    <End Role="products" Type="Self.products" Multiplicity="0..1" />
+    <End Role="listimage" Type="Self.listimage" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="products">
         <PropertyRef Name="id" />
@@ -337,8 +282,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="fk_news_newstype">
-    <End Type="nonbaohiemviettinModel.newstype" Role="newstype" Multiplicity="0..1" />
-    <End Type="nonbaohiemviettinModel.news" Role="news" Multiplicity="*" />
+    <End Role="newstype" Type="Self.newstype" Multiplicity="0..1" />
+    <End Role="news" Type="Self.news" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="newstype">
         <PropertyRef Name="id" />
@@ -349,8 +294,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="fk_orderdetail_order">
-    <End Type="nonbaohiemviettinModel.order" Role="order" Multiplicity="1" />
-    <End Type="nonbaohiemviettinModel.orderdetail" Role="orderdetail" Multiplicity="*" />
+    <End Role="order" Type="Self.order" Multiplicity="1" />
+    <End Role="orderdetail" Type="Self.orderdetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="order">
         <PropertyRef Name="id" />
@@ -361,8 +306,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="fk_orderdetail_products">
-    <End Type="nonbaohiemviettinModel.products" Role="products" Multiplicity="1" />
-    <End Type="nonbaohiemviettinModel.orderdetail" Role="orderdetail" Multiplicity="*" />
+    <End Role="products" Type="Self.products" Multiplicity="1" />
+    <End Role="orderdetail" Type="Self.orderdetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="products">
         <PropertyRef Name="id" />
@@ -373,8 +318,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="fk_products_production">
-    <End Type="nonbaohiemviettinModel.production" Role="production" Multiplicity="0..1" />
-    <End Type="nonbaohiemviettinModel.products" Role="products" Multiplicity="*" />
+    <End Role="production" Type="Self.production" Multiplicity="0..1" />
+    <End Role="products" Type="Self.products" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="production">
         <PropertyRef Name="id" />
@@ -385,8 +330,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="fk_rate_products">
-    <End Type="nonbaohiemviettinModel.products" Role="products" Multiplicity="0..1" />
-    <End Type="nonbaohiemviettinModel.rate" Role="rate" Multiplicity="*" />
+    <End Role="products" Type="Self.products" Multiplicity="0..1" />
+    <End Role="rate" Type="Self.rate" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="products">
         <PropertyRef Name="id" />
@@ -396,4 +341,67 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityContainer Name="nonbaohiemviettinEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="accounts" EntityType="Self.accounts" />
+    <EntitySet Name="category" EntityType="Self.category" />
+    <EntitySet Name="contact" EntityType="Self.contact" />
+    <EntitySet Name="countonline" EntityType="Self.countonline" />
+    <EntitySet Name="groupproduct" EntityType="Self.groupproduct" />
+    <EntitySet Name="introduce" EntityType="Self.introduce" />
+    <EntitySet Name="listimage" EntityType="Self.listimage" />
+    <EntitySet Name="news" EntityType="Self.news" />
+    <EntitySet Name="newstype" EntityType="Self.newstype" />
+    <EntitySet Name="order" EntityType="Self.order" />
+    <EntitySet Name="orderdetail" EntityType="Self.orderdetail" />
+    <EntitySet Name="production" EntityType="Self.production" />
+    <EntitySet Name="products" EntityType="Self.products" />
+    <EntitySet Name="rate" EntityType="Self.rate" />
+    <EntitySet Name="role" EntityType="Self.role" />
+    <EntitySet Name="sendcontactinfo" EntityType="Self.sendcontactinfo" />
+    <EntitySet Name="subscribe" EntityType="Self.subscribe" />
+    <AssociationSet Name="fk_accounts_role" Association="Self.fk_accounts_role">
+      <End Role="role" EntitySet="role" />
+      <End Role="accounts" EntitySet="accounts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_order_account" Association="Self.fk_order_account">
+      <End Role="accounts" EntitySet="accounts" />
+      <End Role="order" EntitySet="order" />
+    </AssociationSet>
+    <AssociationSet Name="fk_rate_accounts" Association="Self.fk_rate_accounts">
+      <End Role="accounts" EntitySet="accounts" />
+      <End Role="rate" EntitySet="rate" />
+    </AssociationSet>
+    <AssociationSet Name="fk_products_category" Association="Self.fk_products_category">
+      <End Role="category" EntitySet="category" />
+      <End Role="products" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="fk_products_groupproduct" Association="Self.fk_products_groupproduct">
+      <End Role="groupproduct" EntitySet="groupproduct" />
+      <End Role="products" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="fk_listimage_products" Association="Self.fk_listimage_products">
+      <End Role="products" EntitySet="products" />
+      <End Role="listimage" EntitySet="listimage" />
+    </AssociationSet>
+    <AssociationSet Name="fk_news_newstype" Association="Self.fk_news_newstype">
+      <End Role="newstype" EntitySet="newstype" />
+      <End Role="news" EntitySet="news" />
+    </AssociationSet>
+    <AssociationSet Name="fk_orderdetail_order" Association="Self.fk_orderdetail_order">
+      <End Role="order" EntitySet="order" />
+      <End Role="orderdetail" EntitySet="orderdetail" />
+    </AssociationSet>
+    <AssociationSet Name="fk_orderdetail_products" Association="Self.fk_orderdetail_products">
+      <End Role="products" EntitySet="products" />
+      <End Role="orderdetail" EntitySet="orderdetail" />
+    </AssociationSet>
+    <AssociationSet Name="fk_products_production" Association="Self.fk_products_production">
+      <End Role="production" EntitySet="production" />
+      <End Role="products" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="fk_rate_products" Association="Self.fk_rate_products">
+      <End Role="products" EntitySet="products" />
+      <End Role="rate" EntitySet="rate" />
+    </AssociationSet>
+  </EntityContainer>
 </Schema>

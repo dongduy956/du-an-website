@@ -253,7 +253,7 @@
     <Compile Include="Models\contact.cs">
       <DependentUpon>EDO.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\counonline.cs">
+    <Compile Include="Models\countonline.cs">
       <DependentUpon>EDO.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDO.Context.cs">
