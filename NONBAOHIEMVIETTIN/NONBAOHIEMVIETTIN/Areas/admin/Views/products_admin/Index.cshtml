@@ -4,6 +4,7 @@
 @{
     ViewBag.Title = "Danh sách nón";
     Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+    var db = new nonbaohiemviettinEntities();
 }
 @section styles{
     <style>
@@ -50,7 +51,7 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr>
+                        <tr id="_product_@item.id">
                             <td>@item.id</td>
                             <td><img class="img-product" src="~/assets/img/Nón bảo hiểm/@item.image" /></td>
                             <td>@item.name</td>
@@ -62,20 +63,20 @@
                             <td>@item.groupproduct.name</td>
                             <td>
                                 <div class="tool d-flex align-items-center flex-column justify-content-center">
-                                    <a data-toggle="modal" data-target="#product_@item.id" href="#" title="Xem sản phẩm @item.name" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                    <a data-toggle="modal" data-target="#product_@item.id" title="Xem sản phẩm @item.name" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                         <i class="far fa-eye"></i>
                                     </a>
 
-                                    <a href="#" title="Sửa sản phẩm @item.name" class="mt-1 mb-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                    <a title="Sửa sản phẩm @item.name" class="mt-1 mb-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                         <i class="far fa-edit"></i>
                                     </a>
-                                    <a href="#" data-id="@item.id" title="Xoá sản phẩm @item.name" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                    <a data-id="@item.id" title="Xoá sản phẩm @item.name" class="delete_product d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                         <i class="far fa-trash-alt"></i>
                                     </a>
                                 </div>
                             </td>
                         </tr>
-                <!-- Logout Modal-->
+                <!-- Product Modal-->
                         <div class="modal fade" id="product_@item.id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -99,9 +100,28 @@
                                         <p><strong>Giá:</strong> @item.price</p>
                                         <p><strong>Giá khuyến mãi:</strong> @item.promationprice</p>
                                         <p><strong>Số lượng còn:</strong> @item.quantity</p>
-                                        <p><strong>Đánh giá:</strong> </p>
-                                        <p><strong>Trạng thái:</strong>@(item.status == true ? "Còn" : "Hết")</p>
+                                        <div style="display:flex">
+                                            <strong>Đánh giá:</strong>
+                                            <ul style="margin:0;list-style: none;display: inherit;padding: 0;padding-left: 12px;">
+                                                @{ var avgStar = Math.Round(item.rate.Average(x => x.star) != null ? (decimal)item.rate.Average(x => x.star) : 0, 0);}
+                                                @for (var z = 0; z < 5; z++)
+                                                {
+                                                    if (avgStar != 0 && z < Math.Round((decimal)avgStar, 0))
+                                                    {
+                                                        <li><a class="ratting"><i class="fa fa-star"></i></a></li>
+                                                    }
+                                                    else
+                                                    {
+                                                        <li><a><i class="fa fa-star"></i></a></li>
+
+                                                    }
+                                                }
+                                            </ul>
+                                        </div>
+                                        <p><strong>Trạng thái:</strong> @(item.status == true ? "Còn" : "Hết")</p>
                                         <p><strong>Số lượt xem:</strong> @item.viewcount</p>
+                                        <p><strong>Sản phẩm:</strong> @(item.isdelete == true ? "Đã xoá" : "Chưa xoá")</p>
+
                                     </div>
                                     <div class="modal-footer">
                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Đóng</button>
@@ -116,6 +136,8 @@
     </div>
 
 </div>
+@if(ViewBag.last!=1)
+{ 
 <ul class="pagination mr-auto ml-auto" style="justify-content:center;">
 
     @Html.PagedListPager(Model,
@@ -126,3 +148,4 @@
         })
 
 </ul>
+}

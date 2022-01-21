@@ -10,9 +10,8 @@ namespace NONBAOHIEMVIETTIN.Controllers
     {
         nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
         public ActionResult Index()
-        {
-           
-            return View(db.products.ToList());
+        {           
+            return View(db.products.Where(x=> x.isdelete == false).ToList());
 
         }       
     }

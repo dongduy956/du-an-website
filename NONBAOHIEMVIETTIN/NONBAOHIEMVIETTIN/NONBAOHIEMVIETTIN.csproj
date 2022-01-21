@@ -230,9 +230,10 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\admin\adminAreaRegistration.cs" />
     <Compile Include="Areas\admin\Controllers\BaseController.cs" />
+    <Compile Include="Areas\admin\Controllers\Category_adminController.cs" />
     <Compile Include="Areas\admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\admin\Controllers\LoginController.cs" />
-    <Compile Include="Areas\admin\Controllers\productsController.cs" />
+    <Compile Include="Areas\admin\Controllers\products_adminController.cs" />
     <Compile Include="Areas\admin\Models\AccountLogin.cs" />
     <Compile Include="assets\NganLuongAPI\APICheckoutV3.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
@@ -318,6 +319,9 @@
       <DependentUpon>EDO.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\subscribe.cs">
+      <DependentUpon>EDO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sysdiagrams.cs">
       <DependentUpon>EDO.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -2875,11 +2879,11 @@
     <Content Include="Areas\admin\Views\web.config" />
     <Content Include="Areas\admin\Views\Dashboard\Index.cshtml" />
     <Content Include="Areas\admin\Views\Login\Index.cshtml" />
-    <Content Include="Areas\admin\Views\products\Create.cshtml" />
-    <Content Include="Areas\admin\Views\products\Delete.cshtml" />
-    <Content Include="Areas\admin\Views\products\Details.cshtml" />
-    <Content Include="Areas\admin\Views\products\Edit.cshtml" />
-    <Content Include="Areas\admin\Views\products\Index.cshtml" />
+    <Content Include="Areas\admin\Views\products_admin\Create.cshtml" />
+    <Content Include="Areas\admin\Views\products_admin\Delete.cshtml" />
+    <Content Include="Areas\admin\Views\products_admin\Details.cshtml" />
+    <Content Include="Areas\admin\Views\products_admin\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\products_admin\Index.cshtml" />
     <EntityDeploy Include="Models\EDO.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>EDO.Designer.cs</LastGenOutput>
@@ -2887,6 +2891,7 @@
     <Content Include="Models\EDO.edmx.diagram">
       <DependentUpon>EDO.edmx</DependentUpon>
     </Content>
+    <Content Include="Areas\admin\Views\Category_admin\Index.cshtml" />
     <None Include="Properties\PublishProfiles\nonbaohiemviettin.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

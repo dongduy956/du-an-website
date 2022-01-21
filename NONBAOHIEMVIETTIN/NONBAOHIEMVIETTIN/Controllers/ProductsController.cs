@@ -26,7 +26,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
         // GET: Products
         public ActionResult Index(string alias, int page = 1)
         {
-            var temp = db.products.Where(x => x.category.alias.Equals(alias) || x.production.alias.Equals(alias)).OrderByDescending(x => x.id).ToList();
+            var temp = db.products.Where(x =>( x.category.alias.Equals(alias) || x.production.alias.Equals(alias))&& x.isdelete == false).OrderByDescending(x => x.id).ToList();
             var products = temp.ToPagedList(page, pageSize);
             var category = db.category.SingleOrDefault(x => x.alias.Equals(alias));
             ViewBag.alias = category != null ? category.name : db.production.SingleOrDefault(x => x.alias.Equals(alias)).name;
@@ -35,7 +35,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
         }
         public ActionResult GroupProducts(string alias, string alia,int page=1)
         {
-            var temp = db.products.Where(x => x.category.alias.Equals(alias) && x.groupproduct.alias.Equals(alia)).OrderByDescending(x => x.id).ToList();
+            var temp = db.products.Where(x => x.category.alias.Equals(alias) && x.groupproduct.alias.Equals(alia) && x.isdelete == false).OrderByDescending(x => x.id).ToList();
             var products = temp.ToPagedList(page, pageSize);
             ViewBag.alias = db.groupproduct.SingleOrDefault(x => x.alias.Equals(alia)).name;
             ViewBagNoti(temp,1, page);
@@ -45,9 +45,9 @@ namespace NONBAOHIEMVIETTIN.Controllers
         {
             productdetail prd = new productdetail();
             prd.product= db.products.SingleOrDefault(x => x.alias.Equals(alias));
-            prd.lstProductCategory = db.products.Where(x => x.id != prd.product.id && x.category.id == prd.product.category.id).ToList();
-            prd.lstProductProduction= db.products.Where(x => x.id != prd.product.id && x.production.id == prd.product.production.id).ToList();
-            prd.lstProductGroup= db.products.Where(x => x.id != prd.product.id && x.groupproduct.id == prd.product.groupproduct.id && x.category.id == prd.product.category.id).ToList();
+            prd.lstProductCategory = db.products.Where(x => x.id != prd.product.id && x.category.id == prd.product.category.id&&prd.product.isdelete==false).ToList();
+            prd.lstProductProduction= db.products.Where(x => x.id != prd.product.id && x.production.id == prd.product.production.id && prd.product.isdelete == false).ToList();
+            prd.lstProductGroup= db.products.Where(x => x.id != prd.product.id && x.groupproduct.id == prd.product.groupproduct.id && x.category.id == prd.product.category.id && prd.product.isdelete == false).ToList();
             prd.lstRate = db.rate.Where(x => x.id_product == prd.product.id).ToList();
             return View(prd);
         }
@@ -57,11 +57,12 @@ namespace NONBAOHIEMVIETTIN.Controllers
             try
             {
                 string keyword = Request["tukhoa"].ToString().ToLower();
-                var temp = db.products.Where(x => x.category.name.ToLower().Contains(keyword)
+                var temp = db.products.Where(x => (x.category.name.ToLower().Contains(keyword)
                 || x.production.name.ToLower().Contains(keyword)
                 || x.name.ToLower().Contains(keyword)
                 || x.groupproduct.name.ToLower().Contains(keyword)
-                || x.id.ToString().ToLower().Equals(keyword)).OrderByDescending(x => x.id).ToList();
+                || x.id.ToString().ToLower().Equals(keyword)
+                ) && x.isdelete == false).OrderByDescending(x => x.id).ToList();
                 var products = temp.ToPagedList(page, pageSize);
                 ViewBag.alias = "Tìm kiếm: " + keyword;
                 ViewBagNoti(temp,2, page);

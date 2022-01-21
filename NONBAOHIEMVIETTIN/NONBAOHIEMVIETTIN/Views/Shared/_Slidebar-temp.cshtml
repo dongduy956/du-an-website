@@ -7,11 +7,11 @@
 <div class="sidebar_widget catrgorie mb-35">
     <h3>Danh mục sản phẩm</h3>
     <ul>
-        @foreach (var itemCategory in db.category)
+        @foreach (var itemCategory in db.category.Where(x=>x.isdelete==true).ToList())
             {
             <li class="has-sub">
                 <a class="category-item" data-alias="@(itemCategory.alias)">
-                    <i class="fa fa-caret-right"></i>@itemCategory.name (@db.products.Count(x => x.idcategory == itemCategory.id))
+                    <i class="fa fa-caret-right"></i>@itemCategory.name (@db.products.Count(x =>x.isdelete==false&& x.idcategory == itemCategory.id))
                     <span class="operation">+</span>
                 </a>
                 <ul class="categorie_sub">
@@ -19,7 +19,7 @@
                     {
                         <li>
                             <a href="/@itemCategory.alias/@(itemGroupproduct.alias).html">
-                                <i class="fa fa-caret-right"></i> @itemGroupproduct.name (@db.products.Count(x => x.idgroupproduct == itemGroupproduct.id && x.idcategory == itemCategory.id))
+                                <i class="fa fa-caret-right"></i> @itemGroupproduct.name (@db.products.Count(x =>x.isdelete==false&& x.idgroupproduct == itemGroupproduct.id && x.idcategory == itemCategory.id))
                             </a>
                         </li>
                     }

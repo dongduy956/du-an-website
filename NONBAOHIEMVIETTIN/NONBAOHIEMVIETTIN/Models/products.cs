@@ -38,6 +38,7 @@ namespace NONBAOHIEMVIETTIN.Models
         public Nullable<int> idcategory { get; set; }
         public Nullable<int> idproduction { get; set; }
         public Nullable<int> idgroupproduct { get; set; }
+        public Nullable<bool> isdelete { get; set; }
     
         public virtual category category { get; set; }
         public virtual groupproduct groupproduct { get; set; }

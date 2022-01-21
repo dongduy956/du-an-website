@@ -11,7 +11,7 @@ using PagedList;
 
 namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
 {
-    public class productsController : BaseController
+    public class products_adminController : BaseController
     {
         nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
         int pageSize = 10;
@@ -26,27 +26,39 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             }
         }
         // GET: admin/products
-        public ActionResult Index(int page=1)
+        public ActionResult Index(int page = 1)
         {
-            var temp = db.products.Include(p => p.category).Include(p => p.groupproduct).Include(p => p.production).ToList();
+            var temp = db.products.Where(x => x.isdelete == false).ToList();
             var products = temp.ToPagedList(page, pageSize);
             ViewBagNoti(temp, page);
             return View(products);
         }
-
-        // GET: admin/products/Details/5
-        public ActionResult Details(int? id)
+        [HttpPost]
+        public JsonResult delete_product(int id)
         {
-            if (id == null)
+            try
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                var product = db.products.SingleOrDefault(x => x.id == id);
+                product.isdelete = true;
+                db.Entry(product).State = EntityState.Modified;
+                db.SaveChanges();
+
+
             }
-            products products = db.products.Find(id);
-            if (products == null)
+            catch (Exception ex)
             {
-                return HttpNotFound();
+                return Json(new
+                {
+                    status = 0,
+                    message = "Có lỗi trong quá trình xoá.Vui lòng thử lại."
+                });
             }
-            return View(products);
+
+            return Json(new
+            {
+                status = 1,
+                message = "Xoá thành công."
+            });
         }
 
         // GET: admin/products/Create
@@ -115,31 +127,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             return View(products);
         }
 
-        // GET: admin/products/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            products products = db.products.Find(id);
-            if (products == null)
-            {
-                return HttpNotFound();
-            }
-            return View(products);
-        }
 
-        // POST: admin/products/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            products products = db.products.Find(id);
-            db.products.Remove(products);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
 
         protected override void Dispose(bool disposing)
         {
