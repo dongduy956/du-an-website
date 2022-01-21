@@ -15,6 +15,11 @@ namespace NONBAOHIEMVIETTIN.Areas.admin
         public override void RegisterArea(AreaRegistrationContext context) 
         {
             context.MapRoute(
+               "admin_products_index",
+               "admin/non.html",
+               new { controller = "products", action = "Index", id = UrlParameter.Optional }
+           );
+            context.MapRoute(
                "admin_login",
                "admin/dang-nhap.html",
                new { controller = "Login", action = "Index", id = UrlParameter.Optional }

@@ -4756,7 +4756,7 @@ input[type="button"].btn-block {
   border-radius: 0.35rem;
 }
 
-.page-link {
+.pagination a {
   position: relative;
   display: block;
   padding: 0.5rem 0.75rem;
@@ -4767,7 +4767,7 @@ input[type="button"].btn-block {
   border: 1px solid #dddfeb;
 }
 
-.page-link:hover {
+.pagination a:hover {
   z-index: 2;
   color: #224abe;
   text-decoration: none;
@@ -4775,31 +4775,31 @@ input[type="button"].btn-block {
   border-color: #dddfeb;
 }
 
-.page-link:focus {
+.pagination a:focus {
   z-index: 3;
   outline: 0;
   box-shadow: 0 0 0 0.2rem rgba(78, 115, 223, 0.25);
 }
 
-.page-item:first-child .page-link {
+.pagination li:first-child .pagination li a {
   margin-left: 0;
   border-top-left-radius: 0.35rem;
   border-bottom-left-radius: 0.35rem;
 }
 
-.page-item:last-child .page-link {
+.pagination li:last-child .pagination li a {
   border-top-right-radius: 0.35rem;
   border-bottom-right-radius: 0.35rem;
 }
 
-.page-item.active .page-link {
+.pagination li.active a {
   z-index: 3;
   color: #fff;
   background-color: #4e73df;
   border-color: #4e73df;
 }
 
-.page-item.disabled .page-link {
+.pagination li.disabled .pagination li a {
   color: #858796;
   pointer-events: none;
   cursor: auto;
@@ -4807,34 +4807,34 @@ input[type="button"].btn-block {
   border-color: #dddfeb;
 }
 
-.pagination-lg .page-link {
+.pagination-lg a {
   padding: 0.75rem 1.5rem;
   font-size: 1.25rem;
   line-height: 1.5;
 }
 
-.pagination-lg .page-item:first-child .page-link {
+.pagination-lg li:first-child a {
   border-top-left-radius: 0.3rem;
   border-bottom-left-radius: 0.3rem;
 }
 
-.pagination-lg .page-item:last-child .page-link {
+.pagination-lg li:last-child a {
   border-top-right-radius: 0.3rem;
   border-bottom-right-radius: 0.3rem;
 }
 
-.pagination-sm .page-link {
+.pagination-sm a {
   padding: 0.25rem 0.5rem;
   font-size: 0.875rem;
   line-height: 1.5;
 }
 
-.pagination-sm .page-item:first-child .page-link {
+.pagination-sm li:first-child .pagination-sm a {
   border-top-left-radius: 0.2rem;
   border-bottom-left-radius: 0.2rem;
 }
 
-.pagination-sm .page-item:last-child .page-link {
+.pagination-sm li:last-child .pagination-sm a {
   border-top-right-radius: 0.2rem;
   border-bottom-right-radius: 0.2rem;
 }
@@ -11278,4 +11278,7 @@ footer.sticky-footer .copyright {
 
 body.sidebar-toggled footer.sticky-footer {
   width: 100%;
+}
+.tool a{
+    min-width:35px;
 }

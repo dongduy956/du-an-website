@@ -1,0 +1,128 @@
+﻿@using NONBAOHIEMVIETTIN.Models;
+@model PagedList.IPagedList<products>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Danh sách nón";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+}
+@section styles{
+    <style>
+        .img-product {
+            width: 100px;
+            height: 100px;
+        }
+
+        .modal-body {
+            overflow-y: scroll;
+            max-height: 70vh;
+        }
+
+            .modal-body p {
+                margin: 0;
+            }
+    </style>
+}
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách nón</h6>
+        <a href="#" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <i class="fas fa-plus fa-sm text-white-50"></i> Thêm mới
+        </a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Ảnh</th>
+                        <th>Tên</th>
+                        <th>Giá</th>
+                        <th>Giá khuyến mãi</th>
+                        <th>Số lượng còn</th>
+                        <th>Loại nón</th>
+                        <th>Hãng sản xuất</th>
+                        <th>Nhóm nón</th>
+                        <th>Công cụ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.id</td>
+                            <td><img class="img-product" src="~/assets/img/Nón bảo hiểm/@item.image" /></td>
+                            <td>@item.name</td>
+                            <td>@item.price</td>
+                            <td>@item.promationprice</td>
+                            <td>@item.quantity</td>
+                            <td>@item.category.name</td>
+                            <td>@item.production.name</td>
+                            <td>@item.groupproduct.name</td>
+                            <td>
+                                <div class="tool d-flex align-items-center flex-column justify-content-center">
+                                    <a data-toggle="modal" data-target="#product_@item.id" href="#" title="Xem sản phẩm @item.name" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                        <i class="far fa-eye"></i>
+                                    </a>
+
+                                    <a href="#" title="Sửa sản phẩm @item.name" class="mt-1 mb-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                        <i class="far fa-edit"></i>
+                                    </a>
+                                    <a href="#" data-id="@item.id" title="Xoá sản phẩm @item.name" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                        <i class="far fa-trash-alt"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                <!-- Logout Modal-->
+                        <div class="modal fade" id="product_@item.id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Thông tin nón <strong>@item.name</strong></h5>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p><strong>Mã:</strong> @item.id</p>
+                                        <p><strong>Tên:</strong> @item.name</p>
+                                        <p><strong>Ngày tạo: </strong> @item.createddate</p>
+                                        <p><strong>Thuộc loại nón:</strong> @item.category.name</p>
+                                        <p><strong>Thuộc nhóm nón:</strong> @item.groupproduct.name</p>
+                                        <p><strong>Thuộc hãng sản xuất:</strong> @item.production.name</p>
+                                        <p><strong>Mô tả:</strong> @item.description</p>
+                                        <p><strong>Bán chạy:</strong> @(item.fastsell == true ? "Có" : "Không")</p>
+                                        <p><strong>Bán chạy:</strong> <img src="~/assets/img/Nón bảo hiểm/@item.image" class="img-product" /></p>
+                                        <p><strong>Sản phẩm mới:</strong> @(item.newproduct == true ? "Có" : "Không")</p>
+                                        <p><strong>Giá:</strong> @item.price</p>
+                                        <p><strong>Giá khuyến mãi:</strong> @item.promationprice</p>
+                                        <p><strong>Số lượng còn:</strong> @item.quantity</p>
+                                        <p><strong>Đánh giá:</strong> </p>
+                                        <p><strong>Trạng thái:</strong>@(item.status == true ? "Còn" : "Hết")</p>
+                                        <p><strong>Số lượt xem:</strong> @item.viewcount</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Đóng</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+<ul class="pagination mr-auto ml-auto" style="justify-content:center;">
+
+    @Html.PagedListPager(Model,
+        page => Url.Action("Index", new { page }),
+        new PagedListRenderOptions
+        {
+            MaximumPageNumbersToDisplay = 3
+        })
+
+</ul>
