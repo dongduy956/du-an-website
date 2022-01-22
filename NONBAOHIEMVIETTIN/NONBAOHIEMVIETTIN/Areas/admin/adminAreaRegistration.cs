@@ -14,7 +14,24 @@ namespace NONBAOHIEMVIETTIN.Areas.admin
 
         public override void RegisterArea(AreaRegistrationContext context) 
         {
-
+            context.MapRoute(
+         "admin_products_create",
+         "admin/them-moi-non.html",
+         new { controller = "products_admin", action = "Create", id = UrlParameter.Optional, Area = "Admin" },
+          namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+     );
+            context.MapRoute(
+            "admin_groupproduct_index",
+            "admin/nhom-non.html",
+            new { controller = "GroupProduct_admin", action = "Index", id = UrlParameter.Optional, Area = "Admin" },
+             namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+        );
+            context.MapRoute(
+             "admin_production_index",
+             "admin/hang-san-xuat.html",
+             new { controller = "Production_admin", action = "Index", id = UrlParameter.Optional, Area = "Admin" },
+              namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+         );
             context.MapRoute(
               "admin_category_index",
               "admin/loai-non.html",

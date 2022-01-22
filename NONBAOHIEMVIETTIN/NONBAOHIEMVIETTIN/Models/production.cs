@@ -24,6 +24,7 @@ namespace NONBAOHIEMVIETTIN.Models
         public string name { get; set; }
         public string alias { get; set; }
         public Nullable<bool> status { get; set; }
+        public Nullable<bool> isdelete { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<products> products { get; set; }

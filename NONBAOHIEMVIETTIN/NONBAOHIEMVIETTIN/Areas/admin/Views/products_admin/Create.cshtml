@@ -1,154 +1,159 @@
 ﻿@model NONBAOHIEMVIETTIN.Models.products
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Thêm mới nón";
     Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
 }
+@section scripts{
+    <script>
+        // Disable form submissions if there are invalid fields
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Get the forms we want to add validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
 
-<h2>Create</h2>
+            var editor = CKEDITOR.replace('txtDescription', {
+                customConfig: '/Areas/admin/assets/js/ckeditor/config.js'
+            })
+            $('#btnimg').click(function (e) {
+                e.preventDefault();
+                var finder = new CKFinder();
+                finder.selectActionFunction = function (url) {
+                    $('#txtimg').text(url); 
+                    $('#txtimg_hide').val(url); 
+                }
+                finder.popup();
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>products</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.alias, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.alias, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.alias, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.status, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.status)
-                    @Html.ValidationMessageFor(model => model.status, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.price, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.promationprice, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.promationprice, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.promationprice, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.quantity, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.quantity, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.quantity, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.description, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.description, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.description, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.viewcount, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.viewcount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.viewcount, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.createddate, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.createddate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.createddate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.image, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.image, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.image, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.fastsell, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.fastsell)
-                    @Html.ValidationMessageFor(model => model.fastsell, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.newproduct, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                <div class="checkbox">
-                    @Html.EditorFor(model => model.newproduct)
-                    @Html.ValidationMessageFor(model => model.newproduct, "", new { @class = "text-danger" })
-                </div>
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.idcategory, "idcategory", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("idcategory", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.idcategory, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.idproduction, "idproduction", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("idproduction", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.idproduction, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.idgroupproduct, "idgroupproduct", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("idgroupproduct", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.idgroupproduct, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+            })
+            //$('#ckb_status').change(function () {
+            //    if ($(this).is(":checked"))
+            //        $('#status_mess').text('Còn hàng');
+            //    else
+            //        $('#status_mess').text('Hết hàng');
+            //});
+        })();
+     
+    </script>
+    }
+@section styles{
+    <style>
+    .custom-file-label{
+        left:0.75rem;
+        right:0.75rem;
+    }
+    </style>}
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Thêm mới nón</h6>
     </div>
-}
+    <div class="card-body">
+        @using (Html.BeginForm("Create", "products_admin", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "needs-validation", @novalidate = "true" }))
+        {
+            @Html.AntiForgeryToken()
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-md-12">Tên nón</label>
+                    <div class="col-md-12">
+                        <input name="name" placeholder = "Nhập vào tên nón" required class = "form-control"/>
+                        <div class="valid-feedback">Valid</div>
+                        <div class="invalid-feedback">Nhập vào tên nón</div>
+                    </div>
+                </div>                              
+                <div class="form-group">
+                    <label class = "control-label col-md-12">Giá</label>
+                    <div class="col-md-12">
+                        <input type="number" placeholder="Nhập vào giá bán" required class = "form-control" name="price"/>
+                    </div>
+                    <div class="valid-feedback">Valid</div>
+                    <div class="invalid-feedback">Nhập giá bán</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-12">Giá khuyến mãi</label>
+                    <div class="col-md-12">
+                        <input type="number" value="0" required placeholder="Nhập vào giá khuyến mãi (nếu có)" class="form-control" name="promationprice"/>
+                    </div>    
+                    <div class="valid-feedback">Valid</div>
+                    <div class="invalid-feedback">Nhập giá khuyến mãi (nếu có)</div>                
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-12">Số lượng</label>
+                    <div class="col-md-12">
+                        <input type="number" placeholder="Nhập vào số lượng (1-100)" required value="1" min="1" max="1000" class="form-control" name="quantity" />
+                    </div>
+                    <div class="valid-feedback">Valid</div>
+                    <div class="invalid-feedback">Nhập vào số lượng (1-100)</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-12">Mô tả</label>
+                    <div class="col-md-12">
+                        <textarea required placeholder="Nhập vào mô tả" id = "txtDescription" name="description" class = "form-control"></textarea>
+                    </div>  
+                    <div class="valid-feedback">Valid</div>
+                    <div class="invalid-feedback">Nhập mô tả</div>                                                     
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-12" for="image">Ảnh đại diện</label>
+                    <span class="custom-file col-md-12">
+                        <input type="file" class="custom-file-input" id="btnimg">
+                        <label class="custom-file-label"  id="txtimg" for="customFile">Chọn ảnh</label>
+                    </span>                 
+                    <input name="image" id="txtimg_hide" type="hidden" />
+
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-12">Loại nón</label>
+                    <div class="col-md-12">
+                        @Html.DropDownList("idcategory", null, htmlAttributes: new { @class = "form-control" })                        
+                    </div>                      
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-12">Hãng sản xuất</label>
+                    <div class="col-md-12">
+                        @Html.DropDownList("idproduction", null, htmlAttributes: new { @class = "form-control" })
+                    </div>             
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-12">Nhóm nón</label>
+                    <div class="col-md-12">
+                        @Html.DropDownList("idgroupproduct", null, htmlAttributes: new { @class = "form-control" })                        
+                    </div> 
+                </div>
+
+                <div class="form-group">
+                    <a href="/admin/non.html" class="btn btn-light btn-icon-split" style="margin:0 0.75rem">
+                        <span class="icon text-gray-600">
+                            <i class="fas fa-arrow-left"></i>
+                        </span>
+                        <span class="text">Trở về</span>
+                    </a>
+                    <button type="submit"  style="margin:0 0.75rem" class="btn btn-success btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span class="text">Tạo mới</span>
+                    </button>
+                </div>
+            </div>
+        }     
+    </div>
 </div>
+

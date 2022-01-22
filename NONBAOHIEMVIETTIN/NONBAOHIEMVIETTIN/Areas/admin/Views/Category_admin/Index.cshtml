@@ -49,7 +49,7 @@
                         <tr id="_category_@item.id">
                             <td>@item.id</td>
                             <td>@item.name</td>
-                            <td>@(item.status == true ? "Hết hàng loại này" : "Còn hàng loại này")</td>
+                            <td>@(item.status == true ? "Còn hàng" : "Hết hàng") (@db.products.Count(x=>x.idcategory==item.id &&x.isdelete==false))</td>
                             <td>@(item.isdelete == true ? "Đã xoá" : "Chưa xoá")</td>
                             <td>
                                 <div class="tool d-flex align-items-center flex-column justify-content-center">
@@ -57,9 +57,12 @@
                                     <a title="Sửa sản phẩm @item.name" class="mb-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                         <i class="far fa-edit"></i>
                                     </a>
+                                    @if(item.isdelete==false)
+                                    { 
                                     <a data-id="@item.id" title="Xoá loại @item.name" class="delete_category d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                         <i class="far fa-trash-alt"></i>
                                     </a>
+                                    }
                                 </div>
                             </td>
                         </tr>

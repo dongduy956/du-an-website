@@ -1,0 +1,89 @@
+﻿@using NONBAOHIEMVIETTIN.Models;
+@model PagedList.IPagedList<groupproduct>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Danh sách nhóm nón";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+    var db = new nonbaohiemviettinEntities();
+}
+@section styles{
+    <style>
+        .img-product {
+            width: 100px;
+            height: 100px;
+        }
+
+        .modal-body {
+            overflow-y: scroll;
+            max-height: 70vh;
+        }
+
+            .modal-body p {
+                margin: 0;
+            }
+    </style>
+}
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách nhóm nón</h6>
+        <a href="#" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <i class="fas fa-plus fa-sm text-white-50"></i> Thêm mới
+        </a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Tên</th>
+                        <th>Tình trạng</th>
+                        <th>Xoá?</th>
+                        <th>Công cụ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr id="_group-product_@item.id">
+                            <td>@item.id</td>
+                            <td>@item.name</td>
+                            <td>@(item.status == true ? "Còn hàng" : "Hết hàng") (@db.products.Count(x=>x.idgroupproduct==item.id && x.isdelete==false))</td>
+                            <td>@(item.isdelete == true ? "Đã xoá" : "Chưa xoá")</td>
+                            <td>
+                                <div class="tool d-flex align-items-center flex-column justify-content-center">
+
+                                    <a title="Sửa sản phẩm @item.name" class="mb-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                        <i class="far fa-edit"></i>
+                                    </a>
+                                    @if (item.isdelete == false)
+                                    {
+                                        <a data-id="@item.id" title="Xoá loại @item.name" class="delete_group-product d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                            <i class="far fa-trash-alt"></i>
+                                        </a>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+@if (ViewBag.last != 1)
+{
+    <ul class="pagination mr-auto ml-auto" style="justify-content:center;">
+
+        @Html.PagedListPager(Model,
+            page => Url.Action("Index", new { page }),
+            new PagedListRenderOptions
+            {
+                MaximumPageNumbersToDisplay = 3
+            })
+
+    </ul>
+}

@@ -25,7 +25,6 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 ViewBag.noti = "Showing " + page + "-" + last + " of " + temp.Count() + " results";
             }
         }
-        // GET: admin/products
         public ActionResult Index(int page = 1)
         {
             var temp = db.products.Where(x => x.isdelete == false).ToList();
@@ -60,8 +59,6 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 message = "Xoá thành công."
             });
         }
-
-        // GET: admin/products/Create
         public ActionResult Create()
         {
             ViewBag.idcategory = new SelectList(db.category, "id", "name");
@@ -69,19 +66,21 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             ViewBag.idproduction = new SelectList(db.production, "id", "name");
             return View();
         }
-
-        // POST: admin/products/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,name,alias,status,price,promationprice,quantity,description,viewcount,createddate,image,fastsell,newproduct,idcategory,idproduction,idgroupproduct")] products products)
+        [ValidateInput(false)]
+        public ActionResult Create([Bind(Include = "id,name,price,promationprice,quantity,description,image,idcategory,idproduction,idgroupproduct")] products products)
         {
             if (ModelState.IsValid)
             {
+                products.createddate = DateTime.Now;
+                products.fastsell = products.isdelete = false;
+                products.newproduct =products.status =true;
+                products.viewcount = 0;
+                products.alias = HoTro.Instances.convertToUnSign3(products.name);
                 db.products.Add(products);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect("/admin/non.html");
             }
 
             ViewBag.idcategory = new SelectList(db.category, "id", "name", products.idcategory);

@@ -42,6 +42,5 @@ namespace NONBAOHIEMVIETTIN.Models
         public virtual DbSet<role> role { get; set; }
         public virtual DbSet<sendcontactinfo> sendcontactinfo { get; set; }
         public virtual DbSet<subscribe> subscribe { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
     }
 }

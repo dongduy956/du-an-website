@@ -27,8 +27,8 @@
     <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="status" Type="Boolean" />
-    <NavigationProperty Name="products" Relationship="Self.fk_products_category" FromRole="category" ToRole="products" />
     <Property Name="isdelete" Type="Boolean" />
+    <NavigationProperty Name="products" Relationship="Self.fk_products_category" FromRole="category" ToRole="products" />
   </EntityType>
   <EntityType Name="contact">
     <Key>
@@ -60,6 +60,7 @@
     <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="status" Type="Boolean" />
+    <Property Name="isdelete" Type="Boolean" />
     <NavigationProperty Name="products" Relationship="Self.fk_products_groupproduct" FromRole="groupproduct" ToRole="products" />
   </EntityType>
   <EntityType Name="introduce">
@@ -142,6 +143,7 @@
     <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="status" Type="Boolean" />
+    <Property Name="isdelete" Type="Boolean" />
     <NavigationProperty Name="products" Relationship="Self.fk_products_production" FromRole="production" ToRole="products" />
   </EntityType>
   <EntityType Name="products">
@@ -164,13 +166,13 @@
     <Property Name="idcategory" Type="Int32" />
     <Property Name="idproduction" Type="Int32" />
     <Property Name="idgroupproduct" Type="Int32" />
+    <Property Name="isdelete" Type="Boolean" />
     <NavigationProperty Name="category" Relationship="Self.fk_products_category" FromRole="products" ToRole="category" />
     <NavigationProperty Name="groupproduct" Relationship="Self.fk_products_groupproduct" FromRole="products" ToRole="groupproduct" />
     <NavigationProperty Name="listimage" Relationship="Self.fk_listimage_products" FromRole="products" ToRole="listimage" />
     <NavigationProperty Name="orderdetail" Relationship="Self.fk_orderdetail_products" FromRole="products" ToRole="orderdetail" />
     <NavigationProperty Name="production" Relationship="Self.fk_products_production" FromRole="products" ToRole="production" />
     <NavigationProperty Name="rate" Relationship="Self.fk_rate_products" FromRole="products" ToRole="rate" />
-    <Property Name="isdelete" Type="Boolean" />
   </EntityType>
   <EntityType Name="rate">
     <Key>
@@ -210,16 +212,6 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <Association Name="fk_accounts_role">
     <End Role="role" Type="Self.role" Multiplicity="0..1" />
@@ -371,7 +363,6 @@
     <EntitySet Name="role" EntityType="Self.role" />
     <EntitySet Name="sendcontactinfo" EntityType="Self.sendcontactinfo" />
     <EntitySet Name="subscribe" EntityType="Self.subscribe" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
     <AssociationSet Name="fk_accounts_role" Association="Self.fk_accounts_role">
       <End Role="role" EntitySet="role" />
       <End Role="accounts" EntitySet="accounts" />

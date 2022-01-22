@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="nonbaohiemviettinModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="nonbaohiemviettinModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="accounts">
           <Key>
             <PropertyRef Name="id" />
@@ -61,6 +61,7 @@
           <Property Name="name" Type="nvarchar" MaxLength="100" />
           <Property Name="alias" Type="varchar" MaxLength="100" />
           <Property Name="status" Type="bit" />
+          <Property Name="isdelete" Type="bit" />
         </EntityType>
         <EntityType Name="introduce">
           <Key>
@@ -135,6 +136,7 @@
           <Property Name="name" Type="nvarchar" MaxLength="100" />
           <Property Name="alias" Type="varchar" MaxLength="100" />
           <Property Name="status" Type="bit" />
+          <Property Name="isdelete" Type="bit" />
         </EntityType>
         <EntityType Name="products">
           <Key>
@@ -193,16 +195,6 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="email" Type="varchar" MaxLength="50" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
-          <Property Name="principal_id" Type="int" Nullable="false" />
-          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="version" Type="int" />
-          <Property Name="definition" Type="varbinary(max)" />
         </EntityType>
         <Association Name="fk_accounts_role">
           <End Role="role" Type="Self.role" Multiplicity="0..1" />
@@ -354,7 +346,6 @@
           <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="sendcontactinfo" EntityType="Self.sendcontactinfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="subscribe" EntityType="Self.subscribe" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="fk_accounts_role" Association="Self.fk_accounts_role">
             <End Role="role" EntitySet="role" />
             <End Role="accounts" EntitySet="accounts" />
@@ -400,7 +391,8 @@
             <End Role="rate" EntitySet="rate" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="nonbaohiemviettinModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -431,8 +423,8 @@
           <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="status" Type="Boolean" />
-          <NavigationProperty Name="products" Relationship="Self.fk_products_category" FromRole="category" ToRole="products" />
           <Property Name="isdelete" Type="Boolean" />
+          <NavigationProperty Name="products" Relationship="Self.fk_products_category" FromRole="category" ToRole="products" />
         </EntityType>
         <EntityType Name="contact">
           <Key>
@@ -464,6 +456,7 @@
           <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="status" Type="Boolean" />
+          <Property Name="isdelete" Type="Boolean" />
           <NavigationProperty Name="products" Relationship="Self.fk_products_groupproduct" FromRole="groupproduct" ToRole="products" />
         </EntityType>
         <EntityType Name="introduce">
@@ -546,6 +539,7 @@
           <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="status" Type="Boolean" />
+          <Property Name="isdelete" Type="Boolean" />
           <NavigationProperty Name="products" Relationship="Self.fk_products_production" FromRole="production" ToRole="products" />
         </EntityType>
         <EntityType Name="products">
@@ -568,13 +562,13 @@
           <Property Name="idcategory" Type="Int32" />
           <Property Name="idproduction" Type="Int32" />
           <Property Name="idgroupproduct" Type="Int32" />
+          <Property Name="isdelete" Type="Boolean" />
           <NavigationProperty Name="category" Relationship="Self.fk_products_category" FromRole="products" ToRole="category" />
           <NavigationProperty Name="groupproduct" Relationship="Self.fk_products_groupproduct" FromRole="products" ToRole="groupproduct" />
           <NavigationProperty Name="listimage" Relationship="Self.fk_listimage_products" FromRole="products" ToRole="listimage" />
           <NavigationProperty Name="orderdetail" Relationship="Self.fk_orderdetail_products" FromRole="products" ToRole="orderdetail" />
           <NavigationProperty Name="production" Relationship="Self.fk_products_production" FromRole="products" ToRole="production" />
           <NavigationProperty Name="rate" Relationship="Self.fk_rate_products" FromRole="products" ToRole="rate" />
-          <Property Name="isdelete" Type="Boolean" />
         </EntityType>
         <EntityType Name="rate">
           <Key>
@@ -614,16 +608,6 @@
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
-        <EntityType Name="sysdiagrams">
-          <Key>
-            <PropertyRef Name="diagram_id" />
-          </Key>
-          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="principal_id" Type="Int32" Nullable="false" />
-          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="version" Type="Int32" />
-          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
         </EntityType>
         <Association Name="fk_accounts_role">
           <End Role="role" Type="Self.role" Multiplicity="0..1" />
@@ -775,7 +759,6 @@
           <EntitySet Name="role" EntityType="Self.role" />
           <EntitySet Name="sendcontactinfo" EntityType="Self.sendcontactinfo" />
           <EntitySet Name="subscribe" EntityType="Self.subscribe" />
-          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
           <AssociationSet Name="fk_accounts_role" Association="Self.fk_accounts_role">
             <End Role="role" EntitySet="role" />
             <End Role="accounts" EntitySet="accounts" />
@@ -847,11 +830,11 @@
           <EntitySetMapping Name="category">
             <EntityTypeMapping TypeName="nonbaohiemviettinModel.category">
               <MappingFragment StoreEntitySet="category">
-                <ScalarProperty Name="isdelete" ColumnName="isdelete" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="alias" ColumnName="alias" />
                 <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="isdelete" ColumnName="isdelete" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -886,6 +869,7 @@
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="alias" ColumnName="alias" />
                 <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="isdelete" ColumnName="isdelete" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -966,13 +950,13 @@
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="alias" ColumnName="alias" />
                 <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="isdelete" ColumnName="isdelete" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="products">
             <EntityTypeMapping TypeName="nonbaohiemviettinModel.products">
               <MappingFragment StoreEntitySet="products">
-                <ScalarProperty Name="isdelete" ColumnName="isdelete" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="alias" ColumnName="alias" />
@@ -989,6 +973,7 @@
                 <ScalarProperty Name="idcategory" ColumnName="idcategory" />
                 <ScalarProperty Name="idproduction" ColumnName="idproduction" />
                 <ScalarProperty Name="idgroupproduct" ColumnName="idgroupproduct" />
+                <ScalarProperty Name="isdelete" ColumnName="isdelete" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1029,17 +1014,6 @@
               <MappingFragment StoreEntitySet="subscribe">
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="email" ColumnName="email" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sysdiagrams">
-            <EntityTypeMapping TypeName="nonbaohiemviettinModel.sysdiagrams">
-              <MappingFragment StoreEntitySet="sysdiagrams">
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
-                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
-                <ScalarProperty Name="version" ColumnName="version" />
-                <ScalarProperty Name="definition" ColumnName="definition" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -14,7 +14,7 @@
                     <div class="mega_menu jewelry">
                         <div class="mega_items jewelry">
                             <ul>
-                                @foreach (var item in db.production)
+                                @foreach (var item in db.production.Where(x=>x.isdelete==false).ToList())
                                 {
                                     <li><a href="/@(@item.alias).html">@item.name</a></li>
                                 }
@@ -55,7 +55,7 @@
                     <div>
                         <div>
                             <ul>
-                                @foreach (var item in db.production)
+                                @foreach (var item in db.production.Where(x=>x.isdelete==false).ToList())
                                 {
                                     <li><a href="/@(item.alias).html">@item.name</a></li>
                                 }

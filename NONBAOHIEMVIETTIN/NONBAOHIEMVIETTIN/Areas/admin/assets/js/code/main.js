@@ -98,10 +98,72 @@
     $('.delete_category').off('click').click(function (e) {
         e.preventDefault();
         var id = Number($(this).data('id'));
-        alertify.confirm('Thông báo', 'Bạn chắc chắn xoá loại nón này này?', function () {
+        alertify.confirm('Thông báo', 'Bạn chắc chắn xoá loại nón này?', function () {
             delete_category(id);
         }, function () { alertify.error('Huỷ') });
 
     });
 
+    function delete_production(id) {
+        $.ajax({
+            url: "/admin/production_admin/delete_production/" + id,
+            data: JSON.stringify(id),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: "POST",
+            success: function (data) {
+
+                showToast(data.message);
+                if (data.status == 1) {
+                    $('#_production_' + id).hide(200);
+                }
+
+            },
+            error: function (data) {
+
+                alert(JSON.stringify(data));
+            }
+        })
+    }
+    $('.delete_production').off('click').click(function (e) {
+        e.preventDefault();
+        var id = Number($(this).data('id'));
+        alertify.confirm('Thông báo', 'Bạn chắc chắn xoá hãng sản xuất này?', function () {
+            delete_production(id);
+        }, function () { alertify.error('Huỷ') });
+
+    });
+
+    function delete_groupproduct(id) {
+        $.ajax({
+            url: "/admin/GroupProduct_admin/delete_groupProduct/" + id,
+            data: JSON.stringify(id),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: "POST",
+            success: function (data) {
+
+                showToast(data.message);
+                if (data.status == 1) {
+                    $('#_group-product_' + id).hide(200);
+                }
+
+            },
+            error: function (data) {
+
+                alert(JSON.stringify(data));
+            }
+        })
+    }
+    $('.delete_group-product').off('click').click(function (e) {
+        e.preventDefault();
+        var id = Number($(this).data('id'));
+        alertify.confirm('Thông báo', 'Bạn chắc chắn xoá nhóm nón này?', function () {
+            delete_groupproduct(id);
+        }, function () { alertify.error('Huỷ') });
+
+    });
+
 })
+
+

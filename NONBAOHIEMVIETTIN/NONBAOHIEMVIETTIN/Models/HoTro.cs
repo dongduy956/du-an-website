@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace NONBAOHIEMVIETTIN
@@ -38,6 +39,14 @@ namespace NONBAOHIEMVIETTIN
             var format = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
             string value = String.Format(format, "{0:c0}", Convert.ToUInt32(money));
             return value;
+        }
+        public string convertToUnSign3(string s)
+        {
+            Regex regex = new Regex("\\p{IsCombiningDiacriticalMarks}+");
+            string temp = s.Normalize(NormalizationForm.FormD);
+            string unsigned = regex.Replace(temp, String.Empty).Replace('\u0111', 'd').Replace('\u0110', 'D');
+            unsigned = Regex.Replace(unsigned, "[^a-zA-Z0-9 ]+", "");
+            return unsigned.Replace(" ", "-");
         }
     }
 }

@@ -27,7 +27,7 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex align-items-center justify-content-between">
         <h6 class="m-0 font-weight-bold text-primary">Danh sách nón</h6>
-        <a href="#" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <a href="/admin/them-moi-non.html" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
             <i class="fas fa-plus fa-sm text-white-50"></i> Thêm mới
         </a>
     </div>
@@ -53,7 +53,7 @@
                     {
                         <tr id="_product_@item.id">
                             <td>@item.id</td>
-                            <td><img class="img-product" src="~/assets/img/Nón bảo hiểm/@item.image" /></td>
+                            <td><img class="img-product" src="~/@item.image" /></td>
                             <td>@item.name</td>
                             <td>@item.price</td>
                             <td>@item.promationprice</td>
@@ -70,9 +70,12 @@
                                     <a title="Sửa sản phẩm @item.name" class="mt-1 mb-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                         <i class="far fa-edit"></i>
                                     </a>
-                                    <a data-id="@item.id" title="Xoá sản phẩm @item.name" class="delete_product d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                                        <i class="far fa-trash-alt"></i>
-                                    </a>
+                                    @if (item.isdelete == false)
+                                    {
+                                        <a data-id="@item.id" title="Xoá sản phẩm @item.name" class="delete_product d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                            <i class="far fa-trash-alt"></i>
+                                        </a>
+                                    }
                                 </div>
                             </td>
                         </tr>
@@ -95,7 +98,7 @@
                                         <p><strong>Thuộc hãng sản xuất:</strong> @item.production.name</p>
                                         <p><strong>Mô tả:</strong> @item.description</p>
                                         <p><strong>Bán chạy:</strong> @(item.fastsell == true ? "Có" : "Không")</p>
-                                        <p><strong>Bán chạy:</strong> <img src="~/assets/img/Nón bảo hiểm/@item.image" class="img-product" /></p>
+                                        <p><strong>Hình ảnh:</strong> <img src="~/assets/img/Nón bảo hiểm/@item.image" class="img-product" /></p>
                                         <p><strong>Sản phẩm mới:</strong> @(item.newproduct == true ? "Có" : "Không")</p>
                                         <p><strong>Giá:</strong> @item.price</p>
                                         <p><strong>Giá khuyến mãi:</strong> @item.promationprice</p>
@@ -118,7 +121,7 @@
                                                 }
                                             </ul>
                                         </div>
-                                        <p><strong>Trạng thái:</strong> @(item.status == true ? "Còn" : "Hết")</p>
+                                        <p><strong>Trạng thái:</strong> @(item.status == true ? "Còn hàng" : "Hết hàng")</p>
                                         <p><strong>Số lượt xem:</strong> @item.viewcount</p>
                                         <p><strong>Sản phẩm:</strong> @(item.isdelete == true ? "Đã xoá" : "Chưa xoá")</p>
 
@@ -129,23 +132,23 @@
                                 </div>
                             </div>
                         </div>
-                    }
+                                                    }
                 </tbody>
             </table>
         </div>
     </div>
 
 </div>
-@if(ViewBag.last!=1)
-{ 
-<ul class="pagination mr-auto ml-auto" style="justify-content:center;">
+@if (ViewBag.last != 1)
+{
+    <ul class="pagination mr-auto ml-auto" style="justify-content:center;">
 
-    @Html.PagedListPager(Model,
+        @Html.PagedListPager(Model,
         page => Url.Action("Index", new { page }),
         new PagedListRenderOptions
         {
             MaximumPageNumbersToDisplay = 3
         })
 
-</ul>
+    </ul>
 }
