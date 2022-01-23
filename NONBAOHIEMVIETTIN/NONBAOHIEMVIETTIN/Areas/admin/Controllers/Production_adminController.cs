@@ -105,7 +105,8 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (db.production.SingleOrDefault(x => x.name.Equals(production.name)) == null)
+                var name_temp = Request["name-temp"].ToString();
+                if (db.production.SingleOrDefault(x =>!x.name.ToLower().Equals(name_temp.ToLower()) && x.name.ToLower().Equals(production.ToLower().name)) == null)
                 {
                     production.alias = HoTro.Instances.convertToUnSign3(production.name);
                 db.Entry(production).State = EntityState.Modified;
