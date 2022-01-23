@@ -4071,6 +4071,12 @@
     <Content Include="Areas\admin\assets\js\ckeditor\samples\toolbarconfigurator\lib\codemirror\LICENSE" />
     <Content Include="Areas\admin\assets\js\ckeditor\SECURITY.md" />
     <Content Include="Areas\admin\assets\js\ckeditor\skins\moono-lisa\readme.md" />
+    <Content Include="Areas\admin\Views\Category_admin\Create.cshtml" />
+    <Content Include="Areas\admin\Views\Category_admin\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\GroupProduct_admin\Create.cshtml" />
+    <Content Include="Areas\admin\Views\GroupProduct_admin\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\Production_admin\Create.cshtml" />
+    <Content Include="Areas\admin\Views\Production_admin\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\nonbaohiemviettin.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

@@ -31,20 +31,14 @@
                 e.preventDefault();
                 var finder = new CKFinder();
                 finder.selectActionFunction = function (url) {
-                    $('#txtimg').text(url); 
-                    $('#txtimg_hide').val(url); 
+                    $('#txtimg').text(url);
+                    $('#txtimg_hide').val(url);
                 }
                 finder.popup();
 
             })
-            //$('#ckb_status').change(function () {
-            //    if ($(this).is(":checked"))
-            //        $('#status_mess').text('Còn hàng');
-            //    else
-            //        $('#status_mess').text('Hết hàng');
-            //});
+            alertify.error(`@ViewBag.status`);
         })();
-     
     </script>
     }
 @section styles{

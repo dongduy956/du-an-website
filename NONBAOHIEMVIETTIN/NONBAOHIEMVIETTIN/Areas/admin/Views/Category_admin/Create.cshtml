@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "Thêm mới loại nón";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{
+    <script>
+        // Disable form submissions if there are invalid fields
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Get the forms we want to add validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);           
+        })();
+
+</script>
+}
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Thêm mới loại nón</h6>
+    </div>
+    <div class="card-body">
+        @using (Html.BeginForm("Create", "Category_admin", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "needs-validation", @novalidate = "true" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-md-12">Tên loại nón</label>
+                    <div class="col-md-12">
+                        <input name="name" placeholder="Nhập vào tên loại nón" required class="form-control" />
+                        <div class="valid-feedback">Valid</div>
+                        <div class="invalid-feedback">Nhập vào tên loại nón</div>
+                    </div>
+                </div>                
+                <div class="form-group">
+                    <a href="/admin/loai-non.html" class="btn btn-light btn-icon-split" style="margin:0 0.75rem">
+                        <span class="icon text-gray-600">
+                            <i class="fas fa-arrow-left"></i>
+                        </span>
+                        <span class="text">Trở về</span>
+                    </a>
+                    <button type="submit" style="margin:0 0.75rem" class="btn btn-success btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span class="text">Tạo mới</span>
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+

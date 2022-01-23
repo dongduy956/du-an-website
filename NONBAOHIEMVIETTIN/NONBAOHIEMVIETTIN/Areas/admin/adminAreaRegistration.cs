@@ -2,18 +2,60 @@
 
 namespace NONBAOHIEMVIETTIN.Areas.admin
 {
-    public class adminAreaRegistration : AreaRegistration 
+    public class adminAreaRegistration : AreaRegistration
     {
-        public override string AreaName 
+        public override string AreaName
         {
-            get 
+            get
             {
                 return "admin";
             }
         }
 
-        public override void RegisterArea(AreaRegistrationContext context) 
+        public override void RegisterArea(AreaRegistrationContext context)
         {
+            context.MapRoute(
+                 "admin_production_edit",
+   "admin/sua-hang-san-xuat/{alias}.html",
+   new { controller = "Production_admin", action = "Edit", id = UrlParameter.Optional, Area = "Admin" },
+    namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+            "admin_groupproduct_edit",
+   "admin/sua-nhom-non/{alias}.html",
+   new { controller = "GroupProduct_admin", action = "Edit", id = UrlParameter.Optional, Area = "Admin" },
+    namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+     "admin_category_edit",
+     "admin/sua-loai-non/{alias}.html",
+     new { controller = "Category_admin", action = "Edit", id = UrlParameter.Optional, Area = "Admin" },
+      namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+ );
+            context.MapRoute(
+        "admin_products_edit",
+        "admin/sua-non/{alias}.html",
+        new { controller = "products_admin", action = "Edit", id = UrlParameter.Optional, Area = "Admin" },
+         namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+    );
+            context.MapRoute(
+    "admin_Production_create",
+    "admin/them-moi-hang-san-xuat.html",
+    new { controller = "Production_admin", action = "Create", id = UrlParameter.Optional, Area = "Admin" },
+     namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+    "admin_groupproduct_create",
+    "admin/them-moi-nhom-non.html",
+    new { controller = "GroupProduct_admin", action = "Create", id = UrlParameter.Optional, Area = "Admin" },
+     namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+       "admin_category_create",
+       "admin/them-moi-loai-non.html",
+       new { controller = "Category_admin", action = "Create", id = UrlParameter.Optional, Area = "Admin" },
+        namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+   );
             context.MapRoute(
          "admin_products_create",
          "admin/them-moi-non.html",
@@ -41,7 +83,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin
             context.MapRoute(
                "admin_products_index",
                "admin/non.html",
-               new { controller = "products_admin", action = "Index", id = UrlParameter.Optional, Area = "Admin" },               
+               new { controller = "products_admin", action = "Index", id = UrlParameter.Optional, Area = "Admin" },
                namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
            );
             context.MapRoute(
@@ -53,7 +95,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin
             context.MapRoute(
                 "admin_default",
                 "admin/{controller}/{action}/{id}",
-                new { controller="Dashboard", action = "Index", id = UrlParameter.Optional, Area = "Admin" },
+                new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional, Area = "Admin" },
                namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
             );
         }

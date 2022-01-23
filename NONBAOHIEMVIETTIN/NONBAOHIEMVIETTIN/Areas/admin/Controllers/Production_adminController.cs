@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -55,5 +56,54 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 message = "Xoá thành công."
             });
         }
+
+        public ActionResult Create()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "id,name")] production production)
+        {
+
+            if (ModelState.IsValid)
+            {
+                production.isdelete = false;
+                production.status = true;
+                production.alias = HoTro.Instances.convertToUnSign3(production.name);
+                db.production.Add(production);
+                db.SaveChanges();
+                return Redirect("/admin/hang-san-xuat.html");
+            }
+            return View(production);
+        }
+        public ActionResult Edit(string alias)
+        {
+            if (string.IsNullOrEmpty(alias))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            production production = db.production.SingleOrDefault(x => x.alias.Equals(alias));
+            if (production == null)
+            {
+                return HttpNotFound();
+            }
+            return View(production);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "id,name,alias,status,isdelete")] production production)
+        {
+            if (ModelState.IsValid)
+            {
+
+                production.alias = HoTro.Instances.convertToUnSign3(production.name);
+                db.Entry(production).State = EntityState.Modified;
+                db.SaveChanges();
+                return Redirect("/admin/hang-san-xuat.html");
+            }
+            return View(production);
+        }
+
     }
 }

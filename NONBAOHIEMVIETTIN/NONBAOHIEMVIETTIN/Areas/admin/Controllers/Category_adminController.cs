@@ -28,7 +28,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         }
         public ActionResult Index(int page = 1)
         {
-            var temp = db.category.Where(x => x.isdelete == false).ToList();
+            var temp = db.category.ToList();
             var category = temp.ToPagedList(page, pageSize);
             ViewBagNoti(temp, page);
             return View(category);
@@ -58,5 +58,56 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 message = "Xoá thành công."
             });
         }
+
+        public ActionResult Create()
+        {      
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create([Bind(Include = "id,name")] category category)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                category.isdelete = false;
+                category.status = true;
+                category.alias = HoTro.Instances.convertToUnSign3(category.name);
+                db.category.Add(category);
+                db.SaveChanges();
+                return Redirect("/admin/loai-non.html");
+            }            
+            return View(category);
+        }
+
+        // GET: admin/products/Edit/5
+        public ActionResult Edit(string alias)
+        {
+            if (string.IsNullOrEmpty(alias))
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            category category = db.category.SingleOrDefault(x => x.alias.Equals(alias));
+            if (category == null)
+            {
+                return HttpNotFound();
+            }           
+            return View(category);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Edit([Bind(Include = "id,name,alias,status,isdelete")] category category)
+        {            
+            if (ModelState.IsValid)
+            {
+               
+                category.alias = HoTro.Instances.convertToUnSign3(category.name);
+                db.Entry(category).State = EntityState.Modified;
+                db.SaveChanges();
+                return Redirect("/admin/loai-non.html");
+            }           
+            return View(category);
+        }
+
     }
 }

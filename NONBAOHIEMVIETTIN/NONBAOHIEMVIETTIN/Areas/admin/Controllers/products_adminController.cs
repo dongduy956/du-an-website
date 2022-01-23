@@ -27,7 +27,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         }
         public ActionResult Index(int page = 1)
         {
-            var temp = db.products.Where(x => x.isdelete == false).ToList();
+            var temp = db.products.ToList();
             var products = temp.ToPagedList(page, pageSize);
             ViewBagNoti(temp, page);
             return View(products);
@@ -73,14 +73,31 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                products.createddate = DateTime.Now;
-                products.fastsell = products.isdelete = false;
-                products.newproduct =products.status =true;
-                products.viewcount = 0;
-                products.alias = HoTro.Instances.convertToUnSign3(products.name);
-                db.products.Add(products);
-                db.SaveChanges();
-                return Redirect("/admin/non.html");
+               
+                if (db.products.SingleOrDefault(x => x.name.Equals(products.name)) == null)
+                {
+                    try
+                    {
+                        products.image = products.image.Substring(1, products.image.Length - 1);
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                    products.createddate = DateTime.Now;
+                    products.fastsell = products.isdelete = false;
+                    products.newproduct = products.status = true;
+                    products.viewcount = 0;
+                    products.alias = HoTro.Instances.convertToUnSign3(products.name);
+                    db.products.Add(products);
+                    db.SaveChanges();
+                    return Redirect("/admin/non.html");
+                }
+                else
+                {
+                    ViewBag.status = "Trùng tên nón!!";
+                }
             }
 
             ViewBag.idcategory = new SelectList(db.category, "id", "name", products.idcategory);
@@ -90,13 +107,13 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         }
 
         // GET: admin/products/Edit/5
-        public ActionResult Edit(int? id)
+        public ActionResult Edit(string alias)
         {
-            if (id == null)
+            if (string.IsNullOrEmpty(alias))
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            products products = db.products.Find(id);
+            products products = db.products.SingleOrDefault(x => x.alias.Equals(alias));
             if (products == null)
             {
                 return HttpNotFound();
@@ -106,19 +123,26 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             ViewBag.idproduction = new SelectList(db.production, "id", "name", products.idproduction);
             return View(products);
         }
-
-        // POST: admin/products/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name,alias,status,price,promationprice,quantity,description,viewcount,createddate,image,fastsell,newproduct,idcategory,idproduction,idgroupproduct")] products products)
+        [ValidateInput(false)]
+        public ActionResult Edit([Bind(Include = "id,name,alias,status,price,promationprice,quantity,description,viewcount,createddate,image,fastsell,newproduct,idcategory,idproduction,idgroupproduct,isdelete")] products products)
         {
             if (ModelState.IsValid)
             {
+                try
+                {
+                    products.image = products.image.Substring(1, products.image.Length - 1);
+
+                }
+                catch (Exception ex)
+                {
+
+                }
+                products.alias = HoTro.Instances.convertToUnSign3(products.name);
                 db.Entry(products).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return Redirect("/admin/non.html");
             }
             ViewBag.idcategory = new SelectList(db.category, "id", "name", products.idcategory);
             ViewBag.idgroupproduct = new SelectList(db.groupproduct, "id", "name", products.idgroupproduct);

@@ -40,11 +40,12 @@
                         <th>Ảnh</th>
                         <th>Tên</th>
                         <th>Giá</th>
-                        <th>Giá khuyến mãi</th>
                         <th>Số lượng còn</th>
                         <th>Loại nón</th>
                         <th>Hãng sản xuất</th>
                         <th>Nhóm nón</th>
+                        <th>Xoá?</th>
+
                         <th>Công cụ</th>
                     </tr>
                 </thead>
@@ -56,18 +57,19 @@
                             <td><img class="img-product" src="~/@item.image" /></td>
                             <td>@item.name</td>
                             <td>@item.price</td>
-                            <td>@item.promationprice</td>
                             <td>@item.quantity</td>
                             <td>@item.category.name</td>
                             <td>@item.production.name</td>
                             <td>@item.groupproduct.name</td>
+                            <td id="_product_@item.id-delete">@(item.isdelete==false?"Chưa xoá":"Đã xoá")</td>
+
                             <td>
                                 <div class="tool d-flex align-items-center flex-column justify-content-center">
                                     <a data-toggle="modal" data-target="#product_@item.id" title="Xem sản phẩm @item.name" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                         <i class="far fa-eye"></i>
                                     </a>
 
-                                    <a title="Sửa sản phẩm @item.name" class="mt-1 mb-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                    <a href="/admin/sua-non/@(item.alias).html" title="Sửa sản phẩm @item.name" class="mt-1 mb-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                         <i class="far fa-edit"></i>
                                     </a>
                                     @if (item.isdelete == false)
@@ -96,9 +98,9 @@
                                         <p><strong>Thuộc loại nón:</strong> @item.category.name</p>
                                         <p><strong>Thuộc nhóm nón:</strong> @item.groupproduct.name</p>
                                         <p><strong>Thuộc hãng sản xuất:</strong> @item.production.name</p>
-                                        <p><strong>Mô tả:</strong> @item.description</p>
+                                        <p><strong>Mô tả:</strong>@Html.Raw(item.description)</p>
                                         <p><strong>Bán chạy:</strong> @(item.fastsell == true ? "Có" : "Không")</p>
-                                        <p><strong>Hình ảnh:</strong> <img src="~/assets/img/Nón bảo hiểm/@item.image" class="img-product" /></p>
+                                        <p><strong>Hình ảnh:</strong> <img src="~/@item.image" class="img-product" /></p>
                                         <p><strong>Sản phẩm mới:</strong> @(item.newproduct == true ? "Có" : "Không")</p>
                                         <p><strong>Giá:</strong> @item.price</p>
                                         <p><strong>Giá khuyến mãi:</strong> @item.promationprice</p>
@@ -123,8 +125,7 @@
                                         </div>
                                         <p><strong>Trạng thái:</strong> @(item.status == true ? "Còn hàng" : "Hết hàng")</p>
                                         <p><strong>Số lượt xem:</strong> @item.viewcount</p>
-                                        <p><strong>Sản phẩm:</strong> @(item.isdelete == true ? "Đã xoá" : "Chưa xoá")</p>
-
+                                        <p><strong>Sản phẩm:</strong> <span id="_product_@item.id-delete-detail">@(item.isdelete == true ? "Đã xoá" : "Chưa xoá")</span></p>
                                     </div>
                                     <div class="modal-footer">
                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Đóng</button>

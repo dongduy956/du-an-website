@@ -44,7 +44,7 @@
     $('#btnlogout').click(function () {
        location.href="/admin/Login/Logout"
     })
-    function delete_product(id) {
+    function delete_product(id,ele) {
         $.ajax({
             url: "/admin/products_admin/delete_product/"+id,
             data: JSON.stringify(id),
@@ -55,7 +55,9 @@
 
                 showToast(data.message);
                 if (data.status == 1) {
-                    $('#_product_' + id).hide(200);
+                    ele.attr('style', 'display:none !important');
+                    $(`#_product_${id}-delete`).text('Đã xoá');
+                    $(`#_product_${id}-delete-detail`).text('Đã xoá');
                 }
 
             },
@@ -68,13 +70,14 @@
     $('.delete_product').off('click').click(function (e) {
         e.preventDefault();
         var id = Number($(this).data('id'));
+        var ele = $(this);
         alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', function () {
-            delete_product(id);
+            delete_product(id,ele);
         }, function () { alertify.error('Huỷ') });
        
     });
 
-    function delete_category(id) {
+    function delete_category(id,ele) {
         $.ajax({
             url: "/admin/category_admin/delete_category/" + id,
             data: JSON.stringify(id),
@@ -85,7 +88,8 @@
 
                 showToast(data.message);
                 if (data.status == 1) {
-                    $('#_category_' + id).hide(200);
+                    ele.attr('style', 'display:none !important');
+                    $(`#_category_${id}-delete`).text('Đã xoá');
                 }
 
             },
@@ -98,13 +102,14 @@
     $('.delete_category').off('click').click(function (e) {
         e.preventDefault();
         var id = Number($(this).data('id'));
+        var ele = $(this);
         alertify.confirm('Thông báo', 'Bạn chắc chắn xoá loại nón này?', function () {
-            delete_category(id);
+            delete_category(id,ele);
         }, function () { alertify.error('Huỷ') });
 
     });
 
-    function delete_production(id) {
+    function delete_production(id,ele) {
         $.ajax({
             url: "/admin/production_admin/delete_production/" + id,
             data: JSON.stringify(id),
@@ -115,7 +120,8 @@
 
                 showToast(data.message);
                 if (data.status == 1) {
-                    $('#_production_' + id).hide(200);
+                    ele.attr('style', 'display:none !important');
+                    $(`#_production_${id}-delete`).text('Đã xoá');
                 }
 
             },
@@ -128,13 +134,15 @@
     $('.delete_production').off('click').click(function (e) {
         e.preventDefault();
         var id = Number($(this).data('id'));
+        var ele = $(this);
+
         alertify.confirm('Thông báo', 'Bạn chắc chắn xoá hãng sản xuất này?', function () {
-            delete_production(id);
+            delete_production(id,ele);
         }, function () { alertify.error('Huỷ') });
 
     });
 
-    function delete_groupproduct(id) {
+    function delete_groupproduct(id,ele) {
         $.ajax({
             url: "/admin/GroupProduct_admin/delete_groupProduct/" + id,
             data: JSON.stringify(id),
@@ -145,7 +153,8 @@
 
                 showToast(data.message);
                 if (data.status == 1) {
-                    $('#_group-product_' + id).hide(200);
+                    ele.attr('style', 'display:none !important');
+                    $(`#_group-product_${id}-delete`).text('Đã xoá');
                 }
 
             },
@@ -158,8 +167,10 @@
     $('.delete_group-product').off('click').click(function (e) {
         e.preventDefault();
         var id = Number($(this).data('id'));
+        var ele = $(this);
+
         alertify.confirm('Thông báo', 'Bạn chắc chắn xoá nhóm nón này?', function () {
-            delete_groupproduct(id);
+            delete_groupproduct(id,ele);
         }, function () { alertify.error('Huỷ') });
 
     });

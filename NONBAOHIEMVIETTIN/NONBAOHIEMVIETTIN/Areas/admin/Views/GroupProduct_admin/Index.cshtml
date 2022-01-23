@@ -27,7 +27,7 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex align-items-center justify-content-between">
         <h6 class="m-0 font-weight-bold text-primary">Danh sách nhóm nón</h6>
-        <a href="#" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <a href="/admin/them-moi-nhom-non.html" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
             <i class="fas fa-plus fa-sm text-white-50"></i> Thêm mới
         </a>
     </div>
@@ -50,11 +50,11 @@
                             <td>@item.id</td>
                             <td>@item.name</td>
                             <td>@(item.status == true ? "Còn hàng" : "Hết hàng") (@db.products.Count(x=>x.idgroupproduct==item.id && x.isdelete==false))</td>
-                            <td>@(item.isdelete == true ? "Đã xoá" : "Chưa xoá")</td>
+                            <td id="_group-product_@item.id-delete">@(item.isdelete == true ? "Đã xoá" : "Chưa xoá")</td>
                             <td>
                                 <div class="tool d-flex align-items-center flex-column justify-content-center">
 
-                                    <a title="Sửa sản phẩm @item.name" class="mb-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                    <a href="/admin/sua-nhom-non/@(item.alias).html" title="Sửa nhóm nón @item.name" class="mb-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                         <i class="far fa-edit"></i>
                                     </a>
                                     @if (item.isdelete == false)
