@@ -70,12 +70,21 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             
             if (ModelState.IsValid)
             {
-                category.isdelete = false;
-                category.status = true;
-                category.alias = HoTro.Instances.convertToUnSign3(category.name);
-                db.category.Add(category);
-                db.SaveChanges();
-                return Redirect("/admin/loai-non.html");
+                if (db.category.SingleOrDefault(x => x.name.Equals(category.name)) == null)
+                {
+                    category.isdelete = false;
+                    category.status = true;
+                    category.alias = HoTro.Instances.convertToUnSign3(category.name);
+                    db.category.Add(category);
+                    db.SaveChanges();
+                    TempData["status"] = "Thêm mới loại nón thành công!!";
+
+                    return Redirect("/admin/loai-non.html");
+                }
+                else
+                {
+                    TempData["status"] = "Trùng tên loại nón!!";
+                }
             }            
             return View(category);
         }
@@ -100,11 +109,18 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         {            
             if (ModelState.IsValid)
             {
-               
-                category.alias = HoTro.Instances.convertToUnSign3(category.name);
-                db.Entry(category).State = EntityState.Modified;
-                db.SaveChanges();
-                return Redirect("/admin/loai-non.html");
+                if (db.category.SingleOrDefault(x => x.name.Equals(category.name)) == null)
+                {
+                    category.alias = HoTro.Instances.convertToUnSign3(category.name);
+                    db.Entry(category).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["status"] = "Sửa loại nón thành công!!";
+                    return Redirect("/admin/loai-non.html");
+                }
+                else
+                {
+                    TempData["status"] = "Trùng tên loại nón!!";
+                }
             }           
             return View(category);
         }

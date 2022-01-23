@@ -23,6 +23,16 @@
             }
     </style>
 }
+@section scripts{
+    @if (TempData["status"] != null)
+    {
+        <script>
+        $(function () {
+            alertify.error(`@TempData["status"]`);
+        })
+        </script>
+    }
+}
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex align-items-center justify-content-between">
@@ -49,7 +59,7 @@
                         <tr id="_category_@item.id">
                             <td>@item.id</td>
                             <td>@item.name</td>
-                            <td>@(item.status == true ? "Còn hàng" : "Hết hàng") (@db.products.Count(x=>x.idcategory==item.id &&x.isdelete==false))</td>
+                            <td>@(item.status == true ? "Còn hàng" : "Hết hàng") (@db.products.Count(x => x.idcategory == item.id && x.isdelete == false))</td>
                             <td id="_category_@item.id-delete">@(item.isdelete == true ? "Đã xoá" : "Chưa xoá")</td>
                             <td>
                                 <div class="tool d-flex align-items-center flex-column justify-content-center">
@@ -57,11 +67,11 @@
                                     <a href="/admin/sua-loai-non/@(item.alias).html" title="Sửa loại nón @item.name" class="mb-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                         <i class="far fa-edit"></i>
                                     </a>
-                                    @if(item.isdelete==false)
-                                    { 
-                                    <a data-id="@item.id" title="Xoá loại @item.name"  class="delete_category d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                                        <i class="far fa-trash-alt"></i>
-                                    </a>
+                                    @if (item.isdelete == false)
+                                    {
+                                        <a data-id="@item.id" title="Xoá loại @item.name" class="delete_category d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                            <i class="far fa-trash-alt"></i>
+                                        </a>
                                     }
                                 </div>
                             </td>
@@ -75,7 +85,7 @@
 
 </div>
 @if (ViewBag.last != 1)
-{ 
+{
     <ul class="pagination mr-auto ml-auto" style="justify-content:center;">
 
         @Html.PagedListPager(Model,
@@ -86,4 +96,4 @@
             })
 
     </ul>
-    }
+}

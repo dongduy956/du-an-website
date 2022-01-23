@@ -68,12 +68,21 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
 
             if (ModelState.IsValid)
             {
-                production.isdelete = false;
-                production.status = true;
-                production.alias = HoTro.Instances.convertToUnSign3(production.name);
-                db.production.Add(production);
-                db.SaveChanges();
-                return Redirect("/admin/hang-san-xuat.html");
+                if (db.production.SingleOrDefault(x => x.name.Equals(production.name)) == null)
+                {
+                    production.isdelete = false;
+                    production.status = true;
+                    production.alias = HoTro.Instances.convertToUnSign3(production.name);
+                    db.production.Add(production);
+                    db.SaveChanges();
+                    TempData["status"] = "Thêm mới hãng sản xuất thành công!!";
+
+                    return Redirect("/admin/hang-san-xuat.html");
+                }
+                else
+                {
+                    TempData["status"] = "Trùng tên hãng sản xuất!!";
+                }
             }
             return View(production);
         }
@@ -96,11 +105,19 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                production.alias = HoTro.Instances.convertToUnSign3(production.name);
+                if (db.production.SingleOrDefault(x => x.name.Equals(production.name)) == null)
+                {
+                    production.alias = HoTro.Instances.convertToUnSign3(production.name);
                 db.Entry(production).State = EntityState.Modified;
                 db.SaveChanges();
-                return Redirect("/admin/hang-san-xuat.html");
+                    TempData["status"] = "Sửa hãng sản xuất thành công!!";
+
+                    return Redirect("/admin/hang-san-xuat.html");
+                }
+                else
+                {
+                    TempData["status"] = "Trùng tên hãng sản xuất!!";
+                }
             }
             return View(production);
         }

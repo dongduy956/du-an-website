@@ -22,10 +22,18 @@
                         form.classList.add('was-validated');
                     }, false);
                 });
-            }, false);           
+            }, false);
         })();
 
-</script>
+    </script>
+    @if (TempData["status"] != null)
+    {
+        <script>
+        $(function () {
+            alertify.error(`@TempData["status"]`);
+        })
+        </script>
+    }
 }
 <div class="card shadow mb-4">
     <div class="card-header py-3">
@@ -44,7 +52,7 @@
                         <div class="valid-feedback">Valid</div>
                         <div class="invalid-feedback">Nhập vào tên loại nón</div>
                     </div>
-                </div>                
+                </div>
                 <div class="form-group">
                     <a href="/admin/loai-non.html" class="btn btn-light btn-icon-split" style="margin:0 0.75rem">
                         <span class="icon text-gray-600">

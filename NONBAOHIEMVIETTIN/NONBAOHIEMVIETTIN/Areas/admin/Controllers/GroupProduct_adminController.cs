@@ -68,12 +68,21 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
 
             if (ModelState.IsValid)
             {
-                groupproduct.isdelete = false;
-                groupproduct.status = true;
-                groupproduct.alias = HoTro.Instances.convertToUnSign3(groupproduct.name);
-                db.groupproduct.Add(groupproduct);
-                db.SaveChanges();
-                return Redirect("/admin/nhom-non.html");
+                if (db.groupproduct.SingleOrDefault(x => x.name.Equals(groupproduct.name)) == null)
+                {
+                    groupproduct.isdelete = false;
+                    groupproduct.status = true;
+                    groupproduct.alias = HoTro.Instances.convertToUnSign3(groupproduct.name);
+                    db.groupproduct.Add(groupproduct);
+                    db.SaveChanges();
+                    TempData["status"] = "Thêm mới nhóm nón thành công!!";
+
+                    return Redirect("/admin/nhom-non.html");
+                }
+                else
+                {
+                    TempData["status"] = "Trùng tên nhóm nón!!";
+                }
             }
             return View(groupproduct);
         }
@@ -98,11 +107,19 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         {
             if (ModelState.IsValid)
             {
-
-                groupproduct.alias = HoTro.Instances.convertToUnSign3(groupproduct.name);
+                if (db.groupproduct.SingleOrDefault(x => x.name.Equals(groupproduct.name)) == null)
+                {
+                    groupproduct.alias = HoTro.Instances.convertToUnSign3(groupproduct.name);
                 db.Entry(groupproduct).State = EntityState.Modified;
                 db.SaveChanges();
-                return Redirect("/admin/nhom-non.html");
+                    TempData["status"] = "Sửa nhóm nón thành công!!";
+
+                    return Redirect("/admin/nhom-non.html");
+                }
+                else
+                {
+                    TempData["status"] = "Trùng tên nhóm nón!!";
+                }
             }
             return View(groupproduct);
         }

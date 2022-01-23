@@ -1,11 +1,19 @@
 ﻿@using NONBAOHIEMVIETTIN.Models
 @model category
 @{
-    ViewBag.Title = "Sửa loại nón "+Model.name;
+    ViewBag.Title = "Sửa loại nón " + Model.name;
     Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
 }
 
 @section scripts{
+    @if (TempData["status"] != null)
+    {
+        <script>
+        $(function () {
+            alertify.error(`@TempData["status"]`);
+        })
+        </script>
+    }
     <script>
         // Disable form submissions if there are invalid fields
         (function () {
@@ -23,7 +31,7 @@
                         form.classList.add('was-validated');
                     }, false);
                 });
-            }, false);                       
+            }, false);
             $('#input_isdelete').change(function () {
                 if ($(this).is(":checked")) {
                     $('#input_mess-isdelete').text('Ẩn');
@@ -38,6 +46,7 @@
 
             });
         })();
+
 
     </script>
 }
@@ -90,7 +99,7 @@
                         </div>
                     </div>
                 </div>
-               
+
                 <div class="form-group">
                     <a href="/admin/loai-non.html" class="btn btn-light btn-icon-split" style="margin:0 0.75rem">
                         <span class="icon text-gray-600">

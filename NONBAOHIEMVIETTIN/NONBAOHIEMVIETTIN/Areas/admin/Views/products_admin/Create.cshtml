@@ -37,16 +37,23 @@
                 finder.popup();
 
             })
-            alertify.error(`@ViewBag.status`);
         })();
     </script>
+    @if (TempData["status"] != null)
+    {
+        <script>
+        $(function () {
+            alertify.error(`@TempData["status"]`);
+        })
+        </script>
     }
+}
 @section styles{
     <style>
-    .custom-file-label{
-        left:0.75rem;
-        right:0.75rem;
-    }
+        .custom-file-label {
+            left: 0.75rem;
+            right: 0.75rem;
+        }
     </style>}
 <div class="card shadow mb-4">
     <div class="card-header py-3">
@@ -61,15 +68,15 @@
                 <div class="form-group">
                     <label class="control-label col-md-12">Tên nón</label>
                     <div class="col-md-12">
-                        <input name="name" placeholder = "Nhập vào tên nón" required class = "form-control"/>
+                        <input name="name" placeholder="Nhập vào tên nón" required class="form-control" />
                         <div class="valid-feedback">Valid</div>
                         <div class="invalid-feedback">Nhập vào tên nón</div>
                     </div>
-                </div>                              
+                </div>
                 <div class="form-group">
-                    <label class = "control-label col-md-12">Giá</label>
+                    <label class="control-label col-md-12">Giá</label>
                     <div class="col-md-12">
-                        <input type="number" placeholder="Nhập vào giá bán" required class = "form-control" name="price"/>
+                        <input type="number" placeholder="Nhập vào giá bán" required class="form-control" name="price" />
                     </div>
                     <div class="valid-feedback">Valid</div>
                     <div class="invalid-feedback">Nhập giá bán</div>
@@ -78,10 +85,10 @@
                 <div class="form-group">
                     <label class="control-label col-md-12">Giá khuyến mãi</label>
                     <div class="col-md-12">
-                        <input type="number" value="0" required placeholder="Nhập vào giá khuyến mãi (nếu có)" class="form-control" name="promationprice"/>
-                    </div>    
+                        <input type="number" value="0" required placeholder="Nhập vào giá khuyến mãi (nếu có)" class="form-control" name="promationprice" />
+                    </div>
                     <div class="valid-feedback">Valid</div>
-                    <div class="invalid-feedback">Nhập giá khuyến mãi (nếu có)</div>                
+                    <div class="invalid-feedback">Nhập giá khuyến mãi (nếu có)</div>
                 </div>
 
                 <div class="form-group">
@@ -96,40 +103,40 @@
                 <div class="form-group">
                     <label class="control-label col-md-12">Mô tả</label>
                     <div class="col-md-12">
-                        <textarea required placeholder="Nhập vào mô tả" id = "txtDescription" name="description" class = "form-control"></textarea>
-                    </div>  
+                        <textarea required placeholder="Nhập vào mô tả" id="txtDescription" name="description" class="form-control"></textarea>
+                    </div>
                     <div class="valid-feedback">Valid</div>
-                    <div class="invalid-feedback">Nhập mô tả</div>                                                     
+                    <div class="invalid-feedback">Nhập mô tả</div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-md-12" for="image">Ảnh đại diện</label>
                     <span class="custom-file col-md-12">
                         <input type="file" class="custom-file-input" id="btnimg">
-                        <label class="custom-file-label"  id="txtimg" for="customFile">Chọn ảnh</label>
-                    </span>                 
+                        <label class="custom-file-label" id="txtimg" for="customFile">Chọn ảnh</label>
+                    </span>
                     <input name="image" id="txtimg_hide" type="hidden" />
 
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-12">Loại nón</label>
                     <div class="col-md-12">
-                        @Html.DropDownList("idcategory", null, htmlAttributes: new { @class = "form-control" })                        
-                    </div>                      
+                        @Html.DropDownList("idcategory", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-md-12">Hãng sản xuất</label>
                     <div class="col-md-12">
                         @Html.DropDownList("idproduction", null, htmlAttributes: new { @class = "form-control" })
-                    </div>             
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-md-12">Nhóm nón</label>
                     <div class="col-md-12">
-                        @Html.DropDownList("idgroupproduct", null, htmlAttributes: new { @class = "form-control" })                        
-                    </div> 
+                        @Html.DropDownList("idgroupproduct", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -139,7 +146,7 @@
                         </span>
                         <span class="text">Trở về</span>
                     </a>
-                    <button type="submit"  style="margin:0 0.75rem" class="btn btn-success btn-icon-split">
+                    <button type="submit" style="margin:0 0.75rem" class="btn btn-success btn-icon-split">
                         <span class="icon text-white-50">
                             <i class="fas fa-plus"></i>
                         </span>
@@ -147,7 +154,7 @@
                     </button>
                 </div>
             </div>
-        }     
+        }
     </div>
 </div>
 

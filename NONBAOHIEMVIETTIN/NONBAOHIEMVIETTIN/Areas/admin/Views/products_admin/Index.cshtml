@@ -23,6 +23,16 @@
             }
     </style>
 }
+@section scripts{
+    @if (TempData["status"] != null)
+    {
+        <script>
+        $(function () {
+            alertify.error(`@TempData["status"]`);
+        })
+        </script>
+    }
+}
 <!-- DataTales Example -->
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex align-items-center justify-content-between">
@@ -61,7 +71,7 @@
                             <td>@item.category.name</td>
                             <td>@item.production.name</td>
                             <td>@item.groupproduct.name</td>
-                            <td id="_product_@item.id-delete">@(item.isdelete==false?"Chưa xoá":"Đã xoá")</td>
+                            <td id="_product_@item.id-delete">@(item.isdelete == false ? "Chưa xoá" : "Đã xoá")</td>
 
                             <td>
                                 <div class="tool d-flex align-items-center flex-column justify-content-center">
@@ -81,7 +91,7 @@
                                 </div>
                             </td>
                         </tr>
-                <!-- Product Modal-->
+                        <!-- Product Modal-->
                         <div class="modal fade" id="product_@item.id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                                 <div class="modal-content">
@@ -133,7 +143,7 @@
                                 </div>
                             </div>
                         </div>
-                                                    }
+                    }
                 </tbody>
             </table>
         </div>

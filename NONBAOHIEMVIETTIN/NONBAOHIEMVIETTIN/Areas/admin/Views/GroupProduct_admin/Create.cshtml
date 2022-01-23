@@ -25,6 +25,16 @@
         })();
 
     </script>
+
+    @if (TempData["status"] != null)
+    {
+        <script>
+        $(function () {
+            alertify.error(`@TempData["status"]`);
+        })
+        </script>
+    }
+}
 }
 <div class="card shadow mb-4">
     <div class="card-header py-3">

@@ -73,7 +73,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         {
             if (ModelState.IsValid)
             {
-               
+
                 if (db.products.SingleOrDefault(x => x.name.Equals(products.name)) == null)
                 {
                     try
@@ -92,11 +92,13 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     products.alias = HoTro.Instances.convertToUnSign3(products.name);
                     db.products.Add(products);
                     db.SaveChanges();
+                    TempData["status"] = "Thêm mới nón thành công!!";
+
                     return Redirect("/admin/non.html");
                 }
                 else
                 {
-                    ViewBag.status = "Trùng tên nón!!";
+                    TempData["status"] = "Trùng tên nón!!";
                 }
             }
 
@@ -130,19 +132,27 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                try
+                if (db.products.SingleOrDefault(x => x.name.Equals(products.name)) == null)
                 {
-                    products.image = products.image.Substring(1, products.image.Length - 1);
+                    try
+                    {
+                        products.image = products.image.Substring(1, products.image.Length - 1);
 
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                    products.alias = HoTro.Instances.convertToUnSign3(products.name);
+                    db.Entry(products).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["status"] = "Sửa nón thành công!!";
+                    return Redirect("/admin/non.html");
                 }
-                catch (Exception ex)
+                else
                 {
-
+                    TempData["status"] = "Trùng tên nón!!";
                 }
-                products.alias = HoTro.Instances.convertToUnSign3(products.name);
-                db.Entry(products).State = EntityState.Modified;
-                db.SaveChanges();
-                return Redirect("/admin/non.html");
             }
             ViewBag.idcategory = new SelectList(db.category, "id", "name", products.idcategory);
             ViewBag.idgroupproduct = new SelectList(db.groupproduct, "id", "name", products.idgroupproduct);
