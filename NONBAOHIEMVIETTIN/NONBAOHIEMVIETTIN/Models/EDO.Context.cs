@@ -25,7 +25,6 @@ namespace NONBAOHIEMVIETTIN.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<accounts> accounts { get; set; }
         public virtual DbSet<category> category { get; set; }
         public virtual DbSet<contact> contact { get; set; }
         public virtual DbSet<countonline> countonline { get; set; }
@@ -42,5 +41,6 @@ namespace NONBAOHIEMVIETTIN.Models
         public virtual DbSet<role> role { get; set; }
         public virtual DbSet<sendcontactinfo> sendcontactinfo { get; set; }
         public virtual DbSet<subscribe> subscribe { get; set; }
+        public virtual DbSet<accounts> accounts { get; set; }
     }
 }

@@ -15,6 +15,7 @@
     <Property Name="address" Type="nvarchar" MaxLength="100" />
     <Property Name="status" Type="bit" />
     <Property Name="issocial" Type="int" />
+    <Property Name="alias" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="category">
     <Key>
@@ -147,7 +148,7 @@
     <Property Name="description" Type="ntext" />
     <Property Name="viewcount" Type="int" />
     <Property Name="createddate" Type="datetime" />
-    <Property Name="image" Type="nvarchar" MaxLength="500" />
+    <Property Name="image" Type="ntext" />
     <Property Name="fastsell" Type="bit" />
     <Property Name="newproduct" Type="bit" />
     <Property Name="idcategory" Type="int" />
@@ -172,6 +173,7 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="varchar" MaxLength="20" />
+    <Property Name="alias" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="sendcontactinfo">
     <Key>

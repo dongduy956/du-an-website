@@ -15,6 +15,18 @@ namespace NONBAOHIEMVIETTIN.Areas.admin
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
+              "admin_Accounts_edit",
+"admin/sua-tai-khoan/{alias}.html",
+new { controller = "Accounts_admin", action = "Edit", id = UrlParameter.Optional, Area = "Admin" },
+ namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+               "admin_role_edit",
+ "admin/sua-quyen/{alias}.html",
+ new { controller = "Role_admin", action = "Edit", id = UrlParameter.Optional, Area = "Admin" },
+  namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
                  "admin_production_edit",
    "admin/sua-hang-san-xuat/{alias}.html",
    new { controller = "Production_admin", action = "Edit", id = UrlParameter.Optional, Area = "Admin" },
@@ -33,11 +45,59 @@ namespace NONBAOHIEMVIETTIN.Areas.admin
       namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
  );
             context.MapRoute(
+"admin_Accounts_search",
+"admin/tim-kiem-tai-khoan.html",
+new { controller = "Accounts_admin", action = "Search", id = UrlParameter.Optional, Area = "Admin" },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+"admin_role_search",
+"admin/tim-kiem-quyen.html",
+new { controller = "Role_admin", action = "Search", id = UrlParameter.Optional, Area = "Admin" },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+"admin_groupproduct_search",
+"admin/tim-kiem-nhom-non.html",
+new { controller = "GroupProduct_admin", action = "Search", id = UrlParameter.Optional, Area = "Admin" },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+"admin_category_search",
+"admin/tim-kiem-loai-non.html",
+new { controller = "Category_admin", action = "Search", id = UrlParameter.Optional, Area = "Admin" },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+  "admin_production_search",
+  "admin/tim-kiem-hang-san-xuat.html",
+  new { controller = "Production_admin", action = "Search", id = UrlParameter.Optional, Area = "Admin" },
+   namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+      "admin_products_search",
+      "admin/tim-kiem-non.html",
+      new { controller = "products_admin", action = "Search", id = UrlParameter.Optional, Area = "Admin" },
+       namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+  );
+            context.MapRoute(
         "admin_products_edit",
         "admin/sua-non/{alias}.html",
         new { controller = "products_admin", action = "Edit", id = UrlParameter.Optional, Area = "Admin" },
          namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
     );
+            context.MapRoute(
+"admin_Accounts_create",
+"admin/them-moi-tai-khoan.html",
+new { controller = "Accounts_admin", action = "Create", id = UrlParameter.Optional, Area = "Admin" },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+   "admin_Role_create",
+   "admin/them-moi-quyen.html",
+   new { controller = "Role_admin", action = "Create", id = UrlParameter.Optional, Area = "Admin" },
+    namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
             context.MapRoute(
     "admin_Production_create",
     "admin/them-moi-hang-san-xuat.html",
@@ -60,6 +120,18 @@ namespace NONBAOHIEMVIETTIN.Areas.admin
          "admin_products_create",
          "admin/them-moi-non.html",
          new { controller = "products_admin", action = "Create", id = UrlParameter.Optional, Area = "Admin" },
+          namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+     );
+            context.MapRoute(
+       "admin_account_index",
+       "admin/tai-khoan.html",
+       new { controller = "Accounts_admin", action = "Index", id = UrlParameter.Optional, Area = "Admin" },
+        namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+   );
+            context.MapRoute(
+         "admin_role_index",
+         "admin/quyen.html",
+         new { controller = "Role_admin", action = "Index", id = UrlParameter.Optional, Area = "Admin" },
           namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
      );
             context.MapRoute(

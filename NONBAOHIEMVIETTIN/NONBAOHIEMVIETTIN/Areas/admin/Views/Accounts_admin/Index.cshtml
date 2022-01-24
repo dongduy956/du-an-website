@@ -1,0 +1,162 @@
+﻿@using NONBAOHIEMVIETTIN.Models;
+@model PagedList.IPagedList<accounts>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Danh sách tài khoản";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+    var db = new nonbaohiemviettinEntities();
+}
+@section styles{
+    <style>
+        .img-product {
+            width: 100px;
+            height: 100px;
+        }
+
+        .modal-body {
+            overflow-y: scroll;
+            max-height: 70vh;
+        }
+
+            .modal-body p {
+                margin: 0;
+            }
+    </style>
+}
+@section scripts{
+    @if (TempData["status"] != null)
+    {
+        <script>
+            $(function () {
+                alertify.error(`@TempData["status"]`);
+            })
+        </script>
+    }
+}
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách tài khoản</h6>
+        <form method="get" action="/admin/tim-kiem-tai-khoan.html" class="d-none d-sm-inline-block form-inline ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+                <input name="tukhoa" type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm..." aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <a href="/admin/them-moi-tai-khoan.html" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <i class="fas fa-plus fa-sm text-white-50"></i> Thêm mới
+        </a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Ảnh</th>
+                        <th>Họ tên</th>
+                        <th>Tên đăng nhập</th>
+                        <th>Email</th>
+                        <th>Tên quyền</th>
+                        <th>Địa chỉ</th>
+                        <th>Trạng thái</th>
+
+                        <th>Công cụ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr id="_account_@item.id">
+                            <td>@item.id</td>
+                            <td><img class="img-product" src="~/@item.image" /></td>
+                            <td>@item.fullname</td>
+                            <td>@item.username</td>
+                            <td>@item.email</td>
+                            <td>@item.role.name</td>
+                            <td>@item.address</td>
+                            <td id="_account_@item.id-delete">@(item.username.Equals("admin") ? "Luôn luôn mở" : item.status == false ? "Khoá" : "Mở")</td>
+
+                            <td>
+                                <div class="tool d-flex align-items-center flex-column justify-content-center">
+                                    <a data-toggle="modal" data-target="#account_@item.id" title="Xem tài khoản @item.username" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                        <i class="far fa-eye"></i>
+                                    </a>
+
+                                    <a href="/admin/sua-tai-khoan/@(item.alias).html" title="Sửa tài khoản @item.username" class="mt-1 mb-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                        <i class="far fa-edit"></i>
+                                    </a>
+                                    @if (item.status == true && !item.username.Equals("admin"))
+                                    {
+                                        <a data-id="@item.id" title="Xoá tài khoản @item.username" class="delete_account d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                            <i class="far fa-trash-alt"></i>
+                                        </a>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- Product Modal-->
+                        <div class="modal fade" id="account_@item.id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Thông tin tài khoản <strong>@item.username</strong></h5>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p><strong>Id:</strong> @item.id</p>
+                                        <p><strong>Họ tên:</strong> @item.fullname</p>
+                                        <p><strong>Tên đăng nhập:</strong> @item.username</p>
+                                        <p><strong>Họ tên:</strong> @item.fullname</p>
+                                        <p><strong>Email: </strong> @item.email</p>
+                                        <p><strong>Địa chỉ:</strong> @item.address</p>
+                                        <p><strong>Thuộc quyền:</strong> @item.role.name</p>
+                                        <p><strong>Số điện thoại:</strong> @item.phone</p>
+                                        <p><strong>Thuộc loại tài khoản:</strong> @(item.issocial == 0 ? "Tạo từ website" : item.issocial == 1 ? "Tài khoản google" : "Tài khoản facebook")</p>
+                                        <p><strong>Hình ảnh:</strong> <img src="~/@item.image" class="img-product" /></p>
+                                        <p><strong>Đã đặt hàng:</strong> @item.order.Count đơn hàng</p>
+                                        <p><strong>Đánh giá:</strong> @item.rate.Count lần</p>
+                                        <p><strong>Trạng thái:</strong> <span id="_account_@item.id-delete-detail">@(item.username.Equals("admin") ? "Luôn luôn mở" : item.status == false ? "Khoá" : "Mở")</span></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Đóng</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+@if (ViewBag.last != 1)
+{
+    <ul class="pagination mr-auto ml-auto" style="justify-content:center;">
+        @if (ViewBag.check == true)
+        {
+            @Html.PagedListPager(Model,
+        page => Url.Action("Index", new { page }),
+        new PagedListRenderOptions
+        {
+            MaximumPageNumbersToDisplay = 3
+        })
+        }
+        else
+        {
+            @Html.PagedListPager(Model, page => Url.Action("Search", new { tukhoa = Request.Url.Query.Substring(Request.Url.Query.IndexOf("?tukhoa="), Request.Url.Query.LastIndexOf('&') == -1 ? Request.Url.Query.Length : Request.Url.Query.LastIndexOf('&')).Replace("?tukhoa=", ""), page }),
+                                    new PagedListRenderOptions
+                                    {
+                                        MaximumPageNumbersToDisplay = 5
+                                    });
+        }
+
+    </ul>
+}

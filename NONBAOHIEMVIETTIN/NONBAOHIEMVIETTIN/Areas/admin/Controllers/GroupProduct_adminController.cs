@@ -26,10 +26,28 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         }
         public ActionResult Index(int page = 1)
         {
-            var temp = db.groupproduct.Where(x => x.isdelete == false).ToList();
+            var temp = db.groupproduct.ToList();
             var groupproduct = temp.ToPagedList(page, pageSize);
             ViewBagNoti(temp, page);
+            ViewBag.check = true;
             return View(groupproduct);
+        }
+        public ActionResult Search(int page = 1)
+        {
+            var keyword = Request["tukhoa"];
+            if (string.IsNullOrEmpty(keyword))
+            {
+                return RedirectToAction("Index");
+            }
+            ViewBag.check = true;
+
+            var temp = db.groupproduct.Where(x => 
+            x.name.ToLower().Contains(keyword.ToLower().Trim())||
+            x.id.ToString().ToLower().Equals(keyword.ToLower().Trim())
+            ).ToList();
+            var groupproduct = temp.ToPagedList(page, pageSize);
+            ViewBagNoti(temp, page);
+            return View("Index", groupproduct);
         }
         [HttpPost]
         public JsonResult delete_groupProduct(int id)
@@ -68,7 +86,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
 
             if (ModelState.IsValid)
             {
-                if (db.groupproduct.SingleOrDefault(x => x.name.Equals(groupproduct.name)) == null)
+                if (db.groupproduct.SingleOrDefault(x => x.name.ToLower().Equals(groupproduct.name.ToLower())) == null)
                 {
                     groupproduct.isdelete = false;
                     groupproduct.status = true;
@@ -107,13 +125,26 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (db.groupproduct.SingleOrDefault(x => x.name.Equals(groupproduct.name)) == null)
+                var temp = db.groupproduct.SingleOrDefault(x => x.name.ToLower().Equals(groupproduct.name.ToLower()));
+                if (temp == null)
                 {
-                    groupproduct.alias = HoTro.Instances.convertToUnSign3(groupproduct.name);
-                db.Entry(groupproduct).State = EntityState.Modified;
-                db.SaveChanges();
+                    groupproduct.alias = HoTro.Instances.convertToUnSign3(groupproduct.name.ToLower());
+                    db.Entry(groupproduct).State = EntityState.Modified;
+                    db.SaveChanges();
                     TempData["status"] = "Sửa nhóm nón thành công!!";
-
+                    return Redirect("/admin/nhom-non.html");
+                }
+                else
+                    if (temp != null && groupproduct.id == temp.id)
+                {
+                    groupproduct = temp = db.groupproduct.Find(groupproduct.id);
+                    groupproduct.status = Boolean.Parse(Request["status"]);
+                    groupproduct.isdelete = Boolean.Parse(Request["isdelete"]);
+                    groupproduct.name = Request["name"];
+                    groupproduct.alias = HoTro.Instances.convertToUnSign3(groupproduct.name.ToLower());
+                    db.Entry(groupproduct).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["status"] = "Sửa nhóm nón thành công!!";
                     return Redirect("/admin/nhom-non.html");
                 }
                 else

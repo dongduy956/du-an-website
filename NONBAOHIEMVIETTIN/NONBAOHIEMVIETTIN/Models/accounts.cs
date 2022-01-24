@@ -32,6 +32,7 @@ namespace NONBAOHIEMVIETTIN.Models
         public string address { get; set; }
         public Nullable<bool> status { get; set; }
         public Nullable<int> issocial { get; set; }
+        public string alias { get; set; }
     
         public virtual role role { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

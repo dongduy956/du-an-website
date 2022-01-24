@@ -233,6 +233,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\admin\adminAreaRegistration.cs" />
+    <Compile Include="Areas\admin\Controllers\Accounts_adminController.cs" />
     <Compile Include="Areas\admin\Controllers\BaseController.cs" />
     <Compile Include="Areas\admin\Controllers\Category_adminController.cs" />
     <Compile Include="Areas\admin\Controllers\DashboardController.cs" />
@@ -240,7 +241,7 @@
     <Compile Include="Areas\admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\admin\Controllers\Production_adminController.cs" />
     <Compile Include="Areas\admin\Controllers\products_adminController.cs" />
-    <Compile Include="Areas\admin\Controllers\RoleController.cs" />
+    <Compile Include="Areas\admin\Controllers\Role_adminController.cs" />
     <Compile Include="Areas\admin\Models\AccountLogin.cs" />
     <Compile Include="assets\NganLuongAPI\APICheckoutV3.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
@@ -4077,6 +4078,12 @@
     <Content Include="Areas\admin\Views\GroupProduct_admin\Edit.cshtml" />
     <Content Include="Areas\admin\Views\Production_admin\Create.cshtml" />
     <Content Include="Areas\admin\Views\Production_admin\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\Role_admin\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Role_admin\Create.cshtml" />
+    <Content Include="Areas\admin\Views\Role_admin\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\Accounts_admin\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\Accounts_admin\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Accounts_admin\Create.cshtml" />
     <None Include="Properties\PublishProfiles\nonbaohiemviettin.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -4121,7 +4128,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\admin\Views\Role\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

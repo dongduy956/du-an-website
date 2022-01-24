@@ -37,6 +37,16 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex align-items-center justify-content-between">
         <h6 class="m-0 font-weight-bold text-primary">Danh sách hãng sản xuất</h6>
+        <form action="/admin/tim-kiem-hang-san-xuat.html" class="d-none d-sm-inline-block form-inline ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+                <input name="tukhoa" type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm" aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
         <a href="/admin/them-moi-hang-san-xuat.html" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
             <i class="fas fa-plus fa-sm text-white-50"></i> Thêm mới
         </a>
@@ -88,12 +98,24 @@
 {
     <ul class="pagination mr-auto ml-auto" style="justify-content:center;">
 
-        @Html.PagedListPager(Model,
-            page => Url.Action("Index", new { page }),
-            new PagedListRenderOptions
-            {
-                MaximumPageNumbersToDisplay = 3
-            })
+        @if (ViewBag.check == true)
+        {
+            @Html.PagedListPager(Model,
+        page => Url.Action("Index", new { page }),
+        new PagedListRenderOptions
+        {
+            MaximumPageNumbersToDisplay = 3
+        })
+        }
+        else
+        {
+            @Html.PagedListPager(Model, page => Url.Action("Search", new { tukhoa = Request.Url.Query.Substring(Request.Url.Query.IndexOf("?tukhoa="), Request.Url.Query.LastIndexOf('&') == -1 ? Request.Url.Query.Length : Request.Url.Query.LastIndexOf('&')).Replace("?tukhoa=", ""), page }),
+                                    new PagedListRenderOptions
+                                    {
+                                        MaximumPageNumbersToDisplay = 5
+                                    });
+        }
+
 
     </ul>
 }

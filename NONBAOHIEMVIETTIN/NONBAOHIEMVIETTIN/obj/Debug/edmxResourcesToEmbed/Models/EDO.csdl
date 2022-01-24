@@ -1,24 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="nonbaohiemviettinModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="accounts">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="idrole" Type="Int32" />
-    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
-    <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="fullname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="phone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
-    <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="status" Type="Boolean" />
-    <Property Name="issocial" Type="Int32" />
-    <NavigationProperty Name="role" Relationship="Self.fk_accounts_role" FromRole="accounts" ToRole="role" />
-    <NavigationProperty Name="order" Relationship="Self.fk_order_account" FromRole="accounts" ToRole="order" />
-    <NavigationProperty Name="rate" Relationship="Self.fk_rate_accounts" FromRole="accounts" ToRole="rate" />
-  </EntityType>
   <EntityType Name="category">
     <Key>
       <PropertyRef Name="id" />
@@ -119,8 +100,8 @@
     <Property Name="statuspay" Type="Boolean" />
     <Property Name="total" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="accounts" Relationship="Self.fk_order_account" FromRole="order" ToRole="accounts" />
     <NavigationProperty Name="orderdetail" Relationship="Self.fk_orderdetail_order" FromRole="order" ToRole="orderdetail" />
+    <NavigationProperty Name="accounts" Relationship="nonbaohiemviettinModel.fk_order_account" FromRole="order" ToRole="accounts" />
   </EntityType>
   <EntityType Name="orderdetail">
     <Key>
@@ -160,7 +141,7 @@
     <Property Name="description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="viewcount" Type="Int32" />
     <Property Name="createddate" Type="DateTime" Precision="3" />
-    <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="image" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="fastsell" Type="Boolean" />
     <Property Name="newproduct" Type="Boolean" />
     <Property Name="idcategory" Type="Int32" />
@@ -184,8 +165,8 @@
     <Property Name="star" Type="Int32" />
     <Property Name="comment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <Property Name="createdate" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="accounts" Relationship="Self.fk_rate_accounts" FromRole="rate" ToRole="accounts" />
     <NavigationProperty Name="products" Relationship="Self.fk_rate_products" FromRole="rate" ToRole="products" />
+    <NavigationProperty Name="accounts" Relationship="nonbaohiemviettinModel.fk_rate_accounts" FromRole="rate" ToRole="accounts" />
   </EntityType>
   <EntityType Name="role">
     <Key>
@@ -193,7 +174,8 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="accounts" Relationship="Self.fk_accounts_role" FromRole="role" ToRole="accounts" />
+    <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="accounts" Relationship="nonbaohiemviettinModel.fk_accounts_role" FromRole="role" ToRole="accounts" />
   </EntityType>
   <EntityType Name="sendcontactinfo">
     <Key>
@@ -213,42 +195,6 @@
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
-  <Association Name="fk_accounts_role">
-    <End Role="role" Type="Self.role" Multiplicity="0..1" />
-    <End Role="accounts" Type="Self.accounts" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="role">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="accounts">
-        <PropertyRef Name="idrole" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="fk_order_account">
-    <End Role="accounts" Type="Self.accounts" Multiplicity="0..1" />
-    <End Role="order" Type="Self.order" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="accounts">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="order">
-        <PropertyRef Name="idaccount" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="fk_rate_accounts">
-    <End Role="accounts" Type="Self.accounts" Multiplicity="0..1" />
-    <End Role="rate" Type="Self.rate" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="accounts">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="rate">
-        <PropertyRef Name="id_account" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="fk_products_category">
     <End Role="category" Type="Self.category" Multiplicity="0..1" />
     <End Role="products" Type="Self.products" Multiplicity="*" />
@@ -346,7 +292,6 @@
     </ReferentialConstraint>
   </Association>
   <EntityContainer Name="nonbaohiemviettinEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="accounts" EntityType="Self.accounts" />
     <EntitySet Name="category" EntityType="Self.category" />
     <EntitySet Name="contact" EntityType="Self.contact" />
     <EntitySet Name="countonline" EntityType="Self.countonline" />
@@ -363,18 +308,6 @@
     <EntitySet Name="role" EntityType="Self.role" />
     <EntitySet Name="sendcontactinfo" EntityType="Self.sendcontactinfo" />
     <EntitySet Name="subscribe" EntityType="Self.subscribe" />
-    <AssociationSet Name="fk_accounts_role" Association="Self.fk_accounts_role">
-      <End Role="role" EntitySet="role" />
-      <End Role="accounts" EntitySet="accounts" />
-    </AssociationSet>
-    <AssociationSet Name="fk_order_account" Association="Self.fk_order_account">
-      <End Role="accounts" EntitySet="accounts" />
-      <End Role="order" EntitySet="order" />
-    </AssociationSet>
-    <AssociationSet Name="fk_rate_accounts" Association="Self.fk_rate_accounts">
-      <End Role="accounts" EntitySet="accounts" />
-      <End Role="rate" EntitySet="rate" />
-    </AssociationSet>
     <AssociationSet Name="fk_products_category" Association="Self.fk_products_category">
       <End Role="category" EntitySet="category" />
       <End Role="products" EntitySet="products" />
@@ -407,5 +340,74 @@
       <End Role="products" EntitySet="products" />
       <End Role="rate" EntitySet="rate" />
     </AssociationSet>
+    <EntitySet Name="accounts" EntityType="nonbaohiemviettinModel.accounts" />
+    <AssociationSet Name="fk_accounts_role" Association="nonbaohiemviettinModel.fk_accounts_role">
+      <End Role="role" EntitySet="role" />
+      <End Role="accounts" EntitySet="accounts" />
+    </AssociationSet>
+    <AssociationSet Name="fk_order_account" Association="nonbaohiemviettinModel.fk_order_account">
+      <End Role="accounts" EntitySet="accounts" />
+      <End Role="order" EntitySet="order" />
+    </AssociationSet>
+    <AssociationSet Name="fk_rate_accounts" Association="nonbaohiemviettinModel.fk_rate_accounts">
+      <End Role="accounts" EntitySet="accounts" />
+      <End Role="rate" EntitySet="rate" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="accounts">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idrole" Type="Int32" />
+    <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="fullname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="phone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="status" Type="Boolean" />
+    <Property Name="issocial" Type="Int32" />
+    <NavigationProperty Name="role" Relationship="nonbaohiemviettinModel.fk_accounts_role" FromRole="accounts" ToRole="role" />
+    <NavigationProperty Name="order" Relationship="nonbaohiemviettinModel.fk_order_account" FromRole="accounts" ToRole="order" />
+    <NavigationProperty Name="rate" Relationship="nonbaohiemviettinModel.fk_rate_accounts" FromRole="accounts" ToRole="rate" />
+    <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <Association Name="fk_accounts_role">
+    <End Type="nonbaohiemviettinModel.role" Role="role" Multiplicity="0..1" />
+    <End Type="nonbaohiemviettinModel.accounts" Role="accounts" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="role">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="accounts">
+        <PropertyRef Name="idrole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_order_account">
+    <End Type="nonbaohiemviettinModel.accounts" Role="accounts" Multiplicity="0..1" />
+    <End Type="nonbaohiemviettinModel.order" Role="order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="accounts">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="order">
+        <PropertyRef Name="idaccount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_rate_accounts">
+    <End Type="nonbaohiemviettinModel.accounts" Role="accounts" Multiplicity="0..1" />
+    <End Type="nonbaohiemviettinModel.rate" Role="rate" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="accounts">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="rate">
+        <PropertyRef Name="id_account" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

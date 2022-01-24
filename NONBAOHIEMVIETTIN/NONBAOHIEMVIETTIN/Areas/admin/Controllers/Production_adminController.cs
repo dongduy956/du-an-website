@@ -26,10 +26,28 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         }
         public ActionResult Index(int page = 1)
         {
-            var temp = db.production.Where(x => x.isdelete == false).ToList();
+            var temp = db.production.ToList();
             var production = temp.ToPagedList(page, pageSize);
             ViewBagNoti(temp, page);
+            ViewBag.check = true;
             return View(production);
+        }
+        public ActionResult Search(int page = 1)
+        {
+            var keyword = Request["tukhoa"];
+            if(string.IsNullOrEmpty(keyword))
+            {
+                return RedirectToAction("Index");
+            }
+            ViewBag.check = false;
+
+            var temp = db.production.Where(x=>
+            x.name.ToLower().Contains(keyword.ToLower().Trim())||
+            x.id.ToString().ToLower().Equals(keyword.ToLower().Trim()) 
+            ).ToList();
+            var production = temp.ToPagedList(page, pageSize);
+            ViewBagNoti(temp, page);
+            return View("Index",production);
         }
         [HttpPost]
         public JsonResult delete_production(int id)
@@ -68,7 +86,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
 
             if (ModelState.IsValid)
             {
-                if (db.production.SingleOrDefault(x => x.name.Equals(production.name)) == null)
+                if (db.production.SingleOrDefault(x => x.name.ToLower().Equals(production.name.ToLower())) == null)
                 {
                     production.isdelete = false;
                     production.status = true;
@@ -105,14 +123,27 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var name_temp = Request["name-temp"].ToString();
-                if (db.production.SingleOrDefault(x =>!x.name.ToLower().Equals(name_temp.ToLower()) && x.name.ToLower().Equals(production.ToLower().name)) == null)
+                var temp = db.production.SingleOrDefault(x => x.name.ToLower().Equals(production.name.ToLower()));
+                if (temp == null)
                 {
-                    production.alias = HoTro.Instances.convertToUnSign3(production.name);
-                db.Entry(production).State = EntityState.Modified;
-                db.SaveChanges();
+                    production.alias = HoTro.Instances.convertToUnSign3(production.name.ToLower());
+                    db.Entry(production).State = EntityState.Modified;
+                    db.SaveChanges();
                     TempData["status"] = "Sửa hãng sản xuất thành công!!";
 
+                    return Redirect("/admin/hang-san-xuat.html");
+                }
+                else
+                    if (temp != null && production.id == temp.id)
+                {
+                    production = temp = db.production.Find(production.id);
+                    production.status = Boolean.Parse(Request["status"]);
+                    production.isdelete = Boolean.Parse(Request["isdelete"]);
+                    production.name = Request["name"];
+                    production.alias = HoTro.Instances.convertToUnSign3(production.name.ToLower());
+                    db.Entry(production).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["status"] = "Sửa hãng sản xuất thành công!!";
                     return Redirect("/admin/hang-san-xuat.html");
                 }
                 else

@@ -31,7 +31,24 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             var temp = db.category.ToList();
             var category = temp.ToPagedList(page, pageSize);
             ViewBagNoti(temp, page);
+            ViewBag.check = true;
             return View(category);
+        }
+        public ActionResult Search(int page = 1)
+        {
+            var keyword = Request["tukhoa"];
+            if (string.IsNullOrEmpty(keyword))
+            {
+                return RedirectToAction("Index");
+            }
+            ViewBag.check = false;
+
+            var temp = db.category.Where(x =>
+            x.name.ToLower().Contains(keyword.ToLower().Trim())||
+            x.id.ToString().ToLower().Equals(keyword.ToLower().Trim())).ToList();
+            var category = temp.ToPagedList(page, pageSize);
+            ViewBagNoti(temp, page);
+            return View("Index", category);
         }
         [HttpPost]
         public JsonResult delete_category(int id)
@@ -60,17 +77,17 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         }
 
         public ActionResult Create()
-        {      
+        {
             return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,name")] category category)
         {
-            
+
             if (ModelState.IsValid)
             {
-                if (db.category.SingleOrDefault(x => x.name.Equals(category.name)) == null)
+                if (db.category.SingleOrDefault(x => x.name.ToLower().Equals(category.name.ToLower())) == null)
                 {
                     category.isdelete = false;
                     category.status = true;
@@ -85,7 +102,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 {
                     TempData["status"] = "Trùng tên loại nón!!";
                 }
-            }            
+            }
             return View(category);
         }
 
@@ -100,18 +117,32 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             if (category == null)
             {
                 return HttpNotFound();
-            }           
+            }
             return View(category);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,name,alias,status,isdelete")] category category)
-        {            
+        {
             if (ModelState.IsValid)
             {
-                if (db.category.SingleOrDefault(x => x.name.Equals(category.name)) == null)
+                var temp = db.category.SingleOrDefault(x => x.name.ToLower().Equals(category.name.ToLower()));
+                if (temp == null)
                 {
-                    category.alias = HoTro.Instances.convertToUnSign3(category.name);
+                    category.alias = HoTro.Instances.convertToUnSign3(category.name.ToLower());
+                    db.Entry(category).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["status"] = "Sửa loại nón thành công!!";
+                    return Redirect("/admin/loai-non.html");
+                }
+                else
+                    if (temp != null && category.id == temp.id)
+                {
+                    category = temp = db.category.Find(category.id);
+                    category.status = Boolean.Parse(Request["status"]);
+                    category.isdelete = Boolean.Parse(Request["isdelete"]);
+                    category.name = Request["name"];
+                    category.alias = HoTro.Instances.convertToUnSign3(category.name.ToLower());
                     db.Entry(category).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa loại nón thành công!!";
@@ -121,7 +152,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 {
                     TempData["status"] = "Trùng tên loại nón!!";
                 }
-            }           
+            }
             return View(category);
         }
 

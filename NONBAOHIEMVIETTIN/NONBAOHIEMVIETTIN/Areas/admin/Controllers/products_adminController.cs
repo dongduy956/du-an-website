@@ -30,7 +30,29 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             var temp = db.products.ToList();
             var products = temp.ToPagedList(page, pageSize);
             ViewBagNoti(temp, page);
+            ViewBag.check = true;
             return View(products);
+        }
+        public ActionResult Search(int page = 1)
+        {
+            var keyword = Request["tukhoa"];
+            if (string.IsNullOrEmpty(keyword))
+            {
+                return RedirectToAction("Index");
+            }
+            ViewBag.check =false;       
+            var temp = db.products.Where(x => 
+            x.name.ToLower().Contains(keyword.ToLower().Trim())||
+            x.category.name.ToLower().Contains(keyword.ToLower().Trim())||
+            x.production.name.ToLower().Contains(keyword.ToLower().Trim()) ||
+            x.groupproduct.name.ToLower().Contains(keyword.ToLower().Trim()) ||
+            x.id.ToString().ToLower().Equals(keyword.ToLower().Trim()) ||
+            x.price.ToString().ToLower().Equals(keyword.ToLower().Trim()) ||
+            x.promationprice.ToString().ToLower().Equals(keyword.ToLower().Trim())
+            ).ToList();
+            var groupproduct = temp.ToPagedList(page, pageSize);
+            ViewBagNoti(temp, page);
+            return View("Index", groupproduct);
         }
         [HttpPost]
         public JsonResult delete_product(int id)
@@ -74,7 +96,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             if (ModelState.IsValid)
             {
 
-                if (db.products.SingleOrDefault(x => x.name.Equals(products.name)) == null)
+                if (db.products.SingleOrDefault(x => x.name.ToLower().Equals(products.name.ToLower())) == null)
                 {
                     try
                     {
@@ -132,7 +154,8 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (db.products.SingleOrDefault(x => x.name.Equals(products.name)) == null)
+                var name_temp = Request["name-temp"].ToLower();
+                if (db.products.SingleOrDefault(x =>!x.name.ToLower().Equals(name_temp)&& x.name.ToLower().Equals(products.name.ToLower())) == null)
                 {
                     try
                     {

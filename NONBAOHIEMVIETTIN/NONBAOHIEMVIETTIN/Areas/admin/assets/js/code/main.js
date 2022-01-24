@@ -175,6 +175,41 @@
 
     });
 
+    function delete_account(id, ele) {
+        $.ajax({
+            url: "/admin/Accounts_admin/delete_account/" + id,
+            data: JSON.stringify(id),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: "POST",
+            success: function (data) {
+
+                showToast(data.message);
+                if (data.status == 1) {
+                    ele.attr('style', 'display:none !important');
+                    $(`#_account_${id}-delete`).text('Khoá');
+                    $(`#_account_${id}-delete-detail`).text('Khoá');
+
+                }
+
+            },
+            error: function (data) {
+
+                alert(JSON.stringify(data));
+            }
+        })
+    }
+    $('.delete_account').off('click').click(function (e) {
+        e.preventDefault();
+        var id = Number($(this).data('id'));
+        var ele = $(this);
+
+        alertify.confirm('Thông báo', 'Bạn chắc chắn xoá tài khoản này?', function () {
+            delete_account(id, ele);
+        }, function () { alertify.error('Huỷ') });
+
+    });
+
 })
 
 
