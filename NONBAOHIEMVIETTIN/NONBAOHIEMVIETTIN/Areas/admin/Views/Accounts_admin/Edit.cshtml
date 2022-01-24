@@ -117,13 +117,18 @@
             @Html.HiddenFor(model => model.alias)
             @Html.HiddenFor(model => model.password)
             @Html.HiddenFor(model => model.issocial)
-            if(Model.issocial!=0)
-            { 
             @Html.HiddenFor(model => model.username)
-            @Html.HiddenFor(model => model.email)
-            @Html.HiddenFor(model => model.username)
+            if (Model.username.Equals("admin"))
+            {
+                @Html.HiddenFor(model => model.idrole)
 
-            @Html.HiddenFor(model => model.image)
+            }
+
+            if (Model.issocial != 0)
+            {
+            @Html.HiddenFor(model => model.email)
+            @Html.HiddenFor(model => model.fullname)
+            <input type="hidden" name="image" value="/@Model.image"/>
             }
             <div class="form-horizontal">
                 @if (Model.issocial == 0)
@@ -185,13 +190,14 @@
                             </div>
                         </div>
                     </div>
-                }
-                <div class="form-group">
-                    <label class="control-label col-md-12">Quyền</label>
-                    <div class="col-md-12">
-                        @Html.DropDownList("idrole", null, htmlAttributes: new { @class = "form-control" })
+                    <div class="form-group">
+                        <label class="control-label col-md-12">Quyền</label>
+                        <div class="col-md-12">
+                            @Html.DropDownList("idrole", null, htmlAttributes: new { @class = "form-control" })
+                        </div>
                     </div>
-                </div>
+                }
+               
                 <div class="form-group">
                     <a href="/admin/tai-khoan.html" class="btn btn-light btn-icon-split" style="margin:0 0.75rem">
                         <span class="icon text-gray-600">
@@ -203,7 +209,7 @@
                         <span class="icon text-white-50">
                             <i class="far fa-save"></i>
                         </span>
-                        <span class="text">Tạo mới</span>
+                        <span class="text">Lưu</span>
                     </button>
                 </div>
             </div>

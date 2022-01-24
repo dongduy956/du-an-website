@@ -210,6 +210,33 @@
 
     });
 
+
+    function reset_password(id) {
+        $.ajax({
+            url: "/admin/Accounts_admin/resetPassword/" + id,
+            data: JSON.stringify(id),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: "POST",
+            success: function (data) {
+
+               showToast(data.message);               
+
+            },
+            error: function (data) {
+
+                alert(JSON.stringify(data));
+            }
+        })
+    }
+    $('.reset-password').off('click').click(function (e) {
+        e.preventDefault();
+        var id = Number($(this).data('id'));
+        alertify.confirm('Thông báo', 'Bạn chắc chắn reset mật khẩu tài khoản này?', function () {
+            reset_password(id);
+        }, function () { alertify.error('Huỷ') });
+
+    });
 })
 
 

@@ -73,7 +73,7 @@
                     {
                         <tr id="_account_@item.id">
                             <td>@item.id</td>
-                            <td><img class="img-product" src="~/@item.image" /></td>
+                            <td><img class="img-product" src='@(item.issocial==0?"/"+item.image:item.image)' /></td>
                             <td>@item.fullname</td>
                             <td>@item.username</td>
                             <td>@item.email</td>
@@ -94,6 +94,12 @@
                                     {
                                         <a data-id="@item.id" title="Xoá tài khoản @item.username" class="delete_account d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                             <i class="far fa-trash-alt"></i>
+                                        </a>
+                                    }
+                                    @if (item.issocial == 0)
+                                    {
+                                        <a title="Reset mật khẩu tài khoản @item.username" data-id="@item.id" class="reset-password mt-1 mb-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                            <i class="fas fa-lock-open"></i>
                                         </a>
                                     }
                                 </div>

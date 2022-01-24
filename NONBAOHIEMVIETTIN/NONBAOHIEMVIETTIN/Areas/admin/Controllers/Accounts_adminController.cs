@@ -79,6 +79,31 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 message = "Xoá thành công."
             });
         }
+        [HttpPost]
+        public JsonResult resetPassword(int id)
+        {
+            try
+            {
+                var accounts = db.accounts.Find(id);
+                accounts.password = HoTro.Instances.EncodeMD5("123");
+                db.Entry(accounts).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    status = 0,
+                    message = "Có lỗi trong quá trình xử lý.Vui lòng thử lại."
+                });
+            }
+
+            return Json(new
+            {
+                status = 1,
+                message = "Reset thành công. Mật khẩu mới là 123"
+            });
+        }
 
         // GET: admin/accounts/Create
         public ActionResult Create()
@@ -138,10 +163,12 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,idrole,username,password,image,fullname,email,phone,address,status,issocial")] accounts accounts)
+        public ActionResult Edit([Bind(Include = "id,idrole,alias,username,password,image,fullname,email,phone,address,status,issocial")] accounts accounts)
         {
             if (ModelState.IsValid)
             {
+                if (string.IsNullOrEmpty(accounts.password))
+                    accounts.password = "";
                 try
                 {
                     accounts.image = accounts.image.Substring(1, accounts.image.Length - 1);
@@ -153,6 +180,12 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 }
                 db.Entry(accounts).State = EntityState.Modified;
                 db.SaveChanges();
+                if ((Session["account"] as accounts).id == accounts.id)
+                {
+                    var acc = db.accounts.Find(accounts.id);
+                    acc.role = (Session["account"] as accounts).role;
+                    Session["account"] = acc;
+                }
                 return RedirectToAction("Index");
             }
             ViewBag.idrole = new SelectList(db.role, "id", "name", accounts.idrole);
