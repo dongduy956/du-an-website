@@ -70,6 +70,7 @@
     <EntitySetMapping Name="news">
       <EntityTypeMapping TypeName="nonbaohiemviettinModel.news">
         <MappingFragment StoreEntitySet="news">
+          <ScalarProperty Name="isdelete" ColumnName="isdelete" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="id_newstype" ColumnName="id_newstype" />
           <ScalarProperty Name="title" ColumnName="title" />
@@ -83,6 +84,7 @@
     <EntitySetMapping Name="newstype">
       <EntityTypeMapping TypeName="nonbaohiemviettinModel.newstype">
         <MappingFragment StoreEntitySet="newstype">
+          <ScalarProperty Name="isdelete" ColumnName="isdelete" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="alias" ColumnName="alias" />

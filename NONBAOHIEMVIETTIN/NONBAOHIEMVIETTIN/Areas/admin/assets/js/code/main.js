@@ -237,6 +237,73 @@
         }, function () { alertify.error('Huỷ') });
 
     });
+
+    function delete_newstype(id, ele) {
+        $.ajax({
+            url: "/admin/Newstype_admin/delete_newstype/" + id,
+            data: JSON.stringify(id),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: "POST",
+            success: function (data) {
+
+                showToast(data.message);
+                if (data.status == 1) {
+                    ele.attr('style', 'display:none !important');
+                    $(`#_newstype_${id}-delete`).text('Đã xoá');
+                }
+
+            },
+            error: function (data) {
+
+                alert(JSON.stringify(data));
+            }
+        })
+    }
+    $('.delete_newstype').off('click').click(function (e) {
+        e.preventDefault();
+        var id = Number($(this).data('id'));
+        var ele = $(this);
+
+        alertify.confirm('Thông báo', 'Bạn chắc chắn xoá loại tin này?', function () {
+            delete_newstype(id, ele);
+        }, function () { alertify.error('Huỷ') });
+
+    });
+
+
+    function delete_news(id, ele) {
+        $.ajax({
+            url: "/admin/News_admin/delete_news/" + id,
+            data: JSON.stringify(id),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: "POST",
+            success: function (data) {
+
+                showToast(data.message);
+                if (data.status == 1) {
+                    ele.attr('style', 'display:none !important');
+                    $(`#_news_${id}-delete`).text('Đã xoá');
+                }
+
+            },
+            error: function (data) {
+
+                alert(JSON.stringify(data));
+            }
+        })
+    }
+    $('.delete_news').off('click').click(function (e) {
+        e.preventDefault();
+        var id = Number($(this).data('id'));
+        var ele = $(this);
+
+        alertify.confirm('Thông báo', 'Bạn chắc chắn xoá tin này?', function () {
+            delete_news(id, ele);
+        }, function () { alertify.error('Huỷ') });
+
+    });
 })
 
 

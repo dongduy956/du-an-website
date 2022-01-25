@@ -50,9 +50,9 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             x.price.ToString().ToLower().Equals(keyword.ToLower().Trim()) ||
             x.promationprice.ToString().ToLower().Equals(keyword.ToLower().Trim())
             ).ToList();
-            var groupproduct = temp.ToPagedList(page, pageSize);
+            var products = temp.ToPagedList(page, pageSize);
             ViewBagNoti(temp, page);
-            return View("Index", groupproduct);
+            return View("Index", products);
         }
         [HttpPost]
         public JsonResult delete_product(int id)
@@ -154,8 +154,8 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                var name_temp = Request["name-temp"].ToLower();
-                if (db.products.SingleOrDefault(x =>!x.name.ToLower().Equals(name_temp)&& x.name.ToLower().Equals(products.name.ToLower())) == null)
+                var temp = db.products.SingleOrDefault(x => x.name.ToLower().Equals(products.name.ToLower()));
+                if (temp == null)
                 {
                     try
                     {
@@ -167,6 +167,28 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
 
                     }
                     products.alias = HoTro.Instances.convertToUnSign3(products.name);
+                    db.Entry(products).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["status"] = "Sửa nón thành công!!";
+                    return Redirect("/admin/non.html");
+                }
+                else
+                    if (temp != null && products.id == temp.id)
+                {
+                    products = temp = db.products.Find(products.id);
+                    products.status = Boolean.Parse(Request["status"]);
+                    products.newproduct = Boolean.Parse(Request["newproduct"]);
+                    products.isdelete = Boolean.Parse(Request["isdelete"]);
+                    products.name = Request["name"];
+                    products.description = Request["description"];
+                    products.image = Request["image"].Substring(1, Request["image"].Length-1);
+                    products.price =decimal.Parse(Request["price"]);
+                    products.promationprice =decimal.Parse(Request["promationprice"]);
+                    products.quantity =int.Parse(Request["quantity"]);
+                    products.idcategory =int.Parse(Request["idcategory"]);
+                    products.idgroupproduct =int.Parse(Request["idgroupproduct"]);
+                    products.idproduction =int.Parse(Request["idproduction"]);
+                    products.alias = HoTro.Instances.convertToUnSign3(products.name.ToLower());
                     db.Entry(products).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa nón thành công!!";

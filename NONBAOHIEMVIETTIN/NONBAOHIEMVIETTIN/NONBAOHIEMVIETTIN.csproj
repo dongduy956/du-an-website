@@ -239,6 +239,8 @@
     <Compile Include="Areas\admin\Controllers\DashboardController.cs" />
     <Compile Include="Areas\admin\Controllers\GroupProduct_adminController.cs" />
     <Compile Include="Areas\admin\Controllers\LoginController.cs" />
+    <Compile Include="Areas\admin\Controllers\Newstype_adminController.cs" />
+    <Compile Include="Areas\admin\Controllers\News_adminController.cs" />
     <Compile Include="Areas\admin\Controllers\Production_adminController.cs" />
     <Compile Include="Areas\admin\Controllers\products_adminController.cs" />
     <Compile Include="Areas\admin\Controllers\Role_adminController.cs" />
@@ -4084,6 +4086,12 @@
     <Content Include="Areas\admin\Views\Accounts_admin\Edit.cshtml" />
     <Content Include="Areas\admin\Views\Accounts_admin\Index.cshtml" />
     <Content Include="Areas\admin\Views\Accounts_admin\Create.cshtml" />
+    <Content Include="Areas\admin\Views\Newstype_admin\Create.cshtml" />
+    <Content Include="Areas\admin\Views\Newstype_admin\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Newstype_admin\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\News_admin\Index.cshtml" />
+    <Content Include="Areas\admin\Views\News_admin\Create.cshtml" />
+    <Content Include="Areas\admin\Views\News_admin\Edit.cshtml" />
     <None Include="Properties\PublishProfiles\nonbaohiemviettin.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

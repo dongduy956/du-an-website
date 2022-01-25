@@ -1,19 +1,10 @@
-﻿@using NONBAOHIEMVIETTIN.Models
-@model role
+﻿
 @{
-    ViewBag.Title = "Sửa quyền " + Model.name;
+    ViewBag.Title = "Thêm mới loại tin";
     Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
 }
 
 @section scripts{
-    @if (TempData["status"] != null)
-    {
-        <script>
-        $(function () {
-            alertify.error(`@TempData["status"]`);
-        })
-        </script>
-    }
     <script>
         // Disable form submissions if there are invalid fields
         (function () {
@@ -31,55 +22,39 @@
                         form.classList.add('was-validated');
                     }, false);
                 });
-            }, false);          
+            }, false);
         })();
 
-
     </script>
+    @if (TempData["status"] != null)
+    {
+        <script>
+        $(function () {
+            alertify.error(`@TempData["status"]`);
+        })
+        </script>
+    }
 }
-@section styles{
-    <style>
-        .custom-file-label {
-            left: 0.75rem;
-            right: 0.75rem;
-        }
-
-        .input-ckb {
-            height: 20px;
-            width: 20px;
-            cursor: pointer;
-        }
-    </style>
-}
-
-
-
-
-
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Sửa quyền <strong>@Model.name</strong></h6>
+        <h6 class="m-0 font-weight-bold text-primary">Thêm mới loại tin</h6>
     </div>
-
     <div class="card-body">
-        @using (Html.BeginForm("Edit", "Role_admin", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "needs-validation", @novalidate = "true" }))
+        @using (Html.BeginForm("Create", "Newstype_admin", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "needs-validation", @novalidate = "true" }))
         {
             @Html.AntiForgeryToken()
-            @Html.HiddenFor(model => model.id)
-            <input type="hidden" name="name-temp" value="@Model.name" />
+
             <div class="form-horizontal">
                 <div class="form-group">
-                    <label class="control-label col-md-12">Tên quyền</label>
+                    <label class="control-label col-md-12">Tên loại tin</label>
                     <div class="col-md-12">
-                        <input name="name" placeholder="Nhập vào tên quyền" value="@Model.name" required class="form-control" />
+                        <input name="name" placeholder="Nhập vào tên loại tin" required class="form-control" />
                         <div class="valid-feedback">Valid</div>
-                        <div class="invalid-feedback">Nhập vào tên quyền</div>
+                        <div class="invalid-feedback">Nhập vào tên loại tin</div>
                     </div>
                 </div>
-           
-
                 <div class="form-group">
-                    <a href="/admin/quyen.html" class="btn btn-light btn-icon-split" style="margin:0 0.75rem">
+                    <a href="/admin/loai-tin.html" class="btn btn-light btn-icon-split" style="margin:0 0.75rem">
                         <span class="icon text-gray-600">
                             <i class="fas fa-arrow-left"></i>
                         </span>
@@ -87,13 +62,14 @@
                     </a>
                     <button type="submit" style="margin:0 0.75rem" class="btn btn-success btn-icon-split">
                         <span class="icon text-white-50">
-                            <i class="far fa-save"></i>
+                            <i class="fas fa-plus"></i>
                         </span>
-                        <span class="text">Lưu</span>
+                        <span class="text">Tạo mới</span>
                     </button>
                 </div>
             </div>
         }
     </div>
 </div>
+
 

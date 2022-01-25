@@ -15,6 +15,18 @@ namespace NONBAOHIEMVIETTIN.Areas.admin
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
+           "admin_News_edit",
+"admin/sua-tin-tuc/{alias}.html",
+new { controller = "News_admin", action = "Edit", id = UrlParameter.Optional, Area = "Admin" },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+             "admin_Newstype_edit",
+"admin/sua-loai-tin/{alias}.html",
+new { controller = "Newstype_admin", action = "Edit", id = UrlParameter.Optional, Area = "Admin" },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
               "admin_Accounts_edit",
 "admin/sua-tai-khoan/{alias}.html",
 new { controller = "Accounts_admin", action = "Edit", id = UrlParameter.Optional, Area = "Admin" },
@@ -44,6 +56,18 @@ new { controller = "Accounts_admin", action = "Edit", id = UrlParameter.Optional
      new { controller = "Category_admin", action = "Edit", id = UrlParameter.Optional, Area = "Admin" },
       namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
  );
+            context.MapRoute(
+"admin_News_search",
+"admin/tim-kiem-tin-tuc.html",
+new { controller = "News_admin", action = "Search", id = UrlParameter.Optional, Area = "Admin" },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+"admin_Newstype_search",
+"admin/tim-kiem-loai-tin.html",
+new { controller = "Newstype_admin", action = "Search", id = UrlParameter.Optional, Area = "Admin" },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
             context.MapRoute(
 "admin_Accounts_search",
 "admin/tim-kiem-tai-khoan.html",
@@ -87,6 +111,18 @@ namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
          namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
     );
             context.MapRoute(
+"admin_News_create",
+"admin/them-moi-tin-tuc.html",
+new { controller = "News_admin", action = "Create", id = UrlParameter.Optional, Area = "Admin" },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+"admin_Newstype_create",
+"admin/them-moi-loai-tin.html",
+new { controller = "Newstype_admin", action = "Create", id = UrlParameter.Optional, Area = "Admin" },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
 "admin_Accounts_create",
 "admin/them-moi-tai-khoan.html",
 new { controller = "Accounts_admin", action = "Create", id = UrlParameter.Optional, Area = "Admin" },
@@ -122,6 +158,18 @@ namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
          new { controller = "products_admin", action = "Create", id = UrlParameter.Optional, Area = "Admin" },
           namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
      );
+            context.MapRoute(
+   "admin_News_index",
+   "admin/tin-tuc.html",
+   new { controller = "News_admin", action = "Index", id = UrlParameter.Optional, Area = "Admin" },
+    namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+    "admin_Newstype_index",
+    "admin/loai-tin.html",
+    new { controller = "Newstype_admin", action = "Index", id = UrlParameter.Optional, Area = "Admin" },
+     namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
             context.MapRoute(
        "admin_account_index",
        "admin/tai-khoan.html",

@@ -172,13 +172,13 @@
                         <label class="control-label col-md-12" for="image">Ảnh đại diện</label>
                         <span class="custom-file col-md-12">
                             <input type="file" class="custom-file-input" id="btnimg">
-                            <label class="custom-file-label" id="txtimg" for="customFile">@(Model.image.Equals("") ? "Chọn ảnh" : Model.image)</label>
+                            <label class="custom-file-label" id="txtimg" for="customFile">@(Model.image.Equals("") ? "Chọn ảnh" :"/"+ Model.image)</label>
                         </span>
                         <input name="image" value="/@Model.image" id="txtimg_hide" type="hidden" />
 
                     </div>
                 }
-                @if (!Model.role.name.Equals("admin"))
+                @if (!Model.username.Equals("admin"))
                 {
                     <div class="form-group">
                         <label class="control-label col-md-12">Trạng thái</label>

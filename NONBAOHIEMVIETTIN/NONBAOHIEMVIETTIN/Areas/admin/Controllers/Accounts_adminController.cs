@@ -190,34 +190,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             }
             ViewBag.idrole = new SelectList(db.role, "id", "name", accounts.idrole);
             return View(accounts);
-        }
-
-        // GET: admin/accounts/Delete/5
-        public ActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            accounts accounts = db.accounts.Find(id);
-            if (accounts == null)
-            {
-                return HttpNotFound();
-            }
-            return View(accounts);
-        }
-
-        // POST: admin/accounts/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
-        {
-            accounts accounts = db.accounts.Find(id);
-            db.accounts.Remove(accounts);
-            db.SaveChanges();
-            return RedirectToAction("Index");
-        }
-
+        }      
         protected override void Dispose(bool disposing)
         {
             if (disposing)

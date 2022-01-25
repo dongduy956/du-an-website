@@ -75,6 +75,7 @@
     <Property Name="createdate" Type="DateTime" Precision="0" />
     <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="newstype" Relationship="Self.fk_news_newstype" FromRole="news" ToRole="newstype" />
+    <Property Name="isdelete" Type="Boolean" />
   </EntityType>
   <EntityType Name="newstype">
     <Key>
@@ -84,6 +85,7 @@
     <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="news" Relationship="Self.fk_news_newstype" FromRole="newstype" ToRole="news" />
+    <Property Name="isdelete" Type="Boolean" />
   </EntityType>
   <EntityType Name="order">
     <Key>

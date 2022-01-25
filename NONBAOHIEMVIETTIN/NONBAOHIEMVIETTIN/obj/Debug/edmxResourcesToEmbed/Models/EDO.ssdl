@@ -88,6 +88,7 @@
     <Property Name="content" Type="ntext" />
     <Property Name="createdate" Type="date" />
     <Property Name="image" Type="varchar" MaxLength="500" />
+    <Property Name="isdelete" Type="bit" />
   </EntityType>
   <EntityType Name="newstype">
     <Key>
@@ -96,6 +97,7 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="alias" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="isdelete" Type="bit" />
   </EntityType>
   <EntityType Name="order">
     <Key>

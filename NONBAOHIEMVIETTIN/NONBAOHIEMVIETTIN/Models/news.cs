@@ -21,6 +21,7 @@ namespace NONBAOHIEMVIETTIN.Models
         public string content { get; set; }
         public Nullable<System.DateTime> createdate { get; set; }
         public string image { get; set; }
+        public Nullable<bool> isdelete { get; set; }
     
         public virtual newstype newstype { get; set; }
     }
