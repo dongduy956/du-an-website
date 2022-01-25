@@ -41,6 +41,7 @@
     <Property Name="map" Type="varchar" MaxLength="500" />
     <Property Name="display" Type="bit" />
     <Property Name="workday" Type="nvarchar" MaxLength="100" />
+    <Property Name="alias" Type="varchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="countonline">
     <Key>
@@ -68,6 +69,7 @@
     <Property Name="content" Type="ntext" />
     <Property Name="image" Type="varchar" MaxLength="100" />
     <Property Name="status" Type="bit" />
+    <Property Name="alias" Type="varchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="listimage">
     <Key>

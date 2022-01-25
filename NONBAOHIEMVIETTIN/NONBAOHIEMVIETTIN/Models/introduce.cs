@@ -19,5 +19,6 @@ namespace NONBAOHIEMVIETTIN.Models
         public string content { get; set; }
         public string image { get; set; }
         public Nullable<bool> status { get; set; }
+        public string alias { get; set; }
     }
 }

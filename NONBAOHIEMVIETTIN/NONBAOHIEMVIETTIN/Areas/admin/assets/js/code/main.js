@@ -304,6 +304,75 @@
         }, function () { alertify.error('Huỷ') });
 
     });
+
+
+    function delete_introduce(id, ele) {
+        $.ajax({
+            url: "/admin/Introduce_admin/delete_introduce/" + id,
+            data: JSON.stringify(id),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: "POST",
+            success: function (data) {
+
+                showToast(data.message);
+                if (data.status == 1) {
+                    ele.attr('style', 'display:none !important');
+                    $(`#_introduce_${id}-delete`).text('Ẩn');
+                }
+
+            },
+            error: function (data) {
+
+                alert(JSON.stringify(data));
+            }
+        })
+    }
+    $('.delete_introduce').off('click').click(function (e) {
+        e.preventDefault();
+        var id = Number($(this).data('id'));
+        var ele = $(this);
+
+        alertify.confirm('Thông báo', 'Bạn chắc chắn xoá giới thiệu này?', function () {
+            delete_introduce(id, ele);
+        }, function () { alertify.error('Huỷ') });
+
+    });
+
+
+    function delete_contact(id, ele) {
+        $.ajax({
+            url: "/admin/Contact_admin/delete_contact/" + id,
+            data: JSON.stringify(id),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: "POST",
+            success: function (data) {
+
+                showToast(data.message);
+                if (data.status == 1) {
+                    ele.attr('style', 'display:none !important');
+                    $(`#_contact_${id}-delete`).text('Ẩn');
+                    $(`#_contact_${id}-delete-detail`).text('Ẩn');
+                }
+
+            },
+            error: function (data) {
+
+                alert(JSON.stringify(data));
+            }
+        })
+    }
+    $('.delete_contact').off('click').click(function (e) {
+        e.preventDefault();
+        var id = Number($(this).data('id'));
+        var ele = $(this);
+        alertify.confirm('Thông báo', 'Bạn chắc chắn xoá liên hệ này?', function () {
+            delete_contact(id, ele);
+        }, function () { alertify.error('Huỷ') });
+
+    });
+
 })
 
 

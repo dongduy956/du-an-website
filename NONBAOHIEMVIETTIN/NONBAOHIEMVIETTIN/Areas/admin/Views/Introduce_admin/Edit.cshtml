@@ -1,9 +1,12 @@
-﻿@model NONBAOHIEMVIETTIN.Models.products
+﻿@using NONBAOHIEMVIETTIN.Models
+@model introduce
 
 @{
-    ViewBag.Title = "Thêm mới tin tức";
+    ViewBag.Title = "Sửa giới thiệu " + Model.title;
     Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+    var db = new nonbaohiemviettinEntities();
 }
+
 @section scripts{
     <script>
         // Disable form submissions if there are invalid fields
@@ -37,14 +40,28 @@
                 finder.popup();
 
             })
+            $('#input_status').change(function () {
+                if ($(this).is(":checked")) {
+                    $('#input_mess-status').text('Hiện');
+                    $('input[name="status"]').val('True');
+                }
+
+
+                else {
+                    $('#input_mess-status').text('Ẩn');
+                    $('input[name="status"]').val('False');
+                }
+
+            });
         })();
+
     </script>
     @if (TempData["status"] != null)
     {
         <script>
-        $(function () {
-            alertify.error(`@TempData["status"]`);
-        })
+            $(function () {
+                alertify.error(`@TempData["status"]`);
+            })
         </script>
     }
 }
@@ -54,31 +71,48 @@
             left: 0.75rem;
             right: 0.75rem;
         }
-    </style>}
+
+        .input-ckb {
+            height: 20px;
+            width: 20px;
+            cursor: pointer;
+        }
+    </style>
+}
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold text-primary">Thêm mới tin tức</h6>
+        <h6 class="m-0 font-weight-bold text-primary">Sửa giới thiệu <strong>@Model.title</strong></h6>
     </div>
+
     <div class="card-body">
-        @using (Html.BeginForm("Create", "News_admin", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "needs-validation", @novalidate = "true" }))
+        @using (Html.BeginForm("Edit", "Introduce_admin", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "needs-validation", @novalidate = "true" }))
         {
             @Html.AntiForgeryToken()
-
+            @Html.HiddenFor(model => model.id)
+            @Html.HiddenFor(model => model.alias)
+            @Html.HiddenFor(model => model.status)
             <div class="form-horizontal">
                 <div class="form-group">
                     <label class="control-label col-md-12">Tiêu đề</label>
                     <div class="col-md-12">
-                        <input name="title" placeholder="Nhập vào tiêu đề" required class="form-control" />
+                        <input name="title" placeholder="Nhập vào tiêu đề" value="@Model.title" required class="form-control" />
                         <div class="valid-feedback">Valid</div>
                         <div class="invalid-feedback">Nhập vào tiêu đề</div>
                     </div>
-                </div>              
-                            
-
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-12">Bạn muốn ẩn đi hay hiện tin tức <strong>@Model.title</strong>?</label>
+                    <div class="col-md-12">
+                        <div class="d-flex align-items-center">
+                            <input id="input_status" class="input-ckb" type="checkbox" checked="@Model.status" />
+                            <span class="ml-2" id="input_mess-status">@(Model.status == false ? "Ẩn" : "Hiện")</span>
+                        </div>
+                    </div>
+                </div>
                 <div class="form-group">
                     <label class="control-label col-md-12">Nội dung</label>
                     <div class="col-md-12">
-                        <textarea required placeholder="Nhập vào nội dung" id="txtDescription" name="content" class="form-control"></textarea>
+                        <textarea required placeholder="Nhập vào nội dung" id="txtDescription" name="content" class="form-control">@Html.Raw(Model.content)</textarea>
                     </div>
                     <div class="valid-feedback">Valid</div>
                     <div class="invalid-feedback">Nhập nội dung</div>
@@ -88,20 +122,13 @@
                     <label class="control-label col-md-12" for="image">Ảnh đại diện</label>
                     <span class="custom-file col-md-12">
                         <input type="file" class="custom-file-input" id="btnimg">
-                        <label class="custom-file-label" id="txtimg" for="customFile">Chọn ảnh</label>
+                        <label class="custom-file-label" id="txtimg" for="customFile">@(Model.image.Equals("") ? "Chọn ảnh" : "/" + Model.image)</label>
                     </span>
-                    <input name="image" id="txtimg_hide" type="hidden" />
+                    <input name="image" value="/@Model.image" id="txtimg_hide" type="hidden" />
 
-                </div>
+                </div>               
                 <div class="form-group">
-                    <label class="control-label col-md-12">Loại tin</label>
-                    <div class="col-md-12">
-                        @Html.DropDownList("id_newstype", null, htmlAttributes: new { @class = "form-control" })
-                    </div>
-                </div>
-             
-                <div class="form-group">
-                    <a href="/admin/tin-tuc.html" class="btn btn-light btn-icon-split" style="margin:0 0.75rem">
+                    <a href="/admin/gioi-thieu.html" class="btn btn-light btn-icon-split" style="margin:0 0.75rem">
                         <span class="icon text-gray-600">
                             <i class="fas fa-arrow-left"></i>
                         </span>
@@ -109,13 +136,12 @@
                     </a>
                     <button type="submit" style="margin:0 0.75rem" class="btn btn-success btn-icon-split">
                         <span class="icon text-white-50">
-                            <i class="fas fa-plus"></i>
+                            <i class="far fa-save"></i>
                         </span>
-                        <span class="text">Tạo mới</span>
+                        <span class="text">Lưu</span>
                     </button>
                 </div>
             </div>
         }
     </div>
 </div>
-

@@ -46,6 +46,7 @@
           <Property Name="map" Type="varchar" MaxLength="500" />
           <Property Name="display" Type="bit" />
           <Property Name="workday" Type="nvarchar" MaxLength="100" />
+          <Property Name="alias" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="countonline">
           <Key>
@@ -73,6 +74,7 @@
           <Property Name="content" Type="ntext" />
           <Property Name="image" Type="varchar" MaxLength="100" />
           <Property Name="status" Type="bit" />
+          <Property Name="alias" Type="varchar" MaxLength="500" />
         </EntityType>
         <EntityType Name="listimage">
           <Key>
@@ -424,6 +426,7 @@
           <Property Name="map" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="display" Type="Boolean" />
           <Property Name="workday" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="alias" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="countonline">
           <Key>
@@ -452,6 +455,7 @@
           <Property Name="content" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="image" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="status" Type="Boolean" />
+          <Property Name="alias" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="listimage">
           <Key>
@@ -831,6 +835,7 @@
           <EntitySetMapping Name="contact">
             <EntityTypeMapping TypeName="nonbaohiemviettinModel.contact">
               <MappingFragment StoreEntitySet="contact">
+                <ScalarProperty Name="alias" ColumnName="alias" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="content" ColumnName="content" />
@@ -866,6 +871,7 @@
           <EntitySetMapping Name="introduce">
             <EntityTypeMapping TypeName="nonbaohiemviettinModel.introduce">
               <MappingFragment StoreEntitySet="introduce">
+                <ScalarProperty Name="alias" ColumnName="alias" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="content" ColumnName="content" />

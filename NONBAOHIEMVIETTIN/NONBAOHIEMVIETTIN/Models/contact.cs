@@ -24,5 +24,6 @@ namespace NONBAOHIEMVIETTIN.Models
         public string map { get; set; }
         public Nullable<bool> display { get; set; }
         public string workday { get; set; }
+        public string alias { get; set; }
     }
 }

@@ -41,7 +41,6 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             }
             ViewBag.check = false;
             var temp = db.news.Where(x =>
-            x.content.ToLower().Contains(keyword.ToLower().Trim()) ||
             x.createdate.ToString().ToLower().Contains(keyword.ToLower().Trim()) ||
             x.newstype.name.ToLower().Contains(keyword.ToLower().Trim()) ||
             x.id.ToString().ToLower().Equals(keyword.ToLower().Trim()) ||
@@ -78,7 +77,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         }
         public ActionResult Create()
         {
-            ViewBag.idnewstype = new SelectList(db.newstype, "id", "name");
+            ViewBag.id_newstype = new SelectList(db.newstype, "id", "name");
             return View();
         }
         [HttpPost]
@@ -114,7 +113,8 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 }
             }
 
-            ViewBag.idnewstype = new SelectList(db.newstype, "id", "name", news.id_newstype);
+            ViewBag.id_newstype = new SelectList(db.newstype, "id", "name", news.id_newstype);
+
             return View(news);
         }
 
@@ -130,14 +130,14 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.idnewstype = new SelectList(db.newstype, "id", "name", news.id_newstype);
+            ViewBag.id_newstype = new SelectList(db.newstype, "id", "name", news.id_newstype);
 
             return View(news);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit([Bind(Include = "id,idnewstype,title,content,image,alias,createdate,isdelete")] news news)
+        public ActionResult Edit([Bind(Include = "id,id_newstype,title,content,image,alias,createdate,isdelete")] news news)
         {
             if (ModelState.IsValid)
             {
@@ -172,7 +172,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     TempData["status"] = "Trùng tên tin tức!!";
                 }
             }
-            ViewBag.idnewstype = new SelectList(db.newstype, "id", "name", news.id_newstype);
+            ViewBag.id_newstype = new SelectList(db.newstype, "id", "name", news.id_newstype);
             return View(news);
         }
 
