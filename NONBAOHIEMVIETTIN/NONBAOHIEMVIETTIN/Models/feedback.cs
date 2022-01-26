@@ -12,7 +12,7 @@ namespace NONBAOHIEMVIETTIN.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class sendcontactinfo
+    public partial class feedback
     {
         public int id { get; set; }
         public string name { get; set; }

@@ -59,9 +59,8 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         {
             try
             {
-                var accounts = db.accounts.SingleOrDefault(x => x.id == id);
-                accounts.status = false;
-                db.Entry(accounts).State = EntityState.Modified;
+                var accounts = db.accounts.Find(id);
+                db.accounts.Remove(accounts);
                 db.SaveChanges();
             }
             catch (Exception ex)

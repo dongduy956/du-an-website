@@ -1,6 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="nonbaohiemviettinModelStoreContainer" CdmEntityContainer="nonbaohiemviettinEntities">
+    <EntitySetMapping Name="accounts">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.accounts">
+        <MappingFragment StoreEntitySet="accounts">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="idrole" ColumnName="idrole" />
+          <ScalarProperty Name="username" ColumnName="username" />
+          <ScalarProperty Name="password" ColumnName="password" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="fullname" ColumnName="fullname" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="issocial" ColumnName="issocial" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="category">
       <EntityTypeMapping TypeName="nonbaohiemviettinModel.category">
         <MappingFragment StoreEntitySet="category">
@@ -15,7 +33,6 @@
     <EntitySetMapping Name="contact">
       <EntityTypeMapping TypeName="nonbaohiemviettinModel.contact">
         <MappingFragment StoreEntitySet="contact">
-          <ScalarProperty Name="alias" ColumnName="alias" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="title" ColumnName="title" />
           <ScalarProperty Name="content" ColumnName="content" />
@@ -26,6 +43,7 @@
           <ScalarProperty Name="map" ColumnName="map" />
           <ScalarProperty Name="display" ColumnName="display" />
           <ScalarProperty Name="workday" ColumnName="workday" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -51,12 +69,12 @@
     <EntitySetMapping Name="introduce">
       <EntityTypeMapping TypeName="nonbaohiemviettinModel.introduce">
         <MappingFragment StoreEntitySet="introduce">
-          <ScalarProperty Name="alias" ColumnName="alias" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="title" ColumnName="title" />
           <ScalarProperty Name="content" ColumnName="content" />
           <ScalarProperty Name="image" ColumnName="image" />
           <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -72,7 +90,6 @@
     <EntitySetMapping Name="news">
       <EntityTypeMapping TypeName="nonbaohiemviettinModel.news">
         <MappingFragment StoreEntitySet="news">
-          <ScalarProperty Name="isdelete" ColumnName="isdelete" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="id_newstype" ColumnName="id_newstype" />
           <ScalarProperty Name="title" ColumnName="title" />
@@ -86,7 +103,6 @@
     <EntitySetMapping Name="newstype">
       <EntityTypeMapping TypeName="nonbaohiemviettinModel.newstype">
         <MappingFragment StoreEntitySet="newstype">
-          <ScalarProperty Name="isdelete" ColumnName="isdelete" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="alias" ColumnName="alias" />
@@ -170,21 +186,9 @@
     <EntitySetMapping Name="role">
       <EntityTypeMapping TypeName="nonbaohiemviettinModel.role">
         <MappingFragment StoreEntitySet="role">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="alias" ColumnName="alias" />
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="name" ColumnName="name" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="sendcontactinfo">
-      <EntityTypeMapping TypeName="nonbaohiemviettinModel.sendcontactinfo">
-        <MappingFragment StoreEntitySet="sendcontactinfo">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="name" ColumnName="name" />
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="phone" ColumnName="phone" />
-          <ScalarProperty Name="subject" ColumnName="subject" />
-          <ScalarProperty Name="message" ColumnName="message" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -196,20 +200,14 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="accounts">
-      <EntityTypeMapping TypeName="nonbaohiemviettinModel.accounts">
-        <MappingFragment StoreEntitySet="accounts">
-          <ScalarProperty Name="alias" ColumnName="alias" />
-          <ScalarProperty Name="issocial" ColumnName="issocial" />
-          <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="address" ColumnName="address" />
+    <EntitySetMapping Name="feedback">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.feedback">
+        <MappingFragment StoreEntitySet="feedback">
+          <ScalarProperty Name="message" ColumnName="message" />
+          <ScalarProperty Name="subject" ColumnName="subject" />
           <ScalarProperty Name="phone" ColumnName="phone" />
           <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="fullname" ColumnName="fullname" />
-          <ScalarProperty Name="image" ColumnName="image" />
-          <ScalarProperty Name="password" ColumnName="password" />
-          <ScalarProperty Name="username" ColumnName="username" />
-          <ScalarProperty Name="idrole" ColumnName="idrole" />
+          <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>

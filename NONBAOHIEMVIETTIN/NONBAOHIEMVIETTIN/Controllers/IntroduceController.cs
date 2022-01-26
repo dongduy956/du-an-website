@@ -12,7 +12,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
         // GET: Introduce
         public ActionResult Index()
         {
-            return View(db.introduce.SingleOrDefault(x=>x.status==true));
+            return View(db.introduce.FirstOrDefault(x=>x.status==true));
         }
     }
 }

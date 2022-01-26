@@ -69,6 +69,30 @@ new { controller = "Accounts_admin", action = "Edit", id = UrlParameter.Optional
       namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
  );
             context.MapRoute(
+"admin_Order_search",
+"admin/tim-kiem-don-hang.html",
+new { controller = "Order_admin", action = "Search", id = UrlParameter.Optional, Area = "Admin" },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+"admin_Rate_search",
+"admin/tim-kiem-danh-gia.html",
+new { controller = "Rate_admin", action = "Search", id = UrlParameter.Optional, Area = "Admin" },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+"admin_Subscribe_search",
+"admin/tim-kiem-dang-ki.html",
+new { controller = "Subscribe_admin", action = "Search", id = UrlParameter.Optional, Area = "Admin" },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+"admin_Feedback_search",
+"admin/tim-kiem-phan-hoi.html",
+new { controller = "Feedback_admin", action = "Search", id = UrlParameter.Optional, Area = "Admin" },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
 "admin_Contact_search",
 "admin/tim-kiem-lien-he.html",
 new { controller = "Contact_admin", action = "Search", id = UrlParameter.Optional, Area = "Admin" },
@@ -194,6 +218,30 @@ namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
          new { controller = "products_admin", action = "Create", id = UrlParameter.Optional, Area = "Admin" },
           namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
      );
+            context.MapRoute(
+"admin_Order_index",
+"admin/don-hang.html",
+new { controller = "Order_admin", action = "Index", id = UrlParameter.Optional, Area = "Admin" },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+"admin_Rate_index",
+"admin/danh-gia.html",
+new { controller = "Rate_admin", action = "Index", id = UrlParameter.Optional, Area = "Admin" },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+"admin_Subscribe_index",
+"admin/dang-ki.html",
+new { controller = "Subscribe_admin", action = "Index", id = UrlParameter.Optional, Area = "Admin" },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+"admin_Feedback_index",
+"admin/phan-hoi.html",
+new { controller = "Feedback_admin", action = "Index", id = UrlParameter.Optional, Area = "Admin" },
+ namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
             context.MapRoute(
  "admin_Contact_index",
  "admin/lien-he.html",

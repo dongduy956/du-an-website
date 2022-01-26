@@ -76,10 +76,11 @@
                             <td><img class="img-product" src='@(item.issocial==0?"/"+item.image:item.image)' /></td>
                             <td>@item.fullname</td>
                             <td>@item.username</td>
-                            <td>@item.email</td>
+                            <td >@item.email</td>
                             <td>@item.role.name</td>
                             <td>@item.address</td>
-                            <td id="_account_@item.id-delete">@(item.username.Equals("admin") ? "Luôn luôn mở" : item.status == false ? "Khoá" : "Mở")</td>
+
+                            <td id="_account_@item.id-delete">@(item.username.Equals("admin")|| item.status == true ? Html.Raw("<span class='text-success'>Đã kích hoạt</span>") : Html.Raw("<span class='text-danger'>Chưa kích hoạt</span>"))</td>
 
                             <td>
                                 <div class="tool d-flex align-items-center flex-column justify-content-center">
@@ -90,7 +91,7 @@
                                     <a href="/admin/sua-tai-khoan/@(item.alias).html" title="Sửa tài khoản @item.username" class="mt-1 mb-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                         <i class="far fa-edit"></i>
                                     </a>
-                                    @if (item.status == true && !item.username.Equals("admin"))
+                                    @if (!item.username.Equals("admin"))
                                     {
                                         <a data-id="@item.id" title="Xoá tài khoản @item.username" class="delete_account d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                             <i class="far fa-trash-alt"></i>
@@ -128,7 +129,7 @@
                                         <p><strong>Hình ảnh:</strong> <img src="~/@item.image" class="img-product" /></p>
                                         <p><strong>Đã đặt hàng:</strong> @item.order.Count đơn hàng</p>
                                         <p><strong>Đánh giá:</strong> @item.rate.Count lần</p>
-                                        <p><strong>Trạng thái:</strong> <span id="_account_@item.id-delete-detail">@(item.username.Equals("admin") ? "Luôn luôn mở" : item.status == false ? "Khoá" : "Mở")</span></p>
+                                        <p><strong>Trạng thái:</strong> <span id="_account_@item.id-delete-detail">@(item.username.Equals("admin") || item.status == true ? Html.Raw("<span class='text-success'>Đã kích hoạt</span>") : Html.Raw("<span class='text-danger'>Chưa kích hoạt</span>"))</span></p>
                                     </div>
                                     <div class="modal-footer">
                                         <button class="btn btn-secondary" type="button" data-dismiss="modal">Đóng</button>

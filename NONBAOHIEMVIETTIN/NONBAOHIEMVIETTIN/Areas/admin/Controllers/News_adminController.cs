@@ -55,9 +55,8 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         {
             try
             {
-                var news = db.news.SingleOrDefault(x => x.id == id);
-                news.isdelete = true;
-                db.Entry(news).State = EntityState.Modified;
+                var news = db.news.Find(id);
+                db.news.Remove(news);
                 db.SaveChanges();
             }
             catch (Exception ex)
@@ -100,7 +99,6 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
 
                     }
                     news.createdate = DateTime.Now;
-                    news.isdelete = false;
                     news.alias = HoTro.Instances.convertToUnSign3(news.title);
                     db.news.Add(news);
                     db.SaveChanges();
@@ -137,7 +135,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit([Bind(Include = "id,id_newstype,title,content,image,alias,createdate,isdelete")] news news)
+        public ActionResult Edit([Bind(Include = "id,id_newstype,title,content,image,alias,createdate")] news news)
         {
             if (ModelState.IsValid)
             {
@@ -156,7 +154,6 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     var content = news.content;
                     var id_newstype = news.id_newstype;
                     news = temp = db.news.Find(news.id);
-                    news.isdelete = Boolean.Parse(Request["isdelete"]);
                     news.title = Request["title"];
                     news.id_newstype = id_newstype;
                     news.content = content;

@@ -4,7 +4,8 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="a0183af9da2a40acabd285986e975ab7" Name="Diagram1">
+      <Diagram DiagramId="f38b533cca1142f3bf04955599243883" Name="Diagram1">
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.accounts" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
         <EntityTypeShape EntityType="nonbaohiemviettinModel.category" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="nonbaohiemviettinModel.contact" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="nonbaohiemviettinModel.countonline" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
@@ -19,8 +20,10 @@
         <EntityTypeShape EntityType="nonbaohiemviettinModel.products" Width="1.5" PointX="3" PointY="2.625" IsExpanded="true" />
         <EntityTypeShape EntityType="nonbaohiemviettinModel.rate" Width="1.5" PointX="5.25" PointY="7" IsExpanded="true" />
         <EntityTypeShape EntityType="nonbaohiemviettinModel.role" Width="1.5" PointX="1.5" PointY="16.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.sendcontactinfo" Width="1.5" PointX="9.75" PointY="7.75" IsExpanded="true" />
         <EntityTypeShape EntityType="nonbaohiemviettinModel.subscribe" Width="1.5" PointX="9.75" PointY="10.75" IsExpanded="true" />
+        <AssociationConnector Association="nonbaohiemviettinModel.fk_accounts_role" ManuallyRouted="false" />
+        <AssociationConnector Association="nonbaohiemviettinModel.fk_order_account" ManuallyRouted="false" />
+        <AssociationConnector Association="nonbaohiemviettinModel.fk_rate_accounts" ManuallyRouted="false" />
         <AssociationConnector Association="nonbaohiemviettinModel.fk_products_category" ManuallyRouted="false" />
         <AssociationConnector Association="nonbaohiemviettinModel.fk_products_groupproduct" ManuallyRouted="false" />
         <AssociationConnector Association="nonbaohiemviettinModel.fk_listimage_products" ManuallyRouted="false" />
@@ -29,10 +32,7 @@
         <AssociationConnector Association="nonbaohiemviettinModel.fk_orderdetail_products" ManuallyRouted="false" />
         <AssociationConnector Association="nonbaohiemviettinModel.fk_products_production" ManuallyRouted="false" />
         <AssociationConnector Association="nonbaohiemviettinModel.fk_rate_products" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.accounts" Width="1.5" PointX="6.75" PointY="16.5" />
-        <AssociationConnector Association="nonbaohiemviettinModel.fk_accounts_role" />
-        <AssociationConnector Association="nonbaohiemviettinModel.fk_order_account" />
-        <AssociationConnector Association="nonbaohiemviettinModel.fk_rate_accounts" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.feedback" Width="1.5" PointX="10.375" PointY="7.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

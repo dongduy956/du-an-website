@@ -266,24 +266,28 @@ namespace NONBAOHIEMVIETTIN.Controllers
         }
         [HttpPost]
         public ActionResult Pay(order order, string PaymentMethod, string BankCode)
-        {       
-                order.createdate = DateTime.Parse(DateTime.Now.ToShortDateString());
-                order.status = false;
-                order.idaccount = (Session["account"] as accounts).id;
-                db.order.Add(order);
-                db.SaveChanges();
-                int idorder = db.order.OrderByDescending(x => x.id).FirstOrDefault().id;
-                var cart = Session[cartSession] as List<CartItem>;
-                foreach (var item in cart)
-                {
+        {
+            order.createdate = DateTime.Parse(DateTime.Now.ToShortDateString());
+            order.status = false;
+            if (PaymentMethod == "CASH")
+                order.statuspay = false;
+            else
+                order.statuspay = true;
+            order.idaccount = (Session["account"] as accounts).id;
+            db.order.Add(order);
+            db.SaveChanges();
+            int idorder = db.order.OrderByDescending(x => x.id).FirstOrDefault().id;
+            var cart = Session[cartSession] as List<CartItem>;
+            foreach (var item in cart)
+            {
                 orderdetail odetail = new orderdetail();
-                    odetail.idorder = idorder;
-                    odetail.idproduct = item.Product.id;
-                    odetail.quantity = item.Quantity;
-                    odetail.price = item.Product.price;
-                    db.orderdetail.Add(odetail);
-                    db.SaveChanges();
-                }            
+                odetail.idorder = idorder;
+                odetail.idproduct = item.Product.id;
+                odetail.quantity = item.Quantity;
+                odetail.price = item.Product.price;
+                db.orderdetail.Add(odetail);
+                db.SaveChanges();
+            }
             if (PaymentMethod == "CASH")
             {
                 Session[cartSession] = null;
@@ -314,7 +318,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 info.Buyer_mobile = order.phone;
 
                 APICheckoutV3 objNLChecout = new APICheckoutV3();
-                ResponseInfo result = objNLChecout.GetUrlCheckout(info,PaymentMethod);
+                ResponseInfo result = objNLChecout.GetUrlCheckout(info, PaymentMethod);
                 if (result.Error_code == "00")
                 {
                     return Json(new

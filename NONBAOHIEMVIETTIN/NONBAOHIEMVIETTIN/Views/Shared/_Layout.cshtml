@@ -227,14 +227,21 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-sm-6">
                             <div class="footer_widget">
-                                <h3>@aboutus.title</h3>
-                                <p>@aboutus.content</p>
-                                <div class="footer_widget_contect">
-                                    <p><i class="fa fa-map-marker" aria-hidden="true"></i>@aboutus.address </p>
+                         @if (aboutus != null)
+                         {
+                            <h3>@aboutus.title</h3>
+                                    <p>@Html.Raw(aboutus.content)</p>
+                                    <div class="footer_widget_contect">
+                                        <p><i class="fa fa-map-marker" aria-hidden="true"></i>@aboutus.address </p>
 
-                                    <p><a href="tel:@aboutus.phone"><i class="fa fa-mobile" aria-hidden="true"></i> @aboutus.phone</a></p>
-                                    <a href="mailto:@aboutus.email"><i class="fa fa-envelope-o" aria-hidden="true"></i>@aboutus.email  </a>
-                                </div>
+                                        <p><a href="tel:@aboutus.phone"><i class="fa fa-mobile" aria-hidden="true"></i> @aboutus.phone</a></p>
+                                        <a href="mailto:@aboutus.email"><i class="fa fa-envelope-o" aria-hidden="true"></i>@aboutus.email  </a>
+                                    </div>
+                         }
+                         else
+                         {
+                             <h4 class="text-center text-warning">Lỗi thông tin liên hệ. Vui lòng liên hệ admin để biết.</h4>
+                         }
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6">

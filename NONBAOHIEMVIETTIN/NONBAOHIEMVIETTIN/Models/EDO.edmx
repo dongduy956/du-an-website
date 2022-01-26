@@ -55,6 +55,17 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="total" Type="bigint" />
         </EntityType>
+        <EntityType Name="feedback">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="100" />
+          <Property Name="email" Type="varchar" MaxLength="100" />
+          <Property Name="phone" Type="varchar" MaxLength="11" />
+          <Property Name="subject" Type="nvarchar" MaxLength="100" />
+          <Property Name="message" Type="nvarchar" MaxLength="500" />
+        </EntityType>
         <EntityType Name="groupproduct">
           <Key>
             <PropertyRef Name="id" />
@@ -95,7 +106,6 @@
           <Property Name="content" Type="ntext" />
           <Property Name="createdate" Type="date" />
           <Property Name="image" Type="varchar" MaxLength="500" />
-          <Property Name="isdelete" Type="bit" />
         </EntityType>
         <EntityType Name="newstype">
           <Key>
@@ -104,7 +114,6 @@
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
           <Property Name="alias" Type="varchar" MaxLength="100" Nullable="false" />
-          <Property Name="isdelete" Type="bit" />
         </EntityType>
         <EntityType Name="order">
           <Key>
@@ -181,19 +190,8 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="varchar" MaxLength="20" />
-          <Property Name="alias" Type="varchar" MaxLength="100" />
-        </EntityType>
-        <EntityType Name="sendcontactinfo">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="100" />
-          <Property Name="email" Type="varchar" MaxLength="100" />
-          <Property Name="phone" Type="varchar" MaxLength="11" />
-          <Property Name="subject" Type="nvarchar" MaxLength="100" />
-          <Property Name="message" Type="nvarchar" MaxLength="500" />
+          <Property Name="alias" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="subscribe">
           <Key>
@@ -203,7 +201,9 @@
           <Property Name="email" Type="varchar" MaxLength="50" />
         </EntityType>
         <Association Name="fk_accounts_role">
-          <End Role="role" Type="Self.role" Multiplicity="0..1" />
+          <End Role="role" Type="Self.role" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="accounts" Type="Self.accounts" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="role">
@@ -227,7 +227,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_news_newstype">
-          <End Role="newstype" Type="Self.newstype" Multiplicity="0..1" />
+          <End Role="newstype" Type="Self.newstype" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="news" Type="Self.news" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="newstype">
@@ -239,7 +241,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_order_account">
-          <End Role="accounts" Type="Self.accounts" Multiplicity="0..1" />
+          <End Role="accounts" Type="Self.accounts" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="order" Type="Self.order" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="accounts">
@@ -251,7 +255,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_orderdetail_order">
-          <End Role="order" Type="Self.order" Multiplicity="1" />
+          <End Role="order" Type="Self.order" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="orderdetail" Type="Self.orderdetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="order">
@@ -311,7 +317,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_rate_accounts">
-          <End Role="accounts" Type="Self.accounts" Multiplicity="0..1" />
+          <End Role="accounts" Type="Self.accounts" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="rate" Type="Self.rate" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="accounts">
@@ -339,6 +347,7 @@
           <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="contact" EntityType="Self.contact" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="countonline" EntityType="Self.countonline" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="feedback" EntityType="Self.feedback" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="groupproduct" EntityType="Self.groupproduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="introduce" EntityType="Self.introduce" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="listimage" EntityType="Self.listimage" Schema="dbo" store:Type="Tables" />
@@ -350,7 +359,6 @@
           <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="rate" EntityType="Self.rate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="sendcontactinfo" EntityType="Self.sendcontactinfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="subscribe" EntityType="Self.subscribe" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="fk_accounts_role" Association="Self.fk_accounts_role">
             <End Role="role" EntitySet="role" />
@@ -401,6 +409,26 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="nonbaohiemviettinModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="accounts">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idrole" Type="Int32" />
+          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="password" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="fullname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="phone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="issocial" Type="Int32" />
+          <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="role" Relationship="Self.fk_accounts_role" FromRole="accounts" ToRole="role" />
+          <NavigationProperty Name="order" Relationship="Self.fk_order_account" FromRole="accounts" ToRole="order" />
+          <NavigationProperty Name="rate" Relationship="Self.fk_rate_accounts" FromRole="accounts" ToRole="rate" />
+        </EntityType>
         <EntityType Name="category">
           <Key>
             <PropertyRef Name="id" />
@@ -478,7 +506,6 @@
           <Property Name="createdate" Type="DateTime" Precision="0" />
           <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="newstype" Relationship="Self.fk_news_newstype" FromRole="news" ToRole="newstype" />
-          <Property Name="isdelete" Type="Boolean" />
         </EntityType>
         <EntityType Name="newstype">
           <Key>
@@ -488,7 +515,6 @@
           <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="news" Relationship="Self.fk_news_newstype" FromRole="newstype" ToRole="news" />
-          <Property Name="isdelete" Type="Boolean" />
         </EntityType>
         <EntityType Name="order">
           <Key>
@@ -505,8 +531,8 @@
           <Property Name="statuspay" Type="Boolean" />
           <Property Name="total" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="accounts" Relationship="Self.fk_order_account" FromRole="order" ToRole="accounts" />
           <NavigationProperty Name="orderdetail" Relationship="Self.fk_orderdetail_order" FromRole="order" ToRole="orderdetail" />
-          <NavigationProperty Name="accounts" Relationship="nonbaohiemviettinModel.fk_order_account" FromRole="order" ToRole="accounts" />
         </EntityType>
         <EntityType Name="orderdetail">
           <Key>
@@ -570,28 +596,17 @@
           <Property Name="star" Type="Int32" />
           <Property Name="comment" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <Property Name="createdate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="accounts" Relationship="Self.fk_rate_accounts" FromRole="rate" ToRole="accounts" />
           <NavigationProperty Name="products" Relationship="Self.fk_rate_products" FromRole="rate" ToRole="products" />
-          <NavigationProperty Name="accounts" Relationship="nonbaohiemviettinModel.fk_rate_accounts" FromRole="rate" ToRole="accounts" />
         </EntityType>
         <EntityType Name="role">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="accounts" Relationship="nonbaohiemviettinModel.fk_accounts_role" FromRole="role" ToRole="accounts" />
-        </EntityType>
-        <EntityType Name="sendcontactinfo">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="phone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
-          <Property Name="subject" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="accounts" Relationship="Self.fk_accounts_role" FromRole="role" ToRole="accounts" />
         </EntityType>
         <EntityType Name="subscribe">
           <Key>
@@ -600,6 +615,48 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <Association Name="fk_accounts_role">
+          <End Role="role" Type="Self.role" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="accounts" Type="Self.accounts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="role">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="accounts">
+              <PropertyRef Name="idrole" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_order_account">
+          <End Role="accounts" Type="Self.accounts" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="idaccount" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_rate_accounts">
+          <End Role="accounts" Type="Self.accounts" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="rate" Type="Self.rate" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="accounts">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="rate">
+              <PropertyRef Name="id_account" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_products_category">
           <End Role="category" Type="Self.category" Multiplicity="0..1" />
           <End Role="products" Type="Self.products" Multiplicity="*" />
@@ -637,7 +694,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_news_newstype">
-          <End Role="newstype" Type="Self.newstype" Multiplicity="0..1" />
+          <End Role="newstype" Type="Self.newstype" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="news" Type="Self.news" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="newstype">
@@ -649,7 +708,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="fk_orderdetail_order">
-          <End Role="order" Type="Self.order" Multiplicity="1" />
+          <End Role="order" Type="Self.order" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="orderdetail" Type="Self.orderdetail" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="order">
@@ -697,6 +758,7 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="nonbaohiemviettinEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="accounts" EntityType="Self.accounts" />
           <EntitySet Name="category" EntityType="Self.category" />
           <EntitySet Name="contact" EntityType="Self.contact" />
           <EntitySet Name="countonline" EntityType="Self.countonline" />
@@ -711,8 +773,19 @@
           <EntitySet Name="products" EntityType="Self.products" />
           <EntitySet Name="rate" EntityType="Self.rate" />
           <EntitySet Name="role" EntityType="Self.role" />
-          <EntitySet Name="sendcontactinfo" EntityType="Self.sendcontactinfo" />
           <EntitySet Name="subscribe" EntityType="Self.subscribe" />
+          <AssociationSet Name="fk_accounts_role" Association="Self.fk_accounts_role">
+            <End Role="role" EntitySet="role" />
+            <End Role="accounts" EntitySet="accounts" />
+          </AssociationSet>
+          <AssociationSet Name="fk_order_account" Association="Self.fk_order_account">
+            <End Role="accounts" EntitySet="accounts" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="fk_rate_accounts" Association="Self.fk_rate_accounts">
+            <End Role="accounts" EntitySet="accounts" />
+            <End Role="rate" EntitySet="rate" />
+          </AssociationSet>
           <AssociationSet Name="fk_products_category" Association="Self.fk_products_category">
             <End Role="category" EntitySet="category" />
             <End Role="products" EntitySet="products" />
@@ -745,82 +818,43 @@
             <End Role="products" EntitySet="products" />
             <End Role="rate" EntitySet="rate" />
           </AssociationSet>
-          <EntitySet Name="accounts" EntityType="nonbaohiemviettinModel.accounts" />
-          <AssociationSet Name="fk_accounts_role" Association="nonbaohiemviettinModel.fk_accounts_role">
-            <End Role="role" EntitySet="role" />
-            <End Role="accounts" EntitySet="accounts" />
-          </AssociationSet>
-          <AssociationSet Name="fk_order_account" Association="nonbaohiemviettinModel.fk_order_account">
-            <End Role="accounts" EntitySet="accounts" />
-            <End Role="order" EntitySet="order" />
-          </AssociationSet>
-          <AssociationSet Name="fk_rate_accounts" Association="nonbaohiemviettinModel.fk_rate_accounts">
-            <End Role="accounts" EntitySet="accounts" />
-            <End Role="rate" EntitySet="rate" />
-          </AssociationSet>
+          <EntitySet Name="feedback" EntityType="nonbaohiemviettinModel.feedback" />
         </EntityContainer>
-        <EntityType Name="accounts">
+        <EntityType Name="feedback">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="idrole" Type="Int32" />
-          <Property Name="username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="password" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
-          <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-          <Property Name="fullname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="email" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="phone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
-          <Property Name="address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="status" Type="Boolean" />
-          <Property Name="issocial" Type="Int32" />
-          <NavigationProperty Name="role" Relationship="nonbaohiemviettinModel.fk_accounts_role" FromRole="accounts" ToRole="role" />
-          <NavigationProperty Name="order" Relationship="nonbaohiemviettinModel.fk_order_account" FromRole="accounts" ToRole="order" />
-          <NavigationProperty Name="rate" Relationship="nonbaohiemviettinModel.fk_rate_accounts" FromRole="accounts" ToRole="rate" />
-          <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="subject" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
         </EntityType>
-        <Association Name="fk_accounts_role">
-          <End Type="nonbaohiemviettinModel.role" Role="role" Multiplicity="0..1" />
-          <End Type="nonbaohiemviettinModel.accounts" Role="accounts" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="role">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="accounts">
-              <PropertyRef Name="idrole" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_order_account">
-          <End Type="nonbaohiemviettinModel.accounts" Role="accounts" Multiplicity="0..1" />
-          <End Type="nonbaohiemviettinModel.order" Role="order" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="accounts">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="order">
-              <PropertyRef Name="idaccount" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="fk_rate_accounts">
-          <End Type="nonbaohiemviettinModel.accounts" Role="accounts" Multiplicity="0..1" />
-          <End Type="nonbaohiemviettinModel.rate" Role="rate" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="accounts">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="rate">
-              <PropertyRef Name="id_account" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="nonbaohiemviettinModelStoreContainer" CdmEntityContainer="nonbaohiemviettinEntities">
+          <EntitySetMapping Name="accounts">
+            <EntityTypeMapping TypeName="nonbaohiemviettinModel.accounts">
+              <MappingFragment StoreEntitySet="accounts">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idrole" ColumnName="idrole" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="fullname" ColumnName="fullname" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="issocial" ColumnName="issocial" />
+                <ScalarProperty Name="alias" ColumnName="alias" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="category">
             <EntityTypeMapping TypeName="nonbaohiemviettinModel.category">
               <MappingFragment StoreEntitySet="category">
@@ -835,7 +869,6 @@
           <EntitySetMapping Name="contact">
             <EntityTypeMapping TypeName="nonbaohiemviettinModel.contact">
               <MappingFragment StoreEntitySet="contact">
-                <ScalarProperty Name="alias" ColumnName="alias" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="content" ColumnName="content" />
@@ -846,6 +879,7 @@
                 <ScalarProperty Name="map" ColumnName="map" />
                 <ScalarProperty Name="display" ColumnName="display" />
                 <ScalarProperty Name="workday" ColumnName="workday" />
+                <ScalarProperty Name="alias" ColumnName="alias" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -871,12 +905,12 @@
           <EntitySetMapping Name="introduce">
             <EntityTypeMapping TypeName="nonbaohiemviettinModel.introduce">
               <MappingFragment StoreEntitySet="introduce">
-                <ScalarProperty Name="alias" ColumnName="alias" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="title" ColumnName="title" />
                 <ScalarProperty Name="content" ColumnName="content" />
                 <ScalarProperty Name="image" ColumnName="image" />
                 <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="alias" ColumnName="alias" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -892,7 +926,6 @@
           <EntitySetMapping Name="news">
             <EntityTypeMapping TypeName="nonbaohiemviettinModel.news">
               <MappingFragment StoreEntitySet="news">
-                <ScalarProperty Name="isdelete" ColumnName="isdelete" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="id_newstype" ColumnName="id_newstype" />
                 <ScalarProperty Name="title" ColumnName="title" />
@@ -906,7 +939,6 @@
           <EntitySetMapping Name="newstype">
             <EntityTypeMapping TypeName="nonbaohiemviettinModel.newstype">
               <MappingFragment StoreEntitySet="newstype">
-                <ScalarProperty Name="isdelete" ColumnName="isdelete" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="alias" ColumnName="alias" />
@@ -990,21 +1022,9 @@
           <EntitySetMapping Name="role">
             <EntityTypeMapping TypeName="nonbaohiemviettinModel.role">
               <MappingFragment StoreEntitySet="role">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="alias" ColumnName="alias" />
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="sendcontactinfo">
-            <EntityTypeMapping TypeName="nonbaohiemviettinModel.sendcontactinfo">
-              <MappingFragment StoreEntitySet="sendcontactinfo">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="subject" ColumnName="subject" />
-                <ScalarProperty Name="message" ColumnName="message" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1016,20 +1036,14 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="accounts">
-            <EntityTypeMapping TypeName="nonbaohiemviettinModel.accounts">
-              <MappingFragment StoreEntitySet="accounts">
-                <ScalarProperty Name="alias" ColumnName="alias" />
-                <ScalarProperty Name="issocial" ColumnName="issocial" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="address" ColumnName="address" />
+          <EntitySetMapping Name="feedback">
+            <EntityTypeMapping TypeName="nonbaohiemviettinModel.feedback">
+              <MappingFragment StoreEntitySet="feedback">
+                <ScalarProperty Name="message" ColumnName="message" />
+                <ScalarProperty Name="subject" ColumnName="subject" />
                 <ScalarProperty Name="phone" ColumnName="phone" />
                 <ScalarProperty Name="email" ColumnName="email" />
-                <ScalarProperty Name="fullname" ColumnName="fullname" />
-                <ScalarProperty Name="image" ColumnName="image" />
-                <ScalarProperty Name="password" ColumnName="password" />
-                <ScalarProperty Name="username" ColumnName="username" />
-                <ScalarProperty Name="idrole" ColumnName="idrole" />
+                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

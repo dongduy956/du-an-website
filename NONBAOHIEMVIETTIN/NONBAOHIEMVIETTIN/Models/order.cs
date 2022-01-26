@@ -32,8 +32,8 @@ namespace NONBAOHIEMVIETTIN.Models
         public Nullable<decimal> total { get; set; }
         public string note { get; set; }
     
+        public virtual accounts accounts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<orderdetail> orderdetail { get; set; }
-        public virtual accounts accounts { get; set; }
     }
 }

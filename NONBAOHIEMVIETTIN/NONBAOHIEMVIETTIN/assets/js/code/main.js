@@ -1026,7 +1026,7 @@ alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', f
         send.email = $('#email').val();
         send.subject = $('#subject').val();
         send.phone = $('#phone').val();
-        send.message = $('#message').val();
+        send.message = CKEDITOR.instances['message'].getData();
         if (send.name == '')
             showToast('Tên không được rỗng!');
         else
@@ -1043,7 +1043,7 @@ alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', f
                             showToast('Nội dung không được rỗng!');
                         else
                             $.ajax({
-                                url: "/Contact/sendContactInfo",
+                                url: "/Contact/feedback",
                                 data: JSON.stringify({ send }),
                                         contentType: "application/json; charset=utf-8",
                                         dataType: "json",
@@ -1055,7 +1055,7 @@ alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', f
                                         $('#email').val('');
                                         $('#subject').val('');
                                         $('#phone').val('');
-                                        $('#message').val('');
+                                        CKEDITOR.instances['message'].setData('');
                                 }
                                 },
                                     error: function (data) {

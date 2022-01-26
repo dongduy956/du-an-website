@@ -175,7 +175,39 @@
 
     });
 
-    function delete_account(id, ele) {
+
+    function delete_role(id) {
+        $.ajax({
+            url: "/admin/Role_admin/delete_role/" + id,
+            data: JSON.stringify(id),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: "POST",
+            success: function (data) {
+
+                showToast(data.message);
+                if (data.status == 1) {
+                    $(`#_role_${id}`).hide(200);
+                }
+
+            },
+            error: function (data) {
+
+                alert(JSON.stringify(data));
+            }
+        })
+    }
+    $('.delete_role').off('click').click(function (e) {
+        e.preventDefault();
+        var id = Number($(this).data('id'));
+
+        alertify.confirm('Thông báo', 'Bạn chắc chắn xoá quyền này?', function () {
+            delete_role(id);
+        }, function () { alertify.error('Huỷ') });
+
+    });
+
+    function delete_account(id) {
         $.ajax({
             url: "/admin/Accounts_admin/delete_account/" + id,
             data: JSON.stringify(id),
@@ -185,12 +217,9 @@
             success: function (data) {
 
                 showToast(data.message);
-                if (data.status == 1) {
-                    ele.attr('style', 'display:none !important');
-                    $(`#_account_${id}-delete`).text('Khoá');
-                    $(`#_account_${id}-delete-detail`).text('Khoá');
+                if (data.status == 1) 
+                    $(`#_account_${id}`).hide(200);
 
-                }
 
             },
             error: function (data) {
@@ -202,10 +231,8 @@
     $('.delete_account').off('click').click(function (e) {
         e.preventDefault();
         var id = Number($(this).data('id'));
-        var ele = $(this);
-
         alertify.confirm('Thông báo', 'Bạn chắc chắn xoá tài khoản này?', function () {
-            delete_account(id, ele);
+            delete_account(id);
         }, function () { alertify.error('Huỷ') });
 
     });
@@ -238,7 +265,7 @@
 
     });
 
-    function delete_newstype(id, ele) {
+    function delete_newstype(id) {
         $.ajax({
             url: "/admin/Newstype_admin/delete_newstype/" + id,
             data: JSON.stringify(id),
@@ -249,8 +276,7 @@
 
                 showToast(data.message);
                 if (data.status == 1) {
-                    ele.attr('style', 'display:none !important');
-                    $(`#_newstype_${id}-delete`).text('Đã xoá');
+                    $(`#_newstype_${id}`).hide(200);
                 }
 
             },
@@ -263,16 +289,15 @@
     $('.delete_newstype').off('click').click(function (e) {
         e.preventDefault();
         var id = Number($(this).data('id'));
-        var ele = $(this);
 
         alertify.confirm('Thông báo', 'Bạn chắc chắn xoá loại tin này?', function () {
-            delete_newstype(id, ele);
+            delete_newstype(id);
         }, function () { alertify.error('Huỷ') });
 
     });
 
 
-    function delete_news(id, ele) {
+    function delete_news(id) {
         $.ajax({
             url: "/admin/News_admin/delete_news/" + id,
             data: JSON.stringify(id),
@@ -284,7 +309,7 @@
                 showToast(data.message);
                 if (data.status == 1) {
                     ele.attr('style', 'display:none !important');
-                    $(`#_news_${id}-delete`).text('Đã xoá');
+                    $(`#_news_${id}`).hide(200);
                 }
 
             },
@@ -297,16 +322,15 @@
     $('.delete_news').off('click').click(function (e) {
         e.preventDefault();
         var id = Number($(this).data('id'));
-        var ele = $(this);
 
         alertify.confirm('Thông báo', 'Bạn chắc chắn xoá tin này?', function () {
-            delete_news(id, ele);
+            delete_news(id);
         }, function () { alertify.error('Huỷ') });
 
     });
 
 
-    function delete_introduce(id, ele) {
+    function delete_introduce(id) {
         $.ajax({
             url: "/admin/Introduce_admin/delete_introduce/" + id,
             data: JSON.stringify(id),
@@ -317,8 +341,7 @@
 
                 showToast(data.message);
                 if (data.status == 1) {
-                    ele.attr('style', 'display:none !important');
-                    $(`#_introduce_${id}-delete`).text('Ẩn');
+                    $(`#_introduce_${id}`).hide(200);
                 }
 
             },
@@ -331,16 +354,15 @@
     $('.delete_introduce').off('click').click(function (e) {
         e.preventDefault();
         var id = Number($(this).data('id'));
-        var ele = $(this);
 
         alertify.confirm('Thông báo', 'Bạn chắc chắn xoá giới thiệu này?', function () {
-            delete_introduce(id, ele);
+            delete_introduce(id);
         }, function () { alertify.error('Huỷ') });
 
     });
 
 
-    function delete_contact(id, ele) {
+    function delete_contact(id) {
         $.ajax({
             url: "/admin/Contact_admin/delete_contact/" + id,
             data: JSON.stringify(id),
@@ -351,9 +373,7 @@
 
                 showToast(data.message);
                 if (data.status == 1) {
-                    ele.attr('style', 'display:none !important');
-                    $(`#_contact_${id}-delete`).text('Ẩn');
-                    $(`#_contact_${id}-delete-detail`).text('Ẩn');
+                    $(`#_contact_${id}`).hide(200);
                 }
 
             },
@@ -366,9 +386,102 @@
     $('.delete_contact').off('click').click(function (e) {
         e.preventDefault();
         var id = Number($(this).data('id'));
-        var ele = $(this);
         alertify.confirm('Thông báo', 'Bạn chắc chắn xoá liên hệ này?', function () {
-            delete_contact(id, ele);
+            delete_contact(id);
+        }, function () { alertify.error('Huỷ') });
+
+    });
+
+
+
+    function delete_feedback(id) {
+        $.ajax({
+            url: "/admin/Feedback_admin/delete_feedback/" + id,
+            data: JSON.stringify(id),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: "POST",
+            success: function (data) {
+
+                showToast(data.message);
+                if (data.status == 1) {
+                    $(`#_feedback_${id}`).hide(200);
+                }
+
+            },
+            error: function (data) {
+
+                alert(JSON.stringify(data));
+            }
+        })
+    }
+    $('.delete_feedback').off('click').click(function (e) {
+        e.preventDefault();
+        var id = Number($(this).data('id'));
+        alertify.confirm('Thông báo', 'Bạn chắc chắn xoá phản hồi này?', function () {
+            delete_feedback(id);
+        }, function () { alertify.error('Huỷ') });
+
+    });
+
+
+    function delete_subscribe(id) {
+        $.ajax({
+            url: "/admin/Subscribe_admin/delete_subscribe/" + id,
+            data: JSON.stringify(id),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: "POST",
+            success: function (data) {
+
+                showToast(data.message);
+                if (data.status == 1) {
+                    $(`#_subscribe_${id}`).hide(200);
+                }
+
+            },
+            error: function (data) {
+
+                alert(JSON.stringify(data));
+            }
+        })
+    }
+    $('.delete_subscribe').off('click').click(function (e) {
+        e.preventDefault();
+        var id = Number($(this).data('id'));
+        alertify.confirm('Thông báo', 'Bạn chắc chắn xoá đăng kí này?', function () {
+            delete_subscribe(id);
+        }, function () { alertify.error('Huỷ') });
+
+    });
+
+
+    function delete_rate(id) {
+        $.ajax({
+            url: "/admin/Rate_admin/delete_rate/" + id,
+            data: JSON.stringify(id),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            type: "POST",
+            success: function (data) {
+
+                showToast(data.message);
+                if (data.status == 1) {
+                    $(`#_rate_${id}`).hide(200);
+                }
+
+            },
+            error: function (data) {
+
+                alert(JSON.stringify(data));
+            }
+        })
+    }
+    $('.delete_rate').off('click').click(function (e) {
+        e.preventDefault();
+        var id = Number($(this).data('id'));
+        alertify.confirm('Thông báo', 'Bạn chắc chắn xoá đánh giá này?', function () {
+            delete_rate(id);
         }, function () { alertify.error('Huỷ') });
 
     });

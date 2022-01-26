@@ -50,6 +50,17 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="total" Type="bigint" />
   </EntityType>
+  <EntityType Name="feedback">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="100" />
+    <Property Name="email" Type="varchar" MaxLength="100" />
+    <Property Name="phone" Type="varchar" MaxLength="11" />
+    <Property Name="subject" Type="nvarchar" MaxLength="100" />
+    <Property Name="message" Type="nvarchar" MaxLength="500" />
+  </EntityType>
   <EntityType Name="groupproduct">
     <Key>
       <PropertyRef Name="id" />
@@ -90,7 +101,6 @@
     <Property Name="content" Type="ntext" />
     <Property Name="createdate" Type="date" />
     <Property Name="image" Type="varchar" MaxLength="500" />
-    <Property Name="isdelete" Type="bit" />
   </EntityType>
   <EntityType Name="newstype">
     <Key>
@@ -99,7 +109,6 @@
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="nvarchar" MaxLength="100" Nullable="false" />
     <Property Name="alias" Type="varchar" MaxLength="100" Nullable="false" />
-    <Property Name="isdelete" Type="bit" />
   </EntityType>
   <EntityType Name="order">
     <Key>
@@ -176,19 +185,8 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="name" Type="varchar" MaxLength="20" />
-    <Property Name="alias" Type="varchar" MaxLength="100" />
-  </EntityType>
-  <EntityType Name="sendcontactinfo">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="nvarchar" MaxLength="100" />
-    <Property Name="email" Type="varchar" MaxLength="100" />
-    <Property Name="phone" Type="varchar" MaxLength="11" />
-    <Property Name="subject" Type="nvarchar" MaxLength="100" />
-    <Property Name="message" Type="nvarchar" MaxLength="500" />
+    <Property Name="alias" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="subscribe">
     <Key>
@@ -198,7 +196,9 @@
     <Property Name="email" Type="varchar" MaxLength="50" />
   </EntityType>
   <Association Name="fk_accounts_role">
-    <End Role="role" Type="Self.role" Multiplicity="0..1" />
+    <End Role="role" Type="Self.role" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="accounts" Type="Self.accounts" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="role">
@@ -222,7 +222,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="fk_news_newstype">
-    <End Role="newstype" Type="Self.newstype" Multiplicity="0..1" />
+    <End Role="newstype" Type="Self.newstype" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="news" Type="Self.news" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="newstype">
@@ -234,7 +236,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="fk_order_account">
-    <End Role="accounts" Type="Self.accounts" Multiplicity="0..1" />
+    <End Role="accounts" Type="Self.accounts" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="order" Type="Self.order" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="accounts">
@@ -246,7 +250,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="fk_orderdetail_order">
-    <End Role="order" Type="Self.order" Multiplicity="1" />
+    <End Role="order" Type="Self.order" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="orderdetail" Type="Self.orderdetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="order">
@@ -306,7 +312,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="fk_rate_accounts">
-    <End Role="accounts" Type="Self.accounts" Multiplicity="0..1" />
+    <End Role="accounts" Type="Self.accounts" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="rate" Type="Self.rate" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="accounts">
@@ -334,6 +342,7 @@
     <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="contact" EntityType="Self.contact" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="countonline" EntityType="Self.countonline" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="feedback" EntityType="Self.feedback" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="groupproduct" EntityType="Self.groupproduct" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="introduce" EntityType="Self.introduce" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="listimage" EntityType="Self.listimage" Schema="dbo" store:Type="Tables" />
@@ -345,7 +354,6 @@
     <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="rate" EntityType="Self.rate" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sendcontactinfo" EntityType="Self.sendcontactinfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="subscribe" EntityType="Self.subscribe" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="fk_accounts_role" Association="Self.fk_accounts_role">
       <End Role="role" EntitySet="role" />

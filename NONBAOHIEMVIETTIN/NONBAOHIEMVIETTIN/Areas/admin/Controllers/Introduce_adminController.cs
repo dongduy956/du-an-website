@@ -53,9 +53,8 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         {
             try
             {
-                var introduce = db.introduce.SingleOrDefault(x => x.id == id);
-                introduce.status = false;
-                db.Entry(introduce).State = EntityState.Modified;
+                var introduce = db.introduce.Find(id);
+                db.introduce.Remove(introduce);
                 db.SaveChanges();
             }
             catch (Exception ex)

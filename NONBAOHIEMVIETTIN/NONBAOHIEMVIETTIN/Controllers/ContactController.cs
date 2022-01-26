@@ -12,15 +12,16 @@ namespace NONBAOHIEMVIETTIN.Controllers
         // GET: Contact
         public ActionResult Index()
         {
-            var contact = db.contact.SingleOrDefault(x => x.display == true);
+            var contact = db.contact.FirstOrDefault(x => x.display == true);
             return View(contact);
         }
         [HttpPost]
-        public JsonResult sendContactInfo(sendcontactinfo send)
+        [ValidateInput(false)]
+        public JsonResult feedback(feedback send)
         {
             try
             {
-                db.sendcontactinfo.Add(send);
+                db.feedback.Add(send);
                 db.SaveChanges();
             }
             catch (Exception ex)

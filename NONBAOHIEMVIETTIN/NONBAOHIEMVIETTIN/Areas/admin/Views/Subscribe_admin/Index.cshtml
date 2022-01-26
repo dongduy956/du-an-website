@@ -1,0 +1,104 @@
+﻿@using NONBAOHIEMVIETTIN.Models;
+@model PagedList.IPagedList<subscribe>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Danh sách đăng kí";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+    var db = new nonbaohiemviettinEntities();
+}
+@section styles{
+    <style>
+        .img-product {
+            width: 100px;
+            height: 100px;
+        }
+
+        .modal-body {
+            overflow-y: scroll;
+            max-height: 70vh;
+        }
+
+            .modal-body p {
+                margin: 0;
+            }
+    </style>
+}
+@section scripts{
+    @if (TempData["status"] != null)
+    {
+        <script>
+            $(function () {
+                alertify.error(`@TempData["status"]`);
+            })
+        </script>
+    }
+}
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách đăng kí</h6>
+        <form method="get" action="/admin/tim-kiem-dang-ki.html" class="d-none d-sm-inline-block form-inline ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+                <input name="tukhoa" type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm..." aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Email đăng kí</th>
+                        <th>Công cụ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr id="_subscribe_@item.id">
+                            <td>@item.id</td>
+                            <td>@item.email</td>
+                            <td>
+                                <div class="tool d-flex align-items-center flex-column justify-content-center">
+                                    <a data-id="@item.id" title="Xoá đăng kí của email @item.email" class="delete_subscribe d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                        <i class="far fa-trash-alt"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+@if (ViewBag.last != 1)
+{
+    <ul class="pagination mr-auto ml-auto" style="justify-content:center;">
+        @if (ViewBag.check == true)
+        {
+            @Html.PagedListPager(Model,
+        page => Url.Action("Index", new { page }),
+        new PagedListRenderOptions
+        {
+            MaximumPageNumbersToDisplay = 3
+        })
+        }
+        else
+        {
+            @Html.PagedListPager(Model, page => Url.Action("Search", new { tukhoa = Request.Url.Query.Substring(Request.Url.Query.IndexOf("?tukhoa="), Request.Url.Query.LastIndexOf('&') == -1 ? Request.Url.Query.Length : Request.Url.Query.LastIndexOf('&')).Replace("?tukhoa=", ""), page }),
+                                    new PagedListRenderOptions
+                                    {
+                                        MaximumPageNumbersToDisplay = 5
+                                    });
+        }
+
+    </ul>
+}

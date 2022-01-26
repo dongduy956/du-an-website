@@ -21,7 +21,7 @@ namespace NONBAOHIEMVIETTIN.Models
         public string comment { get; set; }
         public Nullable<System.DateTime> createdate { get; set; }
     
-        public virtual products products { get; set; }
         public virtual accounts accounts { get; set; }
+        public virtual products products { get; set; }
     }
 }

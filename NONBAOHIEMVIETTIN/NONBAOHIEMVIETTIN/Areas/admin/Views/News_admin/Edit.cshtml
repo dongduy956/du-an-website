@@ -39,20 +39,7 @@
                 }
                 finder.popup();
 
-            })          
-            $('#input_isdelete').change(function () {
-                if ($(this).is(":checked")) {
-                    $('#input_mess-isdelete').text('Ẩn');
-                    $('input[name="isdelete"]').val('True');
-                }
-
-
-                else {
-                    $('#input_mess-isdelete').text('Hiện');
-                    $('input[name="isdelete"]').val('False');
-                }
-
-            });
+            })                    
         })();
 
     </script>
@@ -91,7 +78,6 @@
             @Html.HiddenFor(model => model.id)
             @Html.HiddenFor(model => model.alias)
             @Html.HiddenFor(model => model.createdate)
-            @Html.HiddenFor(model => model.isdelete)
             <div class="form-horizontal">
                 <div class="form-group">
                     <label class="control-label col-md-12">Tiêu đề</label>
@@ -100,19 +86,7 @@
                         <div class="valid-feedback">Valid</div>
                         <div class="invalid-feedback">Nhập vào tiêu đề</div>
                     </div>
-                </div>
-                @if (Model.newstype.isdelete == false)
-                {
-                    <div class="form-group">
-                        <label class="control-label col-md-12">Bạn muốn ẩn đi hay hiện tin tức <strong>@Model.title</strong>?</label>
-                        <div class="col-md-12">
-                            <div class="d-flex align-items-center">
-                                <input id="input_isdelete" class="input-ckb" type="checkbox" checked="@Model.isdelete" />
-                                <span class="ml-2" id="input_mess-isdelete">@(Model.isdelete == true ? "Ẩn" : "Hiện")</span>
-                            </div>
-                        </div>
-                    </div>
-                }                                          
+                </div>                                         
                 <div class="form-group">
                     <label class="control-label col-md-12">Nội dung</label>
                     <div class="col-md-12">

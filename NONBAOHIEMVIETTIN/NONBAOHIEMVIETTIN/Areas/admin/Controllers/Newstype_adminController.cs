@@ -53,9 +53,8 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         {
             try
             {
-                var newstype = db.newstype.SingleOrDefault(x => x.id == id);
-                newstype.isdelete = true;
-                db.Entry(newstype).State = EntityState.Modified;
+                var newstype = db.newstype.Find(id);
+                db.newstype.Remove(newstype);
                 db.SaveChanges();
             }
             catch (Exception ex)
@@ -87,7 +86,6 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             {
                 if (db.newstype.SingleOrDefault(x => x.name.ToLower().Equals(newstype.name.ToLower())) == null)
                 {
-                    newstype.isdelete = false;
                     newstype.alias = HoTro.Instances.convertToUnSign3(newstype.name);
                     db.newstype.Add(newstype);
                     db.SaveChanges();
@@ -118,7 +116,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,name,alias,isdelete")] newstype newstype)
+        public ActionResult Edit([Bind(Include = "id,name,alias")] newstype newstype)
         {
             if (ModelState.IsValid)
             {
@@ -135,7 +133,6 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     if (temp != null && newstype.id == temp.id)
                 {
                     newstype = temp = db.newstype.Find(newstype.id);
-                    newstype.isdelete = Boolean.Parse(Request["isdelete"]);
                     newstype.name = Request["name"];
                     newstype.alias = HoTro.Instances.convertToUnSign3(newstype.name.ToLower());
                     db.Entry(newstype).State = EntityState.Modified;

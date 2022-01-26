@@ -175,19 +175,23 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 else
                     if (temp != null && products.id == temp.id)
                 {
+                    var description = products.description;
+                    var idgroupproduct = products.idgroupproduct;
+                    var idproduction = products.idproduction;
+                    var idcategory = products.idcategory;
                     products = temp = db.products.Find(products.id);
                     products.status = Boolean.Parse(Request["status"]);
                     products.newproduct = Boolean.Parse(Request["newproduct"]);
                     products.isdelete = Boolean.Parse(Request["isdelete"]);
                     products.name = Request["name"];
-                    products.description = Request["description"];
+                    products.description = description;
                     products.image = Request["image"].Substring(1, Request["image"].Length-1);
                     products.price =decimal.Parse(Request["price"]);
                     products.promationprice =decimal.Parse(Request["promationprice"]);
                     products.quantity =int.Parse(Request["quantity"]);
-                    products.idcategory =int.Parse(Request["idcategory"]);
-                    products.idgroupproduct =int.Parse(Request["idgroupproduct"]);
-                    products.idproduction =int.Parse(Request["idproduction"]);
+                    products.idcategory = idcategory;
+                    products.idgroupproduct = idgroupproduct;
+                    products.idproduction = idproduction;
                     products.alias = HoTro.Instances.convertToUnSign3(products.name.ToLower());
                     db.Entry(products).State = EntityState.Modified;
                     db.SaveChanges();

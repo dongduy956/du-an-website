@@ -243,9 +243,13 @@
     <Compile Include="Areas\admin\Controllers\LoginController.cs" />
     <Compile Include="Areas\admin\Controllers\Newstype_adminController.cs" />
     <Compile Include="Areas\admin\Controllers\News_adminController.cs" />
+    <Compile Include="Areas\admin\Controllers\Order_adminController.cs" />
     <Compile Include="Areas\admin\Controllers\Production_adminController.cs" />
     <Compile Include="Areas\admin\Controllers\products_adminController.cs" />
+    <Compile Include="Areas\admin\Controllers\Rate_adminController.cs" />
     <Compile Include="Areas\admin\Controllers\Role_adminController.cs" />
+    <Compile Include="Areas\admin\Controllers\Feedback_adminController.cs" />
+    <Compile Include="Areas\admin\Controllers\Subscribe_adminController.cs" />
     <Compile Include="Areas\admin\Models\AccountLogin.cs" />
     <Compile Include="assets\NganLuongAPI\APICheckoutV3.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
@@ -290,6 +294,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>EDO.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\feedback.cs">
+      <DependentUpon>EDO.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\groupproduct.cs">
       <DependentUpon>EDO.tt</DependentUpon>
     </Compile>
@@ -325,9 +332,6 @@
       <DependentUpon>EDO.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\role.cs">
-      <DependentUpon>EDO.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sendcontactinfo.cs">
       <DependentUpon>EDO.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\subscribe.cs">
@@ -4027,13 +4031,6 @@
     <Content Include="Areas\admin\Views\products_admin\Edit.cshtml" />
     <Content Include="Areas\admin\Views\products_admin\Index.cshtml" />
     <Content Include="Areas\admin\Views\Category_admin\Index.cshtml" />
-    <EntityDeploy Include="Models\EDO.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>EDO.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\EDO.edmx.diagram">
-      <DependentUpon>EDO.edmx</DependentUpon>
-    </Content>
     <Content Include="Areas\admin\Views\Production_admin\Index.cshtml" />
     <Content Include="Areas\admin\Views\GroupProduct_admin\Index.cshtml" />
     <Content Include="Areas\admin\assets\js\ckfinder\plugins\fileeditor\codemirror\LICENSE" />
@@ -4100,6 +4097,17 @@
     <Content Include="Areas\admin\Views\Contact_admin\Index.cshtml" />
     <Content Include="Areas\admin\Views\Contact_admin\Create.cshtml" />
     <Content Include="Areas\admin\Views\Contact_admin\Edit.cshtml" />
+    <EntityDeploy Include="Models\EDO.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>EDO.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\EDO.edmx.diagram">
+      <DependentUpon>EDO.edmx</DependentUpon>
+    </Content>
+    <Content Include="Areas\admin\Views\Feedback_admin\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Subscribe_admin\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Rate_admin\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Order_admin\Index.cshtml" />
     <None Include="Properties\PublishProfiles\nonbaohiemviettin.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />

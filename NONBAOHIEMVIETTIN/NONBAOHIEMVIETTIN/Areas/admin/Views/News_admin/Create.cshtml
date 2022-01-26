@@ -1,9 +1,13 @@
-﻿@model NONBAOHIEMVIETTIN.Models.products
+﻿@using NONBAOHIEMVIETTIN.Models
+@model news
 
 @{
     ViewBag.Title = "Thêm mới tin tức";
     Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+    var db = new nonbaohiemviettinEntities();
 }
+@if(db.newstype.FirstOrDefault()!=null)
+{ 
 @section scripts{
     <script>
         // Disable form submissions if there are invalid fields
@@ -118,4 +122,8 @@
         }
     </div>
 </div>
-
+}
+else
+{
+    <h3 class="text-center">Hãy tạo loại tin trước khi tạo tin <a href="/admin/them-moi-loai-tin.html">Click vào đây</a> để tạo mới loại tin.</h3>
+}

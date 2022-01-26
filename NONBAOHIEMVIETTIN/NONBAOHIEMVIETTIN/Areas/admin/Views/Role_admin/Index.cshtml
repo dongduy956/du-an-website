@@ -64,15 +64,24 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        <tr id="_category_@item.id">
+                        <tr id="_role_@item.id">
                             <td>@item.id</td>
                             <td>@item.name</td>
                             <td>
                                 <div class="tool d-flex align-items-center flex-column justify-content-center">
-
-                                    <a href="/admin/sua-quyen/@(item.alias).html" title="Sửa loại nón @item.name" class="mb-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                    @if(!item.name.Equals("admin")&&!item.name.Equals("user"))
+                                    { 
+                                    <a href="/admin/sua-quyen/@(item.alias).html" title="Sửa quyền @item.name" class="mb-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                         <i class="far fa-edit"></i>
-                                    </a>                                  
+                                    </a>       
+                                    <a data-id="@item.id" title="Xoá quyền @item.name" class="delete_role d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                        <i class="far fa-trash-alt"></i>
+                                    </a>                           
+                                    }
+                                    else
+                                    {
+                                        <p class="text-danger">Mặc định không được phép thao tác.</p>
+                                    }
                                 </div>
                             </td>
                         </tr>

@@ -46,7 +46,32 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             var role = temp.ToPagedList(page, pageSize);
             ViewBagNoti(temp, page);
             return View("Index", role);
-        }     
+        }
+
+        [HttpPost]
+        public JsonResult delete_role(int id)
+        {
+            try
+            {
+                var role = db.role.Find(id);
+                db.role.Remove(role);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    status = 0,
+                    message = "Có lỗi trong quá trình xoá.Vui lòng thử lại."
+                });
+            }
+
+            return Json(new
+            {
+                status = 1,
+                message = "Xoá thành công."
+            });
+        }
         public ActionResult Create()
         {
             return View();

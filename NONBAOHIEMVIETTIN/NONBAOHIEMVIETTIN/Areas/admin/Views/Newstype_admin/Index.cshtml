@@ -58,7 +58,6 @@
                     <tr>
                         <th>#</th>
                         <th>Tên</th>
-                        <th>Xoá?</th>
                         <th>Công cụ</th>
                     </tr>
                 </thead>
@@ -68,19 +67,15 @@
                         <tr id="_newstype_@item.id">
                             <td>@item.id</td>
                             <td>@item.name</td>
-                            <td id="_newstype_@item.id-delete">@(item.isdelete == true ? "Đã xoá" : "Chưa xoá")</td>
                             <td>
                                 <div class="tool d-flex align-items-center flex-column justify-content-center">
 
                                     <a href="/admin/sua-loai-tin/@(item.alias).html" title="Sửa loại tin @item.name" class="mb-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                         <i class="far fa-edit"></i>
                                     </a>
-                                    @if (item.isdelete == false)
-                                    {
-                                        <a data-id="@item.id" title="Xoá loại @item.name" class="delete_newstype d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                                            <i class="far fa-trash-alt"></i>
-                                        </a>
-                                    }
+                                    <a data-id="@item.id" title="Xoá loại @item.name" class="delete_newstype d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                        <i class="far fa-trash-alt"></i>
+                                    </a>
                                 </div>
                             </td>
                         </tr>
