@@ -32,6 +32,12 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 {
                     var wish = Session[wishSession];//bien wish co ten la wishSession
                     var p = db.products.Find(ProductId);
+                    if (Quantity > p.quantity)
+                        return Json(new
+                        {
+                            status = -3,
+                            message = "Không đủ hàng"
+                        });
                     //tim kiem san pham trong db, Id=1
                     if (wish != null)
                     {//gio da co sp
@@ -40,8 +46,15 @@ namespace NONBAOHIEMVIETTIN.Controllers
                         {
                             foreach (var item in list)
                             {
+                               
                                 if (item.Product.id == ProductId)
                                 {
+                                    if ((item.Quantity + Quantity) > p.quantity)
+                                        return Json(new
+                                        {
+                                            status = -3,
+                                            message = "Không đủ hàng"
+                                        });
                                     item.Quantity += Quantity;
                                     return Json(new
                                     {
@@ -49,7 +62,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                                         id = item.Product.id,
                                         image = item.Product.image,
                                         name = item.Product.name,
-                                        price = HoTro.Instances.convertVND(item.Product.price.ToString()),
+                                        price = HoTro.Instances.convertVND(item.Product.promationprice>0?item.Product.promationprice.ToString():item.Product.price.ToString()),
                                         quantity = item.Quantity,
                                         alias = item.Product.alias,
                                         sumQuantity=list.Sum(x=>x.Quantity)
@@ -71,7 +84,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                                 id = item.Product.id,
                                 image = item.Product.image,
                                 name = item.Product.name,
-                                price = HoTro.Instances.convertVND(item.Product.price.ToString()),
+                                price = HoTro.Instances.convertVND(item.Product.promationprice > 0 ? item.Product.promationprice.ToString() : item.Product.price.ToString()),
                                 quantity = item.Quantity,
                                 alias = item.Product.alias,
                                 sumQuantity = list.Sum(x => x.Quantity)
@@ -93,8 +106,8 @@ namespace NONBAOHIEMVIETTIN.Controllers
                             id = item.Product.id,
                             image=item.Product.image,
                             name=item.Product.name,
-                            price=HoTro.Instances.convertVND(item.Product.price.ToString()),
-                            quantity=item.Quantity,
+                            price = HoTro.Instances.convertVND(item.Product.promationprice > 0 ? item.Product.promationprice.ToString() : item.Product.price.ToString()),
+                            quantity = item.Quantity,
                             alias = item.Product.alias,
                             sumQuantity=Quantity
                         });

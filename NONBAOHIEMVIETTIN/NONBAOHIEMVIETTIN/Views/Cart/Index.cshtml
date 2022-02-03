@@ -70,7 +70,7 @@
 </div>
 <!--breadcrumbs area end-->
 <div class="img-cart" style="display:flex;justify-content:center;padding:24px 0;">
-    <img src="~/assets/img/cart/no-cart.png" />
+    <img src="~/assets/images/cart/no-cart.png" />
 </div>
 @if (Model == null || Model.Count() == 0)
 {
@@ -111,11 +111,19 @@ else
                                 {
                                     <tr class="cart-@item.Product.id">
                                         <td class="product_remove"><a href="" class="deletecart" data-id="@item.Product.id"><i class="fa fa-trash-o"></i></a></td>
-                                        <td class="product_thumb"><a href="/chi-tiet/@(item.Product.alias).html"><img style="width:70px" src="~/assets/img/Nón bảo hiểm/@item.Product.image" alt=""></a></td>
+                                        <td class="product_thumb"><a href="/chi-tiet/@(item.Product.alias).html"><img style="width:70px" src="/@item.Product.image" alt=""></a></td>
                                         <td class="product_name"><a href="/chi-tiet/@(item.Product.alias).html">@item.Product.name</a></td>
-                                        <td class="product-price">@HoTro.Instances.convertVND(item.Product.price.ToString())</td>
+                                        @if(item.Product.promationprice>0)
+                                        { 
+                                        <td class="product-price">@HoTro.Instances.convertVND(item.Product.promationprice.ToString())</td>
+                                        }
+                                        else
+                                        {
+                                            <td class="product-price">@HoTro.Instances.convertVND(item.Product.price.ToString())</td>
+
+                                        }
                                         <td class="product_quantity"><input class="txtquantity-lstcart" min="0" data-id="@item.Product.id" max="100" value="@item.Quantity" type="number"></td>
-                                        <td class="product_total" id="total-@item.Product.id">@HoTro.Instances.convertVND((item.Quantity * item.Product.price).ToString())</td>
+                                        <td class="product_total" id="total-@item.Product.id">@HoTro.Instances.convertVND((item.Quantity * (item.Product.promationprice>0? item.Product.promationprice: item.Product.price)).ToString())</td>
                                     </tr>
                                 }
                             </tbody>
@@ -130,7 +138,7 @@ else
                             <a></a>
                             <div class="cart_subtotal">
                                 <p>Tổng tiền</p>
-                                <p class="cart_amount sum_money">@HoTro.Instances.convertVND(Model.Sum(x => x.Quantity * x.Product.price).ToString())</p>
+                                <p class="cart_amount sum_money">@HoTro.Instances.convertVND(Model.Sum(x => x.Quantity * (x.Product.promationprice>0?x.Product.promationprice:x.Product.price)).ToString())</p>
                             </div>
                             <button data-toggle="collapse" data-target="#detail" type="submit">Đặt hàng</button>
                         </div>

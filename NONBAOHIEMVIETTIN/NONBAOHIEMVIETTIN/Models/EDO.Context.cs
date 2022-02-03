@@ -31,7 +31,6 @@ namespace NONBAOHIEMVIETTIN.Models
         public virtual DbSet<countonline> countonline { get; set; }
         public virtual DbSet<groupproduct> groupproduct { get; set; }
         public virtual DbSet<introduce> introduce { get; set; }
-        public virtual DbSet<listimage> listimage { get; set; }
         public virtual DbSet<news> news { get; set; }
         public virtual DbSet<newstype> newstype { get; set; }
         public virtual DbSet<order> order { get; set; }
@@ -42,5 +41,8 @@ namespace NONBAOHIEMVIETTIN.Models
         public virtual DbSet<role> role { get; set; }
         public virtual DbSet<subscribe> subscribe { get; set; }
         public virtual DbSet<feedback> feedback { get; set; }
+        public virtual DbSet<receipt> receipt { get; set; }
+        public virtual DbSet<receiptdetail> receiptdetail { get; set; }
+        public virtual DbSet<brand> brand { get; set; }
     }
 }

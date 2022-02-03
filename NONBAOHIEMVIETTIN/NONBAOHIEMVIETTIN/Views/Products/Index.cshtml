@@ -88,14 +88,23 @@
                                     <div class="single_product">
                                         <div class="product_thumb">
                                             <a href="/chi-tiet/@(item.alias).html">
-                                                <img src="~/assets/img/Nón bảo hiểm/@item.image" alt="">
+                                                <img src="/@item.image" alt="">
                                             </a>
                                             <div class="product_action">
                                                 <a href="" data-id="@item.id" data-value="1" title="Thêm vào giỏ hàng" class="addcart"> <i class="fa fa-shopping-cart"></i> Thêm vào vào giỏ hàng</a>
                                             </div>
                                         </div>
                                         <div class="product_content">
-                                            <span class="product_price">@HoTro.Instances.convertVND(item.price.ToString())</span>
+                                            @if(item.promationprice>0)
+                                            { 
+                                            <span class="product_price">@HoTro.Instances.convertVND(item.promationprice.ToString())</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="product_price">@HoTro.Instances.convertVND(item.price.ToString())</span>
+
+                                            }
+
                                             <h3 class="product_title"><a href="/chi-tiet/@(item.alias).html">@item.name</a></h3>
                                         </div>
                                         <div class="product_info">
@@ -118,7 +127,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-lg-3 col-md-5 col-sm-6">
                                         <div class="product_thumb">
-                                            <a href="/chi-tiet/@(item.alias).html"><img src="~/assets/img/Nón bảo hiểm/@item.image" alt=""></a>
+                                            <a href="/chi-tiet/@(item.alias).html"><img src="/@item.image" alt=""></a>
 
                                         </div>
                                     </div>
@@ -138,10 +147,17 @@
                                                     <a href="/chi-tiet/@(item.alias).html">@item.name</a>
                                                 </h3>
                                             </div>
-                                            <p class="design"> @item.description</p>
+                                            @Html.Raw(item.description)
                                             <div class="content_price">
-                                                <span>@HoTro.Instances.convertVND(item.promationprice.ToString())</span>
+                                                @if(item.promationprice>0)
+                                                { 
+                                                <span class="new_price">@HoTro.Instances.convertVND(item.promationprice.ToString())</span>
                                                 <span class="old-price">@HoTro.Instances.convertVND(item.price.ToString())</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="new_price">@HoTro.Instances.convertVND(item.price.ToString())</span>
+                                                }
                                             </div>
                                             <div class="add_links">
                                                 <ul style="display:flex;">
@@ -243,7 +259,7 @@
                                     <div class="tab-content" id="pills-tabContent">
                                         <div class="tab-pane fade show active" id="tab-@(i++)" role="tabpanel">
                                             <div class="modal_tab_img">
-                                                <a href="#"><img src="~/assets/img/Nón bảo hiểm/@item.image" alt=""></a>
+                                                <a href="#"><img src="/@item.image" alt=""></a>
                                             </div>
                                         </div>
                                         <div class="tab-pane fade" id="tab-@(i++)" role="tabpanel">
@@ -260,7 +276,7 @@
                                     <div class="modal_tab_button">
                                         <ul class="nav product_navactive" role="tablist">
                                             <li>
-                                                <a class="nav-link active" data-toggle="tab" href="#tab-@(j++)" role="tab" aria-controls="tab1" aria-selected="false"><img src="~/assets/img/Nón bảo hiểm/@item.image" alt=""></a>
+                                                <a class="nav-link active" data-toggle="tab" href="#tab-@(j++)" role="tab" aria-controls="tab1" aria-selected="false"><img src="/@item.image" alt=""></a>
                                             </li>
                                             <li>
                                                 <a class="nav-link" data-toggle="tab" href="#tab-@(j++)" role="tab" aria-controls="tab2" aria-selected="false"><img src="~/assets/img/cart/cart18.jpg" alt=""></a>
@@ -278,8 +294,16 @@
                                         <h2>@item.name</h2>
                                     </div>
                                     <div class="modal_price mb-10">
+                                        @if (item.promationprice > 0)
+                                        {
                                         <span class="new_price">@HoTro.Instances.convertVND(item.promationprice.ToString())</span>
                                         <span class="old_price">@HoTro.Instances.convertVND(item.price.ToString())</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="new_price">@HoTro.Instances.convertVND(item.price.ToString())</span>
+
+                                        }
                                     </div>
                                     <div class="modal_size mb-15">
                                         <h2>size</h2>
@@ -298,7 +322,7 @@
                                         </div>
                                     </div>
                                     <div class="modal_description mb-15">
-                                        <p>@item.description</p>
+                                        @Html.Raw(item.description)
                                     </div>
                                     <div class="modal_social">
                                         <h2>Share this product</h2>

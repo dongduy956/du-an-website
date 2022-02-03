@@ -170,7 +170,7 @@ $(function () {
                                                 },
                                                 error: function (data) {
 
-                                                    alert(JSON.stringify(data));
+                                                    alert('hi'+JSON.stringify(data));
                                                 }
                                             })
                                         }
@@ -187,7 +187,7 @@ $(function () {
             success: function (data) {
                 console.log(data);
                 if (data == 1)
-                    location.href = '/';
+                    location.href = '/dang-nhap.html';
             },
             error: function (data) {
                 alert('Lỗi')
@@ -570,7 +570,7 @@ $(function () {
             else if (data.status == "0") {
                 var html = `<div class="cart_item" id="wish-${data.id}">
                 <div class="cart_img">
-                    <a href="/chi-tiet/${data.alias}.html"><img src="../../assets/img/Nón bảo hiểm/${data.image}" alt=""></a>
+                    <a href="/chi-tiet/${data.alias}.html"><img src="/${data.image}" alt=""></a>
                 </div>
                 <div class="cart_info">
                     <a href="/chi-tiet/${data.alias}.html">${data.name}</a>
@@ -626,11 +626,16 @@ $(function () {
                 $('#lst-wish .block_content p').text(`${data.sumQuantity} sản phẩm.`);
                 $('.img-wish').hide();
             }
-            else {
+            else if(data.status=='-1'){
                 alertify.alert('Thông báo', 'Mời bạn đăng nhập!', function () {
                     location.href = "/dang-nhap.html";
                 });
             }
+            else
+                if(data.status=='-3')
+                {
+                    alertify.alert('Thông báo', data.message);
+                }
                     },
             error: function (data) {
 
@@ -726,7 +731,7 @@ $(function () {
                 else if (data.status == "0") {
                     var html = `<div class="cart_item cart-${data.id}">
                                                             <div class="cart_img">
-                                                                <a href="/chi-tiet/${data.alias}.html"><img src="../../assets/img/Nón bảo hiểm/${data.image}" alt=""></a>
+                                                                <a href="/chi-tiet/${data.alias}.html"><img src="/${data.image}" alt=""></a>
                                                             </div>
                                                             <div class="cart_info">
                                                                 <a href="/chi-tiet/${data.alias}.html">${data.name}</a>
@@ -792,10 +797,14 @@ alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', f
                         deletewish(ProductId, false);
 
                 }
-                else {
+                else if(data.status=='-1'){
                     alertify.alert('Thông báo', 'Mời bạn đăng nhập', function () {
                         location.href = "/dang-nhap.html";
                     })
+                }
+                else
+                {
+                    alertify.alert('Thông báo', data.message)
                 }
                     },
             error: function (data) {
@@ -912,6 +921,55 @@ alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', f
         if (e.which == 13)
             search();
     })
+
+    $("#txtkeyword").autocomplete({
+        minLength: 0,
+        source: function (request, response) {
+            $.ajax({
+               
+                dataType: "jsonp",
+                data: {
+                    term: request.term
+                },
+                success: function (data) {
+                    response(JSON.stringify(data.data));
+                }
+            });
+
+             $.ajax({
+                 url: "/Products/ListName",
+                 data: JSON.stringify({ term: request.term }),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    type: "POST",
+                    success: function (data) {
+                        response(data.data);
+
+                    },
+            error: function (data) {
+
+                alert(JSON.stringify(data));
+            }
+
+        });
+        },
+        focus: function (event, ui) {
+            $("#txtkeyword").val(ui.item.name);
+            return false;
+        },
+        select: function (event, ui) {
+            $("#txtkeyword").val(ui.item.name);
+            return false;
+        }
+    })
+    .autocomplete("instance")._renderItem = function (ul, item) {
+        return $("<li>")
+         .append(`<div> <img style='width:20px;' src='/${item.image}' />  ${item.name} </div>`)
+        .appendTo(ul);
+    };
+
+
+
     $('#rate li').each(function (index, element) {
         $(element).find('a').mouseenter(function (e) {
             $(this).addClass('ratting');
@@ -984,7 +1042,7 @@ alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', f
 
                     var img = '';
                     if (data.issocial == 0)
-                        img = `/assets/img/user/${data.image}`;
+                        img = `/${data.image}`;
                     else
                         img = data.image;
                     var li = '';
@@ -1142,8 +1200,8 @@ alertify.confirm('Thông báo', 'Bạn chắc chắn xoá sản phẩm này?', f
                                         showToast(data.message);
                                         if (data.status == 1) {
                                             $('#accountname').text(data.fullname);
-                                            $('#accounthome img').attr('src', '/assets/img/user/' +data.image);
-                                            $('#imgupdate').attr('src', '/assets/img/user/' +data.image);
+                                            $('#accounthome img').attr('src', '/' +data.image);
+                                            $('#imgupdate').attr('src', '/' +data.image);
 
 
                                     }

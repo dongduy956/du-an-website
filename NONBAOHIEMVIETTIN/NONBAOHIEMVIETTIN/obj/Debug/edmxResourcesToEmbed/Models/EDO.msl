@@ -78,15 +78,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="listimage">
-      <EntityTypeMapping TypeName="nonbaohiemviettinModel.listimage">
-        <MappingFragment StoreEntitySet="listimage">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="id_product" ColumnName="id_product" />
-          <ScalarProperty Name="image" ColumnName="image" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="news">
       <EntityTypeMapping TypeName="nonbaohiemviettinModel.news">
         <MappingFragment StoreEntitySet="news">
@@ -207,6 +198,38 @@
           <ScalarProperty Name="subject" ColumnName="subject" />
           <ScalarProperty Name="phone" ColumnName="phone" />
           <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="receipt">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.receipt">
+        <MappingFragment StoreEntitySet="receipt">
+          <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="createdate" ColumnName="createdate" />
+          <ScalarProperty Name="idaccount" ColumnName="idaccount" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="receiptdetail">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.receiptdetail">
+        <MappingFragment StoreEntitySet="receiptdetail">
+          <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+          <ScalarProperty Name="quantity" ColumnName="quantity" />
+          <ScalarProperty Name="price" ColumnName="price" />
+          <ScalarProperty Name="idreceipt" ColumnName="idreceipt" />
+          <ScalarProperty Name="idproduct" ColumnName="idproduct" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="brand">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.brand">
+        <MappingFragment StoreEntitySet="brand">
+          <ScalarProperty Name="link" ColumnName="link" />
+          <ScalarProperty Name="image" ColumnName="image" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>

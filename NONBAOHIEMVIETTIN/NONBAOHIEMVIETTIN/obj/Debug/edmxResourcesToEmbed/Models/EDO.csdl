@@ -19,6 +19,7 @@
     <NavigationProperty Name="role" Relationship="Self.fk_accounts_role" FromRole="accounts" ToRole="role" />
     <NavigationProperty Name="order" Relationship="Self.fk_order_account" FromRole="accounts" ToRole="order" />
     <NavigationProperty Name="rate" Relationship="Self.fk_rate_accounts" FromRole="accounts" ToRole="rate" />
+    <NavigationProperty Name="receipt" Relationship="nonbaohiemviettinModel.fk_receipt_accounts" FromRole="accounts" ToRole="receipt" />
   </EntityType>
   <EntityType Name="category">
     <Key>
@@ -75,15 +76,6 @@
     <Property Name="image" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <Property Name="status" Type="Boolean" />
     <Property Name="alias" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-  </EntityType>
-  <EntityType Name="listimage">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="id_product" Type="Int32" />
-    <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
-    <NavigationProperty Name="products" Relationship="Self.fk_listimage_products" FromRole="listimage" ToRole="products" />
   </EntityType>
   <EntityType Name="news">
     <Key>
@@ -172,10 +164,10 @@
     <Property Name="isdelete" Type="Boolean" />
     <NavigationProperty Name="category" Relationship="Self.fk_products_category" FromRole="products" ToRole="category" />
     <NavigationProperty Name="groupproduct" Relationship="Self.fk_products_groupproduct" FromRole="products" ToRole="groupproduct" />
-    <NavigationProperty Name="listimage" Relationship="Self.fk_listimage_products" FromRole="products" ToRole="listimage" />
     <NavigationProperty Name="orderdetail" Relationship="Self.fk_orderdetail_products" FromRole="products" ToRole="orderdetail" />
     <NavigationProperty Name="production" Relationship="Self.fk_products_production" FromRole="products" ToRole="production" />
     <NavigationProperty Name="rate" Relationship="Self.fk_rate_products" FromRole="products" ToRole="rate" />
+    <NavigationProperty Name="receiptdetail" Relationship="nonbaohiemviettinModel.fk_receiptdetail_products" FromRole="products" ToRole="receiptdetail" />
   </EntityType>
   <EntityType Name="rate">
     <Key>
@@ -272,18 +264,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="fk_listimage_products">
-    <End Role="products" Type="Self.products" Multiplicity="0..1" />
-    <End Role="listimage" Type="Self.listimage" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="products">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="listimage">
-        <PropertyRef Name="id_product" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="fk_news_newstype">
     <End Role="newstype" Type="Self.newstype" Multiplicity="0..1">
       <OnDelete Action="Cascade" />
@@ -355,7 +335,6 @@
     <EntitySet Name="countonline" EntityType="Self.countonline" />
     <EntitySet Name="groupproduct" EntityType="Self.groupproduct" />
     <EntitySet Name="introduce" EntityType="Self.introduce" />
-    <EntitySet Name="listimage" EntityType="Self.listimage" />
     <EntitySet Name="news" EntityType="Self.news" />
     <EntitySet Name="newstype" EntityType="Self.newstype" />
     <EntitySet Name="order" EntityType="Self.order" />
@@ -385,10 +364,6 @@
       <End Role="groupproduct" EntitySet="groupproduct" />
       <End Role="products" EntitySet="products" />
     </AssociationSet>
-    <AssociationSet Name="fk_listimage_products" Association="Self.fk_listimage_products">
-      <End Role="products" EntitySet="products" />
-      <End Role="listimage" EntitySet="listimage" />
-    </AssociationSet>
     <AssociationSet Name="fk_news_newstype" Association="Self.fk_news_newstype">
       <End Role="newstype" EntitySet="newstype" />
       <End Role="news" EntitySet="news" />
@@ -410,6 +385,21 @@
       <End Role="rate" EntitySet="rate" />
     </AssociationSet>
     <EntitySet Name="feedback" EntityType="nonbaohiemviettinModel.feedback" />
+    <EntitySet Name="receipt" EntityType="nonbaohiemviettinModel.receipt" />
+    <AssociationSet Name="fk_receipt_accounts" Association="nonbaohiemviettinModel.fk_receipt_accounts">
+      <End Role="accounts" EntitySet="accounts" />
+      <End Role="receipt" EntitySet="receipt" />
+    </AssociationSet>
+    <EntitySet Name="receiptdetail" EntityType="nonbaohiemviettinModel.receiptdetail" />
+    <AssociationSet Name="fk_receiptdetail_products" Association="nonbaohiemviettinModel.fk_receiptdetail_products">
+      <End Role="products" EntitySet="products" />
+      <End Role="receiptdetail" EntitySet="receiptdetail" />
+    </AssociationSet>
+    <AssociationSet Name="fk_receiptdetail_receipt" Association="nonbaohiemviettinModel.fk_receiptdetail_receipt">
+      <End Role="receipt" EntitySet="receipt" />
+      <End Role="receiptdetail" EntitySet="receiptdetail" />
+    </AssociationSet>
+    <EntitySet Name="brand" EntityType="nonbaohiemviettinModel.brand" />
   </EntityContainer>
   <EntityType Name="feedback">
     <Key>
@@ -421,5 +411,81 @@
     <Property Name="phone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
     <Property Name="subject" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="message" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="receipt">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idaccount" Type="Int32" />
+    <Property Name="createdate" Type="DateTime" Precision="0" />
+    <Property Name="total" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="accounts" Relationship="nonbaohiemviettinModel.fk_receipt_accounts" FromRole="receipt" ToRole="accounts" />
+    <NavigationProperty Name="receiptdetail" Relationship="nonbaohiemviettinModel.fk_receiptdetail_receipt" FromRole="receipt" ToRole="receiptdetail" />
+  </EntityType>
+  <Association Name="fk_receipt_accounts">
+    <End Type="nonbaohiemviettinModel.accounts" Role="accounts" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="nonbaohiemviettinModel.receipt" Role="receipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="accounts">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="receipt">
+        <PropertyRef Name="idaccount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="receiptdetail">
+    <Key>
+      <PropertyRef Name="idproduct" />
+      <PropertyRef Name="idreceipt" />
+    </Key>
+    <Property Name="idproduct" Type="Int32" Nullable="false" />
+    <Property Name="idreceipt" Type="Int32" Nullable="false" />
+    <Property Name="price" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="quantity" Type="Int32" Nullable="false" />
+    <Property Name="subtotal" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <NavigationProperty Name="products" Relationship="nonbaohiemviettinModel.fk_receiptdetail_products" FromRole="receiptdetail" ToRole="products" />
+    <NavigationProperty Name="receipt" Relationship="nonbaohiemviettinModel.fk_receiptdetail_receipt" FromRole="receiptdetail" ToRole="receipt" />
+  </EntityType>
+  <Association Name="fk_receiptdetail_products">
+    <End Type="nonbaohiemviettinModel.products" Role="products" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="nonbaohiemviettinModel.receiptdetail" Role="receiptdetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="receiptdetail">
+        <PropertyRef Name="idproduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_receiptdetail_receipt">
+    <End Type="nonbaohiemviettinModel.receipt" Role="receipt" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="nonbaohiemviettinModel.receiptdetail" Role="receiptdetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="receipt">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="receiptdetail">
+        <PropertyRef Name="idreceipt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="brand">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="link" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
   </EntityType>
 </Schema>

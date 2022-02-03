@@ -12,7 +12,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
     {
        protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
-            var acc = Session["account"] as accounts;
+            var acc = Session["account_admin"] as accounts;
             if(acc== null||!acc.role.name.Equals("admin"))
             {
                 filterContext.Result = new RedirectToRouteResult(

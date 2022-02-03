@@ -11,7 +11,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
         nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
         public ActionResult Index()
         {           
-            return View(db.products.Where(x=> x.isdelete == false).ToList());
+            return View(db.products.Where(x=> x.isdelete == false && x.status == true).ToList());
 
         }       
     }

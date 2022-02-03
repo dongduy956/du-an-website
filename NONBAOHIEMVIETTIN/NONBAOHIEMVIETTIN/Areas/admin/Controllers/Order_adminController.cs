@@ -2,6 +2,7 @@
 using PagedList;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -76,5 +77,64 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 message = "Xoá thành công."
             });
         }
+
+        [HttpPost]
+        public JsonResult confirm_order(int id)
+        {
+            try
+            {
+                var order = db.order.Find(id);
+                order.status = true;
+                db.Entry(order).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    status = 0,
+                    message = "Có lỗi trong quá trình xử lý.Vui lòng thử lại."
+                });
+            }
+
+            return Json(new
+            {
+                status = 1,
+                message = "Duyệt thành công."
+            });
+        }
+
+        [HttpPost]
+        public JsonResult transfer_order(int id)
+        {
+            try
+            {
+                var order = db.order.Find(id);
+                if(order.status==false)
+                    return Json(new
+                    {
+                        status = -1,
+                        message = "Vui lòng duyệt đơn hàng trước khi thanh toán"
+                    });
+                order.statuspay = true;
+                db.Entry(order).State = EntityState.Modified;
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    status = 0,
+                    message = "Có lỗi trong quá trình xử lý.Vui lòng thử lại."
+                });
+            }
+
+            return Json(new
+            {
+                status = 1,
+                message = "Thanh toán thành công."
+            });
+        }
+
     }
 }

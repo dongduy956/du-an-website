@@ -78,8 +78,14 @@ function getUserInfo() {
                     fullname: user.name,
                     image: user.picture
                 },
-                success: function () {
+                success: function (data) {
+                if(data.status==1)
                     location.href = "/";
+                else
+                {
+                    showToast(data.message);
+                    location.href = "/dang-nhap.html";
+                }
                 }, error: function (data) {
                     alert(JSON.stringify(data));
                 }

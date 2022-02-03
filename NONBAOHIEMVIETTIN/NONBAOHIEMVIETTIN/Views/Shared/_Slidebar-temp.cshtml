@@ -11,7 +11,7 @@
             {
             <li class="has-sub">
                 <a class="category-item" data-alias="@(itemCategory.alias)">
-                    <i class="fa fa-caret-right"></i>@itemCategory.name (@db.products.Count(x=>x.idcategory == itemCategory.id &&x.isdelete==false))
+                    <i class="fa fa-caret-right"></i>@itemCategory.name (@db.products.Count(x=>x.idcategory == itemCategory.id &&x.isdelete==false&&x.status==true))
                     <span class="operation">+</span>
                 </a>
                 <ul class="categorie_sub">
@@ -19,7 +19,7 @@
                     {
                         <li>
                             <a href="/@itemCategory.alias/@(itemGroupproduct.alias).html">
-                                <i class="fa fa-caret-right"></i> @itemGroupproduct.name (@db.products.Count(x=>x.idgroupproduct == itemGroupproduct.id && x.isdelete == false && x.idcategory == itemCategory.id))
+                                <i class="fa fa-caret-right"></i> @itemGroupproduct.name (@db.products.Count(x=>x.idgroupproduct == itemGroupproduct.id && x.status==true&&x.isdelete == false && x.idcategory == itemCategory.id))
                             </a>
                         </li>
                     }
@@ -35,7 +35,7 @@
 </div>
 <div class="sidebar_widget wishlist mb-35" id="lst-wish" style="overflow-y:scroll;height:200px;">
     <div class="img-wish" style="padding:24px;">
-        <img src="~/assets/img/cart/no-cart.png" />
+        <img src="~/assets/images/cart/no-cart.png" />
     </div>
     @if (lstwish == null || lstwish.Count() == 0)
     {
@@ -61,11 +61,19 @@
         {
             <div class="cart_item" id="wish-@item.Product.id">
                 <div class="cart_img">
-                    <a href="/chi-tiet/@(item.Product.alias).html"><img src="~/assets/img/Nón bảo hiểm/@item.Product.image" alt=""></a>
+                    <a href="/chi-tiet/@(item.Product.alias).html"><img src="/@item.Product.image" alt=""></a>
                 </div>
                 <div class="cart_info">
                     <a href="/chi-tiet/@(item.Product.alias).html">@item.Product.name</a>
-                    <span class="cart_price">@HoTro.Instances.convertVND(item.Product.price.ToString())</span>
+                    @if (item.Product.promationprice > 0)
+                    {
+                    <span class="cart_price">@HoTro.Instances.convertVND(item.Product.promationprice.ToString())</span>
+                    }
+                    else
+                    {
+                        <span class="cart_price">@HoTro.Instances.convertVND(item.Product.price.ToString())</span>
+
+                    }
                     <span class="quantity">SL: @item.Quantity</span>
                 </div>
                 <div class="cart_remove">

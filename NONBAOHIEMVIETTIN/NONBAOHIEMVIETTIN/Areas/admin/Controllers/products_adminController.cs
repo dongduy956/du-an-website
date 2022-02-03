@@ -40,10 +40,10 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             {
                 return RedirectToAction("Index");
             }
-            ViewBag.check =false;       
-            var temp = db.products.Where(x => 
-            x.name.ToLower().Contains(keyword.ToLower().Trim())||
-            x.category.name.ToLower().Contains(keyword.ToLower().Trim())||
+            ViewBag.check = false;
+            var temp = db.products.Where(x =>
+            x.name.ToLower().Contains(keyword.ToLower().Trim()) ||
+            x.category.name.ToLower().Contains(keyword.ToLower().Trim()) ||
             x.production.name.ToLower().Contains(keyword.ToLower().Trim()) ||
             x.groupproduct.name.ToLower().Contains(keyword.ToLower().Trim()) ||
             x.id.ToString().ToLower().Equals(keyword.ToLower().Trim()) ||
@@ -91,7 +91,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Create([Bind(Include = "id,name,price,promationprice,quantity,description,image,idcategory,idproduction,idgroupproduct")] products products)
+        public ActionResult Create([Bind(Include = "id,name,price,promationprice,description,image,idcategory,idproduction,idgroupproduct")] products products)
         {
             if (ModelState.IsValid)
             {
@@ -107,10 +107,11 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     {
 
                     }
+
                     products.createddate = DateTime.Now;
-                    products.fastsell = products.isdelete = false;
-                    products.newproduct = products.status = true;
-                    products.viewcount = 0;
+                    products.fastsell = products.isdelete = products.status = false;
+                    products.newproduct = true;
+                    products.viewcount = products.quantity = 0;
                     products.alias = HoTro.Instances.convertToUnSign3(products.name);
                     db.products.Add(products);
                     db.SaveChanges();
@@ -150,7 +151,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateInput(false)]
-        public ActionResult Edit([Bind(Include = "id,name,alias,status,price,promationprice,quantity,description,viewcount,createddate,image,fastsell,newproduct,idcategory,idproduction,idgroupproduct,isdelete")] products products)
+        public ActionResult Edit([Bind(Include = "id,name,alias,quantity,status,price,promationprice,description,viewcount,createddate,image,fastsell,newproduct,idcategory,idproduction,idgroupproduct,isdelete")] products products)
         {
             if (ModelState.IsValid)
             {
@@ -185,10 +186,11 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     products.isdelete = Boolean.Parse(Request["isdelete"]);
                     products.name = Request["name"];
                     products.description = description;
-                    products.image = Request["image"].Substring(1, Request["image"].Length-1);
-                    products.price =decimal.Parse(Request["price"]);
-                    products.promationprice =decimal.Parse(Request["promationprice"]);
-                    products.quantity =int.Parse(Request["quantity"]);
+                    products.image = Request["image"].Substring(1, Request["image"].Length - 1);
+                    products.price = decimal.Parse(Request["price"]);
+                    products.quantity = int.Parse(Request["quantity"]);
+                    products.promationprice = decimal.Parse(Request["promationprice"]);
+                    products.quantity = int.Parse(Request["quantity"]);
                     products.idcategory = idcategory;
                     products.idgroupproduct = idgroupproduct;
                     products.idproduction = idproduction;

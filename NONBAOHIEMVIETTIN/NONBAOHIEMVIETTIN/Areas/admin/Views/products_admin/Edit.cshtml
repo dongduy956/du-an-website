@@ -39,19 +39,7 @@
                 }
                 finder.popup();
 
-            })
-            $('#input_status').change(function () {
-                if ($(this).is(":checked")) {
-                    $('#input_mess-status').text('Còn hàng');
-                    $('input[name="status"]').val('True');
-
-                }
-                else {
-                    $('#input_mess-status').text('Hết hàng');
-                    $('input[name="status"]').val('False');
-
-                }
-            });
+            })          
             $('#input_newproduct').change(function () {
                 if ($(this).is(":checked")) {
                     $('#input_mess-newproduct').text('Có');
@@ -120,6 +108,7 @@
             @Html.HiddenFor(model => model.newproduct)
             @Html.HiddenFor(model => model.status)
             @Html.HiddenFor(model => model.isdelete)
+            @Html.HiddenFor(model => model.quantity)
             <div class="form-horizontal">
                 <div class="form-group">
                     <label class="control-label col-md-12">Tên nón</label>
@@ -167,18 +156,7 @@
                             </label>
                         </div>
                     }
-                }
-                <div class="form-group">
-                    <label class="control-label col-md-12">Trạng thái</label>
-
-                    <div class="col-md-12">
-                        <div class="d-flex align-items-center">
-                            <input id="input_status" class="input-ckb" type="checkbox" checked="@Model.status" />
-                            <span class="ml-2" id="input_mess-status">@(Model.status == true ? "Còn hàng" : "Hết hàng")</span>
-                        </div>
-                    </div>
-                </div>
-
+                }               
                 <div class="form-group">
                     <label class="control-label col-md-12">Nón mới:</label>
                     <div class="col-md-12">
@@ -205,17 +183,7 @@
                     </div>
                     <div class="valid-feedback">Valid</div>
                     <div class="invalid-feedback">Nhập giá khuyến mãi (nếu có)</div>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label col-md-12">Số lượng</label>
-                    <div class="col-md-12">
-                        <input type="number" placeholder="Nhập vào số lượng (1-100)" required value="@Model.quantity" min="1" max="1000" class="form-control" name="quantity" />
-                    </div>
-                    <div class="valid-feedback">Valid</div>
-                    <div class="invalid-feedback">Nhập vào số lượng (1-100)</div>
-                </div>
-
+                </div>               
                 <div class="form-group">
                     <label class="control-label col-md-12">Mô tả</label>
                     <div class="col-md-12">
@@ -229,7 +197,7 @@
                     <label class="control-label col-md-12" for="image">Ảnh đại diện</label>
                     <span class="custom-file col-md-12">
                         <input type="file" class="custom-file-input" id="btnimg">
-                        <label class="custom-file-label" id="txtimg" for="customFile">@(Model.image.Equals("") ? "Chọn ảnh" : "/" + Model.image)</label>
+                        <label class="custom-file-label" id="txtimg" for="customFile">@(Model.image==null||Model.image.Equals("") ? "Chọn ảnh" : "/" + Model.image)</label>
                     </span>
                     <input name="image" value="/@Model.image" id="txtimg_hide" type="hidden" />
 

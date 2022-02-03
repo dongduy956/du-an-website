@@ -44,7 +44,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 {
                     list.RemoveAll(r => r.Product.id == ProductId);
                     Session[cartSession] = list;
-                    return Json(new { status = 1, sumQuantity = list.Sum(x => x.Quantity), sumMoney = HoTro.Instances.convertVND(list.Sum(x => x.Quantity * x.Product.price).ToString()) }, JsonRequestBehavior.AllowGet);
+                    return Json(new { status = 1, sumQuantity = list.Sum(x => x.Quantity), sumMoney = HoTro.Instances.convertVND(list.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString()) }, JsonRequestBehavior.AllowGet);
                 }
             }
             return Json(new { status = 0 }, JsonRequestBehavior.AllowGet);
@@ -60,6 +60,12 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 {
                     var wish = Session[cartSession];//bien wish co ten la wishSession
                     var p = db.products.Find(ProductId);
+                    if (Quantity > p.quantity)
+                        return Json(new
+                        {
+                            status = -3,
+                            message = "Không đủ hàng"
+                        });
                     //tim kiem san pham trong db, Id=1
                     if (wish != null)
                     {//gio da co sp
@@ -70,6 +76,12 @@ namespace NONBAOHIEMVIETTIN.Controllers
                             {
                                 if (item.Product.id == ProductId)
                                 {
+                                    if ((item.Quantity + Quantity) > p.quantity)
+                                        return Json(new
+                                        {
+                                            status = -3,
+                                            message = "Không đủ hàng"
+                                        });
                                     item.Quantity += Quantity;
                                     return Json(new
                                     {
@@ -77,11 +89,11 @@ namespace NONBAOHIEMVIETTIN.Controllers
                                         id = item.Product.id,
                                         image = item.Product.image,
                                         name = item.Product.name,
-                                        price = HoTro.Instances.convertVND(item.Product.price.ToString()),
+                                        price = HoTro.Instances.convertVND(item.Product.promationprice > 0 ? item.Product.promationprice.ToString() : item.Product.price.ToString()),
                                         quantity = item.Quantity,
                                         alias = item.Product.alias,
                                         sumQuantity = list.Sum(x => x.Quantity),
-                                        sumMoney = HoTro.Instances.convertVND(list.Sum(x => x.Quantity * x.Product.price).ToString())
+                                        sumMoney = HoTro.Instances.convertVND(list.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString())
                                     });
                                 }
 
@@ -100,11 +112,11 @@ namespace NONBAOHIEMVIETTIN.Controllers
                                 id = item.Product.id,
                                 image = item.Product.image,
                                 name = item.Product.name,
-                                price = HoTro.Instances.convertVND(item.Product.price.ToString()),
+                                price = HoTro.Instances.convertVND((item.Product.promationprice > 0 ? item.Product.promationprice.ToString() : item.Product.price.ToString())),
                                 quantity = item.Quantity,
                                 alias = item.Product.alias,
                                 sumQuantity = list.Sum(x => x.Quantity),
-                                sumMoney = HoTro.Instances.convertVND(list.Sum(x => x.Quantity * x.Product.price).ToString())
+                                sumMoney = HoTro.Instances.convertVND(list.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString())
                             });
                         }
 
@@ -123,11 +135,11 @@ namespace NONBAOHIEMVIETTIN.Controllers
                             id = item.Product.id,
                             image = item.Product.image,
                             name = item.Product.name,
-                            price = HoTro.Instances.convertVND(item.Product.price.ToString()),
+                            price = HoTro.Instances.convertVND((item.Product.promationprice > 0 ? item.Product.promationprice.ToString() : item.Product.price.ToString())),
                             quantity = item.Quantity,
                             alias = item.Product.alias,
                             sumQuantity = Quantity,
-                            sumMoney = HoTro.Instances.convertVND(list.Sum(x => x.Quantity * x.Product.price).ToString())
+                            sumMoney = HoTro.Instances.convertVND(list.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString())
                         });
                     }
                 }
@@ -156,7 +168,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                             if (item.Product.id == ProductId)
                             {
                                 item.Quantity = Quantity;
-                                subtotal = Quantity * item.Product.price;
+                                subtotal = Quantity * (item.Product.promationprice > 0 ? item.Product.promationprice : item.Product.price);
                             }
                         }
                 }
@@ -166,7 +178,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 {
                     status = 1,
                     sumQuantity = list.Sum(x => x.Quantity),
-                    sumMoney = HoTro.Instances.convertVND(list.Sum(x => x.Quantity * x.Product.price).ToString()),
+                    sumMoney = HoTro.Instances.convertVND(list.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString()),
                     total = HoTro.Instances.convertVND(subtotal.ToString())
                 });
             }
@@ -267,33 +279,35 @@ namespace NONBAOHIEMVIETTIN.Controllers
         [HttpPost]
         public ActionResult Pay(order order, string PaymentMethod, string BankCode)
         {
+            int idorder = 0;
             order.createdate = DateTime.Parse(DateTime.Now.ToShortDateString());
             order.status = false;
             if (PaymentMethod == "CASH")
                 order.statuspay = false;
             else
                 order.statuspay = true;
-            order.idaccount = (Session["account"] as accounts).id;
-            db.order.Add(order);
-            db.SaveChanges();
-            int idorder = db.order.OrderByDescending(x => x.id).FirstOrDefault().id;
-            var cart = Session[cartSession] as List<CartItem>;
-            foreach (var item in cart)
-            {
-                orderdetail odetail = new orderdetail();
-                odetail.idorder = idorder;
-                odetail.idproduct = item.Product.id;
-                odetail.quantity = item.Quantity;
-                odetail.price = item.Product.price;
-                db.orderdetail.Add(odetail);
-                db.SaveChanges();
-            }
             if (PaymentMethod == "CASH")
             {
+                order.idaccount = (Session["account"] as accounts).id;
+                db.order.Add(order);
+                db.SaveChanges();
+                idorder = db.order.OrderByDescending(x => x.id).FirstOrDefault().id;
+                var cart = Session[cartSession] as List<CartItem>;
+                foreach (var item in cart)
+                {
+                    orderdetail odetail = new orderdetail();
+                    odetail.idorder = idorder;
+                    odetail.idproduct = item.Product.id;
+                    odetail.quantity = item.Quantity;
+                    odetail.price = (item.Product.promationprice > 0 ? item.Product.promationprice : item.Product.price);
+                    db.orderdetail.Add(odetail);
+                    db.SaveChanges();
+                }
                 Session[cartSession] = null;
                 return Json(new
                 {
-                    status = true
+                    status = true,
+                    message = "Thanh toán thành công"
                 });
             }
             else

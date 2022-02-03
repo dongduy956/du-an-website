@@ -13,15 +13,14 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         // GET: admin/Login
         public ActionResult Index()
         {
-            var acc = Session["account"] as accounts;
+            var acc = Session["account_admin"] as accounts;
             if (acc != null && acc.role.name.Equals("admin"))
                 return Redirect("/admin");
             return View();
         }
         public ActionResult Logout()
         {
-            Session.Abandon();
-            Session.Clear();
+            Session["account_admin"] = null;            
             return Redirect("/admin/dang-nhap.html");
         }
         [HttpPost]
@@ -47,7 +46,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     status = 0,
                     message = "Tài khoản này bị khoá. Vui lòng liên hệ admin để biết thêm chi tiết!"
                 });
-            Session["account"] = acc;
+            Session["account_admin"] = acc;
             return Json(new
             {
                 status = 1,

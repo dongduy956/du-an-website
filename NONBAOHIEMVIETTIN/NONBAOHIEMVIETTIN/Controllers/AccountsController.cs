@@ -55,7 +55,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
             return Redirect(loginUrl.AbsoluteUri);
         }
         [HttpPost]
-        public void LoginGoogle(string username, string email, string fullname, string image)
+        public JsonResult LoginGoogle(string username, string email, string fullname, string image)
         {
             var acc = new accounts()
             {
@@ -64,8 +64,11 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 fullname = fullname,
                 image = image,
                 issocial = 1,
+                status=true,
                 password="",
-                idrole=1
+                idrole=1,
+                alias = "tai-khoan-" + (db.accounts.OrderByDescending(x => x.id).FirstOrDefault().id+1)
+                
             };
             bool check = false;
             var accTemp = db.accounts.SingleOrDefault(x => x.email.Equals(acc.email)&&x.issocial==1);
@@ -78,7 +81,19 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 Session["account"] = db.accounts.SingleOrDefault(x => x.email.Equals(acc.email) && x.issocial == 1);
             }
             else
+            {
+                if (accTemp.status == false)
+                    return Json(new
+                    {
+                        status = 0,
+                        message = "Tài khoản bị khoá."
+                    });
                 Session["account"] = accTemp;
+            }
+            return Json(new
+            {
+                status = 1                
+            });
         }
         public ActionResult FacebookCallback(string code)
         {
@@ -113,6 +128,8 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 acc.issocial = 2;
                 acc.password = "";
                 acc.idrole = 1;
+                acc.status = true;
+                acc.alias = "tai-khoan-" + (db.accounts.OrderByDescending(x => x.id).FirstOrDefault().id + 1);
                 bool check = false;
                 var accTemp = db.accounts.SingleOrDefault(x => x.email.Equals(acc.email)&&x.issocial==2);
                 if (accTemp == null)               
@@ -124,7 +141,11 @@ namespace NONBAOHIEMVIETTIN.Controllers
                     Session["account"] = db.accounts.SingleOrDefault(x => x.email.Equals(acc.email) && x.issocial == 2);
                 }
                 else
+                {
+                    if (accTemp.status == false)
+                        return Redirect("/dang-nhap.html");
                     Session["account"] = accTemp;
+                }
             }
             return RedirectToAction("Index", "Home");
         }
@@ -138,7 +159,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
         [HttpPost]
         public JsonResult Logout()
         {
-            Session.Clear();
+            Session["account"] = null;
             return Json(1);
         }
         [HttpPost]
@@ -156,7 +177,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                     if (file != null)
                     {
                         var InputFileName = Path.GetFileName(file.FileName);
-                        var ServerSavePath = Path.Combine(Server.MapPath("~/assets/img/user/") + InputFileName);
+                        var ServerSavePath = Path.Combine(Server.MapPath("~/assets/images/users/") + InputFileName);
                         //Save file to server folder  
                         file.SaveAs(ServerSavePath);
 
@@ -246,7 +267,9 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 if (db.accounts.SingleOrDefault(x => x.email.Equals(acc.email)&&x.issocial==0) != null)
                     return Json(2);
                 if (sendMail(acc.email))
-                {
+                {                    
+                    acc.image = "assets/images/users/" + acc.image;
+                    acc.alias = "tai-khoan-" + (db.accounts.OrderByDescending(x => x.id).FirstOrDefault().id+1);
                     Session["acc"] = acc;
                     return Json(1);
                 }
@@ -305,9 +328,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 acc.issocial = 0;
                 db.accounts.Add(acc);
                 db.SaveChanges();
-                Session.Clear();
-                Session.Abandon();
-
+                Session["acc"]=Session["code"]=null;
                 return Json(1);
             }
             catch (Exception ex)

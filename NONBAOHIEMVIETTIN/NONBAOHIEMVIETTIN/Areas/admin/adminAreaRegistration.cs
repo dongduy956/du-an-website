@@ -69,6 +69,12 @@ new { controller = "Accounts_admin", action = "Edit", id = UrlParameter.Optional
       namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
  );
             context.MapRoute(
+"admin_Receipt_search",
+"admin/tim-kiem-phieu-nhap.html",
+new { controller = "Receipt_admin", action = "Search", id = UrlParameter.Optional, Area = "Admin" },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
 "admin_Order_search",
 "admin/tim-kiem-don-hang.html",
 new { controller = "Order_admin", action = "Search", id = UrlParameter.Optional, Area = "Admin" },
@@ -159,6 +165,12 @@ namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
          namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
     );
             context.MapRoute(
+"admin_Receipt_create",
+"admin/them-moi-phieu-nhap.html",
+new { controller = "Receipt_admin", action = "Create", id = UrlParameter.Optional, Area = "Admin" },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
 "admin_Contact_create",
 "admin/them-moi-lien-he.html",
 new { controller = "Contact_admin", action = "Create", id = UrlParameter.Optional, Area = "Admin" },
@@ -218,6 +230,12 @@ namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
          new { controller = "products_admin", action = "Create", id = UrlParameter.Optional, Area = "Admin" },
           namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
      );
+            context.MapRoute(
+"admin_Receipt_index",
+"admin/nhap-kho.html",
+new { controller = "Receipt_admin", action = "Index", id = UrlParameter.Optional, Area = "Admin" },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
             context.MapRoute(
 "admin_Order_index",
 "admin/don-hang.html",

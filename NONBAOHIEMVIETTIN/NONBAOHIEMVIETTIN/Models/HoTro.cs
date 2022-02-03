@@ -48,5 +48,64 @@ namespace NONBAOHIEMVIETTIN
             unsigned = Regex.Replace(unsigned, "[^a-zA-Z0-9 ]+", "");
             return unsigned.Replace(" ", "-");
         }
+
+
+        public int validateYear(int year)
+        {
+            if (year % 400 == 0 || (year % 4 == 0 && year % 100 != 0))
+                return 1;
+            return 0;
+        }
+        public int dayOfMonth(int month, int year)
+        {
+            switch (month)
+            {
+                case 1:
+                case 3:
+                case 5:
+                case 7:
+                case 8:
+                case 10:
+                case 12:
+                    return 31;
+                case 2:
+                    return 28 + validateYear(year);
+                case 4:
+                case 6:
+                case 9:
+                case 11:
+                    return 30;
+            }
+            return -1;
+        }
+
+        public DateTime getYesterday(DateTime now)
+        {
+            int day, month, year;
+
+            if (now.Day == 1)
+            {
+                if (now.Month == 1)
+                {
+                    month = 12;
+                    year = now.Year - 1;
+                }
+                else
+                {
+                    month = now.Month - 1;
+                    year = now.Year;
+                }
+                day = dayOfMonth(month, year);
+            }
+            else
+            {
+                month = now.Month;
+                year = now.Year;
+                day = now.Day - 1;
+            }
+
+
+            return new DateTime(year, month, day);
+        }
     }
 }

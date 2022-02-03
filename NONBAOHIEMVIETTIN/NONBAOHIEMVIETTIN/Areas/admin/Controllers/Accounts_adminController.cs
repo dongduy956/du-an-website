@@ -179,11 +179,11 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 }
                 db.Entry(accounts).State = EntityState.Modified;
                 db.SaveChanges();
-                if ((Session["account"] as accounts).id == accounts.id)
+                if ((Session["account_admin"] as accounts).id == accounts.id)
                 {
                     var acc = db.accounts.Find(accounts.id);
-                    acc.role = (Session["account"] as accounts).role;
-                    Session["account"] = acc;
+                    acc.role = (Session["account_admin"] as accounts).role;
+                    Session["account_admin"] = acc;
                 }
                 return RedirectToAction("Index");
             }

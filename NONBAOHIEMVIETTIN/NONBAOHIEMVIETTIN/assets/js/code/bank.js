@@ -17,7 +17,7 @@
         order.fullname = $('#cart-fullname').val();
         order.phone = $('#cart-phone').val();
         order.email = $('#cart-email').val();
-        order.address = $('#cart-town').val() + '' + $('#town').val() == '-1' ? '' : $('#town').val() + ' ' + $('#district').val() == '-1' ? '' : $('#district').val() + ' ' + $('#province').val() == '-1' ? '' : $('#province').val();
+        order.address = $('#cart-town').val() + ' ' + ($('#town').val() == '-1' ? '' : $('#town').val()) + ' ' + ($('#district').val() == '-1' ? '' : $('#district').val()) + ' ' + ($('#province').val() == '-1' ? '' : $('#province').val());
         order.note = $("#order_note").val();
         var PaymentMethod = $('input[name="paymentMethod"]:checked').val();
         var BankCode = $('input[groupname="bankcode"]:checked').prop('id');

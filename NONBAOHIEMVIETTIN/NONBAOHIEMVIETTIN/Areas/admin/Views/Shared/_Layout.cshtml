@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <link rel="shortcut icon" type="image/x-icon" href="~/assets/img/logo/logo.png">
+    <link rel="shortcut icon" type="image/x-icon" href="~/assets/images/logo/logo.png">
     <meta name="description" content="">
     <meta name="author" content="">
     <title>@ViewBag.Title | Admin</title>
@@ -80,16 +80,22 @@
     <!-- Page level plugins -->
     <script src="~/Areas/admin/assets/vendor/chart.js/Chart.min.js"></script>
     <!-- Page level custom scripts -->
-    <script src="~/Areas/admin/assets/js/demo/chart-area-demo.js"></script>
-    <script src="~/Areas/admin/assets/js/demo/chart-pie-demo.js"></script>
+
     <script src="~/Areas/admin/assets/js/ckfinder/ckfinder.js"></script>
     <script src="~/Areas/admin/assets/js/ckeditor/ckeditor.js"></script>
     <script src="~/assets/js/code/toast.js"></script>
     <script src="~/Scripts/alertify.min.js"></script>
-
     <script src="~/Areas/admin/assets/js/code/main.js"></script>
     @RenderSection("scripts", false)
+    <script>
+   
+        $('#btnupload').click(function (e) {
+            e.preventDefault();
+            var finder = new CKFinder();
+            finder.popup();
 
+        })
+        </script>
 
 </body>
 </html>

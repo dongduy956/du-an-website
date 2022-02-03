@@ -21,7 +21,7 @@
 </div>
 <!--breadcrumbs area end-->
 <div class="img-wish" style="display:flex;justify-content:center;padding:24px 0;">
-    <img src="~/assets/img/cart/no-cart.png" />
+    <img src="~/assets/images/cart/no-cart.png" />
 </div>
 @if (Session["wishSession"] == null || Model.Count() == 0)
 {
@@ -68,9 +68,17 @@ else
                                     </td>
                                     <td class="product_thumb">
                                     <a href="/chi-tiet/@(item.Product.alias).html">
-                                        <img style="width:80px;" src="~/assets/img/Nón bảo hiểm/@item.Product.image" alt=""></a></td>
+                                        <img style="width:80px;" src="/@item.Product.image" alt=""></a></td>
                                     <td class="product_name"><a href="/chi-tiet/@(item.Product.alias).html">@item.Product.name</a></td>
-                                    <td class="product-price">@HoTro.Instances.convertVND(item.Product.price.ToString())</td>
+                                    @if (item.Product.promationprice > 0)
+                                    {
+                                    <td class="product-price">@HoTro.Instances.convertVND(item.Product.promationprice.ToString())</td>
+                                    }
+                                    else
+                                    {
+                                        <td class="product-price">@HoTro.Instances.convertVND(item.Product.price.ToString())</td>
+
+                                    }
                                     <td class="product_quantity">@item.Quantity</td>
                                 </tr>
                             }
