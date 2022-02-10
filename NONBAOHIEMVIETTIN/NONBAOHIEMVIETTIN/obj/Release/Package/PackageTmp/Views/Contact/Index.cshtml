@@ -4,6 +4,16 @@
     ViewBag.Title = "Liên hệ";
     var acc = Session["account"] as accounts;
 }
+@section scripts{
+<script src="~/Areas/admin/assets/js/ckfinder/ckfinder.js"></script>
+
+<script src="~/Areas/admin/assets/js/ckeditor/ckeditor.js"></script>
+<script>
+    var editor = CKEDITOR.replace('message', {
+        customConfig: '/Areas/admin/assets/js/ckeditor/config.js'
+    })
+    </script>
+    }
 <!--breadcrumbs area start-->
 <div class="breadcrumbs_area">
     <div class="row">
@@ -20,60 +30,67 @@
     </div>
 </div>
 <!--breadcrumbs area end-->
-<!--contact area start-->
-<div class="contact_area">
-    <div class="row">
-        <div class="col-lg-6 col-md-12">
-            <div class="contact_message">
-                <h3>Gửi thông tin cho chúng tôi</h3>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <input name="name" id="name" placeholder="Tên *" value="@(acc!=null?acc.fullname:"")" type="text">
-                    </div>
-                    <div class="col-lg-6">
-                        <input name="email" id="email" placeholder="Email *" value="@(acc!=null?acc.email:"")" type="email">
-                    </div>
-                    <div class="col-lg-6">
-                        <input name="subject" id="subject" placeholder="Tiêu đề *"  type="text">
-                    </div>
-                    <div class="col-lg-6">
-                        <input name="phone" id="phone" placeholder="Số điện thoại *" value="@(acc!=null?acc.phone:"")" type="text">
-                    </div>
-
-                    <div class="col-12">
-                        <div class="contact_textarea">
-                            <textarea id="message" placeholder="Thông tin *" name="message" class="form-control2"></textarea>
+@if (Model != null)
+{
+    <!--contact area start-->
+    <div class="contact_area">
+        <div class="row">
+            <div class="col-lg-6 col-md-12">
+                <div class="contact_message">
+                    <h3>Gửi thông tin cho chúng tôi</h3>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <input name="name" id="name" placeholder="Tên *" value="@(acc!=null?acc.fullname:"")" type="text">
                         </div>
-                        <button id="btnsendcontact" type="submit"> Gửi đi </button>
-                    </div>                   
+                        <div class="col-lg-6">
+                            <input name="email" id="email" placeholder="Email *" value="@(acc!=null?acc.email:"")" type="email">
+                        </div>
+                        <div class="col-lg-6">
+                            <input name="subject" id="subject" placeholder="Tiêu đề *" type="text">
+                        </div>
+                        <div class="col-lg-6">
+                            <input name="phone" id="phone" placeholder="Số điện thoại *" value="@(acc!=null?acc.phone:"")" type="text">
+                        </div>
+
+                        <div class="col-12">
+                            <div class="contact_textarea">
+                                <textarea id="message" placeholder="Thông tin *" name="message" class="form-control2"></textarea>
+                            </div>
+                            <button id="btnsendcontact" type="submit"> Gửi đi </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-12">
+                <div class="contact_message contact_info">
+                    <h3>@Model.title</h3>
+                    <p>@Html.Raw(Model.content)</p>
+                    <ul>
+                        <li><i class="fa fa-fax"></i> Địa chỉ : @Model.address</li>
+
+                        <li><i class="fa fa-phone"></i> <a href="mailto:@Model.email" target="_blank">@Model.email</a></li>
+                        <li><i class="fa fa-envelope-o"></i><a href="tel:@Model.phone"> @Model.phone</a></li>
+                    </ul>
+                    <h3><strong>Ngày-giờ làm việc</strong></h3>
+                    <p><strong>@Model.workday</strong>:  @Model.worktime</p>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div class="col-lg-6 col-md-12">
-            <div class="contact_message contact_info">
-                <h3>@Model.title</h3>
-                <p>@Model.content</p>
-                <ul>
-                    <li><i class="fa fa-fax"></i> Địa chỉ : @Model.address</li>
-                    
-                    <li><i class="fa fa-phone"></i> <a href="mailto:@Model.email"   target="_blank">@Model.email</a></li>
-                    <li><i class="fa fa-envelope-o"></i><a href="tel:@Model.phone"> @Model.phone</a></li>
-                </ul>
-                <h3><strong>Ngày-giờ làm việc</strong></h3>
-                <p><strong>@Model.workday</strong>:  @Model.worktime</p>
+    <!--contact area end-->
+    <!--contact map start-->
+    <div class="contact_map">
+        <div class="row">
+            <div class="col-12">
+                @Html.Raw(Model.map)
             </div>
         </div>
     </div>
-</div>
-
-<!--contact area end-->
-<!--contact map start-->
-<div class="contact_map">
-    <div class="row">
-        <div class="col-12">
-            @Html.Raw(Model.map)
-        </div>
-    </div>
-</div>
-<!--contact map end-->
+    <!--contact map end-->
+}
+else
+{
+    <h1 class="text-center text-danger">Lỗi!! Vui lòng truy cập lại sau.</h1>
+}

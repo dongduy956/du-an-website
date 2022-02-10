@@ -108,7 +108,7 @@
                                             <p>
                                                 <label for="imageupdate">Ảnh đại diện</label>
                                                 <br />
-                                                <img id="imgupdate" data-val="@acc.image" alt="Lỗi ảnh đại diện" src="~/assets/img/user/@acc.image" />
+                                                <img id="imgupdate" data-val="@acc.image" alt="Lỗi ảnh đại diện" src="/@acc.image" />
                                                 <br />
                                                 <span class="custom-file">
                                                     <input type="file" name="file" class="custom-file-input" id="imageupdate">
@@ -149,7 +149,7 @@
                                     <tr>
                                         <td>@item.id</td>
                                         <td>@DateTime.Parse(item.createdate.ToString()).ToShortDateString()</td>
-                                        <td><span class="success">@(item.status == true ? "Đã duyệt" : "Chưa duyệt")</span></td>
+                                        <td><span class="success">@(item.status == true ? Html.Raw("<span class='text-success'>Đã duyệt</span>") : Html.Raw("<span class='text-danger'>Chưa duyệt</span>"))</span></td>
                                         <td>@HoTro.Instances.convertVND(item.total.ToString()) </td>
                                         <td>
                                             <a href="" data-target="#detail_@item.id" data-id="@item.id" id="view_@item.id" data-toggle="collapse" class="view">

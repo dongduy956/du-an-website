@@ -14,13 +14,14 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="~/assets/img/logo/logo.png">
+    <link rel="shortcut icon" type="image/x-icon" href="~/assets/images/logo/logo.png">
     <!-- all css here -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <link rel="stylesheet" href="~/assets/css/plugin.css">
     <link rel="stylesheet" href="~/assets/css/bundle.css">
+    <link href="~/assets/css/jquery-ui.css" rel="stylesheet" />
 
     <link href="~/assets/css/style.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/assets/css/responsive.css">
@@ -62,7 +63,7 @@
 
                                                     @if (acc.issocial == 0)
                                                     {
-                                                        <img style="border-radius:50%;width: 24px;margin-right: 2px;" src="~/assets/img/user/@acc.image" alt="">
+                                                        <img style="border-radius:50%;width: 24px;margin-right: 2px;" src="/@acc.image" alt="">
 
                                                     }
                                                     else
@@ -121,7 +122,7 @@
                             <!--logo start-->
                             <div class="col-lg-3 col-md-3">
                                 <div class="logo">
-                                    <a href="/"><img style="width:75px;" src="~/assets/img/logo/logo.png" alt=""></a>
+                                    <a href="/"><img style="width:75px;" src="~/assets/images/logo/logo.png" alt=""></a>
                                 </div>
                             </div>
                             <!--logo end-->
@@ -137,7 +138,8 @@
                                         <a href="">
                                             <i class="fa fa-shopping-cart"></i>
                                             <span>
-                                                @(cart != null ? (cart.Sum(x => x.Quantity) + "sản phẩm -" + HoTro.Instances.convertVND(cart.Sum(x => x.Quantity * x.Product.price).ToString())) : "0 sản phẩm - 0đ")
+                                                
+                                                @(cart != null ? (cart.Sum(x => x.Quantity) + "sản phẩm -" + HoTro.Instances.convertVND(cart.Sum(x => x.Quantity * (x.Product.promationprice>0?x.Product.promationprice:x.Product.price)).ToString())) : "0 sản phẩm - 0đ")
                                             </span>
                                             <i class="fa fa-angle-down"></i>
                                         </a>
@@ -145,7 +147,7 @@
                                         <!--mini cart-->
                                         <div id="lst-cart" class="mini_cart">
                                             <div class="img-cart" style="padding:24px;">
-                                                <img src="~/assets/img/cart/no-cart.png" />
+                                                <img src="~/assets/images/cart/no-cart.png" />
                                             </div>
                                             <div id="cart" style="max-height:300px; overflow-y:scroll">
                                                 @if (cart == null || cart.Count == 0)
@@ -172,11 +174,18 @@
                                                     {
                                                         <div class="cart_item cart-@item.Product.id">
                                                             <div class="cart_img">
-                                                                <a href="/chi-tiet/@(item.Product.alias).html"><img src="~/assets/img/Nón bảo hiểm/@item.Product.image" alt=""></a>
+                                                                <a href="/chi-tiet/@(item.Product.alias).html"><img src="/@item.Product.image" alt=""></a>
                                                             </div>
                                                             <div class="cart_info">
                                                                 <a href="/chi-tiet/@(item.Product.alias).html">@item.Product.name</a>
+                                                                @if (item.Product.promationprice > 0)
+                                                                {
                                                                 <span class="cart_price">@HoTro.Instances.convertVND(item.Product.price.ToString())</span>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <span class="cart_price">@HoTro.Instances.convertVND(item.Product.price.ToString())</span>
+                                                                }
                                                                 <span class="quantity">Số lượng: @item.Quantity</span>
                                                             </div>
                                                             <div class="cart_remove">
@@ -190,7 +199,7 @@
                                             <div id="shipping-group">
                                                 <div class="total_price">
                                                     <span> Tổng tiền: </span>
-                                                    <span class="prices">@(cart != null ? HoTro.Instances.convertVND(cart.Sum(x => x.Quantity * x.Product.price).ToString()) : "0")</span>
+                                                    <span class="prices">@(cart != null ? HoTro.Instances.convertVND(cart.Sum(x => x.Quantity * (x.Product.promationprice>0?x.Product.promationprice:x.Product.price)).ToString()) : "0")</span>
                                                 </div>
                                                 <div class="cart_button">
                                                     <a id="btncheckout" href="/gio-hang.html"> Giỏ hàng</a>
@@ -227,14 +236,21 @@
                     <div class="row">
                         <div class="col-lg-3 col-md-6 col-sm-6">
                             <div class="footer_widget">
-                                <h3>@aboutus.title</h3>
-                                <p>@aboutus.content</p>
-                                <div class="footer_widget_contect">
-                                    <p><i class="fa fa-map-marker" aria-hidden="true"></i>@aboutus.address </p>
+                         @if (aboutus != null)
+                         {
+                            <h3>@aboutus.title</h3>
+                                    <p>@Html.Raw(aboutus.content)</p>
+                                    <div class="footer_widget_contect">
+                                        <p><i class="fa fa-map-marker" aria-hidden="true"></i>@aboutus.address </p>
 
-                                    <p><a href="tel:@aboutus.phone"><i class="fa fa-mobile" aria-hidden="true"></i> @aboutus.phone</a></p>
-                                    <a href="mailto:@aboutus.email"><i class="fa fa-envelope-o" aria-hidden="true"></i>@aboutus.email  </a>
-                                </div>
+                                        <p><a href="tel:@aboutus.phone"><i class="fa fa-mobile" aria-hidden="true"></i> @aboutus.phone</a></p>
+                                        <a href="mailto:@aboutus.email"><i class="fa fa-envelope-o" aria-hidden="true"></i>@aboutus.email  </a>
+                                    </div>
+                         }
+                         else
+                         {
+                             <h4 class="text-center text-warning">Lỗi thông tin liên hệ. Vui lòng liên hệ admin để biết.</h4>
+                         }
                             </div>
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6">
@@ -345,6 +361,9 @@
         <script src="~/assets/js/ajax-mail.js"></script>
         <script src="~/assets/js/plugins.js"></script>
         <script src="~/Scripts/alertify.min.js"></script>
+        <script src="~/assets/js/jquery-ui.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+
         <script src="@Url.Content("~/Scripts/jquery.signalR-2.4.2.min.js")"></script>
         <script src="@Url.Content("~/signalr/hubs")"></script>
         <script src="~/assets/js/main.js"></script>

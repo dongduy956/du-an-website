@@ -9,9 +9,10 @@
 
 namespace NONBAOHIEMVIETTIN.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class products
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -39,14 +40,25 @@ namespace NONBAOHIEMVIETTIN.Models
         public Nullable<int> idproduction { get; set; }
         public Nullable<int> idgroupproduct { get; set; }
         public Nullable<bool> isdelete { get; set; }
-    
+        public string moreimage { get; set; }
+        [JsonIgnore]
+
         public virtual category category { get; set; }
+        [JsonIgnore]
         public virtual groupproduct groupproduct { get; set; }
+        [JsonIgnore]
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<orderdetail> orderdetail { get; set; }
+        [JsonIgnore]
+
         public virtual production production { get; set; }
+        [JsonIgnore]
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<rate> rate { get; set; }
+        [JsonIgnore]
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<receiptdetail> receiptdetail { get; set; }
     }

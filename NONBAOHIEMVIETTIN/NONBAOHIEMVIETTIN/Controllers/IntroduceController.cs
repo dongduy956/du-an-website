@@ -10,6 +10,8 @@ namespace NONBAOHIEMVIETTIN.Controllers
     {
         nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
         // GET: Introduce
+        [HandleError]
+
         public ActionResult Index()
         {
             return View(db.introduce.FirstOrDefault(x=>x.status==true));

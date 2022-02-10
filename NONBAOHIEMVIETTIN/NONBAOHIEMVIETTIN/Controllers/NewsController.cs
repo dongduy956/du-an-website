@@ -23,6 +23,8 @@ namespace NONBAOHIEMVIETTIN.Controllers
             }
         }
         // GET: Products
+        [HandleError]
+
         public ActionResult Index(string alias, int page = 1)
         {
             var temp = db.news.Where(x => x.newstype.alias.Equals(alias)).OrderByDescending(x => x.id).ToList();
@@ -31,6 +33,8 @@ namespace NONBAOHIEMVIETTIN.Controllers
             ViewBagNoti(temp, page);
             return View(news);
         }
+        [HandleError]
+
         public ActionResult Newsdetail(string alias)
         {
             news _news = new news();

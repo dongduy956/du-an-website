@@ -1,0 +1,88 @@
+﻿@using NONBAOHIEMVIETTIN.Models
+@{
+    ViewBag.Title = "Thêm mới phiếu nhập";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+    var db = new nonbaohiemviettinEntities();
+}
+
+@section scripts{    
+    @if (TempData["status"] != null)
+    {
+        <script>
+        $(function () {
+            alertify.error(`@TempData["status"]`);
+        })
+        </script>
+    }
+}
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Thêm mới phiếu nhập</h6>
+    </div>
+    <div class="card-body">
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-md-12">Tên nón</label>
+                    <div class="col-md-12">
+                        <select id="product-name" class="form-control">
+                            @foreach(var item in db.products)
+                            {
+                                <option value="@item.id">@item.name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-12">Đơn giá</label>
+                    <div class="col-md-12">
+                        <input id="price" type="number" min="1000" value="1000" placeholder="Nhập vào đơn giá" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-12">Số lượng</label>
+                    <div class="col-md-12">
+                       <input id="quantity" value="1" type="number" class="form-control" min="1" max="100"/>
+                    </div>
+                </div>
+                <div class="form-group">                   
+                    <button id="btnadd-receipt_detail" type="submit" style="margin:0 0.75rem" class="btn btn-success btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span class="text">Thêm</span>
+                    </button>
+                </div>
+                <div class="table-responsive" style="padding:0 0.75rem">
+                    <table class="table table-bordered" id="table-detail" width="100%" cellspacing="0">
+                        <thead>
+                            <tr>
+                                <th>Tên sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Thành tiền</th>
+                                <th>Xoá</th>
+                            </tr>
+                        </thead>
+                        <tbody>                          
+                        </tbody>
+                    </table>
+                </div>
+                <div class="form-group">
+                    <a href="/admin/nhap-kho.html" class="btn btn-light btn-icon-split" style="margin:0 0.75rem">
+                        <span class="icon text-gray-600">
+                            <i class="fas fa-arrow-left"></i>
+                        </span>
+                        <span class="text">Trở về</span>
+                    </a>
+                    <button id="btn-confirm" type="submit" style="margin:0 0.75rem" class="btn btn-success btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="fas fa-plus"></i>
+                        </span>
+                        <span class="text">Xác nhận</span>
+                    </button>
+                </div>
+            </div>
+    </div>
+</div>
+
+

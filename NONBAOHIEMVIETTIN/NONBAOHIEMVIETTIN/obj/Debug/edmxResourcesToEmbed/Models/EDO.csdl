@@ -168,6 +168,7 @@
     <NavigationProperty Name="production" Relationship="Self.fk_products_production" FromRole="products" ToRole="production" />
     <NavigationProperty Name="rate" Relationship="Self.fk_rate_products" FromRole="products" ToRole="rate" />
     <NavigationProperty Name="receiptdetail" Relationship="nonbaohiemviettinModel.fk_receiptdetail_products" FromRole="products" ToRole="receiptdetail" />
+    <Property Name="moreimage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="rate">
     <Key>

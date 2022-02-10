@@ -170,6 +170,7 @@
     <Property Name="idproduction" Type="int" />
     <Property Name="idgroupproduct" Type="int" />
     <Property Name="isdelete" Type="bit" />
+    <Property Name="moreimage" Type="xml" />
   </EntityType>
   <EntityType Name="rate">
     <Key>

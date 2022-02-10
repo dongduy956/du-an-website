@@ -18,6 +18,18 @@ namespace NONBAOHIEMVIETTIN
                defaults: new { controller = "Accounts", action = "Login", id = UrlParameter.Optional },
                namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
            );
+            routes.MapRoute(
+             name: "NotFound",
+             url: "loi-404.html",
+             defaults: new { controller = "Error", action = "NotFound", id = UrlParameter.Optional },
+             namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+         );
+            routes.MapRoute(
+              name: "ConfirmOrder",
+              url: "xac-nhan-don-hang.html",
+              defaults: new { controller = "Cart", action = "ConfirmOrder", id = UrlParameter.Optional },
+              namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+          );
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
             routes.MapRoute(
                name: "AccountInfo",

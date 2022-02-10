@@ -9,9 +9,10 @@
 
 namespace NONBAOHIEMVIETTIN.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class order
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -31,8 +32,10 @@ namespace NONBAOHIEMVIETTIN.Models
         public Nullable<bool> statuspay { get; set; }
         public Nullable<decimal> total { get; set; }
         public string note { get; set; }
-    
+        [JsonIgnore]
+
         public virtual accounts accounts { get; set; }
+        [JsonIgnore]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<orderdetail> orderdetail { get; set; }
     }

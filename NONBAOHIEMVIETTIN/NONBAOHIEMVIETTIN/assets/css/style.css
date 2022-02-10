@@ -1677,6 +1677,7 @@
 	position: relative;
     -webkit-transition: .3s;
     transition: .3s;
+    text-align:center;
 }
 
 .view_img {
@@ -2032,7 +2033,8 @@
 .product_tab.sidebar .product_tab_button ul li {
 	margin-bottom: 0;
 	width: 28%;
-	margin-right: 20px;
+	margin-right: 12px;
+	margin-bottom: 12px;
 }
 .product_tab.sidebar .product_tab_button ul li:last-child{
     margin-right: 0;
@@ -3711,8 +3713,9 @@
 	width: 100px;
 	float: left;
 	border: 1px solid #ddd;
-	margin-right: 13px;
-	padding: 8px;
+	margin-right: 4px;
+	margin-bottom: 4px;
+	padding: 4px;
 }
 .modal_tab_button ul li:last-child{
     margin-right: 0;

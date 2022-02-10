@@ -142,6 +142,7 @@
     <EntitySetMapping Name="products">
       <EntityTypeMapping TypeName="nonbaohiemviettinModel.products">
         <MappingFragment StoreEntitySet="products">
+          <ScalarProperty Name="moreimage" ColumnName="moreimage" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="alias" ColumnName="alias" />

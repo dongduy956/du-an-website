@@ -1,6 +1,7 @@
 ﻿@using NONBAOHIEMVIETTIN.Models
 @model PagedList.IPagedList<products>
-@using PagedList.Mvc;
+@using PagedList.Mvc
+@using System.Xml.Linq
 @{
     ViewBag.Title = ViewBag.alias;
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -262,28 +263,34 @@
                                                 <a href="#"><img src="/@item.image" alt=""></a>
                                             </div>
                                         </div>
-                                        <div class="tab-pane fade" id="tab-@(i++)" role="tabpanel">
-                                            <div class="modal_tab_img">
-                                                <a href="#"><img src="~/assets/img/product/product14.jpg" alt=""></a>
-                                            </div>
-                                        </div>
-                                        <div class="tab-pane fade" id="tab-@(i++)" role="tabpanel">
-                                            <div class="modal_tab_img">
-                                                <a href="#"><img src="~/assets/img/product/product15.jpg" alt=""></a>
-                                            </div>
-                                        </div>
+                                        @if (item.moreimage != null)
+                                        {
+                                            foreach (XElement ele in XElement.Parse(item.moreimage).Elements())
+                                            {
+
+                                                <div class="tab-pane fade" id="tab-@(i++)" role="tabpanel">
+                                                    <div class="modal_tab_img">
+                                                        <a href="#"><img src="/@ele.Value" alt=""></a>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
                                     </div>
                                     <div class="modal_tab_button">
                                         <ul class="nav product_navactive" role="tablist">
                                             <li>
                                                 <a class="nav-link active" data-toggle="tab" href="#tab-@(j++)" role="tab" aria-controls="tab1" aria-selected="false"><img src="/@item.image" alt=""></a>
-                                            </li>
-                                            <li>
-                                                <a class="nav-link" data-toggle="tab" href="#tab-@(j++)" role="tab" aria-controls="tab2" aria-selected="false"><img src="~/assets/img/cart/cart18.jpg" alt=""></a>
-                                            </li>
-                                            <li>
-                                                <a class="nav-link button_three" data-toggle="tab" href="#tab-@(j++)" role="tab" aria-controls="tab3" aria-selected="false"><img src="~/assets/img/cart/cart19.jpg" alt=""></a>
-                                            </li>
+                                            </li>                                           
+                                            @if (item.moreimage != null)
+                                            {
+                                                foreach (XElement ele in XElement.Parse(item.moreimage).Elements())
+                                                {
+
+                                                    <li>
+                                                        <a class="nav-link" data-toggle="tab" href="#tab-@(j++)" role="tab" aria-controls="tab2" aria-selected="false"><img src="/@ele.Value" alt=""></a>
+                                                    </li>
+                                                }
+                                            }
                                         </ul>
                                     </div>
                                 </div>
@@ -305,7 +312,7 @@
 
                                         }
                                     </div>
-                                    <div class="modal_size mb-15">
+                                    @*<div class="modal_size mb-15">
                                         <h2>size</h2>
                                         <ul>
                                             <li><a href="#">s</a></li>
@@ -314,7 +321,7 @@
                                             <li><a href="#">xl</a></li>
                                             <li><a href="#">xxl</a></li>
                                         </ul>
-                                    </div>
+                                    </div>*@
                                     <div class="modal_add_to_cart mb-15">
                                         <div class="form">
                                             <input min="1" max="100" step="1" id="txtquantity-@item.id" value="1" type="number">

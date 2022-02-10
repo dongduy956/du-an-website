@@ -15,6 +15,17 @@
     <Property Name="address" Type="nvarchar" MaxLength="100" />
     <Property Name="status" Type="bit" />
     <Property Name="issocial" Type="int" />
+    <Property Name="alias" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="brand">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="100" />
+    <Property Name="alias" Type="varchar" MaxLength="100" />
+    <Property Name="image" Type="varchar" MaxLength="500" />
+    <Property Name="link" Type="nvarchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="category">
     <Key>
@@ -24,6 +35,7 @@
     <Property Name="name" Type="nvarchar" MaxLength="100" />
     <Property Name="alias" Type="varchar" MaxLength="100" />
     <Property Name="status" Type="bit" />
+    <Property Name="isdelete" Type="bit" />
   </EntityType>
   <EntityType Name="contact">
     <Key>
@@ -39,6 +51,7 @@
     <Property Name="map" Type="varchar" MaxLength="500" />
     <Property Name="display" Type="bit" />
     <Property Name="workday" Type="nvarchar" MaxLength="100" />
+    <Property Name="alias" Type="varchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="countonline">
     <Key>
@@ -46,6 +59,17 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="total" Type="bigint" />
+  </EntityType>
+  <EntityType Name="feedback">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="100" />
+    <Property Name="email" Type="varchar" MaxLength="100" />
+    <Property Name="phone" Type="varchar" MaxLength="11" />
+    <Property Name="subject" Type="nvarchar" MaxLength="100" />
+    <Property Name="message" Type="nvarchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="groupproduct">
     <Key>
@@ -55,6 +79,7 @@
     <Property Name="name" Type="nvarchar" MaxLength="100" />
     <Property Name="alias" Type="varchar" MaxLength="100" />
     <Property Name="status" Type="bit" />
+    <Property Name="isdelete" Type="bit" />
   </EntityType>
   <EntityType Name="introduce">
     <Key>
@@ -65,14 +90,7 @@
     <Property Name="content" Type="ntext" />
     <Property Name="image" Type="varchar" MaxLength="100" />
     <Property Name="status" Type="bit" />
-  </EntityType>
-  <EntityType Name="listimage">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="id_product" Type="int" />
-    <Property Name="image" Type="varchar" MaxLength="500" />
+    <Property Name="alias" Type="varchar" MaxLength="500" />
   </EntityType>
   <EntityType Name="news">
     <Key>
@@ -129,6 +147,7 @@
     <Property Name="name" Type="nvarchar" MaxLength="100" />
     <Property Name="alias" Type="varchar" MaxLength="100" />
     <Property Name="status" Type="bit" />
+    <Property Name="isdelete" Type="bit" />
   </EntityType>
   <EntityType Name="products">
     <Key>
@@ -144,12 +163,14 @@
     <Property Name="description" Type="ntext" />
     <Property Name="viewcount" Type="int" />
     <Property Name="createddate" Type="datetime" />
-    <Property Name="image" Type="nvarchar" MaxLength="500" />
+    <Property Name="image" Type="ntext" />
     <Property Name="fastsell" Type="bit" />
     <Property Name="newproduct" Type="bit" />
     <Property Name="idcategory" Type="int" />
     <Property Name="idproduction" Type="int" />
     <Property Name="idgroupproduct" Type="int" />
+    <Property Name="isdelete" Type="bit" />
+    <Property Name="moreimage" Type="xml" />
   </EntityType>
   <EntityType Name="rate">
     <Key>
@@ -162,23 +183,33 @@
     <Property Name="comment" Type="nvarchar" MaxLength="500" />
     <Property Name="createdate" Type="date" />
   </EntityType>
+  <EntityType Name="receipt">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="idaccount" Type="int" />
+    <Property Name="createdate" Type="date" />
+    <Property Name="total" Type="decimal" Precision="18" Scale="0" />
+  </EntityType>
+  <EntityType Name="receiptdetail">
+    <Key>
+      <PropertyRef Name="idproduct" />
+      <PropertyRef Name="idreceipt" />
+    </Key>
+    <Property Name="idproduct" Type="int" Nullable="false" />
+    <Property Name="idreceipt" Type="int" Nullable="false" />
+    <Property Name="price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="quantity" Type="int" Nullable="false" />
+    <Property Name="subtotal" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
   <EntityType Name="role">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="name" Type="varchar" MaxLength="20" />
-  </EntityType>
-  <EntityType Name="sendcontactinfo">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="name" Type="nvarchar" MaxLength="100" />
-    <Property Name="email" Type="varchar" MaxLength="100" />
-    <Property Name="phone" Type="varchar" MaxLength="11" />
-    <Property Name="subject" Type="nvarchar" MaxLength="100" />
-    <Property Name="message" Type="nvarchar" MaxLength="500" />
+    <Property Name="alias" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="subscribe">
     <Key>
@@ -188,7 +219,9 @@
     <Property Name="email" Type="varchar" MaxLength="50" />
   </EntityType>
   <Association Name="fk_accounts_role">
-    <End Role="role" Type="Self.role" Multiplicity="0..1" />
+    <End Role="role" Type="Self.role" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="accounts" Type="Self.accounts" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="role">
@@ -199,20 +232,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="fk_listimage_products">
-    <End Role="products" Type="Self.products" Multiplicity="0..1" />
-    <End Role="listimage" Type="Self.listimage" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="products">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="listimage">
-        <PropertyRef Name="id_product" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="fk_news_newstype">
-    <End Role="newstype" Type="Self.newstype" Multiplicity="0..1" />
+    <End Role="newstype" Type="Self.newstype" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="news" Type="Self.news" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="newstype">
@@ -224,7 +247,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="fk_order_account">
-    <End Role="accounts" Type="Self.accounts" Multiplicity="0..1" />
+    <End Role="accounts" Type="Self.accounts" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="order" Type="Self.order" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="accounts">
@@ -236,7 +261,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="fk_orderdetail_order">
-    <End Role="order" Type="Self.order" Multiplicity="1" />
+    <End Role="order" Type="Self.order" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="orderdetail" Type="Self.orderdetail" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="order">
@@ -296,7 +323,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="fk_rate_accounts">
-    <End Role="accounts" Type="Self.accounts" Multiplicity="0..1" />
+    <End Role="accounts" Type="Self.accounts" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="rate" Type="Self.rate" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="accounts">
@@ -319,14 +348,57 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="fk_receipt_accounts">
+    <End Role="accounts" Type="Self.accounts" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="receipt" Type="Self.receipt" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="accounts">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="receipt">
+        <PropertyRef Name="idaccount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_receiptdetail_products">
+    <End Role="products" Type="Self.products" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="receiptdetail" Type="Self.receiptdetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="products">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="receiptdetail">
+        <PropertyRef Name="idproduct" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_receiptdetail_receipt">
+    <End Role="receipt" Type="Self.receipt" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="receiptdetail" Type="Self.receiptdetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="receipt">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="receiptdetail">
+        <PropertyRef Name="idreceipt" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="nonbaohiemviettinModelStoreContainer">
     <EntitySet Name="accounts" EntityType="Self.accounts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="brand" EntityType="Self.brand" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="contact" EntityType="Self.contact" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="countonline" EntityType="Self.countonline" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="feedback" EntityType="Self.feedback" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="groupproduct" EntityType="Self.groupproduct" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="introduce" EntityType="Self.introduce" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="listimage" EntityType="Self.listimage" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="news" EntityType="Self.news" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="newstype" EntityType="Self.newstype" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="order" EntityType="Self.order" Schema="dbo" store:Type="Tables" />
@@ -334,16 +406,13 @@
     <EntitySet Name="production" EntityType="Self.production" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="rate" EntityType="Self.rate" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="receipt" EntityType="Self.receipt" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="receiptdetail" EntityType="Self.receiptdetail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="role" EntityType="Self.role" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="sendcontactinfo" EntityType="Self.sendcontactinfo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="subscribe" EntityType="Self.subscribe" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="fk_accounts_role" Association="Self.fk_accounts_role">
       <End Role="role" EntitySet="role" />
       <End Role="accounts" EntitySet="accounts" />
-    </AssociationSet>
-    <AssociationSet Name="fk_listimage_products" Association="Self.fk_listimage_products">
-      <End Role="products" EntitySet="products" />
-      <End Role="listimage" EntitySet="listimage" />
     </AssociationSet>
     <AssociationSet Name="fk_news_newstype" Association="Self.fk_news_newstype">
       <End Role="newstype" EntitySet="newstype" />
@@ -380,6 +449,18 @@
     <AssociationSet Name="fk_rate_products" Association="Self.fk_rate_products">
       <End Role="products" EntitySet="products" />
       <End Role="rate" EntitySet="rate" />
+    </AssociationSet>
+    <AssociationSet Name="fk_receipt_accounts" Association="Self.fk_receipt_accounts">
+      <End Role="accounts" EntitySet="accounts" />
+      <End Role="receipt" EntitySet="receipt" />
+    </AssociationSet>
+    <AssociationSet Name="fk_receiptdetail_products" Association="Self.fk_receiptdetail_products">
+      <End Role="products" EntitySet="products" />
+      <End Role="receiptdetail" EntitySet="receiptdetail" />
+    </AssociationSet>
+    <AssociationSet Name="fk_receiptdetail_receipt" Association="Self.fk_receiptdetail_receipt">
+      <End Role="receipt" EntitySet="receipt" />
+      <End Role="receiptdetail" EntitySet="receiptdetail" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

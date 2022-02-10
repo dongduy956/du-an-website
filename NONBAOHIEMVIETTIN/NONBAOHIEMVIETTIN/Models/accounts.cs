@@ -9,9 +9,10 @@
 
 namespace NONBAOHIEMVIETTIN.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class accounts
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -34,12 +35,18 @@ namespace NONBAOHIEMVIETTIN.Models
         public Nullable<bool> status { get; set; }
         public Nullable<int> issocial { get; set; }
         public string alias { get; set; }
-    
+        [JsonIgnore]
         public virtual role role { get; set; }
+        [JsonIgnore]
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order> order { get; set; }
+        [JsonIgnore]
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<rate> rate { get; set; }
+        [JsonIgnore]
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<receipt> receipt { get; set; }
     }

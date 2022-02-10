@@ -9,9 +9,10 @@
 
 namespace NONBAOHIEMVIETTIN.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class rate
     {
         public int id { get; set; }
@@ -20,8 +21,11 @@ namespace NONBAOHIEMVIETTIN.Models
         public Nullable<int> star { get; set; }
         public string comment { get; set; }
         public Nullable<System.DateTime> createdate { get; set; }
-    
+        [JsonIgnore]
+
         public virtual accounts accounts { get; set; }
+        [JsonIgnore]
+
         public virtual products products { get; set; }
     }
 }

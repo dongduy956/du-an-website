@@ -175,6 +175,7 @@
           <Property Name="idproduction" Type="int" />
           <Property Name="idgroupproduct" Type="int" />
           <Property Name="isdelete" Type="bit" />
+          <Property Name="moreimage" Type="xml" />
         </EntityType>
         <EntityType Name="rate">
           <Key>
@@ -639,6 +640,7 @@
           <NavigationProperty Name="production" Relationship="Self.fk_products_production" FromRole="products" ToRole="production" />
           <NavigationProperty Name="rate" Relationship="Self.fk_rate_products" FromRole="products" ToRole="rate" />
           <NavigationProperty Name="receiptdetail" Relationship="nonbaohiemviettinModel.fk_receiptdetail_products" FromRole="products" ToRole="receiptdetail" />
+          <Property Name="moreimage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="rate">
           <Key>
@@ -1106,6 +1108,7 @@
           <EntitySetMapping Name="products">
             <EntityTypeMapping TypeName="nonbaohiemviettinModel.products">
               <MappingFragment StoreEntitySet="products">
+                <ScalarProperty Name="moreimage" ColumnName="moreimage" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="alias" ColumnName="alias" />

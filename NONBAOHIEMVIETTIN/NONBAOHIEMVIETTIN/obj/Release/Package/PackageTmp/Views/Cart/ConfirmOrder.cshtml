@@ -1,0 +1,35 @@
+﻿@{
+    ViewBag.Title = "Xác nhận đơn hàng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--breadcrumbs area start-->
+<div class="breadcrumbs_area">
+    <div class="row">
+        <div class="col-12">
+            <div class="breadcrumb_content">
+                <ul>
+                    <li><a href="/">Trang chủ</a></li>
+                    <li><i class="fa fa-angle-right"></i></li>
+                    <li>Xác nhận đơn hàng</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs area end-->
+<div class="error_section">
+    <div class="row">
+        <div class="col-12">
+            <div class="error_form">
+                <h1>Thông báo</h1>
+                @if (ViewBag.idorder != null)
+                {
+                    <h2>Xác nhận đơn hàng @ViewBag.idorder</h2>
+                }
+                <h2>Lỗi!!!</h2>
+                <p>@ViewBag.result</p>
+                <a href="/">Trở về trang chủ</a>
+            </div>
+        </div>
+    </div>
+</div>

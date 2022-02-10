@@ -22,6 +22,8 @@ namespace NONBAOHIEMVIETTIN.Controllers
         private nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
 
         // GET: Cart
+        [HandleError]
+
         public ActionResult Index()
         {
             var cart = Session[cartSession];
@@ -277,22 +279,23 @@ namespace NONBAOHIEMVIETTIN.Controllers
 
         }
         [HttpPost]
-        public ActionResult Pay(order order, string PaymentMethod, string BankCode)
+
+        public JsonResult Pay(order order, string PaymentMethod, string BankCode)
         {
-            int idorder = 0;
             order.createdate = DateTime.Parse(DateTime.Now.ToShortDateString());
             order.status = false;
+            order.idaccount = (Session["account"] as accounts).id;
+            var cart = Session[cartSession] as List<CartItem>;
             if (PaymentMethod == "CASH")
                 order.statuspay = false;
             else
                 order.statuspay = true;
             if (PaymentMethod == "CASH")
             {
-                order.idaccount = (Session["account"] as accounts).id;
+                
                 db.order.Add(order);
                 db.SaveChanges();
-                idorder = db.order.OrderByDescending(x => x.id).FirstOrDefault().id;
-                var cart = Session[cartSession] as List<CartItem>;
+                int idorder = db.order.OrderByDescending(x => x.id).FirstOrDefault().id;
                 foreach (var item in cart)
                 {
                     orderdetail odetail = new orderdetail();
@@ -312,6 +315,8 @@ namespace NONBAOHIEMVIETTIN.Controllers
             }
             else
             {
+                Session["order"] = order;
+                var idorder = (db.order.OrderByDescending(x => x.id).FirstOrDefault().id + 1);
                 var currentLink = ConfigurationManager.AppSettings["CurrentLink"];
                 RequestInfo info = new RequestInfo();
                 info.Merchant_id = merchantId;
@@ -320,13 +325,12 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 info.cur_code = "vnd";
                 info.bank_code = BankCode;
                 info.Order_code = idorder.ToString();
-                info.Total_amount = db.orderdetail.Where(x => x.idorder == idorder).Sum(x => x.subtotal).ToString();
+                info.Total_amount = cart.Sum(x=>x.Quantity*(x.Product.promationprice>0? x.Product.promationprice:x.Product.price)).ToString();
                 info.fee_shipping = "0";
                 info.Discount_amount = "0";
                 info.order_description = "Thanh toán đơn hàng tại nonbaohiemviettin";
                 info.return_url = currentLink + "xac-nhan-don-hang.html";
-                info.cancel_url = currentLink + "huy-don-hang.html";
-
+                info.cancel_url = currentLink + "gio-hang.html";
                 info.Buyer_fullname = order.fullname;
                 info.Buyer_email = order.email;
                 info.Buyer_mobile = order.phone;
@@ -351,6 +355,8 @@ namespace NONBAOHIEMVIETTIN.Controllers
             }
 
         }
+        [HandleError]
+
         public ActionResult ConfirmOrder()
         {
             string token = Request["token"];
@@ -362,22 +368,30 @@ namespace NONBAOHIEMVIETTIN.Controllers
             ResponseCheckOrder result = objNLChecout.GetTransactionDetail(info);
             if (result.errorCode == "00")
             {
-                ////update status order
-                //_orderService.UpdateStatus(int.Parse(result.order_code));
-                //_orderService.Save();
-                //ViewBag.IsSuccess = true;
+                var order = Session["order"] as order;
+                var cart = Session[cartSession] as List<CartItem>;
+                Session["order"] = null;
+                db.order.Add(order);
+                int idorder = db.order.OrderByDescending(x => x.id).FirstOrDefault().id;
+                foreach (var item in cart)
+                {
+                    orderdetail odetail = new orderdetail();
+                    odetail.idorder = idorder;
+                    odetail.idproduct = item.Product.id;
+                    odetail.quantity = item.Quantity;
+                    odetail.price = (item.Product.promationprice > 0 ? item.Product.promationprice : item.Product.price);
+                    db.orderdetail.Add(odetail);
+                    db.SaveChanges();
+                }
+                Session[cartSession] = null;
+                ViewBag.idorder = idorder;
                 ViewBag.Result = "Thanh toán thành công. Chúng tôi sẽ liên hệ lại sớm nhất.";
             }
             else
             {
-                ViewBag.IsSuccess = true;
                 ViewBag.Result = "Có lỗi xảy ra. Vui lòng liên hệ admin.";
             }
             return View();
-        }
-        public ActionResult CancelOrder()
-        {
-            return View();
-        }
+        }      
     }
 }

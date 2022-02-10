@@ -27,20 +27,7 @@
             dataType: 'json',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ order, PaymentMethod, BankCode }),
-            success: function (response) {
-                //if (response.status) {
-                //    if (response.urlCheckout != undefined && response.urlCheckout != '') {
-                //        location.href = response.urlCheckout;
-                //    }
-                //    else {
-                //        console.log('create order ok');
-                //    }
-
-                //}
-                //else {
-                //    $('#divMessage').show();
-                //    $('#divMessage').text(response.message);
-                //}
+            success: function (response) {                
                 if (response.status) {
                     if (PaymentMethod == 'CASH')
                     {
@@ -49,13 +36,23 @@
                         $('.shopping_cart_area').hide();
                         $('.shopping_cart a span').text('0 sản phẩm- 0đ');
                         $('#cart').hide();
-                        showToast('Đặt hàng thành công.');
+                        swal({
+                            title: "Thông báo",
+                            text: "Đặt hàng thành công",
+                            icon: "success",
+                            button: "Ok",
+                        });
                     }
                     else
                     location.href = response.urlCheckout;
                 }
                 else
-                    showToast('Hệ thống bảo trì.Vui lòng đặt hàng bằng phương thức tiền mặt');
+                    swal({
+                        title: "Thông báo",
+                        text: "Lỗi hệ thống! Vui lòng thử lại sau.",
+                        icon: "error",
+                        button: "Ok",
+                    });
             },
             error: function (data) {
                 alert(JSON.stringify(data));

@@ -15,6 +15,12 @@ namespace NONBAOHIEMVIETTIN.Areas.admin
         public override void RegisterArea(AreaRegistrationContext context)
         {
             context.MapRoute(
+        "admin_Brand_edit",
+"admin/sua-doi-tac/{alias}.html",
+new { controller = "Brand_admin", action = "Edit", id = UrlParameter.Optional, Area = "Admin" },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
          "admin_Contact_edit",
 "admin/sua-lien-he/{alias}.html",
 new { controller = "Contact_admin", action = "Edit", id = UrlParameter.Optional, Area = "Admin" },
@@ -68,6 +74,12 @@ new { controller = "Accounts_admin", action = "Edit", id = UrlParameter.Optional
      new { controller = "Category_admin", action = "Edit", id = UrlParameter.Optional, Area = "Admin" },
       namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
  );
+            context.MapRoute(
+"admin_Brand_search",
+"admin/tim-kiem-doi-tac.html",
+new { controller = "Brand_admin", action = "Search", id = UrlParameter.Optional, Area = "Admin" },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
             context.MapRoute(
 "admin_Receipt_search",
 "admin/tim-kiem-phieu-nhap.html",
@@ -165,6 +177,12 @@ namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
          namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
     );
             context.MapRoute(
+"admin_Brand_create",
+"admin/them-moi-doi-tac.html",
+new { controller = "Brand_admin", action = "Create", id = UrlParameter.Optional, Area = "Admin" },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
 "admin_Receipt_create",
 "admin/them-moi-phieu-nhap.html",
 new { controller = "Receipt_admin", action = "Create", id = UrlParameter.Optional, Area = "Admin" },
@@ -230,6 +248,12 @@ namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
          new { controller = "products_admin", action = "Create", id = UrlParameter.Optional, Area = "Admin" },
           namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
      );
+            context.MapRoute(
+"admin_Brand_index",
+"admin/doi-tac.html",
+new { controller = "Brand_admin", action = "Index", id = UrlParameter.Optional, Area = "Admin" },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
             context.MapRoute(
 "admin_Receipt_index",
 "admin/nhap-kho.html",

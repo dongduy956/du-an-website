@@ -9,6 +9,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
     public class HomeController : Controller
     {
         nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
+        [HandleError]
         public ActionResult Index()
         {           
             return View(db.products.Where(x=> x.isdelete == false && x.status == true).ToList());

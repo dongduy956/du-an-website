@@ -8,6 +8,8 @@ using System.Web;
 using System.Web.Mvc;
 using NONBAOHIEMVIETTIN.Models;
 using PagedList;
+using System.Web.Script.Serialization;
+using System.Xml.Linq;
 
 namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
 {
@@ -129,6 +131,65 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             ViewBag.idgroupproduct = new SelectList(db.groupproduct, "id", "name", products.idgroupproduct);
             ViewBag.idproduction = new SelectList(db.production, "id", "name", products.idproduction);
             return View(products);
+        }
+
+        [HttpPost]
+        public ActionResult LoadImages(int id)
+        {
+            var products = db.products.Find(id);
+            var images = products.moreimage;
+            try
+            {
+                XElement xElement = XElement.Parse(images);
+                List<string> lstImages = new List<string>();
+                foreach (XElement ele in xElement.Elements())
+                {
+                    lstImages.Add(ele.Value);
+                }
+                return Json(new
+                {
+                    data = lstImages
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    data = ""
+                });
+            }
+
+        }
+        [HttpPost]
+        public ActionResult SaveImages(int id, string[] images)
+        {
+            XElement xElement = new XElement("Images");
+            try
+            {
+                foreach (var item in images)
+                {
+                    if (item[0] == '/')
+                    {
+                        var temp = item.Substring(1, item.Length - 1);
+                        xElement.Add(new XElement("Images", temp));
+                    }
+                    else
+                        xElement.Add(new XElement("Images", item));
+                }
+            }
+            catch (Exception ex)
+            {
+
+                
+            }
+            var products = db.products.Find(id);
+            products.moreimage = xElement.ToString();
+            db.Entry(products).State = EntityState.Modified;
+            db.SaveChanges();
+            return Json(new
+            {
+                status = 1
+            });
         }
 
         // GET: admin/products/Edit/5

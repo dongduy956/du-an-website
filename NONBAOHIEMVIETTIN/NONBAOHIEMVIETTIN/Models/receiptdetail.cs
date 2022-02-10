@@ -9,9 +9,10 @@
 
 namespace NONBAOHIEMVIETTIN.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class receiptdetail
     {
         public int idproduct { get; set; }
@@ -19,8 +20,11 @@ namespace NONBAOHIEMVIETTIN.Models
         public decimal price { get; set; }
         public int quantity { get; set; }
         public decimal subtotal { get; set; }
-    
+        [JsonIgnore]
+
         public virtual products products { get; set; }
+        [JsonIgnore]
+
         public virtual receipt receipt { get; set; }
     }
 }

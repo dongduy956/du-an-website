@@ -1,0 +1,163 @@
+﻿@using NONBAOHIEMVIETTIN.Models;
+@model PagedList.IPagedList<receipt>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Danh sách phiếu nhập";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+    var db = new nonbaohiemviettinEntities();
+}
+@section styles{
+    <style>
+        .img-product {
+            width: 100px;
+            height: 100px;
+        }
+
+        .modal-body {
+            overflow-y: scroll;
+            max-height: 70vh;
+        }
+
+            .modal-body p {
+                margin: 0;
+            }
+    </style>
+}
+@section scripts{
+    @if (TempData["status"] != null)
+    {
+        <script>
+            $(function () {
+                alertify.error(`@TempData["status"]`);
+            })
+        </script>
+    }
+}
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex align-items-center justify-content-between  flex-wrap">
+        <h6 class="m-0 font-weight-bold text-primary">Danh sách phiếu nhập</h6>
+        <form method="get" action="/admin/tim-kiem-phieu-nhap.html" class="d-sm-inline-block form-inline ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+                <input name="tukhoa" type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm..." aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+        <a href="/admin/them-moi-phieu-nhap.html" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <i class="fas fa-plus fa-sm text-white-50"></i> Thêm mới
+        </a>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Tên tài khoản</th>
+                        <th>Ngày nhập</th>
+                        <th>Tổng giá</th>
+                        <th>Công cụ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr id="_receipt_@item.id">
+                            <td>@item.id</td>
+                            <td>@item.accounts.username</td>
+                            <td>@DateTime.Parse(item.createdate.ToString()).ToShortDateString()</td>
+                            <td>@HoTro.Instances.convertVND(item.total.ToString())</td>
+                            <td>
+                                <div class="tool d-flex align-items-center flex-column justify-content-center">                                   
+                                    <a data-id="@item.id" title="Xoá phiếu nhập mã @item.id" class="mt-1 mb-1 delete_receipt d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                        <i class="far fa-trash-alt"></i>
+                                    </a>
+                                    <a data-toggle="modal" data-target="#receipt_@item.id-detail" title="Xem chi tiết phiếu nhập mã @item.id" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                        <i class="fas fa-info-circle"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>                       
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+@foreach (var item in Model)
+{
+    <div class="modal fade" id="receipt_@item.id-detail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Thông tin phiếu nhập có mã <strong>@item.id</strong></h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="card shadow mb-4">
+                        <div class="table-responsive">
+                            <table class="table table-bordered" cellspacing="0">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Tên sản phẩm</th>
+                                        <th>Giá</th>
+                                        <th>Số lượng</th>
+                                        <th>Thành tiền</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item_detail in db.receiptdetail.Where(x => x.idreceipt == item.id).ToList())
+                                    {
+                                        <tr>
+                                            <td>@item_detail.idreceipt</td>
+                                            <td>@item_detail.products.name</td>
+                                            <td>@HoTro.Instances.convertVND(item_detail.price.ToString())</td>
+                                            <td>@item_detail.quantity</td>
+                                            <td>@HoTro.Instances.convertVND(item_detail.subtotal.ToString())</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Đóng</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+@if (ViewBag.last != 1)
+{
+    <ul class="pagination mr-auto ml-auto" style="justify-content:center;">
+        @if (ViewBag.check == true)
+        {
+            @Html.PagedListPager(Model,
+        page => Url.Action("Index", new { page }),
+        new PagedListRenderOptions
+        {
+            MaximumPageNumbersToDisplay = 3
+        })
+        }
+        else
+        {
+            @Html.PagedListPager(Model, page => Url.Action("Search", new { tukhoa = Request.Url.Query.Substring(Request.Url.Query.IndexOf("?tukhoa="), Request.Url.Query.LastIndexOf('&') == -1 ? Request.Url.Query.Length : Request.Url.Query.LastIndexOf('&')).Replace("?tukhoa=", ""), page }),
+                                    new PagedListRenderOptions
+                                    {
+                                        MaximumPageNumbersToDisplay = 5
+                                    });
+        }
+
+    </ul>
+}

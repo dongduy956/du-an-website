@@ -24,6 +24,8 @@ namespace NONBAOHIEMVIETTIN.Controllers
             }
         }
         // GET: Products
+        [HandleError]
+
         public ActionResult Index(string alias, int page = 1)
         {
             var temp = db.products.Where(x =>( x.category.alias.Equals(alias) || x.production.alias.Equals(alias))&& x.isdelete == false&&x.status==true).OrderByDescending(x => x.id).ToList();
@@ -33,6 +35,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
             ViewBagNoti(temp,0, page);
             return View(products);
         }
+        [HandleError]
         public ActionResult GroupProducts(string alias, string alia,int page=1)
         {
             var temp = db.products.Where(x => x.category.alias.Equals(alias) && x.groupproduct.alias.Equals(alia) && x.isdelete == false && x.status == true).OrderByDescending(x => x.id).ToList();
@@ -41,6 +44,8 @@ namespace NONBAOHIEMVIETTIN.Controllers
             ViewBagNoti(temp,1, page);
             return View("Index", products);
         }
+        [HandleError]
+
         public ActionResult ProductDetail(string alias)
         {
             productdetail prd = new productdetail();
@@ -72,6 +77,8 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 status=true
             }, JsonRequestBehavior.AllowGet);
         }
+        [HandleError]
+
         public ActionResult Search(int page=1)
         {
             try

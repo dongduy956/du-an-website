@@ -1,4 +1,5 @@
 ﻿@using NONBAOHIEMVIETTIN.Models
+@using System.Xml.Linq
 @model productdetail
 @{
     ViewBag.Title = Model.product.name;
@@ -35,42 +36,45 @@
                         <div class="tab-content produc_tab_c">
                             <div class="tab-pane fade show active" id="p_tab1" role="tabpanel">
                                 <div class="modal_img text-center">
-                                    <a href="#"><img src="~/assets/img/Nón bảo hiểm/@Model.product.image" alt=""></a>
+                                    <a href="#"><img src="/@Model.product.image" alt=""></a>
                                     <div class="view_img">
-                                        <a class="large_view" href="~/assets/img/Nón bảo hiểm/@Model.product.image"><i class="fa fa-search-plus"></i></a>
+                                        <a class="large_view" href="/@Model.product.image"><i class="fa fa-search-plus"></i></a>
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="p_tab2" role="tabpanel">
-                                <div class="modal_img">
-                                    <a href="#"><img src="~/assets/img/product/productbig1.jpg" alt=""></a>
+                            @if (Model.product.moreimage != null)
+                            {
+                                foreach (XElement ele in XElement.Parse(Model.product.moreimage).Elements())
+                                {
 
-                                    <div class="view_img">
-                                        <a class="large_view" href="~/assets/img/product/productbig1.jpg"><i class="fa fa-search-plus"></i></a>
+                                    <div class="tab-pane fade" id="p_tab2" role="tabpanel">
+                                        <div class="modal_img">
+                                            <a href="#"><img src="/@ele.Value" alt=""></a>
+                                            <div class="view_img">
+                                                <a class="large_view" href="/@ele.Value"><i class="fa fa-search-plus"></i></a>
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="p_tab3" role="tabpanel">
-                                <div class="modal_img">
-                                    <a href="#"><img src="~/assets/img/product/productbig2.jpg" alt=""></a>
-
-                                    <div class="view_img">
-                                        <a class="large_view" href="~/assets/img/product/productbig2.jpg"> <i class="fa fa-search-plus"></i></a>
-                                    </div>
-                                </div>
-                            </div>
+                                }
+                            }
                         </div>
                         <div class="product_tab_button">
                             <ul class="nav" role="tablist">
                                 <li>
-                                    <a class="active" data-toggle="tab" href="#p_tab1" role="tab" aria-controls="p_tab1" aria-selected="false"><img src="~/assets/img/Nón bảo hiểm/@Model.product.image" alt=""></a>
+                                    <a class="active" data-toggle="tab" href="#p_tab1" role="tab" aria-controls="p_tab1" aria-selected="false"><img src="/@Model.product.image" alt=""></a>
                                 </li>
-                                <li>
-                                    <a data-toggle="tab" href="#p_tab2" role="tab" aria-controls="p_tab2" aria-selected="false"><img src="~/assets/img/cart/cart2.jpg" alt=""></a>
-                                </li>
-                                <li>
-                                    <a data-toggle="tab" href="#p_tab3" role="tab" aria-controls="p_tab3" aria-selected="false"><img src="~/assets/img/cart/cart4.jpg" alt=""></a>
-                                </li>
+                                @if (Model.product.moreimage != null)
+                                {
+                                    foreach (XElement ele in XElement.Parse(Model.product.moreimage).Elements())
+                                    {
+
+                                        <li>
+                                            <a data-toggle="tab" href="#p_tab2" role="tab" aria-controls="p_tab2" aria-selected="false"><img src="/@ele.Value" alt=""></a>
+                                        </li>
+                                    }
+                                }
+
+
                             </ul>
                         </div>
                     </div>
@@ -81,26 +85,33 @@
                         <div class="product_ratting mb-10">
                             <ul id="countrate">
 
-                                   @for (var z = 0; z < 5; z++)
+                                @for (var z = 0; z < 5; z++)
+                                {
+                                    if (avgStar != 0 && z < Math.Round((decimal)avgStar, 0))
                                     {
-                                        if (avgStar != 0&&z < Math.Round((decimal)avgStar, 0))
-                                        {
-                                            <li><a class="ratting"><i class="fa fa-star"></i></a></li>
-                                        }
-                                        else
-                                        {
-                                            <li><a><i class="fa fa-star"></i></a></li>
-
-                                        }
+                                        <li><a class="ratting"><i class="fa fa-star"></i></a></li>
                                     }
+                                    else
+                                    {
+                                        <li><a><i class="fa fa-star"></i></a></li>
+
+                                    }
+                                }
                             </ul>
                         </div>
                         <div class="product_desc">
-                            <p>@Model.product.description</p>
+                            @Html.Raw(Model.product.description)
                         </div>
                         <div class="content_price mb-15">
-                            <span>@HoTro.Instances.convertVND(Model.product.promationprice.ToString())</span>
-                            <span class="old-price">@HoTro.Instances.convertVND(Model.product.price.ToString())</span>
+                            @if (Model.product.promationprice > 0)
+                            {
+                                <span class="new-price">@HoTro.Instances.convertVND(Model.product.promationprice.ToString())</span>
+                                <span class="old-price">@HoTro.Instances.convertVND(Model.product.price.ToString())</span>
+                            }
+                            else
+                            {
+                                <span class="new-price">@HoTro.Instances.convertVND(Model.product.price.ToString())</span>
+                            }
                         </div>
                         <div class="box_quantity mb-20">
                             <div style="display: flex;align-items: baseline;">
@@ -145,7 +156,7 @@
                         <div class="tab-content">
                             <div class="tab-pane fade show active" id="info" role="tabpanel">
                                 <div class="product_info_content">
-                                    <p>@Model.product.description</p>
+                                    @Html.Raw(Model.product.description)
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="sheet" role="tabpanel">
@@ -156,7 +167,7 @@
                                             <div>
                                                 @if (item.accounts.issocial == 0)
                                                 {
-                                                    <img style="border-radius:50%;width: 24px;margin-right: 2px;" src="~/assets/img/user/@item.accounts.image" alt="">
+                                                    <img style="border-radius:50%;width: 24px;margin-right: 2px;" src="/@item.accounts.image" alt="">
 
                                                 }
                                                 else
@@ -231,13 +242,21 @@
                                 <div class="col-lg-3">
                                     <div class="single_product">
                                         <div class="product_thumb">
-                                            <a href="/chi-tiet/@(item.alias).html"><img src="~/assets/img/Nón bảo hiểm/@item.image" alt=""></a>
+                                            <a href="/chi-tiet/@(item.alias).html"><img src="/@item.image" alt=""></a>
                                             <div class="product_action">
                                                 <a href="" data-id="@item.id" data-value="1" title="Thêm vào giỏ hàng" class="addcart"> <i class="fa fa-shopping-cart"></i> Thêm vào vào giỏ hàng</a>
                                             </div>
                                         </div>
                                         <div class="product_content">
-                                            <span class="product_price">@item.price</span>
+                                            @if (@item.promationprice > 0)
+                                            {
+                                                <span class="product_price">@item.promationprice</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="product_price">@item.price</span>
+
+                                            }
                                             <h3 class="product_title"><a href="/chi-tiet/@(item.alias).html">@item.name</a></h3>
                                         </div>
                                         <div class="product_info">
@@ -268,13 +287,21 @@
                                 <div class="col-lg-3">
                                     <div class="single_product">
                                         <div class="product_thumb">
-                                            <a href="/chi-tiet/@(item.alias).html"><img src="~/assets/img/Nón bảo hiểm/@item.image" alt=""></a>
+                                            <a href="/chi-tiet/@(item.alias).html"><img src="/@item.image" alt=""></a>
                                             <div class="product_action">
                                                 <a href="" data-id="@item.id" data-value="1" title="Thêm vào giỏ hàng" class="addcart"> <i class="fa fa-shopping-cart"></i> Thêm vào vào giỏ hàng</a>
                                             </div>
                                         </div>
                                         <div class="product_content">
-                                            <span class="product_price">@item.price</span>
+                                            @if (@item.promationprice > 0)
+                                            {
+                                                <span class="product_price">@item.promationprice</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="product_price">@item.price</span>
+
+                                            }
                                             <h3 class="product_title"><a href="/chi-tiet/@(item.alias).html">@item.name</a></h3>
                                         </div>
                                         <div class="product_info">
@@ -305,13 +332,21 @@
                                 <div class="col-lg-3">
                                     <div class="single_product">
                                         <div class="product_thumb">
-                                            <a href="/chi-tiet/@(item.alias).html"><img src="~/assets/img/Nón bảo hiểm/@item.image" alt=""></a>
+                                            <a href="/chi-tiet/@(item.alias).html"><img src="/@item.image" alt=""></a>
                                             <div class="product_action">
                                                 <a class="addcart" href="" data-id="@item.id" data-value="1"> <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</a>
                                             </div>
                                         </div>
                                         <div class="product_content">
-                                            <span class="product_price">@item.price</span>
+                                            @if (@item.promationprice > 0)
+                                            {
+                                                <span class="product_price">@item.promationprice</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="product_price">@item.price</span>
+
+                                            }
                                             <h3 class="product_title"><a href="/chi-tiet/@(item.alias).html">@item.name</a></h3>
                                         </div>
                                         <div class="product_info">
@@ -355,31 +390,40 @@
                                         <div class="tab-content" id="pills-tabContent">
                                             <div class="tab-pane fade show active" id="tab-@(i++)" role="tabpanel">
                                                 <div class="modal_tab_img">
-                                                    <a href="#"><img src="~/assets/img/Nón bảo hiểm/@item.image" alt=""></a>
+                                                    <a href="#"><img src="/@item.image" alt=""></a>
                                                 </div>
                                             </div>
-                                            <div class="tab-pane fade" id="tab-@(i++)" role="tabpanel">
-                                                <div class="modal_tab_img">
-                                                    <a href="#"><img src="~/assets/img/product/product14.jpg" alt=""></a>
-                                                </div>
-                                            </div>
-                                            <div class="tab-pane fade" id="tab-@(i++)" role="tabpanel">
-                                                <div class="modal_tab_img">
-                                                    <a href="#"><img src="~/assets/img/product/product15.jpg" alt=""></a>
-                                                </div>
-                                            </div>
+                                            @if (item.moreimage != null)
+                                            {
+                                                foreach (XElement ele in XElement.Parse(item.moreimage).Elements())
+                                                {
+
+                                                    <div class="tab-pane fade" id="tab-@(i++)" role="tabpanel">
+                                                        <div class="modal_tab_img">
+                                                            <a href="#"><img src="/@ele.Value" alt=""></a>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+                                          
+                                          
                                         </div>
                                         <div class="modal_tab_button">
                                             <ul class="nav product_navactive" role="tablist">
                                                 <li>
-                                                    <a class="nav-link active" data-toggle="tab" href="#tab-@j" role="tab" aria-controls="tab-@(j++)" aria-selected="false"><img src="~/assets/img/Nón bảo hiểm/@item.image" alt=""></a>
+                                                    <a class="nav-link active" data-toggle="tab" href="#tab-@j" role="tab" aria-controls="tab-@(j++)" aria-selected="false"><img src="/@item.image" alt=""></a>
                                                 </li>
-                                                <li>
-                                                    <a class="nav-link" data-toggle="tab" href="#tab-@j" role="tab" aria-controls="tab-@(j++)" aria-selected="false"><img src="~/assets/img/cart/cart18.jpg" alt=""></a>
-                                                </li>
-                                                <li>
-                                                    <a class="nav-link button_three" data-toggle="tab" href="#tab-@(j)" role="tab" aria-controls="tab-@(j++)" aria-selected="false"><img src="~/assets/img/cart/cart19.jpg" alt=""></a>
-                                                </li>
+                                                @if (item.moreimage != null)
+                                                {
+                                                    foreach (XElement ele in XElement.Parse(item.moreimage).Elements())
+                                                    {
+
+                                                        <li>
+                                                            <a class="nav-link button_three" data-toggle="tab" href="#tab-@(j)" role="tab" aria-controls="tab-@(j++)" aria-selected="false"><img src="/@ele.Value" alt=""></a>
+                                                        </li>
+                                                    }
+                                                }
+                                               
                                             </ul>
                                         </div>
                                     </div>
@@ -390,19 +434,20 @@
                                             <h2>@item.name</h2>
                                         </div>
                                         <div class="modal_price mb-10">
-                                            <span class="new_price">@HoTro.Instances.convertVND(item.promationprice.ToString())</span>
-                                            <span class="old_price">@HoTro.Instances.convertVND(item.price.ToString())</span>
+                                            @if (item.promationprice > 0)
+                                            {
+
+
+                                                <span class="new_price">@HoTro.Instances.convertVND(item.promationprice.ToString())</span>
+                                                <span class="old_price">@HoTro.Instances.convertVND(item.price.ToString())</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="new_price">@HoTro.Instances.convertVND(item.price.ToString())</span>
+
+                                            }
                                         </div>
-                                        <div class="modal_size mb-15">
-                                            <h2>size</h2>
-                                            <ul>
-                                                <li><a href="#">s</a></li>
-                                                <li><a href="#">m</a></li>
-                                                <li><a href="#">l</a></li>
-                                                <li><a href="#">xl</a></li>
-                                                <li><a href="#">xxl</a></li>
-                                            </ul>
-                                        </div>
+                                       
                                         <div class="modal_add_to_cart mb-15">
                                             <div class="form form-group-product">
                                                 <input min="1" id="txtquantity-group-@item.id" max="100" step="1" value="1" type="number">
@@ -410,7 +455,7 @@
                                             </div>
                                         </div>
                                         <div class="modal_description mb-15">
-                                            <p>@item.description</p>
+                                            @Html.Raw(item.description)
                                         </div>
                                         <div class="modal_social">
                                             <h2>Share this product</h2>
@@ -452,31 +497,40 @@
                                         <div class="tab-content" id="pills-tabContent">
                                             <div class="tab-pane fade show active" id="tab-@(i++)" role="tabpanel">
                                                 <div class="modal_tab_img">
-                                                    <a href="#"><img src="~/assets/img/Nón bảo hiểm/@item.image" alt=""></a>
+                                                    <a href="#"><img src="/@item.image" alt=""></a>
                                                 </div>
                                             </div>
-                                            <div class="tab-pane fade" id="tab-@(i++)" role="tabpanel">
-                                                <div class="modal_tab_img">
-                                                    <a href="#"><img src="~/assets/img/product/product14.jpg" alt=""></a>
-                                                </div>
-                                            </div>
-                                            <div class="tab-pane fade" id="tab-@(i++)" role="tabpanel">
-                                                <div class="modal_tab_img">
-                                                    <a href="#"><img src="~/assets/img/product/product15.jpg" alt=""></a>
-                                                </div>
-                                            </div>
+                                            @if (item.moreimage != null)
+                                            {
+                                                foreach (XElement ele in XElement.Parse(item.moreimage).Elements())
+                                                {
+
+                                                    <div class="tab-pane fade" id="tab-@(i++)" role="tabpanel">
+                                                        <div class="modal_tab_img">
+                                                            <a href="#"><img src="/@ele.Value" alt=""></a>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }
+
                                         </div>
                                         <div class="modal_tab_button">
                                             <ul class="nav product_navactive" role="tablist">
                                                 <li>
-                                                    <a class="nav-link active" data-toggle="tab" href="#tab-@j" role="tab" aria-controls="tab-@(j++)" aria-selected="false"><img src="~/assets/img/Nón bảo hiểm/@item.image" alt=""></a>
+                                                    <a class="nav-link active" data-toggle="tab" href="#tab-@j" role="tab" aria-controls="tab-@(j++)" aria-selected="false"><img src="/@item.image" alt=""></a>
                                                 </li>
-                                                <li>
-                                                    <a class="nav-link" data-toggle="tab" href="#tab-@j" role="tab" aria-controls="tab-@(j++)" aria-selected="false"><img src="~/assets/img/cart/cart18.jpg" alt=""></a>
-                                                </li>
-                                                <li>
-                                                    <a class="nav-link button_three" data-toggle="tab" href="#tab-@(j)" role="tab" aria-controls="tab-@(j++)" aria-selected="false"><img src="~/assets/img/cart/cart19.jpg" alt=""></a>
-                                                </li>
+                                                @if (item.moreimage != null)
+                                                {
+                                                    foreach (XElement ele in XElement.Parse(item.moreimage).Elements())
+                                                    {
+
+                                                        <li>
+                                                            <a class="nav-link button_three" data-toggle="tab" href="#tab-@(j)" role="tab" aria-controls="tab-@(j++)" aria-selected="false"><img src="/@ele.Value" alt=""></a>
+                                                        </li>
+                                                    }
+                                                }
+
+                                             
                                             </ul>
                                         </div>
                                     </div>
@@ -487,19 +541,20 @@
                                             <h2>@item.name</h2>
                                         </div>
                                         <div class="modal_price mb-10">
-                                            <span class="new_price">@HoTro.Instances.convertVND(item.promationprice.ToString())</span>
-                                            <span class="old_price">@HoTro.Instances.convertVND(item.price.ToString())</span>
+                                            @if (item.promationprice > 0)
+                                            {
+
+
+                                                <span class="new_price">@HoTro.Instances.convertVND(item.promationprice.ToString())</span>
+                                                <span class="old_price">@HoTro.Instances.convertVND(item.price.ToString())</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="new_price">@HoTro.Instances.convertVND(item.price.ToString())</span>
+
+                                            }
                                         </div>
-                                        <div class="modal_size mb-15">
-                                            <h2>size</h2>
-                                            <ul>
-                                                <li><a href="#">s</a></li>
-                                                <li><a href="#">m</a></li>
-                                                <li><a href="#">l</a></li>
-                                                <li><a href="#">xl</a></li>
-                                                <li><a href="#">xxl</a></li>
-                                            </ul>
-                                        </div>
+                                      
                                         <div class="modal_add_to_cart mb-15">
                                             <div class="form form-category">
                                                 <input min="1" max="100" step="1" id="txtquantity-category-@item.id" value="1" type="number">
@@ -507,7 +562,7 @@
                                             </div>
                                         </div>
                                         <div class="modal_description mb-15">
-                                            <p>@item.description</p>
+                                            @Html.Raw(item.description)
                                         </div>
                                         <div class="modal_social">
                                             <h2>Share this product</h2>
@@ -549,31 +604,38 @@
                                         <div class="tab-content" id="pills-tabContent">
                                             <div class="tab-pane fade show active" id="tab-@(i++)" role="tabpanel">
                                                 <div class="modal_tab_img">
-                                                    <a href="#"><img src="~/assets/img/Nón bảo hiểm/@item.image" alt=""></a>
+                                                    <a href="#"><img src="/@item.image" alt=""></a>
                                                 </div>
                                             </div>
-                                            <div class="tab-pane fade" id="tab-@(i++)" role="tabpanel">
-                                                <div class="modal_tab_img">
-                                                    <a href="#"><img src="~/assets/img/product/product14.jpg" alt=""></a>
-                                                </div>
-                                            </div>
-                                            <div class="tab-pane fade" id="tab-@(i++)" role="tabpanel">
-                                                <div class="modal_tab_img">
-                                                    <a href="#"><img src="~/assets/img/product/product15.jpg" alt=""></a>
-                                                </div>
-                                            </div>
+                                            @if (item.moreimage != null)
+                                            {
+                                                foreach (XElement ele in XElement.Parse(item.moreimage).Elements())
+                                                {
+
+                                                    <div class="tab-pane fade" id="tab-@(i++)" role="tabpanel">
+                                                        <div class="modal_tab_img">
+                                                            <a href="#"><img src="/@ele.Value" alt=""></a>
+                                                        </div>
+                                                    </div>
+                                                }
+                                            }                                          
                                         </div>
                                         <div class="modal_tab_button">
                                             <ul class="nav product_navactive" role="tablist">
                                                 <li>
-                                                    <a class="nav-link active" data-toggle="tab" href="#tab-@j" role="tab" aria-controls="tab-@(j++)" aria-selected="false"><img src="~/assets/img/Nón bảo hiểm/@item.image" alt=""></a>
+                                                    <a class="nav-link active" data-toggle="tab" href="#tab-@j" role="tab" aria-controls="tab-@(j++)" aria-selected="false"><img src="/@item.image" alt=""></a>
                                                 </li>
-                                                <li>
-                                                    <a class="nav-link" data-toggle="tab" href="#tab-@j" role="tab" aria-controls="tab-@(j++)" aria-selected="false"><img src="~/assets/img/cart/cart18.jpg" alt=""></a>
-                                                </li>
-                                                <li>
-                                                    <a class="nav-link button_three" data-toggle="tab" href="#tab-@(j)" role="tab" aria-controls="tab-@(j++)" aria-selected="false"><img src="~/assets/img/cart/cart19.jpg" alt=""></a>
-                                                </li>
+                                                @if (item.moreimage != null)
+                                                {
+                                                    foreach (XElement ele in XElement.Parse(item.moreimage).Elements())
+                                                    {
+
+                                                        <li>
+                                                            <a class="nav-link button_three" data-toggle="tab" href="#tab-@(j)" role="tab" aria-controls="tab-@(j++)" aria-selected="false"><img src="/@ele.Value" alt=""></a>
+                                                        </li>
+                                                    }
+                                                }
+                                               
                                             </ul>
                                         </div>
                                     </div>
@@ -584,19 +646,19 @@
                                             <h2>@item.name</h2>
                                         </div>
                                         <div class="modal_price mb-10">
-                                            <span class="new_price">@HoTro.Instances.convertVND(item.promationprice.ToString())</span>
-                                            <span class="old_price">@HoTro.Instances.convertVND(item.price.ToString())</span>
-                                        </div>
-                                        <div class="modal_size mb-15">
-                                            <h2>size</h2>
-                                            <ul>
-                                                <li><a href="#">s</a></li>
-                                                <li><a href="#">m</a></li>
-                                                <li><a href="#">l</a></li>
-                                                <li><a href="#">xl</a></li>
-                                                <li><a href="#">xxl</a></li>
-                                            </ul>
-                                        </div>
+                                            @if (item.promationprice > 0)
+                                            {
+
+
+                                                <span class="new_price">@HoTro.Instances.convertVND(item.promationprice.ToString())</span>
+                                                <span class="old_price">@HoTro.Instances.convertVND(item.price.ToString())</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="new_price">@HoTro.Instances.convertVND(item.price.ToString())</span>
+
+                                            }
+                                        </div>                                       
                                         <div class="modal_add_to_cart mb-15">
                                             <div class="form form-production">
                                                 <input min="1" max="100" step="1" id="txtquantity-production-@item.id" value="1" type="number">
@@ -604,7 +666,7 @@
                                             </div>
                                         </div>
                                         <div class="modal_description mb-15">
-                                            <p>@item.description</p>
+                                            @Html.Raw(item.description)
                                         </div>
                                         <div class="modal_social">
                                             <h2>Share this product</h2>

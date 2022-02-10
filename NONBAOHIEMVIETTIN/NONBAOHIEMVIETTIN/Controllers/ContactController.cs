@@ -10,6 +10,8 @@ namespace NONBAOHIEMVIETTIN.Controllers
     {
         nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
         // GET: Contact
+        [HandleError]
+
         public ActionResult Index()
         {
             var contact = db.contact.FirstOrDefault(x => x.display == true);

@@ -11,7 +11,8 @@ namespace NONBAOHIEMVIETTIN.Controllers
     {
         public const string wishSession = "wishSession";
         private nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
-        // GET: wish
+        [HandleError]
+
         public ActionResult Index()
         {
             var wish = Session[wishSession];

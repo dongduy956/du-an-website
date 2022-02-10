@@ -9,9 +9,10 @@
 
 namespace NONBAOHIEMVIETTIN.Models
 {
+    using Newtonsoft.Json;
     using System;
     using System.Collections.Generic;
-    
+
     public partial class news
     {
         public int id { get; set; }
@@ -21,7 +22,7 @@ namespace NONBAOHIEMVIETTIN.Models
         public string content { get; set; }
         public Nullable<System.DateTime> createdate { get; set; }
         public string image { get; set; }
-    
+        [JsonIgnore]
         public virtual newstype newstype { get; set; }
     }
 }

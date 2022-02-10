@@ -227,6 +227,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Api\accountsController.cs" />
+    <Compile Include="Api\brandController.cs" />
     <Compile Include="Api\categoryController.cs" />
     <Compile Include="Api\feedbackController.cs" />
     <Compile Include="Api\groupproductController.cs" />
@@ -272,6 +273,7 @@
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\ContactController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IntroduceController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
@@ -4065,6 +4067,7 @@
     <Content Include="Areas\admin\Views\Brand_admin\Index.cshtml" />
     <Content Include="Areas\admin\Views\Brand_admin\Create.cshtml" />
     <Content Include="Areas\admin\Views\Brand_admin\Edit.cshtml" />
+    <None Include="Properties\PublishProfiles\nonbaohiem.pubxml" />
     <None Include="Properties\PublishProfiles\nonbaohiemviettin.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
@@ -4105,6 +4108,8 @@
     <Content Include="Views\Contact\Index.cshtml" />
     <Content Include="Views\Introduce\Index.cshtml" />
     <Content Include="Views\Accounts\AccountInfo.cshtml" />
+    <Content Include="Views\Cart\ConfirmOrder.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

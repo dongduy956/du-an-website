@@ -20,6 +20,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
 
         private nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
         int pageSize = 4;
+
         void ViewBagNoti(List<order> temp, int page)
         {
             if (temp.Count() > 0)
@@ -40,6 +41,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 return uriBuilder.Uri;
             }
         }
+        [HandleError]
         public ActionResult LoginFacebook()
         {
             var fb = new FacebookClient();
@@ -95,6 +97,8 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 status = 1                
             });
         }
+        [HandleError]
+
         public ActionResult FacebookCallback(string code)
         {
             var fb = new FacebookClient();
@@ -149,6 +153,8 @@ namespace NONBAOHIEMVIETTIN.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+        [HandleError]
+
         public ActionResult Login()
         {
             var acc = Session["account"] as accounts;
@@ -159,7 +165,8 @@ namespace NONBAOHIEMVIETTIN.Controllers
         [HttpPost]
         public JsonResult Logout()
         {
-            Session["account"] = null;
+            Session["account"] = Session["wishSession"] = Session["cartSession"] = null;
+            
             return Json(1);
         }
         [HttpPost]
@@ -391,7 +398,9 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 return Json(2);
             }
 
-        }        
+        }
+
+        [HandleError]
         public ActionResult AccountInfo(int page=1)
         {
                     

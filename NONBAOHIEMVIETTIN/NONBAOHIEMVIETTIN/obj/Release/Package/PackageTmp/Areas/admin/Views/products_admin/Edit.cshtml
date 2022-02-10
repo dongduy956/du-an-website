@@ -1,0 +1,243 @@
+﻿@using NONBAOHIEMVIETTIN.Models
+@model products
+
+@{
+    ViewBag.Title = "Sửa nón " + Model.name;
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+    var db = new nonbaohiemviettinEntities();
+}
+
+@section scripts{
+    <script>
+        // Disable form submissions if there are invalid fields
+        (function () {
+            'use strict';
+            window.addEventListener('load', function () {
+                // Get the forms we want to add validation styles to
+                var forms = document.getElementsByClassName('needs-validation');
+                // Loop over them and prevent submission
+                var validation = Array.prototype.filter.call(forms, function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (form.checkValidity() === false) {
+                            event.preventDefault();
+                            event.stopPropagation();
+                        }
+                        form.classList.add('was-validated');
+                    }, false);
+                });
+            }, false);
+
+            var editor = CKEDITOR.replace('txtDescription', {
+                customConfig: '/Areas/admin/assets/js/ckeditor/config.js'
+            })
+            $('#btnimg').click(function (e) {
+                e.preventDefault();
+                var finder = new CKFinder();
+                finder.selectActionFunction = function (url) {
+                    $('#txtimg').text(url);
+                    $('#txtimg_hide').val(url);
+                }
+                finder.popup();
+
+            })          
+            $('#input_newproduct').change(function () {
+                if ($(this).is(":checked")) {
+                    $('#input_mess-newproduct').text('Có');
+                    $('input[name="newproduct"]').val('True');
+                }
+
+
+                else {
+                    $('#input_mess-newproduct').text('Không');
+                    $('input[name="newproduct"]').val('False');
+                }
+
+            });
+            $('#input_isdelete').change(function () {
+                if ($(this).is(":checked")) {
+                    $('#input_mess-isdelete').text('Ẩn');
+                    $('input[name="isdelete"]').val('True');
+                }
+
+
+                else {
+                    $('#input_mess-isdelete').text('Hiện');
+                    $('input[name="isdelete"]').val('False');
+                }
+
+            });
+        })();
+
+    </script>
+    @if (TempData["status"] != null)
+    {
+        <script>
+        $(function () {
+            alertify.error(`@TempData["status"]`);
+        })
+        </script>
+    }
+}
+@section styles{
+    <style>
+        .custom-file-label {
+            left: 0.75rem;
+            right: 0.75rem;
+        }
+
+        .input-ckb {
+            height: 20px;
+            width: 20px;
+            cursor: pointer;
+        }
+    </style>
+}
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Sửa nón <strong>@Model.name</strong></h6>
+    </div>
+
+    <div class="card-body">
+        @using (Html.BeginForm("Edit", "products_admin", FormMethod.Post, new { @enctype = "multipart/form-data", @class = "needs-validation", @novalidate = "true" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.id)
+            @Html.HiddenFor(model => model.viewcount)
+            @Html.HiddenFor(model => model.createddate)
+            @Html.HiddenFor(model => model.fastsell)
+            @Html.HiddenFor(model => model.newproduct)
+            @Html.HiddenFor(model => model.status)
+            @Html.HiddenFor(model => model.isdelete)
+            @Html.HiddenFor(model => model.quantity)
+            <div class="form-horizontal">
+                <div class="form-group">
+                    <label class="control-label col-md-12">Tên nón</label>
+                    <div class="col-md-12">
+                        <input name="name" placeholder="Nhập vào tên nón" value="@Model.name" required class="form-control" />
+                        <div class="valid-feedback">Valid</div>
+                        <div class="invalid-feedback">Nhập vào tên nón</div>
+                    </div>
+                </div>
+                @if (db.category.Find(Model.idcategory).isdelete == false && db.production.Find(Model.idproduction).isdelete == false && db.groupproduct.Find(Model.idgroupproduct).isdelete == false)
+                {
+                    <div class="form-group">
+                        <label class="control-label col-md-12">Bạn muốn ẩn đi hay hiện nón <strong>@Model.name</strong>?</label>
+                        <div class="col-md-12">
+                            <div class="d-flex align-items-center">
+                                <input id="input_isdelete" class="input-ckb" type="checkbox" checked="@Model.isdelete" />
+                                <span class="ml-2" id="input_mess-isdelete">@(Model.isdelete == true ? "Ẩn" : "Hiện")</span>
+                            </div>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    if (db.groupproduct.Find(Model.idgroupproduct).isdelete == true)
+                    {
+                        <div class="form-group">
+                            <label class="control-label col-md-12">
+                                Nhóm nón @Model.groupproduct.name ẩn đi. <a href="/admin/sua-nhom-non/@(Model.groupproduct.alias).html">Click vào đây</a> để mở nhóm @Model.groupproduct.name
+                            </label>
+                        </div>
+                    }
+                    if (db.production.Find(Model.idproduction).isdelete == true)
+                    {
+                        <div class="form-group">
+                            <label class="control-label col-md-12">
+                                Hãng sản xuất @Model.production.name đã bị ẩn đi.<a href="/admin/sua-hang-san-xuat/@(Model.production.alias).html">Click vào đây</a> để mở hãng sản xuất @Model.groupproduct.name
+                            </label>
+                        </div>
+                    }
+                    if (db.category.Find(Model.idcategory).isdelete == true)
+                    {
+                        <div class="form-group">
+                            <label class="control-label col-md-12">
+                                Loại @Model.category.name đã bị ẩn đi.<a href="/admin/sua-loai-non/@(Model.category.alias).html">Click vào đây</a> để mở loại @Model.category.name
+                            </label>
+                        </div>
+                    }
+                }               
+                <div class="form-group">
+                    <label class="control-label col-md-12">Nón mới:</label>
+                    <div class="col-md-12">
+                        <div class="d-flex align-items-center">
+                            <input id="input_newproduct" class="input-ckb" type="checkbox" checked="@Model.newproduct" />
+                            <span class="ml-2" id="input_mess-newproduct">@(Model.newproduct == true ? "Có" : "Không")</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-12">Giá</label>
+                    <div class="col-md-12">
+                        <input type="number" value="@Model.price" placeholder="Nhập vào giá bán" required class="form-control" name="price" />
+                    </div>
+                    <div class="valid-feedback">Valid</div>
+                    <div class="invalid-feedback">Nhập giá bán</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-12">Giá khuyến mãi</label>
+                    <div class="col-md-12">
+                        <input type="number" value="@Model.promationprice" required placeholder="Nhập vào giá khuyến mãi (nếu có)" class="form-control" name="promationprice" />
+                    </div>
+                    <div class="valid-feedback">Valid</div>
+                    <div class="invalid-feedback">Nhập giá khuyến mãi (nếu có)</div>
+                </div>               
+                <div class="form-group">
+                    <label class="control-label col-md-12">Mô tả</label>
+                    <div class="col-md-12">
+                        <textarea required placeholder="Nhập vào mô tả" id="txtDescription" name="description" class="form-control">@Html.Raw(Model.description)</textarea>
+                    </div>
+                    <div class="valid-feedback">Valid</div>
+                    <div class="invalid-feedback">Nhập mô tả</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-12" for="image">Ảnh đại diện</label>
+                    <span class="custom-file col-md-12">
+                        <input type="file" class="custom-file-input" id="btnimg">
+                        <label class="custom-file-label" id="txtimg" for="customFile">@(Model.image==null||Model.image.Equals("") ? "Chọn ảnh" : "/" + Model.image)</label>
+                    </span>
+                    <input name="image" value="/@Model.image" id="txtimg_hide" type="hidden" />
+
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-12">Loại nón</label>
+                    <div class="col-md-12">
+                        @Html.DropDownList("idcategory", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-12">Hãng sản xuất</label>
+                    <div class="col-md-12">
+                        @Html.DropDownList("idproduction", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="control-label col-md-12">Nhóm nón</label>
+                    <div class="col-md-12">
+                        @Html.DropDownList("idgroupproduct", null, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <a href="/admin/non.html" class="btn btn-light btn-icon-split" style="margin:0 0.75rem">
+                        <span class="icon text-gray-600">
+                            <i class="fas fa-arrow-left"></i>
+                        </span>
+                        <span class="text">Trở về</span>
+                    </a>
+                    <button type="submit" style="margin:0 0.75rem" class="btn btn-success btn-icon-split">
+                        <span class="icon text-white-50">
+                            <i class="far fa-save"></i>
+                        </span>
+                        <span class="text">Lưu</span>
+                    </button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

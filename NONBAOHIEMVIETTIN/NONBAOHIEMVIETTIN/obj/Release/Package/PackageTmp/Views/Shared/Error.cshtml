@@ -1,9 +1,12 @@
-﻿<!doctype html>
+﻿@model System.Web.Mvc.HandleErrorInfo 
+    @{ 
+        ViewBag.title = "Lỗi 404";
+    }
 <html class="no-js" lang="zxx">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>@ViewBag.Title</title>
+    <title>Lỗi</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
@@ -19,8 +22,7 @@
 </head>
 <body>
     <!-- Add your site or application content here -->
-    <!--pos page start-->
-    @RenderBody()
+    <!--pos page start-->    
     <div class="container">
         <!--error section area start-->
         <div class="error_section">
@@ -28,9 +30,9 @@
                 <div class="col-12">
                     <div class="error_form">
                         <h1>404</h1>
-                        <h2>Opps! PAGE NOT BE FOUND</h2>
-                        <p>Sorry but the page you are looking for does not exist, have been<br> removed, name changed or is temporarity unavailable.</p>
-                        <a href="/">Back to home page</a>
+                        <h2>Lỗi trang không tìm thấy</h2>
+                        <p>Xin lỗi! Trang của bạn không tồn tại hoặc đường dẫn đã bị thay đổi<br />Vui lòng truy cập lại sau</p>
+                        <a href="/">Trở về trang chủ</a>
                     </div>
                 </div>
             </div>

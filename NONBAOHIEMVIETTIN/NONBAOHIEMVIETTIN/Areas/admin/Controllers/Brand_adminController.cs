@@ -133,6 +133,8 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 var temp = db.brand.SingleOrDefault(x => x.name.ToLower().Equals(brand.name.ToLower()));
                 if (temp == null)
                 {
+                    brand.image = brand.image.Substring(1, brand.image.Length - 1);
+
                     brand.alias = HoTro.Instances.convertToUnSign3(brand.name.ToLower());
                     db.Entry(brand).State = EntityState.Modified;
                     db.SaveChanges();
