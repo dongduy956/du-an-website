@@ -47,14 +47,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="countonline">
-      <EntityTypeMapping TypeName="nonbaohiemviettinModel.countonline">
-        <MappingFragment StoreEntitySet="countonline">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="total" ColumnName="total" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="groupproduct">
       <EntityTypeMapping TypeName="nonbaohiemviettinModel.groupproduct">
         <MappingFragment StoreEntitySet="groupproduct">
@@ -103,6 +95,7 @@
     <EntitySetMapping Name="order">
       <EntityTypeMapping TypeName="nonbaohiemviettinModel.order">
         <MappingFragment StoreEntitySet="order">
+          <ScalarProperty Name="paymentmethod" ColumnName="paymentmethod" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="idaccount" ColumnName="idaccount" />
           <ScalarProperty Name="createdate" ColumnName="createdate" />

@@ -2,6 +2,9 @@
 @model news
 @{
     ViewBag.Title = Model.title;
+    ViewBag.Description = Html.Raw(Model.content);
+    ViewBag.Url = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + HttpContext.Current.Request.RawUrl.ToString().Trim().ToLower();
+    ViewBag.Image = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + "/"+Model.image;
 }
 <!--breadcrumbs area start-->
 <div class="breadcrumbs_area">

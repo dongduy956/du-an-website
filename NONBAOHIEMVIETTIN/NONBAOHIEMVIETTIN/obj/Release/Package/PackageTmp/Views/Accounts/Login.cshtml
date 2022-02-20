@@ -1,10 +1,13 @@
 ﻿@{
     ViewBag.Title = "Đăng nhập - Đăng ký";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Description = "Trang đăng nhập và đăng kí chính thức của website";
+    ViewBag.Url = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + HttpContext.Current.Request.RawUrl.ToString().Trim().ToLower();
+    ViewBag.Image = "https://st2.depositphotos.com/1853861/7036/v/950/depositphotos_70364593-stock-illustration-login-button-icon.jpg";
 }
 @section scripts{
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-<script src="~/assets/js/code/logingoogle.js"></script>
+<script src="~/assets/js/code/logingoogle.js?@TempData["Version"]"></script>
     <script>
         $(".custom-file-input").on("change", function () {
             var fileName = $(this).val().split("\\").pop();
@@ -41,16 +44,7 @@
             .login-social button,.login-social a {
                 text-transform: uppercase;
                 font-size: 1rem;
-            }
-
-        button[disabled] {
-            opacity: 0.85;
-            cursor: not-allowed !important;
-        }
-
-            .login_submit button[disabled]:hover {
-                background-color: #333;
-            }
+            }      
     </style>
 }
 <div class="col-lg-12 col-md-12" style="padding:0">
@@ -87,7 +81,7 @@
                         </p>
                         <div class="login_submit">
                             <button id="btnlogin" type="submit">
-                                <span class="spinner-grow spinner-grow-sm" style="display:none"></span>
+                               
                                 Đăng nhập
                             </button>
                             @*<label for="remember">
@@ -104,7 +98,7 @@
                             </a>
 
                             <button onclick="login()" class="btn btn-outline-danger">
-                                <span class="spinner-grow spinner-grow-sm" style="display:none"></span>
+                                
 
                                 <i class="fab fa-google"></i>
                                 <span>Đăng nhập với google</span>
@@ -157,7 +151,6 @@
                         </p>
                         <div class="login_submit">
                             <button id="btnregister" type="submit">
-                                <span class="spinner-grow spinner-grow-sm" style="display:none"></span>
                             Đăng ký</button>
                         </div>
                     </div>
@@ -182,10 +175,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" id="btnsubmitregister" class="btn btn-outline-success">
-                    <span class="spinner-grow spinner-grow-sm" style="display:none"></span>
+                    
                 Xác nhận</button>
                 <button type="button" id="btnsendagainregister" class="btn btn-outline-primary">
-                    <span class="spinner-grow spinner-grow-sm" style="display:none"></span>
+                    
 
                     Gửi lại mã
 
@@ -211,7 +204,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" id="btnsubmitforget" class="btn btn-outline-success">
-                    <span class="spinner-grow spinner-grow-sm" style="display:none"></span>
+                    
                 Xác nhận</button>
                 <button type="button" id="btncloseforget" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
             </div>
@@ -234,11 +227,11 @@
             </div>
             <div class="modal-footer">
                 <button type="button" id="btnsubmitforgetpass" class="btn btn-outline-success">
-                    <span class="spinner-grow spinner-grow-sm" style="display:none"></span>
+                    
 
                 Xác nhận</button>
                 <button type="button" id="btnsendagainforgetpass" class="btn btn-outline-primary">
-                    <span class="spinner-grow spinner-grow-sm" style="display:none"></span>
+                    
 
                 Gửi lại mã</button>
                 <button type="button" id="btncloseforgetpass" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
@@ -263,7 +256,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" id="btnsubmitchangepass" class="btn btn-outline-success">
-                    <span class="spinner-grow spinner-grow-sm" style="display:none"></span>
+                    
                 Xác nhận</button>
                 <button type="button" id="btnclosechangepass" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
             </div>

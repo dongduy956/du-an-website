@@ -6,7 +6,9 @@
     var i = 1;
     var j = 1;
     var db = new nonbaohiemviettinEntities();
-
+    ViewBag.Description = "Chiếc nón bảo hiểm ngày càng trở nên thân thiết với mỗi chúng ta . Nhưng quy trình sản xuất nón bảo hiểm thì ít được nhiều người biết đến. Hôm nay, CÔNG TY TNHH NONBAOHIEMVIETTIN sẽ giới thiệu đến các bạn một cái nhìn chi tiết hơn về quy trình sản xuất  nón bảo hiểm.";
+    ViewBag.Url = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + HttpContext.Current.Request.RawUrl.ToString().Trim().ToLower();
+    ViewBag.Image = "https://media.met-helmets.com/app/uploads/2021/04/legit-carbon-mips-gravity-helmet-megamenu.jpg";
 }
 @section styles{
     <style>
@@ -79,7 +81,7 @@
                                     <div class="col-lg-3">
                                         <div class="single_product">
                                             <div class="product_thumb">
-                                                <a href="~/chi-tiet/@(item.alias).html">
+                                                <a href="~/chi-tiet/@(item.alias)">
                                                     <img src="/@item.image" alt="">
                                                 </a>
 
@@ -100,7 +102,7 @@
                                                     <span class="product_price">@HoTro.Instances.convertVND(@item.price.ToString())</span>
 
                                                 }
-                                                <h3 class="product_title"><a href="~/chi-tiet/@(item.alias).html">@item.name</a></h3>
+                                                <h3 class="product_title"><a href="~/chi-tiet/@(item.alias)">@item.name</a></h3>
                                             </div>
                                             <div class="product_info">
                                                 <ul>
@@ -135,7 +137,7 @@
                                     <div class="col-lg-3">
                                         <div class="single_product">
                                             <div class="product_thumb">
-                                                <a href="/chi-tiet/@(item.alias).html"><img src="/@item.image" alt=""></a>
+                                                <a href="/chi-tiet/@(item.alias)"><img src="/@item.image" alt=""></a>
                                                 <div class="hot_img">
                                                     <img src="~/assets/images/cart/span-hot.png" alt="">
                                                 </div>
@@ -153,7 +155,7 @@
                                                     <span class="product_price">@HoTro.Instances.convertVND(@item.price.ToString())</span>
 
                                                 }
-                                                <h3 class="product_title"><a href="/chi-tiet/@(item.alias).html">@item.name</a></h3>
+                                                <h3 class="product_title"><a href="/chi-tiet/@(item.alias)">@item.name</a></h3>
                                             </div>
                                             <div class="product_info">
                                                 <ul>
@@ -187,7 +189,7 @@
                                         <div class="single_product banner_area">
                                             <div class="single_banner">
                                                 <div class="product_thumb ">
-                                                    <a href="/chi-tiet/@(item.alias).html">
+                                                    <a href="/chi-tiet/@(item.alias)">
                                                         <img src="/@item.image" alt="">
                                                     </a>
                                                     <div class="banner_title title_2">
@@ -200,7 +202,7 @@
                                             </div>
                                             <div class="product_content">
                                                 <span class="product_price">@HoTro.Instances.convertVND(@item.price.ToString())</span>
-                                                <h3 class="product_title"><a href="/chi-tiet/@(item.alias).html">@item.name</a></h3>
+                                                <h3 class="product_title"><a href="/chi-tiet/@(item.alias)">@item.name</a></h3>
                                             </div>
                                             <div class="product_info">
                                                 <ul>
@@ -264,7 +266,7 @@
                                             <div class="tab-content" id="pills-tabContent">
                                                 <div class="tab-pane fade show active" id="tab-@(i++)" role="tabpanel">
                                                     <div class="modal_tab_img">
-                                                        <a href="/chi-tiet/@(item.alias).html"><img src="/@item.image" alt=""></a>
+                                                        <a href="/chi-tiet/@(item.alias)"><img src="/@item.image" alt=""></a>
                                                     </div>
                                                 </div>
                                                 @if(item.moreimage!=null)
@@ -339,13 +341,13 @@
                                                 @Html.Raw(item.description)
                                             </div>
                                             <div class="modal_social">
-                                                <h2>Share this product</h2>
-                                                <ul>
-                                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                                    <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                                <h2>Chia sẻ sản phẩm</h2>
+                                                <ul >
+                                                    <li >
+                                                    <a data-alias="@item.alias" class="facebook" href="#">
+                                                        <i class="fa fa-facebook"></i>
+                                                        </a></li>
+                                                    
                                                 </ul>
                                             </div>
                                         </div>

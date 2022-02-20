@@ -81,14 +81,6 @@
       <HintPath>..\packages\Microsoft.ApplicationInsights.2.0.0\lib\net45\Microsoft.ApplicationInsights.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.4.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.4.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.4.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.4.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -269,6 +261,7 @@
     <Compile Include="Areas\admin\Controllers\Feedback_adminController.cs" />
     <Compile Include="Areas\admin\Controllers\Subscribe_adminController.cs" />
     <Compile Include="Areas\admin\Models\AccountLogin.cs" />
+    <Compile Include="Areas\admin\Models\Spend.cs" />
     <Compile Include="assets\NganLuongAPI\APICheckoutV3.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\CartController.cs" />
@@ -283,7 +276,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Hubs\CounterHub.cs" />
     <Compile Include="Models\accounts.cs">
       <DependentUpon>EDO.tt</DependentUpon>
     </Compile>
@@ -295,10 +287,8 @@
     <Compile Include="Models\category.cs">
       <DependentUpon>EDO.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\SitemapNode.cs" />
     <Compile Include="Models\contact.cs">
-      <DependentUpon>EDO.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\countonline.cs">
       <DependentUpon>EDO.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EDO.Context.cs">
@@ -3181,15 +3171,16 @@
     <Content Include="assets\css\bank.css" />
     <Content Include="assets\css\bundle.css" />
     <Content Include="assets\css\jquery-ui.css" />
+    <Content Include="assets\css\loadpage.css" />
     <Content Include="assets\css\plugin.css" />
     <Content Include="assets\css\responsive.css" />
     <Content Include="assets\css\style.css" />
-    <Content Include="assets\css\toast.css" />
     <Content Include="assets\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\fonts\MyriadPro-Bold.svg" />
     <Content Include="assets\fonts\MyriadPro-Regular.svg" />
     <Content Include="assets\images\banner\banner1.jpg" />
     <Content Include="assets\images\banner\banner2.jpg" />
+    <Content Include="assets\images\logo\giphy.gif" />
     <Content Include="assets\images\slider\slider1.jpg" />
     <Content Include="assets\images\slider\slider2.jpg" />
     <Content Include="assets\images\slider\slider3.jpg" />
@@ -3740,9 +3731,9 @@
     <Content Include="assets\js\code\bank.js" />
     <Content Include="assets\js\code\logingoogle.js" />
     <Content Include="assets\js\code\main.js" />
-    <Content Include="assets\js\code\toast.js" />
     <Content Include="assets\js\jquery-ui.js" />
     <Content Include="assets\js\main.js" />
+    <Content Include="assets\js\notify.min.js" />
     <Content Include="assets\js\plugins.js" />
     <Content Include="assets\js\popper.js" />
     <Content Include="assets\js\vendor\jquery-1.12.0.min.js" />
@@ -4073,8 +4064,6 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery.signalR-2.4.2.js" />
-    <Content Include="Scripts\jquery.signalR-2.4.2.min.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
@@ -4083,7 +4072,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -4146,8 +4137,7 @@
           <IISUrl>http://localhost:62429/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
-          <CustomServerUrl>
-          </CustomServerUrl>
+          <CustomServerUrl>http://localhost:62428/</CustomServerUrl>
           <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
         </WebProjectProperties>
       </FlavorProperties>

@@ -28,7 +28,6 @@ namespace NONBAOHIEMVIETTIN.Models
         public virtual DbSet<accounts> accounts { get; set; }
         public virtual DbSet<category> category { get; set; }
         public virtual DbSet<contact> contact { get; set; }
-        public virtual DbSet<countonline> countonline { get; set; }
         public virtual DbSet<groupproduct> groupproduct { get; set; }
         public virtual DbSet<introduce> introduce { get; set; }
         public virtual DbSet<news> news { get; set; }

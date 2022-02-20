@@ -48,13 +48,6 @@
     <Property Name="workday" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="alias" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
   </EntityType>
-  <EntityType Name="countonline">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="total" Type="Int64" />
-  </EntityType>
   <EntityType Name="groupproduct">
     <Key>
       <PropertyRef Name="id" />
@@ -116,6 +109,7 @@
     <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="accounts" Relationship="Self.fk_order_account" FromRole="order" ToRole="accounts" />
     <NavigationProperty Name="orderdetail" Relationship="Self.fk_orderdetail_order" FromRole="order" ToRole="orderdetail" />
+    <Property Name="paymentmethod" Type="Int32" />
   </EntityType>
   <EntityType Name="orderdetail">
     <Key>
@@ -333,7 +327,6 @@
     <EntitySet Name="accounts" EntityType="Self.accounts" />
     <EntitySet Name="category" EntityType="Self.category" />
     <EntitySet Name="contact" EntityType="Self.contact" />
-    <EntitySet Name="countonline" EntityType="Self.countonline" />
     <EntitySet Name="groupproduct" EntityType="Self.groupproduct" />
     <EntitySet Name="introduce" EntityType="Self.introduce" />
     <EntitySet Name="news" EntityType="Self.news" />

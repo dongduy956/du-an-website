@@ -8,6 +8,9 @@
     var i = 1;
     var j = i;
     var check = ViewBag.check != null ? ViewBag.check : -1;
+    ViewBag.Description = "Chiếc nón bảo hiểm ngày càng trở nên thân thiết với mỗi chúng ta . Nhưng quy trình sản xuất nón bảo hiểm thì ít được nhiều người biết đến. Hôm nay, CÔNG TY TNHH NONBAOHIEMVIETTIN sẽ giới thiệu đến các bạn một cái nhìn chi tiết hơn về quy trình sản xuất  nón bảo hiểm.";
+    ViewBag.Url = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + HttpContext.Current.Request.RawUrl.ToString().Trim().ToLower();
+    ViewBag.Image = "https://media.istockphoto.com/vectors/set-of-racing-helmets-on-a-white-background-vector-id1165417889?k=20&m=1165417889&s=612x612&w=0&h=Fjb6L4m-rz8kr1CygSVrwEykp3I8WcS7k7m7ahwGMTU=";
 }
 @section styles{
     <style>
@@ -88,7 +91,7 @@
                                 <div class="col-lg-4 col-md-4 col-sm-6">
                                     <div class="single_product">
                                         <div class="product_thumb">
-                                            <a href="/chi-tiet/@(item.alias).html">
+                                            <a href="/chi-tiet/@(item.alias)">
                                                 <img src="/@item.image" alt="">
                                             </a>
                                             <div class="product_action">
@@ -106,7 +109,7 @@
 
                                             }
 
-                                            <h3 class="product_title"><a href="/chi-tiet/@(item.alias).html">@item.name</a></h3>
+                                            <h3 class="product_title"><a href="/chi-tiet/@(item.alias)">@item.name</a></h3>
                                         </div>
                                         <div class="product_info">
                                             <ul>
@@ -128,7 +131,7 @@
                                 <div class="row align-items-center">
                                     <div class="col-lg-3 col-md-5 col-sm-6">
                                         <div class="product_thumb">
-                                            <a href="/chi-tiet/@(item.alias).html"><img src="/@item.image" alt=""></a>
+                                            <a href="/chi-tiet/@(item.alias)"><img src="/@item.image" alt=""></a>
 
                                         </div>
                                     </div>
@@ -145,7 +148,7 @@
                                             </div>
                                             <div class="list_title">
                                                 <h3>
-                                                    <a href="/chi-tiet/@(item.alias).html">@item.name</a>
+                                                    <a href="/chi-tiet/@(item.alias)">@item.name</a>
                                                 </h3>
                                             </div>
                                             @Html.Raw(item.description)
@@ -332,13 +335,13 @@
                                         @Html.Raw(item.description)
                                     </div>
                                     <div class="modal_social">
-                                        <h2>Share this product</h2>
+                                        <h2>Chia sẻ sản phẩm này</h2>
                                         <ul>
-                                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-pinterest"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                                            <li>
+                                                <a data-alias="@item.alias" class="facebook" href="#">
+                                                    <i class="fa fa-facebook"></i>
+                                                </a></li>
+                                            
                                         </ul>
                                     </div>
                                 </div>

@@ -146,7 +146,7 @@
                         <label class="control-label col-md-12" for="image">Ảnh đại diện</label>
                         <span class="custom-file col-md-12">
                             <input type="file" class="custom-file-input" id="btnimg">
-                            <label class="custom-file-label" id="txtimg" for="customFile">@(Model.image.Equals("") ? "Chọn ảnh" :"/"+ Model.image)</label>
+                            <label class="custom-file-label" id="txtimg" for="customFile">@(Model.image == null|| Model.image.Equals("") ? "Chọn ảnh" :"/"+ Model.image)</label>
                         </span>
                         <input name="image" value="/@Model.image" id="txtimg_hide" type="hidden" />
 
@@ -160,7 +160,6 @@
                             <div class="d-flex align-items-center">
                                 <input id="input_status" class="input-ckb" type="checkbox" checked="@Model.status" />
                                 <span class="ml-2" id="input_mess-status">@(Model.status==true?"Mở":"Khoá")</span>
-                                <input type="hidden" name="status" value="@Model.status" />
                             </div>
                         </div>
                     </div>
@@ -173,7 +172,7 @@
                 }
                
                 <div class="form-group">
-                    <a href="/admin/tai-khoan.html" class="btn btn-light btn-icon-split" style="margin:0 0.75rem">
+                    <a href="/admin/tai-khoan" class="btn btn-light btn-icon-split" style="margin:0 0.75rem">
                         <span class="icon text-gray-600">
                             <i class="fas fa-arrow-left"></i>
                         </span>

@@ -160,7 +160,6 @@
                             <div class="d-flex align-items-center">
                                 <input id="input_status" class="input-ckb" type="checkbox" checked="@Model.status" />
                                 <span class="ml-2" id="input_mess-status">@(Model.status==true?"Mở":"Khoá")</span>
-                                <input type="hidden" name="status" value="@Model.status" />
                             </div>
                         </div>
                     </div>
@@ -173,7 +172,7 @@
                 }
                
                 <div class="form-group">
-                    <a href="/admin/tai-khoan.html" class="btn btn-light btn-icon-split" style="margin:0 0.75rem">
+                    <a href="/admin/tai-khoan" class="btn btn-light btn-icon-split" style="margin:0 0.75rem">
                         <span class="icon text-gray-600">
                             <i class="fas fa-arrow-left"></i>
                         </span>

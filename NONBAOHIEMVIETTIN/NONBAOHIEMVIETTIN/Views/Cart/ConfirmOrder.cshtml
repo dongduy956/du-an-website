@@ -1,6 +1,9 @@
 ﻿@{
     ViewBag.Title = "Xác nhận đơn hàng";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Description = "Trang xác nhận thanh toán thành công khi khách hàng thanh toán online";
+    ViewBag.Url = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + HttpContext.Current.Request.RawUrl.ToString().Trim().ToLower();
+    ViewBag.Image = "https://thumbs.dreamstime.com/z/happy-businessman-get-success-cartoon-illustration-white-background-38913238.jpg";
 }
 <!--breadcrumbs area start-->
 <div class="breadcrumbs_area">

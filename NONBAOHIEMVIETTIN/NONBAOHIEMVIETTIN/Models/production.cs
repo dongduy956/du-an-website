@@ -28,7 +28,6 @@ namespace NONBAOHIEMVIETTIN.Models
         public Nullable<bool> isdelete { get; set; }
         [JsonIgnore]
 
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<products> products { get; set; }
     }

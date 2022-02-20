@@ -18,7 +18,7 @@
                     @foreach (var itemGroupproduct in db.groupproduct.Where(x=>x.isdelete==false).ToList())
                     {
                         <li>
-                            <a href="/@itemCategory.alias/@(itemGroupproduct.alias).html">
+                            <a href="/@itemCategory.alias/@(itemGroupproduct.alias)">
                                 <i class="fa fa-caret-right"></i> @itemGroupproduct.name (@db.products.Count(x=>x.idgroupproduct == itemGroupproduct.id && x.status==true&&x.isdelete == false && x.idcategory == itemCategory.id))
                             </a>
                         </li>
@@ -47,7 +47,7 @@
         </script>
         <div class="block_content" style="display: flex;justify-content: space-between;padding: 0 8px;">
             <p>0 sản phẩm.</p>
-            <a href="/yeu-thich.html">» Yêu thích của bạn</a>
+            <a href="/yeu-thich">» Yêu thích của bạn</a>
         </div>
     }
     else
@@ -61,10 +61,10 @@
         {
             <div class="cart_item" id="wish-@item.Product.id">
                 <div class="cart_img">
-                    <a href="/chi-tiet/@(item.Product.alias).html"><img src="/@item.Product.image" alt=""></a>
+                    <a href="/chi-tiet/@(item.Product.alias)"><img src="/@item.Product.image" alt=""></a>
                 </div>
                 <div class="cart_info">
-                    <a href="/chi-tiet/@(item.Product.alias).html">@item.Product.name</a>
+                    <a href="/chi-tiet/@(item.Product.alias)">@item.Product.name</a>
                     @if (item.Product.promationprice > 0)
                     {
                     <span class="cart_price">@HoTro.Instances.convertVND(item.Product.promationprice.ToString())</span>
@@ -83,7 +83,7 @@
         }
         <div class="block_content" style="display: flex;justify-content: space-between;padding: 0 8px;">
             <p>@(lstwish.Sum(x => x.Quantity)) sản phẩm.</p>
-            <a href="/yeu-thich.html">» Yêu thích của bạn</a>
+            <a href="/yeu-thich">» Yêu thích của bạn</a>
         </div>
 
     }
@@ -94,7 +94,7 @@
 </div>
 <!--wishlist block end-->
 <!--popular tags area-->
-<div class="sidebar_widget tags mb-35">
+@*<div class="sidebar_widget tags mb-35">
     <div class="block_title">
         <h3>Các tag phổ biến</h3>
     </div>
@@ -102,5 +102,5 @@
         <a href="#">ac</a>
         <a href="#">royal</a>
     </div>
-</div>
+</div>*@
 <!--popular tags end-->

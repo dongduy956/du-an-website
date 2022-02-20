@@ -98,6 +98,7 @@ D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEM
 D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.SignalR.Core.xml
 D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
 D:\Dự án website nón bảo hiểm\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Newtonsoft.Json.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\ApplicationInsights.config
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\csc.exe
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -129,8 +130,6 @@ E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.ApplicationIn
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.Identity.Core.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.Identity.Owin.dll
-E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.SignalR.Core.dll
-E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Host.SystemWeb.dll
@@ -142,7 +141,6 @@ E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.OAuth.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.Twitter.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Web.Infrastructure.dll
-E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Newtonsoft.Json.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Owin.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\PagedList.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\PagedList.Mvc.dll
@@ -164,10 +162,6 @@ E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.ServerTele
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.Web.xml
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.WindowsServer.xml
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.ApplicationInsights.xml
-E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.SignalR.Core.pdb
-E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.SignalR.Core.xml
-E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.SignalR.SystemWeb.pdb
-E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\PagedList.xml
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\PagedList.Mvc.xml
@@ -197,6 +191,5 @@ E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.Google.xml
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.Twitter.xml
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Release\NONBAOHIEMVIETTIN.csprojResolveAssemblyReference.cache
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Release\NONBAOHIEMVIETTIN.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Release\NONBAOHIEMVIETTIN.pdb

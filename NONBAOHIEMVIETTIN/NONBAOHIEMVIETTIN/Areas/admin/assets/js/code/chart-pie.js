@@ -26,9 +26,9 @@ $(document).ready(function () {
                 var myPieChart = new Chart(ctx, {
                     type: 'pie',
                     data: {
-                        labels: ["Tiền thu", "Tiền chi"],
+                        labels: ["Số đơn hàng", "Số phiếu nhập"],
                         datasets: [{
-                            data: [data.moneysCollect,data.moneysSpend],
+                            data: [data.countOrders, data.countReceipts],
                             backgroundColor: ['#4e73df', '#1cc88a'],
                             hoverBackgroundColor: ['#2e59d9', '#17a673'],
                             hoverBorderColor: "rgba(234, 236, 244, 1)",
@@ -62,7 +62,6 @@ $(document).ready(function () {
             }
         })
     }
-    console.log(day + ' ngày của char-pie')
 
     loadMoneysDay(day,month, year);
     $('#day').change(function () {

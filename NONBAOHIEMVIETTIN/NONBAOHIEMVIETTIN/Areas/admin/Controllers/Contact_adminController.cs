@@ -99,7 +99,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     db.SaveChanges();
                     TempData["status"] = "Thêm mới liên hệ thành công!!";
 
-                    return Redirect("/admin/lien-he.html");
+                    return Redirect("/admin/lien-he");
                 }
                 else
                 {
@@ -136,7 +136,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     db.Entry(contact).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa liên hệ thành công!!";
-                    return Redirect("/admin/lien-he.html");
+                    return Redirect("/admin/lien-he");
                 }
                 else
                     if (temp != null && contact.id == temp.id)
@@ -159,7 +159,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     db.Entry(contact).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa liên hệ thành công!!";
-                    return Redirect("/admin/lien-he.html");
+                    return Redirect("/admin/lien-he");
                 }
                 else
                 {

@@ -28,7 +28,7 @@
     {
         <script>
         $(function () {
-            alertify.error(`@TempData["status"]`);
+            alertify.success(`@TempData["status"]`);
         })
         </script>
     }
@@ -37,7 +37,7 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex align-items-center justify-content-between flex-wrap">
         <h6 class="m-0 font-weight-bold text-primary">Danh sách quyền</h6>
-        <form method="get" action="/admin/tim-kiem-quyen.html" class="d-sm-inline-block form-inline ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+        <form method="get" action="/admin/tim-kiem-quyen" class="d-sm-inline-block form-inline ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
                 <input name="tukhoa" type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm..." aria-label="Search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
@@ -47,7 +47,7 @@
                 </div>
             </div>
         </form>
-        <a href="/admin/them-moi-quyen.html" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <a href="/admin/them-moi-quyen" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
             <i class="fas fa-plus fa-sm text-white-50"></i> Thêm mới
         </a>
     </div>
@@ -71,7 +71,7 @@
                                 <div class="tool d-flex align-items-center flex-column justify-content-center">
                                     @if(!item.name.Equals("admin")&&!item.name.Equals("user"))
                                     { 
-                                    <a href="/admin/sua-quyen/@(item.alias).html" title="Sửa quyền @item.name" class="mb-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                    <a href="/admin/sua-quyen/@(item.alias)" title="Sửa quyền @item.name" class="mb-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                         <i class="far fa-edit"></i>
                                     </a>       
                                     <a data-id="@item.id" title="Xoá quyền @item.name" class="delete_role d-sm-inline-block btn btn-sm btn-primary shadow-sm">

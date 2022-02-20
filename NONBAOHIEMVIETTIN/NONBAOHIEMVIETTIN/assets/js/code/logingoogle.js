@@ -2,8 +2,8 @@
 var VALIDURL = 'https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=';
 var SCOPE = 'https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email';
 var CLIENTID = '302904279340-gqup44b82jtuobr4ig89568sl5pvcc85.apps.googleusercontent.com';
-var REDIRECT = 'http://localhost:62429/Accounts/Login';
-var LOGOUT = 'http://localhost:62429/Accounts/Login';
+var REDIRECT = 'http://localhost:62429/dang-nhap';
+var LOGOUT = 'http://localhost:62429/dang-nhap';
 var TYPE = 'token';
 var _url = OAUTHURL + 'scope=' + SCOPE + '&client_id=' + CLIENTID + '&redirect_uri=' + REDIRECT + '&response_type=' + TYPE;
 var acToken;
@@ -70,7 +70,7 @@ function getUserInfo() {
             user = resp;
             $.ajax({
 
-                url: '/Accounts/LoginGoogle/',
+                url: '/dang-nhap-google',
                 type: 'POST',
                 data: {
                     username: user.email,
@@ -84,7 +84,7 @@ function getUserInfo() {
                 else
                 {
                     showToast(data.message);
-                    location.href = "/dang-nhap.html";
+                    location.href = "/dang-nhap";
                 }
                 }, error: function (data) {
                     alert(JSON.stringify(data));

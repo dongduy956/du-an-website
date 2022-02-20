@@ -45,6 +45,7 @@ namespace NONBAOHIEMVIETTIN.Models
 
         public virtual category category { get; set; }
         [JsonIgnore]
+
         public virtual groupproduct groupproduct { get; set; }
         [JsonIgnore]
 

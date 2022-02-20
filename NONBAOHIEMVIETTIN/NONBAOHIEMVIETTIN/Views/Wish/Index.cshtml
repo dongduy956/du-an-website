@@ -3,6 +3,9 @@
 @{
     ViewBag.Title = "Yêu thích";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Description = "Những sản phẩm được khách hàng đưa vào yêu thích muốn đặt hàng có thể thêm vào giỏ hàng.";
+    ViewBag.Url = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + HttpContext.Current.Request.RawUrl.ToString().Trim().ToLower();
+    ViewBag.Image = "https://media0.giphy.com/avatars/thewishlistmx/ENBBDDJgOxLy.jpg";
 
 }
 <!--breadcrumbs area start-->
@@ -67,9 +70,9 @@ else
                                          <a href="" class="addcart" data-id="@item.Product.id" data-value="@item.Quantity" title="Thêm giỏ hàng"><i class="fa fa-shopping-cart"></i></a>
                                     </td>
                                     <td class="product_thumb">
-                                    <a href="/chi-tiet/@(item.Product.alias).html">
+                                    <a href="/chi-tiet/@(item.Product.alias)">
                                         <img style="width:80px;" src="/@item.Product.image" alt=""></a></td>
-                                    <td class="product_name"><a href="/chi-tiet/@(item.Product.alias).html">@item.Product.name</a></td>
+                                    <td class="product_name"><a href="/chi-tiet/@(item.Product.alias)">@item.Product.name</a></td>
                                     @if (item.Product.promationprice > 0)
                                     {
                                     <td class="product-price">@HoTro.Instances.convertVND(item.Product.promationprice.ToString())</td>

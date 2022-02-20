@@ -3,8 +3,12 @@
 @using PagedList.Mvc;
 @{
     var acc = Session["account"] as accounts;
-    ViewBag.Title = "Thông tin tài khoản - " +acc.username;
     var db = new nonbaohiemviettinEntities();
+
+    ViewBag.Title = "Thông tin tài khoản - " +acc.username;
+    ViewBag.Description= "Thông tin về tài khoản và các đơn hàng của tài khoản " + acc.username + " đã đặt hàng.";
+    ViewBag.Url= "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + HttpContext.Current.Request.RawUrl.ToString().Trim().ToLower();
+    ViewBag.Image= "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Crystal_Clear_app_Login_Manager.svg/1024px-Crystal_Clear_app_Login_Manager.svg.png";
 }
 @section styles{
     <style>
@@ -146,15 +150,58 @@
                                 </thead>
                                 @foreach (var item in Model)
                                 {
-                                    <tr>
+                                    <tr id="order-@item.id">
                                         <td>@item.id</td>
                                         <td>@DateTime.Parse(item.createdate.ToString()).ToShortDateString()</td>
-                                        <td><span class="success">@(item.status == true ? Html.Raw("<span class='text-success'>Đã duyệt</span>") : Html.Raw("<span class='text-danger'>Chưa duyệt</span>"))</span></td>
+                                        <td><span class="success">
+                                                @if (item.paymentmethod == 0)
+                                                {
+                                                    if (item.status == false)
+                                                    {
+                                                        <span class='text-danger'>Chưa duyệt</span>
+                                                    }
+                                                    else if (item.statuspay == false)
+                                                    {
+                                                        <span class='text-info'>Đang giao</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class='text-success'>Đã giao</span>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    if (item.status == false)
+                                                    {
+                                                        <span class='text-info'>Đang giao</span>
+                                                    }
+                                                    else
+                                                    {
+                                                        <span class='text-success'>Đã giao</span>
+                                                    }
+                                                }
+                                            </span></td>
                                         <td>@HoTro.Instances.convertVND(item.total.ToString()) </td>
                                         <td>
                                             <a href="" data-target="#detail_@item.id" data-id="@item.id" id="view_@item.id" data-toggle="collapse" class="view">
                                                 Xem
                                             </a>
+                                            |
+                                            @if (item.paymentmethod == 0&& item.status == false)
+                                            {
+                                                                                               
+                                                    <a href="" data-id="@item.id" class="delete_order text-danger">                                                        
+                                                        Huỷ
+                                                    </a>
+
+                                            }
+                                            else
+                                            {
+                                                <a style="cursor:not-allowed; opacity:0.8"  class="text-danger">
+                                                    Huỷ
+                                                </a>
+                                            }
+                                           
                                         </td>
                                     </tr>
 
@@ -183,7 +230,7 @@
                                                     {
                                                         <tr>
                                                             <td>@(j + 1)</td>
-                                                            <td>@lstOrderDetail[j].products.name</td>
+                                                            <td><a href="/chi-tiet/@(lstOrderDetail[j].products.alias)">@lstOrderDetail[j].products.name</a></td>
                                                             <td><span class="success">@lstOrderDetail[j].quantity</span></td>
                                                             <td>@HoTro.Instances.convertVND(lstOrderDetail[j].price.ToString()) </td>
                                                             <td>@HoTro.Instances.convertVND(lstOrderDetail[j].subtotal.ToString())</td>

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using NONBAOHIEMVIETTIN.Models;
+using NONBAOHIEMVIETTIN.Areas.admin.Models;
+
 namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
 {
     public class DashboardController : BaseController
@@ -12,7 +14,76 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         public ActionResult Index()
         {
             return View();
-        }       
+        }
+        decimal billMoneys(List<order> orders, List<receipt> receipts)
+        {
+            decimal total = 0;
+            var lstProductsReceipt = new List<Spend>();
+            var lstProductsOrder = new List<Spend>();
+            //tính tổng tiền trong danh sách nhập kho
+            foreach (var receipt in receipts)
+            {
+                var receiptdetails = db.receiptdetail.Where(x => x.idreceipt == receipt.id).ToList();
+                foreach (var receiptdetail in receiptdetails)
+                {
+                    var index = lstProductsReceipt.FindIndex(x => x.idproduct == receiptdetail.idproduct);
+                    var subtotal = receiptdetail.subtotal;
+                    if (index == -1)
+                        lstProductsReceipt.Add(new Spend()
+                        {
+                            idproduct = receiptdetail.idproduct,
+                            total = subtotal
+                        });
+                    else
+                    {
+                        var item = lstProductsReceipt[index];
+                        item.total += subtotal;
+                        lstProductsReceipt.Insert(index, item);
+                    }
+                }
+            }
+
+            //tính tổng tiền trong danh sách đặt hàng
+            foreach (var order in orders)
+            {
+                var orderdetails = db.orderdetail.Where(x => x.idorder == order.id).ToList();
+                foreach (var orderdetail in orderdetails)
+                {
+                    var index = lstProductsOrder.FindIndex(x => x.idproduct == orderdetail.idproduct);
+                    var subtotal = (decimal)orderdetail.subtotal;
+                    if (index == -1)
+                        lstProductsOrder.Add(new Spend()
+                        {
+                            idproduct = orderdetail.idproduct,
+                            total = subtotal
+                        });
+                    else
+                    {
+                        var item = lstProductsOrder[index];
+                        item.total += subtotal;
+                        lstProductsOrder.Insert(index, item);
+                    }
+                }
+            }
+            // tính tiền lời
+            bool check = false;
+            foreach(var itemReceipt in lstProductsReceipt)
+            {
+                check = false;
+                foreach(var itemOrder in lstProductsOrder)
+                {                
+                    if(itemReceipt.idproduct==itemOrder.idproduct)
+                    {
+                        total += itemOrder.total - itemReceipt.total;
+                        check = true;
+                        break;
+                    }
+                }
+                if (!check)
+                    total -= itemReceipt.total;
+            }
+            return total;
+        }
         [HttpPost]
         public JsonResult LoadMoneysMonth(int month, int year)
         {
@@ -22,11 +93,10 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             for (int i = 0; i < dayofmonth; i++)
             {
                 days[i] = "N" + (i + 1).ToString();
-                var totalOrder = db.order.Where(x => x.statuspay == true && x.createdate.Value.Day == (i + 1) && x.createdate.Value.Month == month && x.createdate.Value.Year == year).Sum(x => x.total);
-                var totalReceipt = db.receipt.Where(x => x.createdate.Value.Day == (i + 1) && x.createdate.Value.Month == month && x.createdate.Value.Year == year).Sum(x => x.total);
-                moneys[i] = (decimal)((totalOrder == null ? 0 : totalOrder)- (totalReceipt == null ? 0 : totalReceipt));
+                var orders = db.order.Where(x => x.statuspay == true && x.createdate.Value.Day == (i + 1) && x.createdate.Value.Month == month && x.createdate.Value.Year == year).ToList();
+                var receipts = db.receipt.Where(x => x.createdate.Value.Day == (i + 1) && x.createdate.Value.Month == month && x.createdate.Value.Year == year).ToList();
+                moneys[i] = billMoneys(orders, receipts);
             }
-
             return Json(new
             {
                 moneys,
@@ -35,15 +105,15 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         }
 
         [HttpPost]
-        public JsonResult LoadMoneysDay(int day,int month, int year)
+        public JsonResult LoadMoneysDay(int day, int month, int year)
         {
-                
-            var moneysCollect = db.order.Where(x => x.statuspay == true && x.createdate.Value.Day == day && x.createdate.Value.Month == month && x.createdate.Value.Year == year).Sum(x => x.total);
-            var moneysSpend = db.receipt.Where(x =>x.createdate.Value.Day == day && x.createdate.Value.Month == month && x.createdate.Value.Year == year).Sum(x => x.total);
+
+            var countOrders = db.order.Where(x => x.statuspay == true && x.createdate.Value.Day == day && x.createdate.Value.Month == month && x.createdate.Value.Year == year).Count();
+            var countReceipts = db.receipt.Where(x => x.createdate.Value.Day == day && x.createdate.Value.Month == month && x.createdate.Value.Year == year).Count();
             return Json(new
             {
-                moneysCollect,
-                moneysSpend
+                countOrders,
+                countReceipts
             });
         }
 
@@ -53,14 +123,14 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             decimal[] moneys = new decimal[12];
             for (int i = 0; i < 12; i++)
             {
-                var totalOrder = db.order.Where(x => x.statuspay == true && x.createdate.Value.Month ==(i+1) && x.createdate.Value.Year == year).Sum(x => x.total);
-                var totalReceipt = db.receipt.Where(x =>x.createdate.Value.Month ==(i+1) && x.createdate.Value.Year == year).Sum(x => x.total);
-                moneys[i] = (decimal)((totalOrder == null ? 0 : totalOrder)- (totalReceipt == null ? 0 : totalReceipt));
+                var orders=db.order.Where(x => x.statuspay == true && x.createdate.Value.Month == (i + 1) && x.createdate.Value.Year == year).ToList();
+                var receipts = db.receipt.Where(x => x.createdate.Value.Month == (i + 1) && x.createdate.Value.Year == year).ToList();
+                moneys[i] = billMoneys(orders,receipts);
             }
 
             return Json(new
             {
-                moneys           
+                moneys
             });
         }
     }

@@ -21,10 +21,8 @@ namespace NONBAOHIEMVIETTIN.Models
         public Nullable<int> quantity { get; set; }
         public Nullable<decimal> subtotal { get; set; }
         [JsonIgnore]
-
         public virtual order order { get; set; }
         [JsonIgnore]
-
         public virtual products products { get; set; }
     }
 }

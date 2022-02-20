@@ -21,13 +21,16 @@
         order.note = $("#order_note").val();
         var PaymentMethod = $('input[name="paymentMethod"]:checked').val();
         var BankCode = $('input[groupname="bankcode"]:checked').prop('id');
+        disable('#btnbill');
         $.ajax({
-            url: '/Cart/Pay',
+            url: '/thanh-toan',
             type: 'POST',
             dataType: 'json',
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify({ order, PaymentMethod, BankCode }),
-            success: function (response) {                
+            success: function (response) {
+                enable('#btnbill');
+
                 if (response.status) {
                     if (PaymentMethod == 'CASH')
                     {

@@ -1,6 +1,9 @@
 ﻿@model NONBAOHIEMVIETTIN.Models.introduce
 @{
     ViewBag.Title = "Giới thiệu";
+    ViewBag.Description =Model.content;
+    ViewBag.Url = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + HttpContext.Current.Request.RawUrl.ToString().Trim().ToLower();
+    ViewBag.Image = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + "/"+Model.image;
 }
 @if (Model == null)
 {

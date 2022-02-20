@@ -59,6 +59,13 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             try
             {
                 var order = db.order.Find(id);
+                if (order.paymentmethod == 0 && order.statuspay == false)
+                    foreach (var item in db.orderdetail.Where(x => x.idorder == order.id).ToList())
+                    {
+                        var products = db.products.Find(item.idproduct);
+                        products.quantity += item.quantity;
+                        db.Entry(products).State = EntityState.Modified;
+                    }
                 db.order.Remove(order);
                 db.SaveChanges();
             }

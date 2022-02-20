@@ -9,6 +9,7 @@ using System.Net.Mail;
 using System.Net;
 using System.Web.Script.Serialization;
 using NONBAOHIEMVIETTIN.assets.NganLuongAPI;
+using System.Data.Entity;
 
 namespace NONBAOHIEMVIETTIN.Controllers
 {
@@ -156,6 +157,12 @@ namespace NONBAOHIEMVIETTIN.Controllers
         {
             var cart = Session[cartSession];
             var p = db.products.Find(ProductId);
+            if (Quantity > p.quantity)
+                return Json(new
+                {
+                    status = -3,
+                    message = "Không đủ hàng"
+                });
             decimal? subtotal = 0;
             if (cart != null)
             {
@@ -169,6 +176,12 @@ namespace NONBAOHIEMVIETTIN.Controllers
                         {
                             if (item.Product.id == ProductId)
                             {
+                                if (Quantity> p.quantity)
+                                    return Json(new
+                                    {
+                                        status = -3,
+                                        message = "Không đủ hàng"
+                                    });
                                 item.Quantity = Quantity;
                                 subtotal = Quantity * (item.Product.promationprice > 0 ? item.Product.promationprice : item.Product.price);
                             }
@@ -287,12 +300,18 @@ namespace NONBAOHIEMVIETTIN.Controllers
             order.idaccount = (Session["account"] as accounts).id;
             var cart = Session[cartSession] as List<CartItem>;
             if (PaymentMethod == "CASH")
+            {
                 order.statuspay = false;
+                order.paymentmethod = 0;
+            }
             else
+            {
                 order.statuspay = true;
+                order.paymentmethod = 1;
+            }
             if (PaymentMethod == "CASH")
             {
-                
+
                 db.order.Add(order);
                 db.SaveChanges();
                 int idorder = db.order.OrderByDescending(x => x.id).FirstOrDefault().id;
@@ -315,8 +334,9 @@ namespace NONBAOHIEMVIETTIN.Controllers
             }
             else
             {
+                var orderCurrent = db.order.OrderByDescending(x => x.id).FirstOrDefault();
                 Session["order"] = order;
-                var idorder = (db.order.OrderByDescending(x => x.id).FirstOrDefault().id + 1);
+                var idorder = orderCurrent == null ? 1 : (orderCurrent.id + 1);
                 var currentLink = ConfigurationManager.AppSettings["CurrentLink"];
                 RequestInfo info = new RequestInfo();
                 info.Merchant_id = merchantId;
@@ -325,12 +345,12 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 info.cur_code = "vnd";
                 info.bank_code = BankCode;
                 info.Order_code = idorder.ToString();
-                info.Total_amount = cart.Sum(x=>x.Quantity*(x.Product.promationprice>0? x.Product.promationprice:x.Product.price)).ToString();
+                info.Total_amount = cart.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString();
                 info.fee_shipping = "0";
                 info.Discount_amount = "0";
                 info.order_description = "Thanh toán đơn hàng tại nonbaohiemviettin";
-                info.return_url = currentLink + "xac-nhan-don-hang.html";
-                info.cancel_url = currentLink + "gio-hang.html";
+                info.return_url = currentLink + "xac-nhan-don-hang";
+                info.cancel_url = currentLink + "gio-hang";
                 info.Buyer_fullname = order.fullname;
                 info.Buyer_email = order.email;
                 info.Buyer_mobile = order.phone;
@@ -392,6 +412,38 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 ViewBag.Result = "Có lỗi xảy ra. Vui lòng liên hệ admin.";
             }
             return View();
-        }      
+        }
+
+        [HttpPost]
+        public JsonResult delete_order(int id)
+        {
+            try
+            {
+                var order = db.order.Find(id);
+                if(order.paymentmethod==0&&order.statuspay==false)
+                foreach(var item in db.orderdetail.Where(x=>x.idorder==order.id).ToList())
+                {
+                        var products = db.products.Find(item.idproduct);
+                        products.quantity += item.quantity;
+                        db.Entry(products).State = EntityState.Modified;
+                }
+                db.order.Remove(order);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    status = 0,
+                    message = "Có lỗi trong quá trình xoá.Vui lòng thử lại."
+                });
+            }
+
+            return Json(new
+            {
+                status = 1,
+                message = "Huỷ đơn hàng thành công."
+            });
+        }
     }
 }

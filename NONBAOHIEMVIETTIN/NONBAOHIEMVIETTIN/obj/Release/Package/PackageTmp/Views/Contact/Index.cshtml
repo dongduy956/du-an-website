@@ -3,11 +3,14 @@
 @{
     ViewBag.Title = "Liên hệ";
     var acc = Session["account"] as accounts;
+    ViewBag.Description = "Thông tin liên hệ chính thức của shop hoạt động 24/7";
+    ViewBag.Url = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + HttpContext.Current.Request.RawUrl.ToString().Trim().ToLower();
+    ViewBag.Image = "https://media.istockphoto.com/photos/closeup-image-of-male-hands-using-smartphone-with-icon-telephone-picture-id1168945108?b=1&k=20&m=1168945108&s=170667a&w=0&h=vuUT6Qw8h-eRIHQEesB0_fC1V1xgQtPdWp4KyaVXq0M=";
 }
 @section scripts{
-<script src="~/Areas/admin/assets/js/ckfinder/ckfinder.js"></script>
+<script src="~/Areas/admin/assets/js/ckfinder/ckfinder.js?@TempData["Version"]"></script>
 
-<script src="~/Areas/admin/assets/js/ckeditor/ckeditor.js"></script>
+<script src="~/Areas/admin/assets/js/ckeditor/ckeditor.js?@TempData["Version"]"></script>
 <script>
     var editor = CKEDITOR.replace('message', {
         customConfig: '/Areas/admin/assets/js/ckeditor/config.js'

@@ -23,6 +23,8 @@ namespace NONBAOHIEMVIETTIN.Models
         public Nullable<System.DateTime> createdate { get; set; }
         public string image { get; set; }
         [JsonIgnore]
+
+
         public virtual newstype newstype { get; set; }
     }
 }

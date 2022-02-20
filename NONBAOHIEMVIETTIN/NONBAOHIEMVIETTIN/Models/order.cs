@@ -32,6 +32,7 @@ namespace NONBAOHIEMVIETTIN.Models
         public Nullable<bool> statuspay { get; set; }
         public Nullable<decimal> total { get; set; }
         public string note { get; set; }
+        public Nullable<int> paymentmethod { get; set; }
         [JsonIgnore]
 
         public virtual accounts accounts { get; set; }

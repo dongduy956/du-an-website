@@ -21,7 +21,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         public ActionResult Logout()
         {
             Session["account_admin"] = null;            
-            return Redirect("/admin/dang-nhap.html");
+            return Redirect("/admin/dang-nhap");
         }
         [HttpPost]
         public JsonResult Login(AccountLogin accLogin)

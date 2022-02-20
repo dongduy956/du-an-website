@@ -8,7 +8,6 @@
         <EntityTypeShape EntityType="nonbaohiemviettinModel.accounts" Width="1.5" PointX="0.75" PointY="11.625" IsExpanded="true" />
         <EntityTypeShape EntityType="nonbaohiemviettinModel.category" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="nonbaohiemviettinModel.contact" Width="1.5" PointX="7.75" PointY="4.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="nonbaohiemviettinModel.countonline" Width="1.5" PointX="7.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="nonbaohiemviettinModel.groupproduct" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="nonbaohiemviettinModel.introduce" Width="1.5" PointX="9.75" PointY="4.75" IsExpanded="true" />
         <EntityTypeShape EntityType="nonbaohiemviettinModel.news" Width="1.5" PointX="10" PointY="1" IsExpanded="true" />

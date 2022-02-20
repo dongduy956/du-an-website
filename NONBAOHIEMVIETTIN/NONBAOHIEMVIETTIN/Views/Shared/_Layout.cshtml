@@ -1,9 +1,10 @@
 ﻿@using NONBAOHIEMVIETTIN.Models
-@{  
+@{
     var db = new nonbaohiemviettinEntities();
     var acc = Session["account"] as accounts;
     var cart = Session["cartSession"] as List<CartItem>;
     var aboutus = db.contact.SingleOrDefault(x => x.display == true);
+    TempData["Version"] = "2.0";
 }
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -11,7 +12,12 @@
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>@ViewBag.title | Nón bảo hiểm việt tin</title>
-    <meta name="description" content="">
+    <meta name="description" content="@ViewBag.Description">
+    <meta property="og:type" content="article">
+    <meta property="og:title" content="@ViewBag.title">
+    <meta property="og:url" content="@ViewBag.Url">
+    <meta property="og:image" content="@ViewBag.Image">
+    <meta property="og:description" content="@ViewBag.Description">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="~/assets/images/logo/logo.png">
@@ -19,23 +25,32 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="~/assets/css/plugin.css">
-    <link rel="stylesheet" href="~/assets/css/bundle.css">
-    <link href="~/assets/css/jquery-ui.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/assets/css/plugin.css?@TempData["Version"]">
+    <link rel="stylesheet" href="~/assets/css/bundle.css?@TempData["Version"]">
+    <link href="~/assets/css/jquery-ui.css?@TempData["Version"]" rel="stylesheet" />
 
-    <link href="~/assets/css/style.css" rel="stylesheet" />
-    <link rel="stylesheet" href="~/assets/css/responsive.css">
-
-    <link href="~/assets/css/toast.css" rel="stylesheet" />
-    <link href="~/Content/alertifyjs/alertify.min.css" rel="stylesheet" />
-    <link href="~/Content/alertifyjs/themes/default.min.css" rel="stylesheet" />
-    <script src="~/assets/js/vendor/modernizr-2.8.3.min.js"></script>
-    <script src="~/assets/js/vendor/jquery-1.12.0.min.js"></script>
+    <link href="~/assets/css/style.css?@TempData["Version"]" rel="stylesheet" />
+    <link rel="stylesheet" href="~/assets/css/responsive.css?@TempData["Version"]">
+    <link href="~/assets/css/loadpage.css?@TempData["Version"]" rel="stylesheet" />
+    <link href="~/Content/alertifyjs/alertify.min.css?@TempData["Version"]" rel="stylesheet" />
+    <link href="~/Content/alertifyjs/themes/default.min.css?@TempData["Version"]" rel="stylesheet" />
+    <script src="~/assets/js/vendor/modernizr-2.8.3.min.js?@TempData["Version"]"></script>
+    <script src="~/assets/js/vendor/jquery-1.12.0.min.js?@TempData["Version"]"></script>
 
     @RenderSection("styles", false)
 </head>
 
 <body>
+    <!-- Hiệu ứng load -->
+    <!-- <div class="load">
+        <img src="loader.gif">
+    </div> -->
+    <div class="loader">
+        <a href="http://nonbaohiem.ml" class="loader-text">nonbaohiem.ml</a>
+        <span class="fas fa-spinner turn _icon">
+
+        </span>
+    </div>
     <!-- Add your site or application content here -->
     <!--pos page start-->
     <div class="pos_page">
@@ -51,7 +66,7 @@
                                 <div class="switcher">
                                     <ul>
                                         <li class="">
-                                            <a href="/gioi-thieu.html">
+                                            <a href="/gioi-thieu">
                                                 Giới thiệu
                                             </a>
 
@@ -71,20 +86,20 @@
                                                         <img style="border-radius:50%; width: 24px;margin-right: 2px;" src="@acc.image" alt="">
 
                                                     }
-                                                        <i id="accountname" style="font-style:normal">@acc.fullname</i>
+                                                    <i id="accountname" style="font-style:normal">@acc.fullname</i>
                                                     <i class="fa fa-angle-down"></i>
                                                 </a>
 
                                                 <ul class="dropdown_languages" style="right:0;min-width:150px">
                                                     <li>
-                                                        <a id="btninfoacc" class="w-100" href="/thong-tin-tai-khoan.html">
+                                                        <a id="btninfoacc" class="w-100" href="/thong-tin-tai-khoan">
                                                             <i class="far fa-user"></i>
                                                             Thông tin tài khoản
                                                         </a>
                                                     </li>
                                                     @if (acc.issocial == 0)
                                                     {
-                                                       
+
                                                         <li>
                                                             <a id="btnchangepasswordlink" class="w-100" href="#">
                                                                 <i class="fas fa-key"></i>
@@ -104,10 +119,10 @@
                                         else
                                         {
                                             <li style="margin-left:auto">
-                                                <a href="/dang-nhap.html">Đăng nhập</a>
+                                                <a href="/dang-nhap">Đăng nhập</a>
                                             </li>
                                             <li>
-                                                <a href="/dang-nhap.html">Đăng ký</a>
+                                                <a href="/dang-nhap">Đăng ký</a>
                                             </li>
                                         }
                                     </ul>
@@ -138,8 +153,8 @@
                                         <a href="">
                                             <i class="fa fa-shopping-cart"></i>
                                             <span>
-                                                
-                                                @(cart != null ? (cart.Sum(x => x.Quantity) + "sản phẩm -" + HoTro.Instances.convertVND(cart.Sum(x => x.Quantity * (x.Product.promationprice>0?x.Product.promationprice:x.Product.price)).ToString())) : "0 sản phẩm - 0đ")
+
+                                                @(cart != null ? (cart.Sum(x => x.Quantity) + "sản phẩm -" + HoTro.Instances.convertVND(cart.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString())) : "0 sản phẩm - 0đ")
                                             </span>
                                             <i class="fa fa-angle-down"></i>
                                         </a>
@@ -174,13 +189,13 @@
                                                     {
                                                         <div class="cart_item cart-@item.Product.id">
                                                             <div class="cart_img">
-                                                                <a href="/chi-tiet/@(item.Product.alias).html"><img src="/@item.Product.image" alt=""></a>
+                                                                <a href="/chi-tiet/@(item.Product.alias)"><img src="/@item.Product.image" alt=""></a>
                                                             </div>
                                                             <div class="cart_info">
-                                                                <a href="/chi-tiet/@(item.Product.alias).html">@item.Product.name</a>
+                                                                <a href="/chi-tiet/@(item.Product.alias)">@item.Product.name</a>
                                                                 @if (item.Product.promationprice > 0)
                                                                 {
-                                                                <span class="cart_price">@HoTro.Instances.convertVND(item.Product.price.ToString())</span>
+                                                                    <span class="cart_price">@HoTro.Instances.convertVND(item.Product.price.ToString())</span>
                                                                 }
                                                                 else
                                                                 {
@@ -199,10 +214,10 @@
                                             <div id="shipping-group">
                                                 <div class="total_price">
                                                     <span> Tổng tiền: </span>
-                                                    <span class="prices">@(cart != null ? HoTro.Instances.convertVND(cart.Sum(x => x.Quantity * (x.Product.promationprice>0?x.Product.promationprice:x.Product.price)).ToString()) : "0")</span>
+                                                    <span class="prices">@(cart != null ? HoTro.Instances.convertVND(cart.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString()) : "0")</span>
                                                 </div>
                                                 <div class="cart_button">
-                                                    <a id="btncheckout" href="/gio-hang.html"> Giỏ hàng</a>
+                                                    <a id="btncheckout" href="/gio-hang"> Giỏ hàng</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -234,11 +249,11 @@
             <div class="footer_top">
                 <div class="container">
                     <div class="row">
-                        <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="footer_widget">
-                         @if (aboutus != null)
-                         {
-                            <h3>@aboutus.title</h3>
+                                @if (aboutus != null)
+                                {
+                                    <h3>@aboutus.title</h3>
                                     <p>@Html.Raw(aboutus.content)</p>
                                     <div class="footer_widget_contect">
                                         <p><i class="fa fa-map-marker" aria-hidden="true"></i>@aboutus.address </p>
@@ -246,49 +261,57 @@
                                         <p><a href="tel:@aboutus.phone"><i class="fa fa-mobile" aria-hidden="true"></i> @aboutus.phone</a></p>
                                         <a href="mailto:@aboutus.email"><i class="fa fa-envelope-o" aria-hidden="true"></i>@aboutus.email  </a>
                                     </div>
-                         }
-                         else
-                         {
-                             <h4 class="text-center text-warning">Lỗi thông tin liên hệ. Vui lòng liên hệ admin để biết.</h4>
-                         }
+                                }
+                                else
+                                {
+                                    <h4 class="text-center text-warning">Lỗi thông tin liên hệ. Vui lòng liên hệ admin để biết.</h4>
+                                }
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6">
+                        <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="footer_widget">
-                                <h3>My Account</h3>
+                                <h3>Tài khoản của bạn</h3>
                                 <ul>
-                                    <li><a href="#">Your Account</a></li>
-                                    <li><a href="#">My orders</a></li>
-                                    <li><a href="#">My credit slips</a></li>
-                                    <li><a href="#">My addresses</a></li>
-                                    <li><a href="#">Login</a></li>
+                                    @if (acc!=null)
+{
+                                    <li><a href="/thong-tin-tai-khoan">Thông tin tài khoản</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="/dang-nhap">Đăng nhập</a></li>
+                                        <li><a href="/dang-nhap">Đăng ký</a></li>
+                                    }
                                 </ul>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6">
-                            <div class="footer_widget">
-                                <h3>Informations</h3>
-                                <ul>
-                                    <li><a href="#">Specials</a></li>
-                                    <li><a href="#">Our store(s)!</a></li>
-                                    <li><a href="#">My credit slips</a></li>
-                                    <li><a href="#">Terms and conditions</a></li>
-                                    <li><a href="#">About us</a></li>
-                                </ul>
-                            </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 mb-1">
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125578.65198579546!2d106.38024530009294!3d10.395114352278497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310ab22487796b79%3A0xfdd0bc625863f488!2zQ2jhu6MgR-G6oW8gRGlzdHJpY3QsIFRpZW4gR2lhbmcsIFZpZXRuYW0!5e0!3m2!1sen!2s!4v1643116057816!5m2!1sen!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+
                         </div>
-                        <div class="col-lg-3 col-md-6 col-sm-6">
-                            <div class="footer_widget">
-                                <h3>extras</h3>
-                                <ul>
-                                    <li><a href="#"> Brands</a></li>
-                                    <li><a href="#"> Gift Vouchers </a></li>
-                                    <li><a href="#"> Affiliates </a></li>
-                                    <li><a href="#"> Specials </a></li>
-                                    <li><a href="#"> Privacy policy </a></li>
-                                </ul>
+                        @*<div class="col-lg-3 col-md-6 col-sm-6">
+                                <div class="footer_widget">
+                                    <h3>Informations</h3>
+                                    <ul>
+                                        <li><a href="#">Specials</a></li>
+                                        <li><a href="#">Our store(s)!</a></li>
+                                        <li><a href="#">My credit slips</a></li>
+                                        <li><a href="#">Terms and conditions</a></li>
+                                        <li><a href="#">About us</a></li>
+                                    </ul>
+                                </div>
                             </div>
-                        </div>
+                            <div class="col-lg-3 col-md-6 col-sm-6">
+                                <div class="footer_widget">
+                                    <h3>extras</h3>
+                                    <ul>
+                                        <li><a href="#"> Brands</a></li>
+                                        <li><a href="#"> Gift Vouchers </a></li>
+                                        <li><a href="#"> Affiliates </a></li>
+                                        <li><a href="#"> Specials </a></li>
+                                        <li><a href="#"> Privacy policy </a></li>
+                                    </ul>
+                                </div>
+                            </div>*@
                     </div>
                 </div>
             </div>
@@ -298,29 +321,27 @@
                         <div class="col-lg-4 col-md-4">
                             <div class="copyright_area">
                                 <ul>
-                                    <li><a href="/lien-he.html"> Liên hệ </a></li>
+                                    <li><a href="/lien-he"> Liên hệ </a></li>
                                     <li><a href="#">  Dịch vụ khách hàng  </a></li>
                                     <li><a href="#">  Chính sách bảo mật  </a></li>
                                 </ul>
-                                <p>Copyright &copy; @DateTime.Now.Year <a href="#">Duy</a>. All rights reserved. </p>
+                                <p>Copyright &copy; @DateTime.Now.Year <a target="_blank" href="https://www.facebook.com/duy.12200">Duy</a>. All rights reserved. </p>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4">
-                            <div>
-                                <div class="copyright_area text-center">
-                                    <p>Đang online:<span id="visting">0</span></p>
-                                    <p>Tổng người online:<span id="visited">0</span></p>
-                                </div>
+                            <div class="copyright_area text-center">
+                                <p>Đang online:@ApplicationInstance.Application["Visiting"]</p>
+                                <p>Tổng người online:@ApplicationInstance.Application["Visited"]</p>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-4">
-                            <div class="footer_social text-right">
+                            <div class="ft_social text-center">
                                 <ul>
-                                    <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                                    <li><a class="pinterest" href="#"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
-                                    <li><a href="#"><i class="fa fa-wifi" aria-hidden="true"></i></a></li>
+                                    <li><a href="https://www.facebook.com/duy.12200" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                                    @*<li><a href="#"><i class="fa fa-twitter"></i></a></li>*@
+                                    <li><a href="mailto:dongduy0612@gmail.com"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
+                                    @*<li><a class="pinterest" href="#"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
+                                        <li><a href="#"><i class="fa fa-wifi" aria-hidden="true"></i></a></li>*@
                                 </ul>
                             </div>
                         </div>
@@ -345,7 +366,7 @@
                     </div>
                     <div class="modal-footer" style="justify-content: space-between;">
                         <button type="button" id="btnsubmitchangepassword" class="btn btn-outline-success">
-                            <span class="spinner-grow spinner-grow-sm" style="display:none"></span>
+
                             Xác nhận
                         </button>
                         <button type="button" id="btnclosechangepassword" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
@@ -356,33 +377,20 @@
         </div>
         <!--Modal changepassword end-->
         <!-- all js here -->
-        <script src="~/assets/js/popper.js"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <script src="~/assets/js/ajax-mail.js"></script>
-        <script src="~/assets/js/plugins.js"></script>
-        <script src="~/Scripts/alertify.min.js"></script>
-        <script src="~/assets/js/jquery-ui.js"></script>
+        <script src="~/assets/js/popper.js?@TempData["Version"]"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js?@TempData["Version"]" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="~/assets/js/ajax-mail.js?@TempData["Version"]"></script>
+        <script src="~/assets/js/plugins.js?@TempData["Version"]"></script>
+        <script src="~/Scripts/alertify.min.js?@TempData["Version"]"></script>
+        <script src="~/assets/js/jquery-ui.js?@TempData["Version"]"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-        <script src="@Url.Content("~/Scripts/jquery.signalR-2.4.2.min.js")"></script>
-        <script src="@Url.Content("~/signalr/hubs")"></script>
-        <script src="~/assets/js/main.js"></script>
-        <script src="~/assets/js/code/toast.js"></script>
-        <script src="~/assets/js/code/main.js"></script>
+        <script src="~/assets/js/notify.min.js?@TempData["Version"]"></script>
+        <script src="~/assets/js/main.js?@TempData["Version"]"></script>
+        <script src="~/assets/js/code/main.js?@TempData["Version"]"></script>
         <script>
-            $(function () {
-                var counterHub = $.connection.counterHub;
-                $.connection.hub.start().done(function () {
-
-                })
-                counterHub.client.UpdateCount = function (count)
-                {
-                    $('#visting').text(count);                   
-                }               
-                counterHub.client.UpdateTotal = function (count) {
-                    $('#visited').text(count);
-                }
-            })
+            $(window).on('load', function (event) {
+                $('.loader').remove();
+            });
         </script>
         @RenderSection("scripts", false)
 </body>

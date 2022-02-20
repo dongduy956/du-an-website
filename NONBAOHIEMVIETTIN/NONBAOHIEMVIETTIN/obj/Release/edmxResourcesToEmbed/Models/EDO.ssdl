@@ -53,13 +53,6 @@
     <Property Name="workday" Type="nvarchar" MaxLength="100" />
     <Property Name="alias" Type="varchar" MaxLength="500" />
   </EntityType>
-  <EntityType Name="countonline">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="total" Type="bigint" />
-  </EntityType>
   <EntityType Name="feedback">
     <Key>
       <PropertyRef Name="id" />
@@ -127,6 +120,7 @@
     <Property Name="statuspay" Type="bit" />
     <Property Name="total" Type="decimal" Precision="18" Scale="0" />
     <Property Name="note" Type="nvarchar" MaxLength="500" />
+    <Property Name="paymentmethod" Type="int" />
   </EntityType>
   <EntityType Name="orderdetail">
     <Key>
@@ -395,7 +389,6 @@
     <EntitySet Name="brand" EntityType="Self.brand" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="contact" EntityType="Self.contact" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="countonline" EntityType="Self.countonline" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="feedback" EntityType="Self.feedback" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="groupproduct" EntityType="Self.groupproduct" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="introduce" EntityType="Self.introduce" Schema="dbo" store:Type="Tables" />

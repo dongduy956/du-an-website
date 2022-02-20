@@ -25,7 +25,6 @@ namespace NONBAOHIEMVIETTIN.Models
         public string name { get; set; }
         public string alias { get; set; }
         [JsonIgnore]
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<news> news { get; set; }
     }

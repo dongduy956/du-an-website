@@ -1,6 +1,7 @@
 ﻿
 @{   
     Layout = null;
+    TempData["Version"] = "2.0";
 }
 
 <!DOCTYPE html>
@@ -15,14 +16,26 @@
     <meta name="author" content="">
     <title>Đăng nhập | Admin</title>
     <!-- Custom fonts for this template-->
-    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="~/Areas/admin/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
           rel="stylesheet">
     <!-- Custom styles for this template-->
-    <link href="~/Areas/admin/assets/css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="~/assets/css/toast.css" rel="stylesheet" />
+    <link href="~/Areas/admin/assets/css/sb-admin-2.min.css?@TempData["Version"]" rel="stylesheet">
+    <link href="~/assets/css/loadpage.css?@TempData["Version"]" rel="stylesheet" />
+    <style>
+         button[disabled] {
+            opacity: 0.85;
+            cursor: not-allowed !important;
+        }           
+    </style>
 </head>
 <body class="bg-gradient-primary vh-100">
+    <div class="loader">
+        <a style="color:rgb(78,115,223)" href="http://nonbaohiem.ml" class="loader-text">nonbaohiem.ml</a>
+        <span style="color:rgb(78,115,223)" class="fas fa-spinner turn _icon">
+        </span>
+    </div>
     <div class="container h-100">
         <!-- Outer Row -->
         <div class="row justify-content-center h-100">
@@ -56,7 +69,7 @@
                                             </div>
                                         </div>*@
                                         <button class="btn btn-primary btn-user btn-block">
-                                            Login
+                                            Đăng nhập
                                         </button>
                                 </div>
                             </div>
@@ -67,14 +80,19 @@
         </div>
     </div>
     <!-- Bootstrap core JavaScript-->
-    <script src="~/Areas/admin/assets/vendor/jquery/jquery.min.js"></script>
-    <script src="~/Areas/admin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Areas/admin/assets/vendor/jquery/jquery.min.js?@TempData["Version"]"></script>
+    <script src="~/Areas/admin/assets/vendor/bootstrap/js/bootstrap.bundle.min.js?@TempData["Version"]"></script>
     <!-- Core plugin JavaScript-->
-    <script src="~/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="~/assets/vendor/jquery-easing/jquery.easing.min.js?@TempData["Version"]"></script>
     <!-- Custom scripts for all pages-->
-    <script src="~/Areas/admin/assets/js/sb-admin-2.min.js"></script>
-    <script src="~/assets/js/code/toast.js"></script>
-    <script src="~/Areas/admin/assets/js/code/main.js"></script>
+    <script src="~/Areas/admin/assets/js/sb-admin-2.min.js?@TempData["Version"]"></script>
+    <script src="~/assets/js/notify.min.js?@TempData["Version"]"></script>
+    <script src="~/Areas/admin/assets/js/code/main.js?@TempData["Version"]"></script>
+    <script>
+            $(window).on('load', function (event) {
+               $('.loader').remove();
+            });
+    </script>
 </body>
 </html>
 

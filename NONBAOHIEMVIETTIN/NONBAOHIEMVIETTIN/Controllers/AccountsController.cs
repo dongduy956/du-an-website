@@ -147,7 +147,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 else
                 {
                     if (accTemp.status == false)
-                        return Redirect("/dang-nhap.html");
+                        return Redirect("/dang-nhap");
                     Session["account"] = accTemp;
                 }
             }
@@ -358,7 +358,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
             var acc = Session["acc"] as accounts;
             try
             {
-                acc.password = HoTro.Instances.EncodeMD5(passNew);
+                acc.password = HoTro.Instances.EncodeMD5(passNew);                
                 db.Entry(acc).State = EntityState.Modified;
                 db.SaveChanges();
                 Session.Clear();
@@ -422,7 +422,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
             acc.status = accSession.status;
             acc.idrole = accSession.idrole;
             acc.username=accSession.username;
-
+            acc.alias = accSession.alias;
             try
             {
                 db.Entry(acc).State = EntityState.Modified;

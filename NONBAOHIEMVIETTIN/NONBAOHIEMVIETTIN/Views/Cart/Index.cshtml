@@ -4,11 +4,14 @@
     ViewBag.Title = "Giỏ hàng";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var acc = Session["account"] as accounts;
+    ViewBag.Description = "Giỏ hàng nhập thông tin chi tiết và phương thức thanh toán trước khi xác nhận đặt hàng.";
+    ViewBag.Url = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + HttpContext.Current.Request.RawUrl.ToString().Trim().ToLower();
+    ViewBag.Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfw1kOyHknL0xB340n2katDgkq7VdArKieJw&usqp=CAU";
 }
 @section scripts{
-    <script src="~/assets/json/data.json"></script>
-    <script src="~/assets/js/code/api.js"></script>
-<script src="~/assets/js/code/bank.js"></script>
+    <script src="~/assets/json/data.json?@TempData["Version"]"></script>
+    <script src="~/assets/js/code/api.js?@TempData["Version"]"></script>
+<script src="~/assets/js/code/bank.js?@TempData["Version"]"></script>
 }
 @section styles{
     <style>
@@ -111,8 +114,8 @@ else
                                 {
                                     <tr class="cart-@item.Product.id">
                                         <td class="product_remove"><a href="" class="deletecart" data-id="@item.Product.id"><i class="fa fa-trash-o"></i></a></td>
-                                        <td class="product_thumb"><a href="/chi-tiet/@(item.Product.alias).html"><img style="width:70px" src="/@item.Product.image" alt=""></a></td>
-                                        <td class="product_name"><a href="/chi-tiet/@(item.Product.alias).html">@item.Product.name</a></td>
+                                        <td class="product_thumb"><a href="/chi-tiet/@(item.Product.alias)"><img style="width:70px" src="/@item.Product.image" alt=""></a></td>
+                                        <td class="product_name"><a href="/chi-tiet/@(item.Product.alias)">@item.Product.name</a></td>
                                         @if(item.Product.promationprice>0)
                                         { 
                                         <td class="product-price">@HoTro.Instances.convertVND(item.Product.promationprice.ToString())</td>
@@ -122,7 +125,7 @@ else
                                             <td class="product-price">@HoTro.Instances.convertVND(item.Product.price.ToString())</td>
 
                                         }
-                                        <td class="product_quantity"><input class="txtquantity-lstcart" min="0" data-id="@item.Product.id" max="100" value="@item.Quantity" type="number"></td>
+                                        <td class="product_quantity"><input data-val="@item.Quantity" class="txtquantity-lstcart" min="0" data-id="@item.Product.id" max="100" value="@item.Quantity" type="number"></td>
                                         <td class="product_total" id="total-@item.Product.id">@HoTro.Instances.convertVND((item.Quantity * (item.Product.promationprice>0? item.Product.promationprice: item.Product.price)).ToString())</td>
                                     </tr>
                                 }
@@ -351,7 +354,8 @@ else
                                     </div>
                                 </div>
                                 <div class="col-12 mt-10">
-                                    <button id="btnbill" type="submit">Xác nhận đơn hàng</button>
+                                    <button id="btnbill" type="submit">
+                                    Xác nhận đơn hàng</button>
                                 </div>                                
                                     
                             </div>

@@ -8,6 +8,7 @@
 }
 @section styles{
     <style>
+
         .img-product {
             width: 100px;
             height: 100px;
@@ -28,7 +29,7 @@
     {
         <script>
         $(function () {
-            alertify.error(`@TempData["status"]`);
+            alertify.success(`@TempData["status"]`);
         })
         </script>
     }
@@ -37,8 +38,8 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex align-items-center justify-content-between flex-wrap">
         <h6 class="m-0 font-weight-bold text-primary">Danh sách nón</h6>
-        <form method="get" action="/admin/tim-kiem-non.html" class="d-sm-inline-block form-inline ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-            <div class="input-group">
+        <form method="get" action="/admin/tim-kiem-non" class="d-sm-inline-block form-inline ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">                                
                 <input name="tukhoa" type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm..." aria-label="Search" aria-describedby="basic-addon2">
                 <div class="input-group-append">
                     <button class="btn btn-primary" type="submit">
@@ -47,7 +48,7 @@
                 </div>
             </div>
         </form>
-        <a href="/admin/them-moi-non.html" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <a href="/admin/them-moi-non" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
             <i class="fas fa-plus fa-sm text-white-50"></i> Thêm mới
         </a>
     </div>
@@ -89,7 +90,7 @@
                                         <i class="far fa-eye"></i>
                                     </a>
 
-                                    <a href="/admin/sua-non/@(item.alias).html" title="Sửa sản phẩm @item.name" class="mt-1 mb-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                    <a href="/admin/sua-non/@(item.alias)" title="Sửa sản phẩm @item.name" class="mt-1 mb-1 d-sm-inline-block btn btn-sm btn-primary shadow-sm">
                                         <i class="far fa-edit"></i>
                                     </a>
                                     @if (item.isdelete == false)

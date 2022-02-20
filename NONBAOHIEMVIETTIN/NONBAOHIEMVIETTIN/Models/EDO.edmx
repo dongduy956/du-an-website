@@ -58,13 +58,6 @@
           <Property Name="workday" Type="nvarchar" MaxLength="100" />
           <Property Name="alias" Type="varchar" MaxLength="500" />
         </EntityType>
-        <EntityType Name="countonline">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="total" Type="bigint" />
-        </EntityType>
         <EntityType Name="feedback">
           <Key>
             <PropertyRef Name="id" />
@@ -132,6 +125,7 @@
           <Property Name="statuspay" Type="bit" />
           <Property Name="total" Type="decimal" Precision="18" Scale="0" />
           <Property Name="note" Type="nvarchar" MaxLength="500" />
+          <Property Name="paymentmethod" Type="int" />
         </EntityType>
         <EntityType Name="orderdetail">
           <Key>
@@ -400,7 +394,6 @@
           <EntitySet Name="brand" EntityType="Self.brand" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="category" EntityType="Self.category" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="contact" EntityType="Self.contact" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="countonline" EntityType="Self.countonline" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="feedback" EntityType="Self.feedback" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="groupproduct" EntityType="Self.groupproduct" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="introduce" EntityType="Self.introduce" Schema="dbo" store:Type="Tables" />
@@ -520,13 +513,6 @@
           <Property Name="workday" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="alias" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="countonline">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="total" Type="Int64" />
-        </EntityType>
         <EntityType Name="groupproduct">
           <Key>
             <PropertyRef Name="id" />
@@ -588,6 +574,7 @@
           <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="accounts" Relationship="Self.fk_order_account" FromRole="order" ToRole="accounts" />
           <NavigationProperty Name="orderdetail" Relationship="Self.fk_orderdetail_order" FromRole="order" ToRole="orderdetail" />
+          <Property Name="paymentmethod" Type="Int32" />
         </EntityType>
         <EntityType Name="orderdetail">
           <Key>
@@ -805,7 +792,6 @@
           <EntitySet Name="accounts" EntityType="Self.accounts" />
           <EntitySet Name="category" EntityType="Self.category" />
           <EntitySet Name="contact" EntityType="Self.contact" />
-          <EntitySet Name="countonline" EntityType="Self.countonline" />
           <EntitySet Name="groupproduct" EntityType="Self.groupproduct" />
           <EntitySet Name="introduce" EntityType="Self.introduce" />
           <EntitySet Name="news" EntityType="Self.news" />
@@ -1013,14 +999,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="countonline">
-            <EntityTypeMapping TypeName="nonbaohiemviettinModel.countonline">
-              <MappingFragment StoreEntitySet="countonline">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="total" ColumnName="total" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="groupproduct">
             <EntityTypeMapping TypeName="nonbaohiemviettinModel.groupproduct">
               <MappingFragment StoreEntitySet="groupproduct">
@@ -1069,6 +1047,7 @@
           <EntitySetMapping Name="order">
             <EntityTypeMapping TypeName="nonbaohiemviettinModel.order">
               <MappingFragment StoreEntitySet="order">
+                <ScalarProperty Name="paymentmethod" ColumnName="paymentmethod" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="idaccount" ColumnName="idaccount" />
                 <ScalarProperty Name="createdate" ColumnName="createdate" />

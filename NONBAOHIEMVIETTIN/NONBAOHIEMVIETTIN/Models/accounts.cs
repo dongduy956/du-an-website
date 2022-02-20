@@ -38,15 +38,12 @@ namespace NONBAOHIEMVIETTIN.Models
         [JsonIgnore]
         public virtual role role { get; set; }
         [JsonIgnore]
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<order> order { get; set; }
         [JsonIgnore]
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<rate> rate { get; set; }
         [JsonIgnore]
-
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<receipt> receipt { get; set; }
     }

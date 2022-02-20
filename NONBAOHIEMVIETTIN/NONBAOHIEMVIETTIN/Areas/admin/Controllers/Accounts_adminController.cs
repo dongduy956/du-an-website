@@ -163,32 +163,57 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,idrole,alias,username,password,image,fullname,email,phone,address,status,issocial")] accounts accounts)
-        {
+        {                      
             if (ModelState.IsValid)
             {
-                if (string.IsNullOrEmpty(accounts.password))
-                    accounts.password = "";
-                try
+                var temp = db.accounts.SingleOrDefault(x => x.username.ToLower().Equals(accounts.username.ToLower()));
+                if (temp == null)
                 {
-                    accounts.image = accounts.image.Substring(1, accounts.image.Length - 1);
+                    if (string.IsNullOrEmpty(accounts.password))
+                        accounts.password = "";
+                    try
+                    {
+                        accounts.image = accounts.image.Substring(1, accounts.image.Length - 1);
+                    }
+                    catch
+                    {
 
+                    }                    
+                    db.Entry(accounts).State = EntityState.Modified;
+                    db.SaveChanges();
+                    if ((Session["account_admin"] as accounts).id == accounts.id)
+                    {
+                        var acc = db.accounts.Find(accounts.id);
+                        acc.role = (Session["account_admin"] as accounts).role;
+                        Session["account_admin"] = acc;
+                    }
+                    TempData["status"] = "Sửa tài khoản thành công!!";
+                    return Redirect("/admin/tai-khoan");
                 }
-                catch (Exception ex)
+                else
+                    if (temp != null && accounts.id == temp.id)
                 {
 
+                    accounts = temp = db.accounts.Find(accounts.id);
+                    accounts.address = Request["address"];
+                    accounts.email = Request["email"];
+                    accounts.fullname = Request["fullname"];
+                    accounts.phone = Request["phone"];
+                    accounts.status =bool.Parse(Request["status"]);
+                    accounts.image = Request["image"].Substring(1, Request["image"].Length - 1);
+                    db.Entry(accounts).State = EntityState.Modified;
+                    db.SaveChanges();
+                    TempData["status"] = "Sửa tài khoản thành công!!";
+                    return Redirect("/admin/tai-khoan");
                 }
-                db.Entry(accounts).State = EntityState.Modified;
-                db.SaveChanges();
-                if ((Session["account_admin"] as accounts).id == accounts.id)
+                else
                 {
-                    var acc = db.accounts.Find(accounts.id);
-                    acc.role = (Session["account_admin"] as accounts).role;
-                    Session["account_admin"] = acc;
+                    TempData["status"] = "Trùng tên đăng nhập!!";
                 }
-                return RedirectToAction("Index");
             }
             ViewBag.idrole = new SelectList(db.role, "id", "name", accounts.idrole);
             return View(accounts);
+
         }      
         protected override void Dispose(bool disposing)
         {

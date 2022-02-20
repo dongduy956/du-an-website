@@ -99,7 +99,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     db.brand.Add(brand);
                     db.SaveChanges();
                     TempData["status"] = "Thêm mới đối tác thành công!!";
-                    return Redirect("/admin/doi-tac.html");
+                    return Redirect("/admin/doi-tac");
                 }
                 else
                 {
@@ -133,13 +133,21 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 var temp = db.brand.SingleOrDefault(x => x.name.ToLower().Equals(brand.name.ToLower()));
                 if (temp == null)
                 {
-                    brand.image = brand.image.Substring(1, brand.image.Length - 1);
+                    try
+                    {
+                        brand.image = brand.image.Substring(1, brand.image.Length - 1);
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
 
                     brand.alias = HoTro.Instances.convertToUnSign3(brand.name.ToLower());
                     db.Entry(brand).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa đối tác thành công!!";
-                    return Redirect("/admin/doi-tac.html");
+                    return Redirect("/admin/doi-tac");
                 }
                 else
                     if (temp != null && brand.id == temp.id)
@@ -153,7 +161,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     db.Entry(brand).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa đối tác thành công!!";
-                    return Redirect("/admin/doi-tac.html");
+                    return Redirect("/admin/doi-tac");
                 }
                 else
                 {

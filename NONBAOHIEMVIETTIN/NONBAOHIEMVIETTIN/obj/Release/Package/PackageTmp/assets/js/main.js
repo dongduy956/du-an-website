@@ -201,7 +201,7 @@
      Category menu Activation
    ------------------------------*/
     $('.sidebar_widget.catrgorie > ul > li > a').click(function (e) {
-        location.href = '/' + $(this).data('alias') + '.html';
+        location.href = '/' + $(this).data('alias');
     })
     $('.sidebar_widget.catrgorie > ul > li > a> span.operation').on('click', function (e) {
         e.stopPropagation();
