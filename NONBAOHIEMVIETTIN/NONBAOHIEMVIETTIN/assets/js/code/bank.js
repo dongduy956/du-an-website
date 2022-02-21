@@ -41,7 +41,7 @@
                         $('#cart').hide();
                         swal({
                             title: "Thông báo",
-                            text: "Đặt hàng thành công",
+                            text: "Đặt hàng thành công.Vui lòng kiểm email đơn đặt hàng.",
                             icon: "success",
                             button: "Ok",
                         });

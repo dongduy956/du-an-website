@@ -176,7 +176,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                         {
                             if (item.Product.id == ProductId)
                             {
-                                if (Quantity> p.quantity)
+                                if (Quantity > p.quantity)
                                     return Json(new
                                     {
                                         status = -3,
@@ -209,64 +209,16 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 val += r.Next(0, 9);
             return val;
         }
-        bool sendMail(accounts acc)
+        void sendMail(string email_receive, string subject, string body)
         {
             // //đăng nhập mail để gửi
             string email = ConfigurationManager.AppSettings["mail"].ToString();
             string pass = ConfigurationManager.AppSettings["pass"].ToString();
 
             //gán thông tin
-            var mess = new MailMessage(email, acc.email);
-            mess.Subject = "Đây là mail tự động.";
-            string text = string.Empty;
-            int i = 1;
-            var list = (Session[cartSession] as List<CartItem>);
-            text = @"<table align='center' border='1' cellpadding='1' cellspacing='5' style='width:1000px'>
-	                <thead>
-		                <tr>
-			                <th scope='row'>STT</th>
-			                <th scope='col'>T&ecirc;n sản phẩm</th>
-			                <th scope='col'>Gi&aacute;</th>
-			                <th scope='col'>Số lượng</th>
-			                <th scope='col'>Th&agrave;nh tiền</th>
-		                </tr>
-	                </thead>
-	                <tbody>";
-            ////tạo 1 hoá đơn
-            //Invoices hd = new Invoices();
-            //hd.Code = taoCode();
-            //hd.AccountId = acc.Id;
-            //hd.IssuedDate = DateTime.Parse(DateTime.Now.ToShortDateString());
-            //hd.ShippingAddress = acc.Address;
-            //hd.ShippingPhone = acc.Phone;
-            //hd.Total = int.Parse(list.Sum(x => x.Quantity * x.Product.Price).ToString());
-            //hd.Status = true;
-            //db.Invoices.Add(hd);
-            //db.SaveChanges();
-            //int idHD = db.Invoices.OrderByDescending(x => x.Id).FirstOrDefault().Id;
-            //foreach (var item in list)
-            //{
-            //    //thêm data vào table carts
-            //    Carts cart = new Carts();
-            //    cart.ProductId = item.Product.Id;
-            //    cart.AccountId = acc.Id;
-            //    cart.Quantity = item.Quantity;
-            //    db.Carts.Add(cart);
-            //    db.SaveChanges();
-            //    //thêm data vào chi tiết hoá đơn
-            //    InvoiceDetails cthd = new InvoiceDetails();
-            //    cthd.InvoiceId = idHD;
-            //    cthd.ProductId = item.Product.Id;
-            //    cthd.Quantity = item.Quantity;
-            //    cthd.UnitPrice = int.Parse(item.Product.Price.ToString());
-            //    db.InvoiceDetails.Add(cthd);
-            //    db.SaveChanges();
-            //    text += String.Format(@"<tr><th scope='row'>{0}</th><td>{1}</td><td>{2}</td><td>{3}</td><td>{4}</td></tr>",
-            //    i, item.Product.Productname, HoTro.Instances.convertVND(item.Product.Price.ToString()), item.Quantity, HoTro.Instances.convertVND((item.Quantity * item.Product.Price).ToString()));
-            //    i++;
-            //}
-            text += String.Format(@"</tbody></table><p align='right'>Tổng tiền:{0}</p>", HoTro.Instances.convertVND(list.Sum(x => x.Quantity * x.Product.price).ToString()));
-            mess.Body = text;
+            var mess = new MailMessage(email, email_receive);
+            mess.Subject = subject;
+            mess.Body = body;
             //cho gửi định dạng html
             mess.IsBodyHtml = true;
             //cấu hình mail
@@ -286,9 +238,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
             }
             catch (SmtpException ex)
             {
-                return false;
             }
-            return true;
 
         }
         [HttpPost]
@@ -296,7 +246,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
         public JsonResult Pay(order order, string PaymentMethod, string BankCode)
         {
             order.createdate = DateTime.Parse(DateTime.Now.ToShortDateString());
-            order.status = false;
+            order.status = false;            
             order.idaccount = (Session["account"] as accounts).id;
             var cart = Session[cartSession] as List<CartItem>;
             if (PaymentMethod == "CASH")
@@ -311,21 +261,227 @@ namespace NONBAOHIEMVIETTIN.Controllers
             }
             if (PaymentMethod == "CASH")
             {
+                #region body mail
+                string body = @"<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>Document</title>
+  <style>
+    body {
+      padding: 4px;
+      margin: 0;
+      box-sizing: border-box;
+      font-size: 1.2rem;
 
+    }
+
+    .container {
+      border: 1px solid #ccc;
+
+    }
+
+    .table {
+      border-top:1px solid #ccc;
+      
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .row>span {
+      width: 20%;
+      text-align: center;
+    }
+
+    .row span:nth-child(4) {
+      width: 10%;
+
+    }
+
+    .row span:nth-child(2) {
+      width: 30%;
+
+    }
+
+    .thead span {
+      border-bottom: 3px solid #00bba6;
+      line-height: 3rem;
+    }
+
+    .tbody .row>span {
+      display: flex;
+      line-height: 1.5rem;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .border_right-none {
+      border-right: none !important;
+    }
+
+    .row>span {
+      border-right: 1px solid #ccc;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    .tbody .row>span>span {
+      margin: auto;
+    }
+
+    .tbody .row {
+      border-bottom: 1px solid #ccc;
+    }
+    
+
+    .footer {
+      padding: 8px;
+    display: flex;
+    }
+    .footer_text{
+      font-weight: 600;
+      margin-right:auto ;
+    }
+    .header{
+      padding: 4px;
+      background: #00bba6;
+    }
+    .header h1,.header h3,.header h5,.header p{
+      text-transform: uppercase;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+      color: white;
+      margin-bottom: 4px;
+    }
+    .header_detail{
+          color: white;
+          display: flex;
+          flex-wrap: wrap;
+        }
+        .header_detail > div{
+          width: 50%;
+          text-align: center;
+        }
+  </style>
+</head>
+
+<body>
+  <div class='container'>
+    <div class='header'>
+      <h1 >CÔNG TY NÓN BẢO HIỂM VIỆT TIN</h1>
+      <h3>Thông tin đơn hàng</h3>
+      <h5 style='margin:0'>Ngày đặt: " + DateTime.Now.ToString()+@"</h5>
+      <div class='header_detail'>
+        <div>
+          <span>Họ tên:</span>
+          <span>"+order.fullname+@"</span>
+        </div>
+        <div>
+          <span>Email:</span>
+          <span>"+order.email+@"</span>
+        </div>       
+      </div>
+         <div class='header_detail'>        
+        <div>
+          <span>Số điện thoại:</span>
+          <span>" + order.phone + @"</span>
+        </div>
+        <div>
+          <span>Địa chỉ nhận hàng:</span>
+          <span>" + order.address + @"</span>
+        </div>
+      </div>
+    </div>
+    <div class='table'>
+      <div class='thead'>
+        <div class='row'>
+          <span>Ảnh</span>
+          <span>Tên sản phẩm</span>
+          <span>Giá</span>
+          <span>Số lượng</span>
+          <span class='border_right-none'>Thành tiền</span>
+        </div>
+      </div>
+      <div class='tbody'>";
+                #endregion
                 db.order.Add(order);
                 db.SaveChanges();
                 int idorder = db.order.OrderByDescending(x => x.id).FirstOrDefault().id;
+                var urlImage = string.Empty;
                 foreach (var item in cart)
                 {
-                    orderdetail odetail = new orderdetail();
-                    odetail.idorder = idorder;
-                    odetail.idproduct = item.Product.id;
-                    odetail.quantity = item.Quantity;
-                    odetail.price = (item.Product.promationprice > 0 ? item.Product.promationprice : item.Product.price);
-                    db.orderdetail.Add(odetail);
+                    urlImage = "https://nonbaohiem.ml/" + item.Product.image.Replace(" ","%20");
+                    orderdetail orderdetail = new orderdetail();
+                    orderdetail.idorder = idorder;
+                    orderdetail.idproduct = item.Product.id;
+                    orderdetail.quantity = item.Quantity;
+                    orderdetail.price = (item.Product.promationprice > 0 ? item.Product.promationprice : item.Product.price);
+                    #region body mail
+                    body += @"
+                        <div class='row'>
+                  <span><img
+                      src='"+ urlImage + @"'
+                      alt='Error'></span>
+                  <span><span>"+ item.Product.name + @"</span></span>
+                  <span><span>"+ HoTro.Instances.convertVND(orderdetail.price.ToString()) + @"</span></span>
+                  <span><span>" + item.Quantity + @"</span></span>
+                  <span class='border_right-none'><span>"+ HoTro.Instances.convertVND((orderdetail.price * orderdetail.quantity).ToString()) + @"</span></span>
+                </div>";
+                    #endregion
+                    db.orderdetail.Add(orderdetail);
                     db.SaveChanges();
                 }
+                #region body mail
+                body += String.Format(@"</div>
+    </div>
+    <div class='footer'>
+      <span class='footer_text'>
+        Tổng sản phẩm
+      </span>
+      <span>
+        {0}
+      </span>
+    </div>
+    <div class='footer'>
+      <span class='footer_text'>
+        Tổng tiền
+      </span>
+      <span>
+       {1}
+      </span>
+    </div>
+    <div class='header'>
+      <p>Xin cảm ơn quý khách đã ủng hộ shop.</p>
+      <p style='margin:0;'>Hẹn gặp lại quý khách.</p>
+      
+    </div>
+  </div>
+
+</body>
+
+</html>", cart.Sum(x => x.Quantity), HoTro.Instances.convertVND(cart.Sum(x=>x.Quantity*(x.Product.promationprice>0? x.Product.promationprice:x.Product.price)).ToString()));
+                #endregion
                 Session[cartSession] = null;
+                try
+                {
+                    sendMail(order.email, "Thông tin đơn hàng " + idorder, body);
+                }
+                catch (Exception ex)
+                {
+                    return Json(new
+                    {
+                        status = true,
+                        message = "Lỗi gửi mail đơn hàng"
+                    });
+                }
                 return Json(new
                 {
                     status = true,
@@ -391,19 +547,226 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 var order = Session["order"] as order;
                 var cart = Session[cartSession] as List<CartItem>;
                 Session["order"] = null;
+                #region body mail
+                string body = @"<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>Document</title>
+  <style>
+    body {
+      padding: 4px;
+      margin: 0;
+      box-sizing: border-box;
+      font-size: 1.2rem;
+
+    }
+
+    .container {
+      border: 1px solid #ccc;
+
+    }
+
+    .table {
+      border-top:1px solid #ccc;
+      
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .row>span {
+      width: 20%;
+      text-align: center;
+    }
+
+    .row span:nth-child(4) {
+      width: 10%;
+
+    }
+
+    .row span:nth-child(2) {
+      width: 30%;
+
+    }
+
+    .thead span {
+      border-bottom: 3px solid #00bba6;
+      line-height: 3rem;
+    }
+
+    .tbody .row>span {
+      display: flex;
+      line-height: 1.5rem;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .border_right-none {
+      border-right: none !important;
+    }
+
+    .row>span {
+      border-right: 1px solid #ccc;
+    }
+
+    img {
+      width: 100%;
+    }
+
+    .tbody .row>span>span {
+      margin: auto;
+    }
+
+    .tbody .row {
+      border-bottom: 1px solid #ccc;
+    }
+    
+
+    .footer {
+      padding: 8px;
+    display: flex;
+    }
+    .footer_text{
+      font-weight: 600;
+      margin-right:auto ;
+    }
+    .header{
+      padding: 4px;
+      background: #00bba6;
+    }
+    .header h1,.header h3,.header h5,.header p{
+      text-transform: uppercase;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+      color: white;
+      margin-bottom: 4px;
+    }
+    .header_detail{
+          color: white;
+          display: flex;
+          flex-wrap: wrap;
+        }
+        .header_detail > div{
+          width: 50%;
+          text-align: center;
+        }
+  </style>
+</head>
+
+<body>
+  <div class='container'>
+    <div class='header'>
+      <h1 >CÔNG TY NÓN BẢO HIỂM VIỆT TIN</h1>
+      <h3>Thông tin đơn hàng</h3>
+      <h5 style='margin:0'>Ngày đặt: " + DateTime.Now.ToString() + @"</h5>
+      <div class='header_detail'>
+        <div>
+          <span>Họ tên:</span>
+          <span>" + order.fullname + @"</span>
+        </div>
+        <div>
+          <span>Email:</span>
+          <span>" + order.email + @"</span>
+        </div>       
+      </div>
+         <div class='header_detail'>        
+        <div>
+          <span>Số điện thoại:</span>
+          <span>" + order.phone + @"</span>
+        </div>
+        <div>
+          <span>Địa chỉ nhận hàng:</span>
+          <span>" + order.address + @"</span>
+        </div>
+      </div>
+    </div>
+    <div class='table'>
+      <div class='thead'>
+        <div class='row'>
+          <span>Ảnh</span>
+          <span>Tên sản phẩm</span>
+          <span>Giá</span>
+          <span>Số lượng</span>
+          <span class='border_right-none'>Thành tiền</span>
+        </div>
+      </div>
+      <div class='tbody'>";
+                #endregion
                 db.order.Add(order);
                 int idorder = db.order.OrderByDescending(x => x.id).FirstOrDefault().id;
+                var urlImage = string.Empty;
                 foreach (var item in cart)
                 {
-                    orderdetail odetail = new orderdetail();
-                    odetail.idorder = idorder;
-                    odetail.idproduct = item.Product.id;
-                    odetail.quantity = item.Quantity;
-                    odetail.price = (item.Product.promationprice > 0 ? item.Product.promationprice : item.Product.price);
-                    db.orderdetail.Add(odetail);
+                    orderdetail orderdetail = new orderdetail();
+                    urlImage = "https://nonbaohiem.ml/" + item.Product.image.Replace(" ", "%20");
+                    orderdetail.idorder = idorder;
+                    orderdetail.idproduct = item.Product.id;
+                    orderdetail.quantity = item.Quantity;
+                    orderdetail.price = (item.Product.promationprice > 0 ? item.Product.promationprice : item.Product.price);
+                    #region body mail
+                    body += @"
+                        <div class='row'>
+                  <span><img
+                      src='" + urlImage + @"'
+                      alt='Error'></span>
+                  <span><span>" + item.Product.name + @"</span></span>
+                  <span><span>" + HoTro.Instances.convertVND(orderdetail.price.ToString()) + @"</span></span>
+                  <span><span>" + item.Quantity + @"</span></span>
+                  <span class='border_right-none'><span>" + HoTro.Instances.convertVND((orderdetail.price * orderdetail.quantity).ToString()) + @"</span></span>
+                </div>";
+                    #endregion
+                    db.orderdetail.Add(orderdetail);
                     db.SaveChanges();
                 }
+                #region body mail
+                body += String.Format(@"</div>
+    </div>
+    <div class='footer'>
+      <span class='footer_text'>
+        Tổng sản phẩm
+      </span>
+      <span>
+        {0}
+      </span>
+    </div>
+    <div class='footer'>
+      <span class='footer_text'>
+        Tổng tiền
+      </span>
+      <span>
+       {1}
+      </span>
+    </div>
+    <div class='header'>
+      <p>Xin cảm ơn quý khách đã ủng hộ shop.</p>
+      <p style='margin:0;'>Hẹn gặp lại quý khách.</p>
+      
+    </div>
+  </div>
+
+</body>
+
+</html>", cart.Sum(x => x.Quantity), HoTro.Instances.convertVND(cart.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString()));
+                #endregion
                 Session[cartSession] = null;
+                try
+                {
+                    sendMail(order.email, "Thông tin đơn hàng " + idorder, body);
+                }
+                catch (Exception ex)
+                {
+                    return Json(new
+                    {
+                        status = true,
+                        message = "Lỗi gửi mail đơn đặt hàng."
+                    });
+                }
                 ViewBag.idorder = idorder;
                 ViewBag.Result = "Thanh toán thành công. Chúng tôi sẽ liên hệ lại sớm nhất.";
             }
@@ -420,13 +783,13 @@ namespace NONBAOHIEMVIETTIN.Controllers
             try
             {
                 var order = db.order.Find(id);
-                if(order.paymentmethod==0&&order.statuspay==false)
-                foreach(var item in db.orderdetail.Where(x=>x.idorder==order.id).ToList())
-                {
+                if (order.paymentmethod == 0 && order.statuspay == false)
+                    foreach (var item in db.orderdetail.Where(x => x.idorder == order.id).ToList())
+                    {
                         var products = db.products.Find(item.idproduct);
                         products.quantity += item.quantity;
                         db.Entry(products).State = EntityState.Modified;
-                }
+                    }
                 db.order.Remove(order);
                 db.SaveChanges();
             }

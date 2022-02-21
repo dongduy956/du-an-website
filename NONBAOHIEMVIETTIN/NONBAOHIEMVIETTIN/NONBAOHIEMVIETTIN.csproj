@@ -270,7 +270,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IntroduceController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
-    <Compile Include="Controllers\ProductsController.cs" />
+    <Compile Include="Views\ProductsController.cs" />
     <Compile Include="Controllers\subscribeController.cs" />
     <Compile Include="Controllers\WishController.cs" />
     <Compile Include="Global.asax.cs">
