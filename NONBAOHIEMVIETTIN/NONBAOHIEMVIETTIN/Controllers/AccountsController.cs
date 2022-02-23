@@ -743,7 +743,14 @@ namespace NONBAOHIEMVIETTIN.Controllers
         [HttpPost]
         public JsonResult update(accounts acc)
         {
+           
             var accSession = Session["account"] as accounts;
+            if (db.accounts.SingleOrDefault(x =>!x.username.Equals(accSession.username) && x.email.Equals(acc.email)&&x.issocial==0) != null)
+                return Json(new
+                {
+                    status = -1,
+                    message = "Email này đã được sử dụng."
+                });
             acc.id = accSession.id;
             acc.password = accSession.password;
             acc.issocial = accSession.issocial;
@@ -751,6 +758,8 @@ namespace NONBAOHIEMVIETTIN.Controllers
             acc.idrole = accSession.idrole;
             acc.username=accSession.username;
             acc.alias = accSession.alias;
+            if(!acc.image.Contains("assets/images/users/"))
+            acc.image = "assets/images/users/" + acc.image;
             try
             {
                 db.Entry(acc).State = EntityState.Modified;

@@ -18,6 +18,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="Areas/admin/assets/css/sb-admin-2.min.css">
       <publishTime>02/08/2022 21:04:46</publishTime>
     </File>
+    <File Include="Areas/admin/assets/img/bg.gif">
+      <publishTime>02/23/2022 22:24:36</publishTime>
+    </File>
     <File Include="Areas/admin/assets/img/undraw_posting_photo.svg">
       <publishTime>02/08/2022 21:04:46</publishTime>
     </File>
@@ -3550,7 +3553,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/16/2022 17:25:21</publishTime>
     </File>
     <File Include="Areas/admin/assets/js/code/main.js">
-      <publishTime>02/17/2022 10:04:38</publishTime>
+      <publishTime>02/23/2022 23:10:09</publishTime>
     </File>
     <File Include="Areas/admin/assets/js/sb-admin-2.js">
       <publishTime>02/08/2022 21:04:48</publishTime>
@@ -9064,10 +9067,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/08/2022 21:04:50</publishTime>
     </File>
     <File Include="Areas/admin/Views/Accounts_admin/Create.cshtml">
-      <publishTime>02/17/2022 09:54:32</publishTime>
+      <publishTime>02/23/2022 18:19:41</publishTime>
     </File>
     <File Include="Areas/admin/Views/Accounts_admin/Edit.cshtml">
-      <publishTime>02/17/2022 09:55:12</publishTime>
+      <publishTime>02/23/2022 21:24:47</publishTime>
     </File>
     <File Include="Areas/admin/Views/Accounts_admin/Index.cshtml">
       <publishTime>02/17/2022 09:55:34</publishTime>
@@ -9076,7 +9079,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/17/2022 09:55:50</publishTime>
     </File>
     <File Include="Areas/admin/Views/Brand_admin/Edit.cshtml">
-      <publishTime>02/17/2022 09:56:00</publishTime>
+      <publishTime>02/23/2022 21:19:27</publishTime>
     </File>
     <File Include="Areas/admin/Views/Brand_admin/Index.cshtml">
       <publishTime>02/17/2022 09:56:14</publishTime>
@@ -9118,13 +9121,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/17/2022 09:58:40</publishTime>
     </File>
     <File Include="Areas/admin/Views/Introduce_admin/Edit.cshtml">
-      <publishTime>02/17/2022 09:58:47</publishTime>
+      <publishTime>02/23/2022 21:39:34</publishTime>
     </File>
     <File Include="Areas/admin/Views/Introduce_admin/Index.cshtml">
       <publishTime>02/17/2022 09:58:56</publishTime>
     </File>
     <File Include="Areas/admin/Views/Login/Index.cshtml">
-      <publishTime>02/19/2022 14:21:27</publishTime>
+      <publishTime>02/23/2022 23:18:20</publishTime>
     </File>
     <File Include="Areas/admin/Views/Newstype_admin/Create.cshtml">
       <publishTime>02/17/2022 10:00:06</publishTime>
@@ -9139,7 +9142,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/17/2022 09:59:33</publishTime>
     </File>
     <File Include="Areas/admin/Views/News_admin/Edit.cshtml">
-      <publishTime>02/17/2022 09:59:41</publishTime>
+      <publishTime>02/23/2022 21:34:24</publishTime>
     </File>
     <File Include="Areas/admin/Views/News_admin/Index.cshtml">
       <publishTime>02/17/2022 09:59:50</publishTime>
@@ -9160,7 +9163,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/17/2022 10:01:18</publishTime>
     </File>
     <File Include="Areas/admin/Views/products_admin/Edit.cshtml">
-      <publishTime>02/17/2022 10:01:33</publishTime>
+      <publishTime>02/23/2022 21:29:07</publishTime>
     </File>
     <File Include="Areas/admin/Views/products_admin/Index.cshtml">
       <publishTime>02/17/2022 10:01:54</publishTime>
@@ -9184,7 +9187,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/17/2022 10:02:56</publishTime>
     </File>
     <File Include="Areas/admin/Views/Shared/_Layout.cshtml">
-      <publishTime>02/19/2022 14:21:37</publishTime>
+      <publishTime>02/23/2022 23:18:32</publishTime>
     </File>
     <File Include="Areas/admin/Views/Shared/_Slidebar.cshtml">
       <publishTime>02/17/2022 10:03:24</publishTime>
@@ -10933,7 +10936,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/17/2022 19:33:06</publishTime>
     </File>
     <File Include="assets/js/code/main.js">
-      <publishTime>02/17/2022 20:12:12</publishTime>
+      <publishTime>02/23/2022 14:38:48</publishTime>
     </File>
     <File Include="assets/js/code/toast.js">
       <publishTime>02/08/2022 21:05:00</publishTime>
@@ -11053,7 +11056,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/08/2022 21:05:09</publishTime>
     </File>
     <File Include="bin/NONBAOHIEMVIETTIN.dll">
-      <publishTime>02/21/2022 14:49:28</publishTime>
+      <publishTime>02/23/2022 23:19:25</publishTime>
     </File>
     <File Include="bin/Owin.dll">
       <publishTime>02/08/2022 21:05:10</publishTime>
@@ -11269,7 +11272,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/16/2022 11:27:23</publishTime>
     </File>
     <File Include="Views/Accounts/AccountInfo.cshtml">
-      <publishTime>02/19/2022 22:55:38</publishTime>
+      <publishTime>02/23/2022 15:06:23</publishTime>
     </File>
     <File Include="Views/Accounts/Login.cshtml">
       <publishTime>02/19/2022 23:10:13</publishTime>
@@ -11305,10 +11308,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/19/2022 22:42:23</publishTime>
     </File>
     <File Include="Views/Shared/Error.cshtml">
-      <publishTime>02/19/2022 22:45:27</publishTime>
+      <publishTime>02/23/2022 23:18:03</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>02/20/2022 23:32:07</publishTime>
+      <publishTime>02/23/2022 23:17:53</publishTime>
     </File>
     <File Include="Views/Shared/_Navbar.cshtml">
       <publishTime>02/17/2022 09:44:45</publishTime>

@@ -60,6 +60,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             try
             {
                 var accounts = db.accounts.Find(id);
+
                 db.accounts.Remove(accounts);
                 db.SaveChanges();
             }
@@ -71,7 +72,12 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     message = "Có lỗi trong quá trình xoá.Vui lòng thử lại."
                 });
             }
-
+            if((Session["account_admin"] as accounts).id==id)
+                return Json(new
+                {
+                    status = 2,
+                    message = "Xoá thành công."
+                });
             return Json(new
             {
                 status = 1,
@@ -116,7 +122,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (db.accounts.SingleOrDefault(x => x.username.ToLower().Equals(accounts.username.ToLower())) == null)
+                if (db.accounts.SingleOrDefault(x => x.username.ToLower().Equals(accounts.username.ToLower())) == null && db.accounts.SingleOrDefault(x => x.issocial == 0 && x.email.ToLower().Equals(accounts.email.ToLower())) == null)
                 {
                     try
                     {
@@ -137,7 +143,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 }
                 else
                 {
-                    TempData["status"] = "Trùng tên đăng nhập!!";
+                    TempData["status"] = "Trùng tên đăng nhập hoặc email!!";
                 }
             }
 
@@ -163,7 +169,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Edit([Bind(Include = "id,idrole,alias,username,password,image,fullname,email,phone,address,status,issocial")] accounts accounts)
-        {                      
+        {
             if (ModelState.IsValid)
             {
                 var temp = db.accounts.SingleOrDefault(x => x.username.ToLower().Equals(accounts.username.ToLower()));
@@ -178,7 +184,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     catch
                     {
 
-                    }                    
+                    }
                     db.Entry(accounts).State = EntityState.Modified;
                     db.SaveChanges();
                     if ((Session["account_admin"] as accounts).id == accounts.id)
@@ -191,7 +197,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     return Redirect("/admin/tai-khoan");
                 }
                 else
-                    if (temp != null && accounts.id == temp.id)
+                    if (temp != null && accounts.id == temp.id && db.accounts.SingleOrDefault(x => x.issocial == 0 && x.id != temp.id && x.email.ToLower().Equals(accounts.email.ToLower())) == null)
                 {
 
                     accounts = temp = db.accounts.Find(accounts.id);
@@ -199,8 +205,17 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     accounts.email = Request["email"];
                     accounts.fullname = Request["fullname"];
                     accounts.phone = Request["phone"];
-                    accounts.status =bool.Parse(Request["status"]);
-                    accounts.image = Request["image"].Substring(1, Request["image"].Length - 1);
+                    accounts.status = bool.Parse(Request["status"]);
+                    try
+                    {
+                        accounts.image = Request["image"].Substring(1, Request["image"].Length - 1);
+
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                    accounts.idrole = int.Parse(Request["idrole"]);
                     db.Entry(accounts).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa tài khoản thành công!!";
@@ -208,13 +223,13 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 }
                 else
                 {
-                    TempData["status"] = "Trùng tên đăng nhập!!";
+                    TempData["status"] = "Trùng email!!";
                 }
             }
             ViewBag.idrole = new SelectList(db.role, "id", "name", accounts.idrole);
             return View(accounts);
 
-        }      
+        }
         protected override void Dispose(bool disposing)
         {
             if (disposing)

@@ -5,10 +5,10 @@
     var acc = Session["account"] as accounts;
     var db = new nonbaohiemviettinEntities();
 
-    ViewBag.Title = "Thông tin tài khoản - " +acc.username;
-    ViewBag.Description= "Thông tin về tài khoản và các đơn hàng của tài khoản " + acc.username + " đã đặt hàng.";
-    ViewBag.Url= "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + HttpContext.Current.Request.RawUrl.ToString().Trim().ToLower();
-    ViewBag.Image= "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Crystal_Clear_app_Login_Manager.svg/1024px-Crystal_Clear_app_Login_Manager.svg.png";
+    ViewBag.Title = "Thông tin tài khoản - " + acc.username;
+    ViewBag.Description = "Thông tin về tài khoản và các đơn hàng của tài khoản " + acc.username + " đã đặt hàng.";
+    ViewBag.Url = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + HttpContext.Current.Request.RawUrl.ToString().Trim().ToLower();
+    ViewBag.Image = "https://upload.wikimedia.org/wikipedia/commons/thumb/6/67/Crystal_Clear_app_Login_Manager.svg/1024px-Crystal_Clear_app_Login_Manager.svg.png";
 }
 @section styles{
     <style>
@@ -40,7 +40,7 @@
     <div class="row">
         <div class="col-12">
             <div class="breadcrumb_content">
-                <ul>                    
+                <ul>
                     <li><a href="/">Trang chủ</a></li>
                     <li><i class="fa fa-angle-right"></i></li>
                     <li>Tài khoản @acc.username</li>
@@ -81,21 +81,32 @@
                                                 <label for="fullnameupdate">Họ tên</label>
                                                 <input value="@acc.fullname" type="text" id="fullnameupdate" name="fullnameupdate">
                                             </p>
-                                            <p>
-                                                <label for="emailupdate">Email</label>
-                                                <input type="text" value="@acc.email" id="emailupdate" name="emailupdate">
+                                            if (!acc.username.Equals("admin"))
+                                            {
+                                                <p>
+                                                    <label for="emailupdate">Email</label>
+                                                    <input type="text" value="@acc.email" id="emailupdate" name="emailupdate">
 
-                                            </p>
+                                                </p>
+                                            }
+                                            else
+                                            {
+                                                <p>
+                                                    <input type="hidden" value="@acc.email" id="emailupdate" name="emailupdate">
+                                                </p>
+                                            }
                                         }
                                         else
                                         {
                                             <p>
                                                 <input value="@acc.fullname" type="hidden" id="fullnameupdate" name="fullnameupdate">
                                             </p>
+
                                             <p>
                                                 <input type="hidden" value="@acc.email" id="emailupdate" name="emailupdate">
 
                                             </p>
+
                                         }
                                         <p>
                                             <label for="phoneupdate">Số điện thoại</label>
@@ -112,7 +123,7 @@
                                             <p>
                                                 <label for="imageupdate">Ảnh đại diện</label>
                                                 <br />
-                                                <img id="imgupdate" data-val="@acc.image" alt="Lỗi ảnh đại diện" src="/@acc.image" />
+                                                <img id="imgupdate" width="100" data-val="@acc.image" alt="Lỗi ảnh đại diện" src="/@acc.image" />
                                                 <br />
                                                 <span class="custom-file">
                                                     <input type="file" name="file" class="custom-file-input" id="imageupdate">
@@ -153,7 +164,8 @@
                                     <tr id="order-@item.id">
                                         <td>@item.id</td>
                                         <td>@DateTime.Parse(item.createdate.ToString()).ToShortDateString()</td>
-                                        <td><span class="success">
+                                        <td>
+                                            <span class="success">
                                                 @if (item.paymentmethod == 0)
                                                 {
                                                     if (item.status == false)
@@ -180,28 +192,29 @@
                                                         <span class='text-success'>Đã giao</span>
                                                     }
                                                 }
-                                            </span></td>
+                                            </span>
+                                        </td>
                                         <td>@HoTro.Instances.convertVND(item.total.ToString()) </td>
                                         <td>
                                             <a href="" data-target="#detail_@item.id" data-id="@item.id" id="view_@item.id" data-toggle="collapse" class="view">
                                                 Xem
                                             </a>
                                             |
-                                            @if (item.paymentmethod == 0&& item.status == false)
+                                            @if (item.paymentmethod == 0 && item.status == false)
                                             {
-                                                                                               
-                                                    <a href="" data-id="@item.id" class="delete_order text-danger">                                                        
-                                                        Huỷ
-                                                    </a>
+
+                                                <a href="" data-id="@item.id" class="delete_order text-danger">
+                                                    Huỷ
+                                                </a>
 
                                             }
                                             else
                                             {
-                                                <a style="cursor:not-allowed; opacity:0.8"  class="text-danger">
+                                                <a style="cursor:not-allowed; opacity:0.8" class="text-danger">
                                                     Huỷ
                                                 </a>
                                             }
-                                           
+
                                         </td>
                                     </tr>
 
@@ -245,30 +258,30 @@
                                 </div>
                                                         }
                         </div>
-                        @if(ViewBag.last!=1)
-                        { 
-                        <div class="pagination_style shop_page" style="justify-content:flex-end">                          
-                            <div class="page_number">
-                                <ul>
-                                    @Html.PagedListPager(Model,
+                        @if (ViewBag.last != 1)
+                        {
+                            <div class="pagination_style shop_page" style="justify-content:flex-end">
+                                <div class="page_number">
+                                    <ul>
+                                        @Html.PagedListPager(Model,
                     page => Url.Action("AccountInfo", new { page }),
                     new PagedListRenderOptions
                     {
                         MaximumPageNumbersToDisplay = 4
-                    })                                    
+                    })
 
 
-                                </ul>
+                                    </ul>
 
+                                </div>
                             </div>
-                        </div>
                         }
                     </div>
 
-                </div>               
-              
+                </div>
 
+
+            </div>
         </div>
-    </div>
 </section>
 <!-- End Maincontent  -->

@@ -193,3 +193,4 @@ E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Release\NONBAOHIEMVIETTIN.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Release\NONBAOHIEMVIETTIN.pdb
+E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Release\NONBAOHIEMVIETTIN.csprojResolveAssemblyReference.cache

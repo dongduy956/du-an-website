@@ -143,6 +143,15 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 if (temp == null)
                 {
                     news.alias = HoTro.Instances.convertToUnSign3(news.title.ToLower());
+                    try
+                    {
+                        news.image = news.image.Substring(1, news.image.Length - 1);
+                    }
+                    catch (Exception ex)
+                    {
+
+                        
+                    }
                     db.Entry(news).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa tin tức thành công!!";
@@ -157,7 +166,13 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     news.title = Request["title"];
                     news.id_newstype = id_newstype;
                     news.content = content;
-                    news.image = Request["image"].Substring(1,Request["image"].Length-1);
+                    try
+                    {
+                        news.image = Request["image"].Substring(1, Request["image"].Length - 1);
+                    }
+                    catch (Exception ex)
+                    {
+                    }
                     news.alias = HoTro.Instances.convertToUnSign3(news.title.ToLower());
                     db.Entry(news).State = EntityState.Modified;
                     db.SaveChanges();

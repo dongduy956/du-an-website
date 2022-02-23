@@ -156,7 +156,13 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     brand = temp = db.brand.Find(brand.id);
                     brand.name = Request["name"];
                     brand.link = Request["link"];
-                    brand.image = Request["image"].Substring(1, Request["image"].Length - 1);
+                    try
+                    {
+                        brand.image = Request["image"].Substring(1, Request["image"].Length - 1);
+                    }
+                    catch (Exception ex)
+                    {
+                    }
                     brand.alias = HoTro.Instances.convertToUnSign3(brand.name.ToLower());
                     db.Entry(brand).State = EntityState.Modified;
                     db.SaveChanges();

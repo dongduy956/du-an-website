@@ -1237,7 +1237,7 @@ $(function () {
                     } catch (e) {
                         check = false;
                     }
-        acc.image = img == '' ? $('#imgupdate').data('val'): img;
+        acc.image = (img == '') ? $('#imgupdate').data('val'): img;
         acc.fullname = $('#fullnameupdate').val();
         if (acc.fullname == "")
             $.notify('Họ tên không được rỗng.', 'warn');

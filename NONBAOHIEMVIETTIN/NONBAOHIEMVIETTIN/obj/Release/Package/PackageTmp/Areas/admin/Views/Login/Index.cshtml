@@ -1,7 +1,7 @@
 ﻿
 @{   
     Layout = null;
-    TempData["Version"] = "2.0";
+    TempData["Version"] = "4.0";
 }
 
 <!DOCTYPE html>
@@ -27,7 +27,16 @@
          button[disabled] {
             opacity: 0.85;
             cursor: not-allowed !important;
-        }           
+        }   
+         .bg-gradient-primary{
+             background-color:transparent !important;
+             background-image:url(../../Areas/admin/assets/img/bg.gif) !important;
+         }
+        .bg-login-image {
+            background: url(https://www.goscience.eu/common/img/login.jpg);
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
     </style>
 </head>
 <body class="bg-gradient-primary vh-100">

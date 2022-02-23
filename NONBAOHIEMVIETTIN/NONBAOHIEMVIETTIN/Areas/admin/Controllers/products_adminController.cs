@@ -247,7 +247,14 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     products.isdelete = Boolean.Parse(Request["isdelete"]);
                     products.name = Request["name"];
                     products.description = description;
-                    products.image = Request["image"].Substring(1, Request["image"].Length - 1);
+                    try
+                    {
+                        products.image = Request["image"].Substring(1, Request["image"].Length - 1);
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
                     products.price = decimal.Parse(Request["price"]);
                     products.quantity = int.Parse(Request["quantity"]);
                     products.promationprice = decimal.Parse(Request["promationprice"]);

@@ -311,11 +311,15 @@ $(function () {
             type: "POST",
             success: function (data) {
 
-                if (data.status == 1)
+                if (data.status == 1 || data.status==2)
                 {
                     $.notify(data.message, 'success');
 
                     $(`#_account_${id}`).hide(200);
+                    if(data.status==2)
+                    {
+                        location.href = "/admin/Login/Logout"
+                    }
                 }
                 else
                     $.notify(data.message, 'error');

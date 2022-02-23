@@ -358,6 +358,7 @@
   <ItemGroup>
     <Content Include="Areas\admin\assets\css\sb-admin-2.css" />
     <Content Include="Areas\admin\assets\css\sb-admin-2.min.css" />
+    <Content Include="Areas\admin\assets\img\bg.gif" />
     <Content Include="Areas\admin\assets\img\undraw_posting_photo.svg" />
     <Content Include="Areas\admin\assets\img\undraw_profile.svg" />
     <Content Include="Areas\admin\assets\img\undraw_profile_1.svg" />
