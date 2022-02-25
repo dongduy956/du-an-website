@@ -197,7 +197,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     return Redirect("/admin/tai-khoan");
                 }
                 else
-                    if (temp != null && accounts.id == temp.id && db.accounts.SingleOrDefault(x => x.issocial == 0 && x.id != temp.id && x.email.ToLower().Equals(accounts.email.ToLower())) == null)
+                    if (temp != null && accounts.id == temp.id && db.accounts.SingleOrDefault(x => x.issocial == 0&&accounts.issocial==0 && x.id != temp.id && x.email.ToLower().Equals(accounts.email.ToLower())) == null)
                 {
 
                     accounts = temp = db.accounts.Find(accounts.id);

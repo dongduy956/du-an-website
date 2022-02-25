@@ -19,7 +19,13 @@ namespace NONBAOHIEMVIETTIN
                defaults: new { controller = "Accounts", action = "Login", id = UrlParameter.Optional },
                namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
            );
-                 routes.MapRoute(
+            routes.MapRoute(
+        name: "Cart_UpdateItem",
+        url: "cap-nhat-so-luong-gio-hang",
+        defaults: new { controller = "Cart", action = "UpdateItem", id = UrlParameter.Optional },
+        namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+    );
+            routes.MapRoute(
          name: "Products_ListName",
          url: "danh-sach-goi-y",
          defaults: new { controller = "Products", action = "ListName", id = UrlParameter.Optional },

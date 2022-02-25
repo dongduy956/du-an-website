@@ -922,7 +922,7 @@ $(function () {
         var Quantity = $(this).val();
         var dom = $(this);
         $.ajax({
-            url: "/Cart/UpdateItem",
+            url: "/cap-nhat-so-luong-gio-hang",
             data: JSON.stringify({ ProductId, Quantity }),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",

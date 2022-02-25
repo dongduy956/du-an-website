@@ -502,6 +502,7 @@ D:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN
 D:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.pdb
 C:\Users\Admin\Desktop\New folder\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\CKFinder.dll
 C:\Users\Admin\Desktop\New folder\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\CKFinder.pdb
+E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.Facebook.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\ApplicationInsights.config
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\csc.exe
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -538,7 +539,6 @@ E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Host.SystemWeb.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.Cookies.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.dll
-E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.Facebook.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.Google.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.OAuth.dll
@@ -595,6 +595,6 @@ E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.Google.xml
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.Twitter.xml
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.csprojResolveAssemblyReference.cache
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.pdb
-E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\obj\Debug\NONBAOHIEMVIETTIN.csprojResolveAssemblyReference.cache

@@ -745,7 +745,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
         {
            
             var accSession = Session["account"] as accounts;
-            if (db.accounts.SingleOrDefault(x =>!x.username.Equals(accSession.username) && x.email.Equals(acc.email)&&x.issocial==0) != null)
+            if (db.accounts.SingleOrDefault(x =>!x.username.Equals(accSession.username) && x.email.Equals(acc.email)&&x.issocial==0&&accSession.issocial==0) != null)
                 return Json(new
                 {
                     status = -1,
@@ -758,7 +758,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
             acc.idrole = accSession.idrole;
             acc.username=accSession.username;
             acc.alias = accSession.alias;
-            if(!acc.image.Contains("assets/images/users/"))
+            if(!acc.image.Contains("assets/images/users/")&&acc.issocial==0)
             acc.image = "assets/images/users/" + acc.image;
             try
             {
