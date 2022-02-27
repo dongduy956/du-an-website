@@ -208,7 +208,12 @@ $(function () {
             success: function (data) {
 
                 if (data == 1)
+                {
+
                     location.href = '/dang-nhap';
+                    FB.logout(function (response) {
+                    });
+                }
             },
             error: function (data) {
                 $.notify('Lỗi chưa xác định', 'error');

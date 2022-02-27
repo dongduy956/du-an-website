@@ -18,7 +18,13 @@ namespace NONBAOHIEMVIETTIN
                url: "dang-nhap",
                defaults: new { controller = "Accounts", action = "Login", id = UrlParameter.Optional },
                namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
-           );
+           );         
+            routes.MapRoute(
+        name: "Accounts_LoginFacebook",
+        url: "dang-nhap-facebook",
+        defaults: new { controller = "Accounts", action = "LoginFacebook", id = UrlParameter.Optional },
+        namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+    );
             routes.MapRoute(
         name: "Cart_UpdateItem",
         url: "cap-nhat-so-luong-gio-hang",

@@ -119,7 +119,6 @@ E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Antlr3.Runtime.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\CKFinder.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\EntityFramework.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\EntityFramework.SqlServer.dll
-E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Facebook.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.Agent.Intercept.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.DependencyCollector.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.PerfCounterCollector.dll
@@ -135,7 +134,6 @@ E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Host.SystemWeb.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.Cookies.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.dll
-E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.Facebook.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.Google.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.OAuth.dll
@@ -156,7 +154,6 @@ E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.WebPages.Razor.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\WebGrease.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\CKFinder.pdb
-E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Facebook.xml
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.DependencyCollector.xml
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.ServerTelemetryChannel.xml
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.Web.xml
@@ -185,7 +182,6 @@ E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AspNet.Identi
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.xml
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Host.SystemWeb.xml
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.xml
-E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.Facebook.xml
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.Cookies.xml
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.OAuth.xml
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.Owin.Security.Google.xml
