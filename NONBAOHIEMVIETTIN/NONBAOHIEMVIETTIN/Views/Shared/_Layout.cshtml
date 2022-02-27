@@ -393,7 +393,7 @@
                 $('.loader').remove();
             });
         </script>
-        @RenderSection("scripts", false)
+       
         <!-- Messenger Plugin chat Code -->
         <div id="fb-root"></div>
 
@@ -424,6 +424,7 @@
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
         </script>
+ @RenderSection("scripts", false)
 </body>
 
 </html>
