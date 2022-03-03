@@ -1,7 +1,7 @@
 ﻿
-@{   
+@{
     Layout = null;
-    TempData["Version"] = "4.0";
+    TempData["Version"] = "13.5";
 }
 
 <!DOCTYPE html>
@@ -23,15 +23,19 @@
     <!-- Custom styles for this template-->
     <link href="~/Areas/admin/assets/css/sb-admin-2.min.css?@TempData["Version"]" rel="stylesheet">
     <link href="~/assets/css/loadpage.css?@TempData["Version"]" rel="stylesheet" />
+    <script src="https://www.google.com/recaptcha/api.js?hl=vi&#038;onload=recaptchaCallback&#038;render=explicit'"></script>
+
     <style>
-         button[disabled] {
+        button[disabled] {
             opacity: 0.85;
             cursor: not-allowed !important;
-        }   
-         .bg-gradient-primary{
-             background-color:transparent !important;
-             background-image:url(../../Areas/admin/assets/img/bg.gif) !important;
-         }
+        }
+
+        .bg-gradient-primary {
+            background-color: transparent !important;
+            background-image: url(../../Areas/admin/assets/img/bg.gif) !important;
+        }
+
         .bg-login-image {
             background: url(https://www.goscience.eu/common/img/login.jpg);
             background-position: center center;
@@ -59,16 +63,27 @@
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Chào mừng đến với trang đăng nhập <strong>Admin</strong></h1>
                                     </div>
-                                        <div class="form-group">
-                                            <input type="email" class="form-control form-control-user"
-                                                   id="usernameadmin" aria-describedby="emailHelp"
-                                                   placeholder="Tài khoản">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control form-control-user"
+                                               id="usernameadmin" aria-describedby="emailHelp"
+                                               placeholder="Tài khoản">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control form-control-user"
+                                               id="passwordadmin" placeholder="Mật khẩu">
+                                    </div>
+
+                                    <div class="form-group ">
+                                        <div class="g-recaptcha" data-theme="light" data-sitekey="6LfSna0eAAAAABOWrjvDyY00MvAB6WORYEtSfdlJ">
                                         </div>
-                                        <div class="form-group">
-                                            <input type="password" class="form-control form-control-user"
-                                                   id="passwordadmin" placeholder="Mật khẩu">
-                                        </div>
-                                        @*<div class="form-group">
+                                    </div>
+
+                                    <button type="submit" class="btn btn-primary btn-user btn-block">
+                                        Đăng nhập
+                                    </button>
+
+
+                                    @*<div class="form-group">
                                             <div class="custom-control custom-checkbox small">
                                                 <input type="checkbox" class="custom-control-input" id="customCheck">
                                                 <label class="custom-control-label" for="customCheck">
@@ -77,9 +92,7 @@
                                                 </label>
                                             </div>
                                         </div>*@
-                                        <button class="btn btn-primary btn-user btn-block">
-                                            Đăng nhập
-                                        </button>
+
                                 </div>
                             </div>
                         </div>
@@ -98,10 +111,12 @@
     <script src="~/assets/js/notify.min.js?@TempData["Version"]"></script>
     <script src="~/Areas/admin/assets/js/code/main.js?@TempData["Version"]"></script>
     <script>
-            $(window).on('load', function (event) {
-               $('.loader').remove();
-            });
+        $(window).on('load', function (event) {
+            $('.loader').remove();
+        });
     </script>
+
+    <script src="~/assets/js/code/recaptcha.js?@TempData["Version"]"></script>
 </body>
 </html>
 

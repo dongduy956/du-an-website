@@ -45,6 +45,7 @@ $(function () {
         var accLogin = new Object();
         accLogin.username = $('#usernameadmin').val();
         accLogin.password = $('#passwordadmin').val();
+        var recaptcha = $("#g-recaptcha-response-1").val();
         if (accLogin.username == '')
             $.notify('Tài khoản không được rỗng.','warn');
         else
@@ -54,7 +55,7 @@ $(function () {
                 disable('.btn-user');
                 $.ajax({
                     url: "/admin/Login/Login",
-                    data: JSON.stringify(accLogin),
+                    data: JSON.stringify({ accLogin, recaptcha}),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     type: "POST",

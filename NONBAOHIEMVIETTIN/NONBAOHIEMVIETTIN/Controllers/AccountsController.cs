@@ -11,6 +11,8 @@ using System.IO;
 using System.Net.Mail;
 using System.Configuration;
 using PagedList;
+using System.Runtime.Serialization.Json;
+using System.Text;
 
 namespace NONBAOHIEMVIETTIN.Controllers
 {
@@ -122,6 +124,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
 
         public ActionResult Login()
         {
+
             var acc = Session["account"] as accounts;
             if (acc != null)
                 return Redirect("/");
@@ -163,9 +166,40 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 return Json("No files to upload");
             }
         }
-        [HttpPost]
-        public JsonResult Login(string usernamelogin, string passwordlogin)
+        private bool IsValidRecaptcha(string recaptcha)
         {
+            if (string.IsNullOrEmpty(recaptcha))
+            {
+                return false;
+            }
+            var secretKey = "6LfSna0eAAAAAFKwKXzLSajQz835jJn2xZBzqtyY";//Mã bí mật
+            string remoteIp = Request.ServerVariables["REMOTE_ADDR"];
+            string myParameters = String.Format("secret={0}&response={1}&remoteip={2}", secretKey, recaptcha, remoteIp);
+            RecaptchaResult captchaResult;
+            using (var wc = new WebClient())
+            {
+                wc.Headers[HttpRequestHeader.ContentType] = "application/x-www-form-urlencoded";
+                var json = wc.UploadString("https://www.google.com/recaptcha/api/siteverify", myParameters);
+                var js = new DataContractJsonSerializer(typeof(RecaptchaResult));
+                var ms = new MemoryStream(Encoding.ASCII.GetBytes(json));
+                captchaResult = js.ReadObject(ms) as RecaptchaResult;
+                if (captchaResult != null && captchaResult.Success)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
+        [HttpPost]
+        public JsonResult Login(string usernamelogin, string passwordlogin,string recaptcha)
+        {
+            if (!IsValidRecaptcha(recaptcha))
+            {
+                return Json(-2);               
+            }
             passwordlogin = HoTro.Instances.EncodeMD5(passwordlogin);
             accounts acc = db.accounts.SingleOrDefault(x => x.username.Equals(usernamelogin) && x.password.Equals(passwordlogin) && x.issocial == 0);
             if (acc != null)

@@ -6,10 +6,12 @@
     ViewBag.Image = "https://st2.depositphotos.com/1853861/7036/v/950/depositphotos_70364593-stock-illustration-login-button-icon.jpg";
 }
 @section scripts{
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
-<script src="~/assets/js/code/loginfacebook.js?@TempData["Version"]"></script>
+    <script src="https://www.google.com/recaptcha/api.js?hl=vi&#038;onload=recaptchaCallback&#038;render=explicit'"></script>
+    <script src="~/assets/js/code/recaptcha.js?@TempData["Version"]"></script>
+    <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js"></script>
+    <script src="~/assets/js/code/loginfacebook.js?@TempData["Version"]"></script>
     <script src="https://apis.google.com/js/platform.js" async defer></script>
-<script src="~/assets/js/code/logingoogle.js?@TempData["Version"]"></script>
+    <script src="~/assets/js/code/logingoogle.js?@TempData["Version"]"></script>
     <script>
         $(".custom-file-input").on("change", function () {
             var fileName = $(this).val().split("\\").pop();
@@ -44,10 +46,10 @@
             flex-direction: column;
         }
 
-            .login-social button,.login-social a {
+            .login-social button, .login-social a {
                 text-transform: uppercase;
                 font-size: 1rem;
-            }      
+            }
     </style>
 }
 <div class="col-lg-12 col-md-12" style="padding:0">
@@ -74,17 +76,22 @@
                 <div class="account_form">
                     <h2>Đăng nhập</h2>
                     <div class="form">
-                        <p>
+                        <div class="form-group">
                             <label for="usernamelogin">Tài khoản <span>*</span></label>
                             <input type="text" id="usernamelogin" value="" />
-                        </p>
-                        <p>
+                        </div>
+                        <div class="form-group">
                             <label for="passwordlogin">Mật khẩu <span>*</span></label>
                             <input type="password" id="passwordlogin" value="" />
-                        </p>
+                        </div>
+                        <div class="form-group">
+
+                            <div data-theme="light" class="g-recaptcha" data-sitekey="6LfSna0eAAAAABOWrjvDyY00MvAB6WORYEtSfdlJ"></div>
+
+                        </div>
                         <div class="login_submit">
                             <button id="btnlogin" type="submit">
-                               
+
                                 Đăng nhập
                             </button>
                             @*<label for="remember">
@@ -101,7 +108,7 @@
                             </a>
 
                             <button onclick="login()" class="btn btn-outline-danger">
-                                
+
 
                                 <i class="fab fa-google"></i>
                                 <span>Đăng nhập với google</span>
@@ -154,7 +161,8 @@
                         </p>
                         <div class="login_submit">
                             <button id="btnregister" type="submit">
-                            Đăng ký</button>
+                                Đăng ký
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -178,10 +186,11 @@
             </div>
             <div class="modal-footer">
                 <button type="button" id="btnsubmitregister" class="btn btn-outline-success">
-                    
-                Xác nhận</button>
+
+                    Xác nhận
+                </button>
                 <button type="button" id="btnsendagainregister" class="btn btn-outline-primary">
-                    
+
 
                     Gửi lại mã
 
@@ -207,8 +216,9 @@
             </div>
             <div class="modal-footer">
                 <button type="button" id="btnsubmitforget" class="btn btn-outline-success">
-                    
-                Xác nhận</button>
+
+                    Xác nhận
+                </button>
                 <button type="button" id="btncloseforget" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -230,13 +240,15 @@
             </div>
             <div class="modal-footer">
                 <button type="button" id="btnsubmitforgetpass" class="btn btn-outline-success">
-                    
 
-                Xác nhận</button>
+
+                    Xác nhận
+                </button>
                 <button type="button" id="btnsendagainforgetpass" class="btn btn-outline-primary">
-                    
 
-                Gửi lại mã</button>
+
+                    Gửi lại mã
+                </button>
                 <button type="button" id="btncloseforgetpass" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
             </div>
         </div>
@@ -259,8 +271,9 @@
             </div>
             <div class="modal-footer">
                 <button type="button" id="btnsubmitchangepass" class="btn btn-outline-success">
-                    
-                Xác nhận</button>
+
+                    Xác nhận
+                </button>
                 <button type="button" id="btnclosechangepass" class="btn btn-outline-danger" data-dismiss="modal">Close</button>
             </div>
         </div>

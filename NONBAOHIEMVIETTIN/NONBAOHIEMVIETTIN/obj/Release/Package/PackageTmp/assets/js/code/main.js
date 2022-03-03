@@ -27,6 +27,7 @@ $(function () {
     function login() {
         var usernamelogin = $('#usernamelogin').val();
         var passwordlogin = $('#passwordlogin').val();
+        var recaptcha = $("#g-recaptcha-response-1").val();
         if (usernamelogin == "") {
             $.notify('Tài khoản không được để trống.', 'warn')
 
@@ -39,7 +40,7 @@ $(function () {
                 disable('#btnlogin');
                 $.ajax({
                     url: "/dang-nhap",
-                    data: JSON.stringify({ "usernamelogin": usernamelogin, "passwordlogin": passwordlogin }),
+                    data: JSON.stringify({ "usernamelogin": usernamelogin, "passwordlogin": passwordlogin,recaptcha }),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     type: "POST",
@@ -51,7 +52,12 @@ $(function () {
                         else if (data == "0") {
                             $.notify('Tài khoản đã bị khoá.Liên hệ admin để giải quyết.', 'error');
                         }
-                        else {
+                        else
+                            if(data=="-2")
+                        
+                        $.notify('Bạn chưa xác nhận không phải là người máy.', 'error');
+                        else
+                        {
                             location.href = '/';
                         }
                         enable('#btnlogin');

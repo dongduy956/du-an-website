@@ -263,6 +263,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IntroduceController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Models\RecaptchaResult.cs" />
     <Compile Include="Views\ProductsController.cs" />
     <Compile Include="Controllers\subscribeController.cs" />
     <Compile Include="Controllers\WishController.cs" />
@@ -349,6 +350,7 @@
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Areas\admin\assets\css\login.css" />
     <Content Include="Areas\admin\assets\css\sb-admin-2.css" />
     <Content Include="Areas\admin\assets\css\sb-admin-2.min.css" />
     <Content Include="Areas\admin\assets\img\bg.gif" />
@@ -3726,6 +3728,7 @@
     <Content Include="assets\js\code\loginfacebook.js" />
     <Content Include="assets\js\code\logingoogle.js" />
     <Content Include="assets\js\code\main.js" />
+    <Content Include="assets\js\code\recaptcha.js" />
     <Content Include="assets\js\jquery-ui.js" />
     <Content Include="assets\js\main.js" />
     <Content Include="assets\js\notify.min.js" />
