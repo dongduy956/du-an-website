@@ -45,7 +45,7 @@ $(function () {
                     dataType: "json",
                     type: "POST",
                     success: function (data) {
-
+                        grecaptcha.reset();
                         if (data == "-1") {
                             $.notify('Tài khoản hoặc mật khẩu không chính xác.', 'error');
                         }

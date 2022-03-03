@@ -60,6 +60,8 @@ $(function () {
                     dataType: "json",
                     type: "POST",
                     success: function (data) {
+                        grecaptcha.reset();
+
                         if (data.status != 1)
                             $.notify(data.message,'error');
                         else
