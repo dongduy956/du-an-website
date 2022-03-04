@@ -34,6 +34,8 @@
     <link href="~/assets/css/loadpage.css?@TempData["Version"]" rel="stylesheet" />
     <link href="~/Content/alertifyjs/alertify.min.css?@TempData["Version"]" rel="stylesheet" />
     <link href="~/Content/alertifyjs/themes/default.min.css?@TempData["Version"]" rel="stylesheet" />
+    <link href="~/assets/css/hotline.css?@TempData["Version"]" rel="stylesheet" />
+
     <script src="~/assets/js/vendor/modernizr-2.8.3.min.js?@TempData["Version"]"></script>
     <script src="~/assets/js/vendor/jquery-1.12.0.min.js?@TempData["Version"]"></script>
 
@@ -53,6 +55,24 @@
         </span>
     </div>
     <!-- Add your site or application content here -->
+    <!-- Start hotline -->
+    <div class="hotline-phone-ring-wrap">
+        <div class="hotline-phone-ring">
+            <div class="hotline-phone-ring-circle"></div>
+            <div class="hotline-phone-ring-circle-fill"></div>
+            <div class="hotline-phone-ring-img-circle">
+                <a href="tel:0987654321" class="pps-btn-img">
+                    <img src="https://nguyenhung.net/wp-content/uploads/2019/05/icon-call-nh.png" alt="Gọi điện thoại" width="50">
+                </a>
+            </div>
+        </div>
+        <div class="hotline-bar">
+            <a href="tel:0376880903">
+                <span class="text-hotline">037.688.0903</span>
+            </a>
+        </div>
+    </div>
+    <!-- End hotline -->
     <!--pos page start-->
     <div class="pos_page">
         <div class="container">
@@ -425,6 +445,8 @@
       }(document, 'script', 'facebook-jssdk'));
         </script>
  @RenderSection("scripts", false)
-</body>
+
+        
+        </body>
 
 </html>
