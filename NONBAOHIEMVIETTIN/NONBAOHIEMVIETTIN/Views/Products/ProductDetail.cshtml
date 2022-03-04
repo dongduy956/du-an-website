@@ -10,8 +10,14 @@
     ViewBag.Description = Html.Raw(Model.product.description);
     ViewBag.Url = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + HttpContext.Current.Request.RawUrl.ToString().Trim().ToLower();
     ViewBag.Image = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() +"/"+ Model.product.image;
+    var urlProduct = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + "/" + Model.product.alias;
 }
-
+@section styles{
+<meta property="fb:app_id" content="703338740695568" />
+<meta property="fb:admins" content="100040982311795" />
+    }
+<div id="fb-root"></div>
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v13.0&appId=703338740695568&autoLogAppEvents=1" nonce="DLe856eE"></script>
 <!--breadcrumbs area start-->
 <div class="breadcrumbs_area">
     <div class="row">
@@ -149,6 +155,9 @@
                                 <li>
                                     <a data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Đánh giá</a>
                                 </li>
+                                <li>
+                                    <a data-toggle="tab" href="#comments" role="tab" aria-controls="comments" aria-selected="false">Bình luận</a>
+                                </li>
                             </ul>
                         </div>
                         <div class="tab-content">
@@ -220,6 +229,9 @@
                                     </div>
                                     <button data-id="@Model.product.id" type="submit" id="btnrate">Gửi đánh giá</button>
                                 </div>
+                            </div>
+                            <div class="tab-pane fade" id="comments" role="tabpanel">
+                                <div data-href='@urlProduct' class="fb-comments" xid="@Model.product.id" data-width="100%" data-numposts="5" data-colorscheme="light"></div>
                             </div>
                         </div>
                     </div>

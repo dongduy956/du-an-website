@@ -7,3 +7,6 @@
 ## Link đăng kí tài khoản ngân lượng: https://www.nganluong.vn/
 ### Hướng dẫn tích hợp ngân lượng: https://www.youtube.com/watch?v=EvuA2BshVuo
 ## Link hướng dẫn tích hợp recaptcha: https://www.imic.edu.vn/tin-tuc-cong-nghe/27886/nhung-recaptcha-2-vao-asp-net-mvc.html
+## Link hướng dẫn tích hợp comments fb: https://hoangluyen.com/tich-hop-comment-facebook-google-disqus-vao-website/
+### Lấy mã code comments: https://developers.facebook.com/docs/plugins/comments/
+### Xem chi tiết bình luận: https://developers.facebook.com/tools/comments
