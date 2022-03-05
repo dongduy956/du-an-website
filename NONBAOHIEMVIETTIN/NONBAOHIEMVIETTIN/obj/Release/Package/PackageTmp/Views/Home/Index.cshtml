@@ -269,17 +269,17 @@
                                                         <a href="/chi-tiet/@(item.alias)"><img src="/@item.image" alt=""></a>
                                                     </div>
                                                 </div>
-                                                @if(item.moreimage!=null)
-                                                { 
-                                                foreach (XElement ele in XElement.Parse(item.moreimage).Elements())
+                                                @if (item.moreimage != null)
                                                 {
+                                                    foreach (XElement ele in XElement.Parse(item.moreimage).Elements())
+                                                    {
 
-                                                    <div class="tab-pane fade" id="tab-@(i++)" role="tabpanel">
-                                                        <div class="modal_tab_img">
-                                                            <a href="#"><img src="/@ele.Value" alt=""></a>
+                                                        <div class="tab-pane fade" id="tab-@(i++)" role="tabpanel">
+                                                            <div class="modal_tab_img">
+                                                                <a href="#"><img src="/@ele.Value" alt=""></a>
+                                                            </div>
                                                         </div>
-                                                    </div>
-                                                }
+                                                    }
                                                 }
                                             </div>
                                             <div class="modal_tab_button">
@@ -299,8 +299,8 @@
                                                             </li>
                                                         }
                                                     }
-                                                   
-                                                   
+
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -322,15 +322,15 @@
                                                 }
                                             </div>
                                             @*<div class="modal_size mb-15">
-                                                <h2>size</h2>
-                                                <ul>
-                                                    <li><a href="#">s</a></li>
-                                                    <li><a href="#">m</a></li>
-                                                    <li><a href="#">l</a></li>
-                                                    <li><a href="#">xl</a></li>
-                                                    <li><a href="#">xxl</a></li>
-                                                </ul>
-                                            </div>*@
+                                                    <h2>size</h2>
+                                                    <ul>
+                                                        <li><a href="#">s</a></li>
+                                                        <li><a href="#">m</a></li>
+                                                        <li><a href="#">l</a></li>
+                                                        <li><a href="#">xl</a></li>
+                                                        <li><a href="#">xxl</a></li>
+                                                    </ul>
+                                                </div>*@
                                             <div class="modal_add_to_cart mb-15">
                                                 <div class="form">
                                                     <input min="1" id="txtquantity-@item.id" max="100" step="1" value="1" type="number">
@@ -342,12 +342,13 @@
                                             </div>
                                             <div class="modal_social">
                                                 <h2>Chia sẻ sản phẩm</h2>
-                                                <ul >
-                                                    <li >
-                                                    <a data-alias="@item.alias" class="facebook" href="#">
-                                                        <i class="fa fa-facebook"></i>
-                                                        </a></li>
-                                                    
+                                                <ul>
+                                                    <li>
+                                                        <a data-alias="@item.alias" class="facebook" href="#">
+                                                            <i class="fa fa-facebook"></i>
+                                                        </a>
+                                                    </li>
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -362,3 +363,41 @@
         }
     }
 }
+
+
+<!--Modal: modalPush-->
+<div class="modal fade" id="modalPush" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-notify modal-info" role="document">
+        <!--Content-->
+        <div class="modal-content text-center">
+            <!--Header-->
+            <div class="modal-header d-flex justify-content-center" style="background:#00bba6;">
+                <h1 class="heading m-0" style="color:white;">Thông báo</h1>
+            </div>
+
+            <!--Body-->
+            <div class="modal-body">
+
+                <i style="color:#00bba6;" class="fas fa-bell fa-4x animated rotateIn mb-4"></i>
+
+                <p class='m-0 blockquote'>Website đang trong quá trình thử nghiệm.</p>
+                <p class='m-0 blockquote'>Cân nhắc kĩ trước khi mua hàng và thanh toán online.</p>
+                <p class='m-0 blockquote'>Xin cảm ơn.</p>
+
+
+            </div>
+
+            <!--Footer-->
+            <div class="modal-footer justify-content-between flex-wrap">
+                <div class="d-flex align-items-center">
+                    <input style="cursor:pointer; width:unset;height:unset;" id="ckb-notification" type="checkbox" />
+                    <label style="cursor:pointer;" for="ckb-notification" class="mb-0 cu ml-1 text-info">Không hiển thị lại thông báo này.</label>
+                </div>
+                <button type="button" class="ml-auto btn btn-outline-danger" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+        <!--/.Content-->
+    </div>
+</div>
+<!--Modal: modalPush-->

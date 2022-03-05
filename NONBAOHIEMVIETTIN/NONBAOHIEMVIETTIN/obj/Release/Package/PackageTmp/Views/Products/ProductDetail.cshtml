@@ -10,13 +10,12 @@
     ViewBag.Description = Html.Raw(Model.product.description);
     ViewBag.Url = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + HttpContext.Current.Request.RawUrl.ToString().Trim().ToLower();
     ViewBag.Image = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() +"/"+ Model.product.image;
-    var urlProduct = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + "/" + Model.product.alias;
+    var urlProduct = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + "/chi-tiet/" + Model.product.alias;
 }
 @section styles{
 <meta property="fb:app_id" content="703338740695568" />
 <meta property="fb:admins" content="100040982311795" />
     }
-<div id="fb-root"></div>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v13.0&appId=703338740695568&autoLogAppEvents=1" nonce="DLe856eE"></script>
 <!--breadcrumbs area start-->
 <div class="breadcrumbs_area">

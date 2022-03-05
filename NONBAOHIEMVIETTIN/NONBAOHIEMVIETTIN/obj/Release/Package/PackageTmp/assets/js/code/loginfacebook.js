@@ -1,10 +1,5 @@
 window.fbAsyncInit = function () {
-    FB.init({
-        appId: '703338740695568',
-        cookie: true,
-        xfbml: true,
-        version: 'v13.0'
-    });
+ 
 };
 
 function loginFB() {
@@ -44,6 +39,12 @@ function loginFB() {
 $(function () {
     $('#btnloginface').click(function (e) {
         e.preventDefault();
+        FB.init({
+            appId: '703338740695568',
+            cookie: true,
+            xfbml: true,
+            version: 'v13.0'
+        });
         FB.login(loginFB, { scope: 'email,public_profile', return_scopes: true });
     })
 })

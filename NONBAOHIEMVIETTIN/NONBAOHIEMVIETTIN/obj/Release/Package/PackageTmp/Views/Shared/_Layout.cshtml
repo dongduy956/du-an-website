@@ -4,7 +4,7 @@
     var acc = Session["account"] as accounts;
     var cart = Session["cartSession"] as List<CartItem>;
     var aboutus = db.contact.SingleOrDefault(x => x.display == true);
-    TempData["Version"] = "15.0";
+    TempData["Version"] = "16.5";
 }
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -43,7 +43,37 @@
 </head>
 
 <body>
-   
+    <!-- Messenger Plugin chat Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your Plugin chat code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+      var chatbox = document.getElementById('fb-customer-chat');
+      chatbox.setAttribute("page_id", "102216185074885");
+      chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <!-- Your SDK code -->
+    <script>
+      window.fbAsyncInit = function() {
+        FB.init({
+          xfbml            : true,
+          version          : 'v13.0'
+        });
+      };
+
+      (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+        fjs.parentNode.insertBefore(js, fjs);
+      }(document, 'script', 'facebook-jssdk'));
+    </script>
+
     <!-- Hiệu ứng load -->
     <!-- <div class="load">
         <img src="loader.gif">
@@ -293,9 +323,9 @@
                             <div class="footer_widget">
                                 <h3>Tài khoản của bạn</h3>
                                 <ul>
-                                    @if (acc!=null)
-{
-                                    <li><a href="/thong-tin-tai-khoan">Thông tin tài khoản</a></li>
+                                    @if (acc != null)
+                                    {
+                                        <li><a href="/thong-tin-tai-khoan">Thông tin tài khoản</a></li>
                                     }
                                     else
                                     {
@@ -309,30 +339,6 @@
                             <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d125578.65198579546!2d106.38024530009294!3d10.395114352278497!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x310ab22487796b79%3A0xfdd0bc625863f488!2zQ2jhu6MgR-G6oW8gRGlzdHJpY3QsIFRpZW4gR2lhbmcsIFZpZXRuYW0!5e0!3m2!1sen!2s!4v1643116057816!5m2!1sen!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
 
                         </div>
-                        @*<div class="col-lg-3 col-md-6 col-sm-6">
-                                <div class="footer_widget">
-                                    <h3>Informations</h3>
-                                    <ul>
-                                        <li><a href="#">Specials</a></li>
-                                        <li><a href="#">Our store(s)!</a></li>
-                                        <li><a href="#">My credit slips</a></li>
-                                        <li><a href="#">Terms and conditions</a></li>
-                                        <li><a href="#">About us</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-6 col-sm-6">
-                                <div class="footer_widget">
-                                    <h3>extras</h3>
-                                    <ul>
-                                        <li><a href="#"> Brands</a></li>
-                                        <li><a href="#"> Gift Vouchers </a></li>
-                                        <li><a href="#"> Affiliates </a></li>
-                                        <li><a href="#"> Specials </a></li>
-                                        <li><a href="#"> Privacy policy </a></li>
-                                    </ul>
-                                </div>
-                            </div>*@
                     </div>
                 </div>
             </div>
@@ -359,10 +365,7 @@
                             <div class="ft_social text-center">
                                 <ul>
                                     <li><a href="https://www.facebook.com/duy.12200" target="_blank"><i class="fa fa-facebook"></i></a></li>
-                                    @*<li><a href="#"><i class="fa fa-twitter"></i></a></li>*@
                                     <li><a href="mailto:dongduy0612@gmail.com"><i class="fa fa-google-plus" aria-hidden="true"></i></a></li>
-                                    @*<li><a class="pinterest" href="#"><i class="fa fa-pinterest-p" aria-hidden="true"></i></a></li>
-                                        <li><a href="#"><i class="fa fa-wifi" aria-hidden="true"></i></a></li>*@
                                 </ul>
                             </div>
                         </div>
@@ -411,42 +414,34 @@
         <script>
             $(window).on('load', function (event) {
                 $('.loader').remove();
+                let lc_notification = localStorage.getItem('notification');
+                if (lc_notification == null || lc_notification == '') {
+
+                    let ss_notification = sessionStorage.getItem('notification');
+                    if (ss_notification == null || ss_notification == '') {
+                        $("#modalPush").modal();
+                        sessionStorage.setItem('notification', true);
+
+                        $('#ckb-notification').change(function () {
+                            if ($(this).is(":checked")) {
+                                sessionStorage.removeItem('notification');
+                                localStorage.setItem('notification', true);
+                            }
+                            else {
+                                localStorage.removeItem('notification');
+                                sessionStorage.setItem('notification', true);
+                            }
+                        });
+
+                    }
+                }
             });
         </script>
-       
-        <!-- Messenger Plugin chat Code -->
-        <div id="fb-root"></div>
 
-        <!-- Your Plugin chat code -->
-        <div id="fb-customer-chat" class="fb-customerchat">
-        </div>
 
-        <script>
-      var chatbox = document.getElementById('fb-customer-chat');
-      chatbox.setAttribute("page_id", "102216185074885");
-      chatbox.setAttribute("attribution", "biz_inbox");
-        </script>
+        @RenderSection("scripts", false)
 
-        <!-- Your SDK code -->
-        <script>
-      window.fbAsyncInit = function() {
-        FB.init({
-          xfbml            : true,
-          version          : 'v13.0'
-        });
-      };
 
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-        </script>
- @RenderSection("scripts", false)
-
-        
-        </body>
+</body>
 
 </html>
