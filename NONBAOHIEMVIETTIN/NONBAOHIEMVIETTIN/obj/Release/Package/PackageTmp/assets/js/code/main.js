@@ -45,17 +45,18 @@ $(function () {
                     dataType: "json",
                     type: "POST",
                     success: function (data) {
-                        grecaptcha.reset();
                         if (data == "-1") {
                             $.notify('Tài khoản hoặc mật khẩu không chính xác.', 'error');
+                            grecaptcha.reset();
+
                         }
                         else if (data == "0") {
+                            grecaptcha.reset();
                             $.notify('Tài khoản đã bị khoá.Liên hệ admin để giải quyết.', 'error');
                         }
                         else
-                            if(data=="-2")
-                        
-                        $.notify('Bạn chưa xác nhận không phải là người máy.', 'error');
+                            if(data=="-2")                       
+                                $.notify('Bạn chưa xác nhận không phải là người máy.', 'error');                            
                         else
                         {
                             location.href = '/';

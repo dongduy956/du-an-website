@@ -60,10 +60,11 @@ $(function () {
                     dataType: "json",
                     type: "POST",
                     success: function (data) {
-                        grecaptcha.reset();
-
-                        if (data.status != 1)
-                            $.notify(data.message,'error');
+                        if (data.status != 1) {
+                            $.notify(data.message, 'error');
+                            if(data.status!=-2)
+                            grecaptcha.reset();
+                        }
                         else
                             if (data.status == 1)
                                 location.href = '/admin';

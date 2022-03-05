@@ -6,6 +6,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     var i = 1;
     var j = i;
+    var h = i;
+    var k = i;
     var avgStar = Model.lstRate.Count != 0 ? Model.lstRate.Sum(x => x.star) / (double)Model.lstRate.Count : 0;
     ViewBag.Description = Html.Raw(Model.product.description);
     ViewBag.Url = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + HttpContext.Current.Request.RawUrl.ToString().Trim().ToLower();
@@ -41,7 +43,7 @@
                 <div class="col-lg-6 col-md-6">
                     <div class="product_tab sidebar fix">
                         <div class="tab-content produc_tab_c">
-                            <div class="tab-pane fade show active" id="p_tab1" role="tabpanel">
+                            <div class="tab-pane fade show active" id="p_tab@(h++)" role="tabpanel">
                                 <div class="modal_img text-center">
                                     <a href="#"><img src="/@Model.product.image" alt=""></a>
                                     <div class="view_img">
@@ -54,7 +56,7 @@
                                 foreach (XElement ele in XElement.Parse(Model.product.moreimage).Elements())
                                 {
 
-                                    <div class="tab-pane fade" id="p_tab2" role="tabpanel">
+                                    <div class="tab-pane fade" id="p_tab@(h++)" role="tabpanel">
                                         <div class="modal_img">
                                             <a href="#"><img src="/@ele.Value" alt=""></a>
                                             <div class="view_img">
@@ -68,7 +70,7 @@
                         <div class="product_tab_button">
                             <ul class="nav" role="tablist">
                                 <li>
-                                    <a class="active" data-toggle="tab" href="#p_tab1" role="tab" aria-controls="p_tab1" aria-selected="false"><img src="/@Model.product.image" alt=""></a>
+                                    <a class="active" data-toggle="tab" href="#p_tab@(k)" role="tab" aria-controls="p_tab@(k++)" aria-selected="false"><img src="/@Model.product.image" alt=""></a>
                                 </li>
                                 @if (Model.product.moreimage != null)
                                 {
@@ -76,7 +78,7 @@
                                     {
 
                                         <li>
-                                            <a data-toggle="tab" href="#p_tab2" role="tab" aria-controls="p_tab2" aria-selected="false"><img src="/@ele.Value" alt=""></a>
+                                            <a data-toggle="tab" href="#p_tab@(k)" role="tab" aria-controls="p_tab@(k++)" aria-selected="false"><img src="/@ele.Value" alt=""></a>
                                         </li>
                                     }
                                 }

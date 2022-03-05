@@ -91,7 +91,7 @@
             <div class="hotline-phone-ring-circle"></div>
             <div class="hotline-phone-ring-circle-fill"></div>
             <div class="hotline-phone-ring-img-circle">
-                <a href="tel:0987654321" class="pps-btn-img">
+                <a href="tel:0376880903" class="pps-btn-img">
                     <img src="https://nguyenhung.net/wp-content/uploads/2019/05/icon-call-nh.png" alt="Gọi điện thoại" width="50">
                 </a>
             </div>
@@ -414,26 +414,10 @@
         <script>
             $(window).on('load', function (event) {
                 $('.loader').remove();
-                let lc_notification = localStorage.getItem('notification');
-                if (lc_notification == null || lc_notification == '') {
-
-                    let ss_notification = sessionStorage.getItem('notification');
-                    if (ss_notification == null || ss_notification == '') {
-                        $("#modalPush").modal();
-                        sessionStorage.setItem('notification', true);
-
-                        $('#ckb-notification').change(function () {
-                            if ($(this).is(":checked")) {
-                                sessionStorage.removeItem('notification');
-                                localStorage.setItem('notification', true);
-                            }
-                            else {
-                                localStorage.removeItem('notification');
-                                sessionStorage.setItem('notification', true);
-                            }
-                        });
-
-                    }
+                let ss_notification = sessionStorage.getItem('notification');
+                if (ss_notification == null || ss_notification == '') {
+                    $("#modalPush").modal();
+                    sessionStorage.setItem('notification', true);
                 }
             });
         </script>
