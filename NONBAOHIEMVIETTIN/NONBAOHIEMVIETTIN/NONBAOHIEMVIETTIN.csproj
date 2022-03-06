@@ -3171,6 +3171,7 @@
     <Content Include="assets\css\loadpage.css" />
     <Content Include="assets\css\plugin.css" />
     <Content Include="assets\css\responsive.css" />
+    <Content Include="assets\css\sorttable.css" />
     <Content Include="assets\css\style.css" />
     <Content Include="assets\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\fonts\MyriadPro-Bold.svg" />
@@ -3730,6 +3731,7 @@
     <Content Include="assets\js\code\logingoogle.js" />
     <Content Include="assets\js\code\main.js" />
     <Content Include="assets\js\code\recaptcha.js" />
+    <Content Include="assets\js\code\sorttable.js" />
     <Content Include="assets\js\jquery-ui.js" />
     <Content Include="assets\js\main.js" />
     <Content Include="assets\js\notify.min.js" />
