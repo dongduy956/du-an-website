@@ -4,7 +4,7 @@
     var acc = Session["account"] as accounts;
     var cart = Session["cartSession"] as List<CartItem>;
     var aboutus = db.contact.SingleOrDefault(x => x.display == true);
-    TempData["Version"] = "16.5";
+    TempData["Version"] = "17.5";
 }
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -413,12 +413,7 @@
         <script src="~/assets/js/code/main.js?@TempData["Version"]"></script>
         <script>
             $(window).on('load', function (event) {
-                $('.loader').remove();
-                let ss_notification = sessionStorage.getItem('notification');
-                if (ss_notification == null || ss_notification == '') {
-                    $("#modalPush").modal();
-                    sessionStorage.setItem('notification', true);
-                }
+                $('.loader').remove();               
             });
         </script>
 

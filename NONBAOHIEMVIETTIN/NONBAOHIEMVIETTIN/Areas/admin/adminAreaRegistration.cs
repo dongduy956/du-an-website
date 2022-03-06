@@ -19,7 +19,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin
 "admin/sua-doi-tac/{alias}",
 new { controller = "Brand_admin", action = "Edit", id = UrlParameter.Optional, Area = "Admin" },
 namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
-);
+);       
             context.MapRoute(
          "admin_Contact_edit",
 "admin/sua-lien-he/{alias}",

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using NONBAOHIEMVIETTIN.Models;
 using NONBAOHIEMVIETTIN.Areas.admin.Models;
+using System.Data.Entity;
 
 namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
 {
@@ -14,6 +15,30 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         public ActionResult Index()
         {
             return View();
+        }
+        public JsonResult Backup()
+        {
+            try
+            {
+                string dbname = db.Database.Connection.Database;
+                string url = "https://" + Request.Url.Authority; 
+                string sqlCommand = @"BACKUP DATABASE [{0}] TO  DISK = N'{1}' WITH NOFORMAT, NOINIT,  NAME = N'MyAir-Full Database Backup', SKIP, NOREWIND, NOUNLOAD,  STATS = 10";
+                db.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, string.Format(sqlCommand, dbname, Server.MapPath("~/" + dbname + ".bak")));
+                return Json(new
+                {
+                    status = 1,
+                    message = "Sau lưu thành công."
+                });
+            }
+            catch (Exception ex)
+            {
+                return Json(new
+                {
+                    status = 0,
+                    message = "Có lỗi xảy ra!"
+                });
+            }
+            
         }
         decimal billMoneys(List<order> orders, List<receipt> receipts)
         {

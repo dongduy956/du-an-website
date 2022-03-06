@@ -9130,7 +9130,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/17/2022 09:58:56</publishTime>
     </File>
     <File Include="Areas/admin/Views/Login/Index.cshtml">
-      <publishTime>03/03/2022 22:14:09</publishTime>
+      <publishTime>03/05/2022 20:11:57</publishTime>
     </File>
     <File Include="Areas/admin/Views/Newstype_admin/Create.cshtml">
       <publishTime>02/17/2022 10:00:06</publishTime>
@@ -9190,13 +9190,13 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/17/2022 10:02:56</publishTime>
     </File>
     <File Include="Areas/admin/Views/Shared/_Layout.cshtml">
-      <publishTime>03/04/2022 15:42:44</publishTime>
+      <publishTime>03/05/2022 20:33:31</publishTime>
     </File>
     <File Include="Areas/admin/Views/Shared/_Slidebar.cshtml">
       <publishTime>02/17/2022 10:03:24</publishTime>
     </File>
     <File Include="Areas/admin/Views/Shared/_Topbar.cshtml">
-      <publishTime>02/17/2022 10:03:36</publishTime>
+      <publishTime>03/05/2022 19:59:14</publishTime>
     </File>
     <File Include="Areas/admin/Views/Subscribe_admin/Index.cshtml">
       <publishTime>02/17/2022 10:03:47</publishTime>
@@ -11068,7 +11068,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/08/2022 21:05:09</publishTime>
     </File>
     <File Include="bin/NONBAOHIEMVIETTIN.dll">
-      <publishTime>03/04/2022 15:51:59</publishTime>
+      <publishTime>03/05/2022 21:49:15</publishTime>
     </File>
     <File Include="bin/Owin.dll">
       <publishTime>02/08/2022 21:05:10</publishTime>
@@ -11302,7 +11302,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/19/2022 14:03:22</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>03/05/2022 18:02:16</publishTime>
+      <publishTime>03/05/2022 19:31:07</publishTime>
     </File>
     <File Include="Views/Introduce/Index.cshtml">
       <publishTime>02/19/2022 22:36:22</publishTime>
@@ -11323,7 +11323,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/23/2022 23:18:03</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>03/05/2022 18:00:46</publishTime>
+      <publishTime>03/05/2022 20:12:14</publishTime>
     </File>
     <File Include="Views/Shared/_Navbar.cshtml">
       <publishTime>02/17/2022 09:44:45</publishTime>

@@ -110,11 +110,28 @@
         $(window).on('load', function (event) {
             $('.loader').remove();
         });
-        $('#btnupload').click(function (e) {
+        $('#btn-backup').click(function (e) {
             e.preventDefault();
-            var finder = new CKFinder();
-            finder.popup();
-
+            disable('#btn-backup')
+            $.ajax({
+                url: "/admin/Dashboard/Backup",
+                data: JSON.stringify({  }),
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                type: "POST",
+                success: function (data) {
+                    if (data.status != 1) {
+                        $.notify(data.message, 'error');
+                    }
+                    else {
+                        $.notify(data.message, 'success');
+                    }
+                    enable('#btn-backup');
+                },
+                error: function (data) {
+                    $.notify('Lỗi chưa xác định.', 'error');
+                }
+            })
         })
     </script>
 

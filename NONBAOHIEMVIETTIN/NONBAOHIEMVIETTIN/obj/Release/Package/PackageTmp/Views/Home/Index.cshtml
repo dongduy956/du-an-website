@@ -10,6 +10,7 @@
     ViewBag.Url = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + HttpContext.Current.Request.RawUrl.ToString().Trim().ToLower();
     ViewBag.Image = "https://media.met-helmets.com/app/uploads/2021/04/legit-carbon-mips-gravity-helmet-megamenu.jpg";
 }
+
 @section styles{
     <style>
         .banner_title.title_2 {
@@ -20,7 +21,19 @@
             right: -39px;
         }
     </style>
-} <!--pos home section-->
+}
+@section scripts{
+    <script>
+        $(window).on('load', function (event) {
+            let ss_notification = sessionStorage.getItem('notification');
+            if (ss_notification == null || ss_notification == '') {
+                $("#modalPush").modal();
+                sessionStorage.setItem('notification', true);
+            }
+        });
+    </script>
+}
+<!--pos home section-->
 <div class="pos_home_section">
     <div class="row pos_home">
         @RenderPage("~/Views/Shared/_Slidebar.cshtml")
@@ -390,7 +403,7 @@
 
             <!--Footer-->
             <div class="modal-footer justify-content-between">
-               
+
                 <button type="button" class="ml-auto btn btn-outline-danger" data-dismiss="modal">Đóng</button>
             </div>
         </div>
