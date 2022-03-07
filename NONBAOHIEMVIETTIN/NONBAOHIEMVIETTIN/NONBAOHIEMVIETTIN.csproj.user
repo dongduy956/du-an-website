@@ -8,7 +8,7 @@
     <WebStackScaffolding_IsLayoutPageSelected>True</WebStackScaffolding_IsLayoutPageSelected>
     <WebStackScaffolding_IsPartialViewSelected>False</WebStackScaffolding_IsPartialViewSelected>
     <WebStackScaffolding_IsReferencingScriptLibrariesSelected>False</WebStackScaffolding_IsReferencingScriptLibrariesSelected>
-    <WebStackScaffolding_LayoutPageFile>~/Views/Shared/Error.cshtml</WebStackScaffolding_LayoutPageFile>
+    <WebStackScaffolding_LayoutPageFile>~/Areas/admin/Views/Shared/Error.cshtml</WebStackScaffolding_LayoutPageFile>
     <WebStackScaffolding_IsAsyncSelected>False</WebStackScaffolding_IsAsyncSelected>
     <WebStackScaffolding_ViewDialogWidth>600</WebStackScaffolding_ViewDialogWidth>
     <Use64BitIISExpress />
@@ -22,6 +22,7 @@
     <WebStackScaffolding_DbContextTypeFullName>NONBAOHIEMVIETTIN.Models.nonbaohiemviettinEntities</WebStackScaffolding_DbContextTypeFullName>
     <WebStackScaffolding_IsViewGenerationSelected>True</WebStackScaffolding_IsViewGenerationSelected>
     <NameOfLastUsedPublishProfile>nonbaohiem</NameOfLastUsedPublishProfile>
+    <WebStackScaffolding_AreaDialogWidth>600</WebStackScaffolding_AreaDialogWidth>
   </PropertyGroup>
   <ProjectExtensions>
     <VisualStudio>

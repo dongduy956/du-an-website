@@ -90,7 +90,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     db.SaveChanges();
                     TempData["status"] = "Thêm mới quyền thành công!!";
 
-                    return Redirect("/admin/quyen");
+                    return Redirect("/quyen");
                 }
                 else
                 {
@@ -126,7 +126,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     db.Entry(role).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa quyền thành công!!";
-                    return Redirect("/admin/quyen");
+                    return Redirect("/quyen");
                 }
                 else
                     if (temp != null && role.id == temp.id)
@@ -137,7 +137,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     db.Entry(role).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa quyền thành công!!";
-                    return Redirect("/admin/quyen");
+                    return Redirect("/quyen");
                 }
                 else
                 {

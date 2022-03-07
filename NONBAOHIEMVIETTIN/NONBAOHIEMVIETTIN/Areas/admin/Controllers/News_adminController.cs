@@ -103,7 +103,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     db.news.Add(news);
                     db.SaveChanges();
                     TempData["status"] = "Thêm mới tin tức thành công!!";
-                    return Redirect("/admin/tin-tuc");
+                    return Redirect("/tin-tuc");
                 }
                 else
                 {
@@ -155,7 +155,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     db.Entry(news).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa tin tức thành công!!";
-                    return Redirect("/admin/tin-tuc");
+                    return Redirect("/tin-tuc");
                 }
                 else
                     if (temp != null && news.id == temp.id)
@@ -177,7 +177,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     db.Entry(news).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa tin tức thành công!!";
-                    return Redirect("/admin/tin-tuc");
+                    return Redirect("/tin-tuc");
                 }
                 else
                 {

@@ -54,7 +54,7 @@ $(function () {
             else {
                 disable('.btn-user');
                 $.ajax({
-                    url: "/admin/Login/Login",
+                    url: "/Login/Login",
                     data: JSON.stringify({ accLogin, recaptcha}),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -67,7 +67,7 @@ $(function () {
                         }
                         else
                             if (data.status == 1)
-                                location.href = '/admin';
+                                location.href = '/';
                         enable('.btn-user');
                     },
                     error: function (data) {
@@ -87,12 +87,12 @@ $(function () {
     })
     //Đăng xuất khỏi hệ thống
     $('#btnlogout').click(function () {
-        location.href = "/admin/Login/Logout"
+        location.href = "/Login/Logout"
     })
     //hàm xử lý xoá 1 sản phẩm
     function delete_product(id, ele) {
         $.ajax({
-            url: "/admin/products_admin/delete_product/" + id,
+            url: "/products_admin/delete_product/" + id,
             data: JSON.stringify(id),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -136,7 +136,7 @@ $(function () {
     //Hàm xử lý xoá 1 loại nón
     function delete_category(id, ele) {
         $.ajax({
-            url: "/admin/category_admin/delete_category/" + id,
+            url: "/category_admin/delete_category/" + id,
             data: JSON.stringify(id),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -182,7 +182,7 @@ $(function () {
     //Hàm xử lý xoá 1 nhà sản xuất
     function delete_production(id, ele) {
         $.ajax({
-            url: "/admin/production_admin/delete_production/" + id,
+            url: "/production_admin/delete_production/" + id,
             data: JSON.stringify(id),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -226,7 +226,7 @@ $(function () {
     //Hàm xử lý xoá 1 nhóm nón
     function delete_groupproduct(id, ele) {
         $.ajax({
-            url: "/admin/GroupProduct_admin/delete_groupProduct/" + id,
+            url: "/GroupProduct_admin/delete_groupProduct/" + id,
             data: JSON.stringify(id),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -270,7 +270,7 @@ $(function () {
     //Hàm xoá quyền
     function delete_role(id) {
         $.ajax({
-            url: "/admin/Role_admin/delete_role/" + id,
+            url: "/Role_admin/delete_role/" + id,
             data: JSON.stringify(id),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -308,7 +308,7 @@ $(function () {
     //Hàm xử lý xoá 1 tài khoản
     function delete_account(id) {
         $.ajax({
-            url: "/admin/Accounts_admin/delete_account/" + id,
+            url: "/Accounts_admin/delete_account/" + id,
             data: JSON.stringify(id),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -322,7 +322,7 @@ $(function () {
                     $(`#_account_${id}`).hide(200);
                     if(data.status==2)
                     {
-                        location.href = "/admin/Login/Logout"
+                        location.href = "/Login/Logout"
                     }
                 }
                 else
@@ -358,7 +358,7 @@ $(function () {
     //Hàm reset password của user & admin
     function reset_password(id) {
         $.ajax({
-            url: "/admin/Accounts_admin/resetPassword/" + id,
+            url: "/Accounts_admin/resetPassword/" + id,
             data: JSON.stringify(id),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -397,7 +397,7 @@ $(function () {
     //Hàm xử lý xoá 1 loại tin tức
     function delete_newstype(id) {
         $.ajax({
-            url: "/admin/Newstype_admin/delete_newstype/" + id,
+            url: "/Newstype_admin/delete_newstype/" + id,
             data: JSON.stringify(id),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -441,7 +441,7 @@ $(function () {
     //Hàm xử lý xoá 1 tin tức
     function delete_news(id) {
         $.ajax({
-            url: "/admin/News_admin/delete_news/" + id,
+            url: "/News_admin/delete_news/" + id,
             data: JSON.stringify(id),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -485,7 +485,7 @@ $(function () {
     //Hàm xử lý xoá giới thiệu về webstie
     function delete_introduce(id) {
         $.ajax({
-            url: "/admin/Introduce_admin/delete_introduce/" + id,
+            url: "/Introduce_admin/delete_introduce/" + id,
             data: JSON.stringify(id),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -529,7 +529,7 @@ $(function () {
     //Hàm xoá 1 liên hệ
     function delete_contact(id) {
         $.ajax({
-            url: "/admin/Contact_admin/delete_contact/" + id,
+            url: "/Contact_admin/delete_contact/" + id,
             data: JSON.stringify(id),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -574,7 +574,7 @@ $(function () {
     //Hàm xoá 1 phản hồi
     function delete_feedback(id) {
         $.ajax({
-            url: "/admin/Feedback_admin/delete_feedback/" + id,
+            url: "/Feedback_admin/delete_feedback/" + id,
             data: JSON.stringify(id),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -617,7 +617,7 @@ $(function () {
     //Hàm xoá 1 đăng kí
     function delete_subscribe(id) {
         $.ajax({
-            url: "/admin/Subscribe_admin/delete_subscribe/" + id,
+            url: "/Subscribe_admin/delete_subscribe/" + id,
             data: JSON.stringify(id),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -663,7 +663,7 @@ $(function () {
     //Hàm xoá 1 đánh giá
     function delete_rate(id) {
         $.ajax({
-            url: "/admin/Rate_admin/delete_rate/" + id,
+            url: "/Rate_admin/delete_rate/" + id,
             data: JSON.stringify(id),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -706,7 +706,7 @@ $(function () {
     //Hàm xoá 1 đơn hàng
     function delete_order(id) {
         $.ajax({
-            url: "/admin/Order_admin/delete_order/" + id,
+            url: "/Order_admin/delete_order/" + id,
             data: JSON.stringify(id),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -753,7 +753,7 @@ $(function () {
     //Hàm duyệt 1 đơn hàng
     function confirm_order(id) {
         $.ajax({
-            url: "/admin/Order_admin/confirm_order/" + id,
+            url: "/Order_admin/confirm_order/" + id,
             data: JSON.stringify(id),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -795,7 +795,7 @@ $(function () {
     //Hàm xác nhận đã chuyển tiền của 1 đơn hàng
     function transfer_order(id) {
         $.ajax({
-            url: "/admin/Order_admin/transfer_order/" + id,
+            url: "/Order_admin/transfer_order/" + id,
             data: JSON.stringify(id),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -990,7 +990,7 @@ $(function () {
                 lstreceiptdetail.push(receiptdetail);
             })
             $.ajax({
-                url: "/admin/Receipt_admin/Create/",
+                url: "/Receipt_admin/Create/",
                 data: JSON.stringify({ lstreceiptdetail}),
                         contentType: "application/json; charset=utf-8",
                         dataType: "json",
@@ -999,7 +999,7 @@ $(function () {
                             if (data.status == 1)
                     {
                                 window.sessionStorage.removeItem('receipt');
-                                window.location.href = '/admin/nhap-kho';
+                                window.location.href = '/nhap-kho';
                             }
                         },
                 error: function (data) {
@@ -1014,7 +1014,7 @@ $(function () {
     //hàm xoá 1 phiếu nhập
     function delete_receipt(id) {
         $.ajax({
-            url: "/admin/Receipt_admin/delete_receipt/" + id,
+            url: "/Receipt_admin/delete_receipt/" + id,
             data: JSON.stringify(id),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -1058,7 +1058,7 @@ $(function () {
     //Hàm xoá 1 đối tác
     function delete_brand(id) {
         $.ajax({
-            url: "/admin/Brand_admin/delete_brand/" + id,
+            url: "/Brand_admin/delete_brand/" + id,
             data: JSON.stringify(id),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
@@ -1102,7 +1102,7 @@ $(function () {
     //Hàm load các ảnh phụ của 1 sản phẩm
     function loadImages(id) {
         $.ajax({
-            url: "/admin/Products_admin/LoadImages/",
+            url: "/Products_admin/LoadImages/",
             data: JSON.stringify({ id}),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
@@ -1185,7 +1185,7 @@ $(function () {
         var images = window.sessionStorage.getItem('images') == null ? [] : JSON.parse(window.sessionStorage.getItem('images'));
         console.log(JSON.stringify(images));
         $.ajax({
-            url: "/admin/Products_admin/SaveImages/",
+            url: "/Products_admin/SaveImages/",
             data: JSON.stringify({ id, images}),
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",

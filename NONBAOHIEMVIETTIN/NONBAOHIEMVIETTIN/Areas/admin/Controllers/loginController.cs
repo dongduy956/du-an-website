@@ -20,13 +20,13 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         {
             var acc = Session["account_admin"] as accounts;
             if (acc != null && acc.role.name.Equals("admin"))
-                return Redirect("/admin");
+                return Redirect("/");
             return View();
         }
         public ActionResult Logout()
         {
             Session["account_admin"] = null;            
-            return Redirect("/admin/dang-nhap");
+            return Redirect("/dang-nhap");
         }
         private bool IsValidRecaptcha(string recaptcha)
         {

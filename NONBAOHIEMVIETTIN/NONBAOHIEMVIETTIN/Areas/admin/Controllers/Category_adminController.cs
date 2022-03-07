@@ -96,7 +96,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     db.SaveChanges();
                     TempData["status"] = "Thêm mới loại nón thành công!!";
 
-                    return Redirect("/admin/loai-non");
+                    return Redirect("/loai-non");
                 }
                 else
                 {
@@ -133,7 +133,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     db.Entry(category).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa loại nón thành công!!";
-                    return Redirect("/admin/loai-non");
+                    return Redirect("/loai-non");
                 }
                 else
                     if (temp != null && category.id == temp.id)
@@ -146,7 +146,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     db.Entry(category).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa loại nón thành công!!";
-                    return Redirect("/admin/loai-non");
+                    return Redirect("/loai-non");
                 }
                 else
                 {

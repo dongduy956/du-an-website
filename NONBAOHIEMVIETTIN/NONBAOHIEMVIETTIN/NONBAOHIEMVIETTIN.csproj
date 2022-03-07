@@ -240,6 +240,7 @@
     <Compile Include="Areas\admin\Controllers\Category_adminController.cs" />
     <Compile Include="Areas\admin\Controllers\Contact_adminController.cs" />
     <Compile Include="Areas\admin\Controllers\DashboardController.cs" />
+    <Compile Include="Areas\admin\Controllers\ErrorController.cs" />
     <Compile Include="Areas\admin\Controllers\GroupProduct_adminController.cs" />
     <Compile Include="Areas\admin\Controllers\Introduce_adminController.cs" />
     <Compile Include="Areas\admin\Controllers\LoginController.cs" />
@@ -264,6 +265,8 @@
     <Compile Include="Controllers\IntroduceController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="Models\RecaptchaResult.cs" />
+    <Compile Include="Models\SubdomainRoute.cs" />
+    <Compile Include="Models\SubdomainRouteConstraint.cs" />
     <Compile Include="Views\ProductsController.cs" />
     <Compile Include="Controllers\subscribeController.cs" />
     <Compile Include="Controllers\WishController.cs" />
@@ -1495,6 +1498,7 @@
     <Content Include="Areas\admin\assets\js\ckfinder\skins\v1\skin.js" />
     <Content Include="Areas\admin\assets\js\ckfinder\skins\v1\uipanel.css" />
     <Content Include="Areas\admin\assets\js\ckfinder\translations.txt" />
+    <Content Include="assets\js\code\animation-rain.js" />
     <Content Include="Areas\admin\assets\js\code\main.js" />
     <Content Include="Areas\admin\assets\js\code\chart-area.js" />
     <Content Include="Areas\admin\assets\js\code\chart-bar.js" />
@@ -4059,6 +4063,8 @@
     <Content Include="Areas\admin\Views\Brand_admin\Index.cshtml" />
     <Content Include="Areas\admin\Views\Brand_admin\Create.cshtml" />
     <Content Include="Areas\admin\Views\Brand_admin\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\Shared\Error.cshtml" />
+    <Content Include="Areas\admin\Views\Error\NotFound.cshtml" />
     <None Include="Properties\PublishProfiles\nonbaohiem.pubxml" />
     <None Include="Properties\PublishProfiles\nonbaohiemviettin.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />

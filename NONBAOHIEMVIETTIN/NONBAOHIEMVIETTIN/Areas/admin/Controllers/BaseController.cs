@@ -16,7 +16,9 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             if(acc== null||!acc.role.name.Equals("admin"))
             {
                 filterContext.Result = new RedirectToRouteResult(
-                    new RouteValueDictionary(new { controller = "Login", action = "Index", Area = "Admin" }));
+                    new RouteValueDictionary(
+                        new { controller = "Login", action = "Index", Area = "Admin" }
+                        ));
             }           
             base.OnActionExecuting(filterContext);
         }

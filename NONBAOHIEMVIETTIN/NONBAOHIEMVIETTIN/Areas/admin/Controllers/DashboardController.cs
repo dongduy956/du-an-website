@@ -21,7 +21,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             try
             {
                 string dbname = db.Database.Connection.Database;
-                string url = "https://" + Request.Url.Authority; 
+                string url = "https://" + Request.Url.Authority;
                 string sqlCommand = @"BACKUP DATABASE [{0}] TO  DISK = N'{1}' WITH NOFORMAT, NOINIT,  NAME = N'MyAir-Full Database Backup', SKIP, NOREWIND, NOUNLOAD,  STATS = 10";
                 db.Database.ExecuteSqlCommand(TransactionalBehavior.DoNotEnsureTransaction, string.Format(sqlCommand, dbname, Server.MapPath("~/" + dbname + ".bak")));
                 return Json(new
@@ -38,7 +38,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     message = "Có lỗi xảy ra!"
                 });
             }
-            
+
         }
         decimal billMoneys(List<order> orders, List<receipt> receipts)
         {
@@ -92,20 +92,53 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             }
             // tính tiền lời
             bool check = false;
-            foreach(var itemReceipt in lstProductsReceipt)
+            if (lstProductsReceipt.Count > lstProductsOrder.Count)
             {
-                check = false;
-                foreach(var itemOrder in lstProductsOrder)
-                {                
-                    if(itemReceipt.idproduct==itemOrder.idproduct)
+                foreach (var itemReceipt in lstProductsReceipt)
+                {
+                    check = false;
+                    foreach (var itemOrder in lstProductsOrder)
                     {
-                        total += itemOrder.total - itemReceipt.total;
-                        check = true;
-                        break;
+                        if (itemReceipt.idproduct == itemOrder.idproduct)
+                        {
+                            total += itemOrder.total - itemReceipt.total;
+                            check = true;
+                            lstProductsOrder.Remove(itemOrder);
+                            break;
+                        }
+                    }
+                    if (!check)
+                    { 
+                        total -= itemReceipt.total;
+
                     }
                 }
-                if (!check)
-                    total -= itemReceipt.total;
+                if(lstProductsOrder.Count!=0)
+                {
+                    total += lstProductsOrder.Sum(x => x.total);
+                }
+            }
+            else
+            {
+
+                foreach (var itemOrder in lstProductsOrder)
+                {
+                    check = false;
+                    foreach (var itemReceipt in lstProductsReceipt)
+                    {
+                        if (itemReceipt.idproduct == itemOrder.idproduct)
+                        {
+                            total += itemOrder.total - itemReceipt.total;
+                            check = true;
+                            lstProductsReceipt.Remove(itemReceipt);
+                            break;
+                        }
+                    }
+                    if (!check)
+                        total += itemOrder.total;
+                }
+                if (lstProductsReceipt.Count != 0)
+                    total -= lstProductsReceipt.Sum(x => x.total);
             }
             return total;
         }
@@ -148,9 +181,9 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             decimal[] moneys = new decimal[12];
             for (int i = 0; i < 12; i++)
             {
-                var orders=db.order.Where(x => x.statuspay == true && x.createdate.Value.Month == (i + 1) && x.createdate.Value.Year == year).ToList();
+                var orders = db.order.Where(x => x.statuspay == true && x.createdate.Value.Month == (i + 1) && x.createdate.Value.Year == year).ToList();
                 var receipts = db.receipt.Where(x => x.createdate.Value.Month == (i + 1) && x.createdate.Value.Year == year).ToList();
-                moneys[i] = billMoneys(orders,receipts);
+                moneys[i] = billMoneys(orders, receipts);
             }
 
             return Json(new

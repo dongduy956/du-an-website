@@ -16,7 +16,7 @@ $(document).ready(function () {
     var year = now.getFullYear();
     function loadMoneysDay(day,month, year) {
         $.ajax({
-            url: "/admin/Dashboard/LoadMoneysDay/",
+            url: "/Dashboard/LoadMoneysDay/",
             data: JSON.stringify({ day,month,year }),
             contentType: "application/json; charset=utf-8",
             dataType: "json",

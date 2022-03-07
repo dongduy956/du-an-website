@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NONBAOHIEMVIETTIN.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -12,13 +13,13 @@ namespace NONBAOHIEMVIETTIN
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.MapMvcAttributeRoutes();
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");       
             routes.MapRoute(
                name: "Login",
                url: "dang-nhap",
                defaults: new { controller = "Accounts", action = "Login", id = UrlParameter.Optional },
                namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
-           );         
+           );
             routes.MapRoute(
         name: "Accounts_LoginFacebook",
         url: "dang-nhap-facebook",
@@ -49,25 +50,25 @@ namespace NONBAOHIEMVIETTIN
           defaults: new { controller = "Accounts", action = "LoginGoogle", id = UrlParameter.Optional },
           namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
       );
-                routes.MapRoute(
-               name: "Register",
-               url: "dang-ki",
-               defaults: new { controller = "Accounts", action = "Register", id = UrlParameter.Optional },
-               namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
-           );
-                routes.MapRoute(
-             name: "Update",
-             url: "cap-nhat",
-             defaults: new { controller = "Accounts", action = "Update", id = UrlParameter.Optional },
-             namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
-         );
+            routes.MapRoute(
+           name: "Register",
+           url: "dang-ki",
+           defaults: new { controller = "Accounts", action = "Register", id = UrlParameter.Optional },
+           namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+       );
+            routes.MapRoute(
+         name: "Update",
+         url: "cap-nhat",
+         defaults: new { controller = "Accounts", action = "Update", id = UrlParameter.Optional },
+         namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+     );
             routes.MapRoute(
         name: "subscribe_news",
         url: "dang-ki-nhan-tin",
         defaults: new { controller = "subscribe", action = "news", id = UrlParameter.Optional },
         namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
     );
-            
+
 
             routes.MapRoute(
              name: "ChangePassword",
@@ -99,12 +100,12 @@ namespace NONBAOHIEMVIETTIN
              defaults: new { controller = "Accounts", action = "CodeForget", id = UrlParameter.Optional },
              namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
          );
-                  routes.MapRoute(
-           name: "Wish_AddItem",
-           url: "them-vao-yeu-thich",
-           defaults: new { controller = "Wish", action = "AddItem", id = UrlParameter.Optional },
-           namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
-       );
+            routes.MapRoute(
+     name: "Wish_AddItem",
+     url: "them-vao-yeu-thich",
+     defaults: new { controller = "Wish", action = "AddItem", id = UrlParameter.Optional },
+     namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+ );
 
             routes.MapRoute(
       name: "Cart_DeleteItem",
@@ -154,12 +155,13 @@ namespace NONBAOHIEMVIETTIN
                defaults: new { controller = "Accounts", action = "Logout", id = UrlParameter.Optional },
                namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
            );
+          
             routes.MapRoute(
              name: "NotFound",
              url: "loi-404",
              defaults: new { controller = "Error", action = "NotFound", id = UrlParameter.Optional },
              namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
-         );
+         );            
             routes.MapRoute(
               name: "ConfirmOrder",
               url: "xac-nhan-don-hang",
@@ -235,7 +237,7 @@ namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
                defaults: new { controller = "Products", action = "Index", id = UrlParameter.Optional },
                namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
            );
-         
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

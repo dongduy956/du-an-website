@@ -95,7 +95,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     db.SaveChanges();
                     TempData["status"] = "Thêm mới nhóm nón thành công!!";
 
-                    return Redirect("/admin/nhom-non");
+                    return Redirect("/nhom-non");
                 }
                 else
                 {
@@ -132,7 +132,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     db.Entry(groupproduct).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa nhóm nón thành công!!";
-                    return Redirect("/admin/nhom-non");
+                    return Redirect("/nhom-non");
                 }
                 else
                     if (temp != null && groupproduct.id == temp.id)
@@ -145,7 +145,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     db.Entry(groupproduct).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa nhóm nón thành công!!";
-                    return Redirect("/admin/nhom-non");
+                    return Redirect("/nhom-non");
                 }
                 else
                 {

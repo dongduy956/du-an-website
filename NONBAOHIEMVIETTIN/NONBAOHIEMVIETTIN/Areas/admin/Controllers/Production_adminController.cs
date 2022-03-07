@@ -95,7 +95,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     db.SaveChanges();
                     TempData["status"] = "Thêm mới hãng sản xuất thành công!!";
 
-                    return Redirect("/admin/hang-san-xuat");
+                    return Redirect("/hang-san-xuat");
                 }
                 else
                 {
@@ -131,7 +131,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     db.SaveChanges();
                     TempData["status"] = "Sửa hãng sản xuất thành công!!";
 
-                    return Redirect("/admin/hang-san-xuat");
+                    return Redirect("/hang-san-xuat");
                 }
                 else
                     if (temp != null && production.id == temp.id)
@@ -144,7 +144,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     db.Entry(production).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa hãng sản xuất thành công!!";
-                    return Redirect("/admin/hang-san-xuat");
+                    return Redirect("/hang-san-xuat");
                 }
                 else
                 {

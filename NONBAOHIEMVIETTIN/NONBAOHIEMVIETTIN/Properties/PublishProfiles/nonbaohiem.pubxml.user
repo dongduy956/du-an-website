@@ -3547,16 +3547,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/08/2022 21:04:48</publishTime>
     </File>
     <File Include="Areas/admin/assets/js/code/chart-area.js">
-      <publishTime>02/08/2022 21:04:48</publishTime>
+      <publishTime>03/07/2022 09:05:24</publishTime>
     </File>
     <File Include="Areas/admin/assets/js/code/chart-bar.js">
-      <publishTime>02/08/2022 21:04:48</publishTime>
+      <publishTime>03/07/2022 09:05:38</publishTime>
     </File>
     <File Include="Areas/admin/assets/js/code/chart-pie.js">
-      <publishTime>02/16/2022 17:25:21</publishTime>
+      <publishTime>03/07/2022 09:05:56</publishTime>
     </File>
     <File Include="Areas/admin/assets/js/code/main.js">
-      <publishTime>03/05/2022 18:15:48</publishTime>
+      <publishTime>03/07/2022 09:05:54</publishTime>
     </File>
     <File Include="Areas/admin/assets/js/sb-admin-2.js">
       <publishTime>02/08/2022 21:04:48</publishTime>
@@ -9070,136 +9070,142 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/08/2022 21:04:50</publishTime>
     </File>
     <File Include="Areas/admin/Views/Accounts_admin/Create.cshtml">
-      <publishTime>02/23/2022 18:19:41</publishTime>
+      <publishTime>03/07/2022 09:25:51</publishTime>
     </File>
     <File Include="Areas/admin/Views/Accounts_admin/Edit.cshtml">
-      <publishTime>02/23/2022 21:24:47</publishTime>
+      <publishTime>03/07/2022 09:26:07</publishTime>
     </File>
     <File Include="Areas/admin/Views/Accounts_admin/Index.cshtml">
-      <publishTime>02/17/2022 09:55:34</publishTime>
+      <publishTime>03/07/2022 09:26:23</publishTime>
     </File>
     <File Include="Areas/admin/Views/Brand_admin/Create.cshtml">
-      <publishTime>02/17/2022 09:55:50</publishTime>
+      <publishTime>03/07/2022 09:25:12</publishTime>
     </File>
     <File Include="Areas/admin/Views/Brand_admin/Edit.cshtml">
-      <publishTime>02/23/2022 21:19:27</publishTime>
+      <publishTime>03/07/2022 09:25:23</publishTime>
     </File>
     <File Include="Areas/admin/Views/Brand_admin/Index.cshtml">
-      <publishTime>02/17/2022 09:56:14</publishTime>
+      <publishTime>03/07/2022 09:25:37</publishTime>
     </File>
     <File Include="Areas/admin/Views/Category_admin/Create.cshtml">
-      <publishTime>02/17/2022 09:56:29</publishTime>
+      <publishTime>03/07/2022 09:24:30</publishTime>
     </File>
     <File Include="Areas/admin/Views/Category_admin/Edit.cshtml">
-      <publishTime>02/17/2022 09:56:39</publishTime>
+      <publishTime>03/07/2022 09:24:42</publishTime>
     </File>
     <File Include="Areas/admin/Views/Category_admin/Index.cshtml">
-      <publishTime>02/17/2022 09:56:53</publishTime>
+      <publishTime>03/07/2022 09:24:57</publishTime>
     </File>
     <File Include="Areas/admin/Views/Contact_admin/Create.cshtml">
-      <publishTime>02/17/2022 09:57:06</publishTime>
+      <publishTime>03/07/2022 09:23:46</publishTime>
     </File>
     <File Include="Areas/admin/Views/Contact_admin/Edit.cshtml">
-      <publishTime>02/17/2022 09:57:16</publishTime>
+      <publishTime>03/07/2022 09:24:14</publishTime>
     </File>
     <File Include="Areas/admin/Views/Contact_admin/Index.cshtml">
-      <publishTime>02/17/2022 09:57:25</publishTime>
+      <publishTime>03/07/2022 09:24:12</publishTime>
     </File>
     <File Include="Areas/admin/Views/Dashboard/Index.cshtml">
-      <publishTime>02/16/2022 18:56:07</publishTime>
+      <publishTime>03/07/2022 09:23:29</publishTime>
+    </File>
+    <File Include="Areas/admin/Views/Error/NotFound.cshtml">
+      <publishTime>03/07/2022 13:47:21</publishTime>
     </File>
     <File Include="Areas/admin/Views/Feedback_admin/Index.cshtml">
-      <publishTime>02/17/2022 09:57:45</publishTime>
+      <publishTime>03/07/2022 09:23:15</publishTime>
     </File>
     <File Include="Areas/admin/Views/GroupProduct_admin/Create.cshtml">
-      <publishTime>02/17/2022 09:57:56</publishTime>
+      <publishTime>03/07/2022 09:22:35</publishTime>
     </File>
     <File Include="Areas/admin/Views/GroupProduct_admin/Edit.cshtml">
-      <publishTime>02/17/2022 09:58:20</publishTime>
+      <publishTime>03/07/2022 09:22:47</publishTime>
     </File>
     <File Include="Areas/admin/Views/GroupProduct_admin/Index.cshtml">
-      <publishTime>02/17/2022 09:58:29</publishTime>
+      <publishTime>03/07/2022 09:23:02</publishTime>
     </File>
     <File Include="Areas/admin/Views/Introduce_admin/Create.cshtml">
-      <publishTime>02/17/2022 09:58:40</publishTime>
+      <publishTime>03/07/2022 09:21:27</publishTime>
     </File>
     <File Include="Areas/admin/Views/Introduce_admin/Edit.cshtml">
-      <publishTime>02/23/2022 21:39:34</publishTime>
+      <publishTime>03/07/2022 09:21:42</publishTime>
     </File>
     <File Include="Areas/admin/Views/Introduce_admin/Index.cshtml">
-      <publishTime>02/17/2022 09:58:56</publishTime>
+      <publishTime>03/07/2022 09:22:16</publishTime>
     </File>
     <File Include="Areas/admin/Views/Login/Index.cshtml">
-      <publishTime>03/05/2022 20:11:57</publishTime>
+      <publishTime>03/07/2022 09:21:08</publishTime>
     </File>
     <File Include="Areas/admin/Views/Newstype_admin/Create.cshtml">
-      <publishTime>02/17/2022 10:00:06</publishTime>
+      <publishTime>03/07/2022 09:19:44</publishTime>
     </File>
     <File Include="Areas/admin/Views/Newstype_admin/Edit.cshtml">
-      <publishTime>02/17/2022 10:00:13</publishTime>
+      <publishTime>03/07/2022 09:19:31</publishTime>
     </File>
     <File Include="Areas/admin/Views/Newstype_admin/Index.cshtml">
-      <publishTime>02/17/2022 10:00:23</publishTime>
+      <publishTime>03/07/2022 09:19:21</publishTime>
     </File>
     <File Include="Areas/admin/Views/News_admin/Create.cshtml">
-      <publishTime>02/17/2022 09:59:33</publishTime>
+      <publishTime>03/07/2022 09:20:49</publishTime>
     </File>
     <File Include="Areas/admin/Views/News_admin/Edit.cshtml">
-      <publishTime>02/23/2022 21:34:24</publishTime>
+      <publishTime>03/07/2022 09:20:52</publishTime>
     </File>
     <File Include="Areas/admin/Views/News_admin/Index.cshtml">
-      <publishTime>02/17/2022 09:59:50</publishTime>
+      <publishTime>03/07/2022 09:20:03</publishTime>
     </File>
     <File Include="Areas/admin/Views/Order_admin/Index.cshtml">
-      <publishTime>02/17/2022 10:00:34</publishTime>
+      <publishTime>03/07/2022 09:18:56</publishTime>
     </File>
     <File Include="Areas/admin/Views/Production_admin/Create.cshtml">
-      <publishTime>02/17/2022 10:00:45</publishTime>
+      <publishTime>03/07/2022 09:18:36</publishTime>
     </File>
     <File Include="Areas/admin/Views/Production_admin/Edit.cshtml">
-      <publishTime>02/17/2022 10:00:54</publishTime>
+      <publishTime>03/07/2022 09:18:10</publishTime>
     </File>
     <File Include="Areas/admin/Views/Production_admin/Index.cshtml">
-      <publishTime>02/17/2022 10:01:06</publishTime>
+      <publishTime>03/07/2022 09:17:58</publishTime>
     </File>
     <File Include="Areas/admin/Views/products_admin/Create.cshtml">
-      <publishTime>02/17/2022 10:01:18</publishTime>
+      <publishTime>03/07/2022 09:16:40</publishTime>
     </File>
     <File Include="Areas/admin/Views/products_admin/Edit.cshtml">
-      <publishTime>02/23/2022 21:29:07</publishTime>
+      <publishTime>03/07/2022 09:16:59</publishTime>
     </File>
     <File Include="Areas/admin/Views/products_admin/Index.cshtml">
-      <publishTime>02/17/2022 10:01:54</publishTime>
+      <publishTime>03/07/2022 09:15:48</publishTime>
     </File>
     <File Include="Areas/admin/Views/Rate_admin/Index.cshtml">
-      <publishTime>02/17/2022 10:02:05</publishTime>
+      <publishTime>03/07/2022 09:17:17</publishTime>
     </File>
     <File Include="Areas/admin/Views/Receipt_admin/Create.cshtml">
-      <publishTime>02/17/2022 10:02:16</publishTime>
+      <publishTime>03/07/2022 09:14:58</publishTime>
     </File>
     <File Include="Areas/admin/Views/Receipt_admin/Index.cshtml">
-      <publishTime>02/17/2022 10:02:25</publishTime>
+      <publishTime>03/07/2022 09:15:14</publishTime>
     </File>
     <File Include="Areas/admin/Views/Role_admin/Create.cshtml">
-      <publishTime>02/17/2022 10:02:36</publishTime>
+      <publishTime>03/07/2022 09:14:01</publishTime>
     </File>
     <File Include="Areas/admin/Views/Role_admin/Edit.cshtml">
-      <publishTime>02/17/2022 10:02:46</publishTime>
+      <publishTime>03/07/2022 09:13:16</publishTime>
     </File>
     <File Include="Areas/admin/Views/Role_admin/Index.cshtml">
-      <publishTime>02/17/2022 10:02:56</publishTime>
+      <publishTime>03/07/2022 09:14:04</publishTime>
+    </File>
+    <File Include="Areas/admin/Views/Shared/Error.cshtml">
+      <publishTime>03/07/2022 13:53:46</publishTime>
     </File>
     <File Include="Areas/admin/Views/Shared/_Layout.cshtml">
-      <publishTime>03/05/2022 20:33:31</publishTime>
+      <publishTime>03/07/2022 09:11:43</publishTime>
     </File>
     <File Include="Areas/admin/Views/Shared/_Slidebar.cshtml">
-      <publishTime>02/17/2022 10:03:24</publishTime>
+      <publishTime>03/07/2022 10:03:25</publishTime>
     </File>
     <File Include="Areas/admin/Views/Shared/_Topbar.cshtml">
-      <publishTime>03/05/2022 19:59:14</publishTime>
+      <publishTime>03/07/2022 09:12:47</publishTime>
     </File>
     <File Include="Areas/admin/Views/Subscribe_admin/Index.cshtml">
-      <publishTime>02/17/2022 10:03:47</publishTime>
+      <publishTime>03/07/2022 09:14:19</publishTime>
     </File>
     <File Include="Areas/admin/Views/web.config">
       <publishTime>02/08/2022 21:04:46</publishTime>
@@ -9211,19 +9217,22 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/08/2022 21:04:51</publishTime>
     </File>
     <File Include="assets/css/hotline.css">
-      <publishTime>03/04/2022 22:32:54</publishTime>
+      <publishTime>03/06/2022 20:30:25</publishTime>
     </File>
     <File Include="assets/css/jquery-ui.css">
       <publishTime>02/08/2022 21:04:51</publishTime>
     </File>
     <File Include="assets/css/loadpage.css">
-      <publishTime>02/14/2022 13:43:28</publishTime>
+      <publishTime>03/06/2022 21:32:13</publishTime>
     </File>
     <File Include="assets/css/plugin.css">
       <publishTime>02/08/2022 21:04:51</publishTime>
     </File>
     <File Include="assets/css/responsive.css">
       <publishTime>02/08/2022 21:04:51</publishTime>
+    </File>
+    <File Include="assets/css/sorttable.css">
+      <publishTime>03/06/2022 17:00:52</publishTime>
     </File>
     <File Include="assets/css/style.css">
       <publishTime>02/17/2022 09:10:33</publishTime>
@@ -10932,6 +10941,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="assets/js/ajax-mail.js">
       <publishTime>02/08/2022 21:05:00</publishTime>
     </File>
+    <File Include="assets/js/code/animation-rain.js">
+      <publishTime>03/06/2022 19:39:45</publishTime>
+    </File>
     <File Include="assets/js/code/api.js">
       <publishTime>02/08/2022 21:05:00</publishTime>
     </File>
@@ -10949,6 +10961,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     </File>
     <File Include="assets/js/code/recaptcha.js">
       <publishTime>03/03/2022 21:30:00</publishTime>
+    </File>
+    <File Include="assets/js/code/sorttable.js">
+      <publishTime>03/06/2022 16:43:10</publishTime>
     </File>
     <File Include="assets/js/code/toast.js">
       <publishTime>02/08/2022 21:05:00</publishTime>
@@ -11068,7 +11083,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/08/2022 21:05:09</publishTime>
     </File>
     <File Include="bin/NONBAOHIEMVIETTIN.dll">
-      <publishTime>03/05/2022 21:49:15</publishTime>
+      <publishTime>03/07/2022 13:58:58</publishTime>
     </File>
     <File Include="bin/Owin.dll">
       <publishTime>02/08/2022 21:05:10</publishTime>
@@ -11281,10 +11296,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/08/2022 21:04:51</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>03/03/2022 21:18:37</publishTime>
+      <publishTime>03/06/2022 19:39:25</publishTime>
     </File>
     <File Include="Views/Accounts/AccountInfo.cshtml">
-      <publishTime>02/23/2022 15:06:23</publishTime>
+      <publishTime>03/06/2022 17:04:33</publishTime>
     </File>
     <File Include="Views/Accounts/Login.cshtml">
       <publishTime>03/03/2022 21:34:37</publishTime>
@@ -11323,7 +11338,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/23/2022 23:18:03</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>03/05/2022 20:12:14</publishTime>
+      <publishTime>03/06/2022 21:33:19</publishTime>
     </File>
     <File Include="Views/Shared/_Navbar.cshtml">
       <publishTime>02/17/2022 09:44:45</publishTime>
@@ -11344,7 +11359,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/08/2022 21:04:51</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>03/02/2022 23:34:04</publishTime>
+      <publishTime>03/07/2022 11:26:06</publishTime>
     </File>
   </ItemGroup>
 </Project>

@@ -194,7 +194,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                         Session["account_admin"] = acc;
                     }
                     TempData["status"] = "Sửa tài khoản thành công!!";
-                    return Redirect("/admin/tai-khoan");
+                    return Redirect("/tai-khoan");
                 }
                 else
                     if (temp != null && accounts.id == temp.id && db.accounts.SingleOrDefault(x => x.issocial == 0&&accounts.issocial==0 && x.id != temp.id && x.email.ToLower().Equals(accounts.email.ToLower())) == null)
@@ -219,7 +219,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     db.Entry(accounts).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa tài khoản thành công!!";
-                    return Redirect("/admin/tai-khoan");
+                    return Redirect("/tai-khoan");
                 }
                 else
                 {

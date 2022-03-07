@@ -99,7 +99,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     db.brand.Add(brand);
                     db.SaveChanges();
                     TempData["status"] = "Thêm mới đối tác thành công!!";
-                    return Redirect("/admin/doi-tac");
+                    return Redirect("/doi-tac");
                 }
                 else
                 {
@@ -147,7 +147,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     db.Entry(brand).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa đối tác thành công!!";
-                    return Redirect("/admin/doi-tac");
+                    return Redirect("/doi-tac");
                 }
                 else
                     if (temp != null && brand.id == temp.id)
@@ -167,7 +167,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     db.Entry(brand).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa đối tác thành công!!";
-                    return Redirect("/admin/doi-tac");
+                    return Redirect("/doi-tac");
                 }
                 else
                 {

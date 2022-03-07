@@ -39,7 +39,7 @@ $(document).ready( function() {
     var year = now.getFullYear();
     function loadMoneysMonth(month,year){
         $.ajax({
-            url: "/admin/Dashboard/LoadMoneysMonth/",
+            url: "/Dashboard/LoadMoneysMonth/",
             data: JSON.stringify({ month, year }),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
