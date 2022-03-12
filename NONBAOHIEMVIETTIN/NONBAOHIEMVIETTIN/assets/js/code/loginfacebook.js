@@ -40,7 +40,7 @@ $(function () {
     $('#btnloginface').click(function (e) {
         e.preventDefault();
         FB.init({
-            appId: '703338740695568',
+            appId: '2844490499183619',
             cookie: true,
             xfbml: true,
             version: 'v13.0'
