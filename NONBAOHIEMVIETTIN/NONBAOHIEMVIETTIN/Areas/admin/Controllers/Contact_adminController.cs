@@ -94,7 +94,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 if (db.contact.SingleOrDefault(x => x.title.ToLower().Equals(contact.title.ToLower())) == null)
                 {
                     contact.display = true;
-                    contact.alias = HoTro.Instances.convertToUnSign3(contact.title);
+                    contact.alias = Libary.Instances.convertToUnSign3(contact.title);
                     db.contact.Add(contact);
                     db.SaveChanges();
                     TempData["status"] = "Thêm mới liên hệ thành công!!";
@@ -132,7 +132,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 var temp = db.contact.SingleOrDefault(x => x.title.ToLower().Equals(contact.title.ToLower()));
                 if (temp == null)
                 {                   
-                    contact.alias = HoTro.Instances.convertToUnSign3(contact.title.ToLower());
+                    contact.alias = Libary.Instances.convertToUnSign3(contact.title.ToLower());
                     db.Entry(contact).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa liên hệ thành công!!";
@@ -154,7 +154,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     contact.workday = Request["workday"];
                     contact.worktime = Request["worktime"];
                     contact.content = content;
-                    contact.alias = HoTro.Instances.convertToUnSign3(contact.title.ToLower());
+                    contact.alias = Libary.Instances.convertToUnSign3(contact.title.ToLower());
 
                     db.Entry(contact).State = EntityState.Modified;
                     db.SaveChanges();

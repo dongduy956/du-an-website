@@ -8,12 +8,12 @@
     ViewBag.Image = "https://media.istockphoto.com/photos/closeup-image-of-male-hands-using-smartphone-with-icon-telephone-picture-id1168945108?b=1&k=20&m=1168945108&s=170667a&w=0&h=vuUT6Qw8h-eRIHQEesB0_fC1V1xgQtPdWp4KyaVXq0M=";
 }
 @section scripts{
-<script src="~/Areas/admin/assets/js/ckfinder/ckfinder.js?@TempData["Version"]"></script>
+<script src="~/assets/admin/js/ckfinder/ckfinder.js?@TempData["Version"]"></script>
 
-<script src="~/Areas/admin/assets/js/ckeditor/ckeditor.js?@TempData["Version"]"></script>
+<script src="~/assets/admin/js/ckeditor/ckeditor.js?@TempData["Version"]"></script>
 <script>
     var editor = CKEDITOR.replace('message', {
-        customConfig: '/Areas/admin/assets/js/ckeditor/config.js'
+        customConfig: '/assets/admin/js/ckeditor/config.js'
     })
     </script>
     }

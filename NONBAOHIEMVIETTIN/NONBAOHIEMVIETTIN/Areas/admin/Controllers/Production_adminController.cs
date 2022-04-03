@@ -90,7 +90,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 {
                     production.isdelete = false;
                     production.status = true;
-                    production.alias = HoTro.Instances.convertToUnSign3(production.name);
+                    production.alias = Libary.Instances.convertToUnSign3(production.name);
                     db.production.Add(production);
                     db.SaveChanges();
                     TempData["status"] = "Thêm mới hãng sản xuất thành công!!";
@@ -126,7 +126,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 var temp = db.production.SingleOrDefault(x => x.name.ToLower().Equals(production.name.ToLower()));
                 if (temp == null)
                 {
-                    production.alias = HoTro.Instances.convertToUnSign3(production.name.ToLower());
+                    production.alias = Libary.Instances.convertToUnSign3(production.name.ToLower());
                     db.Entry(production).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa hãng sản xuất thành công!!";
@@ -140,7 +140,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     production.status = Boolean.Parse(Request["status"]);
                     production.isdelete = Boolean.Parse(Request["isdelete"]);
                     production.name = Request["name"];
-                    production.alias = HoTro.Instances.convertToUnSign3(production.name.ToLower());
+                    production.alias = Libary.Instances.convertToUnSign3(production.name.ToLower());
                     db.Entry(production).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa hãng sản xuất thành công!!";

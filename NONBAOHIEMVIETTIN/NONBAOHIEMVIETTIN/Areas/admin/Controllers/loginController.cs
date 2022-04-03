@@ -58,7 +58,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         [HttpPost]
         public ActionResult Login(AccountLogin accLogin,string recaptcha)
         {
-            var password = HoTro.Instances.EncodeMD5(accLogin.password);
+            var password = Libary.Instances.EncodeMD5(accLogin.password);
             if (!IsValidRecaptcha(recaptcha))
             {
 

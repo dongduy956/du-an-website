@@ -25,19 +25,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrZj/k7ujTnHg4CGR2D7kSs0v4LLanw2qksYuRlEzO+tcaEPQogQ0KaoGN26/zrn20ImR1DfuLWnOo7aBA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="~/assets/css/plugin.css?@TempData["Version"]">
-    <link rel="stylesheet" href="~/assets/css/bundle.css?@TempData["Version"]">
-    <link href="~/assets/css/jquery-ui.css?@TempData["Version"]" rel="stylesheet" />
+    <link rel="stylesheet" href="~/assets/client/css/plugin.css?@TempData["Version"]">
+    <link rel="stylesheet" href="~/assets/client/css/bundle.css?@TempData["Version"]">
+    <link href="~/assets/client/css/jquery-ui.css?@TempData["Version"]" rel="stylesheet" />
 
-    <link href="~/assets/css/style.css?@TempData["Version"]" rel="stylesheet" />
-    <link rel="stylesheet" href="~/assets/css/responsive.css?@TempData["Version"]">
-    <link href="~/assets/css/loadpage.css?@TempData["Version"]" rel="stylesheet" />
+    <link href="~/assets/client/css/style.css?@TempData["Version"]" rel="stylesheet" />
+    <link rel="stylesheet" href="~/assets/client/css/responsive.css?@TempData["Version"]">
+    <link href="~/assets/client/css/loadpage.css?@TempData["Version"]" rel="stylesheet" />
     <link href="~/Content/alertifyjs/alertify.min.css?@TempData["Version"]" rel="stylesheet" />
     <link href="~/Content/alertifyjs/themes/default.min.css?@TempData["Version"]" rel="stylesheet" />
-    <link href="~/assets/css/hotline.css?@TempData["Version"]" rel="stylesheet" />
+    <link href="~/assets/client/css/hotline.css?@TempData["Version"]" rel="stylesheet" />
 
-    <script src="~/assets/js/vendor/modernizr-2.8.3.min.js?@TempData["Version"]"></script>
-    <script src="~/assets/js/vendor/jquery-1.12.0.min.js?@TempData["Version"]"></script>
+    <script src="~/assets/client/js/vendor/modernizr-2.8.3.min.js?@TempData["Version"]"></script>
+    <script src="~/assets/client/js/vendor/jquery-1.12.0.min.js?@TempData["Version"]"></script>
 
     @RenderSection("styles", false)
 </head>
@@ -189,7 +189,10 @@
                             <!--logo start-->
                             <div class="col-lg-3 col-md-3">
                                 <div class="logo">
-                                    <a href="/"><img style="width:75px;" src="~/assets/images/logo/logo.png" alt=""></a>
+                                   @* <a href="/"><img style="width:75px;" src="~/assets/images/logo/logo.png" alt=""></a>*@
+                                    <a href="/"  class="text-decoration-none d-block d-none text-center">
+                                        <h1 class="m-0 display-5 font-weight-semi-bold" style="color:#00BBA6;" ><span class="font-weight-bold border px-3 mr-1">T</span>HELMETS</h1>
+                                    </a>
                                 </div>
                             </div>
                             <!--logo end-->
@@ -206,7 +209,7 @@
                                             <i class="fa fa-shopping-cart"></i>
                                             <span>
 
-                                                @(cart != null ? (cart.Sum(x => x.Quantity) + "sản phẩm -" + HoTro.Instances.convertVND(cart.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString())) : "0 sản phẩm - 0đ")
+                                                @(cart != null ? (cart.Sum(x => x.Quantity) + "sản phẩm -" + Libary.Instances.convertVND(cart.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString())) : "0 sản phẩm - 0đ")
                                             </span>
                                             <i class="fa fa-angle-down"></i>
                                         </a>
@@ -247,11 +250,11 @@
                                                                 <a href="/chi-tiet/@(item.Product.alias)">@item.Product.name</a>
                                                                 @if (item.Product.promationprice > 0)
                                                                 {
-                                                                    <span class="cart_price">@HoTro.Instances.convertVND(item.Product.price.ToString())</span>
+                                                                    <span class="cart_price">@Libary.Instances.convertVND(item.Product.promationprice.ToString())</span>
                                                                 }
                                                                 else
                                                                 {
-                                                                    <span class="cart_price">@HoTro.Instances.convertVND(item.Product.price.ToString())</span>
+                                                                    <span class="cart_price">@Libary.Instances.convertVND(item.Product.price.ToString())</span>
                                                                 }
                                                                 <span class="quantity">Số lượng: @item.Quantity</span>
                                                             </div>
@@ -266,7 +269,7 @@
                                             <div id="shipping-group">
                                                 <div class="total_price">
                                                     <span> Tổng tiền: </span>
-                                                    <span class="prices">@(cart != null ? HoTro.Instances.convertVND(cart.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString()) : "0")</span>
+                                                    <span class="prices">@(cart != null ? Libary.Instances.convertVND(cart.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString()) : "0")</span>
                                                 </div>
                                                 <div class="cart_button">
                                                     <a id="btncheckout" href="/gio-hang"> Giỏ hàng</a>
@@ -402,20 +405,21 @@
         </div>
         <!--Modal changepassword end-->
         <!-- all js here -->
-        <script src="~/assets/js/popper.js?@TempData["Version"]"></script>
+        <script src="~/assets/client/js/popper.js?@TempData["Version"]"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js?@TempData["Version"]" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-        <script src="~/assets/js/ajax-mail.js?@TempData["Version"]"></script>
-        <script src="~/assets/js/plugins.js?@TempData["Version"]"></script>
+        <script src="~/assets/client/js/ajax-mail.js?@TempData["Version"]"></script>
+        <script src="~/assets/client/js/plugins.js?@TempData["Version"]"></script>
         <script src="~/Scripts/alertify.min.js?@TempData["Version"]"></script>
-        <script src="~/assets/js/jquery-ui.js?@TempData["Version"]"></script>
+        <script src="~/assets/client/js/jquery-ui.js?@TempData["Version"]"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-        <script src="~/assets/js/notify.min.js?@TempData["Version"]"></script>
-        <script src="~/assets/js/main.js?@TempData["Version"]"></script>
-        <script src="~/assets/js/code/main.js?@TempData["Version"]"></script>
-        <script src="~/assets/js/code/animation-rain.js?@TempData["Version"]"></script>
+        <script src="~/assets/client/js/notify.min.js?@TempData["Version"]"></script>
+        <script src="~/assets/client/js/main.js?@TempData["Version"]"></script>
+        <script src="~/assets/client/js/code/main.js?@TempData["Version"]"></script>
+        <script src="~/assets/client/js/code/animation-rain.js?@TempData["Version"]"></script>
         <script>
             $(window).on('load', function (event) {
                 $('.loader').remove();
+
             });
         </script>
 

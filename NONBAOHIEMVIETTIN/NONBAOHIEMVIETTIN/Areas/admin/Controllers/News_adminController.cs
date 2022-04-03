@@ -99,7 +99,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
 
                     }
                     news.createdate = DateTime.Now;
-                    news.alias = HoTro.Instances.convertToUnSign3(news.title);
+                    news.alias = Libary.Instances.convertToUnSign3(news.title);
                     db.news.Add(news);
                     db.SaveChanges();
                     TempData["status"] = "Thêm mới tin tức thành công!!";
@@ -142,7 +142,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 var temp = db.news.SingleOrDefault(x => x.title.ToLower().Equals(news.title.ToLower()));
                 if (temp == null)
                 {
-                    news.alias = HoTro.Instances.convertToUnSign3(news.title.ToLower());
+                    news.alias = Libary.Instances.convertToUnSign3(news.title.ToLower());
                     try
                     {
                         news.image = news.image.Substring(1, news.image.Length - 1);
@@ -173,7 +173,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     catch (Exception ex)
                     {
                     }
-                    news.alias = HoTro.Instances.convertToUnSign3(news.title.ToLower());
+                    news.alias = Libary.Instances.convertToUnSign3(news.title.ToLower());
                     db.Entry(news).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa tin tức thành công!!";

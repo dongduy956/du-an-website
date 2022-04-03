@@ -90,7 +90,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 {
                     groupproduct.isdelete = false;
                     groupproduct.status = true;
-                    groupproduct.alias = HoTro.Instances.convertToUnSign3(groupproduct.name);
+                    groupproduct.alias = Libary.Instances.convertToUnSign3(groupproduct.name);
                     db.groupproduct.Add(groupproduct);
                     db.SaveChanges();
                     TempData["status"] = "Thêm mới nhóm nón thành công!!";
@@ -128,7 +128,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 var temp = db.groupproduct.SingleOrDefault(x => x.name.ToLower().Equals(groupproduct.name.ToLower()));
                 if (temp == null)
                 {
-                    groupproduct.alias = HoTro.Instances.convertToUnSign3(groupproduct.name.ToLower());
+                    groupproduct.alias = Libary.Instances.convertToUnSign3(groupproduct.name.ToLower());
                     db.Entry(groupproduct).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa nhóm nón thành công!!";
@@ -141,7 +141,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     groupproduct.status = Boolean.Parse(Request["status"]);
                     groupproduct.isdelete = Boolean.Parse(Request["isdelete"]);
                     groupproduct.name = Request["name"];
-                    groupproduct.alias = HoTro.Instances.convertToUnSign3(groupproduct.name.ToLower());
+                    groupproduct.alias = Libary.Instances.convertToUnSign3(groupproduct.name.ToLower());
                     db.Entry(groupproduct).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa nhóm nón thành công!!";

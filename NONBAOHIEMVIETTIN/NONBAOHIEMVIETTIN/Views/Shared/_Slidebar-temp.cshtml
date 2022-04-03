@@ -67,11 +67,11 @@
                     <a href="/chi-tiet/@(item.Product.alias)">@item.Product.name</a>
                     @if (item.Product.promationprice > 0)
                     {
-                    <span class="cart_price">@HoTro.Instances.convertVND(item.Product.promationprice.ToString())</span>
+                    <span class="cart_price">@Libary.Instances.convertVND(item.Product.promationprice.ToString())</span>
                     }
                     else
                     {
-                        <span class="cart_price">@HoTro.Instances.convertVND(item.Product.price.ToString())</span>
+                        <span class="cart_price">@Libary.Instances.convertVND(item.Product.price.ToString())</span>
 
                     }
                     <span class="quantity">SL: @item.Quantity</span>

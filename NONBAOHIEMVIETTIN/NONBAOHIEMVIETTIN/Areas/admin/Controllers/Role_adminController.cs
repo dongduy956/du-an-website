@@ -85,7 +85,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             {
                 if (db.role.SingleOrDefault(x => x.name.ToLower().Equals(role.name.ToLower())) == null)
                 {                   
-                    role.alias = HoTro.Instances.convertToUnSign3(role.name);
+                    role.alias = Libary.Instances.convertToUnSign3(role.name);
                     db.role.Add(role);
                     db.SaveChanges();
                     TempData["status"] = "Thêm mới quyền thành công!!";
@@ -122,7 +122,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 var temp = db.role.SingleOrDefault(x => x.name.ToLower().Equals(role.name.ToLower()));
                 if (temp == null)
                 {
-                    role.alias = HoTro.Instances.convertToUnSign3(role.name.ToLower());
+                    role.alias = Libary.Instances.convertToUnSign3(role.name.ToLower());
                     db.Entry(role).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa quyền thành công!!";
@@ -133,7 +133,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 {
                     role = temp = db.role.Find(role.id);
                     role.name = Request["name"];
-                    role.alias = HoTro.Instances.convertToUnSign3(role.name.ToLower());
+                    role.alias = Libary.Instances.convertToUnSign3(role.name.ToLower());
                     db.Entry(role).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa quyền thành công!!";

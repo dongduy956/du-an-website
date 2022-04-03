@@ -114,7 +114,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     products.fastsell = products.isdelete = products.status = false;
                     products.newproduct = true;
                     products.viewcount = products.quantity = 0;
-                    products.alias = HoTro.Instances.convertToUnSign3(products.name);
+                    products.alias = Libary.Instances.convertToUnSign3(products.name);
                     db.products.Add(products);
                     db.SaveChanges();
                     TempData["status"] = "Thêm mới nón thành công!!";
@@ -228,7 +228,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     {
 
                     }
-                    products.alias = HoTro.Instances.convertToUnSign3(products.name);
+                    products.alias = Libary.Instances.convertToUnSign3(products.name);
                     db.Entry(products).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa nón thành công!!";
@@ -262,7 +262,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     products.idcategory = idcategory;
                     products.idgroupproduct = idgroupproduct;
                     products.idproduction = idproduction;
-                    products.alias = HoTro.Instances.convertToUnSign3(products.name.ToLower());
+                    products.alias = Libary.Instances.convertToUnSign3(products.name.ToLower());
                     db.Entry(products).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa nón thành công!!";

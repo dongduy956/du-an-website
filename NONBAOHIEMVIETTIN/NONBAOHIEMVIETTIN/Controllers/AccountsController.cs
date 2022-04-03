@@ -77,7 +77,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
         [HttpPost]
         public JsonResult LoginFacebook(accounts acc)
         {
-            if(string.IsNullOrEmpty(acc.email))
+            if (string.IsNullOrEmpty(acc.email))
             {
                 acc.email = acc.username = "";
             }
@@ -194,13 +194,13 @@ namespace NONBAOHIEMVIETTIN.Controllers
             }
         }
         [HttpPost]
-        public JsonResult Login(string usernamelogin, string passwordlogin,string recaptcha)
+        public JsonResult Login(string usernamelogin, string passwordlogin, string recaptcha)
         {
             if (!IsValidRecaptcha(recaptcha))
             {
-                return Json(-2);               
+                return Json(-2);
             }
-            passwordlogin = HoTro.Instances.EncodeMD5(passwordlogin);
+            passwordlogin = Libary.Instances.EncodeMD5(passwordlogin);
             accounts acc = db.accounts.SingleOrDefault(x => x.username.Equals(usernamelogin) && x.password.Equals(passwordlogin) && x.issocial == 0);
             if (acc != null)
             {
@@ -215,52 +215,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
             return Json(-1);
 
         }
-        private string randCode()
-        {
-            var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            var stringChars = new char[4];
-            var random = new Random();
 
-            for (int i = 0; i < stringChars.Length; i++)
-            {
-                stringChars[i] = chars[random.Next(chars.Length)];
-            }
-            return new String(stringChars);
-        }
-        bool sendMail(string mailTo, string body)
-        {
-            // //đăng nhập mail để gửi
-            string email = ConfigurationManager.AppSettings["mail"].ToString();
-            string pass = ConfigurationManager.AppSettings["pass"].ToString();
-
-            //gán thông tin
-            var mess = new MailMessage(email, mailTo);
-            mess.Subject = "Kích hoạt tài khoản";
-            mess.Body = body;
-            //cho gửi định dạng html
-            mess.IsBodyHtml = true;
-            //cấu hình mail
-            SmtpClient smtp = new SmtpClient();
-            smtp.Host = "smtp.gmail.com";
-            smtp.Port = 587;
-            smtp.EnableSsl = true;
-
-            //gửi mail đi
-            NetworkCredential net = new NetworkCredential(email, pass);
-            smtp.UseDefaultCredentials = false;
-            smtp.Credentials = net;
-            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-            try
-            {
-                smtp.Send(mess);
-            }
-            catch (SmtpException ex)
-            {
-                return false;
-            }
-            return true;
-
-        }
         // POST: Accounts/Create       
         [HttpPost]
         public JsonResult Register(accounts acc)
@@ -272,7 +227,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 if (db.accounts.SingleOrDefault(x => x.email.Equals(acc.email) && x.issocial == 0) != null)
                     return Json(2);
                 #region mã xác nhận email
-                Session["code"] = randCode();
+                Session["code"] = Libary.Instances.randCode();
                 string body = @"<!DOCTYPE html>
 <html lang='en'>
 
@@ -380,7 +335,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
 
 </html>";
                 #endregion
-                if (sendMail(acc.email, body))
+                if (Libary.Instances.sendMail("Kích hoạt tài khoản", acc.email, body))
                 {
                     acc.image = "assets/images/users/" + acc.image;
                     acc.alias = "tai-khoan-" + (db.accounts.OrderByDescending(x => x.id).FirstOrDefault().id + 1);
@@ -403,7 +358,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 if (acc == null)
                     return Json(0);
                 #region mã xác nhận email
-                Session["code"] = randCode();
+                Session["code"] = Libary.Instances.randCode();
                 string body = @"<!DOCTYPE html>
 <html lang='en'>
 
@@ -511,7 +466,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
 
 </html>";
                 #endregion
-                if (sendMail(acc.email, body))
+                if (Libary.Instances.sendMail("Quên mật khẩu",acc.email, body))
                 {
                     Session["acc"] = acc;
                     return Json(1);
@@ -530,7 +485,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
             {
                 var acc = (Session["acc"] as accounts);
                 #region mã xác nhận email
-                Session["code"] = randCode();
+                Session["code"] = Libary.Instances.randCode();
                 string body = @"<!DOCTYPE html>
 <html lang='en'>
 
@@ -639,8 +594,11 @@ namespace NONBAOHIEMVIETTIN.Controllers
 </html>";
                 #endregion
 
-                sendMail(acc.email, body);
+                if(Libary.Instances.sendMail("Gửi lại mã kích hoạt",acc.email, body))
                 return Json(1);
+                else
+                return Json(0);
+
             }
             catch (Exception ex)
             {
@@ -656,7 +614,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
             try
             {
                 var acc = Session["acc"] as accounts;
-                acc.password = HoTro.Instances.EncodeMD5(acc.password);
+                acc.password = Libary.Instances.EncodeMD5(acc.password);
                 acc.idrole = 1;
                 acc.status = true;
                 acc.issocial = 0;
@@ -685,7 +643,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
             var acc = Session["acc"] as accounts;
             try
             {
-                acc.password = HoTro.Instances.EncodeMD5(passNew);
+                acc.password = Libary.Instances.EncodeMD5(passNew);
                 db.Entry(acc).State = EntityState.Modified;
                 db.SaveChanges();
                 Session.Clear();
@@ -706,13 +664,13 @@ namespace NONBAOHIEMVIETTIN.Controllers
             try
             {
                 var acc = Session["account"] as accounts;
-                if (!acc.password.Equals(HoTro.Instances.EncodeMD5(passold)))
+                if (!acc.password.Equals(Libary.Instances.EncodeMD5(passold)))
                     return Json(-1);
                 else
                 {
                     if (!passnew.Equals(prepass))
                         return Json(0);
-                    acc.password = HoTro.Instances.EncodeMD5(passnew);
+                    acc.password = Libary.Instances.EncodeMD5(passnew);
                     db.Entry(acc).State = EntityState.Modified;
                     db.SaveChanges();
                     Session.Clear();

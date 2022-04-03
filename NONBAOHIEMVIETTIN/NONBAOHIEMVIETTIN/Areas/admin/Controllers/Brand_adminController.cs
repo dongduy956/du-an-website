@@ -95,7 +95,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     {
 
                     }
-                    brand.alias = HoTro.Instances.convertToUnSign3(brand.name);
+                    brand.alias = Libary.Instances.convertToUnSign3(brand.name);
                     db.brand.Add(brand);
                     db.SaveChanges();
                     TempData["status"] = "Thêm mới đối tác thành công!!";
@@ -143,7 +143,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
 
                     }
 
-                    brand.alias = HoTro.Instances.convertToUnSign3(brand.name.ToLower());
+                    brand.alias = Libary.Instances.convertToUnSign3(brand.name.ToLower());
                     db.Entry(brand).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa đối tác thành công!!";
@@ -163,7 +163,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     catch (Exception ex)
                     {
                     }
-                    brand.alias = HoTro.Instances.convertToUnSign3(brand.name.ToLower());
+                    brand.alias = Libary.Instances.convertToUnSign3(brand.name.ToLower());
                     db.Entry(brand).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa đối tác thành công!!";

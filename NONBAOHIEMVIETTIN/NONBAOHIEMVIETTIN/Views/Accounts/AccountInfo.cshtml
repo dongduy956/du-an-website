@@ -24,7 +24,7 @@
             cursor: not-allowed;
         }
     </style>
-<link href="~/assets/css/sorttable.css?@TempData["Version"]" rel="stylesheet" />
+<link href="~/assets/client/css/sorttable.css?@TempData["Version"]" rel="stylesheet" />
 }
 @section scripts
 {
@@ -34,7 +34,7 @@
             $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
         });
     </script>
-<script src="~/assets/js/code/sorttable.js?@TempData["Version"]"></script>
+<script src="~/assets/client/js/code/sorttable.js?@TempData["Version"]"></script>
 }
 <!--breadcrumbs area start-->
 <div class="breadcrumbs_area">
@@ -138,7 +138,7 @@
                                             <input id="imgupdate" data-val="@acc.image" type="hidden" />
                                         }
                                         <div class="login_submit">
-                                            <button id="btnsaveaccinfo">
+                                            <button class="w-100" id="btnsaveaccinfo">
                                                 <span class="spinner-grow spinner-grow-sm" style="display:none"></span>
                                                 Lưu
                                             </button>
@@ -196,7 +196,7 @@
                                                 }
                                             </span>
                                         </td>
-                                        <td>@HoTro.Instances.convertVND(item.total.ToString()) </td>
+                                        <td>@Libary.Instances.convertVND(item.total.ToString()) </td>
                                         <td>
                                             <a href="" data-target="#detail_@item.id" data-id="@item.id" id="view_@item.id" data-toggle="collapse" class="view">
                                                 Xem
@@ -247,8 +247,8 @@
                                                             <td>@(j + 1)</td>
                                                             <td><a href="/chi-tiet/@(lstOrderDetail[j].products.alias)">@lstOrderDetail[j].products.name</a></td>
                                                             <td><span class="success">@lstOrderDetail[j].quantity</span></td>
-                                                            <td>@HoTro.Instances.convertVND(lstOrderDetail[j].price.ToString()) </td>
-                                                            <td>@HoTro.Instances.convertVND(lstOrderDetail[j].subtotal.ToString())</td>
+                                                            <td>@Libary.Instances.convertVND(lstOrderDetail[j].price.ToString()) </td>
+                                                            <td>@Libary.Instances.convertVND(lstOrderDetail[j].subtotal.ToString())</td>
                                                         </tr>
                                                     }
 

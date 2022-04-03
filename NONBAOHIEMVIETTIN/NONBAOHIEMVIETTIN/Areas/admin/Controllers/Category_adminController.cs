@@ -91,7 +91,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 {
                     category.isdelete = false;
                     category.status = true;
-                    category.alias = HoTro.Instances.convertToUnSign3(category.name);
+                    category.alias = Libary.Instances.convertToUnSign3(category.name);
                     db.category.Add(category);
                     db.SaveChanges();
                     TempData["status"] = "Thêm mới loại nón thành công!!";
@@ -129,7 +129,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 var temp = db.category.SingleOrDefault(x => x.name.ToLower().Equals(category.name.ToLower()));
                 if (temp == null)
                 {
-                    category.alias = HoTro.Instances.convertToUnSign3(category.name.ToLower());
+                    category.alias = Libary.Instances.convertToUnSign3(category.name.ToLower());
                     db.Entry(category).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa loại nón thành công!!";
@@ -142,7 +142,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     category.status = Boolean.Parse(Request["status"]);
                     category.isdelete = Boolean.Parse(Request["isdelete"]);
                     category.name = Request["name"];
-                    category.alias = HoTro.Instances.convertToUnSign3(category.name.ToLower());
+                    category.alias = Libary.Instances.convertToUnSign3(category.name.ToLower());
                     db.Entry(category).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa loại nón thành công!!";

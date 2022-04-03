@@ -86,7 +86,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             {
                 if (db.newstype.SingleOrDefault(x => x.name.ToLower().Equals(newstype.name.ToLower())) == null)
                 {
-                    newstype.alias = HoTro.Instances.convertToUnSign3(newstype.name);
+                    newstype.alias = Libary.Instances.convertToUnSign3(newstype.name);
                     db.newstype.Add(newstype);
                     db.SaveChanges();
                     TempData["status"] = "Thêm mới loại tin thành công!!";
@@ -123,7 +123,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 var temp = db.newstype.SingleOrDefault(x => x.name.ToLower().Equals(newstype.name.ToLower()));
                 if (temp == null)
                 {
-                    newstype.alias = HoTro.Instances.convertToUnSign3(newstype.name.ToLower());
+                    newstype.alias = Libary.Instances.convertToUnSign3(newstype.name.ToLower());
                     db.Entry(newstype).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa loại tin thành công!!";
@@ -134,7 +134,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 {
                     newstype = temp = db.newstype.Find(newstype.id);
                     newstype.name = Request["name"];
-                    newstype.alias = HoTro.Instances.convertToUnSign3(newstype.name.ToLower());
+                    newstype.alias = Libary.Instances.convertToUnSign3(newstype.name.ToLower());
                     db.Entry(newstype).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa loại tin thành công!!";

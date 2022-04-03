@@ -90,7 +90,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             try
             {
                 var accounts = db.accounts.Find(id);
-                accounts.password = HoTro.Instances.EncodeMD5("123");
+                accounts.password = Libary.Instances.EncodeMD5("12345");
                 db.Entry(accounts).State = EntityState.Modified;
                 db.SaveChanges();
             }
@@ -106,7 +106,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             return Json(new
             {
                 status = 1,
-                message = "Reset thành công. Mật khẩu mới là 123"
+                message = "Reset thành công. Mật khẩu mới là 12345"
             });
         }
 
@@ -132,7 +132,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     {
 
                     }
-                    accounts.password = HoTro.Instances.EncodeMD5("123");
+                    accounts.password = Libary.Instances.EncodeMD5("123");
                     accounts.issocial = 0;
                     accounts.alias = "tai-khoan-" + (db.accounts.OrderByDescending(x => x.id).FirstOrDefault().id + 1);
                     db.accounts.Add(accounts);

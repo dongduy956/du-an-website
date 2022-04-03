@@ -11,14 +11,14 @@
     var avgStar = Model.lstRate.Count != 0 ? Model.lstRate.Sum(x => x.star) / (double)Model.lstRate.Count : 0;
     ViewBag.Description = Html.Raw(Model.product.description);
     ViewBag.Url = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + HttpContext.Current.Request.RawUrl.ToString().Trim().ToLower();
-    ViewBag.Image = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + "/" + Model.product.image;
+    ViewBag.Image = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() +"/"+ Model.product.image;
     var urlProduct = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + "/chi-tiet/" + Model.product.alias;
 }
 @section styles{
-    <meta property="fb:app_id" content="2844490499183619" />
-    <meta property="fb:admins" content="100013564574152" />
-}
-<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v13.0&appId=2844490499183619&autoLogAppEvents=1" nonce="UGrxgc6J"></script>
+<meta property="fb:app_id" content="2844490499183619" />
+<meta property="fb:admins" content="100013564574152" />
+    }
+<script async defer crossorigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v13.0&appId=703338740695568&autoLogAppEvents=1" nonce="DLe856eE"></script>
 <!--breadcrumbs area start-->
 <div class="breadcrumbs_area">
     <div class="row">
@@ -114,12 +114,12 @@
                         <div class="content_price mb-15">
                             @if (Model.product.promationprice > 0)
                             {
-                                <span class="new-price">@HoTro.Instances.convertVND(Model.product.promationprice.ToString())</span>
-                                <span class="old-price">@HoTro.Instances.convertVND(Model.product.price.ToString())</span>
+                                <span class="new-price">@Libary.Instances.convertVND(Model.product.promationprice.ToString())</span>
+                                <span class="old-price">@Libary.Instances.convertVND(Model.product.price.ToString())</span>
                             }
                             else
                             {
-                                <span class="new-price">@HoTro.Instances.convertVND(Model.product.price.ToString())</span>
+                                <span class="new-price">@Libary.Instances.convertVND(Model.product.price.ToString())</span>
                             }
                         </div>
                         <div class="box_quantity mb-20">
@@ -137,7 +137,7 @@
                         <div class="wishlist-share">
                             <h4>Chia sẻ sản phẩm</h4>
                             <ul>
-                                <li><a data-alias="@Model.product.alias" class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a data-alias="@Model.product.alias" class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>                               
                             </ul>
                         </div>
                     </div>
@@ -261,11 +261,11 @@
                                         <div class="product_content">
                                             @if (@item.promationprice > 0)
                                             {
-                                                <span class="product_price">@item.promationprice</span>
+                                                <span class="product_price">@Libary.Instances.convertVND(item.promationprice.ToString())</span>
                                             }
                                             else
                                             {
-                                                <span class="product_price">@item.price</span>
+                                                <span class="product_price">@Libary.Instances.convertVND(item.price.ToString())</span>
 
                                             }
                                             <h3 class="product_title"><a href="/chi-tiet/@(item.alias)">@item.name</a></h3>
@@ -306,11 +306,11 @@
                                         <div class="product_content">
                                             @if (@item.promationprice > 0)
                                             {
-                                                <span class="product_price">@item.promationprice</span>
+                                                <span class="product_price">@Libary.Instances.convertVND(item.promationprice.ToString())</span>
                                             }
                                             else
                                             {
-                                                <span class="product_price">@item.price</span>
+                                                <span class="product_price">@Libary.Instances.convertVND(item.price.ToString())</span>
 
                                             }
                                             <h3 class="product_title"><a href="/chi-tiet/@(item.alias)">@item.name</a></h3>
@@ -351,11 +351,11 @@
                                         <div class="product_content">
                                             @if (@item.promationprice > 0)
                                             {
-                                                <span class="product_price">@item.promationprice</span>
+                                                <span class="product_price">@Libary.Instances.convertVND(item.promationprice.ToString())</span>
                                             }
                                             else
                                             {
-                                                <span class="product_price">@item.price</span>
+                                                <span class="product_price">@Libary.Instances.convertVND(item.price.ToString())</span>
 
                                             }
                                             <h3 class="product_title"><a href="/chi-tiet/@(item.alias)">@item.name</a></h3>
@@ -416,8 +416,8 @@
                                                     </div>
                                                 }
                                             }
-
-
+                                          
+                                          
                                         </div>
                                         <div class="modal_tab_button">
                                             <ul class="nav product_navactive" role="tablist">
@@ -434,7 +434,7 @@
                                                         </li>
                                                     }
                                                 }
-
+                                               
                                             </ul>
                                         </div>
                                     </div>
@@ -449,16 +449,16 @@
                                             {
 
 
-                                                <span class="new_price">@HoTro.Instances.convertVND(item.promationprice.ToString())</span>
-                                                <span class="old_price">@HoTro.Instances.convertVND(item.price.ToString())</span>
+                                                <span class="new_price">@Libary.Instances.convertVND(item.promationprice.ToString())</span>
+                                                <span class="old_price">@Libary.Instances.convertVND(item.price.ToString())</span>
                                             }
                                             else
                                             {
-                                                <span class="new_price">@HoTro.Instances.convertVND(item.price.ToString())</span>
+                                                <span class="new_price">@Libary.Instances.convertVND(item.price.ToString())</span>
 
                                             }
                                         </div>
-
+                                       
                                         <div class="modal_add_to_cart mb-15">
                                             <div class="form form-group-product">
                                                 <input min="1" id="txtquantity-group-@item.id" max="100" step="1" value="1" type="number">
@@ -472,7 +472,7 @@
                                             <h2>Chia sẻ sản phẩm này</h2>
                                             <ul>
                                                 <li><a data-alias="@item.alias" class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-
+                                               
                                             </ul>
                                         </div>
                                     </div>
@@ -538,7 +538,7 @@
                                                     }
                                                 }
 
-
+                                             
                                             </ul>
                                         </div>
                                     </div>
@@ -553,16 +553,16 @@
                                             {
 
 
-                                                <span class="new_price">@HoTro.Instances.convertVND(item.promationprice.ToString())</span>
-                                                <span class="old_price">@HoTro.Instances.convertVND(item.price.ToString())</span>
+                                                <span class="new_price">@Libary.Instances.convertVND(item.promationprice.ToString())</span>
+                                                <span class="old_price">@Libary.Instances.convertVND(item.price.ToString())</span>
                                             }
                                             else
                                             {
-                                                <span class="new_price">@HoTro.Instances.convertVND(item.price.ToString())</span>
+                                                <span class="new_price">@Libary.Instances.convertVND(item.price.ToString())</span>
 
                                             }
                                         </div>
-
+                                      
                                         <div class="modal_add_to_cart mb-15">
                                             <div class="form form-category">
                                                 <input min="1" max="100" step="1" id="txtquantity-category-@item.id" value="1" type="number">
@@ -576,7 +576,7 @@
                                             <h2>Chia sẻ sản phẩm này</h2>
                                             <ul>
                                                 <li><a data-alias="@item.alias" class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-
+                                                
                                             </ul>
                                         </div>
                                     </div>
@@ -623,7 +623,7 @@
                                                         </div>
                                                     </div>
                                                 }
-                                            }
+                                            }                                          
                                         </div>
                                         <div class="modal_tab_button">
                                             <ul class="nav product_navactive" role="tablist">
@@ -640,7 +640,7 @@
                                                         </li>
                                                     }
                                                 }
-
+                                               
                                             </ul>
                                         </div>
                                     </div>
@@ -655,15 +655,15 @@
                                             {
 
 
-                                                <span class="new_price">@HoTro.Instances.convertVND(item.promationprice.ToString())</span>
-                                                <span class="old_price">@HoTro.Instances.convertVND(item.price.ToString())</span>
+                                                <span class="new_price">@Libary.Instances.convertVND(item.promationprice.ToString())</span>
+                                                <span class="old_price">@Libary.Instances.convertVND(item.price.ToString())</span>
                                             }
                                             else
                                             {
-                                                <span class="new_price">@HoTro.Instances.convertVND(item.price.ToString())</span>
+                                                <span class="new_price">@Libary.Instances.convertVND(item.price.ToString())</span>
 
                                             }
-                                        </div>
+                                        </div>                                       
                                         <div class="modal_add_to_cart mb-15">
                                             <div class="form form-production">
                                                 <input min="1" max="100" step="1" id="txtquantity-production-@item.id" value="1" type="number">
@@ -676,7 +676,7 @@
                                         <div class="modal_social">
                                             <h2>Chia sẻ sản phẩm này</h2>
                                             <ul>
-                                                <li><a data-alias="@item.alias" class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                                                <li><a data-alias="@item.alias" class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>                                                
                                             </ul>
                                         </div>
                                     </div>

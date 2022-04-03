@@ -47,7 +47,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 {
                     list.RemoveAll(r => r.Product.id == ProductId);
                     Session[cartSession] = list;
-                    return Json(new { status = 1, sumQuantity = list.Sum(x => x.Quantity), sumMoney = HoTro.Instances.convertVND(list.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString()) }, JsonRequestBehavior.AllowGet);
+                    return Json(new { status = 1, sumQuantity = list.Sum(x => x.Quantity), sumMoney = Libary.Instances.convertVND(list.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString()) }, JsonRequestBehavior.AllowGet);
                 }
             }
             return Json(new { status = 0 }, JsonRequestBehavior.AllowGet);
@@ -92,11 +92,11 @@ namespace NONBAOHIEMVIETTIN.Controllers
                                         id = item.Product.id,
                                         image = item.Product.image,
                                         name = item.Product.name,
-                                        price = HoTro.Instances.convertVND(item.Product.promationprice > 0 ? item.Product.promationprice.ToString() : item.Product.price.ToString()),
+                                        price = Libary.Instances.convertVND(item.Product.promationprice > 0 ? item.Product.promationprice.ToString() : item.Product.price.ToString()),
                                         quantity = item.Quantity,
                                         alias = item.Product.alias,
                                         sumQuantity = list.Sum(x => x.Quantity),
-                                        sumMoney = HoTro.Instances.convertVND(list.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString())
+                                        sumMoney = Libary.Instances.convertVND(list.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString())
                                     });
                                 }
 
@@ -115,11 +115,11 @@ namespace NONBAOHIEMVIETTIN.Controllers
                                 id = item.Product.id,
                                 image = item.Product.image,
                                 name = item.Product.name,
-                                price = HoTro.Instances.convertVND((item.Product.promationprice > 0 ? item.Product.promationprice.ToString() : item.Product.price.ToString())),
+                                price = Libary.Instances.convertVND((item.Product.promationprice > 0 ? item.Product.promationprice.ToString() : item.Product.price.ToString())),
                                 quantity = item.Quantity,
                                 alias = item.Product.alias,
                                 sumQuantity = list.Sum(x => x.Quantity),
-                                sumMoney = HoTro.Instances.convertVND(list.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString())
+                                sumMoney = Libary.Instances.convertVND(list.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString())
                             });
                         }
 
@@ -138,11 +138,11 @@ namespace NONBAOHIEMVIETTIN.Controllers
                             id = item.Product.id,
                             image = item.Product.image,
                             name = item.Product.name,
-                            price = HoTro.Instances.convertVND((item.Product.promationprice > 0 ? item.Product.promationprice.ToString() : item.Product.price.ToString())),
+                            price = Libary.Instances.convertVND((item.Product.promationprice > 0 ? item.Product.promationprice.ToString() : item.Product.price.ToString())),
                             quantity = item.Quantity,
                             alias = item.Product.alias,
                             sumQuantity = Quantity,
-                            sumMoney = HoTro.Instances.convertVND(list.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString())
+                            sumMoney = Libary.Instances.convertVND(list.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString())
                         });
                     }
                 }
@@ -193,54 +193,14 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 {
                     status = 1,
                     sumQuantity = list.Sum(x => x.Quantity),
-                    sumMoney = HoTro.Instances.convertVND(list.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString()),
-                    total = HoTro.Instances.convertVND(subtotal.ToString())
+                    sumMoney = Libary.Instances.convertVND(list.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString()),
+                    total = Libary.Instances.convertVND(subtotal.ToString())
                 });
             }
             return Json(new { status = 0 });
 
 
-        }
-        string taoCode()
-        {
-            string val = string.Empty;
-            Random r = new Random();
-            for (int i = 0; i < 13; i++)
-                val += r.Next(0, 9);
-            return val;
-        }
-        void sendMail(string email_receive, string subject, string body)
-        {
-            // //đăng nhập mail để gửi
-            string email = ConfigurationManager.AppSettings["mail"].ToString();
-            string pass = ConfigurationManager.AppSettings["pass"].ToString();
-
-            //gán thông tin
-            var mess = new MailMessage(email, email_receive);
-            mess.Subject = subject;
-            mess.Body = body;
-            //cho gửi định dạng html
-            mess.IsBodyHtml = true;
-            //cấu hình mail
-            SmtpClient smtp = new SmtpClient();
-            smtp.Host = "smtp.gmail.com";
-            smtp.Port = 587;
-            smtp.EnableSsl = true;
-
-            //gửi mail đi
-            NetworkCredential net = new NetworkCredential(email, pass);
-            smtp.UseDefaultCredentials = false;
-            smtp.Credentials = net;
-            smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
-            try
-            {
-                smtp.Send(mess);
-            }
-            catch (SmtpException ex)
-            {
-            }
-
-        }
+        }       
         [HttpPost]
 
         public JsonResult Pay(order order, string PaymentMethod, string BankCode)
@@ -431,9 +391,9 @@ namespace NONBAOHIEMVIETTIN.Controllers
                       src='"+ urlImage + @"'
                       alt='Error'></span>
                   <span><span>"+ item.Product.name + @"</span></span>
-                  <span><span>"+ HoTro.Instances.convertVND(orderdetail.price.ToString()) + @"</span></span>
+                  <span><span>"+ Libary.Instances.convertVND(orderdetail.price.ToString()) + @"</span></span>
                   <span><span>" + item.Quantity + @"</span></span>
-                  <span class='border_right-none'><span>"+ HoTro.Instances.convertVND((orderdetail.price * orderdetail.quantity).ToString()) + @"</span></span>
+                  <span class='border_right-none'><span>"+ Libary.Instances.convertVND((orderdetail.price * orderdetail.quantity).ToString()) + @"</span></span>
                 </div>";
                     #endregion
                     db.orderdetail.Add(orderdetail);
@@ -467,12 +427,12 @@ namespace NONBAOHIEMVIETTIN.Controllers
 
 </body>
 
-</html>", cart.Sum(x => x.Quantity), HoTro.Instances.convertVND(cart.Sum(x=>x.Quantity*(x.Product.promationprice>0? x.Product.promationprice:x.Product.price)).ToString()));
+</html>", cart.Sum(x => x.Quantity), Libary.Instances.convertVND(cart.Sum(x=>x.Quantity*(x.Product.promationprice>0? x.Product.promationprice:x.Product.price)).ToString()));
                 #endregion
                 Session[cartSession] = null;
                 try
                 {
-                    sendMail(order.email, "Thông tin đơn hàng " + idorder, body);
+                    Libary.Instances.sendMail("Thông tin đơn hàng " + idorder,order.email, body);
                 }
                 catch (Exception ex)
                 {
@@ -716,9 +676,9 @@ namespace NONBAOHIEMVIETTIN.Controllers
                       src='" + urlImage + @"'
                       alt='Error'></span>
                   <span><span>" + item.Product.name + @"</span></span>
-                  <span><span>" + HoTro.Instances.convertVND(orderdetail.price.ToString()) + @"</span></span>
+                  <span><span>" + Libary.Instances.convertVND(orderdetail.price.ToString()) + @"</span></span>
                   <span><span>" + item.Quantity + @"</span></span>
-                  <span class='border_right-none'><span>" + HoTro.Instances.convertVND((orderdetail.price * orderdetail.quantity).ToString()) + @"</span></span>
+                  <span class='border_right-none'><span>" + Libary.Instances.convertVND((orderdetail.price * orderdetail.quantity).ToString()) + @"</span></span>
                 </div>";
                     #endregion
                     db.orderdetail.Add(orderdetail);
@@ -752,12 +712,12 @@ namespace NONBAOHIEMVIETTIN.Controllers
 
 </body>
 
-</html>", cart.Sum(x => x.Quantity), HoTro.Instances.convertVND(cart.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString()));
+</html>", cart.Sum(x => x.Quantity), Libary.Instances.convertVND(cart.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString()));
                 #endregion
                 Session[cartSession] = null;
                 try
                 {
-                    sendMail(order.email, "Thông tin đơn hàng " + idorder, body);
+                    Libary.Instances.sendMail("Thông tin đơn hàng " + idorder,order.email, body);
                 }
                 catch (Exception ex)
                 {

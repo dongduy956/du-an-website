@@ -145,7 +145,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         [HttpPost]
         public JsonResult LoadMoneysMonth(int month, int year)
         {
-            var dayofmonth = HoTro.Instances.dayOfMonth(month, year);
+            var dayofmonth = Libary.Instances.dayOfMonth(month, year);
             decimal[] moneys = new decimal[dayofmonth];
             string[] days = new string[dayofmonth];
             for (int i = 0; i < dayofmonth; i++)

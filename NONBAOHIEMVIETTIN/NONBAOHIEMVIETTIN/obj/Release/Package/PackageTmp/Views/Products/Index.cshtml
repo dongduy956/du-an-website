@@ -101,11 +101,11 @@
                                         <div class="product_content">
                                             @if(item.promationprice>0)
                                             { 
-                                            <span class="product_price">@HoTro.Instances.convertVND(item.promationprice.ToString())</span>
+                                            <span class="product_price">@Libary.Instances.convertVND(item.promationprice.ToString())</span>
                                             }
                                             else
                                             {
-                                                <span class="product_price">@HoTro.Instances.convertVND(item.price.ToString())</span>
+                                                <span class="product_price">@Libary.Instances.convertVND(item.price.ToString())</span>
 
                                             }
 
@@ -155,12 +155,12 @@
                                             <div class="content_price">
                                                 @if(item.promationprice>0)
                                                 { 
-                                                <span class="new_price">@HoTro.Instances.convertVND(item.promationprice.ToString())</span>
-                                                <span class="old-price">@HoTro.Instances.convertVND(item.price.ToString())</span>
+                                                <span class="new_price">@Libary.Instances.convertVND(item.promationprice.ToString())</span>
+                                                <span class="old-price">@Libary.Instances.convertVND(item.price.ToString())</span>
                                                 }
                                                 else
                                                 {
-                                                    <span class="new_price">@HoTro.Instances.convertVND(item.price.ToString())</span>
+                                                    <span class="new_price">@Libary.Instances.convertVND(item.price.ToString())</span>
                                                 }
                                             </div>
                                             <div class="add_links">
@@ -306,12 +306,12 @@
                                     <div class="modal_price mb-10">
                                         @if (item.promationprice > 0)
                                         {
-                                        <span class="new_price">@HoTro.Instances.convertVND(item.promationprice.ToString())</span>
-                                        <span class="old_price">@HoTro.Instances.convertVND(item.price.ToString())</span>
+                                        <span class="new_price">@Libary.Instances.convertVND(item.promationprice.ToString())</span>
+                                        <span class="old_price">@Libary.Instances.convertVND(item.price.ToString())</span>
                                         }
                                         else
                                         {
-                                            <span class="new_price">@HoTro.Instances.convertVND(item.price.ToString())</span>
+                                            <span class="new_price">@Libary.Instances.convertVND(item.price.ToString())</span>
 
                                         }
                                     </div>

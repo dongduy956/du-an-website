@@ -70,7 +70,7 @@
                             <td>@item.id</td>
                             <td>@item.accounts.username</td>
                             <td>@DateTime.Parse(item.createdate.ToString()).ToShortDateString()</td>
-                            <td>@HoTro.Instances.convertVND(item.total.ToString())</td>
+                            <td>@Libary.Instances.convertVND(item.total.ToString())</td>
                             <td>
                                 <div class="tool d-flex align-items-center flex-column justify-content-center">                                   
                                     <a data-id="@item.id" title="Xoá phiếu nhập mã @item.id" class="mt-1 mb-1 delete_receipt d-sm-inline-block btn btn-sm btn-primary shadow-sm">
@@ -119,9 +119,9 @@
                                         <tr>
                                             <td>@item_detail.idreceipt</td>
                                             <td>@item_detail.products.name</td>
-                                            <td>@HoTro.Instances.convertVND(item_detail.price.ToString())</td>
+                                            <td>@Libary.Instances.convertVND(item_detail.price.ToString())</td>
                                             <td>@item_detail.quantity</td>
-                                            <td>@HoTro.Instances.convertVND(item_detail.subtotal.ToString())</td>
+                                            <td>@Libary.Instances.convertVND(item_detail.subtotal.ToString())</td>
                                         </tr>
                                     }
                                 </tbody>

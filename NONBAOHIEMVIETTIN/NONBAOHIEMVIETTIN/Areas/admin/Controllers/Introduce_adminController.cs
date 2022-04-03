@@ -97,7 +97,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
 
                     }
                     introduce.status = true;
-                    introduce.alias = HoTro.Instances.convertToUnSign3(introduce.title);
+                    introduce.alias = Libary.Instances.convertToUnSign3(introduce.title);
                     db.introduce.Add(introduce);
                     db.SaveChanges();
                     TempData["status"] = "Thêm mới giới thiệu thành công!!";
@@ -145,7 +145,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     {
 
                     }
-                    introduce.alias = HoTro.Instances.convertToUnSign3(introduce.title.ToLower());
+                    introduce.alias = Libary.Instances.convertToUnSign3(introduce.title.ToLower());
                     db.Entry(introduce).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa giới thiệu thành công!!";
@@ -169,7 +169,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     introduce.title = Request["title"];
                     introduce.content = content;
 
-                    introduce.alias = HoTro.Instances.convertToUnSign3(introduce.title.ToLower());
+                    introduce.alias = Libary.Instances.convertToUnSign3(introduce.title.ToLower());
                     db.Entry(introduce).State = EntityState.Modified;
                     db.SaveChanges();
                     TempData["status"] = "Sửa giới thiệu thành công!!";

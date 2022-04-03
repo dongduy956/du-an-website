@@ -73,7 +73,7 @@
                             <td>@item.fullname</td>
                             <td>@(item.status == false ? Html.Raw("<span id='confirm_order_" + @item.id + "' class='text-danger'>Chưa duyệt (<a data-id='" + item.id + "' class='confirm_order' style='cursor:pointer;'>Click vào đây</a> để duyệt)</span>") : Html.Raw("<span class='text-success'>Đã duyệt</span>"))</td>
                             <td>@(item.statuspay == false ? Html.Raw("<span id='transfer_order_" + @item.id + "' class='text-danger'>Chưa chuyển tiền (<a data-id='" + item.id + "' class='transfer_order' style='cursor:pointer;'>Click vào đây</a> để xác nhận chuyển tiền)</span>") : Html.Raw("<span class='text-success'>Đã chuyển tiền</span>"))</td>
-                            <td>@HoTro.Instances.convertVND(item.total.ToString())</td>
+                            <td>@Libary.Instances.convertVND(item.total.ToString())</td>
                             <td>
                                 <div class="tool d-flex align-items-center flex-column justify-content-center">
                                     <a data-toggle="modal" data-target="#order_@item.id" title="Xem đơn hàng mã @item.id" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
@@ -108,7 +108,7 @@
                                         <p><strong>Điện thoại:</strong><a href="tel:@item.phone">@item.phone</a></p>
                                         <p><strong>Trạng thái:</strong> @(item.status == false ? Html.Raw("<span id='confirm_order_detail_" + @item.id + "' class='text-danger'>Chưa duyệt (<a data-id='" + item.id + "' class='confirm_order' style='cursor:pointer;'>Click vào đây</a> để duyệt)</span>") : Html.Raw("<span class='text-success'>Đã duyệt</span>"))</p>
                                         <p><strong>Đã chuyển tiền?</strong> @(item.statuspay == false ? Html.Raw("<span id='transfer_order_detail_" + @item.id + "' class='text-danger'>Chưa chuyển tiền (<a data-id='" + item.id + "' class='transfer_order' style='cursor:pointer;'>Click vào đây</a> để xác nhận chuyển tiền)</span>") : Html.Raw("<span class='text-success'>Đã chuyển tiền</span>"))</p>
-                                        <p><strong>Tổng giá:</strong> @HoTro.Instances.convertVND(item.total.ToString())</p>
+                                        <p><strong>Tổng giá:</strong> @Libary.Instances.convertVND(item.total.ToString())</p>
                                         <p><strong>Ghi chú:</strong> @item.note</p>                                       
                                     </div>
                                     <div class="modal-footer">
@@ -157,9 +157,9 @@
                                         <tr>
                                             <td>@item_detail.idorder</td>
                                             <td>@item_detail.products.name</td>
-                                            <td>@HoTro.Instances.convertVND(item_detail.price.ToString())</td>
+                                            <td>@Libary.Instances.convertVND(item_detail.price.ToString())</td>
                                             <td>@item_detail.quantity</td>
-                                            <td>@HoTro.Instances.convertVND(item_detail.subtotal.ToString())</td>
+                                            <td>@Libary.Instances.convertVND(item_detail.subtotal.ToString())</td>
                                         </tr>
                                     }
                                 </tbody>

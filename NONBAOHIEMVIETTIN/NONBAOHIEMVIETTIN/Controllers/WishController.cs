@@ -63,7 +63,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                                         id = item.Product.id,
                                         image = item.Product.image,
                                         name = item.Product.name,
-                                        price = HoTro.Instances.convertVND(item.Product.promationprice>0?item.Product.promationprice.ToString():item.Product.price.ToString()),
+                                        price = Libary.Instances.convertVND(item.Product.promationprice>0?item.Product.promationprice.ToString():item.Product.price.ToString()),
                                         quantity = item.Quantity,
                                         alias = item.Product.alias,
                                         sumQuantity=list.Sum(x=>x.Quantity)
@@ -85,7 +85,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                                 id = item.Product.id,
                                 image = item.Product.image,
                                 name = item.Product.name,
-                                price = HoTro.Instances.convertVND(item.Product.promationprice > 0 ? item.Product.promationprice.ToString() : item.Product.price.ToString()),
+                                price = Libary.Instances.convertVND(item.Product.promationprice > 0 ? item.Product.promationprice.ToString() : item.Product.price.ToString()),
                                 quantity = item.Quantity,
                                 alias = item.Product.alias,
                                 sumQuantity = list.Sum(x => x.Quantity)
@@ -107,7 +107,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                             id = item.Product.id,
                             image=item.Product.image,
                             name=item.Product.name,
-                            price = HoTro.Instances.convertVND(item.Product.promationprice > 0 ? item.Product.promationprice.ToString() : item.Product.price.ToString()),
+                            price = Libary.Instances.convertVND(item.Product.promationprice > 0 ? item.Product.promationprice.ToString() : item.Product.price.ToString()),
                             quantity = item.Quantity,
                             alias = item.Product.alias,
                             sumQuantity=Quantity
