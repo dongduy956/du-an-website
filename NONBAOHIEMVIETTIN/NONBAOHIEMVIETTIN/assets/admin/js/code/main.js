@@ -1,27 +1,27 @@
 ﻿//hàm chuyển đổi tiền tệ
 function number_format(number, decimals, dec_point, thousands_sep) {
-  // *     example: number_format(1234.56, 2, ',', ' ');
-  // *     return: '1 234,56'
-  number = (number + '').replace(',', '').replace(' ', '');
-  var n = !isFinite(+number) ? 0 : +number,
-    prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
-    sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
-    dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
-    s = '',
-    toFixedFix = function(n, prec) {
-      var k = Math.pow(10, prec);
-      return '' + Math.round(n * k) / k;
-    };
-  // Fix for IE parseFloat(0.55).toFixed(0) = 0;
-  s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
-  if (s[0].length > 3) {
-    s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
-  }
-  if ((s[1] || '').length < prec) {
-    s[1] = s[1] || '';
-    s[1] += new Array(prec - s[1].length + 1).join('0');
-  }
-  return s.join(dec);
+    // *     example: number_format(1234.56, 2, ',', ' ');
+    // *     return: '1 234,56'
+    number = (number + '').replace(',', '').replace(' ', '');
+    var n = !isFinite(+number) ? 0 : +number,
+      prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+      sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+      dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+      s = '',
+      toFixedFix = function (n, prec) {
+          var k = Math.pow(10, prec);
+          return '' + Math.round(n * k) / k;
+      };
+    // Fix for IE parseFloat(0.55).toFixed(0) = 0;
+    s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+    if (s[0].length > 3) {
+        s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+    }
+    if ((s[1] || '').length < prec) {
+        s[1] = s[1] || '';
+        s[1] += new Array(prec - s[1].length + 1).join('0');
+    }
+    return s.join(dec);
 }
 /*Hàm disable button khi chờ server xử lý */
 function disable(dom) {
@@ -40,7 +40,7 @@ $(function () {
     if (!($('#sidebar').css('display') == 'none' || $('#sidebar').css("visibility") == "hidden")) {
         $('#sidebarToggle').click();
     }
-   
+
     //Đăng xuất khỏi hệ thống
     $('#btnlogout').click(function () {
         location.href = "/Login/Logout"
@@ -61,7 +61,7 @@ $(function () {
                     ele.attr('style', 'display:none !important');
                     $(`#_product_${id}-delete`).text('Đã xoá');
                     $(`#_product_${id}-delete-detail`).text('Đã xoá');
-                }else
+                } else
                     $.notify(data.message, 'error');
             },
             error: function (data) {
@@ -271,13 +271,11 @@ $(function () {
             type: "POST",
             success: function (data) {
 
-                if (data.status == 1 || data.status==2)
-                {
+                if (data.status == 1 || data.status == 2) {
                     $.notify(data.message, 'success');
 
                     $(`#_account_${id}`).hide(200);
-                    if(data.status==2)
-                    {
+                    if (data.status == 2) {
                         location.href = "/Login/Logout"
                     }
                 }
@@ -320,7 +318,7 @@ $(function () {
             dataType: "json",
             type: "POST",
             success: function (data) {
-                if(data.status==1)
+                if (data.status == 1)
                     $.notify(data.message, 'success');
                 else
                     $.notify(data.message, 'error');
@@ -612,7 +610,7 @@ $(function () {
 
      }
  });
-      
+
 
     });
 
@@ -654,9 +652,9 @@ $(function () {
         })
 .then((willDelete) => {
     if (willDelete) {
-               delete_rate(id);
+        delete_rate(id);
     }
-});    
+});
 
     });
     //Hàm xoá 1 đơn hàng
@@ -703,7 +701,7 @@ $(function () {
 
     }
 });
-      
+
 
     });
     //Hàm duyệt 1 đơn hàng
@@ -741,11 +739,11 @@ $(function () {
         })
 .then((willDelete) => {
     if (willDelete) {
-                   confirm_order(id);
+        confirm_order(id);
 
 
     }
-});      
+});
     });
 
     //Hàm xác nhận đã chuyển tiền của 1 đơn hàng
@@ -779,17 +777,17 @@ $(function () {
     $('.transfer_order').off('click').click(function (e) {
         e.preventDefault();
         var id = Number($(this).data('id'));
-            swal({
-                title: "Bạn chắc chắn thanh toán đơn hàng này?",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-    .then((willDelete) => {
-        if (willDelete) {
-           transfer_order(id);
-        }
-    });    
+        swal({
+            title: "Bạn chắc chắn thanh toán đơn hàng này?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+.then((willDelete) => {
+    if (willDelete) {
+        transfer_order(id);
+    }
+});
     });
     //Mảng các nón nhập kho
     var lstreceiptdetail = new Array();
@@ -956,15 +954,15 @@ $(function () {
                     {
                                 window.sessionStorage.removeItem('receipt');
                                 window.location.href = '/nhap-kho';
-                            }
-                        },
-                error: function (data) {
+                }
+                },
+                    error: function (data) {
                     $.notify('Lỗi chưa xác định.', 'error');
 
                 }
-            })
-        }
-    })
+                })
+                }
+                })
 
 
     //hàm xoá 1 phiếu nhập
@@ -1007,7 +1005,7 @@ $(function () {
             delete_receipt(id);
 
         }
-    });       
+    });
 
     });
 
@@ -1051,7 +1049,7 @@ $(function () {
         delete_brand(id);
     }
 });
-       
+
 
     });
 
@@ -1068,7 +1066,7 @@ $(function () {
                         var images = window.sessionStorage.setItem('images', JSON.stringify(res.data));
                         $.each(res.data, function (index, item) {
                             html += `<div><img src='/${item}'> <a href='' class='btn-delete-image'><i class='fa fa-times'></i></a></div>`;
-                        })
+            })
                         var script = `<script>
                               $('.btn-delete-image').off('click').click(function (e) {
                 e.preventDefault();
@@ -1157,9 +1155,11 @@ $(function () {
                 error: function (data) {
                     $.notify('Lỗi chưa xác định.', 'error');
 
-                }
-        })
-    })
+            }
+            })
+            })
+
+   
 })
 
 

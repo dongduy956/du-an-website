@@ -37,6 +37,7 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex align-items-center justify-content-between flex-wrap">
         <h6 class="m-0 font-weight-bold text-primary">Danh sách đơn hàng</h6>
+        <a @(db.order.Count()==0?"":"href=/xuat-excel-don-hang target=_blank")  class="btn btn-link" id="btnExportOrder" >Xuất excel</a>
         <form method="get" action="/tim-kiem-don-hang" class="d-sm-inline-block form-inline ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
                 <input name="tukhoa" type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm..." aria-label="Search" aria-describedby="basic-addon2">
@@ -107,6 +108,7 @@
                                         <p><strong>Địa chỉ:</strong> @item.address</p>
                                         <p><strong>Điện thoại:</strong><a href="tel:@item.phone">@item.phone</a></p>
                                         <p><strong>Trạng thái:</strong> @(item.status == false ? Html.Raw("<span id='confirm_order_detail_" + @item.id + "' class='text-danger'>Chưa duyệt (<a data-id='" + item.id + "' class='confirm_order' style='cursor:pointer;'>Click vào đây</a> để duyệt)</span>") : Html.Raw("<span class='text-success'>Đã duyệt</span>"))</p>
+                                        <p><strong>Phương thức thanh toán:</strong> @(item.paymentmethod == 0 ? Html.Raw("<span >Tiền mặt") : Html.Raw("<span >Online")) </p>
                                         <p><strong>Đã chuyển tiền?</strong> @(item.statuspay == false ? Html.Raw("<span id='transfer_order_detail_" + @item.id + "' class='text-danger'>Chưa chuyển tiền (<a data-id='" + item.id + "' class='transfer_order' style='cursor:pointer;'>Click vào đây</a> để xác nhận chuyển tiền)</span>") : Html.Raw("<span class='text-success'>Đã chuyển tiền</span>"))</p>
                                         <p><strong>Tổng giá:</strong> @Libary.Instances.convertVND(item.total.ToString())</p>
                                         <p><strong>Ghi chú:</strong> @item.note</p>                                       

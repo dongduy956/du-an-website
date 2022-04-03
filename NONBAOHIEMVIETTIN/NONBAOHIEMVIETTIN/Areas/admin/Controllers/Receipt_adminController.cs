@@ -1,4 +1,5 @@
 ﻿using NONBAOHIEMVIETTIN.Models;
+using OfficeOpenXml;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -21,6 +22,54 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                 ViewBag.last = last;
                 ViewBag.noti = "Showing " + page + "-" + last + " of " + temp.Count() + " results";
             }
+        }
+        void initializationSheet_order_detail(ExcelWorksheet Sheet)
+        {
+            Sheet.Cells["A1"].Value = "Mã phiếu nhập";
+            Sheet.Cells["B1"].Value = "Tên sản phẩm";
+            Sheet.Cells["C1"].Value = "Giá";
+            Sheet.Cells["D1"].Value = "Số lượng";
+            Sheet.Cells["E1"].Value = "Thành tiền";
+        }
+        public void ExportExcel_EPPLUS()
+        {
+            if (db.receipt.Count() == 0)
+                return;
+            ExcelPackage ep = new ExcelPackage();
+            ExcelWorksheet Sheet = ep.Workbook.Worksheets.Add("ReportReceipt");
+            Sheet.Cells["A1"].Value = "Mã phiếu nhập";
+            Sheet.Cells["B1"].Value = "Tên tài khoản";
+            Sheet.Cells["C1"].Value = "Ngày nhập";
+            Sheet.Cells["D1"].Value = "Tổng giá";
+            int row = 2;// dòng bắt đầu ghi dữ liệu
+            foreach (var item in db.receipt.OrderBy(x=>x.id).ToList())
+            {
+                Sheet.Cells[string.Format("A{0}", row)].Value = item.id;
+                Sheet.Cells[string.Format("B{0}", row)].Value = item.accounts.username;
+                Sheet.Cells[string.Format("C{0}", row)].Value = item.createdate?.ToString("dd/MM/yyyy");
+                Sheet.Cells[string.Format("D{0}", row)].Value = Libary.Instances.convertVND(item.total.ToString());
+                row++;
+            }
+            row = 2;
+            //sheet chi tiết đơn hàng
+            ExcelWorksheet Sheet1 = ep.Workbook.Worksheets.Add("ReceiptDetail");
+            initializationSheet_order_detail(Sheet1);
+            foreach (var item in db.receiptdetail.OrderBy(x => x.idreceipt))
+            {
+                Sheet1.Cells[string.Format("A{0}", row)].Value = item.idreceipt;
+                Sheet1.Cells[string.Format("B{0}", row)].Value = item.products.name;
+                Sheet1.Cells[string.Format("C{0}", row)].Value = Libary.Instances.convertVND(item.price.ToString()); ;
+                Sheet1.Cells[string.Format("D{0}", row)].Value = item.quantity;
+                Sheet1.Cells[string.Format("E{0}", row)].Value = Libary.Instances.convertVND(item.subtotal.ToString());
+                row++;
+            }
+            Sheet.Cells["A:AZ"].AutoFitColumns();
+            Sheet1.Cells["A:AZ"].AutoFitColumns();
+            Response.Clear();
+            Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            Response.AddHeader("content-disposition", "attachment; filename=" + "ReportReceipt.xlsx");
+            Response.BinaryWrite(ep.GetAsByteArray());
+            Response.End();
         }
         public ActionResult Index(int page = 1)
         {

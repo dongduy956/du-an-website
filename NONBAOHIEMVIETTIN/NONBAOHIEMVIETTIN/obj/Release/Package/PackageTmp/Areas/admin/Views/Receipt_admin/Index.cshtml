@@ -37,6 +37,8 @@
 <div class="card shadow mb-4">
     <div class="card-header py-3 d-flex align-items-center justify-content-between  flex-wrap">
         <h6 class="m-0 font-weight-bold text-primary">Danh sách phiếu nhập</h6>
+        <a @(db.receipt.Count()==0?"":"href=/xuat-excel-phieu-nhap target=_blank")  class="btn btn-link" id="btnExportOrder">Xuất excel</a>
+
         <form method="get" action="/tim-kiem-phieu-nhap" class="d-sm-inline-block form-inline ml-md-3 my-2 my-md-0 mw-100 navbar-search">
             <div class="input-group">
                 <input name="tukhoa" type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm..." aria-label="Search" aria-describedby="basic-addon2">

@@ -306,11 +306,11 @@
                                         <div class="product_content">
                                             @if (@item.promationprice > 0)
                                             {
-                                                <span class="product_price">@item.promationprice</span>
+                                                <span class="product_price">@Libary.Instances.convertVND(item.promationprice.ToString())</span>
                                             }
                                             else
                                             {
-                                                <span class="product_price">@item.price</span>
+                                                <span class="product_price">@Libary.Instances.convertVND(item.price.ToString())</span>
 
                                             }
                                             <h3 class="product_title"><a href="/chi-tiet/@(item.alias)">@item.name</a></h3>
@@ -351,11 +351,11 @@
                                         <div class="product_content">
                                             @if (@item.promationprice > 0)
                                             {
-                                                <span class="product_price">@item.promationprice</span>
+                                                <span class="product_price">@Libary.Instances.convertVND(item.promationprice.ToString())</span>
                                             }
                                             else
                                             {
-                                                <span class="product_price">@item.price</span>
+                                                <span class="product_price">@Libary.Instances.convertVND(item.price.ToString())</span>
 
                                             }
                                             <h3 class="product_title"><a href="/chi-tiet/@(item.alias)">@item.name</a></h3>

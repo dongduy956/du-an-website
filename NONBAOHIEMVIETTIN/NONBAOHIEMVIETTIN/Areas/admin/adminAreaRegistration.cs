@@ -95,6 +95,12 @@ new { controller = new SubdomainRouteConstraint("admin.") },namespaces: new stri
 "tim-kiem-phieu-nhap",
 new { controller = "Receipt_admin", action = "Search", id = UrlParameter.Optional, Area = "Admin" },
 new { controller = new SubdomainRouteConstraint("admin.") },namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);            
+                context.MapRoute(
+"admin_Order_ExportExcel_EPPLUS",
+"xuat-excel-don-hang",
+new { controller = "Order_admin", action = "ExportExcel_EPPLUS", id = UrlParameter.Optional, Area = "Admin" },
+new { controller = new SubdomainRouteConstraint("admin.") }, namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
 );
             context.MapRoute(
 "admin_Order_search",
@@ -191,6 +197,12 @@ new { controller = new SubdomainRouteConstraint("admin.") },namespaces: new stri
 "them-moi-doi-tac",
 new { controller = "Brand_admin", action = "Create", id = UrlParameter.Optional, Area = "Admin" },
 new { controller = new SubdomainRouteConstraint("admin.") },namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+"admin_Receipt_ExportExcel_EPPLUS",
+"xuat-excel-phieu-nhap",
+new { controller = "Receipt_admin", action = "ExportExcel_EPPLUS", id = UrlParameter.Optional, Area = "Admin" },
+new { controller = new SubdomainRouteConstraint("admin.") }, namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
 );
             context.MapRoute(
 "admin_Receipt_create",
