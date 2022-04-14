@@ -194,3 +194,5 @@ E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\EPPlus.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.IO.RecyclableMemoryStream.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\EPPlus.xml
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.IO.RecyclableMemoryStream.xml
+E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Swashbuckle.Core.dll
+E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\WebActivatorEx.dll

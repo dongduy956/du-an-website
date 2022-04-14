@@ -103,38 +103,44 @@ $(function () {
             if (passnew == "")
                 $.notify('Mật khẩu mới không được rỗng.', 'warn');
             else
-                if (prepass == "")
-                    $.notify('Nhập lại mật khẩu không được rỗng.', 'warn');
-                else {
-                    disable('#btnsubmitchangepassword');
-                    $.ajax({
-                        url: "/doi-mat-khau",
-                        data: JSON.stringify({ passold, passnew, prepass }),
-                                contentType: "application/json; charset=utf-8",
-                                dataType: "json",
-                                type: "POST",
-                                success: function (data) {
-                                    if (data == "-1")
-                                        $.notify('Mật khẩu cũ không chính xác.', 'error');
-                        else if (data == "1") {
-                            $.notify('Đổi mật khẩu thành công!Vui lòng đăng nhập lại.', 'success');
-                            $('#btnclosechangepassword').click();
-                            location.href = "/dang-nhap";
-                            $('#btnlogout').click();
-                        }
-                        else
-                            if (data == "0")
-                                $.notify('Nhập lại mật khẩu không giống nhau.', 'error');
-                            else
-                                $.notify('Có lỗi xảy ra.', 'error');
-                                    enable('#btnsubmitchangepassword');
+                if (passnew.trim().length < 5)
+                    $.notify('Mật khẩu mới ít nhất 5 kí tự.', 'warn');
+                else
+                    if (prepass == "")
+                        $.notify('Nhập lại mật khẩu không được rỗng.', 'warn');
+                    else
+                        if (prepass.trim().length < 5)
+                            $.notify('Nhập lại mật khẩu ít nhất 5 kí tự.', 'warn');
+                    else {
+                        disable('#btnsubmitchangepassword');
+                        $.ajax({
+                            url: "/doi-mat-khau",
+                            data: JSON.stringify({ passold, passnew, prepass }),
+                                    contentType: "application/json; charset=utf-8",
+                            dataType: "json",
+                            type: "POST",
+                            success: function (data) {
+                                if (data == "-1")
+                                    $.notify('Mật khẩu cũ không chính xác.', 'error');
+                                else if (data == "1") {
+                                    $.notify('Đổi mật khẩu thành công!Vui lòng đăng nhập lại.', 'success');
+                                    $('#btnclosechangepassword').click();
+                                    location.href = "/dang-nhap";
+                                    $('#btnlogout').click();
+                                }
+                                else
+                                    if (data == "0")
+                                        $.notify('Nhập lại mật khẩu không giống nhau.', 'error');
+                                    else
+                                        $.notify('Có lỗi xảy ra.', 'error');
+                                enable('#btnsubmitchangepassword');
 
-                                },
-                        error: function (data) {
-                            $.notify('Lỗi chưa xác định.', 'error');
-                        }
-                    })
-                }
+                            },
+                            error: function (data) {
+                                $.notify('Lỗi chưa xác định.', 'error');
+                            }
+                        })
+                    }
     })
     $('#passoldchange').keypress(function (e) {
         if (e.which == 13)
@@ -241,11 +247,11 @@ $(function () {
                 console.log(data)
                 if (data.status == "1") {
                     $.notify('Đã thêm vào yêu thích.', 'success');
-                    $('#wish-' +data.id + ' .quantity').text('SL:' +data.quantity);
+                    $('#wish-' + data.id + ' .quantity').text('SL:' + data.quantity);
                     $('#lst-wish .block_content p').text(`${data.sumQuantity} sản phẩm.`);
-            }
-            else if (data.status == "0") {
-                var html = `<div class="cart_item" id="wish-${data.id}">
+                }
+                else if (data.status == "0") {
+                    var html = `<div class="cart_item" id="wish-${data.id}">
                 <div class="cart_img">
                     <a href="/chi-tiet/${data.alias}"><img src="/${data.image}" alt=""></a>
                 </div>
@@ -258,8 +264,8 @@ $(function () {
                     <a title="Xoá sản phẩm" data-id="${data.id}" href="" class ="deletewish"><i class ="fa fa-times-circle"></i></a>
                 </div>
             </div>`;
-                //đoạn scripts thêm vào để ajax nhận js xoá yêu thích
-                var deletewish = `<script> function deletewish(ProductId,check) {
+                    //đoạn scripts thêm vào để ajax nhận js xoá yêu thích
+                    var deletewish = `<script> function deletewish(ProductId,check) {
             $.ajax({
                 url: "/xoa-yeu-thich",
                 data: JSON.stringify({ ProductId}),
@@ -306,23 +312,23 @@ $(function () {
                                 });
                             })
                             </script>`
-                $.notify('Đã thêm vào yêu thích.', 'success');
-                $('#lst-wish').prepend(html);
-                $('#lst-wish').append(deletewish);
-                $('#lst-wish .block_content p').text(`${data.sumQuantity} sản phẩm.`);
-                $('.img-wish').hide();
-            }
-            else if (data.status == '-1') {
-                swal("Thông báo", "Mời bạn đăng nhập!", "warning")
-                .then((value) => {
-                    location.href = "/dang-nhap";
-                });
-
-            }
-            else
-                if (data.status == '-3') {
-                    swal("Thông báo", data.message, "info")
+                    $.notify('Đã thêm vào yêu thích.', 'success');
+                    $('#lst-wish').prepend(html);
+                    $('#lst-wish').append(deletewish);
+                    $('#lst-wish .block_content p').text(`${data.sumQuantity} sản phẩm.`);
+                    $('.img-wish').hide();
                 }
+                else if (data.status == '-1') {
+                    swal("Thông báo", "Mời bạn đăng nhập!", "warning")
+                    .then((value) => {
+                        location.href = "/dang-nhap";
+                    });
+
+                }
+                else
+                    if (data.status == '-3') {
+                        swal("Thông báo", data.message, "info")
+                    }
                     },
             error: function (data) {
                 $.notify('Lỗi chưa xác định.', 'error');
@@ -378,15 +384,15 @@ $(function () {
                     if (data.sumQuantity == 0) {
                         $('#wish').hide();
                         $('.img-wish').show();
-            }
-            }
-            else
+                    }
+                }
+                else
                     if (check)
                         $.notify('Lỗi hệ thống khi xoá sản phẩm. Vui lòng thao tác lại sau.', 'error');
-            },
-                error: function (data) {
-                    $.notify('Lỗi chưa xác định', 'error');
-                }
+                    },
+            error: function (data) {
+                $.notify('Lỗi chưa xác định', 'error');
+            }
 
         });
     }
@@ -411,8 +417,8 @@ $(function () {
                     if (location.pathname == '/yeu-thich')
                         deletewish(ProductId, false);
                     $('.shopping_cart a span').text(`${data.sumQuantity} sản phẩm-${data.sumMoney}`);
-            }
-            else if (data.status == "0") {
+                }
+                else if (data.status == "0") {
                     var html = `<div class="cart_item cart-${data.id}">
                                                             <div class="cart_img">
                                                                 <a href="/chi-tiet/${data.alias}"><img src="/${data.image}" alt=""></a>
@@ -425,7 +431,7 @@ $(function () {
                                                         <div class="cart_remove">
                                                             <a title="Xoá sản phẩm ${data.name}" class ="deletecart" data-id='${data.id}' href=""><i class ="fa fa-times-circle"></i></a>
                                                         </div></div>`;
-                var script = `<script>
+                    var script = `<script>
                                 $('.deletecart').off('click').click(function (e) {
         e.preventDefault();
         e.stopPropagation();
@@ -474,27 +480,27 @@ $(function () {
                             });
                             }
                                 </script>`;
-                $.notify('Đã thêm vào giỏ hàng.', 'success');
-                $('#cart').prepend(html);
-                $('#lst-cart').append(script);
-                $('#lst-cart .prices').text(data.sumMoney);
-                $('.img-cart').hide();
-                $('#shipping-group').show();
-                $('.shopping_cart a span').text(`${data.sumQuantity} sản phẩm-${data.sumMoney}`);
+                    $.notify('Đã thêm vào giỏ hàng.', 'success');
+                    $('#cart').prepend(html);
+                    $('#lst-cart').append(script);
+                    $('#lst-cart .prices').text(data.sumMoney);
+                    $('.img-cart').hide();
+                    $('#shipping-group').show();
+                    $('.shopping_cart a span').text(`${data.sumQuantity} sản phẩm-${data.sumMoney}`);
 
-                if (location.pathname == '/yeu-thich')
-                    deletewish(ProductId, false);
+                    if (location.pathname == '/yeu-thich')
+                        deletewish(ProductId, false);
 
-            }
-            else if (data.status == '-1') {
-                swal("Thông báo", "Mời bạn đăng nhập!", "warning")
-                .then((value) => {
-                    location.href = "/dang-nhap";
-                });
-            }
-            else {
-                swal("Thông báo", data.message, "info")
-            }
+                }
+                else if (data.status == '-1') {
+                    swal("Thông báo", "Mời bạn đăng nhập!", "warning")
+                    .then((value) => {
+                        location.href = "/dang-nhap";
+                    });
+                }
+                else {
+                    swal("Thông báo", data.message, "info")
+                }
                     },
             error: function (data) {
                 $.notify('Lỗi chưa xác định.', 'error');
@@ -565,15 +571,15 @@ $(function () {
                         $('.img-cart').show();
                         $('#shipping-group').hide();
                         $('.shopping_cart_area').hide();
-            }
-            }
-            else
+                    }
+                }
+                else
                     if (check)
                         $.notify('Lỗi hệ thống khi xoá sản phẩm. Vui lòng thao tác lại sau.', 'error');
-            },
-                error: function (data) {
-                    $.notify('Lỗi chưa xác định.', 'error');
-                }
+                    },
+            error: function (data) {
+                $.notify('Lỗi chưa xác định.', 'error');
+            }
 
         });
     }
@@ -600,19 +606,18 @@ $(function () {
                     $('.shopping_cart a span').text(`${data.sumQuantity} sản phẩm-${data.sumMoney}`);
                     $('#total-' +ProductId).text(data.total);
                     $('#lst-cart .prices,.cart_amount.sum_money').text(data.sumMoney);
-                    $('.cart-' +ProductId + ' .cart_info .quantity').text('Số lượng:' +Quantity);
+                    $('.cart-' + ProductId + ' .cart_info .quantity').text('Số lượng:' + Quantity);
                     $('.cart_amount.sum_quantity').text(data.sumQuantity)
                     if (data.sumQuantity == 0) {
                         $('.img-cart').show();
                         $('#shipping-group').hide();
                         $('.shopping_cart_area').hide();
                     }
-            }
-            else
-                    if (data.status == -3)
-                    {
+                }
+                else
+                    if (data.status == -3) {
                         dom.val(dom.data('val'));
-                        $.notify(data.message, 'warn');                   
+                        $.notify(data.message, 'warn');
                     }
                     else
                         $.notify('Lỗi hệ thống khi xoá sản phẩm. Vui lòng thao tác lại sau.', 'error');
@@ -753,12 +758,12 @@ $(function () {
                     $('#rate li').each(function (index, element) {
                         if (index != 0)
                             $(element).find('a').removeClass('ratting active');
-            })
+                    })
 
                     var img = '';
                     if (data.issocial == 0)
                         img = `/${data.image}`;
-            else
+                    else
                         img = data.image;
                     var li = '';
                     for (var i = 0; i < 5; i++)
@@ -818,8 +823,7 @@ $(function () {
                     else
                         if (send.message == '')
                             $.notify('Nội dung không được rỗng.', 'warn');
-                        else
-                        {
+                        else {
                             disable('#btnsendcontact');
                             $.ajax({
                                 url: "/phan-hoi",
@@ -838,19 +842,19 @@ $(function () {
                                         $('#subject').val('');
                                         $('#phone').val('');
                                         CKEDITOR.instances['message'].setData('');
-                                }
-                                else
+                                            }
+                                            else
                                                 $.notify(data.message, 'error');
 
-                                },
-                                    error: function (data) {
-                                        $.notify('Lỗi chưa xác định.', 'error');
+                                        },
+                                error: function (data) {
+                                    $.notify('Lỗi chưa xác định.', 'error');
 
                                 }
 
-                                });
+                            });
                         }
-                                })
+    })
     //Xử lý khách hàng đăng kí nhận tin
     $('#btnsub').click(function () {
         var sub = new Object();
@@ -860,8 +864,7 @@ $(function () {
         else
             if (!validateEmail(sub.email))
                 $.notify('Không đúng định dạng email.', 'warn');
-            else
-                {
+            else {
                 disable('#btnsub');
                 $.ajax({
                     url: "/dang-ki-nhan-tin",
@@ -883,12 +886,12 @@ $(function () {
 
                     }
 
-                });
-            }
+                    });
+                    }
                     })
     $('#btninfoacc').click(function () {
         location.href = '/thong-tin-tai-khoan';
-                    })
+    })
     //Hàm update tài khoản
     function updateAccount() {
         var acc = new Object();
@@ -899,10 +902,10 @@ $(function () {
         var check = true;
         try {
             img = $('#imageupdate').val().split("\\").pop();
-                    } catch (e) {
-                        check = false;
-                    }
-        acc.image = (img == '') ? $('#imgupdate').data('val'): img;
+        } catch (e) {
+            check = false;
+        }
+        acc.image = (img == '') ? $('#imgupdate').data('val') : img;
         acc.fullname = $('#fullnameupdate').val();
         if (acc.fullname == "")
             $.notify('Họ tên không được rỗng.', 'warn');
@@ -944,14 +947,14 @@ $(function () {
                                             $.notify(data.message, 'error');
                                         enable('#btnsaveaccinfo');
 
-                                    },
-                                        error: function (data) {
-                                            $.notify('Lỗi chưa xác định.', 'error');
+                                            },
+                                    error: function (data) {
+                                        $.notify('Lỗi chưa xác định.', 'error');
                                     }
-                                    })
-                                    }
+                                })
+                            }
 
-                                    }
+    }
     $('#btnsaveaccinfo').click(updateAccount);
     //Xử lý khi bấm nút xem trong đơn hàng 
     $('.view').off('click').click(function () {
