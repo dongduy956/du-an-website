@@ -1,4 +1,4 @@
-function loginFB() {
+﻿function loginFB() {
     FB.api('me?fields=first_name,middle_name,last_name,id,email,picture', function (responses) {
         let acc = new Object();
         const email = responses.email;
@@ -23,7 +23,12 @@ function loginFB() {
                     location.href = '/';
                 }
                 else {
-                    $.notify(response.message, 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: response.message,
+                        position: 'topRight'
+                    });
                 }
             },
             error: function (data) {

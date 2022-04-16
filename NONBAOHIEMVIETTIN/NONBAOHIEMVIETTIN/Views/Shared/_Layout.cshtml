@@ -4,7 +4,7 @@
     var acc = Session["account"] as accounts;
     var cart = Session["cartSession"] as List<CartItem>;
     var aboutus = db.contact.SingleOrDefault(x => x.display == true);
-    TempData["Version"] = "17.5";
+    TempData["Version"] = "18.5";
 }
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -27,6 +27,7 @@
 
     <link rel="stylesheet" href="~/assets/client/css/plugin.css?@TempData["Version"]">
     <link rel="stylesheet" href="~/assets/client/css/bundle.css?@TempData["Version"]">
+    <link href="~/assets/client/css/iziToast.min.css" rel="stylesheet" />
     <link href="~/assets/client/css/jquery-ui.css?@TempData["Version"]" rel="stylesheet" />
 
     <link href="~/assets/client/css/style.css?@TempData["Version"]" rel="stylesheet" />
@@ -412,7 +413,7 @@
         <script src="~/Scripts/alertify.min.js?@TempData["Version"]"></script>
         <script src="~/assets/client/js/jquery-ui.js?@TempData["Version"]"></script>
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-        <script src="~/assets/client/js/notify.min.js?@TempData["Version"]"></script>
+        <script src="~/assets/client/js/iziToast.min.js"></script>
         <script src="~/assets/client/js/main.js?@TempData["Version"]"></script>
         <script src="~/assets/client/js/code/main.js?@TempData["Version"]"></script>
         <script src="~/assets/client/js/code/animation-rain.js?@TempData["Version"]"></script>

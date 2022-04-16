@@ -28,7 +28,12 @@ function upLoad(dom) {
         success: function (result) {
         },
         error: function (err) {
-            $.notify(err.statusText, 'error');
+            iziToast.error({
+                timeout: 1500,
+                title: 'Lỗi',
+                message: 'Lỗi tải ảnh.',
+                position: 'topRight'
+            });
         }
     });
 
@@ -87,7 +92,12 @@ $(function () {
                 }
             },
             error: function (data) {
-                $.notify('Lỗi chưa xác định', 'error');
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
             }
         })
     })
@@ -98,43 +108,99 @@ $(function () {
 
         var prepass = $('#prepasschange').val();
         if (passold == "")
-            $.notify('Mật khẩu cũ không được rỗng.', 'warn');
+            iziToast.warning({
+                timeout: 1500,
+                title: 'Cảnh báo',
+                message: 'Mật khẩu cũ không được rỗng.',
+                position: 'topRight'
+            });
         else
             if (passnew == "")
-                $.notify('Mật khẩu mới không được rỗng.', 'warn');
+                iziToast.warning({
+                    timeout: 1500,
+                    title: 'Cảnh báo',
+                    message: 'Mật khẩu mới không được rỗng.',
+                    position: 'topRight'
+                });
             else
-                if (prepass == "")
-                    $.notify('Nhập lại mật khẩu không được rỗng.', 'warn');
-                else {
-                    disable('#btnsubmitchangepassword');
-                    $.ajax({
-                        url: "/doi-mat-khau",
-                        data: JSON.stringify({ passold, passnew, prepass }),
-                                contentType: "application/json; charset=utf-8",
-                                dataType: "json",
+                if (passnew.trim().length < 5)
+                    iziToast.warning({
+                        timeout: 1500,
+                        title: 'Cảnh báo',
+                        message: 'Mật khẩu mới ít nhất 5 kí tự.',
+                        position: 'topRight'
+                    });
+                else
+                    if (prepass == "")
+                        iziToast.warning({
+                            timeout: 1500,
+                            title: 'Cảnh báo',
+                            message: 'Nhập lại mật khẩu không được rỗng.',
+                            position: 'topRight'
+                        });
+                    else
+                        if (prepass.trim().length < 5)
+                            iziToast.warning({
+                                timeout: 1500,
+                                title: 'Cảnh báo',
+                                message: 'Nhập lại mật khẩu ít nhất 5 kí tự.',
+                                position: 'topRight'
+                            });
+                        else {
+                            disable('#btnsubmitchangepassword');
+                            $.ajax({
+                                url: "/doi-mat-khau",
+                                data: JSON.stringify({ passold, passnew, prepass }),
+                                        contentType: "application/json; charset=utf-8",
+                                        dataType: "json",
                                 type: "POST",
                                 success: function (data) {
                                     if (data == "-1")
-                                        $.notify('Mật khẩu cũ không chính xác.', 'error');
-                        else if (data == "1") {
-                            $.notify('Đổi mật khẩu thành công!Vui lòng đăng nhập lại.', 'success');
-                            $('#btnclosechangepassword').click();
-                            location.href = "/dang-nhap";
-                            $('#btnlogout').click();
-                        }
-                        else
-                            if (data == "0")
-                                $.notify('Nhập lại mật khẩu không giống nhau.', 'error');
-                            else
-                                $.notify('Có lỗi xảy ra.', 'error');
+                                        iziToast.error({
+                                            timeout: 1500,
+                                            title: 'Lỗi',
+                                            message: 'Mật khẩu cũ không chính xác.',
+                                            position: 'topRight'
+                                        });
+                                    else if (data == "1") {
+                                        iziToast.success({
+                                            timeout: 1500,
+                                            title: 'Thành công',
+                                            message: 'Đổi mật khẩu thành công!Vui lòng đăng nhập lại.',
+                                            position: 'topRight'
+                                        });
+                                        $('#btnclosechangepassword').click();
+                                        location.href = "/dang-nhap";
+                                        $('#btnlogout').click();
+                                    }
+                                    else
+                                        if (data == "0")
+                                            iziToast.error({
+                                                timeout: 1500,
+                                                title: 'Lỗi',
+                                                message: 'Nhập lại mật khẩu không giống nhau.',
+                                                position: 'topRight'
+                                            });
+                                        else
+                                            iziToast.error({
+                                                timeout: 1500,
+                                                title: 'Lỗi',
+                                                message: 'Có lỗi xảy ra.',
+                                                position: 'topRight'
+                                            });
                                     enable('#btnsubmitchangepassword');
 
                                 },
-                        error: function (data) {
-                            $.notify('Lỗi chưa xác định.', 'error');
+                                error: function (data) {
+                                    iziToast.error({
+                                        timeout: 1500,
+                                        title: 'Lỗi',
+                                        message: 'Lỗi chưa xác định.',
+                                        position: 'topRight'
+                                    });
+                                }
+                            })
                         }
-                    })
-                }
     })
     $('#passoldchange').keypress(function (e) {
         if (e.which == 13)
@@ -228,7 +294,12 @@ $(function () {
     //Hàm xử lý thêm yêu thích
     function addWish(ProductId, Quantity) {
         if (Quantity == 0) {
-            $.notify('Số lượng phải lớn hơn 0', "warn");
+            iziToast.warning({
+                timeout: 1500,
+                title: 'Cảnh báo',
+                message: 'Số lượng phải lớn hơn 0.',
+                position: 'topRight'
+            });
             return;
         }
         $.ajax({
@@ -240,12 +311,17 @@ $(function () {
                     success: function (data) {
                 console.log(data)
                 if (data.status == "1") {
-                    $.notify('Đã thêm vào yêu thích.', 'success');
-                    $('#wish-' +data.id + ' .quantity').text('SL:' +data.quantity);
+                    iziToast.success({
+                    timeout: 1500,
+                        title: 'Thành công',
+                        message: 'Đã thêm vào yêu thích.',
+                        position: 'topRight'
+                    });
+                    $('#wish-' + data.id + ' .quantity').text('SL:' + data.quantity);
                     $('#lst-wish .block_content p').text(`${data.sumQuantity} sản phẩm.`);
-            }
-            else if (data.status == "0") {
-                var html = `<div class="cart_item" id="wish-${data.id}">
+                }
+                else if (data.status == "0") {
+                    var html = `<div class="cart_item" id="wish-${data.id}">
                 <div class="cart_img">
                     <a href="/chi-tiet/${data.alias}"><img src="/${data.image}" alt=""></a>
                 </div>
@@ -258,8 +334,8 @@ $(function () {
                     <a title="Xoá sản phẩm" data-id="${data.id}" href="" class ="deletewish"><i class ="fa fa-times-circle"></i></a>
                 </div>
             </div>`;
-                //đoạn scripts thêm vào để ajax nhận js xoá yêu thích
-                var deletewish = `<script> function deletewish(ProductId,check) {
+                    //đoạn scripts thêm vào để ajax nhận js xoá yêu thích
+                    var deletewish = `<script> function deletewish(ProductId,check) {
             $.ajax({
                 url: "/xoa-yeu-thich",
                 data: JSON.stringify({ ProductId}),
@@ -271,7 +347,12 @@ $(function () {
                                 $('#wish-' +ProductId).hide(500);
                                 $('#lst-wish .block_content p').text(data.sumQuantity+ ' sản phẩm.');
                                 if(check)
-                                $.notify('Xoá sản phẩm thành công.', 'success');
+                                  iziToast.success({
+                                        timeout: 1500,
+                                        title: 'Thành công',
+                                        message: 'Xoá sản phẩm thành công.',
+                                        position: 'topRight'
+                                    });
                                 if(data.sumQuantity==0)
                         {
                                     $('#wish').hide();
@@ -280,11 +361,20 @@ $(function () {
                         }
                         else
                                 if(check)
-                                $.notify('Lỗi hệ thống khi xoá sản phẩm. Vui lòng thao tác lại sau.', 'error');
+                                 iziToast.error({
+                                    timeout: 1500,
+                                    title: 'Lỗi',
+                                     message: 'Lỗi hệ thống khi xoá sản phẩm. Vui lòng thao tác lại sau.',
+                                    position: 'topRight'
+                                });
                         },
                             error: function (data) {
-
-                        $.notify('Lỗi chưa xác định', 'error');
+                             iziToast.error({
+                                timeout: 1500,
+                                title: 'Lỗi',
+                                message: 'Lỗi chưa xác định.',
+                                position: 'topRight'
+                            });
                         }
 
                         });
@@ -306,26 +396,36 @@ $(function () {
                                 });
                             })
                             </script>`
-                $.notify('Đã thêm vào yêu thích.', 'success');
-                $('#lst-wish').prepend(html);
-                $('#lst-wish').append(deletewish);
-                $('#lst-wish .block_content p').text(`${data.sumQuantity} sản phẩm.`);
-                $('.img-wish').hide();
-            }
-            else if (data.status == '-1') {
-                swal("Thông báo", "Mời bạn đăng nhập!", "warning")
-                .then((value) => {
-                    location.href = "/dang-nhap";
-                });
-
-            }
-            else
-                if (data.status == '-3') {
-                    swal("Thông báo", data.message, "info")
+                    iziToast.success({
+                        timeout: 1500,
+                        title: 'Thành công',
+                        message: 'Đã thêm vào yêu thích.',
+                        position: 'topRight'
+                    });
+                    $('#lst-wish').prepend(html);
+                    $('#lst-wish').append(deletewish);
+                    $('#lst-wish .block_content p').text(`${data.sumQuantity} sản phẩm.`);
+                    $('.img-wish').hide();
                 }
+                else if (data.status == '-1') {
+                    swal("Thông báo", "Mời bạn đăng nhập!", "warning")
+                    .then((value) => {
+                        location.href = "/dang-nhap";
+                    });
+
+                }
+                else
+                    if (data.status == '-3') {
+                        swal("Thông báo", data.message, "info")
+                    }
                     },
             error: function (data) {
-                $.notify('Lỗi chưa xác định.', 'error');
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
 
             }
         });
@@ -374,26 +474,46 @@ $(function () {
                     $('#wish-' +ProductId).hide(500);
                     $('#lst-wish .block_content p').text(`${data.sumQuantity} sản phẩm.`);
                     if (check)
-                        $.notify('Xoá sản phẩm thành công.', 'success');
+                        iziToast.success({
+                            timeout: 1500,
+                            title: 'Thành công',
+                            message: 'Xoá sản phẩm thành công.',
+                            position: 'topRight'
+                        });
                     if (data.sumQuantity == 0) {
                         $('#wish').hide();
                         $('.img-wish').show();
-            }
-            }
-            else
-                    if (check)
-                        $.notify('Lỗi hệ thống khi xoá sản phẩm. Vui lòng thao tác lại sau.', 'error');
-            },
-                error: function (data) {
-                    $.notify('Lỗi chưa xác định', 'error');
+                    }
                 }
+                else
+                    if (check)
+                        iziToast.error({
+                            timeout: 1500,
+                            title: 'Lỗi',
+                            message: 'Lỗi hệ thống khi xoá sản phẩm. Vui lòng thao tác lại sau.',
+                            position: 'topRight'
+                        });
+                    },
+            error: function (data) {
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
+            }
 
         });
     }
     //Hàm xử lý thêm giỏ hàng
     function addCart(ProductId, Quantity) {
         if (Quantity == 0) {
-            $.notify('Số lượng phải lớn hơn 0', "warn");
+            iziToast.warning({
+                timeout: 1500,
+                title: 'Cảnh báo',
+                message: 'Số lượng phải lớn hơn 0.',
+                position: 'topRight'
+            });
             return;
         }
         $.ajax({
@@ -405,14 +525,19 @@ $(function () {
                     success: function (data) {
                 console.log(data)
                 if (data.status == "1") {
-                    $.notify('Đã thêm vào giỏ hàng.', 'success');
-                    $('.cart-' +data.id + ' .quantity').text('Số lượng:' +data.quantity);
+                    iziToast.success({
+                    timeout: 1500,
+                    title: 'Thành công',
+                    message: 'Đã thêm vào giỏ hàng.',
+                    position: 'topRight'
+            });
+                    $('.cart-' + data.id + ' .quantity').text('Số lượng:' + data.quantity);
                     $('#lst-cart .prices').text(data.sumMoney);
                     if (location.pathname == '/yeu-thich')
                         deletewish(ProductId, false);
                     $('.shopping_cart a span').text(`${data.sumQuantity} sản phẩm-${data.sumMoney}`);
-            }
-            else if (data.status == "0") {
+                }
+                else if (data.status == "0") {
                     var html = `<div class="cart_item cart-${data.id}">
                                                             <div class="cart_img">
                                                                 <a href="/chi-tiet/${data.alias}"><img src="/${data.image}" alt=""></a>
@@ -425,7 +550,7 @@ $(function () {
                                                         <div class="cart_remove">
                                                             <a title="Xoá sản phẩm ${data.name}" class ="deletecart" data-id='${data.id}' href=""><i class ="fa fa-times-circle"></i></a>
                                                         </div></div>`;
-                var script = `<script>
+                    var script = `<script>
                                 $('.deletecart').off('click').click(function (e) {
         e.preventDefault();
         e.stopPropagation();
@@ -455,7 +580,12 @@ $(function () {
                             $('.shopping_cart a span').text(data.sumQuantity +' sản phẩm-'+data.sumMoney);
                             $('#lst-cart .prices').text(data.sumMoney);
                             if(check)
-                    $.notify('Xoá sản phẩm thành công.', 'success');
+                              iziToast.success({
+                        timeout: 1500,
+                        title: 'Thành công',
+                        message: 'Xoá sản phẩm thành công.',
+                        position: 'topRight'
+                    });
                             if (data.sumQuantity == 0) {
                                 $('.img-cart').show();
                                 $('#shipping-group').hide();
@@ -464,40 +594,59 @@ $(function () {
                             }
                             else
                             if (check)
-                    $.notify('Lỗi hệ thống khi xoá sản phẩm. Vui lòng thao tác lại sau.', 'error');
+                                 iziToast.error({
+                                    timeout: 1500,
+                                    title: 'Lỗi',
+                                    message: 'Lỗi hệ thống khi xoá sản phẩm. Vui lòng thao tác lại sau.',
+                                    position: 'topRight'
+                                });
                             },
                             error: function (data) {
-
-                alert(JSON.stringify(data));
+                                     iziToast.error({
+                                        timeout: 1500,
+                                        title: 'Lỗi',
+                                        message: 'Lỗi chưa xác đinh.',
+                                        position: 'topRight'
+                                    });
                             }
 
                             });
                             }
                                 </script>`;
-                $.notify('Đã thêm vào giỏ hàng.', 'success');
-                $('#cart').prepend(html);
-                $('#lst-cart').append(script);
-                $('#lst-cart .prices').text(data.sumMoney);
-                $('.img-cart').hide();
-                $('#shipping-group').show();
-                $('.shopping_cart a span').text(`${data.sumQuantity} sản phẩm-${data.sumMoney}`);
+                    iziToast.success({
+                        timeout: 1500,
+                        title: 'Thành công',
+                        message: 'Đã thêm vào giỏ hàng.',
+                        position: 'topRight'
+                    });
+                    $('#cart').prepend(html);
+                    $('#lst-cart').append(script);
+                    $('#lst-cart .prices').text(data.sumMoney);
+                    $('.img-cart').hide();
+                    $('#shipping-group').show();
+                    $('.shopping_cart a span').text(`${data.sumQuantity} sản phẩm-${data.sumMoney}`);
 
-                if (location.pathname == '/yeu-thich')
-                    deletewish(ProductId, false);
+                    if (location.pathname == '/yeu-thich')
+                        deletewish(ProductId, false);
 
-            }
-            else if (data.status == '-1') {
-                swal("Thông báo", "Mời bạn đăng nhập!", "warning")
-                .then((value) => {
-                    location.href = "/dang-nhap";
-                });
-            }
-            else {
-                swal("Thông báo", data.message, "info")
-            }
+                }
+                else if (data.status == '-1') {
+                    swal("Thông báo", "Mời bạn đăng nhập!", "warning")
+                    .then((value) => {
+                        location.href = "/dang-nhap";
+                    });
+                }
+                else {
+                    swal("Thông báo", data.message, "info")
+                }
                     },
-            error: function (data) {
-                $.notify('Lỗi chưa xác định.', 'error');
+                    error: function (data) {
+                        iziToast.error({
+                            timeout: 1500,
+                            title: 'Lỗi',
+                            message: 'Lỗi chưa xác đinh.',
+                            position: 'topRight'
+                        });
             }
         });
     }
@@ -560,20 +709,35 @@ $(function () {
                     $('#lst-cart .prices,.cart_amount.sum_money').text(data.sumMoney);
                     $('.cart_amount.sum_quantity').text(data.sumQuantity)
                     if (check)
-                        $.notify('Xoá sản phẩm thành công.', 'success');
+                        iziToast.success({
+                            timeout: 1500,
+                            title: 'Thành công',
+                            message: 'Xoá sản phẩm thành công.',
+                            position: 'topRight'
+                        });
                     if (data.sumQuantity == 0) {
                         $('.img-cart').show();
                         $('#shipping-group').hide();
                         $('.shopping_cart_area').hide();
-            }
-            }
-            else
-                    if (check)
-                        $.notify('Lỗi hệ thống khi xoá sản phẩm. Vui lòng thao tác lại sau.', 'error');
-            },
-                error: function (data) {
-                    $.notify('Lỗi chưa xác định.', 'error');
+                    }
                 }
+                else
+                    if (check)
+                        iziToast.info({
+                            timeout: 1500,
+                            title: 'Lỗi',
+                            message: 'Lỗi hệ thống khi xoá sản phẩm. Vui lòng thao tác lại sau.',
+                            position: 'topRight'
+                        });
+                    },
+                    error: function (data) {
+                        iziToast.info({
+                            timeout: 1500,
+                            title: 'Lỗi',
+                            message: 'Lỗi chưa xác định.',
+                            position: 'topRight'
+                        });
+            }
 
         });
     }
@@ -607,18 +771,32 @@ $(function () {
                         $('#shipping-group').hide();
                         $('.shopping_cart_area').hide();
                     }
-            }
-            else
-                    if (data.status == -3)
-                    {
+                }
+                else
+                    if (data.status == -3) {
                         dom.val(dom.data('val'));
-                        $.notify(data.message, 'warn');                   
+                        iziToast.warning({
+                            timeout: 1500,
+                            title: 'Cảnh báo',
+                            message: data.message,
+                            position: 'topRight'
+                        });
                     }
                     else
-                        $.notify('Lỗi hệ thống khi xoá sản phẩm. Vui lòng thao tác lại sau.', 'error');
+                        iziToast.error({
+                            timeout: 1500,
+                            title: 'Lỗi',
+                            message: 'Lỗi hệ thống khi xoá sản phẩm. Vui lòng thao tác lại sau.',
+                            position: 'topRight'
+                        });
                     },
-            error: function (data) {
-                $.notify('Lỗi chưa xác định.', 'error');
+                    error: function (data) {
+                        iziToast.error({
+                            timeout: 1500,
+                            title: 'Lỗi',
+                            message: 'Lỗi chưa xác định.',
+                            position: 'topRight'
+                        });
             }
 
         });
@@ -627,7 +805,12 @@ $(function () {
     function search() {
         var keyword = $('#txtkeyword').val();
         if (keyword == '')
-            $.notify('Bạn chưa nhập từ khoá.', 'warn');
+            iziToast.warning({
+                timeout: 1500,
+                title: 'Cảnh báo',
+                message: 'Bạn chưa nhập từ khoá.',
+                position: 'topRight'
+            });
         else
             location.href = '/tim-kiem?tukhoa=' + keyword;
     }
@@ -663,7 +846,12 @@ $(function () {
 
                 },
                 error: function (data) {
-                    $.notify('Lỗi chưa xác định.', 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: 'Lỗi chưa xác định.',
+                        position: 'topRight'
+                    });
                 }
 
             });
@@ -720,7 +908,12 @@ $(function () {
     $('#btnrate').click(function () {
         var comment = $("#comment").val();
         if (comment == '') {
-            $.notify('Bạn chưa viết đánh giá.', 'warn');
+            iziToast.warning({
+                timeout: 1500,
+                title: 'Cảnh báo',
+                message: 'Bạn chưa viết đánh giá.',
+                position: 'topRight'
+            });
             return;
         }
         var sum = 0;
@@ -753,12 +946,12 @@ $(function () {
                     $('#rate li').each(function (index, element) {
                         if (index != 0)
                             $(element).find('a').removeClass('ratting active');
-            })
+                    })
 
                     var img = '';
                     if (data.issocial == 0)
                         img = `/${data.image}`;
-            else
+                    else
                         img = data.image;
                     var li = '';
                     for (var i = 0; i < 5; i++)
@@ -783,14 +976,29 @@ $(function () {
                                             <p>${comment}</p>
                                     </div>`;
                     $('#sheet').append(html);
-                    $.notify(data.message, 'success');
+                    iziToast.success({
+                        timeout: 1500,
+                        title: 'Thành công',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
                 } else
-                    $.notify(data.message, 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: data.message,
+                        position: 'topRight'
+                    });
                         enable('#btnrate');
                     },
-            error: function (data) {
-                $.notify('Lỗi chưa xác định.', 'error');
+                    error: function (data) {
+                        iziToast.error({
+                            timeout: 1500,
+                            title: 'Lỗi',
+                            message: 'Lỗi chưa xác định.',
+                            position: 'topRight'
+                        });
 
             }
 
@@ -805,21 +1013,45 @@ $(function () {
         send.phone = $('#phone').val();
         send.message = CKEDITOR.instances['message'].getData();
         if (send.name == '')
-            $.notify('Tên không được rỗng.', 'warn');
+            iziToast.warning({
+                timeout: 1500,
+                title: 'Cảnh báo',
+                message: 'Tên không được rỗng.',
+                position: 'topRight'
+            });
         else
             if (send.email == '')
-                $.notify('Email không được rỗng.', 'warn');
+                iziToast.warning({
+                    timeout: 1500,
+                    title: 'Cảnh báo',
+                    message: 'Email không được rỗng.',
+                    position: 'topRight'
+                });
             else
                 if (send.subject == '')
-                    $.notify('Tiêu đề không được rỗng.', 'warn');
+                    iziToast.warning({
+                        timeout: 1500,
+                        title: 'Cảnh báo',
+                        message: 'Tiêu đề không được rỗng.',
+                        position: 'topRight'
+                    });
                 else
                     if (send.phone == '')
-                        $.notify('Số điện thoại không được rỗng.', 'warn');
+                          iziToast.warning({
+                        timeout: 1500,
+                        title: 'Cảnh báo',
+                        message: 'Số điện thoại không được rỗng.',
+                        position: 'topRight'
+                    });
                     else
                         if (send.message == '')
-                            $.notify('Nội dung không được rỗng.', 'warn');
-                        else
-                        {
+                            iziToast.warning({
+                                timeout: 1500,
+                                title: 'Cảnh báo',
+                                message: 'Nội dung không được rỗng.',
+                                position: 'topRight'
+                            });
+                        else {
                             disable('#btnsendcontact');
                             $.ajax({
                                 url: "/phan-hoi",
@@ -831,7 +1063,12 @@ $(function () {
                                             enable('#btnsendcontact');
 
                                             if (data.status == 1) {
-                                                $.notify(data.message, 'success');
+                                                iziToast.success({
+                                                    timeout: 1500,
+                                                    title: 'Thành công',
+                                                    message: data.message,
+                                                    position: 'topRight'
+                                                });
 
                                         $('#name').val('');
                                         $('#email').val('');
@@ -839,29 +1076,48 @@ $(function () {
                                         $('#phone').val('');
                                         CKEDITOR.instances['message'].setData('');
                                 }
-                                else
-                                                $.notify(data.message, 'error');
+                                            else
+                                                iziToast.error({
+                                                    timeout: 1500,
+                                                    title: 'Lỗi',
+                                                    message: data.message,
+                                                    position: 'topRight'
+                                                });
 
-                                },
-                                    error: function (data) {
-                                        $.notify('Lỗi chưa xác định.', 'error');
+                                        },
+                                        error: function (data) {
+                                            iziToast.error({
+                                                timeout: 1500,
+                                                title: 'Lỗi',
+                                                message: 'Lỗi chưa xác định.',
+                                                position: 'topRight'
+                                            });
 
                                 }
 
-                                });
+                            });
                         }
-                                })
+    })
     //Xử lý khách hàng đăng kí nhận tin
     $('#btnsub').click(function () {
         var sub = new Object();
         sub.email = $('#emailsub').val();
         if (sub.email == '')
-            $.notify('Bạn chưa điền email để đăng kí.', 'warn');
+            iziToast.warning({
+                timeout: 1500,
+                title: 'Cảnh báo',
+                message: 'Bạn chưa điền email để đăng kí.',
+                position: 'topRight'
+            });
         else
             if (!validateEmail(sub.email))
-                $.notify('Không đúng định dạng email.', 'warn');
-            else
-                {
+                iziToast.warning({
+                    timeout: 1500,
+                    title: 'Cảnh báo',
+                    message: 'Không đúng định dạng email',
+                    position: 'topRight'
+                });
+            else {
                 disable('#btnsub');
                 $.ajax({
                     url: "/dang-ki-nhan-tin",
@@ -871,20 +1127,35 @@ $(function () {
                             type: "POST",
                             success: function (data) {
                                 enable('#btnsub');
-                        if (data.status == 1) {
-                            $.notify(data.message, 'success');
+                                if (data.status == 1) {
+                                    iziToast.success({
+                                        timeout: 1500,
+                                        title: 'Thành công',
+                                        message: data.message,
+                                        position: 'topRight'
+                                    });
                             $('#emailsub').val('');
                     }
-                    else
-                            $.notify(data.message, 'error');
+                                else
+                                    iziToast.error({
+                                        timeout: 1500,
+                                        title: 'Lỗi',
+                                        message: data.message,
+                                        position: 'topRight'
+                                    });
                     },
-                        error: function (data) {
-                            $.notify('Lỗi chưa xác định.', 'error');
+                            error: function (data) {
+                                iziToast.error({
+                                    timeout: 1500,
+                                    title: 'Lỗi',
+                                    message: 'Lỗi chưa xác định.',
+                                    position: 'topRight'
+                                });
 
                     }
 
-                });
-            }
+                    });
+                    }
                     })
     $('#btninfoacc').click(function () {
         location.href = '/thong-tin-tai-khoan';
@@ -899,28 +1170,58 @@ $(function () {
         var check = true;
         try {
             img = $('#imageupdate').val().split("\\").pop();
-                    } catch (e) {
-                        check = false;
-                    }
-        acc.image = (img == '') ? $('#imgupdate').data('val'): img;
+        } catch (e) {
+            check = false;
+        }
+        acc.image = (img == '') ? $('#imgupdate').data('val') : img;
         acc.fullname = $('#fullnameupdate').val();
         if (acc.fullname == "")
-            $.notify('Họ tên không được rỗng.', 'warn');
+            iziToast.warning({
+                   timeout: 1500,
+                   title: 'Cảnh báo',
+                   message: 'Họ tên không được rỗng.',
+                   position: 'topRight'
+                   });
         else
             if (acc.email == "")
-                $.notify('Email không được rỗng.', 'warn');
+                iziToast.warning({
+                    timeout: 1500,
+                    title: 'Cảnh báo',
+                    message: 'Email không được rỗng.',
+                    position: 'topRight'
+                });
             else
                 if (!validateEmail(acc.email))
-                    $.notify('Email không đúng định dạng.', 'warn');
+                    iziToast.warning({
+                        timeout: 1500,
+                        title: 'Cảnh báo',
+                        message: 'Email không đúng định dạng.',
+                        position: 'topRight'
+                    });
                 else
                     if (acc.phone == "")
-                        $.notify('Số điện thoại không được rỗng.', 'warn');
+                        iziToast.warning({
+                            timeout: 1500,
+                            title: 'Cảnh báo',
+                            message: 'Số điện thoại không được rỗng.',
+                            position: 'topRight'
+                        });
                     else
                         if (!validatePhone(acc.phone))
-                            $.notify('Số điện thoại không đúng định dạng.', 'warn');
+                               iziToast.warning({
+                            timeout: 1500,
+                            title: 'Cảnh báo',
+                            message: 'Số điện thoại không đúng định dạng.',
+                            position: 'topRight'
+                        });
                         else
                             if (acc.address == "")
-                                $.notify('Địa chỉ không được rỗng.', 'warn');
+                                iziToast.warning({
+                                    timeout: 1500,
+                                    title: 'Cảnh báo',
+                                    message: 'Địa chỉ không được rỗng.',
+                                    position: 'topRight'
+                                });
                             else {
                                 disable('#btnsaveaccinfo');
                                 if (check)
@@ -932,26 +1233,41 @@ $(function () {
                                             dataType: "json",
                                             type: "POST",
                                             success: function (data) {
-                                        if (data.status == 1) {
-                                            $.notify(data.message, 'success');
+                                                if (data.status == 1) {
+                                                    iziToast.success({
+                                                        timeout: 1500,
+                                                        title: 'Thành công',
+                                                        message: data.message,
+                                                        position: 'topRight'
+                                                    });
                                             $('#accountname').text(data.fullname);
                                             $('#accounthome img').attr('src', '/' +data.image);
                                             $('#imgupdate').attr('src', '/' +data.image);
 
 
                                     }
-                                    else
-                                            $.notify(data.message, 'error');
+                                                else
+                                                    iziToast.error({
+                                                        timeout: 1500,
+                                                        title: 'Lỗi',
+                                                        message: data.message,
+                                                        position: 'topRight'
+                                                    });
                                         enable('#btnsaveaccinfo');
 
                                     },
-                                        error: function (data) {
-                                            $.notify('Lỗi chưa xác định.', 'error');
-                                    }
-                                    })
-                                    }
+                                            error: function (data) {
+                                                iziToast.error({
+                                                    timeout: 1500,
+                                                    title: 'Lỗi',
+                                                    message: 'Lỗi chưa xác định.',
+                                                    position: 'topRight'
+                                                });
+                                        }
+                                })
+                            }
 
-                                    }
+    }
     $('#btnsaveaccinfo').click(updateAccount);
     //Xử lý khi bấm nút xem trong đơn hàng 
     $('.view').off('click').click(function () {
@@ -981,15 +1297,30 @@ $(function () {
             type: "POST",
             success: function (data) {
                 if (data.status == 1) {
-                    $.notify(data.message, 'success');
+                    iziToast.success({
+                        timeout: 1500,
+                        title: 'Thành công',
+                        message: data.message,
+                        position: 'topRight'
+                    });
                     $(`#order-${id}`).hide(200);
                     $(`#detail_${id}`).hide();
                 }
                 else
-                    $.notify(data.message, 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: data.message,
+                        position: 'topRight'
+                    });
             },
             error: function (data) {
-                $.notify('Lỗi chưa xác định.', 'error');
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
             }
         })
     }

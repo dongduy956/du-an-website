@@ -56,16 +56,31 @@ $(function () {
             success: function (data) {
 
                 if (data.status == 1) {
-                    $.notify(data.message, 'success');
+                    iziToast.success({
+                        timeout: 1500,
+                        title: 'Thành công',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
                     ele.attr('style', 'display:none !important');
                     $(`#_product_${id}-delete`).text('Đã xoá');
                     $(`#_product_${id}-delete-detail`).text('Đã xoá');
                 } else
-                    $.notify(data.message, 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: data.message,
+                        position: 'topRight'
+                    });
             },
             error: function (data) {
-                $.notify('Lỗi chưa xác định.', 'error');
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
             }
         })
     }
@@ -100,18 +115,33 @@ $(function () {
             success: function (data) {
 
                 if (data.status == 1) {
-                    $.notify(data.message, 'success');
+                    iziToast.success({
+                        timeout: 1500,
+                        title: 'Thành công',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
                     ele.attr('style', 'display:none !important');
                     $(`#_category_${id}-delete`).text('Đã xoá');
                 }
                 else
-                    $.notify(data.message, 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
 
             },
             error: function (data) {
-                $.notify('Lỗi chưa xác định.', 'error');
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
 
             }
         })
@@ -145,18 +175,34 @@ $(function () {
             type: "POST",
             success: function (data) {
                 if (data.status == 1) {
-                    $.notify(data.message, 'success');
+                   
+                    iziToast.success({
+                        timeout: 1500,
+                        title: 'Thành công',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
                     ele.attr('style', 'display:none !important');
                     $(`#_production_${id}-delete`).text('Đã xoá');
                 }
                 else
-                    $.notify(data.message, 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
 
             },
             error: function (data) {
-                $.notify('Lỗi chưa xác định.', 'error');
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
 
             }
         })
@@ -190,17 +236,33 @@ $(function () {
             success: function (data) {
 
                 if (data.status == 1) {
-                    $.notify(data.message, 'success');
+
+                    iziToast.success({
+                        timeout: 1500,
+                        title: 'Thành công',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
                     ele.attr('style', 'display:none !important');
                     $(`#_group-product_${id}-delete`).text('Đã xoá');
                 }
                 else
-                    $.notify(data.message, 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
             },
             error: function (data) {
-                $.notify('Lỗi chưa xác định.', 'error');
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
             }
         })
     }
@@ -233,14 +295,29 @@ $(function () {
             type: "POST",
             success: function (data) {
                 if (data.status == 1) {
-                    $.notify(data.message, 'success');
+                    iziToast.success({
+                        timeout: 1500,
+                        title: 'Thành công',
+                        message: data.message,
+                        position: 'topRight'
+                    });
                     $(`#_role_${id}`).hide(200);
                 }
                 else
-                    $.notify(data.message, 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: data.message,
+                        position: 'topRight'
+                    });
             },
             error: function (data) {
-                $.notify('Lỗi chưa xác định.', 'error');
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
             }
         })
     }
@@ -272,7 +349,12 @@ $(function () {
             success: function (data) {
 
                 if (data.status == 1 || data.status == 2) {
-                    $.notify(data.message, 'success');
+                    iziToast.success({
+                        timeout: 1500,
+                        title: 'Thành công',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
                     $(`#_account_${id}`).hide(200);
                     if (data.status == 2) {
@@ -280,12 +362,22 @@ $(function () {
                     }
                 }
                 else
-                    $.notify(data.message, 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
 
             },
             error: function (data) {
-                $.notify('Lỗi chưa xác định.', 'error');
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
 
             }
         })
@@ -319,15 +411,29 @@ $(function () {
             type: "POST",
             success: function (data) {
                 if (data.status == 1)
-                    $.notify(data.message, 'success');
+                    iziToast.success({
+                        timeout: 1500,
+                        title: 'Thành công',
+                        message: data.message,
+                        position: 'topRight'
+                    });
                 else
-                    $.notify(data.message, 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
 
             },
             error: function (data) {
-                $.notify('Lỗi chưa xác định.', 'error');
-
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
             }
         })
     }
@@ -358,18 +464,32 @@ $(function () {
             type: "POST",
             success: function (data) {
                 if (data.status == 1) {
-                    $.notify(data.message, 'success');
+                    iziToast.success({
+                        timeout: 1500,
+                        title: 'Thành công',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
                     $(`#_newstype_${id}`).hide(200);
                 }
                 else
-                    $.notify(data.message, 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
 
             },
             error: function (data) {
-                $.notify('Lỗi chưa xác định.', 'error');
-
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
             }
         })
     }
@@ -403,18 +523,32 @@ $(function () {
             success: function (data) {
 
                 if (data.status == 1) {
-                    $.notify(data.message, 'success');
+                    iziToast.success({
+                        timeout: 1500,
+                        title: 'Thành công',
+                        message: data.message,
+                        position: 'topRight'
+                    });
                     ele.attr('style', 'display:none !important');
                     $(`#_news_${id}`).hide(200);
                 }
                 else
-                    $.notify(data.message, 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
 
             },
             error: function (data) {
-                $.notify('Lỗi chưa xác định.', 'error');
-
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
             }
         })
     }
@@ -447,17 +581,31 @@ $(function () {
             success: function (data) {
 
                 if (data.status == 1) {
-                    $.notify(data.message, 'success');
+                    iziToast.success({
+                        timeout: 1500,
+                        title: 'Thành công',
+                        message: data.message,
+                        position: 'topRight'
+                    });
                     $(`#_introduce_${id}`).hide(200);
                 }
                 else
-                    $.notify(data.message, 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
 
             },
             error: function (data) {
-                $.notify('Lỗi chưa xác định.', 'error');
-
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message:'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
             }
         })
     }
@@ -490,18 +638,32 @@ $(function () {
             type: "POST",
             success: function (data) {
                 if (data.status == 1) {
-                    $.notify(data.message, 'success');
+                    iziToast.success({
+                        timeout: 1500,
+                        title: 'Thành công',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
                     $(`#_contact_${id}`).hide(200);
                 }
                 else
-                    $.notify(data.message, 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
 
             },
             error: function (data) {
-                $.notify('Lỗi chưa xác định.', 'error');
-
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
             }
         })
     }
@@ -535,16 +697,31 @@ $(function () {
             type: "POST",
             success: function (data) {
                 if (data.status == 1) {
-                    $.notify(data.message, 'success');
+                    iziToast.success({
+                        timeout: 1500,
+                        title: 'Thành công',
+                        message: data.message,
+                        position: 'topRight'
+                    });
                     $(`#_feedback_${id}`).hide(200);
                 }
                 else
-                    $.notify(data.message, 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
 
             },
             error: function (data) {
-                $.notify('Lỗi chưa xác định.', 'error');
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
 
             }
         })
@@ -578,18 +755,32 @@ $(function () {
             type: "POST",
             success: function (data) {
                 if (data.status == 1) {
-                    $.notify(data.message, 'success');
+                    iziToast.success({
+                        timeout: 1500,
+                        title: 'Thành công',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
                     $(`#_subscribe_${id}`).hide(200);
                 }
                 else
-                    $.notify(data.message, 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
 
             },
             error: function (data) {
-                $.notify('Lỗi chưa xác định.', 'error');
-
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
             }
         })
     }
@@ -625,18 +816,32 @@ $(function () {
             success: function (data) {
 
                 if (data.status == 1) {
-                    $.notify(data.message, 'success');
+                    iziToast.success({
+                        timeout: 1500,
+                        title: 'Thành công',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
                     $(`#_rate_${id}`).hide(200);
                 }
                 else
-                    $.notify(data.message, 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
 
             },
             error: function (data) {
-                $.notify('Lỗi chưa xác định.', 'error');
-
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
             }
         })
     }
@@ -668,18 +873,32 @@ $(function () {
             success: function (data) {
 
                 if (data.status == 1) {
-                    $.notify(data.message, 'success');
+                    iziToast.success({
+                        timeout: 1500,
+                        title: 'Thành công',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
                     $(`#_order_${id}`).hide(200);
                 }
                 else
-                    $.notify(data.message, 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
 
             },
             error: function (data) {
-                $.notify('Lỗi chưa xác định.', 'error');
-
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
 
             }
         })
@@ -714,16 +933,31 @@ $(function () {
             type: "POST",
             success: function (data) {
                 if (data.status == 1) {
-                    $.notify(data.message, 'success');
+                    iziToast.success({
+                        timeout: 1500,
+                        title: 'Thành công',
+                        message: data.message,
+                        position: 'topRight'
+                    });
                     $('#confirm_order_detail_' + id + ',#confirm_order_' + id).removeClass('text-danger');
                     $('#confirm_order_detail_' + id + ',#confirm_order_' + id).addClass('text-success');
                     $('#confirm_order_detail_' + id + ',#confirm_order_' + id).text('Đã duyệt');
                 }
                 else
-                    $.notify(data.message, 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: data.message,
+                        position: 'topRight'
+                    });
             },
             error: function (data) {
-                $.notify('Lỗi chưa xác định.', 'error');
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
             }
         })
     }
@@ -756,20 +990,34 @@ $(function () {
             type: "POST",
             success: function (data) {
                 if (data.status == 1) {
-                    $.notify(data.message, 'success');
+                     iziToast.success({
+                        timeout: 1500,
+                        title: 'Thành công',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
                     $('#transfer_order_detail_' + id + ',#transfer_order_' + id).removeClass('text-danger');
                     $('#transfer_order_detail_' + id + ',#transfer_order_' + id).addClass('text-success');
                     $('#transfer_order_detail_' + id + ',#transfer_order_' + id).text('Đã chuyển tiền');
                 }
                 else
-                    $.notify(data.message, 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
 
             },
             error: function (data) {
-                $.notify('Lỗi chưa xác định.', 'error');
-
+                  iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: 'Lỗi chưa xác định.',
+                        position: 'topRight'
+                    });
             }
         })
     }
@@ -932,7 +1180,12 @@ $(function () {
     $('#btn-confirm').click(function () {
         var lst = window.sessionStorage.getItem('receipt') == null ? [] : JSON.parse(window.sessionStorage.getItem('receipt'));
         if (lst.toString() == '') {
-            $.notify('Bạn chưa chọn sản phẩm nào để nhập.', 'warn');
+            iziToast.warning({
+                timeout: 1500,
+                title: 'Cảnh báo',
+                message: 'Bạn chưa chọn sản phẩm nào để nhập.',
+                position: 'topRight'
+            });
         }
         else {
             lstreceiptdetail = new Array();
@@ -957,8 +1210,12 @@ $(function () {
                 }
                 },
                     error: function (data) {
-                    $.notify('Lỗi chưa xác định.', 'error');
-
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: 'Lỗi chưa xác định.',
+                        position: 'topRight'
+                    });
                 }
                 })
                 }
@@ -975,18 +1232,32 @@ $(function () {
             type: "POST",
             success: function (data) {
                 if (data.status == 1) {
-                    $.notify(data.message, 'success');
+                    iziToast.success({
+                        timeout: 1500,
+                        title: 'Thành công',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
                     $(`#_receipt_${id}`).hide(200);
                 }
                 else
-                    $.notify(data.message, 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
 
             },
             error: function (data) {
-                $.notify('Lỗi chưa xác định.', 'error');
-
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
             }
         })
     }
@@ -1020,17 +1291,31 @@ $(function () {
             success: function (data) {
 
                 if (data.status == 1) {
-                    $.notify(data.message, 'success');
+                    iziToast.success({
+                        timeout: 1500,
+                        title: 'Thành công',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
                     $(`#_brand_${id}`).hide(200);
                 }
                 else
-                    $.notify(data.message, 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: data.message,
+                        position: 'topRight'
+                    });
 
             },
             error: function (data) {
-                $.notify('Lỗi chưa xác định.', 'error');
-
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
             }
         })
     }
@@ -1085,7 +1370,12 @@ $(function () {
                         $('#lstimage').append(script);
                     },
             error: function (data) {
-                $.notify('Lỗi chưa xác định.', 'error');
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
             }
         })
     }
@@ -1153,7 +1443,12 @@ $(function () {
             });
             },
                 error: function (data) {
-                    $.notify('Lỗi chưa xác định.', 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: 'Lỗi chưa xác định.',
+                        position: 'topRight'
+                    });
 
             }
             })

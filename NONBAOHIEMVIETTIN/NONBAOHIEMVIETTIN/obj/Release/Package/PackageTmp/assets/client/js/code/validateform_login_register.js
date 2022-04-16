@@ -31,17 +31,32 @@ function loginWeb() {
         type: "POST",
         success: function (data) {
             if (data == "-1") {
-                $.notify('Tài khoản hoặc mật khẩu không chính xác.', 'error');
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Tài khoản hoặc mật khẩu không chính xác.',
+                    position: 'topRight'
+                });
                 grecaptcha.reset();
 
             }
             else if (data == "0") {
                 grecaptcha.reset();
-                $.notify('Tài khoản đã bị khoá.Liên hệ admin để giải quyết.', 'error');
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Tài khoản đã bị khoá.Liên hệ admin để giải quyết.',
+                    position: 'topRight'
+                });
             }
             else
                 if (data == "-2")
-                    $.notify('Bạn chưa xác nhận không phải là người máy.', 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: 'Bạn chưa xác nhận không phải là người máy.',
+                        position: 'topRight'
+                    });
                 else {
                     if ($('#remember').is(":checked")) 
                         window.localStorage.setItem('user',
@@ -57,7 +72,12 @@ function loginWeb() {
 
         },
         error: function (data) {
-            $.notify('Lỗi chưa xác định', 'error');
+            iziToast.error({
+                timeout: 1500,
+                title: 'Lỗi',
+                message: 'Lỗi chưa xác định.',
+                position: 'topRight'
+            });
         }
     })
 }
@@ -95,21 +115,41 @@ function register() {
         type: "POST",
         success: function (data) {
             if (data == "-1")
-                $.notify('Đăng ký không thành công.', 'error');
+                iziToast.error({
+                    timeout:1500,
+                    title: 'Lỗi',
+                    message: 'Đăng ký không thành công.',
+                    position:'topRight'
+                });
             else
                 if (data == "0")
-                    $.notify('Tên tài khoản này đã được sử dụng.', 'error');
+                    iziToast.error({
+                        timeout:1500,
+                        title: 'Lỗi',
+                        message: 'Tên tài khoản này đã được sử dụng.',
+                        position:'topRight'
+                    });
 
                 else
                     if (data == "2")
-                        $.notify('Email này đã được sử dụng.', 'error');
+                        iziToast.error({
+                            timeout:1500,
+                            title: 'Lỗi',
+                            message: 'Email này đã được sử dụng.',
+                            position:'topRight'
+                        });
                     else
                         $("#myModal3").modal({ backdrop: "static" });
             enable('#btnregister');
 
         },
         error: function (data) {
-            $.notify('Lỗi chưa xác định.', 'error');
+            iziToast.error({
+                timeout: 1500,
+                title: 'Lỗi',
+                message: 'Lỗi chưa xác định.',
+                position: 'topRight'
+            });
         }
     })
 
@@ -137,7 +177,12 @@ function submit(operation) {
         url += "ma-quen-mat-khau";
     }
     if (code == "")
-        $.notify('Bạn chưa nhập mã xác nhập.', 'warn');
+        iziToast.warning({
+            timeout:1500,
+            title: 'Cảnh báo',
+            message: 'Bạn chưa nhập mã xác nhập.',
+            position:'topRight'
+        });
     else {
         if (operation == 'register')
             disable('#btnsubmitregister');
@@ -153,15 +198,30 @@ function submit(operation) {
             success: function (data) {
                 console.log(data)
                 if (data == "0") {
-                    $.notify('Mã xác nhận không chính xác.', 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: 'Mã xác nhận không chính xác.',
+                        position: 'topRight'
+                    });
                 }
                 else {
                     if (operation == "register") {
-                        $.notify('Đăng kí thành công', 'success');
+                        iziToast.success({
+                            timeout: 1500,
+                            title: 'Thành công',
+                            message: 'Đăng kí thành công.',
+                            position: 'topRight'
+                        });
                         $('#btncloseregister').click();
                     }
                     else {
-                        $.notify('Thành công.Mời bạn đổi mật khẩu mới.', 'success');
+                        iziToast.success({
+                            timeout: 1500,
+                            title: 'Thành công',
+                            message: 'Mời bạn đổi mật khẩu mới.',
+                            position: 'topRight'
+                        });
                         $('#btncloseforgetpass').click();
                         $("#myModal6").modal({ backdrop: "static" });
                     }
@@ -173,7 +233,12 @@ function submit(operation) {
                 }
             },
             error: function (data) {
-                $.notify('Lỗi chưa xác định.', 'error');
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
 
             }
         })
@@ -193,15 +258,30 @@ function sendAgain() {
         success: function (data) {
             console.log(data)
             if (data == "0")
-                $.notify('Lỗi hệ thống không thể gửi mail.', 'error');
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi hệ thống không thể gửi mail.',
+                    position: 'topRight'
+                });
             else
-                $.notify('Mời bạn check email để lấy mã xác nhận mới.Xin cảm ơn.', 'info');
+                iziToast.info({
+                    timeout: 1500,
+                    title: 'Thông tin',
+                    message: 'Mời bạn check email để lấy mã xác nhận mới.Xin cảm ơn.',
+                    position: 'topRight'
+                });
             enable('#btnsendagainregister');
             enable('#btnsendagainforgetpass');
 
         },
         error: function (data) {
-            $.notify('Lỗi chưa xác định', 'error');
+            iziToast.error({
+                timeout: 1500,
+                title: 'Lỗi',
+                message: 'Lỗi chưa xác định.',
+                position: 'topRight'
+            });
         }
     })
 }
@@ -224,20 +304,40 @@ function confirmEmail() {
                 type: "POST",
                 success: function (data) {
             console.log(data)
-                    if (data == "-1")
-                        $.notify('Lỗi hệ thống không thể gửi mail.', 'error');
-                    else if (data == "1") {
-                        $.notify('Mời bạn check email để lấy mã xác nhận mới.Xin cảm ơn.', 'info');
+            if (data == "-1")
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi hệ thống không thể gửi mail.',
+                    position: 'topRight'
+                });
+            else if (data == "1") {
+                iziToast.info({
+                    timeout: 1500,
+                    title: 'Thông tin',
+                    message: 'Mời bạn check email để lấy mã xác nhận mới.Xin cảm ơn.',
+                    position: 'topRight'
+                });
                         $('#btncloseforget').click();
                         $("#myModal5").modal({ backdrop: "static" });
                     }
-                    else
-                        $.notify('Không tồn tại email này.Bạn hãy kiểm tra lại email.', 'error');
+            else
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Không tồn tại email này.Bạn hãy kiểm tra lại email.',
+                    position: 'topRight'
+                });
                     enable('#btnsubmitforget');
 
                 },
-        error: function (data) {
-            $.notify('Lỗi chưa xác định.', 'error');
+                error: function (data) {
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: 'Lỗi chưa xác định.',
+                        position: 'topRight'
+                    });
 
         }
     })
@@ -437,10 +537,20 @@ $(function () {
                     type: "POST",
                     success: function (data) {
                         if (data == "-1")
-                            $.notify('Lỗi hệ thống vui lòng thử lại sau.', 'error');
+                            iziToast.error({
+                                timeout: 1500,
+                                title: 'Lỗi',
+                                message: 'Lỗi hệ thống vui lòng thử lại sau.',
+                                position: 'topRight'
+                            });
             else
-            {
-                            $.notify('Đổi mật khẩu thành công.', 'success');
+                        {
+                            iziToast.success({
+                                timeout: 1500,
+                                title: 'Thành công',
+                                message: 'Đổi mật khẩu thành công.',
+                                position: 'topRight'
+                            });
                             $('#btnclosechangepass').click();
             }
                         enable('#btnsubmitchangepass');
@@ -448,8 +558,12 @@ $(function () {
             },
                 error: function (data) {
                     enable('#btnsubmitchangepass');
-
-                    $.notify('Lỗi chưa xác định.', 'error');
+                    iziToast.error({
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: 'Lỗi chưa xác định.',
+                        position: 'topRight'
+                    });
                 }
         })
     }
