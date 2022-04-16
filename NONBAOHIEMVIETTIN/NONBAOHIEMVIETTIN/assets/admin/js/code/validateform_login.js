@@ -5,8 +5,6 @@ function checkRember() {
         $('#usernameadmin').val(check.username);
         $('#passwordadmin').val(check.password);
         $('#customCheck').prop('checked', true);
-
-
     }
     else {
         $('#usernameadmin').val('');
@@ -33,7 +31,12 @@ function login() {
         type: "POST",
         success: function (data) {
             if (data.status != 1) {
-                $.notify(data.message, 'error');
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: data.message,
+                    position: 'topRight'
+                });
                 if (data.status != -2)
                     grecaptcha.reset();
             }
@@ -52,7 +55,12 @@ function login() {
             enable('.btn-user');
         },
         error: function (data) {
-            $.notify('Lỗi chưa xác định.', 'error');
+            iziToast.error({
+                timeout: 1500,
+                title: 'Lỗi',
+                message: 'Lỗi chưa xác định.',
+                position: 'topRight'
+            });
         }
     })
 

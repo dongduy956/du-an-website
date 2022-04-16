@@ -24,13 +24,12 @@
     <div class="row">
         <div class="col-12">
             <div class="error_form">
-                <h1>Thông báo</h1>
+                <h2 style="color: #00bba6;">Thông báo</h2>
                 @if (ViewBag.idorder != null)
                 {
-                    <h2>Xác nhận đơn hàng @ViewBag.idorder</h2>
+                    <h4>Xác nhận đơn hàng @ViewBag.idorder</h4>
                 }
-                <h2>Lỗi!!!</h2>
-                <p>@ViewBag.result</p>
+                <p>@Html.Raw(ViewBag.result)</p>
                 <a href="/">Trở về trang chủ</a>
             </div>
         </div>

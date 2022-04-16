@@ -9133,7 +9133,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/31/2022 21:24:48</publishTime>
     </File>
     <File Include="Areas/admin/Views/Login/Index.cshtml">
-      <publishTime>03/31/2022 21:55:16</publishTime>
+      <publishTime>04/16/2022 16:26:12</publishTime>
     </File>
     <File Include="Areas/admin/Views/Newstype_admin/Create.cshtml">
       <publishTime>03/07/2022 14:10:12</publishTime>
@@ -9196,7 +9196,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/31/2022 21:16:25</publishTime>
     </File>
     <File Include="Areas/admin/Views/Shared/_Layout.cshtml">
-      <publishTime>03/31/2022 21:18:13</publishTime>
+      <publishTime>04/16/2022 16:26:03</publishTime>
     </File>
     <File Include="Areas/admin/Views/Shared/_Slidebar.cshtml">
       <publishTime>03/07/2022 14:10:12</publishTime>
@@ -12757,10 +12757,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2022 14:10:12</publishTime>
     </File>
     <File Include="assets/admin/js/code/main.js">
-      <publishTime>04/03/2022 23:09:12</publishTime>
+      <publishTime>04/16/2022 16:14:56</publishTime>
     </File>
     <File Include="assets/admin/js/code/validateform_login.js">
-      <publishTime>03/31/2022 22:03:48</publishTime>
+      <publishTime>04/16/2022 15:58:09</publishTime>
     </File>
     <File Include="assets/admin/js/sb-admin-2.js">
       <publishTime>03/07/2022 14:10:12</publishTime>
@@ -18282,6 +18282,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="assets/client/css/hotline.css">
       <publishTime>03/07/2022 14:10:12</publishTime>
     </File>
+    <File Include="assets/client/css/iziToast.min.css">
+      <publishTime>04/16/2022 15:06:13</publishTime>
+    </File>
     <File Include="assets/client/css/jquery-ui.css">
       <publishTime>03/07/2022 14:10:12</publishTime>
     </File>
@@ -18364,16 +18367,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2022 14:10:12</publishTime>
     </File>
     <File Include="assets/client/js/code/bank.js">
-      <publishTime>03/07/2022 14:10:12</publishTime>
+      <publishTime>04/16/2022 16:31:43</publishTime>
     </File>
     <File Include="assets/client/js/code/loginfacebook.js">
-      <publishTime>03/31/2022 12:05:59</publishTime>
+      <publishTime>04/16/2022 15:50:28</publishTime>
     </File>
     <File Include="assets/client/js/code/logingoogle.js">
       <publishTime>03/31/2022 14:58:39</publishTime>
     </File>
     <File Include="assets/client/js/code/main.js">
-      <publishTime>04/11/2022 19:20:08</publishTime>
+      <publishTime>04/16/2022 16:27:19</publishTime>
     </File>
     <File Include="assets/client/js/code/recaptcha.js">
       <publishTime>03/07/2022 14:10:12</publishTime>
@@ -18382,7 +18385,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2022 14:10:12</publishTime>
     </File>
     <File Include="assets/client/js/code/validateform_login_register.js">
-      <publishTime>03/31/2022 21:58:20</publishTime>
+      <publishTime>04/16/2022 15:49:57</publishTime>
+    </File>
+    <File Include="assets/client/js/iziToast.min.js">
+      <publishTime>04/16/2022 15:06:13</publishTime>
     </File>
     <File Include="assets/client/js/jquery-ui.js">
       <publishTime>03/07/2022 14:10:12</publishTime>
@@ -20211,6 +20217,9 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="bin/Facebook.dll">
       <publishTime>02/08/2022 21:05:07</publishTime>
     </File>
+    <File Include="bin/log4net.dll">
+      <publishTime>07/02/2021 18:35:51</publishTime>
+    </File>
     <File Include="bin/Microsoft.AI.Agent.Intercept.dll">
       <publishTime>03/07/2022 14:10:12</publishTime>
     </File>
@@ -20287,7 +20296,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>06/22/2015 11:06:54</publishTime>
     </File>
     <File Include="bin/NONBAOHIEMVIETTIN.dll">
-      <publishTime>04/11/2022 19:21:48</publishTime>
+      <publishTime>04/16/2022 16:35:02</publishTime>
     </File>
     <File Include="bin/Owin.dll">
       <publishTime>03/07/2022 14:10:12</publishTime>
@@ -20506,7 +20515,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2022 14:10:12</publishTime>
     </File>
     <File Include="Scripts/_references.js">
-      <publishTime>03/31/2022 21:40:56</publishTime>
+      <publishTime>04/16/2022 15:09:25</publishTime>
     </File>
     <File Include="Views/Accounts/AccountInfo.cshtml">
       <publishTime>04/01/2022 11:18:00</publishTime>
@@ -20515,10 +20524,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/31/2022 20:58:53</publishTime>
     </File>
     <File Include="Views/Cart/ConfirmOrder.cshtml">
-      <publishTime>03/07/2022 14:10:12</publishTime>
+      <publishTime>04/16/2022 12:04:40</publishTime>
     </File>
     <File Include="Views/Cart/Index.cshtml">
-      <publishTime>04/01/2022 11:24:45</publishTime>
+      <publishTime>04/16/2022 09:49:11</publishTime>
     </File>
     <File Include="Views/Contact/Index.cshtml">
       <publishTime>03/31/2022 21:11:02</publishTime>
@@ -20548,7 +20557,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/31/2022 20:51:08</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>04/11/2022 19:19:18</publishTime>
+      <publishTime>04/16/2022 16:25:49</publishTime>
     </File>
     <File Include="Views/Shared/_Navbar.cshtml">
       <publishTime>03/07/2022 14:10:12</publishTime>
@@ -20569,7 +20578,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2022 14:10:12</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/11/2022 19:22:26</publishTime>
+      <publishTime>04/16/2022 12:10:47</publishTime>
     </File>
   </ItemGroup>
 </Project>
