@@ -3821,10 +3821,76 @@
 	cursor: pointer;
 	z-index: 9;
 }
-.modal-content button span{
-    
+.search_bar{
+	position: relative;
 }
-/*modal css end*/
+.search-list{
+	border-radius: 8px;
+    box-shadow: 0 -4px 32px rgb(0 0 0 / 20%);
+    background-color: white;
+	overflow-y: scroll;
+	max-height: 400px;
+	position: absolute;
+	top: calc(100% + 5px);
+	left: 0;
+	right: 0;
+	z-index: 99;
+	padding: 10px;
+    transform-origin:calc(100% - 20px) 0 ;
+    animation: showHide ease-in .2s;
+    will-change: opacity,transform;
+	display: none;
+}
+.search-list_title{
+	margin-bottom: 5px;
+}
+.search-list_title > span,.search-list_title > i{
+	margin-left: 5px;
+	color: #8c8c8c;
+}
+.search_list_category > li{
+	margin-bottom: 5px;
+}
+.search_list_category > li:nth-child(1){
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid #8c8c8c;
+}
+.search_list_category li > span{
+	text-transform: uppercase;
+	font-weight: bold;
+}
+.search_list_item{
+	margin-top: 5px;
+}
+.search_list_item > li{
+	display: flex;
+	align-items: center;
+	margin-top: 8px;
+}
+.search_list_item> li > img{
+	width: 50px;
+	height: 50px;
+	border-radius:50% ;
+	object-fit: cover;
+	margin-right: 5px;
+}
+.search_list_item > li>a{
+	font-size: 1.5rem;
+}
+@keyframes showHide
+{
+    0%
+    {
+        opacity: 0;
+        transform: scale(0);
+    }
+    100%
+    {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
 
 
 

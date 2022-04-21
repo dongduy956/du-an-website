@@ -531,7 +531,7 @@ $(function () {
                     message: 'Đã thêm vào giỏ hàng.',
                     position: 'topRight'
             });
-                    $('.cart-' + data.id + ' .quantity').text('Số lượng:' + data.quantity);
+                    $('.cart-' +data.id + ' .quantity').text('Số lượng:' + data.quantity);
                     $('#lst-cart .prices').text(data.sumMoney);
                     if (location.pathname == '/yeu-thich')
                         deletewish(ProductId, false);
@@ -640,13 +640,13 @@ $(function () {
                     swal("Thông báo", data.message, "info")
                 }
                     },
-                    error: function (data) {
-                        iziToast.error({
-                            timeout: 1500,
-                            title: 'Lỗi',
-                            message: 'Lỗi chưa xác đinh.',
-                            position: 'topRight'
-                        });
+            error: function (data) {
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác đinh.',
+                    position: 'topRight'
+                });
             }
         });
     }
@@ -710,7 +710,7 @@ $(function () {
                     $('.cart_amount.sum_quantity').text(data.sumQuantity)
                     if (check)
                         iziToast.success({
-                            timeout: 1500,
+                    timeout: 1500,
                             title: 'Thành công',
                             message: 'Xoá sản phẩm thành công.',
                             position: 'topRight'
@@ -730,13 +730,13 @@ $(function () {
                             position: 'topRight'
                         });
                     },
-                    error: function (data) {
-                        iziToast.info({
-                            timeout: 1500,
-                            title: 'Lỗi',
-                            message: 'Lỗi chưa xác định.',
-                            position: 'topRight'
-                        });
+            error: function (data) {
+                iziToast.info({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
             }
 
         });
@@ -790,13 +790,13 @@ $(function () {
                             position: 'topRight'
                         });
                     },
-                    error: function (data) {
-                        iziToast.error({
-                            timeout: 1500,
-                            title: 'Lỗi',
-                            message: 'Lỗi chưa xác định.',
-                            position: 'topRight'
-                        });
+            error: function (data) {
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
             }
 
         });
@@ -820,56 +820,94 @@ $(function () {
         if (e.which == 13)
             search();
     })
-    //Gợi ý tìm kiếm khi nhập vào ô tìm kiếm
-    $("#txtkeyword").autocomplete({
-        minLength: 0,
-        source: function (request, response) {
-            $.ajax({
 
-                dataType: "jsonp",
-                data: {
-                    term: request.term
-                },
-                success: function (data) {
-                    response(JSON.stringify(data.data));
-                }
-            });
+    //hàm gợi ý khi tìm kiếm
+    function suggestSearch(term) {
+        $('.search-list').html(`<div class='loader1'>
+                                                <span class='fas fa-spinner turn _icon'>
+                                                </span>
+                                            </div>`);
+        $('.search-list').css('minHeight', '150px');
 
-            $.ajax({
-                url: "/danh-sach-goi-y",
-                data: JSON.stringify({ term: request.term }),
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                type: "POST",
-                success: function (data) {
-                    response(data.data);
+        $.ajax({
+            url: "/danh-sach-goi-y",
+            data: JSON.stringify({ term}),
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    type: "POST",
+                    success: function (res) {
+                        let data = res.data;
+                        console.log(data);
+                        let html;
+                        if (data == null || data.length == 0)                
+                    html = `<div class='search-list_title'><i class='fa fa-search mr-2'></i><span>Không có kết quả cho '<span class='search_list_keyword'>${term}</span>'</span></div>`;            
+            else {
+                    let li='';
 
-                },
-                error: function (data) {
-                    iziToast.error({
-                        timeout: 1500,
-                        title: 'Lỗi',
-                        message: 'Lỗi chưa xác định.',
-                        position: 'topRight'
+                    data.forEach(ele => {
+                        li += `<li><img src='../../${ele.image}' alt=''><a href='/chi-tiet/${ele.alias}'>${ele.name}</a></li>`;
+
                     });
-                }
+                            html = `<div class='search-list_title'>
+                                                <i class ='fa fa-search mr-2'></i>
+                                                <span>Kết quả cho '<span class='search_list_keyword'>${term}</span>'</span>
+                                            </div>
+                                            <div class='search-list_body'>
 
-            });
-        },
-        focus: function (event, ui) {
-            $("#txtkeyword").val(ui.item.name);
-            return false;
-        },
-        select: function (event, ui) {
-            $("#txtkeyword").val(ui.item.name);
-            return false;
+                                                <ul class='search_list_category'>
+
+                                                    <li>
+                                                        <ul class='search_list_item'>
+                                                            ${li}
+                                                        </ul>
+                                                    </li>
+                                                </ul>
+                                            </div>`;
+                        }
+                        $('.search-list').html(html);
+                        $('.search-list').css('minHeight', 'unset');
+
+                    },
+            error: function (data) {
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
+            }
+
+        });
+    }
+    $('#txtkeyword').keyup(function () {
+        let val = $(this).val();
+        if (val == null || val == '')
+            $('.search-list').css('display', 'none');
+        else {
+            suggestSearch(val);
+            $('.search-list').css('display', 'unset');
         }
     })
-    .autocomplete("instance")._renderItem = function (ul, item) {
-        return $("<li>")
-         .append(`<div> <img style='width:20px;' src='/${item.image}' />  ${item.name} </div>`)
-        .appendTo(ul);
-    };
+    $(document).click(function (e) {
+        let container = $(".search-list");
+        let container2 = $(".search_bar");
+
+        if ((!container.is(e.target) && container.has(e.target).length === 0) && (!container2.is(e.target) && container2.has(e.target).length === 0)) {
+            $('.search-list').css('display', 'none');
+        }
+    });
+    $('#txtkeyword')
+        .focus(function () {
+            let val = $(this).val();
+            if (val == null || val == '')
+                $('.search-list').css('display', 'none');
+            else {
+                suggestSearch(val);
+                $('.search-list').css('display', 'unset');
+            }
+
+        });
+ 
     //Đánh giá sản phẩm khi hover vào các sao sẽ tự sáng lên
     $('#rate li').each(function (index, element) {
         $(element).find('a').mouseenter(function (e) {
@@ -946,7 +984,7 @@ $(function () {
                     $('#rate li').each(function (index, element) {
                         if (index != 0)
                             $(element).find('a').removeClass('ratting active');
-                    })
+            })
 
                     var img = '';
                     if (data.issocial == 0)
@@ -992,13 +1030,13 @@ $(function () {
                     });
                         enable('#btnrate');
                     },
-                    error: function (data) {
-                        iziToast.error({
-                            timeout: 1500,
-                            title: 'Lỗi',
-                            message: 'Lỗi chưa xác định.',
-                            position: 'topRight'
-                        });
+            error: function (data) {
+                iziToast.error({
+                    timeout: 1500,
+                    title: 'Lỗi',
+                    message: 'Lỗi chưa xác định.',
+                    position: 'topRight'
+                });
 
             }
 
@@ -1037,12 +1075,12 @@ $(function () {
                     });
                 else
                     if (send.phone == '')
-                          iziToast.warning({
-                        timeout: 1500,
-                        title: 'Cảnh báo',
-                        message: 'Số điện thoại không được rỗng.',
-                        position: 'topRight'
-                    });
+                        iziToast.warning({
+                            timeout: 1500,
+                            title: 'Cảnh báo',
+                            message: 'Số điện thoại không được rỗng.',
+                            position: 'topRight'
+                        });
                     else
                         if (send.message == '')
                             iziToast.warning({
@@ -1064,18 +1102,18 @@ $(function () {
 
                                             if (data.status == 1) {
                                                 iziToast.success({
-                                                    timeout: 1500,
-                                                    title: 'Thành công',
-                                                    message: data.message,
-                                                    position: 'topRight'
-                                                });
+                                        timeout: 1500,
+                                        title: 'Thành công',
+                                        message: data.message,
+                                        position: 'topRight'
+                                });
 
                                         $('#name').val('');
                                         $('#email').val('');
                                         $('#subject').val('');
-                                        $('#phone').val('');
-                                        CKEDITOR.instances['message'].setData('');
-                                }
+                                                $('#phone').val('');
+                                                CKEDITOR.instances['message'].setData('');
+                                            }
                                             else
                                                 iziToast.error({
                                                     timeout: 1500,
@@ -1085,13 +1123,13 @@ $(function () {
                                                 });
 
                                         },
-                                        error: function (data) {
-                                            iziToast.error({
-                                                timeout: 1500,
-                                                title: 'Lỗi',
-                                                message: 'Lỗi chưa xác định.',
-                                                position: 'topRight'
-                                            });
+                                error: function (data) {
+                                    iziToast.error({
+                                        timeout: 1500,
+                                        title: 'Lỗi',
+                                        message: 'Lỗi chưa xác định.',
+                                        position: 'topRight'
+                                    });
 
                                 }
 
@@ -1129,37 +1167,37 @@ $(function () {
                                 enable('#btnsub');
                                 if (data.status == 1) {
                                     iziToast.success({
-                                        timeout: 1500,
-                                        title: 'Thành công',
-                                        message: data.message,
-                                        position: 'topRight'
-                                    });
+                            timeout: 1500,
+                            title: 'Thành công',
+                            message: data.message,
+                            position: 'topRight'
+                    });
                             $('#emailsub').val('');
                     }
-                                else
+                    else
                                     iziToast.error({
-                                        timeout: 1500,
-                                        title: 'Lỗi',
-                                        message: data.message,
-                                        position: 'topRight'
-                                    });
-                    },
-                            error: function (data) {
-                                iziToast.error({
-                                    timeout: 1500,
-                                    title: 'Lỗi',
-                                    message: 'Lỗi chưa xác định.',
-                                    position: 'topRight'
-                                });
-
-                    }
-
+                        timeout: 1500,
+                        title: 'Lỗi',
+                        message: data.message,
+                        position: 'topRight'
                     });
-                    }
-                    })
+                    },
+                        error: function (data) {
+                            iziToast.error({
+                                timeout: 1500,
+                                title: 'Lỗi',
+                                message: 'Lỗi chưa xác định.',
+                                position: 'topRight'
+                            });
+
+                        }
+
+                });
+            }
+    })
     $('#btninfoacc').click(function () {
         location.href = '/thong-tin-tai-khoan';
-                    })
+    })
     //Hàm update tài khoản
     function updateAccount() {
         var acc = new Object();
@@ -1177,11 +1215,11 @@ $(function () {
         acc.fullname = $('#fullnameupdate').val();
         if (acc.fullname == "")
             iziToast.warning({
-                   timeout: 1500,
-                   title: 'Cảnh báo',
-                   message: 'Họ tên không được rỗng.',
-                   position: 'topRight'
-                   });
+                timeout: 1500,
+                title: 'Cảnh báo',
+                message: 'Họ tên không được rỗng.',
+                position: 'topRight'
+            });
         else
             if (acc.email == "")
                 iziToast.warning({
@@ -1208,12 +1246,12 @@ $(function () {
                         });
                     else
                         if (!validatePhone(acc.phone))
-                               iziToast.warning({
-                            timeout: 1500,
-                            title: 'Cảnh báo',
-                            message: 'Số điện thoại không đúng định dạng.',
-                            position: 'topRight'
-                        });
+                            iziToast.warning({
+                                timeout: 1500,
+                                title: 'Cảnh báo',
+                                message: 'Số điện thoại không đúng định dạng.',
+                                position: 'topRight'
+                            });
                         else
                             if (acc.address == "")
                                 iziToast.warning({
@@ -1235,35 +1273,35 @@ $(function () {
                                             success: function (data) {
                                                 if (data.status == 1) {
                                                     iziToast.success({
-                                                        timeout: 1500,
-                                                        title: 'Thành công',
-                                                        message: data.message,
-                                                        position: 'topRight'
-                                                    });
+                                            timeout: 1500,
+                                            title: 'Thành công',
+                                            message: data.message,
+                                            position: 'topRight'
+                                    });
                                             $('#accountname').text(data.fullname);
                                             $('#accounthome img').attr('src', '/' +data.image);
                                             $('#imgupdate').attr('src', '/' +data.image);
 
 
                                     }
-                                                else
+                                    else
                                                     iziToast.error({
                                                         timeout: 1500,
                                                         title: 'Lỗi',
                                                         message: data.message,
                                                         position: 'topRight'
                                                     });
-                                        enable('#btnsaveaccinfo');
+                                                enable('#btnsaveaccinfo');
 
-                                    },
-                                            error: function (data) {
-                                                iziToast.error({
-                                                    timeout: 1500,
-                                                    title: 'Lỗi',
-                                                    message: 'Lỗi chưa xác định.',
-                                                    position: 'topRight'
-                                                });
-                                        }
+                                            },
+                                    error: function (data) {
+                                        iziToast.error({
+                                            timeout: 1500,
+                                            title: 'Lỗi',
+                                            message: 'Lỗi chưa xác định.',
+                                            position: 'topRight'
+                                        });
+                                    }
                                 })
                             }
 

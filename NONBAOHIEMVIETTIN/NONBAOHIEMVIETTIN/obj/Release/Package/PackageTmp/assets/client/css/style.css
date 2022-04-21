@@ -4468,7 +4468,79 @@ button[disabled] {
     button[disabled]#btnrate, button[disabled]#btnsub, button[disabled]#btnsendcontact {
         background-color: #333;
     }
-
 .login_submit button[disabled]:hover, #btnbill:hover, #btnsub:hover, #btnrate:hover, #btnsendcontact:hover {
     background-color: #333;
+}
+.search_bar{
+	position: relative;
+}
+.search-list{
+	border-radius: 8px;
+    box-shadow: 0 -4px 32px rgb(0 0 0 / 20%);
+    background-color: white;
+	overflow-y: scroll;
+	max-height: 400px;
+	min-height: 150px;
+	position: absolute;
+	top: calc(100% + 5px);
+	left: 0;
+	right: 0;
+	z-index: 99;
+	padding: 10px;
+    transform-origin:calc(100% - 20px) 0 ;
+    animation: showHide ease-in .2s;
+    will-change: opacity,transform;
+	display: none;
+}
+
+
+.search_list_category > li{
+	margin-bottom: 5px;
+}
+
+.search_list_category li > span{
+	text-transform: uppercase;
+	font-weight: bold;
+}
+.search_list_item{
+	margin-top: 5px;
+}
+.search_list_item > li{
+	display: flex;
+	align-items: center;
+	margin-top: 8px;
+   border-bottom:1px solid #ddd;
+}
+.search_list_item > li:last-child
+{
+   border-bottom:unset;
+
+}
+.search_list_item> li > img{
+	width: 30px;
+	height: 30px;
+	border-radius:50% ;
+	object-fit: cover;
+	margin-right: 5px;
+}
+.search_list_item > li>a{
+    overflow: hidden;
+    text-align: left;
+    display: block;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+@keyframes showHide
+{
+    0%
+    {
+        opacity: 0;
+        transform: scale(0);
+    }
+    100%
+    {
+        opacity: 1;
+        transform: scale(1);
+    }
 }

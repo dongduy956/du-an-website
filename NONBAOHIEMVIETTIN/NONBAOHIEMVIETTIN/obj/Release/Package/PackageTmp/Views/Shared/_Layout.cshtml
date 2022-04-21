@@ -4,7 +4,7 @@
     var acc = Session["account"] as accounts;
     var cart = Session["cartSession"] as List<CartItem>;
     var aboutus = db.contact.SingleOrDefault(x => x.display == true);
-    TempData["Version"] = "18.5";
+    TempData["Version"] = "19";
 }
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -201,8 +201,11 @@
                                 <div class="header_right_info">
                                     <div class="search_bar">
                                         <div class="form">
-                                            <input name="keyword" id="txtkeyword" placeholder="Tìm kiếm..." type="text">
+                                            <input autocomplete="off" name="keyword" id="txtkeyword" placeholder="Tìm kiếm..." type="text">
                                             <button id="btnsearch" type="submit"><i class="fa fa-search"></i></button>
+                                        </div>
+                                        <div class="search-list">
+                                                                                      
                                         </div>
                                     </div>
                                     <div class="shopping_cart">

@@ -65,12 +65,15 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 data = "",
                 status = false
             }, JsonRequestBehavior.AllowGet);
-            var data = db.products.Where(x => (x.category.name.ToLower().Contains(term)
-              || x.production.name.ToLower().Contains(term)
-              || x.name.ToLower().Contains(term)
-              || x.groupproduct.name.ToLower().Contains(term)
+            List<string> categoryName = new List<string>();
+
+            var data = db.products.Where(x => (x.category.name.ToLower().StartsWith(term)
+              || x.production.name.ToLower().StartsWith(term)
+              || x.name.ToLower().StartsWith(term)
+              || x.groupproduct.name.ToLower().StartsWith(term)
               || x.id.ToString().ToLower().Equals(term)
-              ) && x.isdelete == false && x.status == true).Select(x=>new { x.name,x.image}).ToList();
+              ) && x.isdelete == false && x.status == true).Select(x=>new {x.name,x.image,x.alias}).ToList();
+           
             return Json(new
             {
                 data=data,
@@ -84,10 +87,10 @@ namespace NONBAOHIEMVIETTIN.Controllers
             try
             {
                 string keyword = Request["tukhoa"].ToString().ToLower();
-                var temp = db.products.Where(x => (x.category.name.ToLower().Contains(keyword)
-                || x.production.name.ToLower().Contains(keyword)
-                || x.name.ToLower().Contains(keyword)
-                || x.groupproduct.name.ToLower().Contains(keyword)
+                var temp = db.products.Where(x => (x.category.name.ToLower().StartsWith(keyword)
+                || x.production.name.ToLower().StartsWith(keyword)
+                || x.name.ToLower().StartsWith(keyword)
+                || x.groupproduct.name.ToLower().StartsWith(keyword)
                 || x.id.ToString().ToLower().Equals(keyword)
                 ) && x.isdelete == false&&x.status==true).OrderByDescending(x => x.id).ToList();
                 var products = temp.ToPagedList(page, pageSize);
