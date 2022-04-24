@@ -3224,6 +3224,8 @@
     <Content Include="assets\images\banner\banner1.jpg" />
     <Content Include="assets\images\banner\banner2.jpg" />
     <Content Include="assets\images\logo\giphy.gif" />
+    <Content Include="assets\images\ship\nav-left-teal.png" />
+    <Content Include="assets\images\ship\nav-right-teal.png" />
     <Content Include="assets\images\slider\slider1.jpg" />
     <Content Include="assets\images\slider\slider2.jpg" />
     <Content Include="assets\images\slider\slider3.jpg" />

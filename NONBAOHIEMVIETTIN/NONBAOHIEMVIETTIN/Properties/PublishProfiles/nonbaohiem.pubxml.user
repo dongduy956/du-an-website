@@ -18301,7 +18301,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2022 14:10:12</publishTime>
     </File>
     <File Include="assets/client/css/style.css">
-      <publishTime>04/21/2022 22:08:09</publishTime>
+      <publishTime>04/24/2022 20:10:00</publishTime>
     </File>
     <File Include="assets/client/fonts/fontawesome-webfont-1.bin">
       <publishTime>03/07/2022 14:10:12</publishTime>
@@ -18394,7 +18394,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2022 14:10:12</publishTime>
     </File>
     <File Include="assets/client/js/main.js">
-      <publishTime>03/07/2022 14:10:12</publishTime>
+      <publishTime>04/24/2022 20:10:47</publishTime>
     </File>
     <File Include="assets/client/js/notify.min.js">
       <publishTime>03/07/2022 14:10:12</publishTime>
@@ -20121,6 +20121,12 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="assets/images/nonbaohiem/Yohe977.jpg">
       <publishTime>03/07/2022 14:10:12</publishTime>
     </File>
+    <File Include="assets/images/ship/nav-left-teal.png">
+      <publishTime>03/07/2022 14:10:12</publishTime>
+    </File>
+    <File Include="assets/images/ship/nav-right-teal.png">
+      <publishTime>03/07/2022 14:10:12</publishTime>
+    </File>
     <File Include="assets/images/slider/slider1.jpg">
       <publishTime>03/07/2022 14:10:12</publishTime>
     </File>
@@ -20296,7 +20302,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/16/2022 18:46:05</publishTime>
     </File>
     <File Include="bin/NONBAOHIEMVIETTIN.dll">
-      <publishTime>04/21/2022 22:10:32</publishTime>
+      <publishTime>04/24/2022 20:12:45</publishTime>
     </File>
     <File Include="bin/Owin.dll">
       <publishTime>03/07/2022 14:10:12</publishTime>
@@ -20557,7 +20563,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/31/2022 20:51:08</publishTime>
     </File>
     <File Include="Views/Shared/_Layout.cshtml">
-      <publishTime>04/21/2022 22:10:02</publishTime>
+      <publishTime>04/24/2022 20:11:35</publishTime>
     </File>
     <File Include="Views/Shared/_Navbar.cshtml">
       <publishTime>03/07/2022 14:10:12</publishTime>

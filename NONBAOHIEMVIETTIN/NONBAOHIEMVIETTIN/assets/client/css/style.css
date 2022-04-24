@@ -347,7 +347,7 @@
         content: "";
         width: 20px;
         height: 64px;
-        background: url(../img/ship/nav-left-teal.png) no-repeat scroll center center;
+        background: url(../../images/ship/nav-left-teal.png) no-repeat scroll center center;
         left: -16px;
         top: -1px;
     }
@@ -357,7 +357,7 @@
         content: "";
         width: 20px;
         height: 64px;
-        background: url(../img/ship/nav-right-teal.png) no-repeat scroll center center;
+        background: url(../../images/ship/nav-right-teal.png) no-repeat scroll center center;
         right: -16px;
         top: -1px;
     }
