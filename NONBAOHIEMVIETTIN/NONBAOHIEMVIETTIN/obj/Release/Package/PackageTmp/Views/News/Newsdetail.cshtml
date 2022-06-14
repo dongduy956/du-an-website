@@ -2,7 +2,7 @@
 @model news
 @{
     ViewBag.Title = Model.title;
-    ViewBag.Description = Html.Raw(Model.content);
+    ViewBag.Description = Model.content;
     ViewBag.Url = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + HttpContext.Current.Request.RawUrl.ToString().Trim().ToLower();
     ViewBag.Image = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + "/"+Model.image;
 }
@@ -22,8 +22,8 @@
 </div>
 <!--breadcrumbs area end-->
 
-<div style="padding:10px">
-    <img src="/@Model.image" />
+<div style="padding:20px 50px">
+    @*<img class="mb-2" src="/@Model.image" />*@
     <h3>@Model.title</h3>
     @Html.Raw(Model.content)
 </div>

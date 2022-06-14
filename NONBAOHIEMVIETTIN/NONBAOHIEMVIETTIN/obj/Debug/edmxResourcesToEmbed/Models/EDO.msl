@@ -4,6 +4,7 @@
     <EntitySetMapping Name="accounts">
       <EntityTypeMapping TypeName="nonbaohiemviettinModel.accounts">
         <MappingFragment StoreEntitySet="accounts">
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="idrole" ColumnName="idrole" />
           <ScalarProperty Name="username" ColumnName="username" />
@@ -89,24 +90,6 @@
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="name" ColumnName="name" />
           <ScalarProperty Name="alias" ColumnName="alias" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="order">
-      <EntityTypeMapping TypeName="nonbaohiemviettinModel.order">
-        <MappingFragment StoreEntitySet="order">
-          <ScalarProperty Name="paymentmethod" ColumnName="paymentmethod" />
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="idaccount" ColumnName="idaccount" />
-          <ScalarProperty Name="createdate" ColumnName="createdate" />
-          <ScalarProperty Name="email" ColumnName="email" />
-          <ScalarProperty Name="fullname" ColumnName="fullname" />
-          <ScalarProperty Name="address" ColumnName="address" />
-          <ScalarProperty Name="phone" ColumnName="phone" />
-          <ScalarProperty Name="status" ColumnName="status" />
-          <ScalarProperty Name="statuspay" ColumnName="statuspay" />
-          <ScalarProperty Name="total" ColumnName="total" />
-          <ScalarProperty Name="note" ColumnName="note" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -225,6 +208,24 @@
           <ScalarProperty Name="image" ColumnName="image" />
           <ScalarProperty Name="alias" ColumnName="alias" />
           <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="order">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.order">
+        <MappingFragment StoreEntitySet="order">
+          <ScalarProperty Name="paymentmethod" ColumnName="paymentmethod" />
+          <ScalarProperty Name="note" ColumnName="note" />
+          <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="statuspay" ColumnName="statuspay" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="phone" ColumnName="phone" />
+          <ScalarProperty Name="address" ColumnName="address" />
+          <ScalarProperty Name="fullname" ColumnName="fullname" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="createdate" ColumnName="createdate" />
+          <ScalarProperty Name="idaccount" ColumnName="idaccount" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>

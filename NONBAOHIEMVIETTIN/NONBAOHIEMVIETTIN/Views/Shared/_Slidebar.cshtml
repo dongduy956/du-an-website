@@ -1,7 +1,7 @@
 ﻿@using NONBAOHIEMVIETTIN.Models
 @{
     var db = new nonbaohiemviettinEntities();
-
+    var ac_cus = ViewData["ac_cus"] as List<ItemActivityCustomer>;
 }
 <div class="col-lg-3 col-md-8 col-12">
     <!--sidebar banner-->
@@ -9,12 +9,43 @@
         <div class="banner_img mb-35">
             <a><img src="~/assets/images/banner/banner1.jpg" alt=""></a>
         </div>
-        <div class="banner_img">
-            <a ><img src="~/assets/images/banner/banner2.jpg" alt=""></a>
+        <div class="banner_img mb-35" style="height:200px">
+
+            <div class="block_title">
+                <h3><a>Hoạt động gần đây</a></h3>
+            </div>
+            <marquee scrollamount="2" class="p-2 mt-2" width="100%" direction="down" height="100%">
+                <ul style="list-style:circle">
+                    @foreach (var item in ac_cus.OrderByDescending(x => x.Create_date).Take(5))
+                    {
+                        if (item.Id_order == -1)
+                        {
+                            <li>
+                                <span class="title_account">@(db.accounts.FirstOrDefault(x=>x.id==item.Id_account).fullname)</span>
+                                <span class="title_title">vừa trở thành </span>
+                                <span class="title_money"> khách hàng mới </span>
+                                <span class="title_title">của nonbaohiem.ml.</span>
+                            </li>
+                        }
+                        else
+                        {
+                            <li>
+                                <span class="title_account">@(db.accounts.FirstOrDefault(x => x.id == item.Id_account).fullname)</span>
+                                <span class="title_title">vừa đặt hàng với mã </span>
+                                <span class="title_money">@item.Id_order</span>
+                                <span class="title_title">và tổng tiền là </span>
+                                <span class="title_money">@(Libary.Instances.convertVND(db.order.FirstOrDefault(x=>x.id==item.Id_order).total.ToString()))</span>
+                                <span class="title_title">.</span>
+                            </li>
+                        }
+                    }
+                   
+                </ul>
+            </marquee>
         </div>
     </div>
     <!--sidebar banner end-->
-   @RenderPage("~/Views/Shared/_Slidebar-temp.cshtml")
+    @RenderPage("~/Views/Shared/_Slidebar-temp.cshtml")
     <!--newsletter block start-->
     <div class="sidebar_widget newsletter mb-35">
         <div class="block_title">
@@ -42,5 +73,5 @@
                 location.href = '/' + dt;
             })
         })
-</script>
-    }
+    </script>
+}

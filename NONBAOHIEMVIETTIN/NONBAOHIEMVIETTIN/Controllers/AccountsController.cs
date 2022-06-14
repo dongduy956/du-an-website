@@ -45,7 +45,8 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 status = true,
                 password = "",
                 idrole = 1,
-                alias = "tai-khoan-" + (db.accounts.OrderByDescending(x => x.id).FirstOrDefault().id + 1)
+                alias = "tai-khoan-" + (db.accounts.OrderByDescending(x => x.id).FirstOrDefault().id + 1),
+                create_date = DateTime.Now
 
             };
             bool check = false;
@@ -88,6 +89,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
             acc.idrole = 1;
             acc.status = true;
             acc.alias = "tai-khoan-" + (db.accounts.OrderByDescending(x => x.id).FirstOrDefault().id + 1);
+            acc.create_date = DateTime.Now;
             bool check = false;
             var accTemp = db.accounts.SingleOrDefault(x => x.email.Equals(acc.email) && x.issocial == 2);
             if (accTemp == null)
@@ -466,7 +468,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
 
 </html>";
                 #endregion
-                if (Libary.Instances.sendMail("Quên mật khẩu",acc.email, body))
+                if (Libary.Instances.sendMail("Quên mật khẩu", acc.email, body))
                 {
                     Session["acc"] = acc;
                     return Json(1);
@@ -594,10 +596,10 @@ namespace NONBAOHIEMVIETTIN.Controllers
 </html>";
                 #endregion
 
-                if(Libary.Instances.sendMail("Gửi lại mã kích hoạt",acc.email, body))
-                return Json(1);
+                if (Libary.Instances.sendMail("Gửi lại mã kích hoạt", acc.email, body))
+                    return Json(1);
                 else
-                return Json(0);
+                    return Json(0);
 
             }
             catch (Exception ex)
@@ -618,6 +620,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 acc.idrole = 1;
                 acc.status = true;
                 acc.issocial = 0;
+                acc.create_date = DateTime.Now;
                 db.accounts.Add(acc);
                 db.SaveChanges();
                 Session["acc"] = Session["code"] = null;

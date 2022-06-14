@@ -25,7 +25,26 @@ namespace NONBAOHIEMVIETTIN.Controllers
         nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
         [HandleError]
         public ActionResult Index()
-        {           
+        {
+            List<ItemActivityCustomer> lstAcCus = new List<ItemActivityCustomer>();
+            foreach(var item in db.accounts)
+            {
+                lstAcCus.Add(new ItemActivityCustomer() {
+                    Id_order=-1,
+                    Id_account=item.id,
+                    Create_date=(DateTime)item.create_date
+                });
+            }
+            foreach (var item in db.order)
+            {
+                lstAcCus.Add(new ItemActivityCustomer()
+                {
+                    Id_order = item.id,
+                    Id_account = (int)item.idaccount,
+                    Create_date = (DateTime)item.createdate
+                });
+            }
+            ViewData["ac_cus"] = lstAcCus;
             return View(db.products.Where(x=> x.isdelete == false && x.status == true).ToList());
 
         }

@@ -135,6 +135,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     accounts.password = Libary.Instances.EncodeMD5("123");
                     accounts.issocial = 0;
                     accounts.alias = "tai-khoan-" + (db.accounts.OrderByDescending(x => x.id).FirstOrDefault().id + 1);
+                    accounts.create_date = DateTime.Now;
                     db.accounts.Add(accounts);
                     db.SaveChanges();
                     TempData["status"] = "Tạo tài khoản thành công. Mật khẩu mặc định là 123!!";
@@ -168,7 +169,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,idrole,alias,username,password,image,fullname,email,phone,address,status,issocial")] accounts accounts)
+        public ActionResult Edit([Bind(Include = "id,idrole,alias,username,password,image,fullname,email,phone,address,status,issocial,create_date")] accounts accounts)
         {
             if (ModelState.IsValid)
             {

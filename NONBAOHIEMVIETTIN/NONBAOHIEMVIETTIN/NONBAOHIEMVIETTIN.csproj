@@ -286,6 +286,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IntroduceController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Models\ItemActivityCustomer.cs" />
     <Compile Include="Models\RecaptchaResult.cs" />
     <Compile Include="Models\SubdomainRoute.cs" />
     <Compile Include="Models\SubdomainRouteConstraint.cs" />
@@ -298,7 +299,6 @@
     <Compile Include="Models\accounts.cs">
       <DependentUpon>EDO.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\brand.cs">
       <DependentUpon>EDO.tt</DependentUpon>
     </Compile>
@@ -336,7 +336,6 @@
     <Compile Include="Models\introduce.cs">
       <DependentUpon>EDO.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\news.cs">
       <DependentUpon>EDO.tt</DependentUpon>
     </Compile>

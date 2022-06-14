@@ -9073,10 +9073,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2022 14:10:12</publishTime>
     </File>
     <File Include="Areas/admin/Views/Accounts_admin/Edit.cshtml">
-      <publishTime>03/31/2022 21:26:33</publishTime>
+      <publishTime>06/14/2022 17:09:26</publishTime>
     </File>
     <File Include="Areas/admin/Views/Accounts_admin/Index.cshtml">
-      <publishTime>03/07/2022 14:10:12</publishTime>
+      <publishTime>06/14/2022 17:10:31</publishTime>
     </File>
     <File Include="Areas/admin/Views/Brand_admin/Create.cshtml">
       <publishTime>03/07/2022 14:10:12</publishTime>
@@ -9085,7 +9085,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2022 14:10:12</publishTime>
     </File>
     <File Include="Areas/admin/Views/Brand_admin/Index.cshtml">
-      <publishTime>03/07/2022 14:10:12</publishTime>
+      <publishTime>06/10/2022 12:12:39</publishTime>
     </File>
     <File Include="Areas/admin/Views/Category_admin/Create.cshtml">
       <publishTime>03/07/2022 14:10:12</publishTime>
@@ -9154,7 +9154,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2022 14:10:12</publishTime>
     </File>
     <File Include="Areas/admin/Views/Order_admin/Index.cshtml">
-      <publishTime>04/03/2022 23:30:37</publishTime>
+      <publishTime>06/14/2022 17:17:07</publishTime>
     </File>
     <File Include="Areas/admin/Views/Production_admin/Create.cshtml">
       <publishTime>03/07/2022 14:10:12</publishTime>
@@ -12757,7 +12757,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2022 14:10:12</publishTime>
     </File>
     <File Include="assets/admin/js/code/main.js">
-      <publishTime>04/16/2022 18:46:05</publishTime>
+      <publishTime>04/24/2022 21:47:37</publishTime>
     </File>
     <File Include="assets/admin/js/code/validateform_login.js">
       <publishTime>04/16/2022 18:46:05</publishTime>
@@ -18301,7 +18301,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2022 14:10:12</publishTime>
     </File>
     <File Include="assets/client/css/style.css">
-      <publishTime>04/24/2022 20:10:00</publishTime>
+      <publishTime>06/14/2022 18:37:57</publishTime>
     </File>
     <File Include="assets/client/fonts/fontawesome-webfont-1.bin">
       <publishTime>03/07/2022 14:10:12</publishTime>
@@ -20302,7 +20302,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>04/16/2022 18:46:05</publishTime>
     </File>
     <File Include="bin/NONBAOHIEMVIETTIN.dll">
-      <publishTime>04/24/2022 20:12:45</publishTime>
+      <publishTime>06/14/2022 18:59:08</publishTime>
     </File>
     <File Include="bin/Owin.dll">
       <publishTime>03/07/2022 14:10:12</publishTime>
@@ -20461,7 +20461,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2022 14:10:12</publishTime>
     </File>
     <File Include="Models/EDO.edmx.diagram">
-      <publishTime>03/07/2022 14:10:12</publishTime>
+      <publishTime>06/14/2022 17:20:31</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>04/16/2022 18:46:05</publishTime>
@@ -20542,7 +20542,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2022 14:10:12</publishTime>
     </File>
     <File Include="Views/Home/Index.cshtml">
-      <publishTime>04/03/2022 12:33:18</publishTime>
+      <publishTime>06/14/2022 18:46:31</publishTime>
     </File>
     <File Include="Views/Introduce/Index.cshtml">
       <publishTime>03/07/2022 14:10:12</publishTime>
@@ -20551,7 +20551,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2022 14:10:12</publishTime>
     </File>
     <File Include="Views/News/Newsdetail.cshtml">
-      <publishTime>03/07/2022 14:10:12</publishTime>
+      <publishTime>04/24/2022 21:55:55</publishTime>
     </File>
     <File Include="Views/Products/Index.cshtml">
       <publishTime>04/01/2022 11:17:59</publishTime>
@@ -20569,10 +20569,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2022 14:10:12</publishTime>
     </File>
     <File Include="Views/Shared/_Slidebar-temp.cshtml">
-      <publishTime>04/01/2022 11:17:59</publishTime>
+      <publishTime>06/14/2022 18:27:29</publishTime>
     </File>
     <File Include="Views/Shared/_Slidebar.cshtml">
-      <publishTime>03/07/2022 14:10:12</publishTime>
+      <publishTime>06/14/2022 18:56:24</publishTime>
     </File>
     <File Include="Views/Web.config">
       <publishTime>03/07/2022 14:10:12</publishTime>
@@ -20584,7 +20584,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/07/2022 14:10:12</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>04/16/2022 18:46:05</publishTime>
+      <publishTime>06/14/2022 18:59:45</publishTime>
     </File>
   </ItemGroup>
 </Project>

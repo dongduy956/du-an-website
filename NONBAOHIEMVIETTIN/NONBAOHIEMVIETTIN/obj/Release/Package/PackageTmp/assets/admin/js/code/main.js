@@ -529,7 +529,7 @@ $(function () {
                         message: data.message,
                         position: 'topRight'
                     });
-                    ele.attr('style', 'display:none !important');
+                    //ele.attr('style', 'display:none !important');
                     $(`#_news_${id}`).hide(200);
                 }
                 else

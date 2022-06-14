@@ -102,7 +102,7 @@
                                     <div class="modal-body">
                                         <p><strong>Mã:</strong> @item.id</p>
                                         <p><strong>Tên tài khoản:</strong> @item.accounts.username</p>
-                                        <p><strong>Ngày đặt: </strong> @DateTime.Parse(item.createdate.ToString()).ToShortDateString()</p>
+                                        <p><strong>Ngày đặt: </strong> @item.createdate</p>
                                         <p><strong>Email:</strong> <a href="mailto:@item.email">@item.email</a></p>
                                         <p><strong>Họ tên khách hàng:</strong> @item.fullname</p>
                                         <p><strong>Địa chỉ:</strong> @item.address</p>

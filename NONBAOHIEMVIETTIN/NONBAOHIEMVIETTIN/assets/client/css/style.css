@@ -4544,3 +4544,12 @@ button[disabled] {
         transform: scale(1);
     }
 }
+.title_title{
+    color:#888;
+}
+.title_account{
+    color:#00BBA6;
+}
+.title_money{
+    color:#ea3a3c;
+}

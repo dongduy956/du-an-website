@@ -204,7 +204,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
 
         public JsonResult Pay(order order, string PaymentMethod)
         {
-            order.createdate = DateTime.Parse(DateTime.Now.ToShortDateString());
+            order.createdate = DateTime.Now;
             order.status = false;
             order.idaccount = (Session["account"] as accounts).id;
             var cart = Session[cartSession] as List<CartItem>;
@@ -458,7 +458,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 var idorder = orderCurrent == null ? 1 : (orderCurrent.id + 1);
 
                 //Save order to db
-                order.createdate = DateTime.Parse(DateTime.Now.ToShortDateString());
+                order.createdate = DateTime.Now;
                 order.status = false;
                 order.idaccount = (Session["account"] as accounts).id;
                 order.total = cart.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price));

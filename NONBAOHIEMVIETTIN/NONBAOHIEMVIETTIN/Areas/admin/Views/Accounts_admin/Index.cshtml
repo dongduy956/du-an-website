@@ -125,6 +125,7 @@
                                         <p><strong>Địa chỉ:</strong> @item.address</p>
                                         <p><strong>Thuộc quyền:</strong> @item.role.name</p>
                                         <p><strong>Số điện thoại:</strong> @item.phone</p>
+                                        <p><strong>Ngày tạo:</strong> @item.create_date</p>
                                         <p><strong>Thuộc loại tài khoản:</strong> @(item.issocial == 0 ? "Tạo từ website" : item.issocial == 1 ? "Tài khoản google" : "Tài khoản facebook")</p>
                                         <p><strong>Hình ảnh:</strong> <img src="@(item.issocial==0?"/"+item.image:item.image)" class="img-product" /></p>
                                         <p><strong>Đã đặt hàng:</strong> @item.order.Count đơn hàng</p>

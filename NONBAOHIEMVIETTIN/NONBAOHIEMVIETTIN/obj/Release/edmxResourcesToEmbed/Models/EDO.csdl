@@ -17,9 +17,10 @@
     <Property Name="issocial" Type="Int32" />
     <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="role" Relationship="Self.fk_accounts_role" FromRole="accounts" ToRole="role" />
-    <NavigationProperty Name="order" Relationship="Self.fk_order_account" FromRole="accounts" ToRole="order" />
     <NavigationProperty Name="rate" Relationship="Self.fk_rate_accounts" FromRole="accounts" ToRole="rate" />
     <NavigationProperty Name="receipt" Relationship="nonbaohiemviettinModel.fk_receipt_accounts" FromRole="accounts" ToRole="receipt" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="order" Relationship="nonbaohiemviettinModel.fk_order_account" FromRole="accounts" ToRole="order" />
   </EntityType>
   <EntityType Name="category">
     <Key>
@@ -92,25 +93,6 @@
     <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="news" Relationship="Self.fk_news_newstype" FromRole="newstype" ToRole="news" />
   </EntityType>
-  <EntityType Name="order">
-    <Key>
-      <PropertyRef Name="id" />
-    </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="idaccount" Type="Int32" />
-    <Property Name="createdate" Type="DateTime" Precision="0" />
-    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="fullname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-    <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="phone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
-    <Property Name="status" Type="Boolean" />
-    <Property Name="statuspay" Type="Boolean" />
-    <Property Name="total" Type="Decimal" Precision="18" Scale="0" />
-    <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="accounts" Relationship="Self.fk_order_account" FromRole="order" ToRole="accounts" />
-    <NavigationProperty Name="orderdetail" Relationship="Self.fk_orderdetail_order" FromRole="order" ToRole="orderdetail" />
-    <Property Name="paymentmethod" Type="Int32" />
-  </EntityType>
   <EntityType Name="orderdetail">
     <Key>
       <PropertyRef Name="idproduct" />
@@ -121,8 +103,8 @@
     <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="quantity" Type="Int32" />
     <Property Name="subtotal" Type="Decimal" Precision="18" Scale="0" />
-    <NavigationProperty Name="order" Relationship="Self.fk_orderdetail_order" FromRole="orderdetail" ToRole="order" />
     <NavigationProperty Name="products" Relationship="Self.fk_orderdetail_products" FromRole="orderdetail" ToRole="products" />
+    <NavigationProperty Name="order" Relationship="nonbaohiemviettinModel.fk_orderdetail_order" FromRole="orderdetail" ToRole="order" />
   </EntityType>
   <EntityType Name="production">
     <Key>
@@ -207,20 +189,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="fk_order_account">
-    <End Role="accounts" Type="Self.accounts" Multiplicity="0..1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="order" Type="Self.order" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="accounts">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="order">
-        <PropertyRef Name="idaccount" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="fk_rate_accounts">
     <End Role="accounts" Type="Self.accounts" Multiplicity="0..1">
       <OnDelete Action="Cascade" />
@@ -273,20 +241,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="fk_orderdetail_order">
-    <End Role="order" Type="Self.order" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="orderdetail" Type="Self.orderdetail" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="order">
-        <PropertyRef Name="id" />
-      </Principal>
-      <Dependent Role="orderdetail">
-        <PropertyRef Name="idorder" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="fk_orderdetail_products">
     <End Role="products" Type="Self.products" Multiplicity="1" />
     <End Role="orderdetail" Type="Self.orderdetail" Multiplicity="*" />
@@ -331,7 +285,6 @@
     <EntitySet Name="introduce" EntityType="Self.introduce" />
     <EntitySet Name="news" EntityType="Self.news" />
     <EntitySet Name="newstype" EntityType="Self.newstype" />
-    <EntitySet Name="order" EntityType="Self.order" />
     <EntitySet Name="orderdetail" EntityType="Self.orderdetail" />
     <EntitySet Name="production" EntityType="Self.production" />
     <EntitySet Name="products" EntityType="Self.products" />
@@ -341,10 +294,6 @@
     <AssociationSet Name="fk_accounts_role" Association="Self.fk_accounts_role">
       <End Role="role" EntitySet="role" />
       <End Role="accounts" EntitySet="accounts" />
-    </AssociationSet>
-    <AssociationSet Name="fk_order_account" Association="Self.fk_order_account">
-      <End Role="accounts" EntitySet="accounts" />
-      <End Role="order" EntitySet="order" />
     </AssociationSet>
     <AssociationSet Name="fk_rate_accounts" Association="Self.fk_rate_accounts">
       <End Role="accounts" EntitySet="accounts" />
@@ -361,10 +310,6 @@
     <AssociationSet Name="fk_news_newstype" Association="Self.fk_news_newstype">
       <End Role="newstype" EntitySet="newstype" />
       <End Role="news" EntitySet="news" />
-    </AssociationSet>
-    <AssociationSet Name="fk_orderdetail_order" Association="Self.fk_orderdetail_order">
-      <End Role="order" EntitySet="order" />
-      <End Role="orderdetail" EntitySet="orderdetail" />
     </AssociationSet>
     <AssociationSet Name="fk_orderdetail_products" Association="Self.fk_orderdetail_products">
       <End Role="products" EntitySet="products" />
@@ -394,6 +339,15 @@
       <End Role="receiptdetail" EntitySet="receiptdetail" />
     </AssociationSet>
     <EntitySet Name="brand" EntityType="nonbaohiemviettinModel.brand" />
+    <EntitySet Name="order" EntityType="nonbaohiemviettinModel.order" />
+    <AssociationSet Name="fk_order_account" Association="nonbaohiemviettinModel.fk_order_account">
+      <End Role="accounts" EntitySet="accounts" />
+      <End Role="order" EntitySet="order" />
+    </AssociationSet>
+    <AssociationSet Name="fk_orderdetail_order" Association="nonbaohiemviettinModel.fk_orderdetail_order">
+      <End Role="order" EntitySet="order" />
+      <End Role="orderdetail" EntitySet="orderdetail" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="feedback">
     <Key>
@@ -482,4 +436,51 @@
     <Property Name="image" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
     <Property Name="link" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="order">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idaccount" Type="Int32" />
+    <Property Name="createdate" Type="DateTime" Precision="3" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fullname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="address" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="phone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="status" Type="Boolean" />
+    <Property Name="statuspay" Type="Boolean" />
+    <Property Name="total" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="paymentmethod" Type="Int32" />
+    <NavigationProperty Name="accounts" Relationship="nonbaohiemviettinModel.fk_order_account" FromRole="order" ToRole="accounts" />
+    <NavigationProperty Name="orderdetail" Relationship="nonbaohiemviettinModel.fk_orderdetail_order" FromRole="order" ToRole="orderdetail" />
+  </EntityType>
+  <Association Name="fk_order_account">
+    <End Type="nonbaohiemviettinModel.accounts" Role="accounts" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="nonbaohiemviettinModel.order" Role="order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="accounts">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="order">
+        <PropertyRef Name="idaccount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_orderdetail_order">
+    <End Type="nonbaohiemviettinModel.order" Role="order" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Type="nonbaohiemviettinModel.orderdetail" Role="orderdetail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="order">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="orderdetail">
+        <PropertyRef Name="idorder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

@@ -16,6 +16,7 @@
     <Property Name="status" Type="bit" />
     <Property Name="issocial" Type="int" />
     <Property Name="alias" Type="varchar" MaxLength="100" />
+    <Property Name="create_date" Type="datetime" />
   </EntityType>
   <EntityType Name="brand">
     <Key>
@@ -111,7 +112,7 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="idaccount" Type="int" />
-    <Property Name="createdate" Type="date" />
+    <Property Name="createdate" Type="datetime" />
     <Property Name="email" Type="varchar" MaxLength="50" />
     <Property Name="fullname" Type="nvarchar" MaxLength="100" />
     <Property Name="address" Type="nvarchar" MaxLength="500" />

@@ -92,6 +92,7 @@
             @Html.HiddenFor(model => model.password)
             @Html.HiddenFor(model => model.issocial)
             @Html.HiddenFor(model => model.username)
+            @Html.HiddenFor(model => model.create_date)
             if (Model.username.Equals("admin"))
             {
                 @Html.HiddenFor(model => model.idrole)
