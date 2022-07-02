@@ -1,0 +1,119 @@
+﻿@using NONBAOHIEMVIETTIN.Models
+@model PagedList.IPagedList<history_withdraw>
+@using PagedList.Mvc;
+@{
+    var acc = Session["account"] as accounts;
+    var db = new nonbaohiemviettinEntities();
+    ViewBag.Title = "Lịch sử rút tiền - " + acc.username;
+
+}
+@section styles{
+    <style>
+        #orders th {
+            text-align: center;
+        }
+
+        .view.active, .page_number .active {
+            color: #ea3a3c;
+        }
+
+        button[disabled] {
+            cursor: not-allowed;
+        }
+    </style>
+    <link href="~/assets/client/css/sorttable.css?@TempData["Version"]" rel="stylesheet" />
+}
+@section scripts
+{
+    <script src="~/assets/client/js/code/sorttable.js?@TempData["Version"]"></script>
+    <script src="~/assets/client/js/code/withdraw.js"></script>
+}
+<!--breadcrumbs area start-->
+<div class="breadcrumbs_area">
+    <div class="row">
+        <div class="col-12">
+            <div class="breadcrumb_content">
+                <ul>
+                    <li><a href="/">Trang chủ</a></li>
+                    <li><i class="fa fa-angle-right"></i></li>
+                    <li>Lịch sử rút tiền tài khoản @acc.username</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs area end-->
+<!-- Start Maincontent  -->
+<section class="main_content_area">
+    <div class="account_dashboard">
+        <div class="row">
+
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <!-- Tab panes -->
+                <div class="tab-content dashboard_content">
+                    <div class="tab-pane fade  show active" id="orders">
+                        <h3>Lịch sử rút tiền</h3>
+                        <div class="coron_table table-responsive">
+                            <table class="table ui-sortable-table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Thời gian đặt lệnh rút</th>
+                                        <th>Số tiền</th>
+                                        <th>Ngày chuyển</th>
+                                        <th>Số tài khoản</th>
+                                        <th>Tên ngân hàng</th>
+                                        <th>Họ tên người nhận</th>
+                                        <th>Ghi chú</th>
+                                        <th>Tình trạng</th>
+                                        <th>Công cụ</th>
+                                    </tr>
+                                </thead>
+                                @foreach (var item in Model)
+                                {
+                                    <tr id="withdraw-@item.id">
+                                        <td>@item.id</td>
+                                        <td>@item.create_date</td>
+                                        <td>@Libary.Instances.convertVND(item.amount_money.ToString())</td>
+                                        <td>@(item.confirm_date != null ? item.confirm_date.ToString() : "")</td>
+                                        <td>@item.bank_number</td>
+                                        <td>@item.bank_name</td>
+                                        <td>@item.fullname</td>
+                                        <td>@(item.note ?? "")</td>
+                                        <td>@(item.status == 0 ? Html.Raw("<span class='text-primary'>Chờ duyệt</span>") : item.status == 1 ? Html.Raw("<span class='text-success'>Thành công.</span>") : Html.Raw("<span class='text-danger'>Thất bại</span>"))</td>
+                                        @if (item.status == 0)
+                                        {
+                                            <td><span data-id="@item.id" class="delete-withdraw text-danger" style="cursor:pointer">Huỷ lệnh</span></td>
+                                        }
+                                        else
+                                        {
+                                            <td><span class="text-danger" style="cursor:not-allowed;opacity:.8">Huỷ lệnh</span></td>
+                                        }
+                                    </tr>
+
+                                }
+                            </table>
+                        </div>
+                        @if (ViewBag.last != 1)
+                        {
+                            <div class="pagination_style shop_page" style="justify-content:flex-end">
+                                <div class="page_number">
+                                    <ul>
+                                        @Html.PagedListPager(Model,
+                    page => Url.Action("AccountRecharge", new { page }),
+                    new PagedListRenderOptions
+                    {
+                        MaximumPageNumbersToDisplay = 4
+                    })
+
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+</section>
+<!-- End Maincontent  -->

@@ -12,17 +12,17 @@ using NONBAOHIEMVIETTIN.Models;
 
 namespace NONBAOHIEMVIETTIN.Api
 {
-    public class categoryController : ApiController
+    public class CategoryController : ApiController
     {
         private nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
 
-        // GET: api/categories
+        // GET: api/Category
         public IQueryable<category> Getcategory()
         {
             return db.category;
         }
 
-        // GET: api/categories/5
+        // GET: api/Category/5
         [ResponseType(typeof(category))]
         public IHttpActionResult Getcategory(int id)
         {
@@ -35,7 +35,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return Ok(category);
         }
 
-        // PUT: api/categories/5
+        // PUT: api/Category/5
         [ResponseType(typeof(void))]
         public IHttpActionResult Putcategory(int id, category category)
         {
@@ -70,7 +70,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/categories
+        // POST: api/Category
         [ResponseType(typeof(category))]
         public IHttpActionResult Postcategory(category category)
         {
@@ -85,7 +85,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return CreatedAtRoute("DefaultApi", new { id = category.id }, category);
         }
 
-        // DELETE: api/categories/5
+        // DELETE: api/Category/5
         [ResponseType(typeof(category))]
         public IHttpActionResult Deletecategory(int id)
         {

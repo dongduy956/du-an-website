@@ -24,6 +24,13 @@ new { controller = new SubdomainRouteConstraint("admin.") },
 namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
 );
             context.MapRoute(
+     "admin_Promontion_edit",
+"sua-giam-gia/{alias}",
+new { controller = "Promotion_admin", action = "Edit", id = UrlParameter.Optional, Area = "Admin" },
+new { controller = new SubdomainRouteConstraint("admin.") },
+namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
         "admin_Brand_edit",
 "sua-doi-tac/{alias}",
 new { controller = "Brand_admin", action = "Edit", id = UrlParameter.Optional, Area = "Admin" },
@@ -84,6 +91,30 @@ new { controller = "Accounts_admin", action = "Edit", id = UrlParameter.Optional
      new { controller = "Category_admin", action = "Edit", id = UrlParameter.Optional, Area = "Admin" },
       new { controller = new SubdomainRouteConstraint("admin.") },namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
  );
+            context.MapRoute(
+"admin_Withdraw_search",
+"tim-kiem-lich-su-rut-tien",
+new { controller = "Withdraw_admin", action = "Search", id = UrlParameter.Optional, Area = "Admin" },
+new { controller = new SubdomainRouteConstraint("admin.") }, namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+"admin_Recharge_search",
+"tim-kiem-lich-su-nap-tien",
+new { controller = "Recharge_admin", action = "Search", id = UrlParameter.Optional, Area = "Admin" },
+new { controller = new SubdomainRouteConstraint("admin.") }, namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+"admin_Wheel_search",
+"tim-kiem-lich-su-vong-quay",
+new { controller = "Wheel_admin", action = "Search", id = UrlParameter.Optional, Area = "Admin" },
+new { controller = new SubdomainRouteConstraint("admin.") }, namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+"admin_Promotion_search",
+"tim-kiem-giam-gia",
+new { controller = "Promotion_admin", action = "Search", id = UrlParameter.Optional, Area = "Admin" },
+new { controller = new SubdomainRouteConstraint("admin.") }, namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
             context.MapRoute(
 "admin_Brand_search",
 "tim-kiem-doi-tac",
@@ -162,6 +193,7 @@ new { controller = new SubdomainRouteConstraint("admin.") },namespaces: new stri
 new { controller = "Role_admin", action = "Search", id = UrlParameter.Optional, Area = "Admin" },
 new { controller = new SubdomainRouteConstraint("admin.") },namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
 );
+
             context.MapRoute(
 "admin_groupproduct_search",
 "tim-kiem-nhom-non",
@@ -192,6 +224,12 @@ new { controller = new SubdomainRouteConstraint("admin.") },namespaces: new stri
         new { controller = "products_admin", action = "Edit", id = UrlParameter.Optional, Area = "Admin" },
          new { controller = new SubdomainRouteConstraint("admin.") },namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
     );
+            context.MapRoute(
+"admin_Promontion_create",
+"them-moi-giam-gia",
+new { controller = "Promotion_admin", action = "Create", id = UrlParameter.Optional, Area = "Admin" },
+new { controller = new SubdomainRouteConstraint("admin.") }, namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
             context.MapRoute(
 "admin_Brand_create",
 "them-moi-doi-tac",
@@ -270,6 +308,30 @@ new { controller = new SubdomainRouteConstraint("admin.") },namespaces: new stri
          new { controller = "products_admin", action = "Create", id = UrlParameter.Optional, Area = "Admin" },
           new { controller = new SubdomainRouteConstraint("admin.") },namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
      );
+            context.MapRoute(
+"admin_Withdraw_index",
+"lich-su-rut-tien",
+new { controller = "Withdraw_admin", action = "Index", id = UrlParameter.Optional, Area = "Admin" },
+new { controller = new SubdomainRouteConstraint("admin.") }, namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+"admin_Recharge_index",
+"lich-su-nap-tien",
+new { controller = "Recharge_admin", action = "Index", id = UrlParameter.Optional, Area = "Admin" },
+new { controller = new SubdomainRouteConstraint("admin.") }, namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+"admin_Wheel_index",
+"lich-su-vong-quay",
+new { controller = "Wheel_admin", action = "Index", id = UrlParameter.Optional, Area = "Admin" },
+new { controller = new SubdomainRouteConstraint("admin.") }, namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
+            context.MapRoute(
+"admin_Promontion_index",
+"giam-gia",
+new { controller = "Promotion_admin", action = "Index", id = UrlParameter.Optional, Area = "Admin" },
+new { controller = new SubdomainRouteConstraint("admin.") }, namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+);
             context.MapRoute(
 "admin_Brand_index",
 "doi-tac",

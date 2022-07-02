@@ -68,27 +68,28 @@
                 <div class="form-group">
                     <label class="control-label col-md-12">Tên nón</label>
                     <div class="col-md-12">
-                        <input name="name" placeholder="Nhập vào tên nón" required class="form-control" />
+                        @Html.EditorFor(model => model.name, new { htmlAttributes = new { @placeholder = "Nhập vào tên nón.", @required = true, @class = "form-control" } })
                         <div class="valid-feedback">Valid</div>
-                        <div class="invalid-feedback">Nhập vào tên nón</div>
+                        <div class="invalid-feedback">Nhập vào tên nón.</div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-12">Giá</label>
                     <div class="col-md-12">
-                        <input type="number" placeholder="Nhập vào giá bán" required class="form-control" name="price" />
+                        @Html.EditorFor(model => model.price, new { htmlAttributes = new {@value=0,@min=0, @type = "number", @placeholder = "Nhập vào giá bán.", @required = true, @class = "form-control" } })
+                        <div class="valid-feedback">Valid</div>
+                        <div class="invalid-feedback">Nhập giá bán.</div>
                     </div>
-                    <div class="valid-feedback">Valid</div>
-                    <div class="invalid-feedback">Nhập giá bán</div>
+
                 </div>
 
                 <div class="form-group">
                     <label class="control-label col-md-12">Giá khuyến mãi</label>
                     <div class="col-md-12">
-                        <input type="number" value="0" required placeholder="Nhập vào giá khuyến mãi (nếu có)" class="form-control" name="promationprice" />
+                        @Html.EditorFor(model => model.promationprice, new { htmlAttributes = new { @value = 0, @min = 0, @type = "number", @placeholder = "Nhập vào giá khuyến mãi (nếu có).", @required = true, @class = "form-control" } })
+                        <div class="valid-feedback">Valid</div>
+                        <div class="invalid-feedback">Nhập giá khuyến mãi (nếu có).</div>
                     </div>
-                    <div class="valid-feedback">Valid</div>
-                    <div class="invalid-feedback">Nhập giá khuyến mãi (nếu có)</div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-12">Mô tả</label>
@@ -96,7 +97,7 @@
                         <textarea required placeholder="Nhập vào mô tả" id="txtDescription" name="description" class="form-control"></textarea>
                     </div>
                     <div class="valid-feedback">Valid</div>
-                    <div class="invalid-feedback">Nhập mô tả</div>
+                    <div class="invalid-feedback">Nhập mô tả.</div>
                 </div>
 
                 <div class="form-group">

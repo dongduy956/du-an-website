@@ -21,6 +21,13 @@
     <NavigationProperty Name="receipt" Relationship="nonbaohiemviettinModel.fk_receipt_accounts" FromRole="accounts" ToRole="receipt" />
     <Property Name="create_date" Type="DateTime" Precision="3" />
     <NavigationProperty Name="order" Relationship="nonbaohiemviettinModel.fk_order_account" FromRole="accounts" ToRole="order" />
+    <NavigationProperty Name="promotion" Relationship="nonbaohiemviettinModel.fk_promotion_account" FromRole="accounts" ToRole="promotion" />
+    <Property Name="coin" Type="Int32" />
+    <Property Name="date_attendance" Type="DateTime" Precision="0" />
+    <Property Name="spin" Type="Int32" />
+    <NavigationProperty Name="wheel" Relationship="nonbaohiemviettinModel.fk_wheel_account" FromRole="accounts" ToRole="wheel" />
+    <NavigationProperty Name="history_recharge" Relationship="nonbaohiemviettinModel.fk_history_recharge_account" FromRole="accounts" ToRole="history_recharge" />
+    <NavigationProperty Name="history_withdraw" Relationship="nonbaohiemviettinModel.fk_history_withdraw_account" FromRole="accounts" ToRole="history_withdraw" />
   </EntityType>
   <EntityType Name="category">
     <Key>
@@ -348,6 +355,34 @@
       <End Role="order" EntitySet="order" />
       <End Role="orderdetail" EntitySet="orderdetail" />
     </AssociationSet>
+    <EntitySet Name="promotion" EntityType="nonbaohiemviettinModel.promotion" />
+    <AssociationSet Name="fk_promotion_account" Association="nonbaohiemviettinModel.fk_promotion_account">
+      <End Role="accounts" EntitySet="accounts" />
+      <End Role="promotion" EntitySet="promotion" />
+    </AssociationSet>
+    <AssociationSet Name="fk_order_promotion" Association="nonbaohiemviettinModel.fk_order_promotion">
+      <End Role="promotion" EntitySet="promotion" />
+      <End Role="order" EntitySet="order" />
+    </AssociationSet>
+    <EntitySet Name="wheel" EntityType="nonbaohiemviettinModel.wheel" />
+    <AssociationSet Name="fk_wheel_account" Association="nonbaohiemviettinModel.fk_wheel_account">
+      <End Role="accounts" EntitySet="accounts" />
+      <End Role="wheel" EntitySet="wheel" />
+    </AssociationSet>
+    <AssociationSet Name="fk_wheel_promotion" Association="nonbaohiemviettinModel.fk_wheel_promotion">
+      <End Role="promotion" EntitySet="promotion" />
+      <End Role="wheel" EntitySet="wheel" />
+    </AssociationSet>
+    <EntitySet Name="history_recharge" EntityType="nonbaohiemviettinModel.history_recharge" />
+    <AssociationSet Name="fk_history_recharge_account" Association="nonbaohiemviettinModel.fk_history_recharge_account">
+      <End Role="accounts" EntitySet="accounts" />
+      <End Role="history_recharge" EntitySet="history_recharge" />
+    </AssociationSet>
+    <EntitySet Name="history_withdraw" EntityType="nonbaohiemviettinModel.history_withdraw" />
+    <AssociationSet Name="fk_history_withdraw_account" Association="nonbaohiemviettinModel.fk_history_withdraw_account">
+      <End Role="accounts" EntitySet="accounts" />
+      <End Role="history_withdraw" EntitySet="history_withdraw" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="feedback">
     <Key>
@@ -454,6 +489,8 @@
     <Property Name="paymentmethod" Type="Int32" />
     <NavigationProperty Name="accounts" Relationship="nonbaohiemviettinModel.fk_order_account" FromRole="order" ToRole="accounts" />
     <NavigationProperty Name="orderdetail" Relationship="nonbaohiemviettinModel.fk_orderdetail_order" FromRole="order" ToRole="orderdetail" />
+    <Property Name="idpromotion" Type="Int32" />
+    <NavigationProperty Name="promotion" Relationship="nonbaohiemviettinModel.fk_order_promotion" FromRole="order" ToRole="promotion" />
   </EntityType>
   <Association Name="fk_order_account">
     <End Type="nonbaohiemviettinModel.accounts" Role="accounts" Multiplicity="0..1">
@@ -480,6 +517,134 @@
       </Principal>
       <Dependent Role="orderdetail">
         <PropertyRef Name="idorder" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="promotion">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="start_date" Type="DateTime" Precision="3" />
+    <Property Name="end_date" Type="DateTime" Precision="3" />
+    <Property Name="create_by" Type="Int32" />
+    <Property Name="discount" Type="Int32" />
+    <Property Name="quantity_use" Type="Int32" />
+    <NavigationProperty Name="accounts" Relationship="nonbaohiemviettinModel.fk_promotion_account" FromRole="promotion" ToRole="accounts" />
+    <Property Name="alias" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="code" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="order" Relationship="nonbaohiemviettinModel.fk_order_promotion" FromRole="promotion" ToRole="order" />
+    <NavigationProperty Name="wheel" Relationship="nonbaohiemviettinModel.fk_wheel_promotion" FromRole="promotion" ToRole="wheel" />
+  </EntityType>
+  <Association Name="fk_promotion_account">
+    <End Type="nonbaohiemviettinModel.accounts" Role="accounts" Multiplicity="0..1" />
+    <End Type="nonbaohiemviettinModel.promotion" Role="promotion" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="accounts">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="promotion">
+        <PropertyRef Name="create_by" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_order_promotion">
+    <End Type="nonbaohiemviettinModel.promotion" Role="promotion" Multiplicity="0..1" />
+    <End Type="nonbaohiemviettinModel.order" Role="order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="promotion">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="order">
+        <PropertyRef Name="idpromotion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="wheel">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idaccount" Type="Int32" />
+    <Property Name="idpromotion" Type="Int32" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="gift_name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="accounts" Relationship="nonbaohiemviettinModel.fk_wheel_account" FromRole="wheel" ToRole="accounts" />
+    <NavigationProperty Name="promotion" Relationship="nonbaohiemviettinModel.fk_wheel_promotion" FromRole="wheel" ToRole="promotion" />
+  </EntityType>
+  <Association Name="fk_wheel_account">
+    <End Type="nonbaohiemviettinModel.accounts" Role="accounts" Multiplicity="0..1" />
+    <End Type="nonbaohiemviettinModel.wheel" Role="wheel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="accounts">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="wheel">
+        <PropertyRef Name="idaccount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_wheel_promotion">
+    <End Type="nonbaohiemviettinModel.promotion" Role="promotion" Multiplicity="0..1" />
+    <End Type="nonbaohiemviettinModel.wheel" Role="wheel" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="promotion">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="wheel">
+        <PropertyRef Name="idpromotion" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="history_recharge">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idaccount" Type="Int32" />
+    <Property Name="amount_money" Type="Int32" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="accounts" Relationship="nonbaohiemviettinModel.fk_history_recharge_account" FromRole="history_recharge" ToRole="accounts" />
+  </EntityType>
+  <Association Name="fk_history_recharge_account">
+    <End Type="nonbaohiemviettinModel.accounts" Role="accounts" Multiplicity="0..1" />
+    <End Type="nonbaohiemviettinModel.history_recharge" Role="history_recharge" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="accounts">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="history_recharge">
+        <PropertyRef Name="idaccount" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="history_withdraw">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="idaccount" Type="Int32" />
+    <Property Name="amount_money" Type="Int32" />
+    <Property Name="create_date" Type="DateTime" Precision="3" />
+    <Property Name="status" Type="Int32" />
+    <Property Name="confirm_date" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="accounts" Relationship="nonbaohiemviettinModel.fk_history_withdraw_account" FromRole="history_withdraw" ToRole="accounts" />
+    <Property Name="bank_number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="bank_name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="fullname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="note" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <Association Name="fk_history_withdraw_account">
+    <End Type="nonbaohiemviettinModel.accounts" Role="accounts" Multiplicity="0..1" />
+    <End Type="nonbaohiemviettinModel.history_withdraw" Role="history_withdraw" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="accounts">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="history_withdraw">
+        <PropertyRef Name="idaccount" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

@@ -12,17 +12,17 @@ using NONBAOHIEMVIETTIN.Models;
 
 namespace NONBAOHIEMVIETTIN.Api
 {
-    public class receiptController : ApiController
+    public class ReceiptController : ApiController
     {
         private nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
 
-        // GET: api/receipt
+        // GET: api/Receipt
         public IQueryable<receipt> Getreceipt()
         {
             return db.receipt;
         }
 
-        // GET: api/receipt/5
+        // GET: api/Receipt/5
         [ResponseType(typeof(receipt))]
         public IHttpActionResult Getreceipt(int id)
         {
@@ -35,7 +35,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return Ok(receipt);
         }
 
-        // PUT: api/receipt/5
+        // PUT: api/Receipt/5
         [ResponseType(typeof(void))]
         public IHttpActionResult Putreceipt(int id, receipt receipt)
         {
@@ -70,7 +70,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/receipt
+        // POST: api/Receipt
         [ResponseType(typeof(receipt))]
         public IHttpActionResult Postreceipt(receipt receipt)
         {
@@ -85,7 +85,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return CreatedAtRoute("DefaultApi", new { id = receipt.id }, receipt);
         }
 
-        // DELETE: api/receipt/5
+        // DELETE: api/Receipt/5
         [ResponseType(typeof(receipt))]
         public IHttpActionResult Deletereceipt(int id)
         {

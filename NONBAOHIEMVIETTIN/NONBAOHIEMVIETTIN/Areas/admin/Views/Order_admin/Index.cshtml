@@ -57,9 +57,9 @@
                         <th>#</th>
                         <th>Tên tài khoản</th>
                         <th>Ngày đặt</th>
-                        <th>Họ tên</th>
                         <th>Trạng thái</th>
                         <th>Đã chuyển tiền?</th>
+                        <th>Giảm giá</th>
                         <th>Tổng giá</th>
                         <td>Công cụ</td>
                     </tr>
@@ -69,11 +69,11 @@
                     {
                         <tr id="_order_@item.id">
                             <td>@item.id</td>
-                            <td>@item.accounts.username</td>
-                            <td>@DateTime.Parse(item.createdate.ToString()).ToShortDateString()</td>
+                            <td>@item.createdate</td>
                             <td>@item.fullname</td>
                             <td>@(item.status == false ? Html.Raw("<span id='confirm_order_" + @item.id + "' class='text-danger'>Chưa duyệt (<a data-id='" + item.id + "' class='confirm_order' style='cursor:pointer;'>Click vào đây</a> để duyệt)</span>") : Html.Raw("<span class='text-success'>Đã duyệt</span>"))</td>
                             <td>@(item.statuspay == false ? Html.Raw("<span id='transfer_order_" + @item.id + "' class='text-danger'>Chưa chuyển tiền (<a data-id='" + item.id + "' class='transfer_order' style='cursor:pointer;'>Click vào đây</a> để xác nhận chuyển tiền)</span>") : Html.Raw("<span class='text-success'>Đã chuyển tiền</span>"))</td>
+                            <td>@(item.idpromotion != null?item.promotion.discount+" %":"0 %")</td>
                             <td>@Libary.Instances.convertVND(item.total.ToString())</td>
                             <td>
                                 <div class="tool d-flex align-items-center flex-column justify-content-center">
@@ -110,6 +110,7 @@
                                         <p><strong>Trạng thái:</strong> @(item.status == false ? Html.Raw("<span id='confirm_order_detail_" + @item.id + "' class='text-danger'>Chưa duyệt (<a data-id='" + item.id + "' class='confirm_order' style='cursor:pointer;'>Click vào đây</a> để duyệt)</span>") : Html.Raw("<span class='text-success'>Đã duyệt</span>"))</p>
                                         <p><strong>Phương thức thanh toán:</strong> @(item.paymentmethod == 0 ? Html.Raw("<span >Tiền mặt") : Html.Raw("<span >Online")) </p>
                                         <p><strong>Đã chuyển tiền?</strong> @(item.statuspay == false ? Html.Raw("<span id='transfer_order_detail_" + @item.id + "' class='text-danger'>Chưa chuyển tiền (<a data-id='" + item.id + "' class='transfer_order' style='cursor:pointer;'>Click vào đây</a> để xác nhận chuyển tiền)</span>") : Html.Raw("<span class='text-success'>Đã chuyển tiền</span>"))</p>
+                                        <p><strong>Giảm giá</strong> @(item.idpromotion!=null?item.promotion.discount+" %":"0 %")</p>
                                         <p><strong>Tổng giá:</strong> @Libary.Instances.convertVND(item.total.ToString())</p>
                                         <p><strong>Ghi chú:</strong> @item.note</p>                                       
                                     </div>

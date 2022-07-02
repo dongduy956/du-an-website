@@ -120,7 +120,6 @@
                                         <p><strong>Id:</strong> @item.id</p>
                                         <p><strong>Họ tên:</strong> @item.fullname</p>
                                         <p><strong>Tên đăng nhập:</strong> @item.username</p>
-                                        <p><strong>Họ tên:</strong> @item.fullname</p>
                                         <p><strong>Email: </strong> @item.email</p>
                                         <p><strong>Địa chỉ:</strong> @item.address</p>
                                         <p><strong>Thuộc quyền:</strong> @item.role.name</p>
@@ -130,6 +129,9 @@
                                         <p><strong>Hình ảnh:</strong> <img src="@(item.issocial==0?"/"+item.image:item.image)" class="img-product" /></p>
                                         <p><strong>Đã đặt hàng:</strong> @item.order.Count đơn hàng</p>
                                         <p><strong>Đánh giá:</strong> @item.rate.Count lần</p>
+                                        <p><strong>Xu:</strong> @item.coin</p>
+                                        <p><strong>Ngày điểm danh:</strong> @item.date_attendance</p>
+                                        <p><strong>Lượt quay:</strong> @item.spin</p>
                                         <p><strong>Trạng thái:</strong> <span id="_account_@item.id-delete-detail">@(item.username.Equals("admin") || item.status == true ? Html.Raw("<span class='text-success'>Đã kích hoạt</span>") : Html.Raw("<span class='text-danger'>Chưa kích hoạt</span>"))</span></p>
                                     </div>
                                     <div class="modal-footer">

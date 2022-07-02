@@ -1,0 +1,174 @@
+﻿@using NONBAOHIEMVIETTIN.Models;
+@model PagedList.IPagedList<history_withdraw>
+@using PagedList.Mvc;
+@{
+    ViewBag.Title = "Lịch sử rút tiền";
+    Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
+    var db = new nonbaohiemviettinEntities();
+}
+@section styles{
+    <style>
+        .img-product {
+            width: 100px;
+            height: 100px;
+        }
+
+        .modal-body {
+            overflow-y: scroll;
+            max-height: 70vh;
+        }
+
+            .modal-body p {
+                margin: 0;
+            }
+    </style>
+}
+@section scripts{
+    <script src="~/assets/admin/js/code/withdraw.js"></script>
+    @if (TempData["status"] != null)
+    {
+        <script>
+            $(function () {
+                alertify.success(`@TempData["status"]`);
+            })
+        </script>
+
+    }
+}
+<!-- DataTales Example -->
+<div class="card shadow mb-4">
+    <div class="card-header py-3 d-flex align-items-center justify-content-between flex-wrap">
+        <h6 class="m-0 font-weight-bold text-primary">Lịch sử rút tiền</h6>
+        <form method="get" action="/tim-kiem-lich-su-rut-tien" class="d-sm-inline-block form-inline ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+            <div class="input-group">
+                <input name="tukhoa" type="text" class="form-control bg-light border-0 small" placeholder="Tìm kiếm..." aria-label="Search" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="submit">
+                        <i class="fas fa-search fa-sm"></i>
+                    </button>
+                </div>
+            </div>
+        </form>        
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="ui-sortable-table table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <td>Tên tài khoản</td>
+                        <th>Số xu rút</th>
+                        <th>Ngày đặt lệnh</th>
+                        <th>Số tài khoản</th>
+                        <th>Tên ngân hàng</th>
+                        <th>Họ tên người nhận</th>
+                        <th>Tình trạng</th>
+                        <td>Công cụ</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.OrderByDescending(x=>x.id))
+                    {
+                        <tr id="_withdraw_@item.id">
+                            <td>@item.id</td>
+                            <td>@item.accounts.username</td>
+                            <td>@Libary.Instances.convertVND(item.amount_money.ToString())</td>
+                            <td>@item.create_date</td>
+                            <td>@item.bank_number</td>
+                            <td>@item.bank_name</td>
+                            <td>@item.fullname</td>
+                            <td class="status">@(item.status == 0 ? Html.Raw("<span class='text-primary'>Chờ duyệt</span>") : item.status == 1 ? Html.Raw("<span class='text-success'>Thành công</span>") : Html.Raw("<span class='text-danger'>Thất bại.</span>"))</td>
+                            <td>
+                                <div class="tool d-flex align-items-center flex-column justify-content-center">
+                                    <a data-toggle="modal" data-target="#withdraw_@item.id" title="Xem lệnh rút của tài khoản @item.accounts.username" class="d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                        <i class="far fa-eye"></i>
+                                    </a>
+                                    @if (item.status == 0)
+                                    {
+                                        <a data-id="@item.id" title="Duyệt lệnh rút của tài khoản @item.accounts.username" class="mt-1 btn_confirm_withdraw d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                                            <i class="fa-solid fa-circle-check"></i>
+                                        </a>
+                                    }
+                                </div>
+                            </td>
+                        </tr>
+                        <!-- Product Modal-->
+                        <div class="modal fade" id="withdraw_@item.id" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Thông tin lệnh rút của tài khoản <strong>@item.accounts.username</strong></h5>
+                                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">×</span>
+                                        </button>
+                                    </div>
+                                    <div id="modal_withdraw_@item.id" class="modal-body">
+                                        <p><strong>Id:</strong> @item.id</p>
+                                        <p><strong>Tên tài khoản:</strong> @item.accounts.username</p>
+                                        <p><strong>Số tiền rút:</strong> @Libary.Instances.convertVND(item.amount_money.ToString())</p>
+                                        <p><strong>Ngày đặt lệnh: </strong> @item.create_date</p>
+                                        <p class="status"><strong>Tình trạng:</strong>@(item.status == 0 ? Html.Raw("<span class='text-primary'>Chờ duyệt</span>") : item.status == 1 ? Html.Raw("<span class='text-success'>Thành công</span>") : Html.Raw("<span class='text-danger'>Thất bại</span>"))</p>
+                                        <p><strong>Ngày duyệt:</strong> @(item.confirm_date == null ? "" : item.confirm_date.ToString())</p>
+                                        <p><strong>Số tài khoản:</strong> @item.bank_number</p>
+                                        <p><strong>Tên ngân hàng:</strong> @item.bank_name</p>
+                                        <p><strong>Họ tên người nhận:</strong>@item.fullname</p>
+                                        <p class="note"><strong>Ghi chú:</strong><span>@item.note</span></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Đóng</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@if (ViewBag.last != 1)
+{
+    <ul class="pagination mr-auto ml-auto" style="justify-content:center;">
+        @if (ViewBag.check == true)
+        {
+            @Html.PagedListPager(Model,
+        page => Url.Action("Index", new { page }),
+        new PagedListRenderOptions
+        {
+            MaximumPageNumbersToDisplay = 3
+        })
+        }
+        else
+        {
+            @Html.PagedListPager(Model, page => Url.Action("Search", new { tukhoa = Request.Url.Query.Substring(Request.Url.Query.IndexOf("?tukhoa="), Request.Url.Query.LastIndexOf('&') == -1 ? Request.Url.Query.Length : Request.Url.Query.LastIndexOf('&')).Replace("?tukhoa=", ""), page }),
+                                    new PagedListRenderOptions
+                                    {
+                                        MaximumPageNumbersToDisplay = 5
+                                    });
+        }
+    </ul>
+}
+<!-- Modal confirm -->
+<div class="modal fade" id="modal_withdraw" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Duyệt lệnh rút tiền</h4>
+                <button type="button" class="close" data-dismiss="modal" style="">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input id="withdraw_note" placeholder="Nhập ghi chú (nếu có)" autofocus autocomplete="on" class="form-control" />
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+                <button id="btn_submit_withdraw" class="btn btn-outline-success">
+                    Xác nhận
+                </button>
+                <button id="btn_refuse_withdraw" class="btn btn-outline-warning">
+                    Từ chối
+                </button>
+                <button type="button" id="btn_close_withdraw" class="btn btn-outline-danger" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal confirm end-->

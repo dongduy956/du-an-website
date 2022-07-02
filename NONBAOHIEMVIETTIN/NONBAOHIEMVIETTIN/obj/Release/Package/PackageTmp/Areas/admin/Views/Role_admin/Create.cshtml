@@ -1,4 +1,4 @@
-﻿
+﻿@model NONBAOHIEMVIETTIN.Models.role
 @{
     ViewBag.Title = "Thêm mới quyền";
     Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
@@ -48,9 +48,9 @@
                 <div class="form-group">
                     <label class="control-label col-md-12">Tên quyền</label>
                     <div class="col-md-12">
-                        <input name="name" placeholder="Nhập vào tên quyền" required class="form-control" />
+                        @Html.EditorFor(model => model.name, new { htmlAttributes = new { @placeholder = "Nhập vào tên tên quyền", @required = true, @class = "form-control" } })
                         <div class="valid-feedback">Valid</div>
-                        <div class="invalid-feedback">Nhập vào tên quyền</div>
+                        <div class="invalid-feedback">Nhập vào tên quyền.</div>
                     </div>
                 </div>
                 <div class="form-group">

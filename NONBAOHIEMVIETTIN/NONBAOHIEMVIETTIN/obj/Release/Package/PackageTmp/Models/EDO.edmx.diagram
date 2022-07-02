@@ -36,6 +36,16 @@
         <EntityTypeShape EntityType="nonbaohiemviettinModel.order" Width="1.5" PointX="3" PointY="11.875" />
         <AssociationConnector Association="nonbaohiemviettinModel.fk_order_account" />
         <AssociationConnector Association="nonbaohiemviettinModel.fk_orderdetail_order" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.promotion" Width="1.5" PointX="3" PointY="23.5" />
+        <AssociationConnector Association="nonbaohiemviettinModel.fk_promotion_account" />
+        <AssociationConnector Association="nonbaohiemviettinModel.fk_order_promotion" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.wheel" Width="1.5" PointX="5.25" PointY="18.125" />
+        <AssociationConnector Association="nonbaohiemviettinModel.fk_wheel_account" />
+        <AssociationConnector Association="nonbaohiemviettinModel.fk_wheel_promotion" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.history_recharge" Width="1.5" PointX="3" PointY="0.75" />
+        <AssociationConnector Association="nonbaohiemviettinModel.fk_history_recharge_account" />
+        <EntityTypeShape EntityType="nonbaohiemviettinModel.history_withdraw" Width="1.5" PointX="3" PointY="28.25" />
+        <AssociationConnector Association="nonbaohiemviettinModel.fk_history_withdraw_account" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

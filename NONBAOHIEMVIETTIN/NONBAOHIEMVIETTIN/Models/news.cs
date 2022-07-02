@@ -11,31 +11,31 @@
 
 namespace NONBAOHIEMVIETTIN.Models
 {
-
-using System;
+    using Newtonsoft.Json;
+    using System;
     using System.Collections.Generic;
-    
-public partial class news
-{
 
-    public int id { get; set; }
+    public partial class news
+    {
 
-    public Nullable<int> id_newstype { get; set; }
+        public int id { get; set; }
 
-    public string title { get; set; }
+        public Nullable<int> id_newstype { get; set; }
 
-    public string alias { get; set; }
+        public string title { get; set; }
 
-    public string content { get; set; }
+        public string alias { get; set; }
 
-    public Nullable<System.DateTime> createdate { get; set; }
+        public string content { get; set; }
 
-    public string image { get; set; }
+        public Nullable<System.DateTime> createdate { get; set; }
+
+        public string image { get; set; }
 
 
+        [JsonIgnore]
+        public virtual newstype newstype { get; set; }
 
-    public virtual newstype newstype { get; set; }
-
-}
+    }
 
 }

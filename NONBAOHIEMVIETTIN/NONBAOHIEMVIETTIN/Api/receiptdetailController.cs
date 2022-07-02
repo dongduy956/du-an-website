@@ -12,17 +12,17 @@ using NONBAOHIEMVIETTIN.Models;
 
 namespace NONBAOHIEMVIETTIN.Api
 {
-    public class receiptdetailController : ApiController
+    public class ReceiptDetailController : ApiController
     {
         private nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
 
-        // GET: api/receiptdetail
+        // GET: api/ReceiptDetail
         public IQueryable<receiptdetail> Getreceiptdetail()
         {
             return db.receiptdetail;
         }
 
-        // GET: api/receiptdetail/5
+        // GET: api/ReceiptDetail/5
         [ResponseType(typeof(receiptdetail))]
         public IHttpActionResult Getreceiptdetail(int id)
         {
@@ -35,7 +35,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return Ok(receiptdetail);
         }
 
-        // PUT: api/receiptdetail/5
+        // PUT: api/ReceiptDetail/5
         [ResponseType(typeof(void))]
         public IHttpActionResult Putreceiptdetail(int id, receiptdetail receiptdetail)
         {
@@ -70,7 +70,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/receiptdetail
+        // POST: api/ReceiptDetail
         [ResponseType(typeof(receiptdetail))]
         public IHttpActionResult Postreceiptdetail(receiptdetail receiptdetail)
         {
@@ -100,7 +100,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return CreatedAtRoute("DefaultApi", new { id = receiptdetail.idproduct }, receiptdetail);
         }
 
-        // DELETE: api/receiptdetail/5
+        // DELETE: api/ReceiptDetail/5
         [ResponseType(typeof(receiptdetail))]
         public IHttpActionResult Deletereceiptdetail(int id)
         {

@@ -1,4 +1,4 @@
-﻿
+﻿@model NONBAOHIEMVIETTIN.Models.groupproduct
 @{
     ViewBag.Title = "Thêm mới nhóm nón";
     Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
@@ -49,9 +49,9 @@
                 <div class="form-group">
                     <label class="control-label col-md-12">Tên nhóm nón</label>
                     <div class="col-md-12">
-                        <input name="name" placeholder="Nhập vào tên nhóm nón" required class="form-control" />
+                        @Html.EditorFor(model => model.name, new { htmlAttributes = new { @placeholder = "Nhập vào tên nhóm nón.", @required = true, @class = "form-control" } })
                         <div class="valid-feedback">Valid</div>
-                        <div class="invalid-feedback">Nhập vào tên nhóm nón</div>
+                        <div class="invalid-feedback">Nhập vào tên nhóm nón.</div>
                     </div>
                 </div>
                 <div class="form-group">

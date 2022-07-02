@@ -12,17 +12,17 @@ using NONBAOHIEMVIETTIN.Models;
 
 namespace NONBAOHIEMVIETTIN.Api
 {
-    public class brandController : ApiController
+    public class BrandController : ApiController
     {
         private nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
 
-        // GET: api/brand
+        // GET: api/Brand
         public IQueryable<brand> Getbrand()
         {
             return db.brand;
         }
 
-        // GET: api/brand/5
+        // GET: api/Brand/5
         [ResponseType(typeof(brand))]
         public IHttpActionResult Getbrand(int id)
         {
@@ -35,7 +35,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return Ok(brand);
         }
 
-        // PUT: api/brand/5
+        // PUT: api/Brand/5
         [ResponseType(typeof(void))]
         public IHttpActionResult Putbrand(int id, brand brand)
         {
@@ -70,7 +70,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/brand
+        // POST: api/Brand
         [ResponseType(typeof(brand))]
         public IHttpActionResult Postbrand(brand brand)
         {
@@ -85,7 +85,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return CreatedAtRoute("DefaultApi", new { id = brand.id }, brand);
         }
 
-        // DELETE: api/brand/5
+        // DELETE: api/Brand/5
         [ResponseType(typeof(brand))]
         public IHttpActionResult Deletebrand(int id)
         {

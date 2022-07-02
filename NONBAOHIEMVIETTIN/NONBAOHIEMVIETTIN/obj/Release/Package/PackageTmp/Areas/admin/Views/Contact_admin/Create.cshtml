@@ -68,57 +68,57 @@
                 <div class="form-group">
                     <label class="control-label col-md-12">Tiêu đề</label>
                     <div class="col-md-12">
-                        <input name="title" placeholder="Nhập vào tiêu đề" required class="form-control" />
+                        @Html.EditorFor(model => model.title, new { htmlAttributes = new { @placeholder = "Nhập vào tiêu đề.", @required = true, @class = "form-control" } })
                         <div class="valid-feedback">Valid</div>
-                        <div class="invalid-feedback">Nhập vào tiêu đề</div>
+                        <div class="invalid-feedback">Nhập vào tiêu đề.</div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-12">Địa chỉ</label>
                     <div class="col-md-12">
-                        <input name="address" placeholder="Nhập vào địa chỉ" required class="form-control" />
+                        @Html.EditorFor(model => model.address, new { htmlAttributes = new { @placeholder = "Nhập vào địa chỉ.", @required = true, @class = "form-control" } })
                         <div class="valid-feedback">Valid</div>
-                        <div class="invalid-feedback">Nhập vào địa chỉ</div>
+                        <div class="invalid-feedback">Nhập vào địa chỉ.</div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-12">Email</label>
                     <div class="col-md-12">
-                        <input name="email" type="email" placeholder="Nhập vào số điện thoại" required class="form-control" />
+                        @Html.EditorFor(model => model.email, new { htmlAttributes = new { @type = "email", @placeholder = "Nhập vào email.", @required = true, @class = "form-control" } })
                         <div class="valid-feedback">Valid</div>
-                        <div class="invalid-feedback">Nhập vào email</div>
+                        <div class="invalid-feedback">Nhập vào email.</div>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-12">Số điện thoại</label>
+                    <label class="control-label col-md-12">Số điện thoại.</label>
                     <div class="col-md-12">
-                        <input name="phone" type="tel" placeholder="Nhập vào số điện thoại" required class="form-control" />
+                        @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @type = "tel", @placeholder = "Nhập vào số điện thoại.", @required = true, @class = "form-control" } })
                         <div class="valid-feedback">Valid</div>
-                        <div class="invalid-feedback">Nhập vào số điện thoại</div>
+                        <div class="invalid-feedback">Nhập vào số điện thoại.</div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-12">Giờ làm việc</label>
                     <div class="col-md-12">
-                        <input name="worktime" placeholder="Nhập vào giờ làm việc" required class="form-control" />
+                        @Html.EditorFor(model => model.worktime, new { htmlAttributes = new { @type = "tel", @placeholder = "Nhập vào giờ làm việc.", @required = true, @class = "form-control" } })
                         <div class="valid-feedback">Valid</div>
-                        <div class="invalid-feedback">Nhập vào giờ làm việc</div>
+                        <div class="invalid-feedback">Nhập vào giờ làm việc.</div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-12">Ngày làm việc</label>
                     <div class="col-md-12">
-                        <input name="workday" placeholder="Nhập vào ngày làm việc" required class="form-control" />
+                        @Html.EditorFor(model => model.workday, new { htmlAttributes = new { @type = "tel", @placeholder = "Nhập vào ngày làm việc.", @required = true, @class = "form-control" } })
                         <div class="valid-feedback">Valid</div>
-                        <div class="invalid-feedback">Nhập vào ngày làm việc</div>
+                        <div class="invalid-feedback">Nhập vào ngày làm việc.</div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-12">Link bản đồ (<a href="https://www.google.com/maps/" target="_blank">Click vào đây</a> để lấy link)</label>
                     <div class="col-md-12">
-                        <input name="map" placeholder="Nhập vào link bản đồ" required class="form-control" />
+                        @Html.EditorFor(model => model.map, new { htmlAttributes = new { @type = "tel", @placeholder = "Nhập vào link bản đồ.", @required = true, @class = "form-control" } })
                         <div class="valid-feedback">Valid</div>
-                        <div class="invalid-feedback">Nhập vào link bản đồ</div>
+                        <div class="invalid-feedback">Nhập vào link bản đồ.</div>
                     </div>
                 </div>
 
@@ -128,7 +128,7 @@
                         <textarea required placeholder="Nhập vào nội dung" id="txtDescription" name="content" class="form-control"></textarea>
                     </div>
                     <div class="valid-feedback">Valid</div>
-                    <div class="invalid-feedback">Nhập nội dung</div>
+                    <div class="invalid-feedback">Nhập nội dung.</div>
                 </div>
             
 

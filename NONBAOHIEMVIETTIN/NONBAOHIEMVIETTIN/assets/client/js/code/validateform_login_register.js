@@ -189,6 +189,7 @@ function submit(operation) {
         else {
             disable('#btnsubmitforgetpass');
         }
+
         $.ajax({
             url: url,
             data: JSON.stringify({ code }),
@@ -293,7 +294,7 @@ $('#btnfogetpass').click(function (e) {
 });
 //Nhập email lấy lại mật khẩu
 function confirmEmail() {
-    let email = $('#keywordemail').val();
+    const email = $('#keywordemail').val();
 
     disable('#btnsubmitforget');
     $.ajax({

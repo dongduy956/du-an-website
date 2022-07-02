@@ -11,68 +11,98 @@
 
 namespace NONBAOHIEMVIETTIN.Models
 {
-
-using System;
+    using Newtonsoft.Json;
+    using System;
     using System.Collections.Generic;
-    
-public partial class accounts
-{
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public accounts()
+    public partial class accounts
     {
 
-        this.rate = new HashSet<rate>();
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public accounts()
+        {
 
-        this.receipt = new HashSet<receipt>();
+            this.rate = new HashSet<rate>();
 
-        this.order = new HashSet<order>();
+            this.receipt = new HashSet<receipt>();
+
+            this.order = new HashSet<order>();
+
+            this.promotion = new HashSet<promotion>();
+
+            this.wheel = new HashSet<wheel>();
+
+            this.history_recharge = new HashSet<history_recharge>();
+
+            this.history_withdraw = new HashSet<history_withdraw>();
+
+        }
+
+
+        public int id { get; set; }
+
+        public Nullable<int> idrole { get; set; }
+
+        public string username { get; set; }
+
+        public string password { get; set; }
+
+        public string image { get; set; }
+
+        public string fullname { get; set; }
+
+        public string email { get; set; }
+
+        public string phone { get; set; }
+
+        public string address { get; set; }
+
+        public Nullable<bool> status { get; set; }
+
+        public Nullable<int> issocial { get; set; }
+
+        public string alias { get; set; }
+
+        public Nullable<System.DateTime> create_date { get; set; }
+
+        public Nullable<int> coin { get; set; }
+
+        public Nullable<System.DateTime> date_attendance { get; set; }
+
+        public Nullable<int> spin { get; set; }
+
+
+        [JsonIgnore]
+        public virtual role role { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
+        public virtual ICollection<rate> rate { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
+        public virtual ICollection<receipt> receipt { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
+        public virtual ICollection<order> order { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
+        public virtual ICollection<promotion> promotion { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
+        public virtual ICollection<wheel> wheel { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
+        public virtual ICollection<history_recharge> history_recharge { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
+        public virtual ICollection<history_withdraw> history_withdraw { get; set; }
 
     }
-
-
-    public int id { get; set; }
-
-    public Nullable<int> idrole { get; set; }
-
-    public string username { get; set; }
-
-    public string password { get; set; }
-
-    public string image { get; set; }
-
-    public string fullname { get; set; }
-
-    public string email { get; set; }
-
-    public string phone { get; set; }
-
-    public string address { get; set; }
-
-    public Nullable<bool> status { get; set; }
-
-    public Nullable<int> issocial { get; set; }
-
-    public string alias { get; set; }
-
-    public Nullable<System.DateTime> create_date { get; set; }
-
-
-
-    public virtual role role { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<rate> rate { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<receipt> receipt { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<order> order { get; set; }
-
-}
 
 }

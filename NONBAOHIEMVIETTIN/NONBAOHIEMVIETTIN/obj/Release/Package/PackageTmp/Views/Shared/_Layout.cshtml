@@ -4,7 +4,7 @@
     var acc = Session["account"] as accounts;
     var cart = Session["cartSession"] as List<CartItem>;
     var aboutus = db.contact.SingleOrDefault(x => x.display == true);
-    TempData["Version"] = "20.5";
+    TempData["Version"] = "21";
 }
 <!doctype html>
 <html class="no-js" lang="zxx">
@@ -116,8 +116,8 @@
                     <div class="header_top">
                         <div class="row align-items-center">
                             <div class="col-lg-12 col-md-12">
-                                <div class="switcher">
-                                    <ul>
+                                <div class="nav_top switcher d-flex justify-content-between flex-wrap">
+                                    <ul class="flex-wrap">
                                         <li class="">
                                             <a href="/gioi-thieu">
                                                 Giới thiệu
@@ -126,7 +126,21 @@
                                         </li>
                                         @if (acc != null)
                                         {
-                                            <li style="margin-left:auto" class="languages">
+                                            <li>
+                                                <a style="width:100%" href="/lich-su-quay-thuong">Lịch sử quay thưởng</a>
+                                            </li>
+                                            <li>
+                                                <a href="/lich-su-nap-tien">Lịch sử nạp tiền</a>
+                                            </li>
+                                            <li>
+                                                <a href="/lich-su-rut-tien">Lịch sử rút tiền</a>
+                                            </li>
+                                        }
+                                    </ul>
+                                    @if (acc != null)
+                                    {
+                                        <ul class="d-inline-block">
+                                            <li class="languages">
                                                 <a class="w-100">
 
                                                     @if (acc.issocial == 0)
@@ -139,7 +153,7 @@
                                                         <img style="border-radius:50%; width: 24px;margin-right: 2px;" src="@acc.image" alt="">
 
                                                     }
-                                                    <i id="accountname" style="font-style:normal">@acc.fullname</i>
+                                                    <i id="accountname" style="font-style:normal">@acc.fullname - <span class="acc_coin">@acc.coin</span> xu</i>
                                                     <i class="fa fa-angle-down"></i>
                                                 </a>
 
@@ -150,6 +164,7 @@
                                                             Thông tin tài khoản
                                                         </a>
                                                     </li>
+
                                                     @if (acc.issocial == 0)
                                                     {
 
@@ -168,17 +183,20 @@
                                                     </li>
                                                 </ul>
                                             </li>
-                                        }
-                                        else
-                                        {
+                                        </ul>
+                                    }
+                                    else
+                                    {
+                                        <ul>
                                             <li style="margin-left:auto">
                                                 <a href="/dang-nhap">Đăng nhập</a>
                                             </li>
-                                                <li>
-                                                    <a href="/dang-nhap">Đăng ký</a>
-                                                </li>
-                                        }
-                                    </ul>
+
+                                            <li>
+                                                <a href="/dang-nhap">Đăng ký</a>
+                                            </li>
+                                        </ul>
+                                    }
                                 </div>
                             </div>
                         </div>
@@ -190,9 +208,9 @@
                             <!--logo start-->
                             <div class="col-lg-3 col-md-3">
                                 <div class="logo">
-                                   @* <a href="/"><img style="width:75px;" src="~/assets/images/logo/logo.png" alt=""></a>*@
-                                    <a href="/"  class="text-decoration-none d-block d-none text-center">
-                                        <h1 class="m-0 display-5 font-weight-semi-bold" style="color:#00BBA6;" ><span class="font-weight-bold border px-3 mr-1">T</span>HELMETS</h1>
+                                    @* <a href="/"><img style="width:75px;" src="~/assets/images/logo/logo.png" alt=""></a>*@
+                                    <a href="/" class="text-decoration-none d-block d-none text-center">
+                                        <h1 class="m-0 display-5 font-weight-semi-bold" style="color:#00BBA6;"><span class="font-weight-bold border px-3 mr-1">T</span>HELMETS</h1>
                                     </a>
                                 </div>
                             </div>
@@ -205,7 +223,7 @@
                                             <button id="btnsearch" type="submit"><i class="fa fa-search"></i></button>
                                         </div>
                                         <div class="search-list">
-                                                                                      
+
                                         </div>
                                     </div>
                                     <div class="shopping_cart">
@@ -313,13 +331,13 @@
                                 @if (aboutus != null)
                                 {
                                     <h3>@aboutus.title</h3>
-                                        <p>@Html.Raw(aboutus.content)</p>
-                                        <div class="footer_widget_contect">
-                                            <p><i class="fa fa-map-marker" aria-hidden="true"></i>@aboutus.address </p>
+                                    <p>@Html.Raw(aboutus.content)</p>
+                                    <div class="footer_widget_contect">
+                                        <p><i class="fa fa-map-marker" aria-hidden="true"></i>@aboutus.address </p>
 
-                                            <p><a href="tel:@aboutus.phone"><i class="fa fa-mobile" aria-hidden="true"></i> @aboutus.phone</a></p>
-                                            <a href="mailto:@aboutus.email"><i class="fa fa-envelope-o" aria-hidden="true"></i>@aboutus.email  </a>
-                                        </div>
+                                        <p><a href="tel:@aboutus.phone"><i class="fa fa-mobile" aria-hidden="true"></i> @aboutus.phone</a></p>
+                                        <a href="mailto:@aboutus.email"><i class="fa fa-envelope-o" aria-hidden="true"></i>@aboutus.email  </a>
+                                    </div>
                                 }
                                 else
                                 {
@@ -338,7 +356,7 @@
                                     else
                                     {
                                         <li><a href="/dang-nhap">Đăng nhập</a></li>
-                                            <li><a href="/dang-nhap">Đăng ký</a></li>
+                                        <li><a href="/dang-nhap">Đăng ký</a></li>
                                     }
                                 </ul>
                             </div>
@@ -419,7 +437,6 @@
         <script src="~/assets/client/js/iziToast.min.js"></script>
         <script src="~/assets/client/js/main.js?@TempData["Version"]"></script>
         <script src="~/assets/client/js/code/main.js?@TempData["Version"]"></script>
-        <script src="~/assets/client/js/code/animation-rain.js?@TempData["Version"]"></script>
         <script>
             $(window).on('load', function (event) {
                 $('.loader').remove();

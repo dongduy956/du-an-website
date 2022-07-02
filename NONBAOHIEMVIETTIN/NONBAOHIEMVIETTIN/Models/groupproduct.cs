@@ -11,38 +11,38 @@
 
 namespace NONBAOHIEMVIETTIN.Models
 {
-
-using System;
+    using Newtonsoft.Json;
+    using System;
     using System.Collections.Generic;
-    
-public partial class groupproduct
-{
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public groupproduct()
+    public partial class groupproduct
     {
 
-        this.products = new HashSet<products>();
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public groupproduct()
+        {
+
+            this.products = new HashSet<products>();
+
+        }
+
+
+        public int id { get; set; }
+
+        public string name { get; set; }
+
+        public string alias { get; set; }
+
+        public Nullable<bool> status { get; set; }
+
+        public Nullable<bool> isdelete { get; set; }
+
+
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
+        public virtual ICollection<products> products { get; set; }
 
     }
-
-
-    public int id { get; set; }
-
-    public string name { get; set; }
-
-    public string alias { get; set; }
-
-    public Nullable<bool> status { get; set; }
-
-    public Nullable<bool> isdelete { get; set; }
-
-
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<products> products { get; set; }
-
-}
 
 }

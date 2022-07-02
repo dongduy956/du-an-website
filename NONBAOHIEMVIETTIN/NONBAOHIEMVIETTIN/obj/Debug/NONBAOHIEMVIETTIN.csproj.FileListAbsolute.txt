@@ -655,7 +655,6 @@ E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\WebActivatorEx.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\WebGrease.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\CKFinder.pdb
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\EPPlus.xml
-E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\log4net.xml
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.DependencyCollector.xml
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.ServerTelemetryChannel.xml
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.AI.Web.xml

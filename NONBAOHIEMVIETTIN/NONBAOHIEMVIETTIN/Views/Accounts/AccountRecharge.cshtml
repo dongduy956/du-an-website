@@ -1,0 +1,97 @@
+﻿@using NONBAOHIEMVIETTIN.Models
+@model PagedList.IPagedList<history_recharge>
+@using PagedList.Mvc;
+@{
+    var acc = Session["account"] as accounts;
+    var db = new nonbaohiemviettinEntities();
+    ViewBag.Title = "Lịch sử nạp tiền - " + acc.username;
+   
+}
+@section styles{
+    <style>
+        #orders th {
+            text-align: center;
+        }
+
+        .view.active, .page_number .active {
+            color: #ea3a3c;
+        }
+
+        button[disabled] {
+            cursor: not-allowed;
+        }
+    </style>
+    <link href="~/assets/client/css/sorttable.css?@TempData["Version"]" rel="stylesheet" />
+}
+@section scripts
+{
+    <script src="~/assets/client/js/code/sorttable.js?@TempData["Version"]"></script>
+}
+<!--breadcrumbs area start-->
+<div class="breadcrumbs_area">
+    <div class="row">
+        <div class="col-12">
+            <div class="breadcrumb_content">
+                <ul>
+                    <li><a href="/">Trang chủ</a></li>
+                    <li><i class="fa fa-angle-right"></i></li>
+                    <li>Lịch sử nạp tiền tài khoản @acc.username</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs area end-->
+<!-- Start Maincontent  -->
+<section class="main_content_area">
+    <div class="account_dashboard">
+        <div class="row">
+
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <!-- Tab panes -->
+                <div class="tab-content dashboard_content">
+                    <div class="tab-pane fade  show active" id="orders">
+                        <h3>Lịch sử nạp tiền</h3>
+                        <div class="coron_table table-responsive">
+                            <table class="table ui-sortable-table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Thời gian nạp</th>
+                                        <th>Số tiền</th>
+                                    </tr>
+                                </thead>
+                                @foreach (var item in Model)
+                                {
+                                    <tr id="order-@item.">
+                                        <td>@item.id</td>
+                                        <td>@item.create_date</td>
+                                        <td>@Libary.Instances.convertVND(item.amount_money.ToString())</td>                                        
+                                    </tr>
+
+                                }
+                            </table>
+                        </div>
+                        @if (ViewBag.last != 1)
+                        {
+                            <div class="pagination_style shop_page" style="justify-content:flex-end">
+                                <div class="page_number">
+                                    <ul>
+                                        @Html.PagedListPager(Model,
+                    page => Url.Action("AccountRecharge", new { page }),
+                    new PagedListRenderOptions
+                    {
+                        MaximumPageNumbersToDisplay = 4
+                    })
+
+                                    </ul>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+
+            </div>
+        </div>
+</section>
+<!-- End Maincontent  -->

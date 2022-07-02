@@ -111,10 +111,10 @@ namespace NONBAOHIEMVIETTIN
             return new DateTime(year, month, day);
         }
 
-        public string randCode()
+        public string randCode(int quantity=4)
         {
             var chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            var stringChars = new char[4];
+            var stringChars = new char[quantity];
             var random = new Random();
 
             for (int i = 0; i < stringChars.Length; i++)

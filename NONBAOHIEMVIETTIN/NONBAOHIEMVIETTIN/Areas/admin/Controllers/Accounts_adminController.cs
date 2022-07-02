@@ -136,6 +136,8 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     accounts.issocial = 0;
                     accounts.alias = "tai-khoan-" + (db.accounts.OrderByDescending(x => x.id).FirstOrDefault().id + 1);
                     accounts.create_date = DateTime.Now;
+                    accounts.coin = 0;
+                    accounts.spin = 3;                    
                     db.accounts.Add(accounts);
                     db.SaveChanges();
                     TempData["status"] = "Tạo tài khoản thành công. Mật khẩu mặc định là 123!!";
@@ -147,7 +149,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
                     TempData["status"] = "Trùng tên đăng nhập hoặc email!!";
                 }
             }
-
+            
             ViewBag.idrole = new SelectList(db.role, "id", "name", accounts.idrole);
             return View(accounts);
         }
@@ -169,7 +171,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "id,idrole,alias,username,password,image,fullname,email,phone,address,status,issocial,create_date")] accounts accounts)
+        public ActionResult Edit([Bind(Include = "id,idrole,alias,username,password,image,fullname,email,phone,address,status,issocial,create_date,coin,spin,date_attendance")] accounts accounts)
         {
             if (ModelState.IsValid)
             {
@@ -231,6 +233,7 @@ namespace NONBAOHIEMVIETTIN.Areas.admin.Controllers
             return View(accounts);
 
         }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing)

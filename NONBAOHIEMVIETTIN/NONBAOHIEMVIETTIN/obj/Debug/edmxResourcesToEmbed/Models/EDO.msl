@@ -4,6 +4,9 @@
     <EntitySetMapping Name="accounts">
       <EntityTypeMapping TypeName="nonbaohiemviettinModel.accounts">
         <MappingFragment StoreEntitySet="accounts">
+          <ScalarProperty Name="spin" ColumnName="spin" />
+          <ScalarProperty Name="date_attendance" ColumnName="date_attendance" />
+          <ScalarProperty Name="coin" ColumnName="coin" />
           <ScalarProperty Name="create_date" ColumnName="create_date" />
           <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="idrole" ColumnName="idrole" />
@@ -215,6 +218,7 @@
     <EntitySetMapping Name="order">
       <EntityTypeMapping TypeName="nonbaohiemviettinModel.order">
         <MappingFragment StoreEntitySet="order">
+          <ScalarProperty Name="idpromotion" ColumnName="idpromotion" />
           <ScalarProperty Name="paymentmethod" ColumnName="paymentmethod" />
           <ScalarProperty Name="note" ColumnName="note" />
           <ScalarProperty Name="total" ColumnName="total" />
@@ -225,6 +229,59 @@
           <ScalarProperty Name="fullname" ColumnName="fullname" />
           <ScalarProperty Name="email" ColumnName="email" />
           <ScalarProperty Name="createdate" ColumnName="createdate" />
+          <ScalarProperty Name="idaccount" ColumnName="idaccount" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="promotion">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.promotion">
+        <MappingFragment StoreEntitySet="promotion">
+          <ScalarProperty Name="code" ColumnName="code" />
+          <ScalarProperty Name="alias" ColumnName="alias" />
+          <ScalarProperty Name="quantity_use" ColumnName="quantity_use" />
+          <ScalarProperty Name="discount" ColumnName="discount" />
+          <ScalarProperty Name="create_by" ColumnName="create_by" />
+          <ScalarProperty Name="end_date" ColumnName="end_date" />
+          <ScalarProperty Name="start_date" ColumnName="start_date" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="name" ColumnName="name" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="wheel">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.wheel">
+        <MappingFragment StoreEntitySet="wheel">
+          <ScalarProperty Name="gift_name" ColumnName="gift_name" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="idpromotion" ColumnName="idpromotion" />
+          <ScalarProperty Name="idaccount" ColumnName="idaccount" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="history_recharge">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.history_recharge">
+        <MappingFragment StoreEntitySet="history_recharge">
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="amount_money" ColumnName="amount_money" />
+          <ScalarProperty Name="idaccount" ColumnName="idaccount" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="history_withdraw">
+      <EntityTypeMapping TypeName="nonbaohiemviettinModel.history_withdraw">
+        <MappingFragment StoreEntitySet="history_withdraw">
+          <ScalarProperty Name="note" ColumnName="note" />
+          <ScalarProperty Name="fullname" ColumnName="fullname" />
+          <ScalarProperty Name="bank_name" ColumnName="bank_name" />
+          <ScalarProperty Name="bank_number" ColumnName="bank_number" />
+          <ScalarProperty Name="confirm_date" ColumnName="confirm_date" />
+          <ScalarProperty Name="status" ColumnName="status" />
+          <ScalarProperty Name="create_date" ColumnName="create_date" />
+          <ScalarProperty Name="amount_money" ColumnName="amount_money" />
           <ScalarProperty Name="idaccount" ColumnName="idaccount" />
           <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>

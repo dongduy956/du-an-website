@@ -12,44 +12,44 @@ using NONBAOHIEMVIETTIN.Models;
 
 namespace NONBAOHIEMVIETTIN.Api
 {
-    public class accountsController : ApiController
+    public class WheelController : ApiController
     {
         private nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
 
-        // GET: api/accounts
-        public IQueryable<accounts> Getaccounts()
+        // GET: api/Wheel
+        public IQueryable<wheel> Getwheel()
         {
-            return db.accounts;
+            return db.wheel;
         }
 
-        // GET: api/accounts/5
-        [ResponseType(typeof(accounts))]
-        public IHttpActionResult Getaccounts(int id)
+        // GET: api/Wheel/5
+        [ResponseType(typeof(wheel))]
+        public IHttpActionResult Getwheel(int id)
         {
-            accounts accounts = db.accounts.Find(id);
-            if (accounts == null)
+            wheel wheel = db.wheel.Find(id);
+            if (wheel == null)
             {
                 return NotFound();
             }
 
-            return Ok(accounts);
+            return Ok(wheel);
         }
 
-        // PUT: api/accounts/5
+        // PUT: api/Wheel/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult Putaccounts(int id, accounts accounts)
+        public IHttpActionResult Putwheel(int id, wheel wheel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != accounts.id)
+            if (id != wheel.id)
             {
                 return BadRequest();
             }
 
-            db.Entry(accounts).State = EntityState.Modified;
+            db.Entry(wheel).State = EntityState.Modified;
 
             try
             {
@@ -57,7 +57,7 @@ namespace NONBAOHIEMVIETTIN.Api
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!accountsExists(id))
+                if (!wheelExists(id))
                 {
                     return NotFound();
                 }
@@ -70,35 +70,35 @@ namespace NONBAOHIEMVIETTIN.Api
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/accounts
-        [ResponseType(typeof(accounts))]
-        public IHttpActionResult Postaccounts(accounts accounts)
+        // POST: api/Wheel
+        [ResponseType(typeof(wheel))]
+        public IHttpActionResult Postwheel(wheel wheel)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.accounts.Add(accounts);
+            db.wheel.Add(wheel);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = accounts.id }, accounts);
+            return CreatedAtRoute("DefaultApi", new { id = wheel.id }, wheel);
         }
 
-        // DELETE: api/accounts/5
-        [ResponseType(typeof(accounts))]
-        public IHttpActionResult Deleteaccounts(int id)
+        // DELETE: api/Wheel/5
+        [ResponseType(typeof(wheel))]
+        public IHttpActionResult Deletewheel(int id)
         {
-            accounts accounts = db.accounts.Find(id);
-            if (accounts == null)
+            wheel wheel = db.wheel.Find(id);
+            if (wheel == null)
             {
                 return NotFound();
             }
 
-            db.accounts.Remove(accounts);
+            db.wheel.Remove(wheel);
             db.SaveChanges();
 
-            return Ok(accounts);
+            return Ok(wheel);
         }
 
         protected override void Dispose(bool disposing)
@@ -110,9 +110,9 @@ namespace NONBAOHIEMVIETTIN.Api
             base.Dispose(disposing);
         }
 
-        private bool accountsExists(int id)
+        private bool wheelExists(int id)
         {
-            return db.accounts.Count(e => e.id == id) > 0;
+            return db.wheel.Count(e => e.id == id) > 0;
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿
 @model NONBAOHIEMVIETTIN.Models.accounts
-
 @{
     ViewBag.Title = "Thêm mới tài khoản";
     Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
@@ -48,13 +47,13 @@
             });
         })();
 
-    </script>    
+    </script>
     @if (TempData["status"] != null)
     {
         <script>
-        $(function () {
-            alertify.error(`@TempData["status"]`);
-        })
+            $(function () {
+                alertify.error(`@TempData["status"]`);
+            })
         </script>
 
     }
@@ -65,7 +64,8 @@
             left: 0.75rem;
             right: 0.75rem;
         }
-         .input-ckb {
+
+        .input-ckb {
             height: 20px;
             width: 20px;
             cursor: pointer;
@@ -83,7 +83,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-12">Họ tên</label>
                     <div class="col-md-12">
-                        <input name="fullname" placeholder="Nhập vào họ tên" required class="form-control" />
+                        @Html.EditorFor(model => model.fullname, new { htmlAttributes = new { @placeholder = "Nhập vào họ tên.", @required = true, @class = "form-control" } })
                         <div class="valid-feedback">Valid</div>
                         <div class="invalid-feedback">Nhập vào họ tên</div>
                     </div>
@@ -91,36 +91,35 @@
                 <div class="form-group">
                     <label class="control-label col-md-12">Tên đăng nhập</label>
                     <div class="col-md-12">
-                        <input placeholder="Nhập vào tên đăng nhập" required class="form-control" name="username" />
+                        @Html.EditorFor(model => model.username, new { htmlAttributes = new { @placeholder = "Nhập vào tên đăng nhập.", @required = true, @class = "form-control" } })
+                        <div class="valid-feedback">Valid</div>
+                        <div class="invalid-feedback">Nhập tên đăng nhập</div>
                     </div>
-                    <div class="valid-feedback">Valid</div>
-                    <div class="invalid-feedback">Nhập tên đăng nhập</div>
-                </div>            
+                </div>
                 <div class="form-group">
                     <label class="control-label col-md-12">Email</label>
                     <div class="col-md-12">
-                        <input placeholder="Nhập vào email" type="email" required class="form-control" name="email" />
+                        @Html.EditorFor(model => model.email, new { htmlAttributes = new { @type = "email", @placeholder = "Nhập vào email.", @required = true, @class = "form-control" } })
+                        <div class="valid-feedback">Valid</div>
+                        <div class="invalid-feedback">Nhập email</div>
                     </div>
-                    <div class="valid-feedback">Valid</div>
-                    <div class="invalid-feedback">Nhập email</div>
-                </div>                     
+                </div>
                 <div class="form-group">
                     <label class="control-label col-md-12">Số điện thoại</label>
                     <div class="col-md-12">
-                        <input placeholder="Nhập vào số điện thoại" type="tel" required class="form-control" name="phone" />
+                        @Html.EditorFor(model => model.phone, new { htmlAttributes = new { @type = "tel", @placeholder = "Nhập vào số điện thoại.", @required = true, @class = "form-control" } })
+                        <div class="valid-feedback">Valid</div>
+                        <div class="invalid-feedback">Nhập số điện thoại</div>
                     </div>
-                    <div class="valid-feedback">Valid</div>
-                    <div class="invalid-feedback">Nhập số điện thoại</div>
-                </div>          
+                </div>
                 <div class="form-group">
                     <label class="control-label col-md-12">Địa chỉ</label>
                     <div class="col-md-12">
-                        <input placeholder="Nhập vào địa chỉ" type="text" required class="form-control" name="address" />
+                        @Html.EditorFor(model => model.address, new { htmlAttributes = new { @placeholder = "Nhập vào địa chỉ.", @required = true, @class = "form-control" } })
+                        <div class="valid-feedback">Valid</div>
+                        <div class="invalid-feedback">Nhập vào địa chỉ</div>
                     </div>
-                    <div class="valid-feedback">Valid</div>
-                    <div class="invalid-feedback">Nhập vào địa chỉ</div>
-                </div>    
-
+                </div>
                 <div class="form-group">
                     <label class="control-label col-md-12" for="image">Ảnh đại diện</label>
                     <span class="custom-file col-md-12">
@@ -128,7 +127,6 @@
                         <label class="custom-file-label" id="txtimg" for="customFile">Chọn ảnh</label>
                     </span>
                     <input name="image" id="txtimg_hide" type="hidden" />
-
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-12">Trạng thái</label>
@@ -136,16 +134,16 @@
                         <div class="d-flex align-items-center">
                             <input id="input_status" class="input-ckb" type="checkbox" checked="checked" />
                             <span class="ml-2" id="input_mess-status">Mở</span>
-                            <input type="hidden" name="status" value="True"/>
+                            <input type="hidden" name="status" value="True" />
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-12">Quyền</label>
                     <div class="col-md-12">
-                        @Html.DropDownList("idrole", null, htmlAttributes: new { @class = "form-control" })                        
+                        @Html.DropDownList("idrole", null, htmlAttributes: new { @class = "form-control" })
                     </div>
-                </div>             
+                </div>
                 <div class="form-group">
                     <a href="/tai-khoan" class="btn btn-light btn-icon-split" style="margin:0 0.75rem">
                         <span class="icon text-gray-600">
@@ -164,4 +162,3 @@
         }
     </div>
 </div>
-

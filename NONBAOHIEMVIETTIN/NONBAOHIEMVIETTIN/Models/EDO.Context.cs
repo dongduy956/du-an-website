@@ -68,6 +68,14 @@ public partial class nonbaohiemviettinEntities : DbContext
 
     public virtual DbSet<order> order { get; set; }
 
+    public virtual DbSet<promotion> promotion { get; set; }
+
+    public virtual DbSet<wheel> wheel { get; set; }
+
+    public virtual DbSet<history_recharge> history_recharge { get; set; }
+
+    public virtual DbSet<history_withdraw> history_withdraw { get; set; }
+
 }
 
 }

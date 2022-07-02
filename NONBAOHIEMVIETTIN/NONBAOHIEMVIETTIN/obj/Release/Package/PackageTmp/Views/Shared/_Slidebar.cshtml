@@ -16,7 +16,7 @@
             </div>
             <marquee scrollamount="2" class="p-2 mt-2" width="100%" direction="down" height="100%">
                 <ul style="list-style:circle">
-                    @foreach (var item in ac_cus.OrderByDescending(x => x.Create_date).Take(3))
+                    @foreach (var item in ac_cus.OrderByDescending(x => x.Create_date).Take(5))
                     {
                         if (item.Id_order == -1)
                         {

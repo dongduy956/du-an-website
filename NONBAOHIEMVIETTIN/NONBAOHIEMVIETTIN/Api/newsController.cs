@@ -12,17 +12,17 @@ using NONBAOHIEMVIETTIN.Models;
 
 namespace NONBAOHIEMVIETTIN.Api
 {
-    public class newsController : ApiController
+    public class NewsController : ApiController
     {
         private nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
 
-        // GET: api/news
+        // GET: api/News
         public IQueryable<news> Getnews()
         {
             return db.news;
         }
 
-        // GET: api/news/5
+        // GET: api/News/5
         [ResponseType(typeof(news))]
         public IHttpActionResult Getnews(int id)
         {
@@ -35,7 +35,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return Ok(news);
         }
 
-        // PUT: api/news/5
+        // PUT: api/News/5
         [ResponseType(typeof(void))]
         public IHttpActionResult Putnews(int id, news news)
         {
@@ -70,7 +70,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/news
+        // POST: api/News
         [ResponseType(typeof(news))]
         public IHttpActionResult Postnews(news news)
         {
@@ -85,7 +85,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return CreatedAtRoute("DefaultApi", new { id = news.id }, news);
         }
 
-        // DELETE: api/news/5
+        // DELETE: api/News/5
         [ResponseType(typeof(news))]
         public IHttpActionResult Deletenews(int id)
         {

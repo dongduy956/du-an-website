@@ -233,22 +233,28 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Api\accountsController.cs" />
-    <Compile Include="Api\brandController.cs" />
-    <Compile Include="Api\categoryController.cs" />
-    <Compile Include="Api\feedbackController.cs" />
-    <Compile Include="Api\groupproductController.cs" />
-    <Compile Include="Api\newsController.cs" />
-    <Compile Include="Api\newstypeController.cs" />
-    <Compile Include="Api\orderController.cs" />
-    <Compile Include="Api\orderdetailController.cs" />
-    <Compile Include="Api\productionController.cs" />
-    <Compile Include="Api\productsController.cs" />
-    <Compile Include="Api\rateController.cs" />
-    <Compile Include="Api\receiptController.cs" />
-    <Compile Include="Api\receiptdetailController.cs" />
-    <Compile Include="Api\roleController.cs" />
-    <Compile Include="Api\subscribeController.cs" />
+    <Compile Include="Api\AccountController.cs" />
+    <Compile Include="Api\BrandController.cs" />
+    <Compile Include="Api\CategoryController.cs" />
+    <Compile Include="Api\ContactController.cs" />
+    <Compile Include="Api\FeedbackController.cs" />
+    <Compile Include="Api\GroupProductController.cs" />
+    <Compile Include="Api\IntroduceController.cs" />
+    <Compile Include="Api\NewsController.cs" />
+    <Compile Include="Api\NewstypeController.cs" />
+    <Compile Include="Api\OrderController.cs" />
+    <Compile Include="Api\OrderDetailController.cs" />
+    <Compile Include="Api\ProductController.cs" />
+    <Compile Include="Api\ProductionController.cs" />
+    <Compile Include="Api\PromotionController.cs" />
+    <Compile Include="Api\RateController.cs" />
+    <Compile Include="Api\ReceiptController.cs" />
+    <Compile Include="Api\ReceiptDetailController.cs" />
+    <Compile Include="Api\RechargeController.cs" />
+    <Compile Include="Api\RoleController.cs" />
+    <Compile Include="Api\SubscribeController.cs" />
+    <Compile Include="Api\WheelController.cs" />
+    <Compile Include="Api\WithdrawController.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -272,11 +278,15 @@
     <Compile Include="Areas\admin\Controllers\Order_adminController.cs" />
     <Compile Include="Areas\admin\Controllers\Production_adminController.cs" />
     <Compile Include="Areas\admin\Controllers\products_adminController.cs" />
+    <Compile Include="Areas\admin\Controllers\Promotion_adminController.cs" />
     <Compile Include="Areas\admin\Controllers\Rate_adminController.cs" />
     <Compile Include="Areas\admin\Controllers\Receipt_adminController.cs" />
+    <Compile Include="Areas\admin\Controllers\Recharge_adminController.cs" />
     <Compile Include="Areas\admin\Controllers\Role_adminController.cs" />
     <Compile Include="Areas\admin\Controllers\Feedback_adminController.cs" />
     <Compile Include="Areas\admin\Controllers\Subscribe_adminController.cs" />
+    <Compile Include="Areas\admin\Controllers\Wheel_adminController.cs" />
+    <Compile Include="Areas\admin\Controllers\Withdraw_adminController.cs" />
     <Compile Include="Areas\admin\Models\AccountLogin.cs" />
     <Compile Include="Areas\admin\Models\Spend.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
@@ -286,7 +296,18 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IntroduceController.cs" />
     <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\WheelController.cs" />
+    <Compile Include="Models\AccInfo.cs" />
+    <Compile Include="Models\history_recharge.cs">
+      <DependentUpon>EDO.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\history_withdraw.cs">
+      <DependentUpon>EDO.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ItemActivityCustomer.cs" />
+    <Compile Include="Models\promotion.cs">
+      <DependentUpon>EDO.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\RecaptchaResult.cs" />
     <Compile Include="Models\SubdomainRoute.cs" />
     <Compile Include="Models\SubdomainRouteConstraint.cs" />
@@ -371,6 +392,9 @@
       <DependentUpon>EDO.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VnPayLibrary.cs" />
+    <Compile Include="Models\wheel.cs">
+      <DependentUpon>EDO.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -1526,6 +1550,7 @@
     <Content Include="assets\admin\js\code\chart-pie.js" />
     <Content Include="assets\admin\js\code\main.js" />
     <Content Include="assets\admin\js\code\validateform_login.js" />
+    <Content Include="assets\admin\js\code\withdraw.js" />
     <Content Include="assets\admin\js\sb-admin-2.js" />
     <Content Include="assets\admin\js\sb-admin-2.min.js" />
     <Content Include="assets\admin\vendor\bootstrap\js\bootstrap.bundle.js" />
@@ -3195,6 +3220,9 @@
     <Content Include="assets\client\css\bundle.css" />
     <Content Include="assets\client\css\hotline.css" />
     <Content Include="assets\client\css\iziToast.min.css" />
+    <Content Include="assets\client\css\wheel.css" />
+    <Content Include="assets\client\js\code\wheel.js" />
+    <Content Include="assets\client\js\code\withdraw.js" />
     <Content Include="assets\client\js\iziToast.min.js" />
     <Content Include="assets\client\css\jquery-ui.css" />
     <Content Include="assets\client\css\loadpage.css" />
@@ -3770,6 +3798,7 @@
     <Content Include="assets\images\logo\fontlogo.jpg" />
     <Content Include="assets\images\logo\fontlogo2.jpg" />
     <Content Include="assets\images\logo\logo.png" />
+    <Content Include="assets\images\wheel\arrow.png" />
     <Content Include="Content\alertifyjs\alertify.css" />
     <Content Include="Content\alertifyjs\alertify.min.css" />
     <Content Include="Content\alertifyjs\alertify.rtl.css" />
@@ -4092,6 +4121,12 @@
     <Content Include="assets\admin\vendor\fontawesome-free\webfonts\fa-solid-900.woff2" />
     <Content Include="assets\admin\vendor\jquery\jquery.min.map" />
     <Content Include="assets\admin\vendor\jquery\jquery.slim.min.map" />
+    <Content Include="Areas\admin\Views\Promotion_admin\Create.cshtml" />
+    <Content Include="Areas\admin\Views\Promotion_admin\Edit.cshtml" />
+    <Content Include="Areas\admin\Views\Promotion_admin\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Wheel_admin\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Recharge_admin\Index.cshtml" />
+    <Content Include="Areas\admin\Views\Withdraw_admin\Index.cshtml" />
     <None Include="Properties\PublishProfiles\nonbaohiem.pubxml" />
     <None Include="Properties\PublishProfiles\nonbaohiemviettin.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
@@ -4135,6 +4170,11 @@
     <Content Include="Views\Accounts\AccountInfo.cshtml" />
     <Content Include="Views\Cart\ConfirmOrder.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
+    <Content Include="Views\Wheel\Index.cshtml" />
+    <Content Include="Views\Accounts\AccountWheel.cshtml" />
+    <Content Include="Views\Wheel\ConfirmRecharge.cshtml" />
+    <Content Include="Views\Accounts\AccountRecharge.cshtml" />
+    <Content Include="Views\Accounts\AccountWithdraw.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

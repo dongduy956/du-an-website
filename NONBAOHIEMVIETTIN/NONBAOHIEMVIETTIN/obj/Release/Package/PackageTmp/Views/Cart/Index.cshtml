@@ -4,6 +4,19 @@
     ViewBag.Title = "Giỏ hàng";
     Layout = "~/Views/Shared/_Layout.cshtml";
     var acc = Session["account"] as accounts;
+    var promotion = Session["promotion"] as promotion;
+    if(promotion!=null && DateTime.Now.CompareTo((DateTime)promotion.end_date)>=0)
+    {
+        promotion = null;
+        Session["promotion"]= null;
+    }
+    double sumMoney = (double)Model.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price));
+
+    double sumDiscount = 0;
+    if (promotion != null)
+    {
+        sumDiscount = (double)(sumMoney * (promotion.discount / 100.0));
+    }
     ViewBag.Description = "Giỏ hàng nhập thông tin chi tiết và phương thức thanh toán trước khi xác nhận đặt hàng.";
     ViewBag.Url = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + HttpContext.Current.Request.RawUrl.ToString().Trim().ToLower();
     ViewBag.Image = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSfw1kOyHknL0xB340n2katDgkq7VdArKieJw&usqp=CAU";
@@ -100,7 +113,7 @@ else
             <div class="col-12">
                 <div class="table_desc">
                     <div class="cart_page table-responsive">
-                        <table class="w-100">
+                        <table class="w-100" id="table-cart">
                             <thead>
                                 <tr>
                                     <th class="product_remove">Công cụ</th>
@@ -135,17 +148,41 @@ else
                         </table>
                     </div>
                     <div class="cart_submit">
-                        <div>
-                            <div class="cart_subtotal">
-                                <p>Tổng sản phẩm</p>
-                                <p class="cart_amount sum_quantity">@Model.Sum(x => x.Quantity)</p>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-12">
+                                <label for="cart-discount">Mã giảm giá (nếu có)</label>
+                                <div class="row">
+                                    <div class="col-lg-8 col-md-8 mb-2">
+                                        <input style="height:38px;" id="cart-discount" placeholder="Nhập vào mã giảm giá (nếu có)" type="text" value="@(promotion!=null?promotion.code:"")">
+                                    </div>
+                                    <div class="col-lg-4 col-md-4">
+                                        <button id="btn-discount" style="flex-basis:40%">Áp dụng</button>
+                                    </div>
+                                    
+                                </div>
+                                <button data-toggle="collapse" data-target="#detail" class="mt-2" type="submit">Đặt hàng</button>
                             </div>
-                            <a></a>
-                            <div class="cart_subtotal">
-                                <p>Tổng tiền</p>
-                                <p class="cart_amount sum_money">@Libary.Instances.convertVND(Model.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString())</p>
+                            <div class="col-lg-6 col-md-12">
+                                <div class="d-flex flex-column">
+                                    <div class="cart_subtotal">
+                                        <p class="mr-1">Tổng sản phẩm:</p>
+                                        <p class="cart_amount sum_quantity text-center" style="min-width:100px">@Model.Sum(x => x.Quantity)</p>
+                                    </div>
+                                    <div class="cart_subtotal">
+                                        <p class="mr-1">Tạm tính:</p>
+                                        <p class="cart_amount sum_temp_money text-center" style="min-width:100px">@Libary.Instances.convertVND(sumMoney.ToString())</p>
+                                    </div>
+                                    <div class="cart_subtotal">
+                                        <p class="mr-1">Giảm giá:</p>
+                                        <p class="cart_amount discount text-center" style="min-width:100px">@(sumDiscount == 0 ? Libary.Instances.convertVND("0") : ("-" + Libary.Instances.convertVND(sumDiscount.ToString())))</p>
+                                    </div>
+                                    <div class="cart_subtotal">
+                                        <p class="mr-1">Tổng tiền trả:</p>
+                                        <p class="cart_amount sum_money text-center" style="min-width:100px">@Libary.Instances.convertVND((sumMoney - sumDiscount).ToString())</p>
+                                    </div>
+                                </div>
+
                             </div>
-                            <button data-toggle="collapse" data-target="#detail" type="submit">Đặt hàng</button>
                         </div>
                     </div>
                 </div>
@@ -199,7 +236,7 @@ else
                                         <label class="col-lg-3 col-md-6 col-sm-6 mb-1"><input type="radio" id="rdoCash" name="paymentMethod" value="CASH" checked="checked" /> <span class="bank-title">Tiền mặt</span></label>
                                         <label class="col-sm-6 col-lg-3 col-md-6 mb-1"><input type="radio" id="rdoNL" name="paymentMethod" value="ONLINE" /> <span class="bank-title">Online</span></label>
                                     </div>
-                                 
+
                                 </div>
                                 <div class="col-lg-12 col-md-12">
                                     <div class="order-notes">

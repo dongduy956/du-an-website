@@ -11,38 +11,38 @@
 
 namespace NONBAOHIEMVIETTIN.Models
 {
-
-using System;
+    using Newtonsoft.Json;
+    using System;
     using System.Collections.Generic;
-    
-public partial class receipt
-{
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public receipt()
+    public partial class receipt
     {
 
-        this.receiptdetail = new HashSet<receiptdetail>();
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public receipt()
+        {
+
+            this.receiptdetail = new HashSet<receiptdetail>();
+
+        }
+
+
+        public int id { get; set; }
+
+        public Nullable<int> idaccount { get; set; }
+
+        public Nullable<System.DateTime> createdate { get; set; }
+
+        public Nullable<decimal> total { get; set; }
+
+
+        [JsonIgnore]
+        public virtual accounts accounts { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
+        public virtual ICollection<receiptdetail> receiptdetail { get; set; }
 
     }
-
-
-    public int id { get; set; }
-
-    public Nullable<int> idaccount { get; set; }
-
-    public Nullable<System.DateTime> createdate { get; set; }
-
-    public Nullable<decimal> total { get; set; }
-
-
-
-    public virtual accounts accounts { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<receiptdetail> receiptdetail { get; set; }
-
-}
 
 }

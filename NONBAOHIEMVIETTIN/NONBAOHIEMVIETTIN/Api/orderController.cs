@@ -12,17 +12,17 @@ using NONBAOHIEMVIETTIN.Models;
 
 namespace NONBAOHIEMVIETTIN.Api
 {
-    public class orderController : ApiController
+    public class OrderController : ApiController
     {
         private nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
 
-        // GET: api/orders
+        // GET: api/Order
         public IQueryable<order> Getorder()
         {
             return db.order;
         }
 
-        // GET: api/orders/5
+        // GET: api/Order/5
         [ResponseType(typeof(order))]
         public IHttpActionResult Getorder(int id)
         {
@@ -35,7 +35,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return Ok(order);
         }
 
-        // PUT: api/orders/5
+        // PUT: api/Order/5
         [ResponseType(typeof(void))]
         public IHttpActionResult Putorder(int id, order order)
         {
@@ -70,7 +70,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/orders
+        // POST: api/Order
         [ResponseType(typeof(order))]
         public IHttpActionResult Postorder(order order)
         {
@@ -85,7 +85,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return CreatedAtRoute("DefaultApi", new { id = order.id }, order);
         }
 
-        // DELETE: api/orders/5
+        // DELETE: api/Order/5
         [ResponseType(typeof(order))]
         public IHttpActionResult Deleteorder(int id)
         {

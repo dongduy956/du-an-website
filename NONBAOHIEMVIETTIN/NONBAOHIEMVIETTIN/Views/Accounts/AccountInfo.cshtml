@@ -157,6 +157,7 @@
                                         <th>#</th>
                                         <th>Ngày</th>
                                         <th>Tình trạng</th>
+                                        <th>Giảm giá</th>
                                         <th>Tổng</th>
                                         <td style="vertical-align: bottom;border-bottom: 2px solid #dee2e6;text-align: center;font-weight: bold;">Hành động</td>
                                     </tr>
@@ -196,6 +197,7 @@
                                                 }
                                             </span>
                                         </td>
+                                        <td>@(item.idpromotion!=null?item.promotion.discount + " %":"0 %")</td>
                                         <td>@Libary.Instances.convertVND(item.total.ToString()) </td>
                                         <td>
                                             <a href="" data-target="#detail_@item.id" data-id="@item.id" id="view_@item.id" data-toggle="collapse" class="view">
@@ -233,7 +235,7 @@
                                                 <thead style="background:#fdfdfd">
                                                     <tr>
                                                         <th>#</th>
-                                                        <th>Tên</th>
+                                                        <th>Tên</th>                                                        
                                                         <th>Số lượng</th>
                                                         <th>Giá</th>
                                                         <th>Thành tiền</th>

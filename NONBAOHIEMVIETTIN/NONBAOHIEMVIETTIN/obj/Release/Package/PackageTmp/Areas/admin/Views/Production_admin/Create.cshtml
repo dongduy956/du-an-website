@@ -1,4 +1,4 @@
-﻿
+﻿@model NONBAOHIEMVIETTIN.Models.production
 @{
     ViewBag.Title = "Thêm mới hãng sản xuất";
     Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
@@ -47,9 +47,9 @@
                 <div class="form-group">
                     <label class="control-label col-md-12">Tên hãng sản xuất</label>
                     <div class="col-md-12">
-                        <input name="name" placeholder="Nhập vào tên hãng sản xuất" required class="form-control" />
+                        @Html.EditorFor(model => model.name, new { htmlAttributes = new { @placeholder = "Nhập vào tên hãng sản xuất.", @required = true, @class = "form-control" } })
                         <div class="valid-feedback">Valid</div>
-                        <div class="invalid-feedback">Nhập vào tên hãng sản xuất</div>
+                        <div class="invalid-feedback">Nhập vào tên hãng sản xuất.</div>
                     </div>
                 </div>
                 <div class="form-group">

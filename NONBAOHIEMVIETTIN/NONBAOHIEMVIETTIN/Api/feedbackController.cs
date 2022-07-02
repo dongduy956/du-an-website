@@ -12,17 +12,17 @@ using NONBAOHIEMVIETTIN.Models;
 
 namespace NONBAOHIEMVIETTIN.Api
 {
-    public class feedbackController : ApiController
+    public class FeedbackController : ApiController
     {
         private nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
 
-        // GET: api/feedbacks
+        // GET: api/Feedback
         public IQueryable<feedback> Getfeedback()
         {
             return db.feedback;
         }
 
-        // GET: api/feedbacks/5
+        // GET: api/Feedback/5
         [ResponseType(typeof(feedback))]
         public IHttpActionResult Getfeedback(int id)
         {
@@ -35,7 +35,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return Ok(feedback);
         }
 
-        // PUT: api/feedbacks/5
+        // PUT: api/Feedback/5
         [ResponseType(typeof(void))]
         public IHttpActionResult Putfeedback(int id, feedback feedback)
         {
@@ -70,7 +70,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/feedbacks
+        // POST: api/Feedback
         [ResponseType(typeof(feedback))]
         public IHttpActionResult Postfeedback(feedback feedback)
         {
@@ -85,7 +85,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return CreatedAtRoute("DefaultApi", new { id = feedback.id }, feedback);
         }
 
-        // DELETE: api/feedbacks/5
+        // DELETE: api/Feedback/5
         [ResponseType(typeof(feedback))]
         public IHttpActionResult Deletefeedback(int id)
         {

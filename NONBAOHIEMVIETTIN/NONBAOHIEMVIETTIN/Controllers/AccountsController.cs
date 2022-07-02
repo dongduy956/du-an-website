@@ -20,9 +20,19 @@ namespace NONBAOHIEMVIETTIN.Controllers
     {
 
         private nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
-        int pageSize = 4;
+        private const int pageSizeInfo = 4;
+        private const int pageSize = 10;
 
-        void ViewBagNoti(List<order> temp, int page)
+        void ViewBagNotiInfo(List<order> temp, int page)
+        {
+            if (temp.Count() > 0)
+            {
+                int last = int.Parse(Math.Ceiling((double)temp.Count() / pageSizeInfo).ToString());
+                ViewBag.last = last;
+                ViewBag.noti = "Showing " + page + "-" + last + " of " + temp.Count() + " results";
+            }
+        }
+        void ViewBagNotiWheel(List<wheel> temp, int page)
         {
             if (temp.Count() > 0)
             {
@@ -31,7 +41,92 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 ViewBag.noti = "Showing " + page + "-" + last + " of " + temp.Count() + " results";
             }
         }
+        void ViewBagNotiRecharge(List<history_recharge> temp, int page)
+        {
+            if (temp.Count() > 0)
+            {
+                int last = int.Parse(Math.Ceiling((double)temp.Count() / pageSize).ToString());
+                ViewBag.last = last;
+                ViewBag.noti = "Showing " + page + "-" + last + " of " + temp.Count() + " results";
+            }
+        }
+        void ViewBagNotiWithdraw(List<history_withdraw> temp, int page)
+        {
+            if (temp.Count() > 0)
+            {
+                int last = int.Parse(Math.Ceiling((double)temp.Count() / pageSize).ToString());
+                ViewBag.last = last;
+                ViewBag.noti = "Showing " + page + "-" + last + " of " + temp.Count() + " results";
+            }
+        }
+        [HandleError]
+        public ActionResult AccountInfo(int page = 1)
+        {
+            var acc = Session["account"] as accounts;
+            if (acc == null)
+                return Redirect("/");
+            var temp = db.order.Where(x => x.idaccount == acc.id).ToList();
+            var lstOrder = temp.ToPagedList(page, pageSizeInfo);
+            ViewBagNotiInfo(temp, page);
+            return View(lstOrder);
+        }
+        [HandleError]
+        public ActionResult AccountWheel(int page = 1)
+        {
+            var acc = Session["account"] as accounts;
+            if (acc == null)
+                return Redirect("/");
+            var temp = db.wheel.OrderByDescending(x=>x.id).Where(x => x.idaccount == acc.id).ToList();
+            var lstWheel = temp.ToPagedList(page, pageSize);
+            ViewBagNotiWheel(temp, page);
+            return View(lstWheel);
+        }
 
+        [HandleError]
+        public ActionResult AccountRecharge(int page = 1)
+        {
+            var acc = Session["account"] as accounts;
+            if (acc == null)
+                return Redirect("/");
+            var temp = db.history_recharge.OrderByDescending(x => x.id).Where(x => x.idaccount == acc.id).ToList();
+            var lstCharge = temp.ToPagedList(page, pageSize);
+            ViewBagNotiRecharge(temp, page);
+            return View(lstCharge);
+        }
+        [HandleError]
+        public ActionResult AccountWithdraw(int page = 1)
+        {
+            var acc = Session["account"] as accounts;
+            if (acc == null)
+                return Redirect("/");
+            var temp = db.history_withdraw.OrderByDescending(x => x.id).Where(x => x.idaccount == acc.id).ToList();
+            var lstWithdraw = temp.ToPagedList(page, pageSize);
+            ViewBagNotiWithdraw(temp, page);
+            return View(lstWithdraw);
+        }
+        [HttpPost]
+        public JsonResult deleteWithdraw(int _id)
+        {
+            var withdraw = db.history_withdraw.Find(_id);
+            if(withdraw!=null)
+            {
+                db.history_withdraw.Remove(withdraw);
+                db.SaveChanges();
+                var acc = db.accounts.Find((Session["account"] as accounts).id);
+                Session["account"] = acc;
+                return Json(new
+                {
+                    status = true,
+                    message = "Huỷ lệnh thành công.",
+                    coin = acc.coin
+                });
+            }
+            return Json(new
+            {
+                status = false,
+                message = "Huỷ lệnh thất bại."
+            });
+        }
         [HttpPost]
         public JsonResult LoginGoogle(string username, string email, string fullname, string image)
         {
@@ -46,7 +141,9 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 password = "",
                 idrole = 1,
                 alias = "tai-khoan-" + (db.accounts.OrderByDescending(x => x.id).FirstOrDefault().id + 1),
-                create_date = DateTime.Now
+                create_date = DateTime.Now,
+                coin = 0,
+                spin = 3,
 
             };
             bool check = false;
@@ -90,6 +187,8 @@ namespace NONBAOHIEMVIETTIN.Controllers
             acc.status = true;
             acc.alias = "tai-khoan-" + (db.accounts.OrderByDescending(x => x.id).FirstOrDefault().id + 1);
             acc.create_date = DateTime.Now;
+            acc.spin = 3;
+            acc.coin = 0;
             bool check = false;
             var accTemp = db.accounts.SingleOrDefault(x => x.email.Equals(acc.email) && x.issocial == 2);
             if (accTemp == null)
@@ -135,7 +234,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
         [HttpPost]
         public JsonResult Logout()
         {
-            Session["account"] = Session["wishSession"] = Session["cartSession"] = null;
+            Session["account"] = Session["wishSession"] = Session["cartSession"] = Session["promotion"] = null;
 
             return Json(1);
         }
@@ -217,8 +316,6 @@ namespace NONBAOHIEMVIETTIN.Controllers
             return Json(-1);
 
         }
-
-        // POST: Accounts/Create       
         [HttpPost]
         public JsonResult Register(accounts acc)
         {
@@ -621,6 +718,8 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 acc.status = true;
                 acc.issocial = 0;
                 acc.create_date = DateTime.Now;
+                acc.coin = 0;
+                acc.spin = 3;
                 db.accounts.Add(acc);
                 db.SaveChanges();
                 Session["acc"] = Session["code"] = null;
@@ -659,8 +758,6 @@ namespace NONBAOHIEMVIETTIN.Controllers
             }
             return Json(-1);
         }
-
-
         [HttpPost]
         public JsonResult ChangePassword(string passold, string passnew, string prepass)
         {
@@ -687,19 +784,6 @@ namespace NONBAOHIEMVIETTIN.Controllers
             }
 
         }
-
-        [HandleError]
-        public ActionResult AccountInfo(int page = 1)
-        {
-
-            var acc = Session["account"] as accounts;
-            if (acc == null)
-                return Redirect("/");
-            var temp = db.order.Where(x => x.idaccount == acc.id).ToList();
-            var lstOrder = temp.ToPagedList(page, pageSize);
-            ViewBagNoti(temp, page);
-            return View(lstOrder);
-        }
         [HttpPost]
         public JsonResult update(accounts acc)
         {
@@ -718,6 +802,10 @@ namespace NONBAOHIEMVIETTIN.Controllers
             acc.idrole = accSession.idrole;
             acc.username = accSession.username;
             acc.alias = accSession.alias;
+            acc.create_date = accSession.create_date;
+            acc.coin = accSession.coin;
+            acc.spin = accSession.spin;
+            acc.date_attendance = accSession.date_attendance;
             if (!acc.image.Contains("assets/images/users/") && acc.issocial == 0)
                 acc.image = "assets/images/users/" + acc.image;
             try

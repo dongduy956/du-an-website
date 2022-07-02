@@ -11,29 +11,29 @@
 
 namespace NONBAOHIEMVIETTIN.Models
 {
-
-using System;
+    using Newtonsoft.Json;
+    using System;
     using System.Collections.Generic;
-    
-public partial class orderdetail
-{
 
-    public int idproduct { get; set; }
+    public partial class orderdetail
+    {
 
-    public int idorder { get; set; }
+        public int idproduct { get; set; }
 
-    public Nullable<decimal> price { get; set; }
+        public int idorder { get; set; }
 
-    public Nullable<int> quantity { get; set; }
+        public Nullable<decimal> price { get; set; }
 
-    public Nullable<decimal> subtotal { get; set; }
+        public Nullable<int> quantity { get; set; }
+
+        public Nullable<decimal> subtotal { get; set; }
 
 
+        [JsonIgnore]
+        public virtual products products { get; set; }
+        [JsonIgnore]
+        public virtual order order { get; set; }
 
-    public virtual products products { get; set; }
-
-    public virtual order order { get; set; }
-
-}
+    }
 
 }

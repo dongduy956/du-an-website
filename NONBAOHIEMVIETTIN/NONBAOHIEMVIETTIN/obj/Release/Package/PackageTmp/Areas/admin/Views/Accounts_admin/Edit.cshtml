@@ -93,6 +93,9 @@
             @Html.HiddenFor(model => model.issocial)
             @Html.HiddenFor(model => model.username)
             @Html.HiddenFor(model => model.create_date)
+            @Html.HiddenFor(model => model.date_attendance)
+            @Html.HiddenFor(model => model.spin)
+            @Html.HiddenFor(model => model.coin)
             if (Model.username.Equals("admin"))
             {
                 @Html.HiddenFor(model => model.idrole)

@@ -1,0 +1,125 @@
+﻿@using NONBAOHIEMVIETTIN.Models;
+@{
+    ViewBag.Title = "Quay thưởng";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var acc = Session["account"] as accounts;
+    var db = new nonbaohiemviettinEntities();
+    if(db.wheel.Count()==0)
+    {
+        Session["wheel"] = 0;
+    }
+    else
+    {
+        Session["wheel"] = db.wheel.OrderByDescending(x=>x.id).FirstOrDefault().id;
+    }
+}
+@section styles{
+    <link href="~/assets/client/css/wheel.css?@TempData["Version"]" rel="stylesheet" />
+}
+@section scripts{
+    <script src="~/assets/client/js/code/wheel.js"></script>
+}
+<!--breadcrumbs area start-->
+<div class="breadcrumbs_area">
+    <div class="row">
+        <div class="col-12">
+            <div class="breadcrumb_content">
+                <ul>
+                    <li><a href="/">Trang chủ</a></li>
+                    <li><i class="fa fa-angle-right"></i></li>
+                    <li>Quay thưởng</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs area end-->
+<!--about section area -->
+<div class="about_section">
+    <div class="row">
+        <div class="col-lg-6 col-md-12 text-center">
+            <button id="btn-authentication" class="mb-2 btn btn-outline-primary">Điểm danh</button>
+            @if (acc != null)
+            {
+                <button id="btn-recharge" class="mb-2 btn btn-outline-secondary">Nạp tiền</button>
+                <button id="btn-withdraw" class="mb-2 btn btn-outline-dark">Rút tiền</button>
+                <p style="font-size:2rem; font-weight:bold;"><span class="acc_coin text-danger">@acc.coin</span> xu - <span class="acc_spin text-danger">@acc.spin</span> lượt quay.</p>
+            }
+        </div>
+        
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-md-12">
+            <main>
+                <div class="main-wheel">
+                    <img class="arrow" src="~/assets/images/wheel/arrow.png" />
+                    <div style="cursor:pointer" class="btn-center btn-start">Spin</div>
+                    <ul class="wheel"></ul>
+                </div>
+            </main>
+
+        </div>
+        <div class="col-lg-6 col-md-12">
+            <h1>Hoạt động gần đây</h1>
+            <marquee scrollamount="2" class="p-2 mt-2" width="100%" direction="down" height="50%">
+                <ul class="list-wheel" style="list-style:circle">
+                    @foreach (var item in db.wheel.Where(x=>x.idpromotion!=null || x.gift_name.Contains("xu")).OrderByDescending(x => x.create_date).Take(10))
+                    {
+                        <li class="item-wheel">
+                            <span class="title_account">@(db.accounts.FirstOrDefault(x => x.id == item.idaccount).fullname)</span>
+                            <span class="title_title">vừa tham gia vòng quay nhận được </span>
+                            <span class="title_money">"@item.gift_name" .</span>
+                        </li>
+                    }
+
+                </ul>
+            </marquee>
+            <div></div>
+        </div>
+    </div>
+</div>
+<!-- Modal  recharge -->
+<div class="modal fade" id="modal_recharge" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Nhập số tiền (<span style="font-weight:100; color:#808080;"><em>1.000đ = 1xu</em>. Tối thiểu: 10.000đ và số tiền là bội của 1000.</span>)</h4>
+                <button type="button" id="btn_close_recharge" class="close" data-dismiss="modal" style="">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input id="amount_money" value="10000" step="1000" name="amount_money" autofocus autocomplete="on" class="form-control" type="number" min="10000" />
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+                <button id="btn_submit_recharge" class="btn btn-outline-success">
+                    Xác nhận
+                </button>
+                <button type="button" id="btncloseforget" class="btn btn-outline-danger" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal recharge end-->
+<!-- Modal  recharge -->
+<div class="modal fade" id="modal_withdraw" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Nhập số xu muốn rút (<span style="font-weight:100; color:#808080;"><em>1xu = 1.000đ</em>. Tối thiểu: 200xu</span>)</h4>
+                <button type="button" class="close" data-dismiss="modal" style="">&times;</button>
+            </div>
+            <div class="modal-body">
+                <input id="bank_number" placeholder="Nhập vào số tài khoản" autofocus autocomplete="on" class="form-control" />
+                <input id="bank_name" placeholder="Nhập vào tên ngân hàng" autofocus autocomplete="on" class="form-control mt-1 mb-1" />
+                <input id="fullname" placeholder="Nhập vào họ tên người nhận" autofocus autocomplete="on" class="form-control mb-1"/>
+                <input id="amount_money_withdraw" value="200" step="1" autofocus autocomplete="on" class="form-control" type="number" min="200" />
+            </div>
+            <div class="modal-footer d-flex justify-content-between">
+                <button id="btn_submit_withdraw" class="btn btn-outline-success">
+                    Xác nhận
+                </button>
+                <button type="button" id="btn_close_withdraw" class="btn btn-outline-danger" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--Modal recharge end-->

@@ -11,54 +11,58 @@
 
 namespace NONBAOHIEMVIETTIN.Models
 {
-
-using System;
+    using Newtonsoft.Json;
+    using System;
     using System.Collections.Generic;
-    
-public partial class order
-{
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public order()
+    public partial class order
     {
 
-        this.orderdetail = new HashSet<orderdetail>();
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public order()
+        {
+
+            this.orderdetail = new HashSet<orderdetail>();
+
+        }
+
+
+        public int id { get; set; }
+
+        public Nullable<int> idaccount { get; set; }
+
+        public Nullable<System.DateTime> createdate { get; set; }
+
+        public string email { get; set; }
+
+        public string fullname { get; set; }
+
+        public string address { get; set; }
+
+        public string phone { get; set; }
+
+        public Nullable<bool> status { get; set; }
+
+        public Nullable<bool> statuspay { get; set; }
+
+        public Nullable<decimal> total { get; set; }
+
+        public string note { get; set; }
+
+        public Nullable<int> paymentmethod { get; set; }
+
+        public Nullable<int> idpromotion { get; set; }
+
+
+        [JsonIgnore]
+        public virtual accounts accounts { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
+        public virtual ICollection<orderdetail> orderdetail { get; set; }
+        [JsonIgnore]
+        public virtual promotion promotion { get; set; }
 
     }
-
-
-    public int id { get; set; }
-
-    public Nullable<int> idaccount { get; set; }
-
-    public Nullable<System.DateTime> createdate { get; set; }
-
-    public string email { get; set; }
-
-    public string fullname { get; set; }
-
-    public string address { get; set; }
-
-    public string phone { get; set; }
-
-    public Nullable<bool> status { get; set; }
-
-    public Nullable<bool> statuspay { get; set; }
-
-    public Nullable<decimal> total { get; set; }
-
-    public string note { get; set; }
-
-    public Nullable<int> paymentmethod { get; set; }
-
-
-
-    public virtual accounts accounts { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<orderdetail> orderdetail { get; set; }
-
-}
 
 }

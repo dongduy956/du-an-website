@@ -12,17 +12,17 @@ using NONBAOHIEMVIETTIN.Models;
 
 namespace NONBAOHIEMVIETTIN.Api
 {
-    public class rateController : ApiController
+    public class RateController : ApiController
     {
         private nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
 
-        // GET: api/rate
+        // GET: api/Rate
         public IQueryable<rate> Getrate()
         {
             return db.rate;
         }
 
-        // GET: api/rate/5
+        // GET: api/Rate/5
         [ResponseType(typeof(rate))]
         public IHttpActionResult Getrate(int id)
         {
@@ -35,7 +35,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return Ok(rate);
         }
 
-        // PUT: api/rate/5
+        // PUT: api/Rate/5
         [ResponseType(typeof(void))]
         public IHttpActionResult Putrate(int id, rate rate)
         {
@@ -70,7 +70,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/rate
+        // POST: api/Rate
         [ResponseType(typeof(rate))]
         public IHttpActionResult Postrate(rate rate)
         {
@@ -85,7 +85,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return CreatedAtRoute("DefaultApi", new { id = rate.id }, rate);
         }
 
-        // DELETE: api/rate/5
+        // DELETE: api/Rate/5
         [ResponseType(typeof(rate))]
         public IHttpActionResult Deleterate(int id)
         {

@@ -12,17 +12,17 @@ using NONBAOHIEMVIETTIN.Models;
 
 namespace NONBAOHIEMVIETTIN.Api
 {
-    public class newstypeController : ApiController
+    public class NewstypeController : ApiController
     {
         private nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
 
-        // GET: api/newstypes
+        // GET: api/Newstype
         public IQueryable<newstype> Getnewstype()
         {
             return db.newstype;
         }
 
-        // GET: api/newstypes/5
+        // GET: api/Newstype/5
         [ResponseType(typeof(newstype))]
         public IHttpActionResult Getnewstype(int id)
         {
@@ -35,7 +35,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return Ok(newstype);
         }
 
-        // PUT: api/newstypes/5
+        // PUT: api/Newstype/5
         [ResponseType(typeof(void))]
         public IHttpActionResult Putnewstype(int id, newstype newstype)
         {
@@ -70,7 +70,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/newstypes
+        // POST: api/Newstype
         [ResponseType(typeof(newstype))]
         public IHttpActionResult Postnewstype(newstype newstype)
         {
@@ -85,7 +85,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return CreatedAtRoute("DefaultApi", new { id = newstype.id }, newstype);
         }
 
-        // DELETE: api/newstypes/5
+        // DELETE: api/Newstype/5
         [ResponseType(typeof(newstype))]
         public IHttpActionResult Deletenewstype(int id)
         {

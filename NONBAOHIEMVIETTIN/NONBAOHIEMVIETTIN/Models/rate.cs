@@ -11,31 +11,31 @@
 
 namespace NONBAOHIEMVIETTIN.Models
 {
-
-using System;
+    using Newtonsoft.Json;
+    using System;
     using System.Collections.Generic;
-    
-public partial class rate
-{
 
-    public int id { get; set; }
+    public partial class rate
+    {
 
-    public Nullable<int> id_account { get; set; }
+        public int id { get; set; }
 
-    public Nullable<int> id_product { get; set; }
+        public Nullable<int> id_account { get; set; }
 
-    public Nullable<int> star { get; set; }
+        public Nullable<int> id_product { get; set; }
 
-    public string comment { get; set; }
+        public Nullable<int> star { get; set; }
 
-    public Nullable<System.DateTime> createdate { get; set; }
+        public string comment { get; set; }
+
+        public Nullable<System.DateTime> createdate { get; set; }
 
 
+        [JsonIgnore]
+        public virtual accounts accounts { get; set; }
+        [JsonIgnore]
+        public virtual products products { get; set; }
 
-    public virtual accounts accounts { get; set; }
-
-    public virtual products products { get; set; }
-
-}
+    }
 
 }

@@ -11,34 +11,34 @@
 
 namespace NONBAOHIEMVIETTIN.Models
 {
-
-using System;
+    using Newtonsoft.Json;
+    using System;
     using System.Collections.Generic;
-    
-public partial class role
-{
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public role()
+    public partial class role
     {
 
-        this.accounts = new HashSet<accounts>();
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public role()
+        {
+
+            this.accounts = new HashSet<accounts>();
+
+        }
+
+
+        public int id { get; set; }
+
+        public string name { get; set; }
+
+        public string alias { get; set; }
+
+
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
+        public virtual ICollection<accounts> accounts { get; set; }
 
     }
-
-
-    public int id { get; set; }
-
-    public string name { get; set; }
-
-    public string alias { get; set; }
-
-
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<accounts> accounts { get; set; }
-
-}
 
 }

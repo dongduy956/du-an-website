@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using NONBAOHIEMVIETTIN.Models;
 using System.Configuration;
-using System.Net.Mail;
-using System.Net;
-using System.Web.Script.Serialization;
 using System.Data.Entity;
 using log4net;
 
@@ -18,12 +14,12 @@ namespace NONBAOHIEMVIETTIN.Controllers
         private static readonly ILog log =
           LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         // GET: Cart
-        public const string cartSession = "cartSession";
+        private const string cartSession = "cartSession";
+
         private nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
 
         // GET: Cart
         [HandleError]
-
         public ActionResult Index()
         {
             var cart = Session[cartSession];
@@ -38,7 +34,9 @@ namespace NONBAOHIEMVIETTIN.Controllers
         public JsonResult DeleteItem(int ProductId)
         {
             var cart = Session[cartSession];
+            var promotion = (Session["promotion"] as promotion);
             var p = db.products.Find(ProductId);
+
             if (cart != null)
             {
                 var list = (List<CartItem>)cart;
@@ -46,7 +44,18 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 {
                     list.RemoveAll(r => r.Product.id == ProductId);
                     Session[cartSession] = list;
-                    return Json(new { status = 1, sumQuantity = list.Sum(x => x.Quantity), sumMoney = Libary.Instances.convertVND(list.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString()) }, JsonRequestBehavior.AllowGet);
+                    double sumMoney = (double)list.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price));
+                    double sumDiscount = 0;
+                    if (promotion != null)
+                        sumDiscount = (double)(sumMoney * (promotion.discount / 100.0));
+                    return Json(new
+                    {
+                        status = 1,
+                        sumQuantity = list.Sum(x => x.Quantity),
+                        sumTempMoney = Libary.Instances.convertVND(sumMoney.ToString()),
+                        sumMoney = Libary.Instances.convertVND((sumMoney - sumDiscount).ToString()),
+                        sumDiscount = sumDiscount == 0 ? Libary.Instances.convertVND("0") : "-" + Libary.Instances.convertVND(sumDiscount.ToString()),
+                    });
                 }
             }
             return Json(new { status = 0 }, JsonRequestBehavior.AllowGet);
@@ -154,6 +163,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
         [HttpPost]
         public JsonResult UpdateItem(int ProductId, int Quantity)
         {
+            var promotion = (Session["promotion"] as promotion);
             var cart = Session[cartSession];
             var p = db.products.Find(ProductId);
             if (Quantity > p.quantity)
@@ -188,16 +198,77 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 }
 
                 Session[cartSession] = list;
+                double sumMoney = (double)list.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price));
+                double sumDiscount = 0;
+                if (promotion != null)
+                    sumDiscount = (double)(sumMoney * (promotion.discount / 100.0));
                 return Json(new
                 {
                     status = 1,
                     sumQuantity = list.Sum(x => x.Quantity),
-                    sumMoney = Libary.Instances.convertVND(list.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString()),
-                    total = Libary.Instances.convertVND(subtotal.ToString())
+                    sumMoney = Libary.Instances.convertVND((sumMoney - sumDiscount).ToString()),
+                    sumTempMoney = Libary.Instances.convertVND(sumMoney.ToString()),
+                    total = Libary.Instances.convertVND(subtotal.ToString()),
+                    sumDiscount = sumDiscount == 0 ? Libary.Instances.convertVND("0") : "-" + Libary.Instances.convertVND(sumDiscount.ToString()),
                 });
             }
             return Json(new { status = 0 });
 
+
+        }
+
+        [HttpPost]
+        public JsonResult getDiscount(string code)
+        {
+
+            if (string.IsNullOrEmpty(code))
+                return Json(new
+                {
+                    status = false,
+                    message = "Mã không tồn tại."
+                });
+
+            var promotion = db.promotion.FirstOrDefault(x => x.code.Equals(code));
+            if (promotion != null)
+            {
+                var sspromotion = (Session["promotion"] as promotion);
+                if (sspromotion != null && sspromotion.id == promotion.id)
+                    return Json(new
+                    {
+                        status = false,
+                        message = "Bạn đang áp dụng mã này."
+                    });
+                if (DateTime.Now.CompareTo(((DateTime)promotion.end_date)) >= 0)
+                    return Json(new
+                    {
+                        status = false,
+                        message = "Mã hết hạn sử dụng."
+                    });
+                if (promotion.quantity_use == 0)
+                    return Json(new
+                    {
+                        status = false,
+                        message = "Mã hết lượt sử dụng."
+                    });
+                var cart = Session[cartSession] as List<CartItem>;
+                var sumMoney = (double)cart.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price));
+                double sumDiscount = (double)(sumMoney * (promotion.discount / 100.0));
+
+                Session["promotion"] = promotion;
+                return Json(new
+                {
+                    status = true,
+                    message = "Quý khách được giảm <strong>" + promotion.discount + "%</strong> .",
+                    sumQuantity = cart.Sum(x => x.Quantity),
+                    sumDiscount = sumDiscount == 0 ? Libary.Instances.convertVND("0") : "-" + Libary.Instances.convertVND(sumDiscount.ToString()),
+                    sumMoney = Libary.Instances.convertVND((sumMoney - sumDiscount).ToString())
+                });
+            }
+            return Json(new
+            {
+                status = false,
+                message = "Mã không tồn tại."
+            });
 
         }
         [HttpPost]
@@ -371,7 +442,20 @@ namespace NONBAOHIEMVIETTIN.Controllers
       </div>
       <div class='tbody'>";
                 #endregion
+
+                var promotion = (Session["promotion"] as promotion);
+                if (promotion != null)
+                {
+                    order.idpromotion = promotion.id;
+                    if (promotion.quantity_use > 0)
+                    {
+                        var promotion_temp = db.promotion.Find(promotion.id);
+                        promotion_temp.quantity_use -= 1;
+                        db.Entry(promotion_temp).State = EntityState.Modified;
+                    }
+                }
                 db.order.Add(order);
+
                 db.SaveChanges();
                 int idorder = db.order.OrderByDescending(x => x.id).FirstOrDefault().id;
                 var urlImage = string.Empty;
@@ -396,8 +480,13 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 </div>";
                     #endregion
                     db.orderdetail.Add(orderdetail);
-                    db.SaveChanges();
                 }
+                db.SaveChanges();
+                order = db.order.Find(idorder);
+                double total = (double)cart.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price));
+                double discount = 0;
+                if (order.idpromotion != null)
+                    discount = (double)(total * order.promotion.discount/100.0);
                 #region body mail
                 body += String.Format(@"</div>
     </div>
@@ -411,10 +500,26 @@ namespace NONBAOHIEMVIETTIN.Controllers
     </div>
     <div class='footer'>
       <span class='footer_text'>
-        Tổng tiền
+        Tạm tính
       </span>
       <span>
        {1}
+      </span>
+    </div>
+ <div class='footer'>
+      <span class='footer_text'>
+        Giảm giá
+      </span>
+      <span>
+       {2}
+      </span>
+    </div>
+ <div class='footer'>
+      <span class='footer_text'>
+       Tổng tiền
+      </span>
+      <span>
+       {3}
       </span>
     </div>
     <div class='header'>
@@ -426,9 +531,14 @@ namespace NONBAOHIEMVIETTIN.Controllers
 
 </body>
 
-</html>", cart.Sum(x => x.Quantity), Libary.Instances.convertVND(cart.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString()));
+</html>", cart.Sum(x => x.Quantity),
+Libary.Instances.convertVND(total.ToString()),
+discount == 0 ? Libary.Instances.convertVND("0") : "-" + Libary.Instances.convertVND(discount.ToString()),
+Libary.Instances.convertVND((total - discount).ToString())
+);
                 #endregion
                 Session[cartSession] = null;
+                Session["promotion"] = null;
                 try
                 {
                     Libary.Instances.sendMail("Thông tin đơn hàng " + idorder, order.email, body);
@@ -500,7 +610,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                     {
 
                     }
-                    
+
                 }
                 vnpay.AddRequestData("vnp_Bill_Address", order.address.Trim());
                 vnpay.AddRequestData("vnp_Bill_Country", "Việt Nam");
@@ -705,9 +815,19 @@ namespace NONBAOHIEMVIETTIN.Controllers
       </div>
       <div class='tbody'>";
                         #endregion
+                        var promotion = (Session["promotion"] as promotion);
+                        if (promotion != null)
+                        {
+                            order.idpromotion = promotion.id;
+                            if (promotion.quantity_use > 0)
+                            {
+                                var promotion_temp = db.promotion.Find(promotion.id);
+                                promotion_temp.quantity_use -= 1;
+                                db.Entry(promotion_temp).State = EntityState.Modified;
+                            }
+                        }
                         db.order.Add(order);
-                            db.SaveChanges();
-
+                        db.SaveChanges();
                         int idorder = db.order.OrderByDescending(x => x.id).FirstOrDefault().id;
                         var urlImage = string.Empty;
                         foreach (var item in cart)
@@ -731,8 +851,13 @@ namespace NONBAOHIEMVIETTIN.Controllers
                 </div>";
                             #endregion
                             db.orderdetail.Add(orderdetail);
-                            db.SaveChanges();
                         }
+                        db.SaveChanges();
+                        order = db.order.Find(idorder);
+                        double total = (double)cart.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price));
+                        double discount = 0;
+                        if (order.idpromotion != null)
+                            discount = (double)(total * order.promotion.discount/100.0);
                         #region body mail
                         body += String.Format(@"</div>
     </div>
@@ -746,10 +871,26 @@ namespace NONBAOHIEMVIETTIN.Controllers
     </div>
     <div class='footer'>
       <span class='footer_text'>
-        Tổng tiền
+        Tạm tính
       </span>
       <span>
        {1}
+      </span>
+    </div>
+ <div class='footer'>
+      <span class='footer_text'>
+        Giảm giá
+      </span>
+      <span>
+       {2}
+      </span>
+    </div>
+ <div class='footer'>
+      <span class='footer_text'>
+       Tổng tiền
+      </span>
+      <span>
+       {3}
       </span>
     </div>
     <div class='header'>
@@ -761,9 +902,14 @@ namespace NONBAOHIEMVIETTIN.Controllers
 
 </body>
 
-</html>", cart.Sum(x => x.Quantity), Libary.Instances.convertVND(cart.Sum(x => x.Quantity * (x.Product.promationprice > 0 ? x.Product.promationprice : x.Product.price)).ToString()));
+</html>", cart.Sum(x => x.Quantity),
+Libary.Instances.convertVND(total.ToString()),
+discount==0? Libary.Instances.convertVND("0"):"-"+Libary.Instances.convertVND(discount.ToString()),
+Libary.Instances.convertVND((total - discount).ToString())
+);
                         #endregion
                         Session[cartSession] = null;
+                        Session["promotion"] = null;
                         try
                         {
                             Libary.Instances.sendMail("Thông tin đơn hàng " + idorder, order.email, body);
@@ -783,7 +929,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                     {
                         ViewBag.Result = "Thanh toán thất bại. Vui lòng thực hiện lại thao tác.";
                     }
-                   
+
                 }
                 else
                 {

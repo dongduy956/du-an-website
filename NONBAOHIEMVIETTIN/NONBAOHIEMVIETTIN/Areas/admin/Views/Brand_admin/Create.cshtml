@@ -1,6 +1,5 @@
 ﻿@using NONBAOHIEMVIETTIN.Models
 @model brand
-
 @{
     ViewBag.Title = "Thêm mới đối tác";
     Layout = "~/Areas/admin/Views/Shared/_Layout.cshtml";
@@ -65,9 +64,9 @@
                 <div class="form-group">
                     <label class="control-label col-md-12">Tên đối tác</label>
                     <div class="col-md-12">
-                        <input name="name" placeholder="Nhập vào tiêu đề" required class="form-control" />
+                        @Html.EditorFor(model => model.name, new { htmlAttributes = new { @placeholder = "Nhập vào tiêu đề.", @required = true, @class = "form-control" } })
                         <div class="valid-feedback">Valid</div>
-                        <div class="invalid-feedback">Nhập vào tên đối tác</div>
+                        <div class="invalid-feedback">Nhập vào tên đối tác.</div>
                     </div>
                 </div>
                 <div class="form-group">
@@ -81,9 +80,9 @@
                 <div class="form-group">
                     <label class="control-label col-md-12">Link</label>
                     <div class="col-md-12">
-                        <input name="link" placeholder="Nhập vào link đối tác" required class="form-control" />
+                        @Html.EditorFor(model => model.link, new { htmlAttributes = new { @placeholder = "Nhập vào link đối tác.", @required = true, @class = "form-control" } })
                         <div class="valid-feedback">Valid</div>
-                        <div class="invalid-feedback">Nhập vào link</div>
+                        <div class="invalid-feedback">Nhập vào link.</div>
                     </div>
                 </div>
                 <div class="form-group">

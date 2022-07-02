@@ -12,20 +12,17 @@ using NONBAOHIEMVIETTIN.Models;
 
 namespace NONBAOHIEMVIETTIN.Api
 {
-    public class roleController : ApiController
+    public class RoleController : ApiController
     {
         private nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();
 
-        public roleController(){
-            db.Configuration.ProxyCreationEnabled = false;
-            }
-        // GET: api/roles
+        // GET: api/Role
         public IQueryable<role> Getrole()
-        {            
+        {
             return db.role;
         }
 
-        // GET: api/roles/5
+        // GET: api/Role/5
         [ResponseType(typeof(role))]
         public IHttpActionResult Getrole(int id)
         {
@@ -38,7 +35,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return Ok(role);
         }
 
-        // PUT: api/roles/5
+        // PUT: api/Role/5
         [ResponseType(typeof(void))]
         public IHttpActionResult Putrole(int id, role role)
         {
@@ -73,7 +70,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/roles
+        // POST: api/Role
         [ResponseType(typeof(role))]
         public IHttpActionResult Postrole(role role)
         {
@@ -88,7 +85,7 @@ namespace NONBAOHIEMVIETTIN.Api
             return CreatedAtRoute("DefaultApi", new { id = role.id }, role);
         }
 
-        // DELETE: api/roles/5
+        // DELETE: api/Role/5
         [ResponseType(typeof(role))]
         public IHttpActionResult Deleterole(int id)
         {

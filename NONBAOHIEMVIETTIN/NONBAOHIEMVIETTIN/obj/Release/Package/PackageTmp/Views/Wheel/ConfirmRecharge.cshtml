@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Xác nhận nạp tiền";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Description = "Trang xác nhận nạp tiền thành công khi khách hàng nạp tiền online.";
+    ViewBag.Url = "https://" + HttpContext.Current.Request.Url.Host.ToString().Trim().ToLower() + HttpContext.Current.Request.RawUrl.ToString().Trim().ToLower();
+    ViewBag.Image = "https://thumbs.dreamstime.com/z/happy-businessman-get-success-cartoon-illustration-white-background-38913238.jpg";
+}
+<!--breadcrumbs area start-->
+<div class="breadcrumbs_area">
+    <div class="row">
+        <div class="col-12">
+            <div class="breadcrumb_content">
+                <ul>
+                    <li><a href="/">Trang chủ</a></li>
+                    <li><i class="fa fa-angle-right"></i></li>
+                    <li>Xác nhận nạp tiền</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<!--breadcrumbs area end-->
+<div class="error_section">
+    <div class="row">
+        <div class="col-12">
+            <div class="error_form">
+                <h2 style="color: #00bba6;">Thông báo</h2>
+                @if (ViewBag.idrecharge != null)
+                {
+                    <h4>Xác nhận nạp tiền @ViewBag.idorder</h4>
+                }
+                <p>@Html.Raw(ViewBag.result)</p>
+                <a href="/quay-thuong">Trở về quay thưởng</a>
+            </div>
+        </div>
+    </div>
+</div>

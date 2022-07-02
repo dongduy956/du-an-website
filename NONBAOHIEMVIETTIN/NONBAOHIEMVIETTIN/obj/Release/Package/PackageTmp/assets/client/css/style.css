@@ -2688,7 +2688,6 @@
 }
 
 .cart_submit {
-    text-align: right;
     padding: 12px;
 }
 
@@ -2725,12 +2724,12 @@
     }
 
 .cart_subtotal {
+    margin-left: auto;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
     -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
+    -ms-flex-pack: justify;    
 }
 
     .cart_subtotal p {
@@ -4552,4 +4551,9 @@ button[disabled] {
 }
 .title_money{
     color:#ea3a3c;
+}
+@media screen and (max-width: 770px){
+    .nav_top{
+        justify-content: center !important;
+    }
 }

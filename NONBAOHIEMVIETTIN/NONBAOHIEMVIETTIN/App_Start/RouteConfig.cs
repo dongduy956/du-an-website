@@ -13,7 +13,86 @@ namespace NONBAOHIEMVIETTIN
         public static void RegisterRoutes(RouteCollection routes)
         {
             routes.MapMvcAttributeRoutes();
-            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");       
+            routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
+            routes.MapRoute(
+       name: "WheelDeleteWithdraw",
+       url: "huy-lenh-rut-tien",
+       defaults: new { controller = "Accounts", action = "deleteWithdraw", id = UrlParameter.Optional },
+       namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+   );
+            routes.MapRoute(
+         name: "WheelWithdraw",
+         url: "rut-tien",
+         defaults: new { controller = "Wheel", action = "Withdraw", id = UrlParameter.Optional },
+         namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+     );
+            
+            routes.MapRoute(
+           name: "WheelConfirmRecharge",
+           url: "xac-nhan-nap-tien",
+           defaults: new { controller = "Wheel", action = "ConfirmRecharge", id = UrlParameter.Optional },
+           namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+       );
+            routes.MapRoute(
+           name: "WheelRecharge",
+           url: "nap-tien",
+           defaults: new { controller = "Wheel", action = "Recharge", id = UrlParameter.Optional },
+           namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+       );
+            routes.MapRoute(
+           name: "AccountsWithdraw",
+           url: "lich-su-rut-tien",
+           defaults: new { controller = "Accounts", action = "AccountWithdraw", id = UrlParameter.Optional },
+           namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+       );
+            routes.MapRoute(
+            name: "AccountsRecharge",
+            url: "lich-su-nap-tien",
+            defaults: new { controller = "Accounts", action = "AccountRecharge", id = UrlParameter.Optional },
+            namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+        );
+            routes.MapRoute(
+            name: "AccountsWheel",
+            url: "lich-su-quay-thuong",
+            defaults: new { controller = "Accounts", action = "AccountWheel", id = UrlParameter.Optional },
+            namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+        );
+            routes.MapRoute(
+            name: "WheelgetNewWheel",
+            url: "lay-phan-thuong-moi-nhat",
+            defaults: new { controller = "Wheel", action = "getNewWheel", id = UrlParameter.Optional },
+            namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+        );
+            routes.MapRoute(
+             name: "WheelAddGift",
+             url: "them-phan-thuong",
+             defaults: new { controller = "Wheel", action = "AddGift", id = UrlParameter.Optional },
+             namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+         );
+            routes.MapRoute(
+              name: "WheelCheckSpin",
+              url: "kiem-tra-luot-quay",
+              defaults: new { controller = "Wheel", action = "CheckSpin", id = UrlParameter.Optional },
+              namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+          );
+            routes.MapRoute(
+              name: "WheelAttendance",
+              url: "diem-danh",
+              defaults: new { controller = "Wheel", action = "Attendance", id = UrlParameter.Optional },
+              namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+          );
+            routes.MapRoute(
+              name: "WheelCheckLogin",
+              url: "kiem-tra-dang-nhap",
+              defaults: new { controller = "Wheel", action = "checkLogin", id = UrlParameter.Optional },
+              namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+          );
+            routes.MapRoute(
+              name: "WheelIndex",
+              url: "quay-thuong",
+              defaults: new { controller = "Wheel", action = "Index", id = UrlParameter.Optional },
+              namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+          );
             routes.MapRoute(
                name: "Login",
                url: "dang-nhap",
@@ -230,7 +309,12 @@ namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
            defaults: new { controller = "Products", action = "GroupProducts", id = UrlParameter.Optional },
            namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
        );
-
+            routes.MapRoute(
+             name: "CartGetDiscount",
+             url: "lay-giam-gia",
+             defaults: new { controller = "Cart", action = "getDiscount", id = UrlParameter.Optional },
+             namespaces: new string[] { "NONBAOHIEMVIETTIN.Controller" }
+         );
             routes.MapRoute(
                name: "ProductsIndex",
                url: "{alias}",

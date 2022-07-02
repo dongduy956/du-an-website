@@ -11,82 +11,82 @@
 
 namespace NONBAOHIEMVIETTIN.Models
 {
-
-using System;
+    using Newtonsoft.Json;
+    using System;
     using System.Collections.Generic;
-    
-public partial class products
-{
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public products()
+    public partial class products
     {
 
-        this.orderdetail = new HashSet<orderdetail>();
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public products()
+        {
 
-        this.rate = new HashSet<rate>();
+            this.orderdetail = new HashSet<orderdetail>();
 
-        this.receiptdetail = new HashSet<receiptdetail>();
+            this.rate = new HashSet<rate>();
+
+            this.receiptdetail = new HashSet<receiptdetail>();
+
+        }
+
+
+        public int id { get; set; }
+
+        public string name { get; set; }
+
+        public string alias { get; set; }
+
+        public Nullable<bool> status { get; set; }
+
+        public Nullable<decimal> price { get; set; }
+
+        public Nullable<decimal> promationprice { get; set; }
+
+        public Nullable<int> quantity { get; set; }
+
+        public string description { get; set; }
+
+        public Nullable<int> viewcount { get; set; }
+
+        public Nullable<System.DateTime> createddate { get; set; }
+
+        public string image { get; set; }
+
+        public Nullable<bool> fastsell { get; set; }
+
+        public Nullable<bool> newproduct { get; set; }
+
+        public Nullable<int> idcategory { get; set; }
+
+        public Nullable<int> idproduction { get; set; }
+
+        public Nullable<int> idgroupproduct { get; set; }
+
+        public Nullable<bool> isdelete { get; set; }
+
+        public string moreimage { get; set; }
+
+
+        [JsonIgnore]
+        public virtual category category { get; set; }
+        [JsonIgnore]
+        public virtual groupproduct groupproduct { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
+        public virtual ICollection<orderdetail> orderdetail { get; set; }
+        [JsonIgnore]
+        public virtual production production { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
+        public virtual ICollection<rate> rate { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        [JsonIgnore]
+        public virtual ICollection<receiptdetail> receiptdetail { get; set; }
 
     }
-
-
-    public int id { get; set; }
-
-    public string name { get; set; }
-
-    public string alias { get; set; }
-
-    public Nullable<bool> status { get; set; }
-
-    public Nullable<decimal> price { get; set; }
-
-    public Nullable<decimal> promationprice { get; set; }
-
-    public Nullable<int> quantity { get; set; }
-
-    public string description { get; set; }
-
-    public Nullable<int> viewcount { get; set; }
-
-    public Nullable<System.DateTime> createddate { get; set; }
-
-    public string image { get; set; }
-
-    public Nullable<bool> fastsell { get; set; }
-
-    public Nullable<bool> newproduct { get; set; }
-
-    public Nullable<int> idcategory { get; set; }
-
-    public Nullable<int> idproduction { get; set; }
-
-    public Nullable<int> idgroupproduct { get; set; }
-
-    public Nullable<bool> isdelete { get; set; }
-
-    public string moreimage { get; set; }
-
-
-
-    public virtual category category { get; set; }
-
-    public virtual groupproduct groupproduct { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<orderdetail> orderdetail { get; set; }
-
-    public virtual production production { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<rate> rate { get; set; }
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<receiptdetail> receiptdetail { get; set; }
-
-}
 
 }
