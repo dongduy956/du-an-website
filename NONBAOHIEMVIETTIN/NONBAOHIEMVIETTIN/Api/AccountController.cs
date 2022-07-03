@@ -9,9 +9,11 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using NONBAOHIEMVIETTIN.Models;
+using System.Web.Http.Cors;
 
 namespace NONBAOHIEMVIETTIN.Api
 {
+    
     public class AccountController : ApiController
     {
         private nonbaohiemviettinEntities db = new nonbaohiemviettinEntities();

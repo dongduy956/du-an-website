@@ -196,3 +196,6 @@ E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\EPPlus.xml
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Microsoft.IO.RecyclableMemoryStream.xml
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\Swashbuckle.Core.dll
 E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\WebActivatorEx.dll
+E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Cors.dll
+E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Http.Cors.dll
+E:\du-an-website\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN\bin\System.Web.Http.Cors.xml

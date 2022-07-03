@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using NONBAOHIEMVIETTIN.Models;
+using System.Web.Http.Cors;
 
 namespace NONBAOHIEMVIETTIN.Api
 {
