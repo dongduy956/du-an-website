@@ -1,4 +1,5 @@
-﻿using System;
+﻿using NONBAOHIEMVIETTIN.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
@@ -21,10 +22,11 @@ namespace NONBAOHIEMVIETTIN
             config.MapHttpAttributeRoutes();
             var json = config.Formatters.JsonFormatter;
             json.SerializerSettings.PreserveReferencesHandling = Newtonsoft.Json.PreserveReferencesHandling.Objects;
-            config.Formatters.Remove(config.Formatters.XmlFormatter);
+            config.Formatters.Remove(config.Formatters.XmlFormatter);           
             config.Routes.MapHttpRoute(
-                name: "DefaultApi",                                
-                routeTemplate: "api/{controller}/{id}",
+                name: "DefaultApi",
+                routeTemplate: "{controller}/{id}",
+                constraints: new { controller = new SubdomainRouteConstraint("api.*") },
                 defaults: new { id = RouteParameter.Optional }
             );
         }

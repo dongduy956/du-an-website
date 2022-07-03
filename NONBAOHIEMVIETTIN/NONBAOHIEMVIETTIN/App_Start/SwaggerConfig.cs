@@ -16,13 +16,12 @@ namespace NONBAOHIEMVIETTIN
     {
         public static void Register()
         {
-            string myCustomBasePath = @"https://nonbaohiem.ml";
+            string myCustomBasePath = @"https://api.nonbaohiem.ml";
             var thisAssembly = typeof(SwaggerConfig).Assembly;
 
             GlobalConfiguration.Configuration
                 .EnableSwagger("docs/{apiVersion}/swagger", c =>
                     {
-                        
                         c.RootUrl((req) => myCustomBasePath);
                         c.Schemes(new[] { "https" });
                         c.PrettyPrint();

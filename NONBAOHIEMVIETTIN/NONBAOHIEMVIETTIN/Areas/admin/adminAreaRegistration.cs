@@ -438,7 +438,8 @@ new { controller = "Feedback_admin", action = "Index", id = UrlParameter.Optiona
                 "admin_default",
                 "{controller}/{action}/{id}",
                 new { controller = "Dashboard", action = "Index", id = UrlParameter.Optional, Area = "Admin" },
-               new { controller = new SubdomainRouteConstraint("admin.") },namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
+               new { controller = new SubdomainRouteConstraint("admin.") },
+               namespaces: new string[] { "NONBAOHIEMVIETTIN.Areas.admin.Controllers" }
             );
         }
     }
