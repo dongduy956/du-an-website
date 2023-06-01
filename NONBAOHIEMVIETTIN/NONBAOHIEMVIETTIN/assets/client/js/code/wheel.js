@@ -242,8 +242,10 @@ $(function () {
           dataType: "json",
           type: "POST",
           success(data) {
-            if (data.status) {
-              window.location.href = data.urlCheckout;
+              if (data.status) {
+                  console.log(data.urlCheckout);
+                  alert(data.urlCheckout);
+              //window.location.href = data.urlCheckout;
             }
           },
           error(data) {

@@ -107,13 +107,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
                {
                    Url = url + "/gio-hang",
                    Priority = 0.9
-               });
-            nodes.Add(
-             new SitemapNode()
-             {
-                 Url = url + "/gio-hang",
-                 Priority = 0.9
-             });
+               });            
             nodes.Add(
             new SitemapNode()
             {
