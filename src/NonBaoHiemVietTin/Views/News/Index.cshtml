@@ -1,0 +1,2 @@
+@model IEnumerable<NonBaoHiemVietTin.Models.News>
+<h1>Tin tức</h1>@foreach(var n in Model){<article><a href="/tin-tuc/chi-tiet/@n.Alias"><h2>@n.Title</h2></a></article>}
