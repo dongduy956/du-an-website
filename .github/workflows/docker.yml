@@ -1,0 +1,59 @@
+name: Docker CI/CD
+
+on:
+  push:
+    branches: [main, refactor]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  docker:
+    runs-on: windows-2022
+    env:
+      IMAGE_NAME: ghcr.io/${{ github.repository }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Log in to GHCR
+        if: github.event_name == 'push'
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build image
+        shell: powershell
+        run: |
+          $image = "$env:IMAGE_NAME:${{ github.sha }}".ToLower()
+          docker build --file Dockerfile --tag $image .
+          "IMAGE=$image" | Out-File -FilePath $env:GITHUB_ENV -Append
+
+      - name: Push immutable image
+        if: github.event_name == 'push'
+        shell: powershell
+        run: docker push $env:IMAGE
+
+      - name: Tag and push branch image
+        if: github.event_name == 'push'
+        shell: powershell
+        run: |
+          $branchTag = "${{ github.ref_name }}".ToLower() -replace '[^a-z0-9_.-]', '-'
+          $tag = "$env:IMAGE_NAME:$branchTag".ToLower()
+          docker tag $env:IMAGE $tag
+          docker push $tag
+
+      - name: Tag and push latest
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        shell: powershell
+        run: |
+          $latest = "$env:IMAGE_NAME:latest".ToLower()
+          docker tag $env:IMAGE $latest
+          docker push $latest
