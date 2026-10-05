@@ -30,18 +30,18 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build image
-                run: |
+        run: |
           image="$(echo "${IMAGE_NAME}:${{ github.sha }}" | tr '[:upper:]' '[:lower:]')"
           docker build --file Dockerfile --tag "$image" .
           echo "IMAGE=$image" >> "$GITHUB_ENV"
 
       - name: Push immutable image
         if: github.event_name == 'push'
-                run: docker push "$IMAGE"
+        run: docker push "$IMAGE"
 
       - name: Tag and push branch image
         if: github.event_name == 'push'
-                run: |
+        run: |
           branch_tag="$(echo "${{ github.ref_name }}" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9_.-]/-/g')"
           tag="$(echo "${IMAGE_NAME}:$branch_tag" | tr '[:upper:]' '[:lower:]')"
           docker tag "$IMAGE" "$tag"
@@ -49,7 +49,7 @@ jobs:
 
       - name: Tag and push latest
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-                run: |
+        run: |
           latest="$(echo "${IMAGE_NAME}:latest" | tr '[:upper:]' '[:lower:]')"
           docker tag "$IMAGE" "$latest"
           docker push "$latest"
