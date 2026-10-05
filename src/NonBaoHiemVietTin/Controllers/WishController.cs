@@ -1,0 +1,6 @@
+using Microsoft.AspNetCore.Mvc; using Microsoft.EntityFrameworkCore; using NonBaoHiemVietTin.Data; using NonBaoHiemVietTin.Infrastructure; using NonBaoHiemVietTin.Models;
+namespace NonBaoHiemVietTin.Controllers;
+public sealed class WishController(AppDbContext db):Controller { const string Key="wishSession"; [HttpGet] public IActionResult Index()=>View(HttpContext.Session.GetJson<List<CartItem>>(Key)??[]);
+[HttpPost] public async Task<IActionResult> AddItem(int ProductId,int Quantity){var p=await db.Products.AsNoTracking().FirstOrDefaultAsync(x=>x.Id==ProductId);if(p==null)return Json(new{status=-2});var list=HttpContext.Session.GetJson<List<CartItem>>(Key)??[];var item=list.FirstOrDefault(x=>x.Product.Id==ProductId);if(item==null)list.Add(new CartItem{Product=p,Quantity=Math.Max(1,Quantity)});else item.Quantity+=Math.Max(1,Quantity);HttpContext.Session.SetJson(Key,list);return Json(new{status=1,sumQuantity=list.Sum(x=>x.Quantity)});}
+[HttpPost] public IActionResult DeleteItem(int ProductId){var list=HttpContext.Session.GetJson<List<CartItem>>(Key)??[];list.RemoveAll(x=>x.Product.Id==ProductId);HttpContext.Session.SetJson(Key,list);return Json(new{status=1,sumQuantity=list.Sum(x=>x.Quantity)});}
+}
