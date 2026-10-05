@@ -54,7 +54,9 @@ jobs:
       - name: Initialize integration database
         run: |
           SQLCMD="$(docker exec sqlserver bash -lc 'if [ -x /opt/mssql-tools18/bin/sqlcmd ]; then echo /opt/mssql-tools18/bin/sqlcmd; else echo /opt/mssql-tools/bin/sqlcmd; fi')"
-          python3 -c 'import sys; d=open("data.sql","rb").read(); sys.stdout.buffer.write(d[3:] if d.startswith(b"\xef\xbb\xbf") else d)' | docker exec -i sqlserver "$SQLCMD" -S localhost -U sa -P "$SA_PASSWORD" -C -b -f 65001
+          python3 -c 'd=open("data.sql","rb").read(); open("data.clean.sql","wb").write(d[3:] if d.startswith(bytes([0xEF,0xBB,0xBF])) else d)'
+          docker cp data.clean.sql sqlserver:/tmp/data.sql
+          docker exec sqlserver "$SQLCMD" -S localhost -U sa -P "$SA_PASSWORD" -C -b -f 65001 -i /tmp/data.sql
 
           docker exec sqlserver "$SQLCMD"             -S localhost -U sa -P "$SA_PASSWORD" -C -b             -Q "SELECT COUNT(*) AS ProductCount FROM nonbaohiemvietti.dbo.products"
 
