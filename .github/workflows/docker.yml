@@ -16,6 +16,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       IMAGE_NAME: ghcr.io/${{ github.repository }}
+      SA_PASSWORD: TestOnly!Passw0rd2026
 
     steps:
       - name: Checkout
@@ -34,6 +35,64 @@ jobs:
           image="$(echo "${IMAGE_NAME}:${{ github.sha }}" | tr '[:upper:]' '[:lower:]')"
           docker build --file Dockerfile --tag "$image" .
           echo "IMAGE=$image" >> "$GITHUB_ENV"
+
+      - name: Start SQL Server integration database
+        run: |
+          docker network create integration-net
+          docker run -d             --name sqlserver             --network integration-net             -e ACCEPT_EULA=Y             -e MSSQL_SA_PASSWORD="$SA_PASSWORD"             mcr.microsoft.com/mssql/server:2022-latest
+
+          for i in {1..60}; do
+            if docker exec sqlserver bash -lc 'SQLCMD=/opt/mssql-tools18/bin/sqlcmd; [ -x "$SQLCMD" ] || SQLCMD=/opt/mssql-tools/bin/sqlcmd; "$SQLCMD" -S localhost -U sa -P "$MSSQL_SA_PASSWORD" -C -Q "SELECT 1" >/dev/null 2>&1'; then
+              exit 0
+            fi
+            sleep 2
+          done
+
+          docker logs sqlserver
+          exit 1
+
+      - name: Initialize integration database
+        run: |
+          SQLCMD="$(docker exec sqlserver bash -lc 'if [ -x /opt/mssql-tools18/bin/sqlcmd ]; then echo /opt/mssql-tools18/bin/sqlcmd; else echo /opt/mssql-tools/bin/sqlcmd; fi')"
+          docker exec -i sqlserver "$SQLCMD"             -S localhost -U sa -P "$SA_PASSWORD" -C -b < data.sql
+
+          docker exec sqlserver "$SQLCMD"             -S localhost -U sa -P "$SA_PASSWORD" -C -b             -Q "SELECT COUNT(*) AS ProductCount FROM nonbaohiemvietti.dbo.products"
+
+      - name: Start application container
+        run: |
+          docker run -d             --name webapp             --network integration-net             -p 18080:8080             -e ASPNETCORE_ENVIRONMENT=Testing             -e ConnectionStrings__DefaultConnection="Server=sqlserver,1433;Database=nonbaohiemvietti;User Id=sa;Password=$SA_PASSWORD;TrustServerCertificate=True;Encrypt=False"             "$IMAGE"
+
+      - name: Smoke test .NET 10 application
+        run: |
+          for i in {1..30}; do
+            if curl --fail --silent http://localhost:18080/health >/dev/null; then
+              break
+            fi
+            if [ "$i" = "30" ]; then
+              docker logs webapp
+              exit 1
+            fi
+            sleep 2
+          done
+
+          curl --fail --show-error --silent http://localhost:18080/health
+          curl --fail --show-error --silent http://localhost:18080/ >/tmp/home.html
+          curl --fail --show-error --silent http://localhost:18080/api/product >/tmp/products.json
+
+          test -s /tmp/home.html
+          test -s /tmp/products.json
+
+      - name: Integration diagnostics
+        if: failure()
+        run: |
+          docker logs webapp || true
+          docker logs sqlserver || true
+
+      - name: Clean integration containers
+        if: always()
+        run: |
+          docker rm -f webapp sqlserver 2>/dev/null || true
+          docker network rm integration-net 2>/dev/null || true
 
       - name: Push immutable image
         if: github.event_name == 'push'
