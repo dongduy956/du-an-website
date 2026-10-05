@@ -1,15 +1,15 @@
-# escape=`
-FROM mcr.microsoft.com/dotnet/framework/sdk:4.8 AS build
-SHELL ["powershell", "-NoProfile", "-Command", "$ErrorActionPreference = 'Stop'; $ProgressPreference = 'SilentlyContinue';"]
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+WORKDIR /src
 
-WORKDIR C:\src
-COPY NONBAOHIEMVIETTIN\ .\
+COPY src/NonBaoHiemVietTin/NonBaoHiemVietTin.csproj src/NonBaoHiemVietTin/
+RUN dotnet restore src/NonBaoHiemVietTin/NonBaoHiemVietTin.csproj
 
-RUN nuget restore .\NONBAOHIEMVIETTIN.sln -NonInteractive
-RUN msbuild .\NONBAOHIEMVIETTIN\NONBAOHIEMVIETTIN.csproj /p:Configuration=Release /p:DeployOnBuild=true /p:WebPublishMethod=FileSystem /p:DeleteExistingFiles=true /p:publishUrl=C:\out
+COPY src/NonBaoHiemVietTin/ src/NonBaoHiemVietTin/
+RUN dotnet publish src/NonBaoHiemVietTin/NonBaoHiemVietTin.csproj -c Release -o /app/publish --no-restore
 
-FROM mcr.microsoft.com/dotnet/framework/aspnet:4.8
-WORKDIR C:\inetpub\wwwroot
-RUN powershell -NoProfile -Command "Remove-Item -Recurse -Force C:\inetpub\wwwroot\*"
-COPY --from=build C:\out\ .
-EXPOSE 80
+FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS runtime
+WORKDIR /app
+COPY --from=build /app/publish .
+ENV ASPNETCORE_URLS=http://+:8080
+EXPOSE 8080
+ENTRYPOINT ["dotnet", "NonBaoHiemVietTin.dll"]
