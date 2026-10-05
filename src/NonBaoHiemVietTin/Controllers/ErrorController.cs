@@ -1,1 +1,1 @@
-using Microsoft.AspNetCore.Mvc; namespace NonBaoHiemVietTin.Controllers; public sealed class ErrorController:Controller { [HttpGet] public IActionResult NotFound()=>View(); }
+using Microsoft.AspNetCore.Mvc; namespace NonBaoHiemVietTin.Controllers; public sealed class ErrorController:Controller { [HttpGet] public new IActionResult NotFound()=>View(); }
