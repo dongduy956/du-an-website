@@ -273,7 +273,7 @@ namespace NONBAOHIEMVIETTIN.Controllers
             {
                 return false;
             }
-            var secretKey = "6LfSna0eAAAAAFKwKXzLSajQz835jJn2xZBzqtyY";//Mã bí mật
+            var secretKey = ConfigurationManager.AppSettings["recaptchaSecret"]; // configure outside source control
             string remoteIp = Request.ServerVariables["REMOTE_ADDR"];
             string myParameters = String.Format("secret={0}&response={1}&remoteip={2}", secretKey, recaptcha, remoteIp);
             RecaptchaResult captchaResult;
