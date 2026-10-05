@@ -1,0 +1,3 @@
+using Microsoft.AspNetCore.Mvc; using Microsoft.EntityFrameworkCore; using NonBaoHiemVietTin.Data;
+namespace NonBaoHiemVietTin.Controllers;
+public sealed class NewsController(AppDbContext db):Controller { [HttpGet] public async Task<IActionResult> Index(string alias,int page=1){var t=await db.NewsTypes.FirstOrDefaultAsync(x=>x.Alias==alias);if(t==null)return NotFound();ViewBag.NewsType=t;return View(await db.News.AsNoTracking().Where(x=>x.IdNewsType==t.Id).OrderByDescending(x=>x.Id).Skip((page-1)*10).Take(10).ToListAsync());} [HttpGet] public async Task<IActionResult> NewsDetail(string alias){var n=await db.News.AsNoTracking().FirstOrDefaultAsync(x=>x.Alias==alias);return n==null?NotFound():View(n);} }
