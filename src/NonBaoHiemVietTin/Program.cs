@@ -11,7 +11,7 @@ builder.Services.AddDbContext<AppDbContext>(o=>o.UseSqlServer(cs));
 
 var app=builder.Build();
 if(!app.Environment.IsDevelopment()){app.UseExceptionHandler("/loi-404");app.UseHsts();}
-app.UseHttpsRedirection(); app.UseStaticFiles(); app.UseRouting(); app.UseSession(); app.UseAuthorization();
+app.UseHttpsRedirection(); app.UseStaticFiles(); app.UseRouting(); app.UseSession(); app.UseAuthorization(); app.MapControllers();
 
 void Route(string name,string pattern,string controller,string action)=>app.MapControllerRoute(name,pattern,new{controller,action});
 Route("withdraw-cancel","huy-lenh-rut-tien","Accounts","DeleteWithdraw");
