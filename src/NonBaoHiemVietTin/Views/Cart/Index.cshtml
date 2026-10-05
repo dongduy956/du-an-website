@@ -1,1 +1,3 @@
-@model IEnumerable<NonBaoHiemVietTin.Models.CartItem><h1>Giỏ hàng</h1>@foreach(var x in Model){<div>@x.Product.Name × @x.Quantity</div>}
+@model IEnumerable<NonBaoHiemVietTin.Models.CartItem>
+<h1>Giỏ hàng</h1>
+@foreach(var x in Model){<div>@x.Product.Name × @x.Quantity</div>}
