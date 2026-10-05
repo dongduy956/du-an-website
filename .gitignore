@@ -1,0 +1,8 @@
+.vs/
+**/.vs/
+[Bb]in/
+[Oo]bj/
+*.user
+*.suo
+TestResults/
+NONBAOHIEMVIETTIN/packages/
