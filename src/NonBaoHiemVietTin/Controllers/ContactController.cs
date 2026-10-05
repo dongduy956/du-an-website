@@ -1,0 +1,3 @@
+using Microsoft.AspNetCore.Mvc; using Microsoft.EntityFrameworkCore; using NonBaoHiemVietTin.Data; using NonBaoHiemVietTin.Models;
+namespace NonBaoHiemVietTin.Controllers;
+public sealed class ContactController(AppDbContext db):Controller { [HttpGet] public async Task<IActionResult> Index()=>View(await db.Contacts.AsNoTracking().FirstOrDefaultAsync(x=>x.Display==true)); [HttpPost] public async Task<IActionResult> Feedback(Feedback model){if(!ModelState.IsValid)return Json(new{status=0,message="Dữ liệu không hợp lệ."});db.Feedback.Add(model);await db.SaveChangesAsync();return Json(new{status=1,message="Gửi thông tin liên hệ thành công."});} }
