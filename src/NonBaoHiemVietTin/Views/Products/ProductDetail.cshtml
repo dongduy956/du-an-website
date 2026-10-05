@@ -1,0 +1,2 @@
+@model NonBaoHiemVietTin.Models.Product
+<h1>@Model.Name</h1><img src="/@Model.Image" alt="@Model.Name"/><div>@Html.Raw(Model.Description)</div><p>@(Model.PromationPrice > 0 ? Model.PromationPrice : Model.Price)</p>
